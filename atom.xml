@@ -121,6 +121,35 @@
   </entry>
   
   <entry>
+    <title>【release】Vue 3 One Piece 正式发布！</title>
+    <link href="http://yonghong.tech/release/vue-3/"/>
+    <id>http://yonghong.tech/release/vue-3/</id>
+    <published>2020-09-25T13:00:00.000Z</published>
+    <updated>2020-09-25T13:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Vue.js 3.0 “One Piece” 已正式发布，此框架新的主要版本提供了更好的性能、更小的捆绑包体积、更好的 TypeScript 集成、用于处理大规模用例的新 API，并为框架未来的长期迭代奠定了坚实的基础。</p><p>3.0 版本的开发周期长达两年多，期间产生了 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3JmY3MvdHJlZS9tYXN0ZXIvYWN0aXZlLXJmY3M=">30+ RFCs<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L2NvbW1pdHMvbWFzdGVy">2600+ commits<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L3B1bGxzP3E9aXM6cHIraXM6bWVyZ2VkKy1hdXRob3I6YXBwL2RlcGVuZGFib3QtcHJldmlldys=">628 pull requests<i class="fa fa-external-link-alt"></i></span>，以及核心仓库之外的大量开发和文档工作。</p><p>Vue 3.0 的发布标志着此框架整体上已处于可用状态。尽管框架的某些子项目可能仍需要进一步的开发才能达到稳定状态（特别是 devtools 中的路由和 Vuex 集成），不过现在仍然是开始使用 Vue 3 启动新项目的合适时机。官方还鼓励库作者现在可以开始升级项目以支持 Vue 3。查阅<span class="exturl" data-url="aHR0cHM6Ly92My52dWVqcy5vcmcvZ3VpZGUvbWlncmF0aW9uL2ludHJvZHVjdGlvbi5odG1sI3N1cHBvcnRpbmctbGlicmFyaWVz">《Vue 3 Libraries Guide》<i class="fa fa-external-link-alt"></i></span>以获取有关所有框架子项目的详细信息。</p><a id="more"></a><h2 id="分层内部模块-Layered-internal-modules"><a href="#分层内部模块-Layered-internal-modules" class="headerlink" title="分层内部模块 (Layered internal modules)"></a>分层内部模块 (Layered internal modules)</h2><p>Vue 3.0 core 仍然可以通过<code>&lt;script&gt;</code>标签进行使用，但其内部架构已被彻底重写为<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L3RyZWUvbWFzdGVyL3BhY2thZ2Vz">一组解耦的模块<i class="fa fa-external-link-alt"></i></span>。新架构提供了更好的可维护性，并允许使用者通过 tree-shaking 来减少多达一半的 runtime 大小。</p><p>这些模块还将许多底层 API 暴露出来，可用于许多高级用例：</p><ul><li>编译器为定制 build-time 提供了对自定义 AST 转换的支持（例如 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ludGxpZnkvdnVlLWkxOG4tZXh0ZW5zaW9ucw==">build-time i18n<i class="fa fa-external-link-alt"></i></span>）</li><li>内核 runtime 提供了优先级最高的 API，用于创建针对不同渲染目标（例如<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JpZ29yNzg5L25hdGl2ZXNjcmlwdC12dWUtbmV4dA==">原生移动设备<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BsYW5uaW5nLW5sL3Z1Z2Vs">WebGL<i class="fa fa-external-link-alt"></i></span> 或<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ljbWphc29uL3Z1bWluYWw=">终端<i class="fa fa-external-link-alt"></i></span>）的自定义渲染器。默认 DOM 渲染器使用相同的 API 构建</li><li><a href="https://github.com/vuejs/vue-next/tree/master/packages/reactivity"><code>@vue/reactivity</code>模块</a>导出的函数可以直接访问 Vue 的 reactivity 系统，其本身也可以作为一个独立的程序包使用。它还可以与其他模板解决方案（例如 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3l5eDk5MDgwMy92dWUtbGl0">vue-lit<i class="fa fa-external-link-alt"></i></span>）搭配使用，甚至可以在非 UI 场景中使用</li></ul><h2 id="用于处理大规模用例的新-API"><a href="#用于处理大规模用例的新-API" class="headerlink" title="用于处理大规模用例的新 API"></a>用于处理大规模用例的新 API</h2><p>在 Vue 3 中，基于对象的 2.x API 基本没有变化。不过 3.0 还引入了 <span class="exturl" data-url="aHR0cHM6Ly92My52dWVqcy5vcmcvZ3VpZGUvY29tcG9zaXRpb24tYXBpLWludHJvZHVjdGlvbi5odG1s">Composition API<i class="fa fa-external-link-alt"></i></span>，旨在解决 Vue 在大型应用程序中的使用痛点。Composition API 构建于 reactivity API 之上，可以实现类似于 React 钩子(React hooks)的逻辑组合和重用，与 2.x 基于对象的 API 相比，拥有更灵活的代码组织模式和更可靠的类型推导。</p><p>通过 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL2NvbXBvc2l0aW9uLWFwaQ==">@vue/composition-api<i class="fa fa-external-link-alt"></i></span> 插件，Composition API 还可以与 Vue 2.x 搭配使用，并且目前已经有适用于 Vue 2 和 3 的 Composition API 实用程序库（例如 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FudGZ1L3Z1ZXVzZQ==">vueuse<i class="fa fa-external-link-alt"></i></span>，<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Bpa2F4L3Z1ZS1jb21wb3NhYmxl">vue-composable<i class="fa fa-external-link-alt"></i></span>）。</p><h2 id="提升性能"><a href="#提升性能" class="headerlink" title="提升性能"></a>提升性能</h2><p>与 Vue 2 相比，Vue 3 在捆绑包体积（通过 tree-shaking 减小约 41% 大小）、初始渲染（速度提升约 55%）、更新（速度提升约 133%）和内存使用率（降低约 54%）等方面有了<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMVZKRngta1E0S2pKbW5wRFhJRWFpZy1jVkFBSnRwSUdMWk5idjNMcjRDUjAvZWRpdD91c3A9c2hhcmluZw==">显著的性能提升<i class="fa fa-external-link-alt"></i></span>。</p><p>Vue 3 采用了”compiler-informed Virtual DOM”的方法：模板编译器执行激进的优化并生成渲染函数代码，以提升静态内容访问速度，为绑定类型留下 runtime 提示。最重要的是，将内部的动态节点扁平化处理，以降低 runtime 遍历的成本。因此，用户可以获得两全其美的效果：通过模板优化编译器的性能，或者在用例需要时通过手动渲染函数直接控制。</p><h2 id="改进与-TypeScript-的集成"><a href="#改进与-TypeScript-的集成" class="headerlink" title="改进与 TypeScript 的集成"></a>改进与 TypeScript 的集成</h2><p>Vue 3 使用 TypeScript 编写，具有自动生成、测试和捆绑的类型定义等特性。Composition API 可与类型推导很好地搭配使用。Vetur，Vue 3 的官方 VSCode 扩展，现在支持模板表达式，以及利用 Vue 3 改进的内部类型进行 props 类型检查。</p><h2 id="实验性功能"><a href="#实验性功能" class="headerlink" title="实验性功能"></a>实验性功能</h2><p>为单文件组件(SFC, Singe-File Components)，即 .vue 文件提供了两项新特性：</p><ul><li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3JmY3MvYmxvYi9zZmMtaW1wcm92ZW1lbnRzL2FjdGl2ZS1yZmNzLzAwMDAtc2ZjLXNjcmlwdC1zZXR1cC5tZA==">: 用于在 SFC 中使用 Composition API 的语法糖<i class="fa fa-external-link-alt"></i></span></li><li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3JmY3MvYmxvYi9zZmMtaW1wcm92ZW1lbnRzL2FjdGl2ZS1yZmNzLzAwMDAtc2ZjLXN0eWxlLXZhcmlhYmxlcy5tZA==">: SFC 中状态驱动的 CSS 变量<i class="fa fa-external-link-alt"></i></span></li></ul><p>上述已在 Vue 3.0 中实现并可用，但仅出于收集反馈的目的而提供。在合并 RFC 之前，它们将保持实验性状态。</p><p>此外还实现了一个当前未记录的<code>&lt;Suspense&gt;</code>组件，该组件允许在初始渲染或分支切换时等待嵌套的异步依赖项（异步组件或包含<code>async setup()</code>的组件）。目前正在与 Nuxt.js 团队一起测试和迭代此功能（<span class="exturl" data-url="aHR0cHM6Ly9udXh0anMuc2xpZGVzLmNvbS9hdGludXgvc3RhdGUtb2YtbnV4dC0yMDIw">即将在 Nuxt 3发布<i class="fa fa-external-link-alt"></i></span>），并且可能会在 3.1 中到达稳定。</p><h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><p>发布后的短期内，开发团队将专注于：</p><ul><li>版本迁移</li><li>支持 IE11</li><li>新 devtools 中的路由和 Vuex 集成</li><li>对 Vetur 中模板类型推导的进一步改进</li></ul><p>目前，Vue 3 和 v3-targeting 项目的文档网站、GitHub 分支和 npm dist 标签将保持 next-denoted 状态。这意味着使用<code>npm install vue</code>命令仍会安装 Vue 2.x，而要安装 Vue 3 需使用<code>npm install vue@next</code>命令。官方计划在 2020 年底前将所有的 doc 链接、分支和 dist 标签都切换为默认 3.0。</p><p>同时，团队已开始启动 2.7 的开发工作计划，这将是 2.x 的最后一个次要版本。2.7 将向后移植来自 v3 的兼容改进，并会提示有关 v3 中已删除/更改的 API 使用情况的警告。团队表示计划在 2021 年第一季度开发 2.7，发布后将直接变为 LTS 版本，具有 18 个月的维护周期。</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>了解有关 Vue 3.0 的更多信息，访问<span class="exturl" data-url="aHR0cHM6Ly92My52dWVqcy5vcmcv">新文档网站<i class="fa fa-external-link-alt"></i></span>。如果是 Vue 2.x 用户，访问<span class="exturl" data-url="aHR0cHM6Ly92My52dWVqcy5vcmcvZ3VpZGUvbWlncmF0aW9uL2ludHJvZHVjdGlvbi5odG1s">迁移指南<i class="fa fa-external-link-alt"></i></span>。</p><p>详情查看 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L3JlbGVhc2VzL3RhZy92My4wLjA=">https://github.com/vuejs/vue-next/releases/tag/v3.0.0<i class="fa fa-external-link-alt"></i></span></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;Vue.js 3.0 “One Piece” 已正式发布，此框架新的主要版本提供了更好的性能、更小的捆绑包体积、更好的 TypeScript 集成、用于处理大规模用例的新 API，并为框架未来的长期迭代奠定了坚实的基础。&lt;/p&gt;
+&lt;p&gt;3.0 版本的开发周期长达两年多，期间产生了 &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3JmY3MvdHJlZS9tYXN0ZXIvYWN0aXZlLXJmY3M=&quot;&gt;30+ RFCs&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;、&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L2NvbW1pdHMvbWFzdGVy&quot;&gt;2600+ commits&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;、&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL3Z1ZWpzL3Z1ZS1uZXh0L3B1bGxzP3E9aXM6cHIraXM6bWVyZ2VkKy1hdXRob3I6YXBwL2RlcGVuZGFib3QtcHJldmlldys=&quot;&gt;628 pull requests&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;，以及核心仓库之外的大量开发和文档工作。&lt;/p&gt;
+&lt;p&gt;Vue 3.0 的发布标志着此框架整体上已处于可用状态。尽管框架的某些子项目可能仍需要进一步的开发才能达到稳定状态（特别是 devtools 中的路由和 Vuex 集成），不过现在仍然是开始使用 Vue 3 启动新项目的合适时机。官方还鼓励库作者现在可以开始升级项目以支持 Vue 3。查阅&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly92My52dWVqcy5vcmcvZ3VpZGUvbWlncmF0aW9uL2ludHJvZHVjdGlvbi5odG1sI3N1cHBvcnRpbmctbGlicmFyaWVz&quot;&gt;《Vue 3 Libraries Guide》&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;以获取有关所有框架子项目的详细信息。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="release" scheme="http://yonghong.tech/categories/release/"/>
+    
+    
+    <category term="release" scheme="http://yonghong.tech/tags/release/"/>
+    
+    <category term="Vue" scheme="http://yonghong.tech/tags/Vue/"/>
+    
+    <category term="Vue3" scheme="http://yonghong.tech/tags/Vue3/"/>
+    
+    <category term="One Piece" scheme="http://yonghong.tech/tags/One-Piece/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【release】PostgresSQL 13 正式发布！</title>
     <link href="http://yonghong.tech/release/postgresql-13/"/>
     <id>http://yonghong.tech/release/postgresql-13/</id>
@@ -606,37 +635,6 @@
     <category term="Linux 命令" scheme="http://yonghong.tech/tags/Linux-%E5%91%BD%E4%BB%A4/"/>
     
     <category term="arp" scheme="http://yonghong.tech/tags/arp/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【Linux 命令】arpd</title>
-    <link href="http://yonghong.tech/linux-command/arpd/"/>
-    <id>http://yonghong.tech/linux-command/arpd/</id>
-    <published>2020-09-25T00:00:00.000Z</published>
-    <updated>2020-09-25T00:08:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>收集免费ARP信息</p><h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>arpd命令</strong> 是用来收集免费arp信息的一个守护进程，它将收集到的信息保存在磁盘上或者在需要时，提供给内核用户用于避免多余广播。</p><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arpd(选项)(参数)</span><br></pre></td></tr></table></figure><h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-l：将arp数据库输出到标准输出设备显示并退出；</span><br><span class="line">-f：指定读取和加载arpd数据库的文本文件，文件的格式与“-l”输出信息类似；</span><br><span class="line">-b：指定arpd数据库文件，默认的位置为“/var/lib/arpd.db”；</span><br><span class="line">-a：指定目标被认为死掉前查询的次数；</span><br><span class="line">-k：禁止通过内核发送广播查询；</span><br><span class="line">-n：设定缓冲失效时间。</span><br></pre></td></tr></table></figure><h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>网络接口：指定网络接口。</p><h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>启动arpd进程：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arpd -b /var/tmp/arpd.db</span><br></pre></td></tr></table></figure><p>运行一段时间后，查看结果：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arpd -l -b /var/tmp/arpd.db</span><br></pre></td></tr></table></figure><!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;收集免费ARP信息&lt;/p&gt;
-&lt;h2 id=&quot;补充说明&quot;&gt;&lt;a href=&quot;#补充说明&quot; class=&quot;headerlink&quot; title=&quot;补充说明&quot;&gt;&lt;/a&gt;补充说明&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;arpd命令&lt;/strong&gt; 是用来收集免费arp信息的一个守护进程，它</summary>
-      
-    
-    
-    
-    <category term="Linux 命令" scheme="http://yonghong.tech/categories/Linux-%E5%91%BD%E4%BB%A4/"/>
-    
-    
-    <category term="Linux" scheme="http://yonghong.tech/tags/Linux/"/>
-    
-    <category term="Linux Command" scheme="http://yonghong.tech/tags/Linux-Command/"/>
-    
-    <category term="Linux 命令" scheme="http://yonghong.tech/tags/Linux-%E5%91%BD%E4%BB%A4/"/>
-    
-    <category term="arpd" scheme="http://yonghong.tech/tags/arpd/"/>
     
   </entry>
   
