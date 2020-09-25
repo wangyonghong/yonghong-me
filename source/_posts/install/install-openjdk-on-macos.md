@@ -9,7 +9,7 @@ tags:
 categories:
 - 安装
 date: 2020-09-23 09:00:00
-updated: 2020-09-24 09:00:00
+updated: 2020-09-26 14:00:00
 ---
 
 [OpenJDK](https://openjdk.java.net/) 是一个标准，[AdoptOpenJDK](https://adoptopenjdk.net/) 是其中的一个比较常用的实现版本，它由 Java User Group (JUG) 成员、Java 开发者以及一些公司（包含亚马逊、GoDaddy、IBM、微软、Pivotal、红帽等）共同维护，AdoptOpenJDK 提供了同时提供了基于 Hotspot 和 OpenJ9 的版本，IBM 是 OpenJ9 的核心贡献者。本文将会讲解几种在 macOS 上安装 OpenJDK/AdoptOpenJDK 的方法。
@@ -100,6 +100,8 @@ jre https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/11/jre/x64/mac/
 
 Homebrew 是一个非常好用的工具，官网 https://brew.sh/
 
+可以参考 [如何安装 Homebrew？](/install/install-homebrew/)
+
 ### 官方的 Homebrew Tap
 
 https://github.com/AdoptOpenJDK/homebrew-openjdk
@@ -135,3 +137,9 @@ brew cask uninstall tuna-adoptopenjdk8
 ```
 
 如果这个工具用着有什么问题，欢迎来GitHub上提[issue](https://github.com/wangyonghong/homebrew-openjdk-mirror/issues)。
+
+## 参考链接
+
+- [如何安装 Homebrew？](/install/install-homebrew/)
+- [如何安装 iTerm2？](/install/install-iterm2/)
+- [如何安装 Oh My Zsh？](/install/install-oh-my-zsh/)
