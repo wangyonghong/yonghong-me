@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","scheme":"Gemini","version":"8.0.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="显示二进制文件信息 补充说明objdump命令 是用查看目标文件或者可执行的目标文件的构成的gcc工具。 选项1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Linux 命令】objdump">
+<meta property="og:url" content="http://yonghong.tech/linux-command/objdump/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="显示二进制文件信息 补充说明objdump命令 是用查看目标文件或者可执行的目标文件的构成的gcc工具。 选项1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-25T01:36:07.441Z">
+<meta property="article:modified_time" content="2020-09-25T01:36:07.441Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Linux Command">
+<meta property="article:tag" content="Linux 命令">
+<meta property="article:tag" content="objdump">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yonghong.tech/linux-command/objdump/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【Linux 命令】objdump | 永红的互联网手记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">573</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">580</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-开源">
+
+    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">1.1.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.2.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">573</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">580</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMHhsMm9vdA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;0xl2oot"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/objdump/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Linux 命令】objdump
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>显示二进制文件信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>objdump命令</strong> 是用查看目标文件或者可执行的目标文件的构成的gcc工具。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">-a --archive-headers </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 </span></span><br><span class="line"></span><br><span class="line">-b bfdname --target=bfdname </span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： </span></span><br><span class="line"></span><br><span class="line">objdump -b oasys -m vax -h fu.o </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 </span></span><br><span class="line"></span><br><span class="line">-C --demangle </span><br><span class="line"><span class="meta">#</span><span class="bash"> 将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 </span></span><br><span class="line">--debugging </span><br><span class="line">-g </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 </span></span><br><span class="line"></span><br><span class="line">-e --debugging-tags </span><br><span class="line"><span class="meta">#</span><span class="bash"> 类似-g选项，但是生成的信息是和ctags工具相兼容的格式。 </span></span><br><span class="line">--disassemble </span><br><span class="line">-d </span><br><span class="line"><span class="meta">#</span><span class="bash"> 从objfile中反汇编那些特定指令机器码的section。 </span></span><br><span class="line"></span><br><span class="line">-D --disassemble-all </span><br><span class="line"><span class="meta">#</span><span class="bash"> 与 -d 类似，但反汇编所有section. </span></span><br><span class="line"></span><br><span class="line">--prefix-addresses </span><br><span class="line"><span class="meta">#</span><span class="bash"> 反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 </span></span><br><span class="line"></span><br><span class="line">-EB </span><br><span class="line">-EL </span><br><span class="line">--endian=&#123;big|little&#125; </span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. </span></span><br><span class="line"></span><br><span class="line">-f </span><br><span class="line">--file-headers </span><br><span class="line">显示objfile中每个文件的整体头部摘要信息。 </span><br><span class="line"></span><br><span class="line">-h </span><br><span class="line">--section-headers </span><br><span class="line">--headers </span><br><span class="line">显示目标文件各个section的头部摘要信息。 </span><br><span class="line"></span><br><span class="line">-H </span><br><span class="line">--help </span><br><span class="line">简短的帮助信息。 </span><br><span class="line"></span><br><span class="line">-i </span><br><span class="line">--info </span><br><span class="line">显示对于 -b 或者 -m 选项可用的架构和目标格式列表。 </span><br><span class="line"></span><br><span class="line">-j name</span><br><span class="line">--section=name </span><br><span class="line">仅仅显示指定名称为name的section的信息 </span><br><span class="line"></span><br><span class="line">-l</span><br><span class="line">--line-numbers </span><br><span class="line">用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </span><br><span class="line"></span><br><span class="line">-m machine </span><br><span class="line">--architecture=machine </span><br><span class="line">指定反汇编目标文件时使用的架构，当待反汇编文件本身没描述架构信息的时候(比如S-records)，这个选项很有用。可以用-i选项列出这里能够指定的架构. </span><br><span class="line"></span><br><span class="line">--reloc </span><br><span class="line">-r </span><br><span class="line">显示文件的重定位入口。如果和-d或者-D一起使用，重定位部分以反汇编后的格式显示出来。 </span><br><span class="line"></span><br><span class="line">--dynamic-reloc </span><br><span class="line">-R </span><br><span class="line">显示文件的动态重定位入口，仅仅对于动态目标文件意义，比如某些共享库。 </span><br><span class="line"></span><br><span class="line">-s </span><br><span class="line">--full-contents </span><br><span class="line">显示指定section的完整内容。默认所有的非空section都会被显示。 </span><br><span class="line"></span><br><span class="line">-S </span><br><span class="line">--source </span><br><span class="line">尽可能反汇编出源代码，尤其当编译的时候指定了-g这种调试参数时，效果比较明显。隐含了-d参数。 </span><br><span class="line"></span><br><span class="line">--show-raw-insn </span><br><span class="line">反汇编的时候，显示每条汇编指令对应的机器码，如不指定--prefix-addresses，这将是缺省选项。 </span><br><span class="line"></span><br><span class="line">--no-show-raw-insn </span><br><span class="line">反汇编时，不显示汇编指令的机器码，如不指定--prefix-addresses，这将是缺省选项。 </span><br><span class="line"></span><br><span class="line">--start-address=address </span><br><span class="line">从指定地址开始显示数据，该选项影响-d、-r和-s选项的输出。 </span><br><span class="line"></span><br><span class="line">--stop-address=address </span><br><span class="line">显示数据直到指定地址为止，该项影响-d、-r和-s选项的输出。 </span><br><span class="line"></span><br><span class="line">-t </span><br><span class="line">--syms </span><br><span class="line">显示文件的符号表入口。类似于nm -s提供的信息 </span><br><span class="line"></span><br><span class="line">-T </span><br><span class="line">--dynamic-syms </span><br><span class="line">显示文件的动态符号表入口，仅仅对动态目标文件意义，比如某些共享库。它显示的信息类似于 nm -D|--dynamic 显示的信息。 </span><br><span class="line"></span><br><span class="line">-V </span><br><span class="line">--version </span><br><span class="line">版本信息 </span><br><span class="line"></span><br><span class="line">--all-headers </span><br><span class="line">-x </span><br><span class="line">显示所可用的头信息，包括符号表、重定位入口。-x 等价于-a -f -h -r -t 同时指定。 </span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">--disassemble-zeroes </span><br><span class="line">一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 </span><br><span class="line"></span><br><span class="line">@file 可以将选项集中到一个文件中，然后使用这个@file选项载入。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>首先，在给出后面大部分测试所基于的源代码以及编译指令。 源代码如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost [test]# nl mytest.cpp </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void printTest() &#123;</span><br><span class="line">    char a;</span><br><span class="line">    a = &#x27;a&#x27;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void printTest2() &#123;</span><br><span class="line">int a = 2;</span><br><span class="line">a+=2;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>对以上源代码进行编译，如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# g++ -c -g mytest.cpp </span><br></pre></td></tr></table></figure>
+
+<p>这里，生成的文件是mytest.o，为了方便测试包含了调试的信息，对可执行文件的测试，显示的结果类似。 </p>
+<p> **查看当前使用的objdump的版本号： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -V </span><br><span class="line">GNU objdump 2.17.50.0.6-14.el5 20061020 </span><br><span class="line">Copyright 2005 free Software Foundation, Inc. </span><br><span class="line">This program is free software; you may redistribute it under the terms of </span><br><span class="line">the GNU General Public License.  This program has absolutely no warranty. </span><br></pre></td></tr></table></figure>
+
+<p> **查看档案库文件中的信息： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -a libmy2.a </span><br><span class="line">In archive libmy2.a: </span><br><span class="line">myfile.o:     file format elf32-i386 </span><br><span class="line">rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </span><br></pre></td></tr></table></figure>
+
+<p> *<em>这里，libmy2.a是一个使用ar命令将多个</em>.o目标文件打包而生成的静态库。命令的输出类似<code>ar -tv</code>，相比较<code>ar -tv</code>输出如下： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# ar -tv libmy2.a </span><br><span class="line">rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o </span><br><span class="line">rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </span><br></pre></td></tr></table></figure>
+
+<p>显示可用的架构和目标结构列表： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -i </span><br><span class="line">BFD header file version 2.17.50.0.6-14.el5 20061020 </span><br><span class="line">elf32-i386 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">a.out-i386-linux </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">efi-app-ia32 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-x86-64 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-little </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-big </span><br><span class="line">(header big endian, data big endian) </span><br><span class="line">  i386 </span><br><span class="line">elf32-little </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf32-big </span><br><span class="line">(header big endian, data big endian) </span><br><span class="line">  i386 </span><br><span class="line">srec </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">symbolsrec </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">tekhex </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">binary </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">ihex </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">trad-core </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line"></span><br><span class="line">              elf32-i386 a.out-i386-linux efi-app-ia32 elf64-x86-64 </span><br><span class="line">          i386 elf32-i386 a.out-i386-linux efi-app-ia32 elf64-x86-64 </span><br><span class="line"></span><br><span class="line">              elf64-little elf64-big elf32-little elf32-big srec symbolsrec </span><br><span class="line">          i386 elf64-little elf64-big elf32-little elf32-big srec symbolsrec </span><br><span class="line"></span><br><span class="line">              tekhex binary ihex trad-core </span><br><span class="line">          i386 tekhex binary ihex --------- </span><br></pre></td></tr></table></figure>
+
+<p>这里，显示的信息是相对于 -b 或者 -m 选项可用的架构和目标格式列表。 </p>
+<p> **显示mytest.o文件中的text段的内容： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump --section=.text -s mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Contents of section .text: </span><br><span class="line">0000 5589e583 ec10c645 ff61c9c3 5589e583  U......E.a..U... </span><br><span class="line">0010 ec10c745 fc020000 008345fc 02c9c3    ...E......E.... </span><br></pre></td></tr></table></figure>
+
+<p>这里注意，不能单独使用-j或者–section，例如<code>objdump --section=.text mytest.o</code>是不会运行成功的。 </p>
+<p> **反汇编mytest.o中的text段内容，并尽可能用源代码形式表示： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -j .text -S mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">void printTest() </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        char a; </span><br><span class="line">        a = &#x27;a&#x27;; </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">void printTest2() </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        int a = 2; </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">        a+=2; </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里注意，不能单独使用-j或者–section，例如<code>objdump -j .text mytest.o是不会运行成功的</code>。另外-S命令对于包含调试信息的目标文件，显示的效果比较好，如果编译时没有指定g++的-g选项，那么目标文件就不包含调试信息，那么显示效果就差多了。 </p>
+<p> **反汇编出mytest.o的源代码: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -S mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">void printTest() </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        char a; </span><br><span class="line">        a = &#x27;a&#x27;; </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">void printTest2() </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">       int a = 2; </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">        a+=2; </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，尤其当编译的时候指定了-g这种调试参数时，反汇编的效果比较明显。隐含了-d参数。 </p>
+<p> **显示文件的符号表入口: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -t mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">SYMBOL TABLE: </span><br><span class="line">00000000 l    df *ABS*  00000000 mytest.cpp </span><br><span class="line">00000000 l    d  .text  00000000 .text </span><br><span class="line">00000000 l    d  .data  00000000 .data </span><br><span class="line">00000000 l    d  .bss   00000000 .bss </span><br><span class="line">00000000 l    d  .debug_abbrev  00000000 .debug_abbrev </span><br><span class="line">00000000 l    d  .debug_info    00000000 .debug_info </span><br><span class="line">00000000 l    d  .debug_line    00000000 .debug_line </span><br><span class="line">00000000 l    d  .debug_frame   00000000 .debug_frame </span><br><span class="line">00000000 l    d  .debug_loc     00000000 .debug_loc </span><br><span class="line">00000000 l    d  .debug_pubnames        00000000 .debug_pubnames </span><br><span class="line">00000000 l    d  .debug_aranges 00000000 .debug_aranges </span><br><span class="line">00000000 l    d  .note.GNU-stack        00000000 .note.GNU-stack </span><br><span class="line">00000000 l    d  .comment       00000000 .comment </span><br><span class="line">00000000 g     F .text  0000000c _Z9printTestv </span><br><span class="line">00000000         *UND*  00000000 __gxx_personality_v0 </span><br><span class="line">0000000c g     F .text  00000013 _Z10printTest2v </span><br></pre></td></tr></table></figure>
+
+<p>这里，输出的信息类似<code>nm -s</code>命令的输出，相比较之下，nm命令的输出如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# nm -s mytest.o </span><br><span class="line">0000000c T _Z10printTest2v </span><br><span class="line">00000000 T _Z9printTestv </span><br><span class="line">         U __gxx_personality_v0 </span><br></pre></td></tr></table></figure>
+
+<p> **显示文件的符号表入口，将底层符号解码并表示成用户级别: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -t -C mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">SYMBOL TABLE: </span><br><span class="line">00000000 l    df *ABS*  00000000 mytest.cpp </span><br><span class="line">00000000 l    d  .text  00000000 .text </span><br><span class="line">00000000 l    d  .data  00000000 .data </span><br><span class="line">00000000 l    d  .bss   00000000 .bss </span><br><span class="line">00000000 l    d  .debug_abbrev  00000000 .debug_abbrev </span><br><span class="line">00000000 l    d  .debug_info    00000000 .debug_info </span><br><span class="line">00000000 l    d  .debug_line    00000000 .debug_line </span><br><span class="line">00000000 l    d  .debug_frame   00000000 .debug_frame </span><br><span class="line">00000000 l    d  .debug_loc     00000000 .debug_loc </span><br><span class="line">00000000 l    d  .debug_pubnames        00000000 .debug_pubnames </span><br><span class="line">00000000 l    d  .debug_aranges 00000000 .debug_aranges </span><br><span class="line">00000000 l    d  .note.GNU-stack        00000000 .note.GNU-stack </span><br><span class="line">00000000 l    d  .comment       00000000 .comment </span><br><span class="line">00000000 g     F .text  0000000c printTest() </span><br><span class="line">00000000         *UND*  00000000 __gxx_personality_v0 </span><br><span class="line">0000000c g     F .text  00000013 printTest2() </span><br></pre></td></tr></table></figure>
+
+<p>这里，和没-C相比，printTest2函数可读性增加了。 </p>
+<p> **反汇编目标文件的特定机器码段： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -d mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">  b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，对text段的内容进行了反汇编。 </p>
+<p> **反汇编特定段，并将汇编代码对应的文件名称和行号对应上： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -d -l mytest.o</span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">_Z9printTestv(): </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:1 </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:4 </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:5 </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">_Z10printTest2v(): </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:6 </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:8 </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:9 </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:10 </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，项”-d”从objfile中反汇编那些特定指令机器码的section，而使用”-l”指定用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用，使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </p>
+<p> **显示目标文件各个段的头部摘要信息： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -h mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">Sections: </span><br><span class="line">Idx Name          Size      VMA       LMA       File off  Algn </span><br><span class="line">  0 .text         0000001f  00000000  00000000  00000034  2**2 </span><br><span class="line">                  CONTENTS, ALLOC, LOAD, readonly, CODE </span><br><span class="line">  1 .data         00000000  00000000  00000000  00000054  2**2 </span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA </span><br><span class="line">  2 .bss          00000000  00000000  00000000  00000054  2**2 </span><br><span class="line">                  ALLOC </span><br><span class="line">  3 .debug_abbrev 00000046  00000000  00000000  00000054  2**0 </span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING </span><br><span class="line">  4 .debug_info   000000ed  00000000  00000000  0000009a  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  5 .debug_line   0000003e  00000000  00000000  00000187  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  6 .debug_frame  00000044  00000000  00000000  000001c8  2**2 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  7 .debug_loc    00000058  00000000  00000000  0000020c  2**0 </span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING </span><br><span class="line">  8 .debug_pubnames 0000002f  00000000  00000000  00000264  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  9 .debug_aranges 00000020  00000000  00000000  00000293  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">10 .comment      0000002e  00000000  00000000  000002b3  2**0 </span><br><span class="line">                  CONTENTS, READONLY </span><br><span class="line">11 .note.GNU-stack 00000000  00000000  00000000  000002e1  2**0 </span><br><span class="line">                  CONTENTS, READONLY </span><br></pre></td></tr></table></figure>
+
+<p>这里，更多的内容参见<code>man objdump</code>中的这个选项。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/linux-command/objdump/" title="【Linux 命令】objdump">http://yonghong.tech/linux-command/objdump/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          
+
+  <div class="followme">
+    <span>欢迎关注我的其它发布渠道</span>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Linux-Command/" rel="tag"># Linux Command</a>
+              <a href="/tags/Linux-%E5%91%BD%E4%BB%A4/" rel="tag"># Linux 命令</a>
+              <a href="/tags/objdump/" rel="tag"># objdump</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/linux-command/gcov/" rel="prev" title="【Linux 命令】gcov">
+                  <i class="fa fa-chevron-left"></i> 【Linux 命令】gcov
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux-command/ls/" rel="next" title="【Linux 命令】ls">
+                  【Linux 命令】ls <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备 18012168号-5 </span>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">701k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">10:38</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/motion.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+  <script data-pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/linux-command/objdump/',]
+      });
+      });
+  </script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "linux-command/objdump/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+</body>
+</html>
