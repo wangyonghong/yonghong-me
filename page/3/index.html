@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/vgrename/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/whoami/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/vgrename/" class="post-title-link" itemprop="url">【Linux 命令】vgrename</a>
+            <a href="/linux-command/whoami/" class="post-title-link" itemprop="url">【Linux 命令】whoami</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:35:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -369,18 +370,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>使用vgrename命令可以重命名卷组的名称</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>grename命令</strong> 可以重命名卷组的名称。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgrename [选项] [旧卷组路径|旧卷组名称|旧卷组UUID] [新卷组路径|新卷组名称]</span><br></pre></td></tr></table></figure>
+          <p>打印当前有效的用户ID对应的名称</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whoami [OPTION]...</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d 启用调试模式</span><br><span class="line">-t 启用测试模式</span><br></pre></td></tr></table></figure>
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>打印当前有效的用户ID对应的名称。</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help       显示帮助信息并退出。</span><br><span class="line">--version    显示版本信息并退出。</span><br></pre></td></tr></table></figure>
 
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>重命名卷组/dev/vg1为/dev/vg2。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vgrename /dev/vg1 /dev/vg2</span><br><span class="line">  Volume group &quot;vg1&quot; successfullyrenamed to &quot;vg2&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whoami</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
 
-<p>重命名卷组vg1为vg2。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vgrename vg1 vg2</span><br><span class="line">  Volume group &quot;vg1&quot; successfully renamed to &quot;vg2&quot;</span><br></pre></td></tr></table></figure>
-
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>该命令等价于 <code>id -un</code>。</li>
+<li>注意区分 <code>whoami</code> 和 <code>logname</code> 这两个命令；比如我们以用户 <code>root</code> 打开的终端，然后切换到了用户 <code>user2</code>。此时， <code>whoami</code>返回的是当前用户 <code>user2</code>, <code>logname</code> 返回的是 <code>root</code>，大家可以自行实践验证一下。</li>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 whoami</code>，<code>info coreutils &#39;whoami invocation&#39;</code>。</li>
+</ol>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
@@ -403,7 +408,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/vgscan/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/who/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -420,7 +425,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/vgscan/" class="post-title-link" itemprop="url">【Linux 命令】vgscan</a>
+            <a href="/linux-command/who/" class="post-title-link" itemprop="url">【Linux 命令】who</a>
         </h2>
 
         <div class="post-meta-container">
@@ -430,8 +435,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:35:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -451,7 +457,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>399</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -469,129 +475,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>扫描并显示系统中的卷组</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>vgscan命令</strong> 查找系统中存在的LVM卷组，并显示找到的卷组列表。vgscan命令仅显示找到的卷组的名称和LVM元数据类型，要得到卷组的详细信息需要使用vgdisplay命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgscan(选项)</span><br></pre></td></tr></table></figure>
+          <p>显示当前所有登陆用户的信息。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">who [OPTION]... [file] [am i]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d：调试模式；</span><br><span class="line">--ignorerlockingfailure：忽略锁定失败的错误。</span><br></pre></td></tr></table></figure>
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>当没有给出非选项参数时，按以下字段顺序为每个当前用户打印信息：登录用户名称，终端信息，登录时间，远程主机或X display。</li>
+<li>当用户执行 <code>who am i</code> 时，只显示运行该命令的用户的信息。</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-a, --all                                等价于调用 &#x27;-b -d --login -p -r -t -T -u&#x27;。</span><br><span class="line">-b, --boot                               上次系统启动的时间。</span><br><span class="line">-d, --dead                               打印 dead 状态的进程。</span><br><span class="line">-H, --heading                            打印列标题行。</span><br><span class="line">-l, --login                              打印系统登录进程。</span><br><span class="line">--lookup                                 尝试通过 DNS 规范主机名。</span><br><span class="line">-m                                       仅显示和标准输入关联的主机名和用户。</span><br><span class="line">-p, --process                            打印由 init 生成的活动进程。</span><br><span class="line">-q, --count                              列出所有已登录的用户的名称和数量。</span><br><span class="line">-r, --runlevel                           打印当前运行级别。</span><br><span class="line">-s, --short                              仅打印名称、行和时间（默认）。</span><br><span class="line">-t, --time                               打印上次系统时钟更改。</span><br><span class="line">-T, -w, --mesg, --message, --writable    将 &#x27;+、-、?&#x27; 中的一个作为用户的消息状态添加到用户名称后面。</span><br><span class="line">-u, --users                              列出登录的用户。</span><br><span class="line">--help                                   显示帮助信息并退出。</span><br><span class="line">--version                                显示版本信息并退出。</span><br><span class="line"></span><br><span class="line">关于 -T 选项的 &#x27;+、-、?&#x27;：</span><br><span class="line">&#x27;+&#x27;  允许写入信息</span><br><span class="line">&#x27;-&#x27;  禁止写入信息</span><br><span class="line">&#x27;?&#x27;  不能查找到终端设备</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用vgscan命令扫描系统中所有的卷组。在命令行中输入下面的命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vgscan     #扫描并显示LVM卷组列表</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>file（可选）：指定 <code>file</code> 代替默认的 <code>/var/run/utmp</code> 、<code>/etc/utmp</code> ；通常使用 <code>/var/log/wtmp</code> 作为参数用于查看过去登陆系统的用户。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# who</span><br><span class="line">root     pts/0        2013-08-19 15:04 (192.168.0.134)</span><br><span class="line">root     pts/1        2013-12-20 10:37 (180.111.155.40)</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# who -q</span><br><span class="line">root root</span><br><span class="line"><span class="meta">#</span><span class="bash"> users=2</span></span><br><span class="line"></span><br><span class="line">[root@localhost ~]# who -H</span><br><span class="line">NAME     LINE         time             COMMENT</span><br><span class="line">root     pts/0        2013-08-19 15:04 (192.168.0.134)</span><br><span class="line">root     pts/1        2013-12-20 10:37 (180.111.155.40)</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# who -w</span><br><span class="line">root     + pts/0        2013-08-19 15:04 (192.168.0.134)</span><br><span class="line">root     + pts/1        2013-12-20 10:37 (180.111.155.40)</span><br></pre></td></tr></table></figure>
 
-<p>输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Found volume group &quot;vg2000&quot; using metadata type lvm2  </span><br><span class="line">Found volume group &quot;vg1000&quot; using metadata type lvm2 </span><br></pre></td></tr></table></figure>
-
-<p>说明：本例中，vgscan指令找到了两个LVM2卷组”vg1000”和”vg2000”。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/vi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/vi/" class="post-title-link" itemprop="url">【Linux 命令】vi</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>功能强大的纯文本编辑器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>vi命令</strong> 是UNIX操作系统和类UNIX操作系统中最通用的全屏幕纯文本编辑器。Linux中的vi编辑器叫vim，它是vi的增强版（vi Improved），与vi编辑器完全兼容，而且实现了很多增强功能。</p>
-<p>vi编辑器支持编辑模式和命令模式，编辑模式下可以完成文本的编辑功能，命令模式下可以完成对文件的操作命令，要正确使用vi编辑器就必须熟练掌握着两种模式的切换。默认情况下，打开vi编辑器后自动进入命令模式。从编辑模式切换到命令模式使用“esc”键，从命令模式切换到编辑模式使用“A”、“a”、“O”、“o”、“I”、“i”键。</p>
-<p>vi编辑器提供了丰富的内置命令，有些内置命令使用键盘组合键即可完成，有些内置命令则需要以冒号“：”开头输入。常用内置命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Ctrl+u：向文件首翻半屏；</span><br><span class="line">Ctrl+d：向文件尾翻半屏；</span><br><span class="line">Ctrl+f：向文件尾翻一屏；</span><br><span class="line">Ctrl+b：向文件首翻一屏；</span><br><span class="line">Esc：从编辑模式切换到命令模式；</span><br><span class="line">ZZ：命令模式下保存当前文件所做的修改后退出vi；</span><br><span class="line">:行号：光标跳转到指定行的行首；</span><br><span class="line">:$：光标跳转到最后一行的行首；</span><br><span class="line">x或X：删除一个字符，x删除光标后的，而X删除光标前的；</span><br><span class="line">D：删除从当前光标到光标所在行尾的全部字符；</span><br><span class="line">dd：删除光标行正行内容；</span><br><span class="line">ndd：删除当前行及其后n-1行；</span><br><span class="line">nyy：将当前行及其下n行的内容保存到寄存器？中，其中？为一个字母，n为一个数字；</span><br><span class="line">p：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的下方；</span><br><span class="line">P：粘贴文本操作，用于将缓存区的内容粘贴到当前光标所在位置的上方；</span><br><span class="line">/字符串：文本查找操作，用于从当前光标所在位置开始向文件尾部查找指定字符串的内容，查找的字符串会被加亮显示；</span><br><span class="line">？字符串：文本查找操作，用于从当前光标所在位置开始向文件头部查找指定字符串的内容，查找的字符串会被加亮显示；</span><br><span class="line">a，bs/F/T：替换文本操作，用于在第a行到第b行之间，将F字符串换成T字符串。其中，“s/”表示进行替换操作；</span><br><span class="line">a：在当前字符后添加文本；</span><br><span class="line">A：在行末添加文本；</span><br><span class="line">i：在当前字符前插入文本；</span><br><span class="line">I：在行首插入文本；</span><br><span class="line">o：在当前行后面插入一空行；</span><br><span class="line">O：在当前行前面插入一空行；</span><br><span class="line">:wq：在命令模式下，执行存盘退出操作；</span><br><span class="line">:w：在命令模式下，执行存盘操作；</span><br><span class="line">:w！：在命令模式下，执行强制存盘操作；</span><br><span class="line">:q：在命令模式下，执行退出vi操作；</span><br><span class="line">:q！：在命令模式下，执行强制退出vi操作；</span><br><span class="line">:e文件名：在命令模式下，打开并编辑指定名称的文件；</span><br><span class="line">:n：在命令模式下，如果同时打开多个文件，则继续编辑下一个文件；</span><br><span class="line">:f：在命令模式下，用于显示当前的文件名、光标所在行的行号以及显示比例；</span><br><span class="line">:set number：在命令模式下，用于在最左端显示行号；</span><br><span class="line">:set nonumber：在命令模式下，用于在最左端不显示行号；</span><br></pre></td></tr></table></figure>
-
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+&lt;行号&gt;：从指定行号的行开始显示文本内容；</span><br><span class="line">-b：以二进制模式打开文件，用于编辑二进制文件和可执行文件；</span><br><span class="line">-c&lt;指令&gt;：在完成对第一个文件编辑任务后，执行给出的指令；</span><br><span class="line">-d：以diff模式打开文件，当多个文件编辑时，显示文件差异部分；</span><br><span class="line">-l：使用lisp模式，打开“lisp”和“showmatch”；</span><br><span class="line">-m：取消写文件功能，重设“write”选项；</span><br><span class="line">-M：关闭修改功能；</span><br><span class="line">-n：不实用缓存功能；</span><br><span class="line">-o&lt;文件数目&gt;：指定同时打开指定数目的文件；</span><br><span class="line">-R：以只读方式打开文件；</span><br><span class="line">-s：安静模式，不现实指令的任何错误信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：指定要编辑的文件列表。多个文件之间使用空格分隔开。</p>
-<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><p>vi编辑器有三种工作方式：命令方式、输入方式和ex转义方式。通过相应的命令或操作，在这三种工作方式之间可以进行转换。</p>
-<p><strong>命令方式</strong> </p>
-<p>在Shell提示符后输入命令vi，进入vi编辑器，并处于vi的命令方式。此时，从键盘上输入的任何字符都被作为编辑命令来解释，例如，a(append）表示附加命令，i(insert）表示插入命令，x表示删除字符命令等。如果输入的字符不是vi的合法命令，则机器发出“报警声”，光标不移动。另外，在命令方式下输入的字符（即vi命令）并不在屏幕上显示出来，例如，输入i，屏幕上并无变化，但通过执行i命令，编辑器的工作方式却发生变化：由命令方式变为输入方式。</p>
-<p><strong>输入方式</strong> </p>
-<p>通过输入vi的插入命令（i）、附加命令（a）、打开命令（o）、替换命令（s）、修改命令(c）或取代命令（r）可以从命令方式进入输入方式。在输入方式下，从键盘上输入的所有字符都被插入到正在编辑的缓冲区中，被当做该文件的正文。进入输入方式后，输入的可见字符都在屏幕上显示出来，而编辑命令不再起作用，仅作为普通字母出现。例如，在命令方式下输入字母i，进到输入方式，然后再输入i，就在屏幕上相应光标处添加一个字母i。</p>
-<p>由输入方式回到命令方式的办法是按下Esc键。如果已在命令方式下，那么按下Esc键就会发出“嘟嘟”声。为了确保用户想执行的vi命令是在命令方式下输入的，不妨多按几下Esc键，听到嘟声后再输入命令。</p>
-<p><strong>ex转义方式</strong> </p>
-<p>vi和ex编辑器的功能是相同的，二者的主要区别是用户界面。在vi中，命令通常是单个字母，如a,x,r等。而在ex中，命令是以Enter；键结束的命令行。vi有一个专门的“转义”命令，可访问很多面向行的ex命令。为使用ex转义方式，可输入一个冒号（:）。作为ex命令提示符，冒号出现在状态行（通常在屏幕最下一行）。按下中断键（通常是Del键），可终止正在执行的命令。多数文件管理命令都是在ex转义方式下执行的（例如，读取文件，把编辑缓冲区的内容写到文件中等）。转义命令执行后，自动回到命令方式。例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:1,$s/I/i/g 按Enter键</span><br></pre></td></tr></table></figure>
-
-<p>则从文件第一行至文件末尾（$）将大写I全部替换成小写i。vi编辑器的三种工作方式之间的转换如图所示。</p>
-<p>!vi</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 who</code>，<code>info coreutils &#39;who invocation&#39;</code>。</li>
+</ol>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
@@ -614,7 +513,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/vmstat/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/which/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -631,7 +530,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/vmstat/" class="post-title-link" itemprop="url">【Linux 命令】vmstat</a>
+            <a href="/linux-command/which/" class="post-title-link" itemprop="url">【Linux 命令】which</a>
         </h2>
 
         <div class="post-meta-container">
@@ -641,8 +540,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:34:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -662,7 +562,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>602</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -680,254 +580,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>显示虚拟内存状态</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>vmstat命令</strong> 的含义为显示虚拟内存状态（“Viryual Memor Statics”），但是它可以报告关于进程、内存、I/O等系统整体运行状态。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmstat(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>查找并显示给定命令的绝对路径</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>which命令</strong> 用于查找并显示给定命令的绝对路径，环境变量PATH中保存了查找命令时需要遍历的目录。which指令会在环境变量$PATH设置的目录里查找符合条件的文件。也就是说，使用which命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a：显示活动内页；</span><br><span class="line">-f：显示启动后创建的进程总数；</span><br><span class="line">-m：显示slab信息；</span><br><span class="line">-n：头信息仅显示一次；</span><br><span class="line">-s：以表格方式显示事件计数器和内存状态；</span><br><span class="line">-d：报告磁盘状态；</span><br><span class="line">-p：显示指定的硬盘分区状态；</span><br><span class="line">-S：输出信息的单位。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;文件名长度&gt;：制定文件名长度，指定的长度必须大于或等于所有文件中最长的文件名；</span><br><span class="line">-p&lt;文件名长度&gt;：与-n参数相同，但此处的&lt;文件名长度&gt;包含了文件的路径；</span><br><span class="line">-w：指定输出时栏位的宽度；</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>事件间隔：状态信息刷新的时间间隔；</li>
-<li>次数：显示报告的次数。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vmstat 3</span><br><span class="line">procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu------</span><br><span class="line"> r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st</span><br><span class="line"> 0  0    320  42188 167332 1534368    0    0     4     7    1    0  0  0 99  0  0</span><br><span class="line"> 0  0    320  42188 167332 1534392    0    0     0     0 1002   39  0  0 100  0  0</span><br><span class="line"> 0  0    320  42188 167336 1534392    0    0     0    19 1002   44  0  0 100  0  0</span><br><span class="line"> 0  0    320  42188 167336 1534392    0    0     0     0 1002   41  0  0 100  0  0</span><br><span class="line"> 0  0    320  42188 167336 1534392    0    0     0     0 1002   41  0  0 100  0  0</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>指令名：指令名列表。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查找文件、显示命令路径：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# which pwd</span><br><span class="line">/bin/pwd</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# which adduser</span><br><span class="line">/usr/sbin/adduser</span><br></pre></td></tr></table></figure>
 
-<p> <strong>字段说明：</strong> </p>
-<p>Procs（进程）</p>
-<ul>
-<li>r: 运行队列中进程数量，这个值也可以判断是否需要增加CPU。（长期大于1）</li>
-<li>b: 等待IO的进程数量。</li>
-</ul>
-<p>Memory（内存）</p>
-<ul>
-<li>swpd: 使用虚拟内存大小，如果swpd的值不为0，但是SI，SO的值长期为0，这种情况不会影响系统性能。</li>
-<li>free: 空闲物理内存大小。</li>
-<li>buff: 用作缓冲的内存大小。</li>
-<li>cache: 用作缓存的内存大小，如果cache的值大的时候，说明cache处的文件数多，如果频繁访问到的文件都能被cache处，那么磁盘的读IO bi会非常小。</li>
-</ul>
-<p>Swap</p>
-<ul>
-<li>si: 每秒从交换区写到内存的大小，由磁盘调入内存。</li>
-<li>so: 每秒写入交换区的内存大小，由内存调入磁盘。</li>
-</ul>
-<p>注意：内存够用的时候，这2个值都是0，如果这2个值长期大于0时，系统性能会受到影响，磁盘IO和CPU资源都会被消耗。有些朋友看到空闲内存（free）很少的或接近于0时，就认为内存不够用了，不能光看这一点，还要结合si和so，如果free很少，但是si和so也很少（大多时候是0），那么不用担心，系统性能这时不会受到影响的。</p>
-<p>IO（现在的Linux版本块的大小为1kb）</p>
-<ul>
-<li>bi: 每秒读取的块数</li>
-<li>bo: 每秒写入的块数</li>
-</ul>
-<p>注意：随机磁盘读写的时候，这2个值越大（如超出1024k)，能看到CPU在IO等待的值也会越大。</p>
-<p>system（系统）</p>
-<ul>
-<li>in: 每秒中断数，包括时钟中断。</li>
-<li>cs: 每秒上下文切换数。</li>
-</ul>
-<p>注意：上面2个值越大，会看到由内核消耗的CPU时间会越大。</p>
-<p>CPU（以百分比表示）</p>
-<ul>
-<li>us: 用户进程执行时间百分比(user time)</li>
-</ul>
-<p>us的值比较高时，说明用户进程消耗的CPU时间多，但是如果长期超50%的使用，那么我们就该考虑优化程序算法或者进行加速。</p>
-<ul>
-<li>sy: 内核系统进程执行时间百分比(system time)</li>
-</ul>
-<p>sy的值高时，说明系统内核消耗的CPU资源多，这并不是良性表现，我们应该检查原因。</p>
-<ul>
-<li>wa: IO等待时间百分比</li>
-</ul>
-<p>wa的值高时，说明IO等待比较严重，这可能由于磁盘大量作随机访问造成，也有可能磁盘出现瓶颈（块操作）。</p>
-<ul>
-<li>id: 空闲时间百分比</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/volname/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/volname/" class="post-title-link" itemprop="url">【Linux 命令】volname</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>109</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示指定的ISO-9660格式的设备的卷名称</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>volname命令</strong> 用于显示指定的“ISO-9660”格式的设备的卷名称，通常这种格式的设备为光驱。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">volname(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>设备文件名：指定要显示卷名称的设备。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/w/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/w/" class="post-title-link" itemprop="url">【Linux 命令】w</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>470</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示目前登入系统的用户信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>w命令</strong> 用于显示已经登陆系统的用户列表，并显示用户正在执行的指令。执行这个命令可得知目前登入系统的用户有那些人，以及他们正在执行的程序。单独执行w命令会显示所有的用户，您也可指定用户名称，仅显示某位用户的相关信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-h, --no-header     不打印头信息；</span><br><span class="line">-u, --no-current    当显示当前进程和cpu时间时忽略用户名；</span><br><span class="line">-s, --short         使用短输出格式；</span><br><span class="line">-f, --from          显示用户从哪登录；</span><br><span class="line">-o, --old-style     老式输出</span><br><span class="line">-i, --ip-addr       显示IP地址而不是主机名（如果可能）</span><br><span class="line"></span><br><span class="line">    --help     显示此帮助并退出</span><br><span class="line">-V, --version  显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户：仅显示指定用户。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">w</span><br><span class="line"> 20:39:37 up 136 days,  3:58,  1 user,  load average: 0.00, 0.00, 0.00</span><br><span class="line">USER     TTY      FROM              login@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    222.94.97.122    20:39    1.00s  0.00s  0.00s w</span><br></pre></td></tr></table></figure>
-
-
+<p>说明：which是根据使用者所配置的 PATH 变量内的目录去搜寻可运行档的！所以，不同的 PATH 配置内容所找到的命令当然不一样的！</p>
+<p>用 which 去找出 cd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# which cd</span><br><span class="line">cd: shell built-in command</span><br></pre></td></tr></table></figure>
+<p>cd 这个常用的命令竟然找不到啊！为什么呢？这是因为 cd 是bash 内建的命令！ 但是 which 默认是找 PATH 内所规范的目录，所以当然一定找不到的！</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
@@ -950,7 +616,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wait/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/whereis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -967,7 +633,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/wait/" class="post-title-link" itemprop="url">【Linux 命令】wait</a>
+            <a href="/linux-command/whereis/" class="post-title-link" itemprop="url">【Linux 命令】whereis</a>
         </h2>
 
         <div class="post-meta-container">
@@ -977,8 +643,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:34:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -998,7 +665,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>242</span>
+      <span>981</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1016,16 +683,117 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>等待进程执行完后返回</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wait命令</strong> 用来等待指令的指令，直到其执行完毕后返回终端。该指令常用于shell脚本编程中，待指定的指令执行完成后，才会继续执行后面的任务。该指令等待作业时，在作业标识号前必须添加备份号”%”。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait(参数)</span><br></pre></td></tr></table></figure>
+          <p>查找二进制程序、代码等相关文件路径</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>whereis命令</strong> 用来定位指令的二进制程序、源代码文件和man手册页等相关文件的路径。</p>
+<p>whereis命令只能用于程序名的搜索，而且只搜索二进制文件（参数-b）、man说明文件（参数-m）和源代码文件（参数-s）。如果省略参数，则返回所有信息。</p>
+<p>和find相比，whereis查找的速度非常快，这是因为linux系统会将 系统内的所有文件都记录在一个数据库文件中，当使用whereis和下面即将介绍的locate时，会从数据库中查找数据，而不是像find命令那样，通 过遍历硬盘来查找，效率自然会很高。 但是该数据库文件并不是实时更新，默认情况下时一星期更新一次，因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程或作业标示：指定进程号或者作业号。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用命令wait等待作业号为1的作业完成后再返回，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait %1       #等待作业号为3的作业完成 </span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b：只查找二进制文件；</span><br><span class="line">-B&lt;目录&gt;：只在设置的目录下查找二进制文件；</span><br><span class="line">-f：不显示文件名前的路径名称；</span><br><span class="line">-m：只查找说明文件；</span><br><span class="line">-M&lt;目录&gt;：只在设置的目录下查找说明文件；</span><br><span class="line">-s：只查找原始代码文件；</span><br><span class="line">-S&lt;目录&gt;只在设置的目录下查找原始代码文件；</span><br><span class="line">-u：查找不包含指定类型的文件。</span><br></pre></td></tr></table></figure>
 
-<p>执行上面的指令后，将输出指定作业号的指令，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name password</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>指令名：要查找的二进制程序、源文件和man手册页的指令名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将相关的文件都查找出来</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis tomcat</span><br><span class="line">tomcat:</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whereis svn</span><br><span class="line">svn: /usr/bin/svn /usr/local/svn /usr/share/man/man1/svn.1.gz</span><br></pre></td></tr></table></figure>
+
+<p>说明：tomcat没安装，找不出来，svn安装找出了很多相关文件</p>
+<p>只将二进制文件查找出来 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whereis -b svn</span><br><span class="line">svn: /usr/bin/svn /usr/local/svn</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whereis -m svn</span><br><span class="line">svn: /usr/share/man/man1/svn.1.gz</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whereis -s svn</span><br><span class="line">svn:</span><br></pre></td></tr></table></figure>
+
+<p>说明：<code>whereis -m svn</code>查出说明文档路径，<code>whereis -s svn</code>找source源文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/whatis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/whatis/" class="post-title-link" itemprop="url">【Linux 命令】whatis</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:33:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>823</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>查询一个命令执行什么功能</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>whatis命令</strong> 是用于查询一个命令执行什么功能，并将查询结果打印到终端上。</p>
+<p>whatis命令在用<code>catman -w</code>命令创建的数据库中查找command参数指定的命令、系统调用、库函数或特殊文件名。whatis命令显示手册部分的页眉行。然后可以发出man命令以获取附加的信息。whatis命令等同于使用<code>man -f</code>命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whatis</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# whatis ls</span><br><span class="line">ls                   (1)  - list directory contents</span><br><span class="line">ls                   (1p)  - list directory contents</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whatis cp</span><br><span class="line">cp                   (1)  - copy files and directories</span><br><span class="line">cp                   (1p)  - copy files</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whatis chown</span><br><span class="line">chown                (1)  - change file owner and group</span><br><span class="line">chown                (1p)  - change the file ownership</span><br><span class="line">chown                (2)  - change ownership of a file</span><br><span class="line">chown                (3p)  - change owner and group of a file</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# whatis man</span><br><span class="line">man                  (1)  - format and display the on-line manual pages</span><br><span class="line">man                  (1p)  - display system documentation</span><br><span class="line">man                  (7)  - macros to format man pages</span><br><span class="line">man                 (rpm) - A set of documentation tools: man, apropos and whatis.</span><br><span class="line">man-pages           (rpm) - Man (manual) pages from the Linux Documentation Project.</span><br><span class="line">man.config [man]     (5)  - configuration data for man</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
@@ -1049,7 +817,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wall/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wget/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1066,7 +834,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/wall/" class="post-title-link" itemprop="url">【Linux 命令】wall</a>
+            <a href="/linux-command/wget/" class="post-title-link" itemprop="url">【Linux 命令】wget</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1076,8 +844,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:33:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1097,7 +866,213 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>266</span>
+      <span>5.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Linux系统下载文件工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wget命令</strong> 用来从指定的URL下载文件。wget非常稳定，它在带宽很窄的情况下和不稳定网络中有很强的适应性，如果是由于网络的原因下载失败，wget会不断的尝试，直到整个文件下载完毕。如果是服务器打断下载过程，它会再次联到服务器上从停止的地方继续下载。这对从那些限定了链接时间的服务器上下载大文件非常有用。</p>
+<p>wget支持HTTP，HTTPS和FTP协议，可以使用HTTP代理。所谓的自动下载是指，wget可以在用户退出系统的之后在后台执行。这意味这你可以登录系统，启动一个wget下载任务，然后退出系统，wget将在后台执行直到任务完成，相对于其它大部分浏览器在下载大量数据时需要用户一直的参与，这省去了极大的麻烦。</p>
+<p>用于从网络上下载资源，没有指定目录，下载资源回默认为当前目录。wget虽然功能强大，但是使用起来还是比较简单：</p>
+<ol>
+<li><strong>支持断点下传功能</strong> 这一点，也是网络蚂蚁和FlashGet当年最大的卖点，现在，Wget也可以使用此功能，那些网络不是太好的用户可以放心了；</li>
+<li><strong>同时支持FTP和HTTP下载方式</strong> 尽管现在大部分软件可以使用HTTP方式下载，但是，有些时候，仍然需要使用FTP方式下载软件；</li>
+<li><strong>支持代理服务器</strong> 对安全强度很高的系统而言，一般不会将自己的系统直接暴露在互联网上，所以，支持代理是下载软件必须有的功能；</li>
+<li><strong>设置方便简单</strong> 可能，习惯图形界面的用户已经不是太习惯命令行了，但是，命令行在设置上其实有更多的优点，最少，鼠标可以少点很多次，也不要担心是否错点鼠标；</li>
+<li><strong>程序小，完全免费</strong> 程序小可以考虑不计，因为现在的硬盘实在太大了；完全免费就不得不考虑了，即使网络上有很多所谓的免费软件，但是，这些软件的广告却不是我们喜欢的。</li>
+</ol>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget [参数] [URL地址]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">启动参数：</span><br><span class="line"></span><br><span class="line">-V, –-version 显示wget的版本后退出</span><br><span class="line">-h, –-help 打印语法帮助</span><br><span class="line">-b, –-background 启动后转入后台执行</span><br><span class="line">-e, –-execute=COMMAND 执行 `.wgetrc’格式的命令，wgetrc格式参见/etc/wgetrc或~/.wgetrc</span><br><span class="line"></span><br><span class="line">记录和输入文件参数：</span><br><span class="line"></span><br><span class="line">-o, –-output-file=FILE 把记录写到FILE文件中</span><br><span class="line">-a, –-append-output=FILE 把记录追加到FILE文件中</span><br><span class="line">-d, –-debug 打印调试输出</span><br><span class="line">-q, –-quiet 安静模式(没有输出)</span><br><span class="line">-v, –-verbose 冗长模式(这是缺省设置)</span><br><span class="line">-nv, –-non-verbose 关掉冗长模式，但不是安静模式</span><br><span class="line">-i, –-input-file=FILE 下载在FILE文件中出现的URLs</span><br><span class="line">-F, –-force-html 把输入文件当作HTML格式文件对待</span><br><span class="line">-B, –-base=URL 将URL作为在-F -i参数指定的文件中出现的相对链接的前缀</span><br><span class="line">–-sslcertfile=FILE 可选客户端证书</span><br><span class="line">–-sslcertkey=KEYFILE 可选客户端证书的KEYFILE</span><br><span class="line">–-egd-file=FILE 指定EGD socket的文件名</span><br><span class="line"></span><br><span class="line">下载参数：</span><br><span class="line"></span><br><span class="line">–-bind-address=ADDRESS 指定本地使用地址(主机名或IP，当本地有多个IP或名字时使用)</span><br><span class="line">-t, –-tries=NUMBER 设定最大尝试链接次数(0 表示无限制).</span><br><span class="line">-O –-output-document=FILE 把文档写到FILE文件中</span><br><span class="line">-nc, –-no-clobber 不要覆盖存在的文件或使用.#前缀</span><br><span class="line">-c, –-continue 接着下载没下载完的文件</span><br><span class="line">–progress=TYPE 设定进程条标记</span><br><span class="line">-N, –-timestamping 不要重新下载文件除非比本地文件新</span><br><span class="line">-S, –-server-response 打印服务器的回应</span><br><span class="line">–-spider 不下载任何东西</span><br><span class="line">-T, –-timeout=SECONDS 设定响应超时的秒数</span><br><span class="line">-w, –-wait=SECONDS 两次尝试之间间隔SECONDS秒</span><br><span class="line">–waitretry=SECONDS 在重新链接之间等待1…SECONDS秒</span><br><span class="line">–random-wait 在下载之间等待0…2*WAIT秒</span><br><span class="line">-Y, –-proxy=on/off 打开或关闭代理</span><br><span class="line">-Q, –-quota=NUMBER 设置下载的容量限制</span><br><span class="line">–limit-rate=RATE 限定下载输率</span><br><span class="line"></span><br><span class="line">目录参数：</span><br><span class="line"></span><br><span class="line">-nd –-no-directories 不创建目录</span><br><span class="line">-x, –-force-directories 强制创建目录</span><br><span class="line">-nH, –-no-host-directories 不创建主机目录</span><br><span class="line">-P, –-directory-prefix=PREFIX 将文件保存到目录 PREFIX/…</span><br><span class="line">–cut-dirs=NUMBER 忽略 NUMBER层远程目录</span><br><span class="line"></span><br><span class="line">HTTP 选项参数：</span><br><span class="line"></span><br><span class="line">-–http-user=USER 设定HTTP用户名为 USER.</span><br><span class="line">-–http-passwd=PASS 设定http密码为 PASS</span><br><span class="line">-C, –-cache=on/off 允许/不允许服务器端的数据缓存 (一般情况下允许)</span><br><span class="line">-E, –-html-extension 将所有text/html文档以.html扩展名保存</span><br><span class="line">-–ignore-length 忽略 `Content-Length’头域</span><br><span class="line">-–header=STRING 在headers中插入字符串 STRING</span><br><span class="line">-–proxy-user=USER 设定代理的用户名为 USER</span><br><span class="line">-–proxy-passwd=PASS 设定代理的密码为 PASS</span><br><span class="line">-–referer=URL 在HTTP请求中包含 `Referer: URL’头</span><br><span class="line">-s, –-save-headers 保存HTTP头到文件</span><br><span class="line">-U, –-user-agent=AGENT 设定代理的名称为 AGENT而不是 Wget/VERSION</span><br><span class="line">-–no-http-keep-alive 关闭 HTTP活动链接 (永远链接)</span><br><span class="line">–-cookies=off 不使用 cookies</span><br><span class="line">–-load-cookies=FILE 在开始会话前从文件 FILE中加载cookie</span><br><span class="line">-–save-cookies=FILE 在会话结束后将 cookies保存到 FILE文件中</span><br><span class="line"></span><br><span class="line">FTP 选项参数：</span><br><span class="line"></span><br><span class="line">-nr, -–dont-remove-listing 不移走 `.listing’文件</span><br><span class="line">-g, -–glob=on/off 打开或关闭文件名的 globbing机制</span><br><span class="line">-–passive-ftp 使用被动传输模式 (缺省值).</span><br><span class="line">-–active-ftp 使用主动传输模式</span><br><span class="line">-–retr-symlinks 在递归的时候，将链接指向文件(而不是目录)</span><br><span class="line"></span><br><span class="line">递归下载参数：</span><br><span class="line"></span><br><span class="line">-r, -–recursive 递归下载－－慎用!</span><br><span class="line">-l, -–level=NUMBER 最大递归深度 (inf 或 0 代表无穷)</span><br><span class="line">–-delete-after 在现在完毕后局部删除文件</span><br><span class="line">-k, –-convert-links 转换非相对链接为相对链接</span><br><span class="line">-K, –-backup-converted 在转换文件X之前，将之备份为 X.orig</span><br><span class="line">-m, –-mirror 等价于 -r -N -l inf -nr</span><br><span class="line">-p, –-page-requisites 下载显示HTML文件的所有图片</span><br><span class="line"></span><br><span class="line">递归下载中的包含和不包含(accept/reject)：</span><br><span class="line"></span><br><span class="line">-A, –-accept=LIST 分号分隔的被接受扩展名的列表</span><br><span class="line">-R, –-reject=LIST 分号分隔的不被接受的扩展名的列表</span><br><span class="line">-D, –-domains=LIST 分号分隔的被接受域的列表</span><br><span class="line">–-exclude-domains=LIST 分号分隔的不被接受的域的列表</span><br><span class="line">–-follow-ftp 跟踪HTML文档中的FTP链接</span><br><span class="line">–-follow-tags=LIST 分号分隔的被跟踪的HTML标签的列表</span><br><span class="line">-G, –-ignore-tags=LIST 分号分隔的被忽略的HTML标签的列表</span><br><span class="line">-H, –-span-hosts 当递归时转到外部主机</span><br><span class="line">-L, –-relative 仅仅跟踪相对链接</span><br><span class="line">-I, –-include-directories=LIST 允许目录的列表</span><br><span class="line">-X, –-exclude-directories=LIST 不被包含目录的列表</span><br><span class="line">-np, –-no-parent 不要追溯到父目录</span><br><span class="line">wget -S –-spider url 不下载只显示过程</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>URL：下载指定的URL地址。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>使用wget下载单个文件</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.jsdig.com/testfile.zip</span><br></pre></td></tr></table></figure>
+
+<p>以下的例子是从网络下载一个文件并保存在当前目录，在下载的过程中会显示进度条，包含（下载完成百分比，已经下载的字节，当前下载速度，剩余下载时间）。</p>
+<p><strong>下载并以不同的文件名保存</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O wordpress.zip http://www.jsdig.com/download.aspx?id=1080</span><br></pre></td></tr></table></figure>
+
+<p>wget默认会以最后一个符合<code>/</code>的后面的字符来命令，对于动态链接的下载通常文件名会不正确。</p>
+<p>错误：下面的例子会下载一个文件并以名称<code>download.aspx?id=1080</code>保存:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.jsdig.com/download?id=1</span><br></pre></td></tr></table></figure>
+
+<p>即使下载的文件是zip格式，它仍然以<code>download.php?id=1080</code>命令。</p>
+<p>正确：为了解决这个问题，我们可以使用参数<code>-O</code>来指定一个文件名：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O wordpress.zip http://www.jsdig.com/download.aspx?id=1080</span><br></pre></td></tr></table></figure>
+
+<p><strong>wget限速下载</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --limit-rate=300k http://www.jsdig.com/testfile.zip</span><br></pre></td></tr></table></figure>
+
+<p>当你执行wget的时候，它默认会占用全部可能的宽带下载。但是当你准备下载一个大文件，而你还需要下载其它文件时就有必要限速了。</p>
+<p><strong>使用wget断点续传</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c http://www.jsdig.com/testfile.zip</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>wget -c</code>重新启动下载中断的文件，对于我们下载大文件时突然由于网络等原因中断非常有帮助，我们可以继续接着下载而不是重新下载一个文件。需要继续中断的下载时可以使用<code>-c</code>参数。</p>
+<p><strong>使用wget后台下载</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -b http://www.jsdig.com/testfile.zip</span><br><span class="line"></span><br><span class="line">Continuing in background, pid 1840.</span><br><span class="line">Output will be written to `wget-log&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p>对于下载非常大的文件的时候，我们可以使用参数<code>-b</code>进行后台下载，你可以使用以下命令来察看下载进度：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f wget-log</span><br></pre></td></tr></table></figure>
+
+<p><strong>伪装代理名称下载</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --user-agent=&quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Chrome/10.0.648.204 Safari/534.16&quot; http://www.jsdig.com/testfile.zip</span><br></pre></td></tr></table></figure>
+
+<p>有些网站能通过根据判断代理名称不是浏览器而拒绝你的下载请求。不过你可以通过<code>--user-agent</code>参数伪装。</p>
+<p><strong>测试下载链接</strong> </p>
+<p>当你打算进行定时下载，你应该在预定时间测试下载链接是否有效。我们可以增加<code>--spider</code>参数进行检查。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --spider URL</span><br></pre></td></tr></table></figure>
+
+<p>如果下载链接正确，将会显示:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Spider mode enabled. Check if remote file exists.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: unspecified [text/html]</span><br><span class="line">Remote file exists and could contain further links,</span><br><span class="line">but recursion is disabled -- not retrieving.</span><br></pre></td></tr></table></figure>
+
+<p>这保证了下载能在预定的时间进行，但当你给错了一个链接，将会显示如下错误:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget --spider url</span><br><span class="line">Spider mode enabled. Check if remote file exists.</span><br><span class="line">HTTP request sent, awaiting response... 404 Not Found</span><br><span class="line">Remote file does not exist -- broken link!!!</span><br></pre></td></tr></table></figure>
+
+<p>你可以在以下几种情况下使用<code>--spider</code>参数：</p>
+<ul>
+<li>定时下载之前进行检查</li>
+<li>间隔检测网站是否可用</li>
+<li>检查网站页面的死链接</li>
+</ul>
+<p><strong>增加重试次数</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --tries=40 URL</span><br></pre></td></tr></table></figure>
+
+<p>如果网络有问题或下载一个大文件也有可能失败。wget默认重试20次连接下载文件。如果需要，你可以使用<code>--tries</code>增加重试次数。</p>
+<p><strong>下载多个文件</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -i filelist.txt</span><br></pre></td></tr></table></figure>
+
+<p>首先，保存一份下载链接文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; filelist.txt</span><br><span class="line">url1</span><br><span class="line">url2</span><br><span class="line">url3</span><br><span class="line">url4</span><br></pre></td></tr></table></figure>
+
+<p>接着使用这个文件和参数<code>-i</code>下载。</p>
+<p><strong>镜像网站</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --mirror -p --convert-links -P ./LOCAL URL</span><br></pre></td></tr></table></figure>
+
+<p>下载整个网站到本地。</p>
+<ul>
+<li><code>--miror</code>开户镜像下载。</li>
+<li><code>-p</code>下载所有为了html页面显示正常的文件。</li>
+<li><code>--convert-links</code>下载后，转换成本地的链接。</li>
+<li><code>-P ./LOCAL</code>保存所有文件和目录到本地指定目录。</li>
+</ul>
+<p><strong>过滤指定格式下载</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --reject=gif ur</span><br></pre></td></tr></table></figure>
+
+<p>下载一个网站，但你不希望下载图片，可以使用这条命令。</p>
+<p><strong>把下载信息存入日志文件</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -o download.log URL</span><br></pre></td></tr></table></figure>
+
+<p>不希望下载信息直接显示在终端而是在一个日志文件，可以使用。</p>
+<p><strong>限制总下载文件大小</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -Q5m -i filelist.txt</span><br></pre></td></tr></table></figure>
+
+<p>当你想要下载的文件超过5M而退出下载，你可以使用。注意：这个参数对单个文件下载不起作用，只能递归下载时才有效。</p>
+<p><strong>下载指定格式文件</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -r -A.pdf url</span><br></pre></td></tr></table></figure>
+
+<p>可以在以下情况使用该功能：</p>
+<ul>
+<li>下载一个网站的所有图片。</li>
+<li>下载一个网站的所有视频。</li>
+<li>下载一个网站的所有PDF文件。</li>
+</ul>
+<p><strong>FTP下载</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget ftp-url</span><br><span class="line">wget --ftp-user=USERNAME --ftp-password=PASSWORD url</span><br></pre></td></tr></table></figure>
+
+<p>可以使用wget来完成ftp链接的下载。</p>
+<p>使用wget匿名ftp下载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget ftp-url</span><br></pre></td></tr></table></figure>
+
+<p>使用wget用户名和密码认证的ftp下载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --ftp-user=USERNAME --ftp-password=PASSWORD url</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/wc/" class="post-title-link" itemprop="url">【Linux 命令】wc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:32:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>660</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1115,15 +1090,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>向系统当前所有打开的终端上输出信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wall命令</strong> 用于向系统当前所有打开的终端上输出信息。通过wall命令可将信息发送给每位同意接收公众信息的终端机用户，若不给予其信息内容，则wall命令会从标准输入设备读取数据，然后再把所得到的数据传送给所有终端机用户。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wall(参数)</span><br></pre></td></tr></table></figure>
+          <p>统计文件的字节数、字数、行数</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wc命令</strong> 统计指定文件中的字节数、字数、行数，并将统计结果显示输出。利用wc指令我们可以计算文件的Byte数、字数或是列数，若不指定文件名称，或是所给予的文件名为“-”，则wc指令会从标准输入设备读取数据。wc同时也给出所指定文件的总统计数。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc(选项)(参数)</span><br><span class="line">wc [选项]... [文件]...</span><br><span class="line">wc [选项]... --files0-from=F</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>消息：指定广播消息。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# wall this is a test line</span><br><span class="line"></span><br><span class="line">Broadcast message from root (pts/1) (Fri Dec 20 11:36:51 2013):</span><br><span class="line"></span><br><span class="line">this is a test line</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-c # 统计字节数，或--bytes或——chars：只显示Bytes数；。</span><br><span class="line">-l # 统计行数，或——lines：只显示列数；。</span><br><span class="line">-m # 统计字符数。这个标志不能与 -c 标志一起使用。</span><br><span class="line">-w # 统计字数，或——words：只显示字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。</span><br><span class="line">-L # 打印最长行的长度。</span><br><span class="line">-help     # 显示帮助信息</span><br><span class="line">--version # 显示版本信息</span><br></pre></td></tr></table></figure>
 
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要统计的文件列表。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc -l *       # 统计当前目录下的所有文件行数及总计行数。</span><br><span class="line">wc -l *.js    # 统计当前目录下的所有 .js 后缀的文件行数及总计行数。</span><br><span class="line">find  . * | xargs wc -l # 当前目录以及子目录的所有文件行数及总计行数。</span><br></pre></td></tr></table></figure>
+
+<p>查看文件的字节数、字数、行数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wc test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">7     8     70     test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 行数 单词数 字节数 文件名</span></span><br></pre></td></tr></table></figure>
+
+<p>用wc命令怎么做到只打印统计数字不打印文件名</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc -l &lt; test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">7</span><br></pre></td></tr></table></figure>
+
+<p>用来统计当前目录下的文件数(不包含隐藏文件)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要去除TOTAL行</span></span><br><span class="line">expr $(ls -l | wc -l) - 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">8</span><br></pre></td></tr></table></figure>
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -1171,8 +1157,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:32:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1242,7 +1229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wc/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wall/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1259,7 +1246,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/wc/" class="post-title-link" itemprop="url">【Linux 命令】wc</a>
+            <a href="/linux-command/wall/" class="post-title-link" itemprop="url">【Linux 命令】wall</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1269,8 +1256,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:31:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1290,7 +1278,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>660</span>
+      <span>266</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1308,26 +1296,115 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>统计文件的字节数、字数、行数</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wc命令</strong> 统计指定文件中的字节数、字数、行数，并将统计结果显示输出。利用wc指令我们可以计算文件的Byte数、字数或是列数，若不指定文件名称，或是所给予的文件名为“-”，则wc指令会从标准输入设备读取数据。wc同时也给出所指定文件的总统计数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc(选项)(参数)</span><br><span class="line">wc [选项]... [文件]...</span><br><span class="line">wc [选项]... --files0-from=F</span><br></pre></td></tr></table></figure>
+          <p>向系统当前所有打开的终端上输出信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wall命令</strong> 用于向系统当前所有打开的终端上输出信息。通过wall命令可将信息发送给每位同意接收公众信息的终端机用户，若不给予其信息内容，则wall命令会从标准输入设备读取数据，然后再把所得到的数据传送给所有终端机用户。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wall(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-c # 统计字节数，或--bytes或——chars：只显示Bytes数；。</span><br><span class="line">-l # 统计行数，或——lines：只显示列数；。</span><br><span class="line">-m # 统计字符数。这个标志不能与 -c 标志一起使用。</span><br><span class="line">-w # 统计字数，或——words：只显示字数。一个字被定义为由空白、跳格或换行字符分隔的字符串。</span><br><span class="line">-L # 打印最长行的长度。</span><br><span class="line">-help     # 显示帮助信息</span><br><span class="line">--version # 显示版本信息</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>消息：指定广播消息。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# wall this is a test line</span><br><span class="line"></span><br><span class="line">Broadcast message from root (pts/1) (Fri Dec 20 11:36:51 2013):</span><br><span class="line"></span><br><span class="line">this is a test line</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要统计的文件列表。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc -l *       # 统计当前目录下的所有文件行数及总计行数。</span><br><span class="line">wc -l *.js    # 统计当前目录下的所有 .js 后缀的文件行数及总计行数。</span><br><span class="line">find  . * | xargs wc -l # 当前目录以及子目录的所有文件行数及总计行数。</span><br></pre></td></tr></table></figure>
-
-<p>查看文件的字节数、字数、行数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wc test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">7     8     70     test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 行数 单词数 字节数 文件名</span></span><br></pre></td></tr></table></figure>
-
-<p>用wc命令怎么做到只打印统计数字不打印文件名</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc -l &lt; test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">7</span><br></pre></td></tr></table></figure>
-
-<p>用来统计当前目录下的文件数(不包含隐藏文件)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 要去除TOTAL行</span></span><br><span class="line">expr $(ls -l | wc -l) - 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">8</span><br></pre></td></tr></table></figure>
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
 
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/wait/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/wait/" class="post-title-link" itemprop="url">【Linux 命令】wait</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:31:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>242</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>等待进程执行完后返回</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>wait命令</strong> 用来等待指令的指令，直到其执行完毕后返回终端。该指令常用于shell脚本编程中，待指定的指令执行完成后，才会继续执行后面的任务。该指令等待作业时，在作业标识号前必须添加备份号”%”。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程或作业标示：指定进程号或者作业号。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用命令wait等待作业号为1的作业完成后再返回，输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait %1       #等待作业号为3的作业完成 </span><br></pre></td></tr></table></figure>
+
+<p>执行上面的指令后，将输出指定作业号的指令，如下所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name password</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
 

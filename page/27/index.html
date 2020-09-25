@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mail/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/mail/" class="post-title-link" itemprop="url">【Linux 命令】mail</a>
+            <a href="/linux-command/mv/" class="post-title-link" itemprop="url">【Linux 命令】mv</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:35:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +352,246 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用来对文件或目录重新命名</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mv命令</strong> 用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中。source表示源文件或目录，target表示目标文件或目录。如果将一个文件移到一个已经存在的目标文件中，则目标文件的内容将被覆盖。</p>
+<p>mv命令可以用来将源文件移至一个目标文件中，或将一组文件移至一个目标目录中。源文件被移至目标文件有两种不同的结果：</p>
+<ol>
+<li>如果目标文件是到某一目录文件的路径，源文件会被移到此目录下，且文件名不变。</li>
+<li>如果目标文件不是目录文件，则源文件名（只能有一个）会变为此目标文件名，并覆盖己存在的同名文件。如果源文件和目标文件在同一个目录下，mv的作用就是改文件名。当目标文件是目录文件时，源文件或目录参数可以有多个，则所有的源文件都会被移至目标文件中。所有移到该目录下的文件都将保留以前的文件名。</li>
+</ol>
+<p>注意事项：mv与cp的结果不同，mv好像文件“搬家”，文件个数并未增加。而cp对文件进行复制，文件个数增加了。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份；</span><br><span class="line">-b：当文件存在时，覆盖前，为其创建一个备份；</span><br><span class="line">-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录；</span><br><span class="line">-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。</span><br><span class="line">--strip-trailing-slashes：删除源文件中的斜杠“/”；</span><br><span class="line">-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀；</span><br><span class="line">--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录；</span><br><span class="line">-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>源文件：源文件列表。</li>
+<li>目标文件：如果“目标文件”是文件名则在移动文件的同时，将其改名为“目标文件”；如果“目标文件”是目录名则将源文件移动到“目标文件”下。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将目录<code>/usr/men</code>中的所有文件移到当前目录（用<code>.</code>表示）中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /usr/men/* .</span><br></pre></td></tr></table></figure>
+
+<p>移动文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv file_1.txt /home/office/</span><br></pre></td></tr></table></figure>
+
+<p>移动多个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv file_2.txt file_3.txt file_4.txt /home/office/</span><br><span class="line">mv *.txt /home/office/</span><br></pre></td></tr></table></figure>
+
+<p>移动目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv directory_1/ /home/office/</span><br></pre></td></tr></table></figure>
+
+<p>重命名文件或目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv file_1.txt file_2.txt # 将文件file_1.txt改名为file_2.txt</span><br></pre></td></tr></table></figure>
+
+<p>重命名目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv directory_1/ directory_2/</span><br></pre></td></tr></table></figure>
+
+<p>打印移动信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -v *.txt &#x2F;home&#x2F;office</span><br></pre></td></tr></table></figure>
+
+<p>提示是否覆盖文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -i file_1.txt /home/office</span><br></pre></td></tr></table></figure>
+
+<p>源文件比目标文件新时才执行更新</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -uv *.txt /home/office</span><br></pre></td></tr></table></figure>
+
+<p>不要覆盖任何已存在的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -vn *.txt /home/office</span><br></pre></td></tr></table></figure>
+
+<p>复制时创建备份</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -bv *.txt /home/office</span><br></pre></td></tr></table></figure>
+
+<p>无条件覆盖已经存在的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv -f *.txt /home/office</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mtools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/mtools/" class="post-title-link" itemprop="url">【Linux 命令】mtools</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:35:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>674</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示mtools支持的指令</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mtools命令</strong> 显示mtools支持的指令，mtools为MS-DOS文件系统的工具程序，可模拟许多MS-DOS的指令。这些指令都是mtools的符号连接，因此会有一些共同的特性。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mtools(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-a：长文件名重复时自动更改目标文件的长文件名；</span><br><span class="line">-A：短文件名重复但长文件名不同时自动更改目标文件的短文件名；</span><br><span class="line">-o：长文件名重复时，将目标文件覆盖现有的文件；</span><br><span class="line">-O：短文件名重复但长文件名不同时，将目标文件覆盖现有的文件；</span><br><span class="line">-r：长文件名重复时，要求用户更改目标文件的长文件名；</span><br><span class="line">-R：短文件名重复但长文件名不同时，要求用户更改目标文件的短文件名；</span><br><span class="line">-s：长文件名重复时，则不处理该目标文件；</span><br><span class="line">-S：短文件名重复但长文件名不同时，则不处理该目标文件；</span><br><span class="line">-v：执行时显示详细的说明；</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用mtools命令显示其支持的所有的指令，输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mtools     #显示所有支持的指令名称</span><br><span class="line">Supported commands:</span><br><span class="line">mattrib, mbadblocks, mcat, mcd, mclasserase, mcopy, mdel, mdeltree</span><br><span class="line">mdir, mdoctorfat, mdu, mformat, minfo, mlabel, mmd, mmount</span><br><span class="line">mpartition, mrd, mread, mmove, mren, mshowfat, mtoolstest, mtype</span><br><span class="line">mwrite, mzip</span><br></pre></td></tr></table></figure>
+
+<p>如上所示，其显示的所有命令均为mtools工具所支持的。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mpstat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/mpstat/" class="post-title-link" itemprop="url">【Linux 命令】mpstat</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:34:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -369,434 +609,137 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>命令行下发送和接收电子邮件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mail命令</strong> 是命令行的电子邮件发送和接收工具。操作的界面不像elm或pine那么容易使用，但功能非常完整。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>显示各个可用CPU的状态</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mpstat命令</strong> 指令主要用于多CPU环境下，它显示各个可用CPU的状态系你想。这些信息存放在<code>/proc/stat</code>文件中。在多CPUs系统里，其不但能查看所有CPU的平均状况信息，而且能够查看特定CPU的信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpstat(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-b&lt;地址&gt;：指定密件副本的收信人地址；</span><br><span class="line">-c&lt;地址&gt;：指定副本的收信人地址；</span><br><span class="line">-f&lt;邮件文件&gt;：读取指定邮件文件中的邮件；</span><br><span class="line">-i：不显示终端发出的信息；</span><br><span class="line">-I：使用互动模式；</span><br><span class="line">-n：程序使用时，不使用mail.rc文件中的设置；</span><br><span class="line">-N：阅读邮件时，不显示邮件的标题；</span><br><span class="line">-s&lt;邮件主题&gt;：指定邮件的主题；</span><br><span class="line">-u&lt;用户帐号&gt;：读取指定用户的邮件；</span><br><span class="line">-v：执行时，显示详细的信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>邮件地址：收信人的电子邮箱地址。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>直接使用shell当编辑器</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by shell&quot; admin@jsdig.com</span><br><span class="line">hello,this is the content of mail.</span><br><span class="line">welcome to www.jsdig.com</span><br></pre></td></tr></table></figure>
-
-<p>第一行是输入的命令，<code>-s</code>表示邮件的主题，后面的<code>admin@jsdig.com</code>则是邮件的接收人，输入完这行命令后回车，会进入邮件正文的编写，我们可以输入任何文字，比如上面的两行。当邮件正文输入完成后，需要按 <strong>CTRL+D</strong> 结束输入，此时会提示你输入Cc地址，即邮件抄送地址，没有直接回车就完成了邮件的发送。</p>
-<p> <strong>使用管道进行邮件发送</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;hello,this is the content of mail.welcome to www.jsdig.com&quot; | mail -s &quot;Hello from jsdig.com by pipe&quot; admin@jsdig.com</span><br></pre></td></tr></table></figure>
-
-<p>使用管道直接敲入这行命令即可完成邮件的发送，其中echo后的是邮件正文。</p>
-<p> <strong>使用文件进行邮件发送</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
-
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjOTc7JiN4NjQ7JiN4NmQ7JiMxMDU7JiMxMTA7JiM2NDsmI3g2YTsmIzExNTsmI3g2NDsmI3g2OTsmI3g2NzsmIzQ2OyYjeDYzOyYjMTExOyYjeDZkOw==">&#97;&#x64;&#x6d;&#105;&#110;&#64;&#x6a;&#115;&#x64;&#x69;&#x67;&#46;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
-<p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
-<p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
-
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjMTAxOyYjMTE0OyYjNjQ7JiMxMDY7JiN4NzM7JiN4NjQ7JiMxMDU7JiMxMDM7JiM0NjsmIzk5OyYjeDZmOyYjMTA5Ow==">&#117;&#115;&#101;&#114;&#64;&#106;&#x73;&#x64;&#105;&#103;&#46;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
-<p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
-
-<p>安装完成后我们就可以来进行附件的发送了，使用如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uuencode test.txt test | mail -s &quot;hello,see the attachement&quot; admin@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
-
-<p>完成后就可以把text.txt文件作为邮件的附件发送出去了。uuencode有两个参数，第一个是要发送的文件，第二个是显示的文件名称。</p>
-<p>这里我主要介绍的是在CentOS下使用mail发送电子邮件的一些使用方法，需要的要求是你的linux必须安装了sendmail并开启了，同时保证可以连接外网。另外，文章中提到的命令本人都经过亲自测试，保证完全可用，不过你需要将命令中的电子邮件地址换成自己的电子邮件地址。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mailq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/mailq/" class="post-title-link" itemprop="url">【Linux 命令】mailq</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>201</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示待发送的邮件队列</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mailq命令</strong> 用户显示待发送的邮件队列，显示的每一个条目包括邮件队列id、邮件大小、加入队列时间、邮件发送者和接受者。如果邮件最后一次尝试后还没有将邮件投递出去，则显示发送失败的原因。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mailq(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-v：显示详细的信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mailq -v</span><br><span class="line">/var/spool/mqueue is empty</span><br><span class="line">                Total requests: 0</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mailstat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/mailstat/" class="post-title-link" itemprop="url">【Linux 命令】mailstat</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>189</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示到达的邮件状态</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mailstat命令</strong> 用来显示到达的邮件状态。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mailstat(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-k：保持邮件日志文件的完整性，不清空日志文件；</span><br><span class="line">-l：使用长格式显示邮件状态；</span><br><span class="line">-m：合并任何错误信息到一行中显示；</span><br><span class="line">-o：使用老的邮件日志邮件；</span><br><span class="line">-t：使用简洁的格式显示邮件状态；</span><br><span class="line">-s：如果没有邮件则不输出任何信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>邮件日志文件：指定要读取邮件日志文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/make/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/make/" class="post-title-link" itemprop="url">【Linux 命令】make</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>831</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>GNU的工程化编译工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>make命令</strong> 是GNU的工程化编译工具，用于编译众多相互关联的源代码文件，以实现工程化的管理，提高开发效率。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-f：指定“makefile”文件；</span><br><span class="line">-i：忽略命令执行返回的出错信息；</span><br><span class="line">-s：沉默模式，在执行之前不输出相应的命令行信息；</span><br><span class="line">-r：禁止使用build-in规则；</span><br><span class="line">-n：非执行模式，输出所有执行命令，但并不执行；</span><br><span class="line">-t：更新目标文件；</span><br><span class="line">-q：make操作将根据目标文件是否已经更新返回&quot;0&quot;或非&quot;0&quot;的状态信息；</span><br><span class="line">-p：输出所有宏定义和目标文件描述；</span><br><span class="line">-d：Debug模式，输出有关文件和检测时间的详细信息。</span><br></pre></td></tr></table></figure>
-
-<p>Linux下常用选项与Unix系统中稍有不同，下面是不同的部分：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c dir：在读取 makefile 之前改变到指定的目录dir；</span><br><span class="line">-I dir：当包含其他 makefile文件时，利用该选项指定搜索目录；</span><br><span class="line">-h：help文挡，显示所有的make选项；</span><br><span class="line">-w：在处理 makefile 之前和之后，都显示工作目录。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标：指定编译目标。</p>
-<h3 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h3><p>无论是在linux 还是在Unix环境 中，make都是一个非常重要的编译命令。不管是自己进行项目开发还是安装应用软件，我们都经常要用到make或make install。利用make工具，我们可以将大型的开发项目分解成为多个更易于管理的模块，对于一个包括几百个源文件的应用程序，使用make和 makefile工具就可以简洁明快地理顺各个源文件之间纷繁复杂的相互关系。</p>
-<p>而且如此多的源文件，如果每次都要键入gcc命令进行编译的话，那对程序员 来说简直就是一场灾难。而make工具则可自动完成编译工作，并且可以只对程序员在上次编译后修改过的部分进行编译。</p>
-<p>因此，有效的利用make和 makefile工具可以大大提高项目开发的效率。同时掌握make和makefile之后，您也不会再面对着Linux下的应用软件手足无措了。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/man/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/man/" class="post-title-link" itemprop="url">【Linux 命令】man</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>625</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>查看Linux中的指令帮助</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>man命令</strong> 是Linux下的帮助指令，通过man指令可以查看Linux中的指令帮助、配置文件帮助和编程帮助等信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：在所有的man帮助手册中搜索；</span><br><span class="line">-f：等价于whatis指令，显示给定关键字的简短描述信息；</span><br><span class="line">-P：指定内容时使用分页程序；</span><br><span class="line">-M：指定man手册搜索的路径。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-P：指定CPU编号。</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>数字：指定从哪本man手册中搜索帮助；</li>
-<li>关键字：指定要搜索帮助的关键字。</li>
+<li>间隔时间：每次报告的间隔时间（秒）；</li>
+<li>次数：显示报告的次数。</li>
 </ul>
-<h3 id="数字代表内容"><a href="#数字代表内容" class="headerlink" title="数字代表内容"></a>数字代表内容</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1：用户在shell环境可操作的命令或执行文件；</span><br><span class="line">2：系统内核可调用的函数与工具等</span><br><span class="line">3：一些常用的函数(function)与函数库(library)，大部分为C的函数库(libc)</span><br><span class="line">4：设备文件说明，通常在/dev下的文件</span><br><span class="line">5：配置文件或某些文件格式</span><br><span class="line">6：游戏(games)</span><br><span class="line">7：惯例与协议等，如Linux文件系统，网络协议，ASCII code等说明</span><br><span class="line">8：系统管理员可用的管理命令</span><br><span class="line">9：跟kernel有关的文件</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>当mpstat不带参数时，输出为从系统启动以来的平均值。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpstat</span><br><span class="line">Linux 2.6.9-5.31AXsmp (builder.redflag-linux.com) 12/16/2005</span><br><span class="line">09:38:46 AM CPU %user %nice %system %iowait %irq %soft %idle intr/s</span><br><span class="line">09:38:48 AM all 23.28 0.00 1.75     0.50 0.00 0.00 74.47 1018.59</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>我们输入<code>man ls</code>，它会在最左上角显示“LS（1）”，在这里，“LS”表示手册名称，而“（1）”表示该手册位于第一节章，同样，我们输<code>man ifconfig</code>它会在最左上角显示“IFCONFIG（8）”。也可以这样输入命令：“man [章节号] 手册名称”。</p>
-<p>man是按照手册的章节号的顺序进行搜索的，比如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man sleep</span><br></pre></td></tr></table></figure>
+<p> <strong>每2秒产生了2个处理器的统计数据报告：</strong> </p>
+<p>下面的命令可以每2秒产生了2个处理器的统计数据报告，一共产生三个interval 的信息，然后再给出这三个interval的平均信息。默认时，输出是按照CPU 号排序。第一个行给出了从系统引导以来的所有活跃数据。接下来每行对应一个处理器的活跃状态。。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mpstat -P ALL 2 3</span><br><span class="line">Linux 2.6.18-164.el5 (server.sys.com)    01/04/2010</span><br><span class="line">09:34:20 PM CPU   %user   %nice    %sys %iowait    %irq   %soft %steal   %idle    intr/s</span><br><span class="line">09:34:22 PM all    0.00    0.00    0.00    0.00    0.00    0.00    0.00 100.00   1001.49</span><br><span class="line">09:34:22 PM    0    0.00    0.00    0.50    0.00    0.00    0.00    0.00   99.50   1001.00</span><br><span class="line">09:34:22 PM    1    0.00    0.00    0.00    0.00    0.00    0.00    0.00 100.00      0.00</span><br></pre></td></tr></table></figure>
 
-<p>只会显示sleep命令的手册,如果想查看库函数sleep，就要输入:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man 3 sleep</span><br></pre></td></tr></table></figure>
+<p> <strong>比较带参数和不带参数的mpstat的结果：</strong> </p>
+<p>在后台开一个2G的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 1.img &amp;</span><br></pre></td></tr></table></figure>
+
+<p>然后在另一个终端运行mpstat命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpstat</span><br><span class="line">Linux 2.6.18-164.el5 (server.sys.com)    01/04/2010</span><br><span class="line">10:17:31 PM CPU   %user   %nice    %sys %iowait    %irq   %soft %steal   %idle    intr/s</span><br><span class="line">10:17:31 PM all    0.07    0.02    0.25    0.21    0.01    0.04    0.00   99.40   1004.57</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mpstat</span><br><span class="line">Linux 2.6.18-164.el5 (server.sys.com)    01/04/2010</span><br><span class="line">10:17:35 PM CPU   %user   %nice    %sys %iowait    %irq   %soft %steal   %idle    intr/s</span><br><span class="line">10:17:35 PM all    0.07    0.02    0.25    0.21    0.01    0.04    0.00   99.39   1004.73</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mpstat 3 10</span><br><span class="line">Linux 2.6.18-164.el5 (server.sys.com)    01/04/2010</span><br><span class="line">10:17:55 PM CPU   %user   %nice    %sys %iowait    %irq   %soft %steal   %idle    intr/s</span><br><span class="line">10:17:58 PM all   13.12    0.00   20.93    0.00    1.83    9.80    0.00   54.32   2488.08</span><br><span class="line">10:18:01 PM all   10.82    0.00   19.30    0.83    1.83    9.32    0.00   57.90   2449.83</span><br><span class="line">10:18:04 PM all   10.95    0.00   20.40    0.17    1.99    8.62    0.00   57.88   2384.05</span><br><span class="line">10:18:07 PM all   10.47    0.00   18.11    0.00    1.50    8.47    0.00   61.46   2416.00</span><br><span class="line">10:18:10 PM all   11.81    0.00   22.63    0.00    1.83   11.98    0.00   51.75   2210.60</span><br><span class="line">10:18:13 PM all    6.31    0.00   10.80    0.00    1.00    5.32    0.00   76.58   1795.33</span><br><span class="line">10:18:19 PM all    1.75    0.00    3.16    0.75    0.25    1.25    0.00   92.85   1245.18</span><br><span class="line">10:18:22 PM all   11.94    0.00   19.07    0.00    1.99    8.29    0.00   58.71   2630.46</span><br><span class="line">10:18:25 PM all   11.65    0.00   19.30    0.50    2.00    9.15    0.00   57.40   2673.91</span><br><span class="line">10:18:28 PM all   11.44    0.00   21.06    0.33    1.99   10.61    0.00   54.56   2369.87</span><br><span class="line">Average:     all    9.27    0.00   16.18    0.30    1.50    7.64    0.00   65.11   2173.54</span><br></pre></td></tr></table></figure>
+
+<p>上两表显示出当要正确反映系统的情况，需要正确使用命令的参数。vmstat 和iostat 也需要注意这一问题。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mount/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/mount/" class="post-title-link" itemprop="url">【Linux 命令】mount</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:34:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用于挂载Linux系统外的文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mount命令</strong> Linux mount命令是经常会使用到的命令，它用于挂载Linux系统外的文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount [-hV]</span><br><span class="line">mount -a [-fFnrsvw] [-t vfstype]</span><br><span class="line">mount [-fnrsvw] [-o options [,...]] device | dir</span><br><span class="line">mount [-fnrsvw] [-t vfstype] [-o options] device dir</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-V：显示程序版本</span><br><span class="line">-h：显示辅助讯息</span><br><span class="line">-v：显示较讯息，通常和 -f 用来除错。</span><br><span class="line">-a：将 /etc/fstab 中定义的所有档案系统挂上。</span><br><span class="line">-F：这个命令通常和 -a 一起使用，它会为每一个 mount 的动作产生一个行程负责执行。在系统需要挂上大量 NFS 档案系统时可以加快挂上的动作。</span><br><span class="line">-f：通常用在除错的用途。它会使 mount 并不执行实际挂上的动作，而是模拟整个挂上的过程。通常会和 -v 一起使用。</span><br><span class="line">-n：一般而言，mount 在挂上后会在 /etc/mtab 中写入一笔资料。但在系统中没有可写入档案系统存在的情况下可以用这个选项取消这个动作。</span><br><span class="line">-s-r：等于 -o ro</span><br><span class="line">-w：等于 -o rw</span><br><span class="line">-L：将含有特定标签的硬盘分割挂上。</span><br><span class="line">-U：将档案分割序号为 的档案系统挂下。-L 和 -U 必须在/proc/partition 这种档案存在时才有意义。</span><br><span class="line">-t：指定档案系统的型态，通常不必指定。mount 会自动选择正确的型态。</span><br><span class="line">-o async：打开非同步模式，所有的档案读写动作都会用非同步模式执行。</span><br><span class="line">-o sync：在同步模式下执行。</span><br><span class="line">-o atime、-o noatime：当 atime 打开时，系统会在每次读取档案时更新档案的『上一次调用时间』。当我们使用 flash 档案系统时可能会选项把这个选项关闭以减少写入的次数。</span><br><span class="line">-o auto、-o noauto：打开/关闭自动挂上模式。</span><br><span class="line">-o defaults:使用预设的选项 rw, suid, dev, exec, auto, nouser, and async.</span><br><span class="line">-o dev、-o nodev-o exec、-o noexec允许执行档被执行。</span><br><span class="line">-o suid、-o nosuid：</span><br><span class="line">允许执行档在 root 权限下执行。</span><br><span class="line">-o user、-o nouser：使用者可以执行 mount/umount 的动作。</span><br><span class="line">-o remount：将一个已经挂下的档案系统重新用不同的方式挂上。例如原先是唯读的系统，现在用可读写的模式重新挂上。</span><br><span class="line">-o ro：用唯读模式挂上。</span><br><span class="line">-o rw：用可读写模式挂上。</span><br><span class="line">-o loop=：使用 loop 模式用来将一个档案当成硬盘分割挂上系统。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将 <code>/dev/hda1</code> 挂在 <code>/mnt</code> 之下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">mount /dev/hda1 /mnt</span></span><br></pre></td></tr></table></figure>
+
+<p>将 <code>/dev/hda1</code> 用唯读模式挂在 <code>/mnt</code> 之下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">mount -o ro /dev/hda1 /mnt</span></span><br></pre></td></tr></table></figure>
+
+<p>将 <code>/tmp/image.iso</code> 这个光碟的 <code>image</code> 档使用 <code>loop</code> 模式挂在 <code>/mnt/cdrom</code> 之下。用这种方法可以将一般网络上可以找到的 <code>Linux</code> 光 碟 ISO 档在不烧录成光碟的情况下检视其内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">mount -o loop /tmp/image.iso /mnt/cdrom</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -823,7 +766,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mapfile/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/more/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -840,7 +783,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/mapfile/" class="post-title-link" itemprop="url">【Linux 命令】mapfile</a>
+            <a href="/linux-command/more/" class="post-title-link" itemprop="url">【Linux 命令】more</a>
         </h2>
 
         <div class="post-meta-container">
@@ -850,8 +793,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:33:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -871,7 +815,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
+      <span>656</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -889,22 +833,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>从标准输入读取行并赋值到数组。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mapfile [-d delim] [-n count] [-O origin] [-s count] [-t] [-u fd] [-C callback] [-c quantum] [array]</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>从标准输入或文件描述符读取行并赋值到数组。</li>
+          <p>显示文件内容，每次显示一屏</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>more命令</strong> 是一个基于vi编辑器文本过滤器，它以全屏幕的方式按页显示文本文件的内容，支持vi中的关键字定位操作。more名单中内置了若干快捷键，常用的有H（获得帮助信息），Enter（向下翻滚一行），空格（向下滚动一屏），Q（退出命令）。</p>
+<p>该命令一次显示一屏文本，满屏后停下来，并且在屏幕的底部出现一个提示信息，给出至今己显示的该文件的百分比：–More–（XX%）可以用下列不同的方法对提示做出回答：</p>
+<ul>
+<li>按 <code>Space</code> 键：显示文本的下一屏内容。</li>
+<li>按 <code>Enter</code> 键：只显示文本的下一行内容。</li>
+<li>按斜线符<code>|</code>：接着输入一个模式，可以在文本中寻找下一个相匹配的模式。</li>
+<li>按H键：显示帮助屏，该屏上有相关的帮助信息。</li>
+<li>按B键：显示上一屏内容。</li>
+<li>按Q键：退出more命令。</li>
 </ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-d delim       将delim设为行分隔符，代替默认的换行符。</span><br><span class="line">-n count       从标准输入中获取最多count行，如果count为零那么获取全部。</span><br><span class="line">-O origin      从数组下标为origin的位置开始赋值，默认的下标为0。</span><br><span class="line">-s count       跳过对前count行的读取。</span><br><span class="line">-t             读取时移除行分隔符delim（默认为换行符）。</span><br><span class="line">-u fd          从文件描述符fd中读取。</span><br><span class="line">-C callback    每当读取了quantum行时，调用callback语句。</span><br><span class="line">-c quantum     设定读取的行数为quantum。</span><br><span class="line"></span><br><span class="line">如果使用-C时没有同时使用-c指定quantum的值，那么quantum默认为5000。</span><br><span class="line">当callback语句执行时，将数组下一个要赋值的下标以及读取的行作为额外的参数传递给callback语句。</span><br><span class="line">如果使用-O时没有提供起始位置，那么mapfile会在实际赋值之前清空该数组。</span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more(语法)(参数)</span><br></pre></td></tr></table></figure>
 
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>array（可选）：用于输出的数组名称。如果没有指定数组名称，那么会默认写入到变量名为MAPFILE的数组中。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非使用了非法选项、指定的数组是只读的、指定的数组不是下标数组。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 常见的读取形式。</span></span><br><span class="line">mapfile &lt; source_file target_array</span><br><span class="line">cat source_file |mapfile target_array</span><br><span class="line">mapfile -u fd target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 只读取前5行。</span></span><br><span class="line">mapfile &lt; source_file -n 5 target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 跳过前5行。</span></span><br><span class="line">mapfile &lt; source_file -s 5 target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在数组指定的下标开始赋值。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 请注意：这样做不会清空该数组。</span></span><br><span class="line">mapfile &lt; source_file -O 2 target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 读取时设定行分隔符为tab。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意，第二行的tab在终端需要用ctrl+v tab输入；</span></span><br><span class="line">mapfile &lt; source_file -d $&#x27;\t&#x27; target_array</span><br><span class="line">mapfile &lt; source_file -d &#x27;	&#x27; target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 读取时移除行分隔符（tab）。</span></span><br><span class="line">mapfile &lt; source_file -d $&#x27;\t&#x27; -t target_array</span><br><span class="line"><span class="meta">#</span><span class="bash"> 读取时移除行分隔符（换行符）。</span></span><br><span class="line">mapfile &lt; source_file -t target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每读取2行，执行一次语句（在这里是<span class="built_in">echo</span>）。</span></span><br><span class="line">mapfile &lt; source_file -C &quot;echo CALLBACK:&quot; -c 2 target_array</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 遍历下标，依次显示数组的元素。</span></span><br><span class="line">for i in $&#123;!target_array[@]&#125;; do</span><br><span class="line">  printf &quot;%s&quot; $&#123;target_array[i]&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-&lt;数字&gt;：指定每屏显示的行数；</span><br><span class="line">-d：显示“[press space to continue,&#x27;q&#x27; to quit.]”和“[Press &#x27;h&#x27; for instructions]”；</span><br><span class="line">-c：不进行滚屏操作。每次刷新这个屏幕；</span><br><span class="line">-s：将多个空行压缩成一行显示；</span><br><span class="line">-u：禁止下划线；</span><br><span class="line">+&lt;数字&gt;：从指定数字的行开始显示。</span><br></pre></td></tr></table></figure>
 
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-<li>bash内建命令readarray是mapfile的同义词。</li>
-</ol>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定分页显示内容的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>显示文件file的内容，但在显示之前先清屏，并且在屏幕的最下方显示完成的百分比。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more -dc file</span><br></pre></td></tr></table></figure>
+
+<p>显示文件file的内容，每10行显示一次，而且在显示之前先清屏。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more -c -10 file</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
@@ -927,7 +878,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/md5sum/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/modprobe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -944,7 +895,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/md5sum/" class="post-title-link" itemprop="url">【Linux 命令】md5sum</a>
+            <a href="/linux-command/modprobe/" class="post-title-link" itemprop="url">【Linux 命令】modprobe</a>
         </h2>
 
         <div class="post-meta-container">
@@ -954,8 +905,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:33:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -975,7 +927,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>888</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -993,44 +945,34 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>计算和校验文件报文摘要的工具程序</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>md5sum命令</strong> 采用MD5报文摘要算法（128位）计算和检查文件的校验和。一般来说，安装了Linux后，就会有md5sum这个工具，直接在命令行终端直接运行。</p>
-<p>MD5算法常常被用来验证网络文件传输的完整性，防止文件被人篡改。MD5 全称是报文摘要算法（Message-Digest Algorithm 5），此算法对任意长度的信息逐位进行计算，产生一个二进制长度为128位（十六进制长度就是32位）的“指纹”（或称“报文摘要”），不同的文件产生相同的报文摘要的可能性是非常非常之小的。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5sum(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>自动处理可载入模块</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>modprobe命令</strong> 用于智能地向内核中加载模块或者从内核中移除模块。</p>
+<p>modprobe可载入指定的个别模块，或是载入一组相依的模块。modprobe会根据depmod所产生的相依关系，决定要载入哪些模块。若在载入过程中发生错误，在modprobe会卸载整组的模块。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-b：二进制模式读取文件；</span><br><span class="line">-t或--text：把输入的文件作为文本文件看待；</span><br><span class="line">-c：从指定文件中读取MD5校验和，并进行校验；</span><br><span class="line">--status：验证成功时不输出任何信息；</span><br><span class="line">-w：当校验不正确时给出警告信息。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：载入全部的模块；</span><br><span class="line">-c或--show-conf：显示所有模块的设置信息；</span><br><span class="line">-d或--debug：使用排错模式；</span><br><span class="line">-l或--list：显示可用的模块；</span><br><span class="line">-r或--remove：模块闲置不用时，即自动卸载模块；</span><br><span class="line">-t或--type：指定模块类型；</span><br><span class="line">-v或--verbose：执行时显示详细的信息；</span><br><span class="line">-V或--version：显示版本信息；</span><br><span class="line">-help：显示帮助。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定保存着文件名和校验和的文本文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>使用 md5sum 生成密码</strong></p>
-<p>另一种获取可用作密码的随机字符串的方法是计算 MD5 校验值！校验值看起来确实像是随机字符串组合在一起，我们可以用作密码。确保你的计算源是个变量，这样的话每次运行命令时生成的校验值都不一样。比如 date ！date 命令 总会生成不同的输出。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# date | md5sum</span><br><span class="line">6a43f2c246cdc3e6a3592652f831d186  -</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>模块名：要加载或移除的模块名称。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>查看modules的配置文件：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe -c</span><br></pre></td></tr></table></figure>
 
-<p><strong>生成一个文件insert.sql的md5值：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# md5sum insert.sql</span><br><span class="line">bcda6cb5c704664f989703ac5a88f112  insert.sql</span><br></pre></td></tr></table></figure>
+<p>这里，可以查看modules的配置文件，比如模块的alias别名是什么等。会打印许多行信息，例如其中的一行会类似如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias symbol:ip_conntrack_unregister_notifier ip_conntrack</span><br></pre></td></tr></table></figure>
 
-<p><strong>检查文件testfile是否被修改过：</strong> </p>
-<p>首先生成md5文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5sum testfile &gt; testfile.md5</span><br></pre></td></tr></table></figure>
+<p> <strong>列出内核中所有已经或者未挂载的所有模块：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe -l</span><br></pre></td></tr></table></figure>
 
-<p>检查：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5sum testfile -c testfile.md5</span><br></pre></td></tr></table></figure>
+<p>这里，我们能查看到我们所需要的模块，然后根据我们的需要来挂载；其实<code>modprobe -l</code>读取的模块列表就位于/lib/modules/`uname -r `目录中；其中<code>uname -r</code>是内核的版本，例如输出结果的其中一行是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/lib/modules/2.6.18-348.6.1.el5/kernel/net/netfilter/xt_statistic.ko</span><br></pre></td></tr></table></figure>
 
-<p>如果文件没有变化，输出应该如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forsort: OK</span><br></pre></td></tr></table></figure>
+<p> <strong>挂载vfat模块：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe vfat</span><br></pre></td></tr></table></figure>
 
-<p>此时，md5sum命令返回0。</p>
-<p>如果文件发生了变化，输出应该如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">forsort: FAILED</span><br><span class="line">md5sum: WARNING: 1 of 1 computed checksum did NOT match</span><br></pre></td></tr></table></figure>
+<p>这里，使用格式<code>modprobe 模块名</code>来挂载一个模块。挂载之后，用lsmod可以查看已经挂载的模块。模块名是不能带有后缀的，我们通过<code>modprobe -l</code>所看到的模块，都是带有<code>.ko</code>或<code>.o</code>后缀。</p>
+<p> <strong>移除已经加载的模块：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe -r 模块名</span><br></pre></td></tr></table></figure>
 
-<p>此时，md5sum命令返回非0。</p>
-<p>这里，检查用的文件名随意。如果不想有任何输出，则<code>md5sum testfile --status -c testfile.md5</code>，这时候通过返回值来检测结果。</p>
-<p>检测的时候如果检测文件非法则输出信息的选项:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md5sum -w -c testfile.md5</span><br></pre></td></tr></table></figure>
-
-<p>输出之后，文件异常输出类似如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">md5sum: testfile.md5: 1: improperly formatted MD5 checksum line</span><br><span class="line">md5sum: testfile.md5: no properly formatted MD5 checksum lines found</span><br></pre></td></tr></table></figure>
-
-<p>这里，testfile.md5只有一行信息，但是我认为地给它多加了一个字符，导致非法。如果md5文件正常那么<code>-w</code>有没有都一样。</p>
+<p>这里，移除已加载的模块，和rmmod功能相同。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
@@ -1053,7 +995,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mesg/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mktemp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1070,7 +1012,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/mesg/" class="post-title-link" itemprop="url">【Linux 命令】mesg</a>
+            <a href="/linux-command/mktemp/" class="post-title-link" itemprop="url">【Linux 命令】mktemp</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1080,8 +1022,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:32:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1101,7 +1044,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>225</span>
+      <span>143</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1119,14 +1062,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>设置当前终端的写权限</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mesg命令</strong> 用于设置当前终端的写权限，即是否让其他用户向本终端发信息。将mesg设置y时，其他用户可利用write命令将信息直接显示在您的屏幕上。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mesg(参数)</span><br></pre></td></tr></table></figure>
+          <p>创建临时文件供shell脚本使用</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mktemp命令</strong> 被用来创建临时文件供shell脚本使用。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mktemp(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>y/n：y表示运行向当前终端写信息，n表示禁止向当前终端写信息。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mesg y    #允许系统用户将信息直接显示在你的屏幕上。</span><br><span class="line">[root@localhost ~]# mesg n    #不允许系统用户将信息直接显示在你的屏幕上。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-q：执行时若发生错误，不会显示任何信息；</span><br><span class="line">-u：暂存文件会在mktemp结束前先行删除；</span><br><span class="line">-d：创建一个目录而非文件。</span><br></pre></td></tr></table></figure>
 
-
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定创建的临时文件。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1148,7 +1090,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mii-tool/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mkswap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1165,7 +1107,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/mii-tool/" class="post-title-link" itemprop="url">【Linux 命令】mii-tool</a>
+            <a href="/linux-command/mkswap/" class="post-title-link" itemprop="url">【Linux 命令】mkswap</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1175,8 +1117,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:32:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1196,7 +1139,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>961</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1214,25 +1157,50 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>配置网络设备协商方式的工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mii-tool命令</strong> 是用于查看、管理介质的网络接口的状态，有时网卡需要配置协商方式，比如10/100/1000M的网卡半双工、全双工、自动协商的配置。但大多数的网络设备是不用我们来修改协商，因为大多数网络设置接入的时候，都采用自动协商来解决相互通信的问题。不过自动协商也不是万能的，有时也会出现错误，比如丢包率比较高，这时就要我们来指定网卡的协商方式。mii-tool就是能指定网卡的协商方式。下面我们说一说mii-tool的用法。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usage: mii-tool [-VvRrwl] [-A media,... | -F media] [interface ...]</span><br></pre></td></tr></table></figure>
+          <p>建立和设置SWAP交换分区</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mkswap命令</strong> 用于在一个文件或者设备上建立交换分区。在建立完之后要使用sawpon命令开始使用这个交换区。最后一个选择性参数指定了交换区的大小，但是这个参数是为了向后兼容设置的，没有使用的必要，一般都将整个文件或者设备作为交换区。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-V 显示版本信息；</span><br><span class="line">-v 显示网络接口的信息；</span><br><span class="line">-R 重设MII到开启状态；</span><br><span class="line">-r 重启自动协商模式；</span><br><span class="line">-w 查看网络接口连接的状态变化；</span><br><span class="line">-l 写入事件到系统日志；</span><br><span class="line">-A 指令特定的网络接口；</span><br><span class="line">-F 更改网络接口协商方式；</span><br><span class="line"></span><br><span class="line">media: 100baseT4, 100baseTx-FD, 100baseTx-HD, 10baseT-FD, 10baseT-HD,</span><br><span class="line">        (to advertise both HD and FD) 100baseTx, 10baseT</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c：建立交换区前，先检查是否有损坏的区块；</span><br><span class="line">-f：在SPARC电脑上建立交换区时，要加上此参数；</span><br><span class="line">-v0：建立旧式交换区，此为预设值；</span><br><span class="line">-v1：建立新式交换区。</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看网络接口的协商状态：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mii-tool -v eth0</span><br><span class="line">eth0: negotiated 100baseTx-FD, link ok</span><br><span class="line">  product info: vendor 00:50:ef, model 60 rev 8</span><br><span class="line">  basic mode:   autonegotiation enabled</span><br><span class="line">  basic status: autonegotiation complete, link ok</span><br><span class="line">  capabilities: 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD</span><br><span class="line">  advertising:  100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD flow-control</span><br><span class="line">  link partner: 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>设备：指定交换空间对应的设备文件或者交换文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>查看系统swap space大小：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br><span class="line">total used free shared buffers cached</span><br><span class="line">Mem: 377 180 197 0 19 110</span><br><span class="line">-/+ buffers/cache: 50 327</span><br><span class="line">Swap: 572 0 572</span><br></pre></td></tr></table></figure>
 
-<p>注：上面的例子，我们可以看得到是自动协商，注意红字的部份。</p>
-<p>更改网络接口协商方式：</p>
-<p>更改网络接口的协商方式，我们要用到<code>-F</code>选项，后面可以接100baseT4, 100baseTx-FD, 100baseTx-HD, 10baseT-FD, 10baseT-HD等参数；</p>
-<p>如果我们想把网络接口eth0改为1000Mb/s全双工的模式应该怎么办呢？</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mii-tool -F 100baseTx-FD</span><br><span class="line">[root@localhost ~]# mii-tool -v eth0</span><br><span class="line">eth0: 100 Mbit, full duplex, link ok</span><br><span class="line">  product info: vendor 00:00:00, model 0 rev 0</span><br><span class="line">  basic mode:   100 Mbit, full duplex</span><br><span class="line">  basic status: link ok</span><br><span class="line">  capabilities: 100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD</span><br><span class="line">  advertising:  100baseTx-FD 100baseTx-HD 10baseT-FD 10baseT-HD</span><br></pre></td></tr></table></figure>
+<p> <strong>查看当前的swap空间(file(s)/partition(s))：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br><span class="line"></span><br><span class="line">等价于</span><br><span class="line"></span><br><span class="line">cat /proc/swaps</span><br></pre></td></tr></table></figure>
 
-<p>注：是不是已经改过来了？当然，我们也一样用ethtool工具来更改，比如执行下面的命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ethtool -s eth0 speed 100 duplex full</span><br></pre></td></tr></table></figure>
+<p> <strong>添加交换空间</strong> </p>
+<p>添加一个 <strong>交换分区</strong> 或添加一个 <strong>交换文件</strong> 。推荐你添加一个交换分区；不过，若你没有多少空闲空间可用，则添加交换文件。</p>
+<p>添加一个交换分区，步骤如下：</p>
+<p>使用fdisk来创建交换分区（假设 /dev/sdb2 是创建的交换分区），使用 mkswap 命令来设置交换分区：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /dev/sdb2</span><br></pre></td></tr></table></figure>
 
+<p>启用交换分区：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /dev/sdb2</span><br></pre></td></tr></table></figure>
 
+<p>写入<code>/etc/fstab</code>，以便在引导时启用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/sdb2 swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<p>添加一个交换文件，步骤如下：</p>
+<p>创建大小为512M的交换文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/swapfile1 bs=1024 count=524288</span><br></pre></td></tr></table></figure>
+
+<p>使用mkswap命令来设置交换文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap /swapfile1</span><br></pre></td></tr></table></figure>
+
+<p>启用交换分区：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /swapfile1</span><br></pre></td></tr></table></figure>
+
+<p>写入<code>/etc/fstab</code>，以便在引导时启用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/swapfile1 swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<p>新添了交换分区并启用它之后，请查看<code>cat /proc/swaps</code>或free命令的输出来确保交换分区已被启用了。</p>
+<p> <strong>删除交换空间：</strong> </p>
+<p>禁用交换分区：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff /dev/sdb2</span><br></pre></td></tr></table></figure>
+
+<p>从<code>/etc/fstab</code>中删除项目，使用fdisk或yast工具删除分区。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1254,7 +1222,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mkbootdisk/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mknod/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1271,7 +1239,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/mkbootdisk/" class="post-title-link" itemprop="url">【Linux 命令】mkbootdisk</a>
+            <a href="/linux-command/mknod/" class="post-title-link" itemprop="url">【Linux 命令】mknod</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1281,8 +1249,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:31:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1302,7 +1271,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>433</span>
+      <span>903</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1320,17 +1289,137 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>可建立目前系统的启动盘</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mkbootdisk命令</strong> 用来为当前运行的系统创建能够单独使用的系统引导软盘，以便在系统出现故障时能够启动操作进行适当的修复工作。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkbootdisk(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>创建字符设备文件和块设备文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mknod命令</strong> 用于创建Linux中的字符设备文件和块设备文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mknod(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--device&lt;设备&gt;：指定设备；</span><br><span class="line">--mkinitrdargs&lt;参数&gt;：设置mkinitrd的参数；</span><br><span class="line">--noprompt：不会提示用户插入磁盘；</span><br><span class="line">--verbose：执行时显示详细的信息；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-Z：设置安全的上下文；</span><br><span class="line">-m：设置权限模式；</span><br><span class="line">-help：显示帮助信息；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>内核：指定内核版本。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkbootdisk --device /dev/fd0 `uname -r`</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>文件名：要创建的设备文件名；</li>
+<li>类型：指定要创建的设备文件的类型；</li>
+<li>主设备号：指定设备文件的主设备号；</li>
+<li>次设备号：指定设备文件的次设备号。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls -la /dev/ttyUSB*</span><br><span class="line">crw-rw—- 1 root dialout 188, 0 2008-02-13 18:32 /dev/ttyUSB0</span><br><span class="line">mknod /dev/ttyUSB32 c 188 32</span><br></pre></td></tr></table></figure>
 
-<p>其中，<code>uname -r</code>是目前Linux 系统所使用的核心版本，如果你有多个核心版本的话，你以可以直接输入核心版本。例如在这个网页中所使用的核心有两个版本，一个是2.2.12-20，另一个是2.2.18，若要以2.2.18设定开机的话，可以使用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkbootdisk --device /dev/fd0 2.2.18</span><br></pre></td></tr></table></figure>
+<h3 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h3><p>Linux的设备管理是和文件系统紧密结合的，各种设备都以文件的形式存放在/dev目录 下，称为设备文件。应用程序可以打开、关闭和读写这些设备文件，完成对设备的操作，就像操作普通的数据文件一样。</p>
+<p>为了管理这些设备，系统为设备编了号，每 个设备号又分为主设备号和次设备号。主设备号用来区分不同种类的设备，而次设备号用来区分同一类型的多个设备。对于常用设备，Linux有约定俗成的编 号，如硬盘的主设备号是3。</p>
+<p>Linux为所有的设备文件都提供了统一的操作函数接口，方法是使用数据结构struct file_operations。这个数据结构中包括许多操作函数的指针，如open()、close()、read()和write()等，但由于外设 的种类较多，操作方式各不相同。Struct file_operations结构体中的成员为一系列的接口函数，如用于读/写的read/write函数和用于控制的ioctl等。</p>
+<p>打开一个文件就是调用这个文件file_operations中的open操作。不同类型的文件有不同的file_operations成员函数，如普通的磁盘数据文件， 接口函数完成磁盘数据块读写操作；而对于各种设备文件，则最终调用各自驱动程序中的I/O函数进行具体设备的操作。这样，应用程序根本不必考虑操作的是设 备还是普通文件，可一律当作文件处理，具有非常清晰统一的I/O接口。所以file_operations是文件层次的I/O接口。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/mkisofs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/mkisofs/" class="post-title-link" itemprop="url">【Linux 命令】mkisofs</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:31:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>建立ISO 9660映像文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mkisofs命令</strong> 用来将指定的目录与文件做成ISO 9660格式的映像文件，以供刻录光盘。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkisofs(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：mkisofs通常不处理备份文件。使用此参数可以把备份文件加到映像文件中；</span><br><span class="line">-A&lt;应用程序id&gt;或-appid&lt;应用程序ID&gt;：指定光盘的应用程序ID；</span><br><span class="line">-abstract&lt;摘要文件&gt;：指定摘要文件的文件名；</span><br><span class="line">-b&lt;开机映像文件&gt;或-eltorito-boot&lt;开机映像文件&gt;：指定在制作可开机光盘时所需的开机映像文件；</span><br><span class="line">-biblio&lt;ISBN文件&gt;：指定ISBN文件的文件名，ISBN文件位于光盘根目录下，记录光盘的ISBN；</span><br><span class="line">-c&lt;开机文件名称&gt;：制作可开机光盘时，mkisofs会将开机映像文件中的全-eltorito-catalog&lt;开机文件名称&gt;全部内容作成一个文件；</span><br><span class="line">-C&lt;盘区编号，盘区编号&gt;：将许多节区合成一个映像文件时，必须使用此参数；</span><br><span class="line">-copyright&lt;版权信息文件&gt;：指定版权信息文件的文件名；</span><br><span class="line">-d或-omit-period：省略文件后的句号；</span><br><span class="line">-D或-disable-deep-relocation：ISO 9660最多只能处理8层的目录，超过8层的部分，RRIP会自动将它们设置成ISO 9660兼容的格式。使用-D参数可关闭此功能；</span><br><span class="line">-f或-follow-links：忽略符号连接；</span><br><span class="line">-h：显示帮助；</span><br><span class="line">-hide&lt;目录或文件名&gt;：使指定的目录或文件在ISO 9660或Rock RidgeExtensions的系统中隐藏；</span><br><span class="line">-hide-joliet&lt;目录或文件名&gt;：使指定的目录或文件在Joliet系统中隐藏；</span><br><span class="line">-J或-joliet：使用Joliet格式的目录与文件名称；</span><br><span class="line">-l或-full-iso9660-filenames：使用ISO 9660 32字符长度的文件名；</span><br><span class="line">-L或-allow-leading-dots：允许文件名的第一个字符为句号；</span><br><span class="line">-log-file&lt;记录文件&gt;：在执行过程中若有错误信息，预设会显示在屏幕上；</span><br><span class="line">-m&lt;目录或文件名&gt;或-exclude&lt;目录或文件名&gt;：指定的目录或文件名将不会房入映像文件中；</span><br><span class="line">-M&lt;映像文件&gt;或-prev-session&lt;映像文件&gt;：与指定的映像文件合并；</span><br><span class="line">-N或-omit-version-number：省略ISO 9660文件中的版本信息；</span><br><span class="line">-o&lt;映像文件&gt;或-output&lt;映像文件&gt;：指定映像文件的名称；</span><br><span class="line">-p&lt;数据处理人&gt;或-preparer&lt;数据处理人&gt;：记录光盘的数据处理人；</span><br><span class="line">-print-size：显示预估的文件系统大小；</span><br><span class="line">-quiet：执行时不显示任何信息；</span><br><span class="line">-r或-rational-rock：使用Rock Ridge Extensions，并开放全部文件的读取权限；</span><br><span class="line">-R或-rock：使用Rock Ridge Extensions；</span><br><span class="line">-sysid&lt;系统ID&gt;：指定光盘的系统ID；</span><br><span class="line">-T或-translation-table：建立文件名的转换表，适用于不支持Rock Ridge Extensions的系统上；</span><br><span class="line">-v或-verbose：执行时显示详细的信息；</span><br><span class="line">-V&lt;光盘ID&gt;或-volid&lt;光盘ID&gt;：指定光盘的卷册集ID；</span><br><span class="line">-volset-size&lt;光盘总数&gt;：指定卷册集所包含的光盘张数；</span><br><span class="line">-volset-seqno&lt;卷册序号&gt;：指定光盘片在卷册集中的编号；</span><br><span class="line">-x&lt;目录&gt;：指定的目录将不会放入映像文件中；</span><br><span class="line">-z：建立通透性压缩文件的SUSP记录，此记录目前只在Alpha机器上的Linux有效。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>路径：需要添加到映像文件中的路径。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>linux中用mkisofs命令把文件制作成ISO步骤：</p>
+<p>把NFS服务器上的目录挂载到本地/mnt/nfs/的目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t nfs 10.0.2.2:/linuxos/rhel4.0_update3/ /mnt/nfs/</span><br></pre></td></tr></table></figure>
+
+<p>把已挂载的文件复制到本地：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -a /mnt/NFS/* /root/Decp -a /mnt/nfs/* /root/Desktop/rhel4.0/&amp;sktop/rhel4.0/&amp;</span><br></pre></td></tr></table></figure>
+
+<p>查找boot.cat文件并删除掉：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find rhel4.0/ -name boot.cat | xargs rm</span><br></pre></td></tr></table></figure>
+
+<p>查找TRANS.TBL文件并删除掉：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find rhel4.0/ -name TRANS.TBL -exec rm &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>复制本地的所需文件到指定目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/comps/i386/.discinfo rhel4.0/</span><br></pre></td></tr></table></figure>
+
+<p>把指定目录下的所有文件制作成ISO文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -R -J -T -v -no-emul-boot -boot-load-size 4 -boot-info-table -V RHEL4ASDVD -b isolinux/isolinux.bin -c isolinux/boot.cat -o /RHEL4AS.iso rhel4.0/</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

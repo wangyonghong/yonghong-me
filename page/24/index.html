@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shift/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/parted/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/shift/" class="post-title-link" itemprop="url">【Linux 命令】shift</a>
+            <a href="/linux-command/parted/" class="post-title-link" itemprop="url">【Linux 命令】parted</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:50:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,14 +352,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>319</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -369,317 +370,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>移动位置参数。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shift [n]</span><br></pre></td></tr></table></figure>
+          <p>磁盘分区和分区大小调整工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>parted命令</strong> 是由GNU组织开发的一款功能强大的磁盘分区和分区大小调整工具，与fdisk不同，它支持调整分区的大小。作为一种设计用于Linux的工具，它没有构建成处理与fdisk关联的多种分区类型，但是，它可以处理最常见的分区格式，包括：ext2、ext3、fat16、fat32、NTFS、ReiserFS、JFS、XFS、UFS、HFS以及Linux交换分区。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>将位置参数<code>$n, $n+1...</code>重命名为<code>$1, $2...</code>。</li>
-</ul>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>n（可选）：大于等于1且小于等于参数个数的整数，默认为1。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非n大于参数个数或n小于1以及其他非法值。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设我们的脚本文件（test.sh）如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示前三个位置参数。</span></span><br><span class="line">echo &quot;$1 $2 $3&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除前两个位置参数，并将<span class="variable">$3</span>重命名为<span class="variable">$1</span>，之后的以此类推。</span></span><br><span class="line">shift 2</span><br><span class="line">echo &quot;$1 $2 $3&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在终端执行该脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh test.sh q w e r t</span><br></pre></td></tr></table></figure>
-
-<p>返回信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">q w e</span><br><span class="line">e r t</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-</ol>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/readelf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/readelf/" class="post-title-link" itemprop="url">【Linux 命令】readelf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>15k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>14 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用于显示elf格式文件的信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>readelf命令</strong> 用来显示一个或者多个elf格式的目标文件的信息，可以通过它的选项来控制显示哪些信息。这里的elf-file(s)就表示那些被检查的文件。可以支持32位，64位的elf格式文件，也支持包含elf文件的文档（这里一般指的是使用ar命令将一些elf文件打包之后生成的例如lib*.a之类的“静态库”文件）。 </p>
-<p>这个程序和objdump提供的功能类似，但是它显示的信息更为具体，并且它不依赖BFD库(BFD库是一个GNU项目，它的目标就是希望通过一种统一的接口来处理不同的目标文件)，所以即使BFD库有什么bug存在的话也不会影响到readelf程序。 </p>
-<p>运行readelf的时候，除了-v和-H之外，其它的选项必须有一个被指定。 </p>
-<h3 id="ELF文件类型"><a href="#ELF文件类型" class="headerlink" title="ELF文件类型"></a>ELF文件类型</h3><p> <strong>种类型的ELF文件：</strong> </p>
-<ol>
-<li><p>可重定位文件:用户和其他目标文件一起创建可执行文件或者共享目标文件,例如lib*.a文件。 </p>
-</li>
-<li><p>可执行文件：用于生成进程映像，载入内存执行,例如编译好的可执行文件a.out。 </p>
-</li>
-<li><p>共享目标文件：用于和其他共享目标文件或者可重定位文件一起生成elf目标文件或者和执行文件一起创建进程映像，例如lib*.so文件。 </p>
-<p><strong>ELF文件作用：</strong> </p>
-</li>
-</ol>
-<p>ELF文件参与程序的连接(建立一个程序)和程序的执行(运行一个程序)，所以可以从不同的角度来看待elf格式的文件： </p>
-<ol>
-<li><p>如果用于编译和链接（可重定位文件），则编译器和链接器将把elf文件看作是节头表描述的节的集合,程序头表可选。 </p>
-</li>
-<li><p>如果用于加载执行（可执行文件），则加载器则将把elf文件看作是程序头表描述的段的集合，一个段可能包含多个节，节头表可选。 </p>
-</li>
-<li><p>如果是共享文件，则两者都含有。 </p>
-<p><strong>ELF文件总体组成：</strong>  </p>
-</li>
-</ol>
-<p>elf文件头描述elf文件的总体信息。包括：系统相关，类型相关，加载相关，链接相关。 </p>
-<ul>
-<li>系统相关表示：elf文件标识的魔术数，以及硬件和平台等相关信息，增加了elf文件的移植性,使交叉编译成为可能。 </li>
-<li>类型相关就是前面说的那个类型。 </li>
-<li>加载相关：包括程序头表相关信息。 </li>
-<li>链接相关：节头表相关信息。 </li>
-</ul>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">-a </span><br><span class="line">--all 显示全部信息,等价于 -h -l -S -s -r -d -V -A -I. </span><br><span class="line"></span><br><span class="line">-h </span><br><span class="line">--file-header 显示elf文件开始的文件头信息. </span><br><span class="line"></span><br><span class="line">-l </span><br><span class="line">--program-headers  </span><br><span class="line">--segments 显示程序头（段头）信息(如果有的话)。 </span><br><span class="line"></span><br><span class="line">-S </span><br><span class="line">--section-headers  </span><br><span class="line">--sections 显示节头信息(如果有的话)。 </span><br><span class="line"></span><br><span class="line">-g </span><br><span class="line">--section-groups 显示节组信息(如果有的话)。 </span><br><span class="line"></span><br><span class="line">-t </span><br><span class="line">--section-details 显示节的详细信息(-S的)。 </span><br><span class="line"></span><br><span class="line">-s </span><br><span class="line">--syms        </span><br><span class="line">--symbols 显示符号表段中的项（如果有的话）。 </span><br><span class="line"></span><br><span class="line">-e </span><br><span class="line">--headers 显示全部头信息，等价于: -h -l -S </span><br><span class="line"></span><br><span class="line">-n </span><br><span class="line">--notes 显示note段（内核注释）的信息。 </span><br><span class="line"></span><br><span class="line">-r </span><br><span class="line">--relocs 显示可重定位段的信息。 </span><br><span class="line"></span><br><span class="line">-u </span><br><span class="line">--unwind 显示unwind段信息。当前只支持IA64 ELF的unwind段信息。 </span><br><span class="line"></span><br><span class="line">-d </span><br><span class="line">--dynamic 显示动态段的信息。 </span><br><span class="line"></span><br><span class="line">-V </span><br><span class="line">--version-info 显示版本段的信息。 </span><br><span class="line"></span><br><span class="line">-A </span><br><span class="line">--arch-specific 显示CPU构架信息。 </span><br><span class="line"></span><br><span class="line">-D </span><br><span class="line">--use-dynamic 使用动态段中的符号表显示符号，而不是使用符号段。 </span><br><span class="line"></span><br><span class="line">-x &lt;number or name&gt; </span><br><span class="line">--hex-dump=&lt;number or name&gt; 以16进制方式显示指定段内内容。number指定段表中段的索引,或字符串指定文件中的段名。 </span><br><span class="line"></span><br><span class="line">-w[liaprmfFsoR] or </span><br><span class="line">--debug-dump[=line,=info,=abbrev,=pubnames,=aranges,=macro,=frames,=frames-interp,=str,=loc,=Ranges] 显示调试段中指定的内容。 </span><br><span class="line"></span><br><span class="line">-I </span><br><span class="line">--histogram 显示符号的时候，显示bucket list长度的柱状图。 </span><br><span class="line"></span><br><span class="line">-v </span><br><span class="line">--version 显示readelf的版本信息。 </span><br><span class="line"></span><br><span class="line">-H </span><br><span class="line">--help 显示readelf所支持的命令行选项。 </span><br><span class="line"></span><br><span class="line">-W </span><br><span class="line">--wide 宽行输出。 </span><br><span class="line"></span><br><span class="line">@file 可以将选项集中到一个文件中，然后使用这个@file选项载入。 </span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>先给出如下例子：</p>
-<p> <strong>1.对于可执行文件形式的elf格式文件：</strong> </p>
-<p>1)查看可执行程序的源代码如下： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">root@localhost [test]$ cat main.cpp </span><br><span class="line"><span class="meta">#</span><span class="bash">include &lt;iostream&gt; </span></span><br><span class="line">using std::cout; </span><br><span class="line">using std::endl; </span><br><span class="line">void my_print(); </span><br><span class="line"></span><br><span class="line">int main(int argc, char *argv[]) </span><br><span class="line">&#123; </span><br><span class="line">        my_print(); </span><br><span class="line">        cout&lt;&lt;&quot;hello!&quot;&lt;&lt;endl; </span><br><span class="line">        return 0; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">void  my_print() </span><br><span class="line">&#123; </span><br><span class="line">        cout&lt;&lt;&quot;print!&quot;&lt;&lt;endl; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>2)编译如下： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ g++ main.cpp -o main </span><br><span class="line">[root@localhost test]$ g++ -g main.cpp -o main.debug </span><br></pre></td></tr></table></figure>
-
-<p>3)编译之后，查看生成的文件： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ ls -l </span><br><span class="line">总计 64 </span><br><span class="line">-rwxr-xr-x 1 quietheart quietheart  6700 07-07 18:04 main </span><br><span class="line">-rw-r--r-- 1 quietheart quietheart   201 07-07 18:02 main.cpp </span><br><span class="line">-rwxr-xr-x 1 quietheart quietheart 38932 07-07 18:04 main.debug </span><br></pre></td></tr></table></figure>
-
-<p>这里，main.debug是带有调试信息的可执行文件，main是一般的可执行文件。 </p>
-<p> <strong>2.对于库文件形式的elf格式文件：</strong> </p>
-<p>1)查看库的源代码如下： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//myfile.h </span><br><span class="line"><span class="meta">#</span><span class="bash">ifndef __MYFILE_H </span></span><br><span class="line"><span class="meta">#</span><span class="bash">define __MYFILE_H </span></span><br><span class="line">void printInfo(); </span><br><span class="line"><span class="meta">#</span><span class="bash">endif </span></span><br><span class="line"></span><br><span class="line">//myfile.cpp </span><br><span class="line"><span class="meta">#</span><span class="bash">include <span class="string">&quot;myfile.h&quot;</span> </span></span><br><span class="line"><span class="meta">#</span><span class="bash">include &lt;iostream&gt; </span></span><br><span class="line">using std::cout; </span><br><span class="line">using std::endl; </span><br><span class="line">void printInfo() </span><br><span class="line">&#123; </span><br><span class="line">    cout&lt;&lt;&quot;hello&quot;&lt;&lt;endl; </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>2)编译如下： </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ g++ -c myfile.cpp </span><br><span class="line">[root@localhost test]$ g++ -shared -fPCI -o libmy.so myfile.o </span><br><span class="line">[root@localhost test]$ ar -r libmy.a myfile.o </span><br><span class="line">ar: creating libmy.a </span><br></pre></td></tr></table></figure>
-
-<p>3)编译之后，查看生成的文件： </p>
-<p>[root@localhost test]$ ls -l </p>
-<p>总计 44 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r-- 1 quietheart quietheart 2154 07-08 16:14 libmy.a </span><br><span class="line">-rwxr-xr-x 1 quietheart quietheart 5707 07-08 16:08 libmy.so </span><br><span class="line">-rwxr-xr-x 1 quietheart quietheart  117 07-08 16:06 myfile.cpp </span><br><span class="line">-rwxr-xr-x 1 quietheart quietheart   63 07-08 16:08 myfile.h </span><br><span class="line">-rw-r--r-- 1 quietheart quietheart 2004 07-08 16:08 myfile.o </span><br><span class="line">libmy.a  libmy.so  myfile.cpp  myfile.h  myfile.o </span><br></pre></td></tr></table></figure>
-
-<p>这里，分别生成目标文件myfile.o，共享库文件libmy.so，和静态库文件libmy.a。 </p>
-<p>基于以上可执行文件和库，这里给出一些常用的命令。 </p>
-<p> <strong>读取可执行文件形式的elf文件头信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -h main </span><br><span class="line">ELF Header: </span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32 </span><br><span class="line">  Data:                              2&#x27;s complement, little endian </span><br><span class="line">  Version:                           1 (current) </span><br><span class="line">  OS/ABI:                            UNIX - System V </span><br><span class="line">  ABI Version:                       0 </span><br><span class="line">  type:                              exec (Executable file) </span><br><span class="line">  Machine:                           Intel 80386 </span><br><span class="line">  Version:                           0x1 </span><br><span class="line">  Entry point address:               0x8048580 </span><br><span class="line">  Start of program headers:          52 (bytes into file) </span><br><span class="line">  Start of section headers:          3232 (bytes into file) </span><br><span class="line">  Flags:                             0x0 </span><br><span class="line">  Size of this header:               52 (bytes) </span><br><span class="line">  Size of program headers:           32 (bytes) </span><br><span class="line">  Number of program headers:         8 </span><br><span class="line">  Size of section headers:           40 (bytes) </span><br><span class="line">  Number of section headers:         29 </span><br><span class="line">  Section header string table index: 26 </span><br></pre></td></tr></table></figure>
-
-<p>这里，可见可执行文件的elf文件，其类型为EXEC(可执行文件)。另外，含调试信息的”main.debug”和不含调试信息的”main”除了一些大小信息之外，其内容是一样的。并且由此可见文件的体系结构为Intel 80386。 </p>
-<p> <strong>读取目标文件形式的elf文件头信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -h myfile.o </span><br><span class="line">ELF Header: </span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32 </span><br><span class="line">  Data:                              2&#x27;s complement, little endian </span><br><span class="line">  Version:                           1 (current) </span><br><span class="line">  OS/ABI:                            UNIX - System V </span><br><span class="line">  ABI Version:                       0 </span><br><span class="line">  Type:                              REL (Relocatable file) </span><br><span class="line">  Machine:                           Intel 80386 </span><br><span class="line">  Version:                           0x1 </span><br><span class="line">  Entry point address:               0x0 </span><br><span class="line">  Start of program headers:          0 (bytes into file) </span><br><span class="line">  Start of section headers:          516 (bytes into file) </span><br><span class="line">  Flags:                             0x0 </span><br><span class="line">  Size of this header:               52 (bytes) </span><br><span class="line">  Size of program headers:           0 (bytes) </span><br><span class="line">  Number of program headers:         0 </span><br><span class="line">  Size of section headers:           40 (bytes) </span><br><span class="line">  Number of section headers:         15 </span><br><span class="line">  Section header string table index: 12 </span><br></pre></td></tr></table></figure>
-
-<p>这里，可见目标文件的elf文件，其类型为REL(可重定位文件)。 </p>
-<p> <strong>读取静态库文件形式的elf文件头信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -h libmy.a </span><br><span class="line">File: libmy.a(myfile.o) </span><br><span class="line">ELF Header: </span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32 </span><br><span class="line">  Data:                              2&#x27;s complement, little endian </span><br><span class="line">  Version:                           1 (current) </span><br><span class="line">  OS/ABI:                            UNIX - System V </span><br><span class="line">  ABI Version:                       0 </span><br><span class="line">  Type:                              REL (Relocatable file) </span><br><span class="line">  Machine:                           Intel 80386 </span><br><span class="line">  Version:                           0x1 </span><br><span class="line">  Entry point address:               0x0 </span><br><span class="line">  Start of program headers:          0 (bytes into file) </span><br><span class="line">  Start of section headers:          516 (bytes into file) </span><br><span class="line">  Flags:                             0x0 </span><br><span class="line">  Size of this header:               52 (bytes) </span><br><span class="line">  Size of program headers:           0 (bytes) </span><br><span class="line">  Number of program headers:         0 </span><br><span class="line">  Size of section headers:           40 (bytes) </span><br><span class="line">  Number of section headers:         15 </span><br><span class="line">  Section header string table index: 12 </span><br></pre></td></tr></table></figure>
-
-<p>这里，可见静态库文件的elf文件，其类型为REL(可重定位文件)。 </p>
-<p> <strong>读取动态库文件形式的elf文件头信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -h libmy.so </span><br><span class="line">ELF Header: </span><br><span class="line">  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF32 </span><br><span class="line">  Data:                              2&#x27;s complement, little endian </span><br><span class="line">  Version:                           1 (current) </span><br><span class="line">  OS/ABI:                            UNIX - System V </span><br><span class="line">  ABI Version:                       0 </span><br><span class="line">  Type:                              DYN (Shared object file) </span><br><span class="line">  Machine:                           Intel 80386 </span><br><span class="line">  Version:                           0x1 </span><br><span class="line">  Entry point address:               0x550 </span><br><span class="line">  Start of program headers:          52 (bytes into file) </span><br><span class="line">  Start of section headers:          2768 (bytes into file) </span><br><span class="line">  Flags:                             0x0 </span><br><span class="line">  Size of this header:               52 (bytes) </span><br><span class="line">  Size of program headers:           32 (bytes) </span><br><span class="line">  Number of program headers:         5 </span><br><span class="line">  Size of section headers:           40 (bytes) </span><br><span class="line">  Number of section headers:         27 </span><br><span class="line">  Section header string table index: 24 </span><br></pre></td></tr></table></figure>
-
-<p>这里，可见动态库文件的elf文件，其类型为DYN(共享目标文件)。 </p>
-<p> <strong>查看可执行的elf文件程序头表信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -l main </span><br><span class="line">Elf file type is EXEC (Executable file) </span><br><span class="line">Entry point 0x8048580 </span><br><span class="line">There are 8 program headers, starting at offset 52 </span><br><span class="line"></span><br><span class="line">Program Headers: </span><br><span class="line">  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align </span><br><span class="line">  PHDR           0x000034 0x08048034 0x08048034 0x00100 0x00100 R E 0x4 </span><br><span class="line">  INTERP         0x000134 0x08048134 0x08048134 0x00013 0x00013 R   0x1 </span><br><span class="line">      Requesting program interpreter: /lib/[ld-linux.so.2] </span><br><span class="line">  LOAD           0x000000 0x08048000 0x08048000 0x00970 0x00970 R E 0x1000 </span><br><span class="line">  LOAD           0x000970 0x08049970 0x08049970 0x00130 0x001c8 RW  0x1000 </span><br><span class="line">  DYNAMIC        0x000988 0x08049988 0x08049988 0x000e0 0x000e0 RW  0x4 </span><br><span class="line">  NOTE           0x000148 0x08048148 0x08048148 0x00020 0x00020 R   0x4 </span><br><span class="line">  GNU_EH_FRAME   0x000820 0x08048820 0x08048820 0x00044 0x00044 R   0x4 </span><br><span class="line">  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x4 </span><br><span class="line"></span><br><span class="line">Section to Segment mapping: </span><br><span class="line">  Segment Sections... </span><br><span class="line">   00     </span><br><span class="line">   01     .interp </span><br><span class="line">   02     .interp .note.ABI-tag .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text .fini .rodata .eh_frame_hdr .eh_frame </span><br><span class="line">   03     .ctors .dtors .jcr .dynamic .got .got.plt .data .bss </span><br><span class="line">   04     .dynamic </span><br><span class="line">   05     .note.ABI-tag </span><br><span class="line">   06     .eh_frame_hdr </span><br><span class="line">   07     </span><br></pre></td></tr></table></figure>
-
-<p>这里，含调试信息的”main.debug”和不含调试信息的”main”其内容是一样的。 </p>
-<p> **查看目标文件的elf文件程序头表信息： ** </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -l myfile.o </span><br><span class="line">There are no program headers in this file. </span><br></pre></td></tr></table></figure>
-
-<p>这里可知，可重定位的目标文件，它没程序头表。 </p>
-<p> <strong>查看静态库文件的elf文件程序头表信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -l libmy.a </span><br><span class="line">File: libmy.a(myfile.o) </span><br><span class="line">There are no program headers in this file. </span><br></pre></td></tr></table></figure>
-
-<p>这里可知，可重定位的静态库文件，它没程序头表。 </p>
-<p> <strong>查看动态库文件的elf文件程序头表信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -l libmy.so </span><br><span class="line">Elf file type is DYN (Shared object file) </span><br><span class="line">Entry point 0x550 </span><br><span class="line">There are 5 program headers, starting at offset 52 </span><br><span class="line"></span><br><span class="line">Program Headers: </span><br><span class="line">  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align </span><br><span class="line">  LOAD           0x000000 0x00000000 0x00000000 0x007f4 0x007f4 R E 0x1000 </span><br><span class="line">  LOAD           0x0007f4 0x000017f4 0x000017f4 0x0011c 0x00128 RW  0x1000 </span><br><span class="line">  DYNAMIC        0x000810 0x00001810 0x00001810 0x000e0 0x000e0 RW  0x4 </span><br><span class="line">  GNU_EH_FRAME   0x000738 0x00000738 0x00000738 0x0002c 0x0002c R   0x4 </span><br><span class="line">  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x4 </span><br><span class="line"></span><br><span class="line">Section to Segment mapping: </span><br><span class="line">  Segment Sections... </span><br><span class="line">   00     .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rel.dyn .rel.plt .init .plt .text .fini .rodata .eh_frame_hdr .eh_frame </span><br><span class="line">   01     .ctors .dtors .jcr .data.rel.ro .dynamic .got .got.plt .bss </span><br><span class="line">   02     .dynamic </span><br><span class="line">   03     .eh_frame_hdr </span><br><span class="line">   04     </span><br></pre></td></tr></table></figure>
-
-<p>这里可知，做为共享目标文件的动态库，它程序头表。 </p>
-<p> <strong>查看一个可执行的elf文件的节信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -S main </span><br><span class="line">There are 29 section headers, starting at offset 0xca0: </span><br><span class="line">Section Headers: </span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al </span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0 </span><br><span class="line">  [ 1] .interp           PROGBITS        08048134 000134 000013 00   A  0   0  1 </span><br><span class="line">  [ 2] .note.ABI-tag     NOTE            08048148 000148 000020 00   A  0   0  4 </span><br><span class="line">  [ 3] .gnu.hash         GNU_HASH        08048168 000168 000030 04   A  4   0  4 </span><br><span class="line">  [ 4] .dynsym           DYNSYM          08048198 000198 0000d0 10   A  5   1  4 </span><br><span class="line">  [ 5] .dynstr           STRTAB          08048268 000268 000183 00   A  0   0  1 </span><br><span class="line">  [ 6] .gnu.version      VERSYM          080483ec 0003ec 00001a 02   A  4   0  2 </span><br><span class="line">  [ 7] .gnu.version_r    VERNEED         08048408 000408 000060 00   A  5   2  4 </span><br><span class="line">  [ 8] .rel.dyn          REL             08048468 000468 000010 08   A  4   0  4 </span><br><span class="line">  [ 9] .rel.plt          REL             08048478 000478 000048 08   A  4  11  4 </span><br><span class="line">  [10] .init             PROGBITS        080484c0 0004c0 000017 00  AX  0   0  4 </span><br><span class="line">  [11] .plt              PROGBITS        080484d8 0004d8 0000a0 04  AX  0   0  4 </span><br><span class="line">  [12] .text             PROGBITS        08048580 000580 000268 00  AX  0   0 16 </span><br><span class="line">  [13] .fini             PROGBITS        080487e8 0007e8 00001c 00  AX  0   0  4 </span><br><span class="line">  [14] .rodata           PROGBITS        08048804 000804 00001a 00   A  0   0  4 </span><br><span class="line">  [15] .eh_frame_hdr     PROGBITS        08048820 000820 000044 00   A  0   0  4 </span><br><span class="line">  [16] .eh_frame         PROGBITS        08048864 000864 00010c 00   A  0   0  4 </span><br><span class="line">  [17] .ctors            PROGBITS        08049970 000970 00000c 00  WA  0   0  4 </span><br><span class="line">  [18] .dtors            PROGBITS        0804997c 00097c 000008 00  WA  0   0  4 </span><br><span class="line">  [19] .jcr              PROGBITS        08049984 000984 000004 00  WA  0   0  4 </span><br><span class="line">  [20] .dynamic          DYNAMIC         08049988 000988 0000e0 08  WA  5   0  4 </span><br><span class="line">  [21] .got              PROGBITS        08049a68 000a68 000004 04  WA  0   0  4 </span><br><span class="line">  [22] .got.plt          PROGBITS        08049a6c 000a6c 000030 04  WA  0   0  4 </span><br><span class="line">  [23] .data             PROGBITS        08049a9c 000a9c 000004 00  WA  0   0  4 </span><br><span class="line">  [24] .bss              NOBITS          08049aa0 000aa0 000098 00  WA  0   0  8 </span><br><span class="line">  [25] .comment          PROGBITS        00000000 000aa0 000114 00      0   0  1 </span><br><span class="line">  [26] .shstrtab         STRTAB          00000000 000bb4 0000e9 00      0   0  1 </span><br><span class="line">  [27] .symtab           SYMTAB          00000000 001128 000510 10     28  53  4 </span><br><span class="line">  [28] .strtab           STRTAB          00000000 001638 0003f4 00      0   0  1 </span><br><span class="line">Key to Flags: </span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings) </span><br><span class="line">  I (info), L (link order), G (group), x (unknown) </span><br><span class="line">  O (extra OS processing required) o (OS specific), p (processor specific) </span><br></pre></td></tr></table></figure>
-
-<p>这里，main是可执行文件，不含调试信息。 </p>
-<p> <strong>查看一个包含调试信息的可执行的elf文件的节信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -S main.debug </span><br><span class="line">There are 37 section headers, starting at offset 0x88c8: </span><br><span class="line"></span><br><span class="line">Section Headers: </span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al </span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0 </span><br><span class="line">  [ 1] .interp           PROGBITS        08048134 000134 000013 00   A  0   0  1 </span><br><span class="line">  [ 2] .note.ABI-tag     NOTE            08048148 000148 000020 00   A  0   0  4 </span><br><span class="line">  [ 3] .gnu.hash         GNU_HASH        08048168 000168 000030 04   A  4   0  4 </span><br><span class="line">  [ 4] .dynsym           DYNSYM          08048198 000198 0000d0 10   A  5   1  4 </span><br><span class="line">  [ 5] .dynstr           STRTAB          08048268 000268 000183 00   A  0   0  1 </span><br><span class="line">  [ 6] .gnu.version      VERSYM          080483ec 0003ec 00001a 02   A  4   0  2 </span><br><span class="line">  [ 7] .gnu.version_r    VERNEED         08048408 000408 000060 00   A  5   2  4 </span><br><span class="line">  [ 8] .rel.dyn          REL             08048468 000468 000010 08   A  4   0  4 </span><br><span class="line">  [ 9] .rel.plt          REL             08048478 000478 000048 08   A  4  11  4 </span><br><span class="line">  [10] .init             PROGBITS        080484c0 0004c0 000017 00  AX  0   0  4 </span><br><span class="line">  [11] .plt              PROGBITS        080484d8 0004d8 0000a0 04  AX  0   0  4 </span><br><span class="line">  [12] .text             PROGBITS        08048580 000580 000268 00  AX  0   0 16 </span><br><span class="line">  [13] .fini             PROGBITS        080487e8 0007e8 00001c 00  AX  0   0  4 </span><br><span class="line">  [14] .rodata           PROGBITS        08048804 000804 00001a 00   A  0   0  4 </span><br><span class="line">  [15] .eh_frame_hdr     PROGBITS        08048820 000820 000044 00   A  0   0  4 </span><br><span class="line">  [16] .eh_frame         PROGBITS        08048864 000864 00010c 00   A  0   0  4 </span><br><span class="line">  [17] .ctors            PROGBITS        08049970 000970 00000c 00  WA  0   0  4 </span><br><span class="line">  [18] .dtors            PROGBITS        0804997c 00097c 000008 00  WA  0   0  4 </span><br><span class="line">  [19] .jcr              PROGBITS        08049984 000984 000004 00  WA  0   0  4 </span><br><span class="line">  [20] .dynamic          DYNAMIC         08049988 000988 0000e0 08  WA  5   0  4 </span><br><span class="line">  [21] .got              PROGBITS        08049a68 000a68 000004 04  WA  0   0  4 </span><br><span class="line">  [22] .got.plt          PROGBITS        08049a6c 000a6c 000030 04  WA  0   0  4 </span><br><span class="line">  [23] .data             PROGBITS        08049a9c 000a9c 000004 00  WA  0   0  4 </span><br><span class="line">  [24] .bss              NOBITS          08049aa0 000aa0 000098 00  WA  0   0  8 </span><br><span class="line">  [25] .comment          PROGBITS        00000000 000aa0 000114 00      0   0  1 </span><br><span class="line">  [26] .debug_aranges    PROGBITS        00000000 000bb4 000020 00      0   0  1 </span><br><span class="line">  [27] .debug_pubnames   PROGBITS        00000000 000bd4 000028 00      0   0  1 </span><br><span class="line">  [28] .debug_info       PROGBITS        00000000 000bfc 0067aa 00      0   0  1 </span><br><span class="line">  [29] .debug_abbrev     PROGBITS        00000000 0073a6 000726 00      0   0  1 </span><br><span class="line">  [30] .debug_line       PROGBITS        00000000 007acc 0003e1 00      0   0  1 </span><br><span class="line">  [31] .debug_frame      PROGBITS        00000000 007eb0 00009c 00      0   0  4 </span><br><span class="line">  [32] .debug_str        PROGBITS        00000000 007f4c 000735 00      0   0  1 </span><br><span class="line">  [33] .debug_loc        PROGBITS        00000000 008681 0000f3 00      0   0  1 </span><br><span class="line">  [34] .shstrtab         STRTAB          00000000 008774 000151 00      0   0  1 </span><br><span class="line">  [35] .symtab           SYMTAB          00000000 008e90 000590 10     36  61  4 </span><br><span class="line">  [36] .strtab           STRTAB          00000000 009420 0003f4 00      0   0  1 </span><br><span class="line">Key to Flags: </span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings) </span><br><span class="line">  I (info), L (link order), G (group), x (unknown) </span><br><span class="line">  O (extra OS processing required) o (OS specific), p (processor specific) </span><br></pre></td></tr></table></figure>
-
-<p>可见，相对非调试版本的可执行文件，多了”.debug*”段的信息。 </p>
-<p> <strong>查看一个目标文件的elf文件的节信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -S myfile.o </span><br><span class="line">There are 15 section headers, starting at offset 0x204: </span><br><span class="line"></span><br><span class="line">Section Headers: </span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al </span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0 </span><br><span class="line">  [ 1] .text             PROGBITS        00000000 000034 00009e 00  AX  0   0  4 </span><br><span class="line">  [ 2] .rel.text         REL             00000000 000744 000060 08     13   1  4 </span><br><span class="line">  [ 3] .data             PROGBITS        00000000 0000d4 000000 00  WA  0   0  4 </span><br><span class="line">  [ 4] .bss              NOBITS          00000000 0000d4 000001 00  WA  0   0  4 </span><br><span class="line">  [ 5] .ctors            PROGBITS        00000000 0000d4 000004 00  WA  0   0  4 </span><br><span class="line">  [ 6] .rel.ctors        REL             00000000 0007a4 000008 08     13   5  4 </span><br><span class="line">  [ 7] .rodata           PROGBITS        00000000 0000d8 000006 00   A  0   0  1 </span><br><span class="line">  [ 8] .eh_frame         PROGBITS        00000000 0000e0 00008c 00   A  0   0  4 </span><br><span class="line">  [ 9] .rel.eh_frame     REL             00000000 0007ac 000028 08     13   8  4 </span><br><span class="line">  [10] .comment          PROGBITS        00000000 00016c 00002e 00      0   0  1 </span><br><span class="line">  [11] .note.GNU-stack   PROGBITS        00000000 00019a 000000 00      0   0  1 </span><br><span class="line">  [12] .shstrtab         STRTAB          00000000 00019a 00006a 00      0   0  1 </span><br><span class="line">  [13] .symtab           SYMTAB          00000000 00045c 000180 10     14  14  4 </span><br><span class="line">  [14] .strtab           STRTAB          00000000 0005dc 000166 00      0   0  1 </span><br><span class="line">Key to Flags: </span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings) </span><br><span class="line">  I (info), L (link order), G (group), x (unknown) </span><br><span class="line">  O (extra OS processing required) o (OS specific), p (processor specific) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line"></span><br><span class="line"> **查看一个静态库文件的elf文件的节信息：** </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">[root@localhost test]$ readelf -S libmy.a </span><br><span class="line">File: libmy.a(myfile.o) </span><br><span class="line">There are 15 section headers, starting at offset 0x204: </span><br><span class="line"></span><br><span class="line">Section Headers: </span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al </span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0 </span><br><span class="line">  [ 1] .text             PROGBITS        00000000 000034 00009e 00  AX  0   0  4 </span><br><span class="line">  [ 2] .rel.text         REL             00000000 000744 000060 08     13   1  4 </span><br><span class="line">  [ 3] .data             PROGBITS        00000000 0000d4 000000 00  WA  0   0  4 </span><br><span class="line">  [ 4] .bss              NOBITS          00000000 0000d4 000001 00  WA  0   0  4 </span><br><span class="line">  [ 5] .ctors            PROGBITS        00000000 0000d4 000004 00  WA  0   0  4 </span><br><span class="line">  [ 6] .rel.ctors        REL             00000000 0007a4 000008 08     13   5  4 </span><br><span class="line">  [ 7] .rodata           PROGBITS        00000000 0000d8 000006 00   A  0   0  1 </span><br><span class="line">  [ 8] .eh_frame         PROGBITS        00000000 0000e0 00008c 00   A  0   0  4 </span><br><span class="line">  [ 9] .rel.eh_frame     REL             00000000 0007ac 000028 08     13   8  4 </span><br><span class="line">  [10] .comment          PROGBITS        00000000 00016c 00002e 00      0   0  1 </span><br><span class="line">  [11] .note.GNU-stack   PROGBITS        00000000 00019a 000000 00      0   0  1 </span><br><span class="line">  [12] .shstrtab         STRTAB          00000000 00019a 00006a 00      0   0  1 </span><br><span class="line">  [13] .symtab           SYMTAB          00000000 00045c 000180 10     14  14  4 </span><br><span class="line">  [14] .strtab           STRTAB          00000000 0005dc 000166 00      0   0  1 </span><br><span class="line">Key to Flags: </span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings) </span><br><span class="line">  I (info), L (link order), G (group), x (unknown) </span><br><span class="line">  O (extra OS processing required) o (OS specific), p (processor specific) </span><br></pre></td></tr></table></figure>
-
-<p> <strong>查看一个动态库文件的elf文件的节信息：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]$ readelf -S libmy.so </span><br><span class="line">There are 27 section headers, starting at offset 0xad0: </span><br><span class="line"></span><br><span class="line">Section Headers: </span><br><span class="line">  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al </span><br><span class="line">  [ 0]                   NULL            00000000 000000 000000 00      0   0  0 </span><br><span class="line">  [ 1] .gnu.hash         GNU_HASH        000000d4 0000d4 00003c 04   A  2   0  4 </span><br><span class="line">  [ 2] .dynsym           DYNSYM          00000110 000110 000120 10   A  3   1  4 </span><br><span class="line">  [ 3] .dynstr           STRTAB          00000230 000230 000199 00   A  0   0  1 </span><br><span class="line">  [ 4] .gnu.version      VERSYM          000003ca 0003ca 000024 02   A  2   0  2 </span><br><span class="line">  [ 5] .gnu.version_r    VERNEED         000003f0 0003f0 000050 00   A  3   2  4 </span><br><span class="line">  [ 6] .rel.dyn          REL             00000440 000440 0000b0 08   A  2   0  4 </span><br><span class="line">  [ 7] .rel.plt          REL             000004f0 0004f0 000010 08   A  2   9  4 </span><br><span class="line">  [ 8] .init             PROGBITS        00000500 000500 000017 00  AX  0   0  4 </span><br><span class="line">  [ 9] .plt              PROGBITS        00000518 000518 000030 04  AX  0   0  4 </span><br><span class="line">  [10] .text             PROGBITS        00000550 000550 0001c4 00  AX  0   0 16 </span><br><span class="line">  [11] .fini             PROGBITS        00000714 000714 00001c 00  AX  0   0  4 </span><br><span class="line">  [12] .rodata           PROGBITS        00000730 000730 000006 00   A  0   0  1 </span><br><span class="line">  [13] .eh_frame_hdr     PROGBITS        00000738 000738 00002c 00   A  0   0  4 </span><br><span class="line">  [14] .eh_frame         PROGBITS        00000764 000764 000090 00   A  0   0  4 </span><br><span class="line">  [15] .ctors            PROGBITS        000017f4 0007f4 00000c 00  WA  0   0  4 </span><br><span class="line">  [16] .dtors            PROGBITS        00001800 000800 000008 00  WA  0   0  4 </span><br><span class="line">  [17] .jcr              PROGBITS        00001808 000808 000004 00  WA  0   0  4 </span><br><span class="line">  [18] .data.rel.ro      PROGBITS        0000180c 00080c 000004 00  WA  0   0  4 </span><br><span class="line">  [19] .dynamic          DYNAMIC         00001810 000810 0000e0 08  WA  3   0  4 </span><br><span class="line">  [20] .got              PROGBITS        000018f0 0008f0 00000c 04  WA  0   0  4 </span><br><span class="line">  [21] .got.plt          PROGBITS        000018fc 0008fc 000014 04  WA  0   0  4 </span><br><span class="line">  [22] .bss              NOBITS          00001910 000910 00000c 00  WA  0   0  4 </span><br><span class="line">  [23] .comment          PROGBITS        00000000 000910 0000e6 00      0   0  1 </span><br><span class="line">  [24] .shstrtab         STRTAB          00000000 0009f6 0000da 00      0   0  1 </span><br><span class="line">  [25] .symtab           SYMTAB          00000000 000f08 000410 10     26  48  4 </span><br><span class="line">  [26] .strtab           STRTAB          00000000 001318 000333 00      0   0  1 </span><br><span class="line">Key to Flags: </span><br><span class="line">  W (write), A (alloc), X (execute), M (merge), S (strings) </span><br><span class="line">  I (info), L (link order), G (group), x (unknown) </span><br><span class="line">  O (extra OS processing required) o (OS specific), p (processor specific) </span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logsave/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logsave/" class="post-title-link" itemprop="url">【Linux 命令】logsave</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>130</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将命令的输出信息保存到指定的日志文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logsave命令</strong> 运行给定的命令，并将命令的输出信息保存到指定的日志文件中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logsave(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-a：追加信息到指定的日志文件中。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-i：交互式模式；</span><br><span class="line">-s：脚本模式，不提示用户；</span><br><span class="line">-v：显示版本号。</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>日志文件：指定记录运行信息的日志文件；</li>
-<li>指令：需要执行的指令。</li>
+<li>设备：指定要分区的硬盘所对应的设备文件；</li>
+<li>命令：要执行的parted命令。</li>
 </ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>从串行技术出现以来，越来越多用户选择使用大容量的SATA硬盘创建磁盘阵列；特别是MD1000/MD3000，很轻易就突破2T的LUN，故在此给大家一些指引。</p>
+<p>红帽企业 Linux 4 Update 4供对大于 2 terabytes（TB）的磁盘设备的支持。</p>
+<p>请参考以下操作步骤：</p>
+<p>注：</p>
+<ul>
+<li>绿色代表你需要使用的命令。</li>
+<li>红色代表你需要注意到的输出信息，在后续需要使用。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line">Disk /dev/sda: 35.8 GB, 35862976512 bytes</span><br><span class="line">255 heads, 63 sectors/track, 4360 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14         144     1052257+  82  Linux swap</span><br><span class="line">/dev/sda3             145        4360    33865020   83  Linux</span><br><span class="line">Disk /dev/sdb: 2147 MB, 2147483648 bytes</span><br><span class="line">255 heads, 63 sectors/track, 261 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">Disk /dev/sdb doesn&#x27;t contain a valid partition table</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# parted /dev/sdb</span><br><span class="line">GNU Parted Copyright (C) 1998 - 2004 free Software Foundation, Inc.</span><br><span class="line">This program is free software, covered by the GNU General Public License.</span><br><span class="line">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span><br><span class="line">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span><br><span class="line">使用/dev/sdb</span><br><span class="line">(parted)mklabel gpt</span><br><span class="line">(parted)print</span><br><span class="line">/dev/sdb的磁盘几何结构：0.000-2048.000兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line">(parted)mkpart primary 0 2048  &lt;-----上面print显示的数字</span><br><span class="line">(parted)print</span><br><span class="line">/dev/sdb的磁盘几何结构：0.000-2048.000兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line">1          0.017   2047.983</span><br><span class="line">(parted)quit</span><br></pre></td></tr></table></figure>
+
+<p>如果必要，不要忘记更新<code>/etc/fstab</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line">Disk /dev/sda: 35.8 GB, 35862976512 bytes</span><br><span class="line">255 heads, 63 sectors/track, 4360 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14         144     1052257+  82  Linux swap</span><br><span class="line">/dev/sda3             145        4360    33865020   83  Linux</span><br><span class="line">WARNING: GPT (GUID Partition Table) detected on &#x27;/dev/sdb&#x27;! The util fdisk doesn&#x27;t support GPT. Use GNU Parted.</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 2147 MB, 2147483648 bytes</span><br><span class="line">255 heads, 63 sectors/track, 261 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1               1         262     2097151+  ee  EFI GPT</span><br><span class="line">Partition 1 has different physical/logical beginnings (non-Linux?):</span><br><span class="line">     phys=(0, 0, 1) logical=(0,0, 2)</span><br><span class="line">Partition 1 has different physical/logical endings:</span><br><span class="line">     phys=(1023, 254, 63) logical=(261, 21, 16)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mkfs.ext3 /dev/sdb1</span><br><span class="line">mke2fs 1.35 (28-Feb-2004)</span><br><span class="line">Filesystem label=</span><br><span class="line">OS type: Linux</span><br><span class="line">Block size=4096 (log=2)</span><br><span class="line">Fragment size=4096 (log=2)</span><br><span class="line">262144 inodes, 524279 blocks</span><br><span class="line">26213 blocks (5.00%) reserved for the super user</span><br><span class="line">First data block=0</span><br><span class="line">Maximum filesystem blocks=536870912</span><br><span class="line">16 block groups</span><br><span class="line">32768 blocks per group, 32768 fragments per group</span><br><span class="line">16384 inodes per group</span><br><span class="line">Superblock backups stored on blocks:</span><br><span class="line">        32768, 98304, 163840, 229376, 294912</span><br><span class="line">Writing inode tables: done</span><br><span class="line">Creating journal (8192 blocks): done</span><br><span class="line">Writing superblocks and filesystem accounting information: done</span><br><span class="line">This filesystem will be automatically checked every 28 mounts or</span><br><span class="line">180 days, whichever comes first.  Use tune2fs -c or -i to override.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mount /dev/sdb1 /mnt</span><br><span class="line">[root@localhost ~]# df -h</span><br><span class="line">Filesystem            容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda3              &lt;?xml:namespace prefix = st1 /&gt;32G  2.6G   28G   9% /</span><br><span class="line">/dev/sda1              99M   12M   82M  13% /boot</span><br><span class="line">none                  252M     0  252M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.0G   36M  1.9G   2% /mnt</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -701,7 +421,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logwatch/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/openssl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -718,7 +438,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/logwatch/" class="post-title-link" itemprop="url">【Linux 命令】logwatch</a>
+            <a href="/linux-command/openssl/" class="post-title-link" itemprop="url">【Linux 命令】openssl</a>
         </h2>
 
         <div class="post-meta-container">
@@ -728,8 +448,584 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:50:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>强大的安全套接字层密码库</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>OpenSSL</strong> 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用。在OpenSSL被曝出现严重安全漏洞后，发现多数通过SSL协议加密的网站使用名为OpenSSL的开源软件包。由于这是互联网应用最广泛的安全传输方法，被网银、在线支付、电商网站、门户网站、电子邮件等重要网站广泛使用，所以该漏洞影响范围广大。</p>
+<p>OpenSSL有两种运行模式：交互模式和批处理模式。</p>
+<p>直接输入openssl回车进入交互模式，输入带命令选项的openssl进入批处理模式。</p>
+<p>OpenSSL整个软件包大概可以分成三个主要的功能部分：密码算法库、SSL协议库以及应用程序。OpenSSL的目录结构自然也是围绕这三个功能部分进行规划的。 </p>
+<p> <strong>对称加密算法</strong></p>
+<p>OpenSSL一共提供了8种对称加密算法，其中7种是分组加密算法，仅有的一种流加密算法是RC4。这7种分组加密算法分别是AES、DES、Blowfish、CAST、IDEA、RC2、RC5，都支持电子密码本模式（ECB）、加密分组链接模式（CBC）、加密反馈模式（CFB）和输出反馈模式（OFB）四种常用的分组密码加密模式。其中，AES使用的加密反馈模式（CFB）和输出反馈模式（OFB）分组长度是128位，其它算法使用的则是64位。事实上，DES算法里面不仅仅是常用的DES算法，还支持三个密钥和两个密钥3DES算法。 </p>
+<p> <strong>非对称加密算法</strong></p>
+<p>OpenSSL一共实现了4种非对称加密算法，包括DH算法、RSA算法、DSA算法和椭圆曲线算法（EC）。DH算法一般用户密钥交换。RSA算法既可以用于密钥交换，也可以用于数字签名，当然，如果你能够忍受其缓慢的速度，那么也可以用于数据加密。DSA算法则一般只用于数字签名。 </p>
+<p> <strong>信息摘要算法</strong></p>
+<p>OpenSSL实现了5种信息摘要算法，分别是MD2、MD5、MDC2、SHA（SHA1）和RIPEMD。SHA算法事实上包括了SHA和SHA1两种信息摘要算法，此外，OpenSSL还实现了DSS标准中规定的两种信息摘要算法DSS和DSS1。 </p>
+<p> <strong>密钥和证书管理</strong></p>
+<p>密钥和证书管理是PKI的一个重要组成部分，OpenSSL为之提供了丰富的功能，支持多种标准。 </p>
+<p>首先，OpenSSL实现了ASN.1的证书和密钥相关标准，提供了对证书、公钥、私钥、证书请求以及CRL等数据对象的DER、PEM和BASE64的编解码功能。OpenSSL提供了产生各种公开密钥对和对称密钥的方法、函数和应用程序，同时提供了对公钥和私钥的DER编解码功能。并实现了私钥的PKCS#12和PKCS#8的编解码功能。OpenSSL在标准中提供了对私钥的加密保护功能，使得密钥可以安全地进行存储和分发。 </p>
+<p>在此基础上，OpenSSL实现了对证书的X.509标准编解码、PKCS#12格式的编解码以及PKCS#7的编解码功能。并提供了一种文本数据库，支持证书的管理功能，包括证书密钥产生、请求产生、证书签发、吊销和验证等功能。 </p>
+<p>事实上，OpenSSL提供的CA应用程序就是一个小型的证书管理中心（CA），实现了证书签发的整个流程和证书管理的大部分机制。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>1、使用 openssl 生成密码</strong></p>
+<p>几乎所有 Linux 发行版都包含 openssl。我们可以利用它的随机功能来生成可以用作密码的随机字母字符串。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl rand -base64 10</span><br><span class="line"><span class="meta">#</span><span class="bash"> nU9LlHO5nsuUvw==</span></span><br></pre></td></tr></table></figure>
+
+<p>nU9LlHO5nsuUvw==</p>
+<p><strong>2、消息摘要算法应用例子</strong></p>
+<p>用SHA1算法计算文件file.txt的哈西值，输出到stdout：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dgst -sha1 file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用SHA1算法计算文件file.txt的哈西值，输出到文件digest.txt：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl sha1 -out digest.txt file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用DSS1(SHA1)算法为文件file.txt签名，输出到文件dsasign.bin。签名的private key必须为DSA算法产生的，保存在文件dsakey.pem中。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dgst -dss1 -sign dsakey.pem -out dsasign.bin file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用dss1算法验证file.txt的数字签名dsasign.bin，验证的private key为DSA算法产生的文件dsakey.pem。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dgst -dss1 -prverify dsakey.pem -signature dsasign.bin file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用sha1算法为文件file.txt签名,输出到文件rsasign.bin，签名的private key为RSA算法产生的文件rsaprivate.pem。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl sha1 -sign rsaprivate.pem -out rsasign.bin file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用sha1算法验证file.txt的数字签名rsasign.bin，验证的public key为RSA算法生成的rsapublic.pem。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl sha1 -verify rsapublic.pem -signature rsasign.bin file.txt</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>3、对称加密应用例子</strong></p>
+<p>对称加密应用例子，用DES3算法的CBC模式加密文件plaintext.doc，加密结果输出到文件ciphertext.bin。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl enc -des3 -salt -<span class="keyword">in</span> plaintext.doc -out ciphertext.bin</span></span><br></pre></td></tr></table></figure>
+
+<p>用DES3算法的OFB模式解密文件ciphertext.bin，提供的口令为trousers，输出到文件plaintext.doc。注意：因为模式不同，该命令不能对以上的文件进行解密。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl enc -des-ede3-ofb -d -<span class="keyword">in</span> ciphertext.bin -out plaintext.doc -pass pass:trousers</span></span><br></pre></td></tr></table></figure>
+
+<p>用Blowfish的CFB模式加密plaintext.doc，口令从环境变量PASSWORD中取，输出到文件ciphertext.bin。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl bf-cfb -salt -<span class="keyword">in</span> plaintext.doc -out ciphertext.bin -pass env:PASSWORD</span></span><br></pre></td></tr></table></figure>
+
+<p>给文件ciphertext.bin用base64编码，输出到文件base64.txt。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl base64 -<span class="keyword">in</span> ciphertext.bin -out base64.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用RC5算法的CBC模式加密文件plaintext.doc，输出到文件ciphertext.bin，salt、key和初始化向量(iv)在命令行指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rc5 -<span class="keyword">in</span> plaintext.doc -out ciphertext.bin -S C62CB1D49F158ADC -iv E9EDACA1BD7090C6 -K 89D4B1678D604FAA3DBFFD030A314B29</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>4、Diffie-Hellman应用例子</strong></p>
+<p>使用生成因子2和随机的1024-bit的素数产生D0ffie-Hellman参数，输出保存到文件dhparam.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dhparam -out dhparam.pem -2 1024</span></span><br></pre></td></tr></table></figure>
+
+<p>从dhparam.pem中读取Diffie-Hell参数，以C代码的形式，输出到stdout。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dhparam -<span class="keyword">in</span> dhparam.pem -noout -C</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>5、DSA应用例子应用例子</strong></p>
+<p>生成1024位DSA参数集，并输出到文件dsaparam.pem。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dsaparam -out dsaparam.pem 1024</span></span><br></pre></td></tr></table></figure>
+
+<p>使用参数文件dsaparam.pem生成DSA私钥匙，采用3DES加密后输出到文件dsaprivatekey.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl gendsa -out dsaprivatekey.pem -des3 dsaparam.pem</span></span><br></pre></td></tr></table></figure>
+
+<p>使用私钥匙dsaprivatekey.pem生成公钥匙，输出到dsapublickey.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dsa -<span class="keyword">in</span> dsaprivatekey.pem -pubout -out dsapublickey.pem</span></span><br></pre></td></tr></table></figure>
+
+<p>从dsaprivatekey.pem中读取私钥匙，解密并输入新口令进行加密，然后写回文件dsaprivatekey.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl dsa -<span class="keyword">in</span> dsaprivatekey.pem -out dsaprivatekey.pem -des3 -passin</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>6、RSA应用例子</strong></p>
+<p>产生1024位RSA私匙，用3DES加密它，口令为trousers，输出到文件rsaprivatekey.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl genrsa -out rsaprivatekey.pem -passout pass:trousers -des3 1024</span></span><br></pre></td></tr></table></figure>
+
+<p>从文件rsaprivatekey.pem读取私匙，用口令trousers解密，生成的公钥匙输出到文件rsapublickey.pem</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rsa -<span class="keyword">in</span> rsaprivatekey.pem -passin pass:trousers -pubout -out rsapubckey.pem</span></span><br></pre></td></tr></table></figure>
+
+<p>用公钥匙rsapublickey.pem加密文件plain.txt，输出到文件cipher.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rsautl -encrypt -pubin -inkey rsapublickey.pem -<span class="keyword">in</span> plain.txt -out cipher.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>使用私钥匙rsaprivatekey.pem解密密文cipher.txt，输出到文件plain.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rsautl -decrypt -inkey rsaprivatekey.pem -<span class="keyword">in</span> cipher.txt -out plain.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>用私钥匙rsaprivatekey.pem给文件plain.txt签名，输出到文件signature.bin</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rsautl -sign -inkey rsaprivatekey.pem -<span class="keyword">in</span> plain.txt -out signature.bin</span></span><br></pre></td></tr></table></figure>
+
+<p>用公钥匙rsapublickey.pem验证签名signature.bin，输出到文件plain.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl rsautl -verify -pubin -inkey rsapublickey.pem -<span class="keyword">in</span> signature.bin -out plain</span></span><br></pre></td></tr></table></figure>
+
+<p>从X.509证书文件cert.pem中获取公钥匙，用3DES加密mail.txt，输出到文件mail.enc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl smime -encrypt -<span class="keyword">in</span> mail.txt -des3 -out mail.enc cert.pem</span></span><br></pre></td></tr></table></figure>
+
+<p>从X.509证书文件cert.pem中获取接收人的公钥匙，用私钥匙key.pem解密S/MIME消息mail.enc，结果输出到文件mail.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl smime -decrypt -<span class="keyword">in</span> mail.enc -recip cert.pem -inkey key.pem -out mail.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>cert.pem为X.509证书文件，用私匙key,pem为mail.txt签名，证书被包含在S/MIME消息中，输出到文件mail.sgn</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl smime -sign -<span class="keyword">in</span> mail.txt -signer cert.pem -inkey key.pem -out mail.sgn</span></span><br></pre></td></tr></table></figure>
+
+<p>验证S/MIME消息mail.sgn，输出到文件mail.txt，签名者的证书应该作为S/MIME消息的一部分包含在mail.sgn中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> openssl smime -verify -<span class="keyword">in</span> mail.sgn -out mail.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>更多实例:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openssl version -a</span><br><span class="line">openssl help</span><br><span class="line">openssl genrsa -aes128 -out fd.key 2048 # pem format</span><br><span class="line">openssl rsa -text -in fd.key</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/od/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/od/" class="post-title-link" itemprop="url">【Linux 命令】od</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:49:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>输出文件的八进制、十六进制等格式编码的字节</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>od命令</strong> 用于输出文件的八进制、十六进制或其它格式编码的字节，通常用于显示或查看文件中不能直接显示在终端的字符。</p>
+<p>常见的文件为文本文件和二进制文件。此命令主要用来查看保存在二进制文件中的值。比如，程序可能输出大量的数据记录，每个数据是一个单精度浮点数。这些数据记录存放在一个文件中，如果想查看下这个数据，这时候od命令就派上用场了。在我看来，od命令主要用来格式化输出文件数据，即对文件中的数据进行无二义性的解释。不管是IEEE754格式的浮点数还是ASCII码，od命令都能按照需求输出它们的值。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">od(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-a：此参数的效果和同时指定“-ta”参数相同；</span><br><span class="line">-A：&lt;字码基数&gt;：选择以何种基数计算字码；</span><br><span class="line">-b：此参数的效果和同时指定“-toC”参数相同；</span><br><span class="line">-c：此参数的效果和同时指定“-tC”参数相同；</span><br><span class="line">-d：此参数的效果和同时指定“-tu2”参数相同；</span><br><span class="line">-f：此参数的效果和同时指定“-tfF”参数相同；</span><br><span class="line">-h：此参数的效果和同时指定“-tx2”参数相同；</span><br><span class="line">-i：此参数的效果和同时指定“-td2”参数相同；</span><br><span class="line">-j&lt;字符数目&gt;或--skip-bytes=&lt;字符数目&gt;：略过设置的字符数目；</span><br><span class="line">-l：此参数的效果和同时指定“-td4”参数相同；</span><br><span class="line">-N&lt;字符数目&gt;或--read-bytes=&lt;字符数目&gt;：到设置的字符树目为止；</span><br><span class="line">-o：此参数的效果和同时指定“-to2”参数相同；</span><br><span class="line">-s&lt;字符串字符数&gt;或--strings=&lt;字符串字符数&gt;：只显示符合指定的字符数目的字符串；</span><br><span class="line">-t&lt;输出格式&gt;或--format=&lt;输出格式&gt;：设置输出格式；</span><br><span class="line">-v或--output-duplicates：输出时不省略重复的数据；</span><br><span class="line">-w&lt;每列字符数&gt;或--width=&lt;每列字符数&gt;：设置每列的最大字符数；</span><br><span class="line">-x：此参数的效果和同时指定“-h”参数相同；</span><br><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要显示的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ echo abcdef g &gt; tmp</span><br><span class="line">[linuxde@localhost ~]$ cat tmp</span><br><span class="line">abcdef g</span><br></pre></td></tr></table></figure>
+
+<p>说明：先准备一个tmp文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -b tmp</span><br><span class="line">0000000 141 142 143 144 145 146 040 147 012</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：使用单字节八进制解释进行输出，注意左侧的默认地址格式为八字节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -c tmp</span><br><span class="line">0000000   a   b   c   d   e   f       g  \n</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：使用ASCII码进行输出，注意其中包括转义字符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -t d1 tmp</span><br><span class="line">0000000   97   98   99  100  101  102   32  103   10</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：使用单字节十进制进行解释</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -A d -c tmp</span><br><span class="line">0000000   a   b   c   d   e   f       g  \n</span><br><span class="line">0000009</span><br></pre></td></tr></table></figure>
+
+<p>说明：设置地址格式为十进制。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -A x -c tmp</span><br><span class="line">000000   a   b   c   d   e   f       g  \n</span><br><span class="line">000009</span><br></pre></td></tr></table></figure>
+
+<p>说明：设置地址格式为十六进制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -j 2 -c tmp</span><br><span class="line">0000002   c   d   e   f       g  \n</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：跳过开始的两个字节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -N 2 -j 2 -c tmp</span><br><span class="line">0000002   c   d</span><br><span class="line">0000004</span><br></pre></td></tr></table></figure>
+
+<p>说明：跳过开始的两个字节，并且仅输出两个字节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -w1 -c tmp</span><br><span class="line">0000000   a</span><br><span class="line">0000001   b</span><br><span class="line">0000002   c</span><br><span class="line">0000003   d</span><br><span class="line">0000004   e</span><br><span class="line">0000005   f</span><br><span class="line">0000006   </span><br><span class="line">0000007   g</span><br><span class="line">0000010  \n</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：每行仅输出1个字节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -w2 -c tmp</span><br><span class="line">0000000   a   b</span><br><span class="line">0000002   c   d</span><br><span class="line">0000004   e   f</span><br><span class="line">0000006       g</span><br><span class="line">0000010  \n</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：每行输出两个字节</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[linuxde@localhost ~]$ od -w3 -b tmp</span><br><span class="line">0000000 141 142 143</span><br><span class="line">0000003 144 145 146</span><br><span class="line">0000006 040 147 012</span><br><span class="line">0000011</span><br></pre></td></tr></table></figure>
+
+<p>说明：每行输出3个字节，并使用八进制单字节进行解释</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/objdump/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/objdump/" class="post-title-link" itemprop="url">【Linux 命令】objdump</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:49:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示二进制文件信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>objdump命令</strong> 是用查看目标文件或者可执行的目标文件的构成的gcc工具。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">-a --archive-headers </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示档案库的成员信息,类似ls -l将lib*.a的信息列出。 </span></span><br><span class="line"></span><br><span class="line">-b bfdname --target=bfdname </span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定目标码格式。这不是必须的，objdump能自动识别许多格式，比如： </span></span><br><span class="line"></span><br><span class="line">objdump -b oasys -m vax -h fu.o </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示fu.o的头部摘要信息，明确指出该文件是Vax系统下用Oasys编译器生成的目标文件。objdump -i将给出这里可以指定的目标码格式列表。 </span></span><br><span class="line"></span><br><span class="line">-C --demangle </span><br><span class="line"><span class="meta">#</span><span class="bash"> 将底层的符号名解码成用户级名字，除了去掉所开头的下划线之外，还使得C++函数名以可理解的方式显示出来。 </span></span><br><span class="line">--debugging </span><br><span class="line">-g </span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示调试信息。企图解析保存在文件中的调试信息并以C语言的语法显示出来。仅仅支持某些类型的调试信息。有些其他的格式被readelf -w支持。 </span></span><br><span class="line"></span><br><span class="line">-e --debugging-tags </span><br><span class="line"><span class="meta">#</span><span class="bash"> 类似-g选项，但是生成的信息是和ctags工具相兼容的格式。 </span></span><br><span class="line">--disassemble </span><br><span class="line">-d </span><br><span class="line"><span class="meta">#</span><span class="bash"> 从objfile中反汇编那些特定指令机器码的section。 </span></span><br><span class="line"></span><br><span class="line">-D --disassemble-all </span><br><span class="line"><span class="meta">#</span><span class="bash"> 与 -d 类似，但反汇编所有section. </span></span><br><span class="line"></span><br><span class="line">--prefix-addresses </span><br><span class="line"><span class="meta">#</span><span class="bash"> 反汇编的时候，显示每一行的完整地址。这是一种比较老的反汇编格式。 </span></span><br><span class="line"></span><br><span class="line">-EB </span><br><span class="line">-EL </span><br><span class="line">--endian=&#123;big|little&#125; </span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定目标文件的小端。这个项将影响反汇编出来的指令。在反汇编的文件没描述小端信息的时候用。例如S-records. </span></span><br><span class="line"></span><br><span class="line">-f </span><br><span class="line">--file-headers </span><br><span class="line">显示objfile中每个文件的整体头部摘要信息。 </span><br><span class="line"></span><br><span class="line">-h </span><br><span class="line">--section-headers </span><br><span class="line">--headers </span><br><span class="line">显示目标文件各个section的头部摘要信息。 </span><br><span class="line"></span><br><span class="line">-H </span><br><span class="line">--help </span><br><span class="line">简短的帮助信息。 </span><br><span class="line"></span><br><span class="line">-i </span><br><span class="line">--info </span><br><span class="line">显示对于 -b 或者 -m 选项可用的架构和目标格式列表。 </span><br><span class="line"></span><br><span class="line">-j name</span><br><span class="line">--section=name </span><br><span class="line">仅仅显示指定名称为name的section的信息 </span><br><span class="line"></span><br><span class="line">-l</span><br><span class="line">--line-numbers </span><br><span class="line">用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </span><br><span class="line"></span><br><span class="line">-m machine </span><br><span class="line">--architecture=machine </span><br><span class="line">指定反汇编目标文件时使用的架构，当待反汇编文件本身没描述架构信息的时候(比如S-records)，这个选项很有用。可以用-i选项列出这里能够指定的架构. </span><br><span class="line"></span><br><span class="line">--reloc </span><br><span class="line">-r </span><br><span class="line">显示文件的重定位入口。如果和-d或者-D一起使用，重定位部分以反汇编后的格式显示出来。 </span><br><span class="line"></span><br><span class="line">--dynamic-reloc </span><br><span class="line">-R </span><br><span class="line">显示文件的动态重定位入口，仅仅对于动态目标文件意义，比如某些共享库。 </span><br><span class="line"></span><br><span class="line">-s </span><br><span class="line">--full-contents </span><br><span class="line">显示指定section的完整内容。默认所有的非空section都会被显示。 </span><br><span class="line"></span><br><span class="line">-S </span><br><span class="line">--source </span><br><span class="line">尽可能反汇编出源代码，尤其当编译的时候指定了-g这种调试参数时，效果比较明显。隐含了-d参数。 </span><br><span class="line"></span><br><span class="line">--show-raw-insn </span><br><span class="line">反汇编的时候，显示每条汇编指令对应的机器码，如不指定--prefix-addresses，这将是缺省选项。 </span><br><span class="line"></span><br><span class="line">--no-show-raw-insn </span><br><span class="line">反汇编时，不显示汇编指令的机器码，如不指定--prefix-addresses，这将是缺省选项。 </span><br><span class="line"></span><br><span class="line">--start-address=address </span><br><span class="line">从指定地址开始显示数据，该选项影响-d、-r和-s选项的输出。 </span><br><span class="line"></span><br><span class="line">--stop-address=address </span><br><span class="line">显示数据直到指定地址为止，该项影响-d、-r和-s选项的输出。 </span><br><span class="line"></span><br><span class="line">-t </span><br><span class="line">--syms </span><br><span class="line">显示文件的符号表入口。类似于nm -s提供的信息 </span><br><span class="line"></span><br><span class="line">-T </span><br><span class="line">--dynamic-syms </span><br><span class="line">显示文件的动态符号表入口，仅仅对动态目标文件意义，比如某些共享库。它显示的信息类似于 nm -D|--dynamic 显示的信息。 </span><br><span class="line"></span><br><span class="line">-V </span><br><span class="line">--version </span><br><span class="line">版本信息 </span><br><span class="line"></span><br><span class="line">--all-headers </span><br><span class="line">-x </span><br><span class="line">显示所可用的头信息，包括符号表、重定位入口。-x 等价于-a -f -h -r -t 同时指定。 </span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">--disassemble-zeroes </span><br><span class="line">一般反汇编输出将省略大块的零，该选项使得这些零块也被反汇编。 </span><br><span class="line"></span><br><span class="line">@file 可以将选项集中到一个文件中，然后使用这个@file选项载入。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>首先，在给出后面大部分测试所基于的源代码以及编译指令。 源代码如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost [test]# nl mytest.cpp </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void printTest() &#123;</span><br><span class="line">    char a;</span><br><span class="line">    a = &#x27;a&#x27;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void printTest2() &#123;</span><br><span class="line">int a = 2;</span><br><span class="line">a+=2;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>对以上源代码进行编译，如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# g++ -c -g mytest.cpp </span><br></pre></td></tr></table></figure>
+
+<p>这里，生成的文件是mytest.o，为了方便测试包含了调试的信息，对可执行文件的测试，显示的结果类似。 </p>
+<p> **查看当前使用的objdump的版本号： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -V </span><br><span class="line">GNU objdump 2.17.50.0.6-14.el5 20061020 </span><br><span class="line">Copyright 2005 free Software Foundation, Inc. </span><br><span class="line">This program is free software; you may redistribute it under the terms of </span><br><span class="line">the GNU General Public License.  This program has absolutely no warranty. </span><br></pre></td></tr></table></figure>
+
+<p> **查看档案库文件中的信息： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -a libmy2.a </span><br><span class="line">In archive libmy2.a: </span><br><span class="line">myfile.o:     file format elf32-i386 </span><br><span class="line">rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </span><br></pre></td></tr></table></figure>
+
+<p> *<em>这里，libmy2.a是一个使用ar命令将多个</em>.o目标文件打包而生成的静态库。命令的输出类似<code>ar -tv</code>，相比较<code>ar -tv</code>输出如下： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# ar -tv libmy2.a </span><br><span class="line">rwxrwxrwx 0/0   2724 Nov 16 16:06 2009 myfile.o </span><br><span class="line">rw-r--r-- 0/0    727 Jul 13 15:32 2011 mytest.o </span><br></pre></td></tr></table></figure>
+
+<p>显示可用的架构和目标结构列表： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -i </span><br><span class="line">BFD header file version 2.17.50.0.6-14.el5 20061020 </span><br><span class="line">elf32-i386 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">a.out-i386-linux </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">efi-app-ia32 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-x86-64 </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-little </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf64-big </span><br><span class="line">(header big endian, data big endian) </span><br><span class="line">  i386 </span><br><span class="line">elf32-little </span><br><span class="line">(header little endian, data little endian) </span><br><span class="line">  i386 </span><br><span class="line">elf32-big </span><br><span class="line">(header big endian, data big endian) </span><br><span class="line">  i386 </span><br><span class="line">srec </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">symbolsrec </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">tekhex </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">binary </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">ihex </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line">  i386 </span><br><span class="line">trad-core </span><br><span class="line">(header endianness unknown, data endianness unknown) </span><br><span class="line"></span><br><span class="line">              elf32-i386 a.out-i386-linux efi-app-ia32 elf64-x86-64 </span><br><span class="line">          i386 elf32-i386 a.out-i386-linux efi-app-ia32 elf64-x86-64 </span><br><span class="line"></span><br><span class="line">              elf64-little elf64-big elf32-little elf32-big srec symbolsrec </span><br><span class="line">          i386 elf64-little elf64-big elf32-little elf32-big srec symbolsrec </span><br><span class="line"></span><br><span class="line">              tekhex binary ihex trad-core </span><br><span class="line">          i386 tekhex binary ihex --------- </span><br></pre></td></tr></table></figure>
+
+<p>这里，显示的信息是相对于 -b 或者 -m 选项可用的架构和目标格式列表。 </p>
+<p> **显示mytest.o文件中的text段的内容： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump --section=.text -s mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Contents of section .text: </span><br><span class="line">0000 5589e583 ec10c645 ff61c9c3 5589e583  U......E.a..U... </span><br><span class="line">0010 ec10c745 fc020000 008345fc 02c9c3    ...E......E.... </span><br></pre></td></tr></table></figure>
+
+<p>这里注意，不能单独使用-j或者–section，例如<code>objdump --section=.text mytest.o</code>是不会运行成功的。 </p>
+<p> **反汇编mytest.o中的text段内容，并尽可能用源代码形式表示： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -j .text -S mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">void printTest() </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        char a; </span><br><span class="line">        a = &#x27;a&#x27;; </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">void printTest2() </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        int a = 2; </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">        a+=2; </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里注意，不能单独使用-j或者–section，例如<code>objdump -j .text mytest.o是不会运行成功的</code>。另外-S命令对于包含调试信息的目标文件，显示的效果比较好，如果编译时没有指定g++的-g选项，那么目标文件就不包含调试信息，那么显示效果就差多了。 </p>
+<p> **反汇编出mytest.o的源代码: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -S mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">void printTest() </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">        char a; </span><br><span class="line">        a = &#x27;a&#x27;; </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">void printTest2() </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">&#123; </span><br><span class="line">       int a = 2; </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">        a+=2; </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">&#125; </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，尤其当编译的时候指定了-g这种调试参数时，反汇编的效果比较明显。隐含了-d参数。 </p>
+<p> **显示文件的符号表入口: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -t mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">SYMBOL TABLE: </span><br><span class="line">00000000 l    df *ABS*  00000000 mytest.cpp </span><br><span class="line">00000000 l    d  .text  00000000 .text </span><br><span class="line">00000000 l    d  .data  00000000 .data </span><br><span class="line">00000000 l    d  .bss   00000000 .bss </span><br><span class="line">00000000 l    d  .debug_abbrev  00000000 .debug_abbrev </span><br><span class="line">00000000 l    d  .debug_info    00000000 .debug_info </span><br><span class="line">00000000 l    d  .debug_line    00000000 .debug_line </span><br><span class="line">00000000 l    d  .debug_frame   00000000 .debug_frame </span><br><span class="line">00000000 l    d  .debug_loc     00000000 .debug_loc </span><br><span class="line">00000000 l    d  .debug_pubnames        00000000 .debug_pubnames </span><br><span class="line">00000000 l    d  .debug_aranges 00000000 .debug_aranges </span><br><span class="line">00000000 l    d  .note.GNU-stack        00000000 .note.GNU-stack </span><br><span class="line">00000000 l    d  .comment       00000000 .comment </span><br><span class="line">00000000 g     F .text  0000000c _Z9printTestv </span><br><span class="line">00000000         *UND*  00000000 __gxx_personality_v0 </span><br><span class="line">0000000c g     F .text  00000013 _Z10printTest2v </span><br></pre></td></tr></table></figure>
+
+<p>这里，输出的信息类似<code>nm -s</code>命令的输出，相比较之下，nm命令的输出如下： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# nm -s mytest.o </span><br><span class="line">0000000c T _Z10printTest2v </span><br><span class="line">00000000 T _Z9printTestv </span><br><span class="line">         U __gxx_personality_v0 </span><br></pre></td></tr></table></figure>
+
+<p> **显示文件的符号表入口，将底层符号解码并表示成用户级别: ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -t -C mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">SYMBOL TABLE: </span><br><span class="line">00000000 l    df *ABS*  00000000 mytest.cpp </span><br><span class="line">00000000 l    d  .text  00000000 .text </span><br><span class="line">00000000 l    d  .data  00000000 .data </span><br><span class="line">00000000 l    d  .bss   00000000 .bss </span><br><span class="line">00000000 l    d  .debug_abbrev  00000000 .debug_abbrev </span><br><span class="line">00000000 l    d  .debug_info    00000000 .debug_info </span><br><span class="line">00000000 l    d  .debug_line    00000000 .debug_line </span><br><span class="line">00000000 l    d  .debug_frame   00000000 .debug_frame </span><br><span class="line">00000000 l    d  .debug_loc     00000000 .debug_loc </span><br><span class="line">00000000 l    d  .debug_pubnames        00000000 .debug_pubnames </span><br><span class="line">00000000 l    d  .debug_aranges 00000000 .debug_aranges </span><br><span class="line">00000000 l    d  .note.GNU-stack        00000000 .note.GNU-stack </span><br><span class="line">00000000 l    d  .comment       00000000 .comment </span><br><span class="line">00000000 g     F .text  0000000c printTest() </span><br><span class="line">00000000         *UND*  00000000 __gxx_personality_v0 </span><br><span class="line">0000000c g     F .text  00000013 printTest2() </span><br></pre></td></tr></table></figure>
+
+<p>这里，和没-C相比，printTest2函数可读性增加了。 </p>
+<p> **反汇编目标文件的特定机器码段： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -d mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">  b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，对text段的内容进行了反汇编。 </p>
+<p> **反汇编特定段，并将汇编代码对应的文件名称和行号对应上： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -d -l mytest.o</span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line">Disassembly of section .text: </span><br><span class="line"></span><br><span class="line">00000000 &lt;_Z9printTestv&gt;: </span><br><span class="line">_Z9printTestv(): </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:1 </span><br><span class="line">   0:   55                      push   %ebp </span><br><span class="line">   1:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   3:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:4 </span><br><span class="line">   6:   c6 45 ff 61             movb   $0x61,0xffffffff(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:5 </span><br><span class="line">   a:   c9                      leave  </span><br><span class="line">   b:   c3                      ret    </span><br><span class="line"></span><br><span class="line">0000000c &lt;_Z10printTest2v&gt;: </span><br><span class="line">_Z10printTest2v(): </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:6 </span><br><span class="line">   c:   55                      push   %ebp </span><br><span class="line">   d:   89 e5                   mov    %esp,%ebp </span><br><span class="line">   f:   83 ec 10                sub    $0x10,%esp </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:8 </span><br><span class="line">  12:   c7 45 fc 02 00 00 00    movl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:9 </span><br><span class="line">  19:   83 45 fc 02             addl   $0x2,0xfffffffc(%ebp) </span><br><span class="line">/root/test/04_libraryTest/mytest.cpp:10 </span><br><span class="line">  1d:   c9                      leave  </span><br><span class="line">  1e:   c3                      ret    </span><br></pre></td></tr></table></figure>
+
+<p>这里，项”-d”从objfile中反汇编那些特定指令机器码的section，而使用”-l”指定用文件名和行号标注相应的目标代码，仅仅和-d、-D或者-r一起使用，使用-ld和使用-d的区别不是很大，在源码级调试的时候有用，要求编译时使用了-g之类的调试编译选项。 </p>
+<p> **显示目标文件各个段的头部摘要信息： ** </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost test]# objdump -h mytest.o </span><br><span class="line">mytest.o:     file format elf32-i386 </span><br><span class="line"></span><br><span class="line">Sections: </span><br><span class="line">Idx Name          Size      VMA       LMA       File off  Algn </span><br><span class="line">  0 .text         0000001f  00000000  00000000  00000034  2**2 </span><br><span class="line">                  CONTENTS, ALLOC, LOAD, readonly, CODE </span><br><span class="line">  1 .data         00000000  00000000  00000000  00000054  2**2 </span><br><span class="line">                  CONTENTS, ALLOC, LOAD, DATA </span><br><span class="line">  2 .bss          00000000  00000000  00000000  00000054  2**2 </span><br><span class="line">                  ALLOC </span><br><span class="line">  3 .debug_abbrev 00000046  00000000  00000000  00000054  2**0 </span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING </span><br><span class="line">  4 .debug_info   000000ed  00000000  00000000  0000009a  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  5 .debug_line   0000003e  00000000  00000000  00000187  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  6 .debug_frame  00000044  00000000  00000000  000001c8  2**2 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  7 .debug_loc    00000058  00000000  00000000  0000020c  2**0 </span><br><span class="line">                  CONTENTS, READONLY, DEBUGGING </span><br><span class="line">  8 .debug_pubnames 0000002f  00000000  00000000  00000264  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">  9 .debug_aranges 00000020  00000000  00000000  00000293  2**0 </span><br><span class="line">                  CONTENTS, RELOC, READONLY, DEBUGGING </span><br><span class="line">10 .comment      0000002e  00000000  00000000  000002b3  2**0 </span><br><span class="line">                  CONTENTS, READONLY </span><br><span class="line">11 .note.GNU-stack 00000000  00000000  00000000  000002e1  2**0 </span><br><span class="line">                  CONTENTS, READONLY </span><br></pre></td></tr></table></figure>
+
+<p>这里，更多的内容参见<code>man objdump</code>中的这个选项。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ntsysv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ntsysv/" class="post-title-link" itemprop="url">【Linux 命令】ntsysv</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:48:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>270</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>集中管理系统的各种服务</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ntsysv命令</strong> 提供了一个基于文本界面的菜单操作方式，集中管理系统不同的运行等级下的系统服务启动状态。在RedHat各个发行版，CentOS各个版本，都自带这个工具。它具有互动式操作界面，您可以轻易地利用方向键和空格键等，开启，关闭操作系统在每个执行等级中，所要执行的系统服务。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntsysv(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--leve：指定运行等级；</span><br><span class="line">--back：在互动式界面里，显示Back钮，而非cancel钮。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>输入ntsysv命令后，出现一个交互式的管理菜单，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!ntsysv</span><br></pre></td></tr></table></figure>
+
+<p>使用空格键选择或者取消选项！</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ntpdate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ntpdate/" class="post-title-link" itemprop="url">【Linux 命令】ntpdate</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:48:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -767,30 +1063,62 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>可定制和可插入式的日志监视系统</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logwatch命令</strong> 是一个可定制和可插入式的日志监视系统，它通过遍历给定时间范围内的系统日志文件而产生日志报告。logwatch默认每天执行一次，可以从<code>/etc/cron.daily</code>里看到。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logwatch(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--detail&lt;报告详细程度&gt;：指定日志报告的详细程度；</span><br><span class="line">--logfile&lt;日志文件&gt;：仅处理指定的日志文件；</span><br><span class="line">--service&lt;服务名&gt;：仅处理指定服务的日志文件；</span><br><span class="line">--print：打印结果到标准输出；</span><br><span class="line">--mailto&lt;邮件地址&gt;：将结果发送到指定邮箱；</span><br><span class="line">--range&lt;日期范围&gt;：指定处理日志的日期范围；</span><br><span class="line">--archives：处理归档日志文件；</span><br><span class="line">--debug&lt;调试等级&gt;：调试模式；</span><br><span class="line">--save&lt;文件名&gt;：将结果保存到指定文件中，而不显示或者发送到指定邮箱；</span><br><span class="line">--logdir&lt;目录&gt;：指定查找日志文件的目录，而不使用默认的日志目录；</span><br><span class="line">--hostname&lt;主机名&gt;：指定在日志报告中使用的主机名，不使用系统默认的主机名；</span><br><span class="line">--numeric：在报告中显示ip地址而不是主机名；</span><br><span class="line">--help：显示指令的帮助信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>检查你的主机上是否已经存在Logwatch（Redhat默认已经安装了Logwatch，不过版本比较旧）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa logwatch</span><br></pre></td></tr></table></figure>
-
-<p>如果主机上没有logwatch，则执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Ivh logwatch***.rpm</span><br></pre></td></tr></table></figure>
-
-<p>如果有老版本的logwatch，则执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh logwatch***.rpm</span><br></pre></td></tr></table></figure>
-
-<p>安装完毕后，开始配置：</p>
-<p>可以修改和添加它的logfiles、services和其他配置，但默认已经有很多脚本了，只要在1）里设置<code>Detail = High</code>就可以了。</p>
+          <p>使用网络计时协议（NTP）设置日期和时间</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ntpdate命令</strong> 是用来设置本地日期和时间。它从指定的每个服务器获得了一些样本，并应用标准 NTP 时钟过滤器和选择算法来选择最好的样本。</p>
+<p>此 ntpdate 命令使用以下方法进行时间调整：</p>
 <ul>
-<li>可以添加新的配置到<code>/etc/logwatch/conf/logwatch.conf</code></li>
-<li>也可以修改<code>/usr/share/logwatch/default.conf/logwatch.conf</code></li>
+<li>如果它确定时钟偏差超过 0.5 秒，它通过调用 settimeofday 子例程设置时钟时间。在引导时间，这是一个首选的方法。</li>
+<li>如 果它确定时钟偏差小于 0.5 秒，它通过调用 adjtime 子例程和偏移量来调整时钟时间。此方法倾向于用牺牲一些稳定性来保持漂移时钟更加准确。 当不是通过运行一个守护程序而是从 cron 命令有规则的运行ntpdate 命令时，每一小时或两小时执行一次可以保证足够的走时精度，从而避免调整时钟。</li>
 </ul>
-<p><code>/etc/logwatch/conf/</code>会自动覆盖<code>/usr/share/logwatch/default.conf/</code>下的同名文件。</p>
-<p>如果没有设置logwatch.conf也没关系，可以直接在命令行下设置。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logwatch --detail High --Service All --range All --print    基本就可以显示出所有日志的情况了</span><br><span class="line">logwatch --service sshd --detail High                       只看sshd的日志情况</span><br></pre></td></tr></table></figure>
+<p>使用很多服务器可以大幅度改善 ntpdate 命令的可靠性与精度。尽管能使用单一服务器，但您能通过提供至少三个或四个服务器以获得更好的性能。</p>
+<p>如果一个类似 xntpd 守护程序的 NTP 服务器守护程序正在同一主机上运行，命令将拒绝ntpdate 设置日期。</p>
+<p>你必须有 root 权限才能在主机上运行这个命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate [ -b] [ -d] [ -s] [ -u] [ -aKeyid] [ -eAuthenticationDelay] [ -kKeyFile] [ -oVersion] [ -pSamples] [ -tTimeOut] Server...</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><table>
+<tbody>
+<tr>
+<td>-aKeyid</td>
+<td>使用 Keyid 来认证全部数据包。</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>通过调用 settimeofday 子例程来增加时钟的时间。</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>指定调试方式。判断 ntpdate 命令会产生什么结果（不产生实际的结果）。结果再现在屏幕上。这个标志使用无特权的端口。</td>
+</tr>
+<tr>
+<td>-eAuthenticationDelay</td>
+<td>指定延迟认证处理的时间秒数。</td>
+</tr>
+<tr>
+<td>-kKeyFile</td>
+<td>当不使用缺省值 /etc/ntp.keys 文件时，为包含密钥的文件指定一个不同的名称。 请参阅文件KeyFile的描述。</td>
+</tr>
+<tr>
+<td>-oVersion</td>
+<td>当轮询它的发出数据包时，指定使用的 NTP 版本实现。 Version 的值可以是 1，2，3。缺省值是 3。</td>
+</tr>
+<tr>
+<td>-pSamples</td>
+<td>指定从每个服务器获取的样本的数目。 Samples 的值在 1 和 8 之间，并包括 1 和 8。它的缺省值是 4。</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定日志操作 syslog 设施的使用，而不是使用标准输出。 当运行 ntpdate 命令和 cron命令时，它是很有用的。</td>
+</tr>
+<tr>
+<td>-tTimeOut</td>
+<td>指定等待响应的时间。给定 TimeOut 的值四舍五入为 0.2 秒的倍数。缺省值是 1 秒。</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定使用无特权的端口发送数据包。 当在一个对特权端口的输入流量进行阻拦的防火墙后是很有益的， 并希望在防火墙之外和主机同步。防火墙是一个系统或者计算机，它控制从外网对专用网的访问。</td>
+</tr>
+</tbody>
+</table>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
@@ -814,7 +1142,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/look/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nslookup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -831,7 +1159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/look/" class="post-title-link" itemprop="url">【Linux 命令】look</a>
+            <a href="/linux-command/nslookup/" class="post-title-link" itemprop="url">【Linux 命令】nslookup</a>
         </h2>
 
         <div class="post-meta-container">
@@ -841,8 +1169,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:47:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -862,7 +1191,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>196</span>
+      <span>563</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -880,16 +1209,232 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>显示文件中以指定字符串开头的任意行</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>look命令</strong> 用于显示文件中以指定字符串开头的任意行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">look(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>查询域名DNS信息的工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nslookup命令</strong> 是常用域名查询工具，就是查DNS信息用的命令。</p>
+<p>nslookup4有两种工作模式，即“交互模式”和“非交互模式”。在“交互模式”下，用户可以向域名服务器查询各类主机、域名的信息，或者输出域名中的主机列表。而在“非交互模式”下，用户可以针对一个主机或域名仅仅获取特定的名称或所需信息。</p>
+<p>进入交互模式，直接输入nslookup命令，不加任何参数，则直接进入交互模式，此时nslookup会连接到默认的域名服务器（即<code>/etc/resolv.conf</code>的第一个dns地址）。或者输入<code>nslookup -nameserver/ip</code>。进入非交互模式，就直接输入<code>nslookup 域名</code>就可以了。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：使用另一个字典文件web2，该文件也位于/usr/dict目录下；</span><br><span class="line">-d：只对比英文字母和数字，其余一概忽略不予比对；</span><br><span class="line">-f：忽略字符大小写差别；</span><br><span class="line">-t&lt;字尾字符串&gt;：设置字尾字符串。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-sil：不显示任何警告信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>字符串：指定要查找的字符串；</li>
-<li>文件：指定要查找的目标文件。</li>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>域名：指定要查询域名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nslookup www.jsdig.com</span><br><span class="line">Server:         202.96.104.15</span><br><span class="line">Address:        202.96.104.15#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">www.jsdig.com canonical name = host.1.jsdig.com.</span><br><span class="line">Name:   host.1.jsdig.com</span><br><span class="line">Address: 100.42.212.8</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nproc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nproc/" class="post-title-link" itemprop="url">【Linux 命令】nproc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:47:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>248</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>打印可用的处理器单元数量。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nproc [OPTION]...</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>打印可用的处理器单元数量。</li>
 </ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">--all         打印已安装处理器的数量。</span><br><span class="line">--ignore=N    如果可以的情况下，排除 N 个处理单元。</span><br><span class="line">--help        显示帮助信息并退出。</span><br><span class="line">--version     显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nproc</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 nproc</code>，<code>info coreutils &#39;nproc invocation&#39;</code>。</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nologin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nologin/" class="post-title-link" itemprop="url">【Linux 命令】nologin</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:46:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>530</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>拒绝用户登录系统</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nologin命令</strong> 可以实现礼貌地拒绝用户登录系统，同时给出信息。如果尝试以这类用户登录，就在log里添加记录，然后在终端输出This account is currently not available信息，就是这样。一般设置这样的帐号是给启动服务的账号所用的，这只是让服务启动起来，但是不能登录系统。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nologin</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>Linux禁止用户登录：</p>
+<p>禁止用户登录后，用户不能登录系统，但可以登录ftp、SAMBA等。我们在Linux下做系统维护的时候，希望个别用户或者所有用户不能登录系统，保证系统在维护期间正常运行。这个时候我们就要禁止用户登录。  </p>
+<p>1、禁止个别用户登录，比如禁止lynn用户登录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd -l lynn</span><br></pre></td></tr></table></figure>
+
+<p>这就话的意思是锁定lynn用户，这样该用户就不能登录了。  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd -u lynn</span><br></pre></td></tr></table></figure>
+
+<p>上面是对锁定的用户lynn进行解锁，用户可登录了。    </p>
+<p>2、我们通过修改<code>/etc/passwd</code>文件中用户登录的shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>更改为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lynn:x:500:500::/home/lynn:/sbin/nologin</span><br></pre></td></tr></table></figure>
+
+<p>该用户就无法登录了。  </p>
+<p>3、禁止所有用户登录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /etc/nologin</span><br></pre></td></tr></table></figure>
+
+<p>除root以外的用户不能登录了。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -911,7 +1456,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/losetup/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nohup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -928,7 +1473,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/losetup/" class="post-title-link" itemprop="url">【Linux 命令】losetup</a>
+            <a href="/linux-command/nohup/" class="post-title-link" itemprop="url">【Linux 命令】nohup</a>
         </h2>
 
         <div class="post-meta-container">
@@ -938,8 +1483,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:46:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -959,7 +1505,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
+      <span>589</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -977,434 +1523,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>设定与控制循环（loop）设备</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>losetup命令</strong> 用来设置循环设备。循环设备可把文件虚拟成块设备，籍此来模拟整个文件系统，让用户得以将其视为硬盘驱动器，光驱或软驱等设备，并挂入当作目录来使用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">losetup [ -e encryption ] [ -o offset ] loop_device file</span><br><span class="line">losetup [ -d ] loop_device</span><br></pre></td></tr></table></figure>
+          <p>将程序以忽略挂起信号的方式运行起来</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nohup命令</strong> 可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。</p>
+<p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到<code>$HOME/nohup.out</code>文件中。如果没有文件能创建或打开以用于追加，那么 command 参数指定的命令不可调用。如果标准错误是一个终端，那么把指定的命令写给标准错误的所有输出作为标准输出重定向到相同的文件描述符。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>nohup(选项)(参数)</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a 显示所有循环设备的状态。</span><br><span class="line">-d 卸除设备。</span><br><span class="line">-e &lt;加密选项&gt; 启动加密编码 。</span><br><span class="line">-f 寻找第一个未使用的循环设备。</span><br><span class="line">-o &lt;偏移量&gt;设置数据偏移量，单位是字节。</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>程序及选项：要运行的程序及选项。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用nohup命令提交作业，如果使用nohup命令提交作业，那么在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中，除非另外指定了输出文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>loop_device：循环设备可以是/dev/loop0, /dev/loop1 … /dev/loop7。</li>
-<li>file：要与循环设备相关联的文件名，这个往往是一个磁盘镜象文件，如 *.img</li>
-</ul>
-<h3 id="loop设备介绍"><a href="#loop设备介绍" class="headerlink" title="loop设备介绍"></a>loop设备介绍</h3><p>在类 UNIX 系统里，loop 设备是一种伪设备(pseudo-device)，或者也可以说是仿真设备。它能使我们像块设备一样访问一个文件。在使用之前，一个 loop 设备必须要和一个文件进行连接。这种结合方式给用户提供了一个替代块特殊文件的接口。因此，如果这个文件包含有一个完整的文件系统，那么这个文件就可以像一个磁盘设备一样被 mount 起来。</p>
-<p>上面说的文件格式，我们经常见到的是 cd 或 DVD 的 ISO 光盘镜像文件或者是软盘(硬盘)的 *.img 镜像文件。通过这种 loop mount (回环mount)的方式，这些镜像文件就可以被 mount 到当前文件系统的一个目录下。</p>
-<p>至此，顺便可以再理解一下 loop 之含义：对于第一层文件系统，它直接安装在我们计算机的物理设备之上；而对于这种被 mount 起来的镜像文件(它也包含有文件系统)，它是建立在第一层文件系统之上，这样看来，它就像是在第一层文件系统之上再绕了一圈的文件系统，所以称为 loop。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>创建空的磁盘镜像文件，这里创建一个1.44M的软盘：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=floppy.img bs=512 count=2880</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，输出被重定向到myout.file文件中。</p>
+<p>该指令表示不做挂断操作，后台下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup wget site.com/file.zip</span><br></pre></td></tr></table></figure>
 
-<p>使用 losetup将磁盘镜像文件虚拟成快设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">losetup /dev/loop1 floppy.img</span><br></pre></td></tr></table></figure>
-
-<p>挂载块设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/loop0 /tmp</span><br></pre></td></tr></table></figure>
-
-<p>经过上面的三步之后，我们就可以通过/tmp目录，像访问真实快设备一样来访问磁盘镜像文件floppy.img。</p>
-<p>卸载loop设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount /tmp</span><br><span class="line">losetup -d /dev/loop1</span><br></pre></td></tr></table></figure>
-
+<p>下面命令，会在同一个目录下生成一个名称为 <code>nohup.out</code> 的文件，其中包含了正在运行的程序的输出内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ping -c 10 baidu.com</span><br></pre></td></tr></table></figure>
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/lp/" class="post-title-link" itemprop="url">【Linux 命令】lp</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>604</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>打印文件或修改排队的打印任务</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lp命令</strong> 用于打印文件，或者修改排队的打印任务。与lpr命令类似，lp命令既支持文件输入也支持标准输入。它与lpr的不同之处在于它有一个不同（稍微复杂点）的参数选项设置。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-E：与打印服务器连接时强制使用加密；</span><br><span class="line">-U：指定连接打印服务器时使用的用户名；</span><br><span class="line">-d：指定接收打印任务的目标打印机；</span><br><span class="line">-i：指定一个存在的打印任务号；</span><br><span class="line">-m：打印完成时发送E-mail；</span><br><span class="line">-n：指定打印的份数；</span><br><span class="line">-t：指定打印任务的名称；</span><br><span class="line">-H：指定打印任务开始的时间；</span><br><span class="line">-P：指定需要打印的页码。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需打印的文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>要在连接在设备dlp0上的打印机lp0上打印文件<code>/etc/motd</code>，请输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp /etc/motd</span><br></pre></td></tr></table></figure>
-
-<p>要使用文件的一个副本打印<code>/etc/motd</code>文件的30个副本，并且要用邮件通知用户作业完成，请输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp -c -m -n30 -dlp0:lpd0 /etc/motd</span><br></pre></td></tr></table></figure>
-
-<p>要使用后端标志-f和-a并带上作业标题blah打印<code>/etc/motd</code>文件，请输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp -t &quot;blah&quot; -o -f -o -a /etc/motd</span><br></pre></td></tr></table></figure>
-
-<p>要排队MyFile文件并返回作业编号，请输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp myfile</span><br></pre></td></tr></table></figure>
-
-<p>要排队MyFile文件并禁止作业编号，请输入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lp -s myfile</span><br></pre></td></tr></table></figure>
-
-<p> <strong>退出状态</strong> </p>
-<p>该命令返回以下退出值：</p>
-<ul>
-<li>0：所有输入文件成功处理。</li>
-<li><blockquote>
-<p>0：没有输出设备可用，或者出现一个错误。</p>
-</blockquote>
-</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lpadmin/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/lpadmin/" class="post-title-link" itemprop="url">【Linux 命令】lpadmin</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>334</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>配置CUPS套件中的打印机和类</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lpadmin命令</strong> 用于配置CUPS套件中的打印机和类，也被用来设置打印服务器默认打印机。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpadmin(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-c：将打印机加入类；</span><br><span class="line">-i：为打印机设置“system V”风格的接口脚本；</span><br><span class="line">-m：从mode目录设置一个标准的“system V”接口脚本或“PPD”文件；</span><br><span class="line">-o：为“PPD”或服务器设置选项；</span><br><span class="line">-r：从类中删除打印机；</span><br><span class="line">-u：设置打印机用户级的访问控制；</span><br><span class="line">-D：为打印机提供一个文字描述；</span><br><span class="line">-E：允许打印机接受打印任务；</span><br><span class="line">-L：为打印机位置提供一个文字描述；</span><br><span class="line">-P：为打印机指定一个ppd描述文件；</span><br><span class="line">-p：指定要配置的打印机名称；</span><br><span class="line">-d：设置默认打印机。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>打印机：指定要配置的打印机的名称。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lpc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/lpc/" class="post-title-link" itemprop="url">【Linux 命令】lpc</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>128</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>命令行方式打印机控制程序</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lpc命令</strong> 式命令行方式打印机控制程序，有5个内置命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpc</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# lpc</span><br><span class="line"><span class="meta">lpc&gt;</span><span class="bash"> ?         </span></span><br><span class="line">命令可能是缩写。命令是：</span><br><span class="line"></span><br><span class="line">exit    help    quit    status  ?</span><br><span class="line"><span class="meta">lpc&gt;</span><span class="bash"> <span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lpq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/lpq/" class="post-title-link" itemprop="url">【Linux 命令】lpq</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>169</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示打印队列中的打印任务的状态信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lpq命令</strong> 用于显示打印队列中的打印任务的状态信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpq(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-E：强制使用加密方式与服务器连接；</span><br><span class="line">-P：显示中的打印机上的打印队列状态；；</span><br><span class="line">-U：自动可选的用户名；</span><br><span class="line">-a：报告所有打印机的定义任务；</span><br><span class="line">-h：指定打印服务器信息；</span><br><span class="line">-l：使用长格式输出；</span><br><span class="line">+：指定显示状态的间隔时间。</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
 

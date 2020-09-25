@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/zcat/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/userdel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/zcat/" class="post-title-link" itemprop="url">【Linux 命令】zcat</a>
+            <a href="/linux-command/userdel/" class="post-title-link" itemprop="url">【Linux 命令】userdel</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:20:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +352,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>263</span>
+      <span>450</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -369,13 +370,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>显示压缩包中文件的内容</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>zcat命令</strong> 用于不真正解压缩文件，就能显示压缩包中文件的内容的场合。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcat(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>用于删除给定的用户以及与用户相关的文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>userdel命令</strong> 用于删除给定的用户，以及与用户相关的文件。若不加选项，则仅删除用户帐号，而不删除相关文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-S：指定gzip格式的压缩包的后缀。当后缀不是标准压缩包后缀时使用此选项；</span><br><span class="line">-c：将文件内容写到标注输出；</span><br><span class="line">-d：执行解压缩操作；</span><br><span class="line">-l：显示压缩包中文件的列表；</span><br><span class="line">-L：显示软件许可信息；</span><br><span class="line">-q：禁用警告信息；</span><br><span class="line">-r：在目录上执行递归操作；</span><br><span class="line">-t：测试压缩文件的完整性；</span><br><span class="line">-V：显示指令的版本信息；</span><br><span class="line">-l：更快的压缩速度；</span><br><span class="line">-9：更高的压缩比。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-f：强制删除用户，即使用户当前已登录；</span><br><span class="line">-r：删除用户的同时，删除与用户相关的所有文件。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要显示其中文件内容的压缩包。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户名：要删除的用户名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>userdel命令很简单，比如我们现在有个用户linuxde，其家目录位于<code>/var</code>目录中，现在我们来删除这个用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdel linuxde       # 删除用户linuxde，但不删除其家目录及文件；</span><br><span class="line">userdel -r linuxde    # 删除用户linuxde，其家目录及文件一并删除；</span><br></pre></td></tr></table></figure>
+
+<p>请不要轻易用<code>-r</code>选项；他会删除用户的同时删除用户所有的文件和目录，切记如果用户目录下有重要的文件，在删除前请备份。</p>
+<p>其实也有最简单的办法，但这种办法有点不安全，也就是直接在<code>/etc/passwd</code>中删除您想要删除用户的记录；但最好不要这样做，<code>/etc/passwd</code>是极为重要的文件，可能您一不小心会操作失误。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -397,7 +403,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/zfore/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/useradd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -414,7 +420,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/zfore/" class="post-title-link" itemprop="url">【Linux 命令】zfore</a>
+            <a href="/linux-command/useradd/" class="post-title-link" itemprop="url">【Linux 命令】useradd</a>
         </h2>
 
         <div class="post-meta-container">
@@ -424,8 +430,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:20:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -445,7 +452,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>97</span>
+      <span>808</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -463,11 +470,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>强制为gzip格式的压缩文件添加.gz后缀</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>zfore命令</strong> 强制为gzip格式的压缩文件添加“.gz”后缀。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zfore(参数)</span><br></pre></td></tr></table></figure>
+          <p>创建的新的系统用户</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>useradd命令</strong> 用于Linux中创建的新的系统用户。useradd可用来建立用户帐号。帐号建好之后，再用passwd设定帐号的密码．而可用userdel删除帐号。使用useradd指令所建立的帐号，实际上是保存在<code>/etc/passwd</code>文本文件中。</p>
+<p>在Slackware中，adduser指令是个script程序，利用交谈的方式取得输入的用户帐号资料，然后再交由真正建立帐号的useradd命令建立新用户，如此可方便管理员建立用户帐号。在Red Hat Linux中， <strong>adduser命令</strong> 则是useradd命令的符号连接，两者实际上是同一个指令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：指定要添加“.gz”后缀的gzip压缩文件。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-c&lt;备注&gt;：加上备注文字。备注文字会保存在passwd的备注栏位中；</span><br><span class="line">-d&lt;登入目录&gt;：指定用户登入时的启始目录；</span><br><span class="line">-D：变更预设值；</span><br><span class="line">-e&lt;有效期限&gt;：指定帐号的有效期限；</span><br><span class="line">-f&lt;缓冲天数&gt;：指定在密码过期后多少天即关闭该帐号；</span><br><span class="line">-g&lt;群组&gt;：指定用户所属的群组；</span><br><span class="line">-G&lt;群组&gt;：指定用户所属的附加群组；</span><br><span class="line">-m：自动建立用户的登入目录；</span><br><span class="line">-M：不要自动建立用户的登入目录；</span><br><span class="line">-n：取消建立以用户名称为名的群组；</span><br><span class="line">-r：建立系统帐号；</span><br><span class="line">-s&lt;shell&gt;：指定用户登入后所使用的shell；</span><br><span class="line">-u&lt;uid&gt;：指定用户id。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户名：要创建的用户名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>新建用户加入组：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd –g sales jack –G company,employees    //-g：加入主要组、-G：加入次要组</span><br></pre></td></tr></table></figure>
+
+<p>建立一个新用户账户，并设置ID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd caojh -u 544</span><br></pre></td></tr></table></figure>
+
+<p>需要说明的是，设定ID值时尽量要大于500，以免冲突。因为Linux安装后会建立一些特殊用户，一般0到499之间的值留给bin、mail这样的系统账号。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -489,7 +506,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/zip/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/uptime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -506,7 +523,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/zip/" class="post-title-link" itemprop="url">【Linux 命令】zip</a>
+            <a href="/linux-command/uptime/" class="post-title-link" itemprop="url">【Linux 命令】uptime</a>
         </h2>
 
         <div class="post-meta-container">
@@ -516,8 +533,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:19:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -537,7 +555,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>614</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -555,33 +573,230 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>可以用来解压缩文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>zip命令</strong> 可以用来解压缩文件，或者对文件进行打包操作。zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>查看Linux系统负载信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>uptime命令</strong> 能够打印系统总共运行了多长时间和系统的平均负载。uptime命令可以显示的信息显示依次为：现在时间、系统已经运行了多长时间、目前有多少登陆用户、系统在过去的1分钟、5分钟和15分钟内的平均负载。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uptime(选项)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">-A：调整可执行的自动解压缩文件；</span><br><span class="line">-b&lt;工作目录&gt;：指定暂时存放文件的目录；</span><br><span class="line">-c：替每个被压缩的文件加上注释；</span><br><span class="line">-d：从压缩文件内删除指定的文件；</span><br><span class="line">-D：压缩文件内不建立目录名称；</span><br><span class="line">-f：此参数的效果和指定“-u”参数类似，但不仅更新既有文件，如果某些文件原本不存在于压缩文件内，使用本参数会一并将其加入压缩文件中；</span><br><span class="line">-F：尝试修复已损坏的压缩文件；</span><br><span class="line">-g：将文件压缩后附加在已有的压缩文件之后，而非另行建立新的压缩文件；</span><br><span class="line">-h：在线帮助；</span><br><span class="line">-i&lt;范本样式&gt;：只压缩符合条件的文件；</span><br><span class="line">-j：只保存文件名称及其内容，而不存放任何目录名称；</span><br><span class="line">-J：删除压缩文件前面不必要的数据；</span><br><span class="line">-k：使用MS-DOS兼容格式的文件名称；</span><br><span class="line">-l：压缩文件时，把LF字符置换成LF+CR字符；</span><br><span class="line">-ll：压缩文件时，把LF+cp字符置换成LF字符；</span><br><span class="line">-L：显示版权信息；</span><br><span class="line">-m：将文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中；</span><br><span class="line">-n&lt;字尾字符串&gt;：不压缩具有特定字尾字符串的文件；</span><br><span class="line">-o：以压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同；</span><br><span class="line">-q：不显示指令执行过程；</span><br><span class="line">-r：递归处理，将指定目录下的所有文件和子目录一并处理；</span><br><span class="line">-S：包含系统和隐藏文件；</span><br><span class="line">-t&lt;日期时间&gt;：把压缩文件的日期设成指定的日期；</span><br><span class="line">-T：检查备份文件内的每个文件是否正确无误；</span><br><span class="line">-u：更换较新的文件到压缩文件内；</span><br><span class="line">-v：显示指令执行过程或显示版本信息；</span><br><span class="line">-V：保存VMS操作系统的文件属性；</span><br><span class="line">-w：在文件名称里假如版本编号，本参数仅在VMS操作系统下有效；</span><br><span class="line">-x&lt;范本样式&gt;：压缩时排除符合条件的文件；</span><br><span class="line">-X：不保存额外的文件属性；</span><br><span class="line">-y：直接保存符号连接，而非该链接所指向的文件，本参数仅在UNIX之类的系统下有效；</span><br><span class="line">-z：替压缩文件加上注释；</span><br><span class="line"><span class="meta">-$</span><span class="bash">：保存第一个被压缩文件所在磁盘的卷册名称；</span></span><br><span class="line">-&lt;压缩效率&gt;：压缩效率是一个介于1~9的数值。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-V：显示指令的版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>zip压缩包：指定要创建的zip压缩包；</li>
-<li>文件列表：指定要压缩的文件列表。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将<code>/home/Blinux/html/</code>这个目录下所有文件和文件夹打包为当前目录下的html.zip：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -q -r html.zip /home/Blinux/html</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用uptime命令查看系统负载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@LinServ-1 ~]# uptime -V    #显示uptime命令版本信息</span><br><span class="line">procps version 3.2.7</span><br><span class="line"></span><br><span class="line">[root@LinServ-1 ~]# uptime</span><br><span class="line"> 15:31:30 up 127 days,  3:00,  1 user,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令操作是将绝对地址的文件及文件夹进行压缩，以下给出压缩相对路径目录，比如目前在Bliux这个目录下，执行以下操作可以达到以上同样的效果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -q -r html.zip html</span><br></pre></td></tr></table></figure>
+<p> <strong>显示内容说明：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">15:31:30             # 系统当前时间</span><br><span class="line">up 127 days,  3:00   # 主机已运行时间,时间越大，说明你的机器越稳定。</span><br><span class="line">1 user               # 用户连接数，是总连接数而不是用户数</span><br><span class="line">load average: 0.00, 0.00, 0.00         #  系统平均负载，统计最近1，5，15分钟的系统平均负载</span><br></pre></td></tr></table></figure>
 
-<p>比如现在我的html目录下，我操作的zip压缩命令是：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -q -r html.zip *</span><br></pre></td></tr></table></figure>
+<p>那么什么是系统平均负载呢？ 系统平均负载是指在特定时间间隔内运行队列中的平均进程数。</p>
+<p>如果每个CPU内核的当前活动进程数不大于3的话，那么系统的性能是良好的。如果每个CPU内核的任务数大于5，那么这台机器的性能有严重问题。</p>
+<p>如果你的linux主机是1个双核CPU的话，当Load Average 为6的时候说明机器已经被充分使用了。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
 
-<p>压缩效率选择:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -9 # 1-9 faster-&gt;better</span><br></pre></td></tr></table></figure>
+    
+    
+    
 
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>CentOS7中命令找不到</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Bash: Unzip: Command Not Found</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
 
-<p>解决方法</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y unzip zip</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/updatedb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/updatedb/" class="post-title-link" itemprop="url">【Linux 命令】updatedb</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:19:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>351</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>创建或更新slocate命令所必需的数据库文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>updatedb命令</strong> 用来创建或更新slocate命令所必需的数据库文件。updatedb命令的执行过程较长，因为在执行时它会遍历整个系统的目录树，并将所有的文件信息写入slocate数据库文件中。</p>
+<p>补充说明：slocate本身具有一个数据库，里面存放了系统中文件与目录的相关信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">updatedb(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-o&lt;文件&gt;：忽略默认的数据库文件，使用指定的slocate数据库文件；</span><br><span class="line">-U&lt;目录&gt;：更新指定目录的slocate数据库；</span><br><span class="line">-v：显示执行的详细过程。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>实用updatedb命令的<code>-U</code>选项可以指定要更新slocate数据库的目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">updatedb -U /usr/local/  更新指定命令的slocate数据库</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/unzip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/unzip/" class="post-title-link" itemprop="url">【Linux 命令】unzip</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:18:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>926</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用于解压缩由zip命令压缩的压缩包</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>unzip命令</strong> 用于解压缩由zip命令压缩的“.zip”压缩包。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-c：将解压缩的结果显示到屏幕上，并对字符做适当的转换；</span><br><span class="line">-f：更新现有的文件；</span><br><span class="line">-l：显示压缩文件内所包含的文件；</span><br><span class="line">-p：与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换；</span><br><span class="line">-t：检查压缩文件是否正确；</span><br><span class="line">-u：与-f参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中；</span><br><span class="line">-v：执行时显示详细的信息；</span><br><span class="line">-z：仅显示压缩文件的备注文字；</span><br><span class="line">-a：对文本文件进行必要的字符转换；</span><br><span class="line">-b：不要对文本文件进行字符转换；</span><br><span class="line">-C：压缩文件中的文件名称区分大小写；</span><br><span class="line">-j：不处理压缩文件中原有的目录路径；</span><br><span class="line">-L：将压缩文件中的全部文件名改为小写；</span><br><span class="line">-M：将输出结果送到more程序处理；</span><br><span class="line">-n：解压缩时不要覆盖原有的文件；</span><br><span class="line">-o：不必先询问用户，unzip执行后覆盖原有的文件；</span><br><span class="line">-P&lt;密码&gt;：使用zip的密码选项；</span><br><span class="line">-q：执行时不显示任何信息；</span><br><span class="line">-s：将文件名中的空白字符转换为底线字符；</span><br><span class="line">-V：保留VMS的文件版本信息；</span><br><span class="line">-X：解压缩时同时回存文件原来的UID/GID；</span><br><span class="line">-d&lt;目录&gt;：指定文件解压缩后所要存储的目录；</span><br><span class="line">-x&lt;文件&gt;：指定不要处理.zip压缩文件中的哪些文件；</span><br><span class="line">-Z：unzip-Z等于执行zipinfo指令。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>压缩包：指定要解压的“.zip”压缩包。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将压缩文件text.zip在当前目录下解压缩。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip test.zip</span><br></pre></td></tr></table></figure>
+
+<p>将压缩文件text.zip在指定目录<code>/tmp</code>下解压缩，如果已有相同的文件存在，要求unzip命令不覆盖原先的文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -n test.zip -d /tmp</span><br></pre></td></tr></table></figure>
+
+<p>查看压缩文件目录，但不解压。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v test.zip</span><br></pre></td></tr></table></figure>
+
+<p>将压缩文件test.zip在指定目录<code>/tmp</code>下解压缩，如果已有相同的文件存在，要求unzip命令覆盖原先的文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -o test.zip -d tmp/</span><br></pre></td></tr></table></figure>
+
+<p>解压指定文件，* 用作通配符。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip test.zip &quot;*.jpg&quot;</span><br></pre></td></tr></table></figure>
+
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
@@ -605,7 +820,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/zipinfo/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/unset/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -622,7 +837,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/zipinfo/" class="post-title-link" itemprop="url">【Linux 命令】zipinfo</a>
+            <a href="/linux-command/unset/" class="post-title-link" itemprop="url">【Linux 命令】unset</a>
         </h2>
 
         <div class="post-meta-container">
@@ -632,8 +847,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:18:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -653,7 +869,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>468</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -671,505 +887,27 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>用来列出压缩文件信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>zipinfo命令</strong> 用来列出压缩文件信息。执行zipinfo指令可得知zip压缩文件的详细信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zipinfo(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-1：只列出文件名称；</span><br><span class="line">-2：此参数的效果和指定“-1”参数类似，但可搭配“-h”，“-t”和“-z”参数使用；</span><br><span class="line">-h：只列出压缩文件的文件名称；</span><br><span class="line">-l：此参数的效果和指定“-m”参数类似，但会列出原始文件的大小而非每个文件的压缩率；</span><br><span class="line">-m：此参数的效果和指定“-s”参数类似，但多会列出每个文件的压缩率；</span><br><span class="line">-M：若信息内容超过一个画面，则采用类似more指令的方式列出信息；</span><br><span class="line">-s：用类似执行“ls-l”指令的效果列出压缩文件内容；</span><br><span class="line">-t：只列出压缩文件内所包含的文件数目，压缩前后的文件大小及压缩率；</span><br><span class="line">-T：将压缩文件内每个文件的日期时间用年，月，日，时，分，秒的顺序列出；</span><br><span class="line">-v：详细显示压缩文件内每一个文件的信息；</span><br><span class="line">-x&lt;范本样式&gt;：不列出符合条件的文件的信息；</span><br><span class="line">-z：如果压缩文件内含有注释，就将注释显示出来。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定zip格式的压缩包。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/zipsplit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/zipsplit/" class="post-title-link" itemprop="url">【Linux 命令】zipsplit</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>169</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将较大的zip压缩包分割成各个较小的压缩包</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>zipsplit命令</strong> 用于将较大的“zip”压缩包分割成各个较小的“zip”压缩包。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zipsplit(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n：指定分割后每个zip文件的大小；</span><br><span class="line">-t：报告将要产生的较小的zip文件的大小；</span><br><span class="line">-b：指定分割后的zip文件的存放位置。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要分割的zip压缩包。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/znew/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/znew/" class="post-title-link" itemprop="url">【Linux 命令】znew</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>275</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将.Z压缩包重新转化为gzip命令压缩的.gz压缩包</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>znew命令</strong> 用于将使用compress命令压缩的“.Z”压缩包重新转化为使用gzip命令压缩的“.gz”压缩包。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">znew(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-f：# 强制执行转换操作，即是目标“.gz”已经存在；</span><br><span class="line">-t：# 删除原文件前测试新文件；</span><br><span class="line">-v：# 显示文件名和每个文件的压缩比；</span><br><span class="line">-9：# 食用油花的压缩比，速度较慢；</span><br><span class="line">-P：# 使用管道完成转换操作，以降低磁盘空间使用；</span><br><span class="line">-K：# 当“.Z”文件比“.gz”文件小时，保留“.Z”文件。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定compress指令压缩生成的“.Z”压缩包。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shopt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/shopt/" class="post-title-link" itemprop="url">【Linux 命令】shopt</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>566</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示和设置shell操作选项</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>shopt命令</strong> 用于显示和设置shell中的行为选项，通过这些选项以增强shell易用性。shopt命令若不带任何参数选项，则可以显示所有可以设置的shell操作选项。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shopt(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s：激活指定的shell行为选项；</span><br><span class="line">-u：关闭指定的shell行为选项。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>shell选项：指定要操作的shell选项。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用shopt命令显示当前所有可以设置的shell操作选项，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shopt           #输出所有可以设置的shell操作选项</span><br><span class="line">cdable_vars     off</span><br><span class="line">cdspell         off</span><br><span class="line">checkhash       off</span><br><span class="line">checkwinsize    on</span><br><span class="line">cmdhist         on</span><br><span class="line">dotglob         off</span><br><span class="line">execfail        off</span><br><span class="line">expand_aliases  on</span><br><span class="line">extdebug        off</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>如图上所示，选项”cdspell”的状态为”off”，即关闭cd拼写检查选项。现在，可以使用shopt命令将其开启，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shopt -s cdspell          #开启cd拼写检查</span><br></pre></td></tr></table></figure>
-
-<p>执行上面的命令后，该选项的状态将变为”on”，即开启状态。可以再次通过该命令显示一下shell操作选项即可，输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdspell on                #开启cdspell选项</span><br></pre></td></tr></table></figure>
-
-<p>用户可以通过实际执行cd命令检查该选项是否被成功开启。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/showmount/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/showmount/" class="post-title-link" itemprop="url">【Linux 命令】showmount</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>150</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示NFS服务器加载的信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>showmount命令</strong> 查询“mountd”守护进程，以显示NFS服务器加载的信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d：仅显示已被NFS客户端加载的目录；</span><br><span class="line">-e：显示NFS服务器上所有的共享目录。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>NFS服务器：指定NFS服务器的ip地址或者主机名。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shuf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/shuf/" class="post-title-link" itemprop="url">【Linux 命令】shuf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>754</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>产生随机的排列。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shuf [OPTION]... [FILE]</span><br><span class="line">shuf -e [OPTION]... [ARG]...</span><br><span class="line">shuf -i LO-HI [OPTION]...</span><br></pre></td></tr></table></figure>
+          <p>删除指定的shell变量或函数。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset [-f] [-v] [-n] [name ...]</span><br></pre></td></tr></table></figure>
 
 <h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>将输入的内容随机排列并输出。</li>
-<li>当没有文件或文件为<code>-</code>时，读取标准输入。</li>
+<li>删除一到多个shell变量（不包括只读变量）。</li>
+<li>删除一到多个shell函数。</li>
+<li>删除一到多个具有引用属性的变量（如果-n选项存在）。</li>
 </ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-e, --echo                  将每个ARG视为输入行。</span><br><span class="line">-i, --input-range=LO-HI     将数字范围LO（最低）到HI（最高）之间的作为输入行。</span><br><span class="line">-n, --head-count=COUNT      只输出前COUNT行。</span><br><span class="line">-o, --output=FILE           将结果写入到文件而不是标准输出。</span><br><span class="line">    --random-source=FILE    将FILE中内容作为随机数据源。</span><br><span class="line">-r, --repeat                输出行可以重复。</span><br><span class="line">-z, --zero-terminated       行终止符为NUL（空字符）而不是默认的换行符。</span><br><span class="line">--help                      显示帮助信息并退出。</span><br><span class="line">--version                   显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-f：仅删除函数。</span><br><span class="line">-v：仅删除变量（不包括只读变量）。</span><br><span class="line">-n：删除具有引用属性的变量名（如果该选项存在）。</span><br></pre></td></tr></table></figure>
 
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>FILE（可选）：要处理的文件，可以为任意数量。</p>
-<p>ARG（可选）：作为输入行的字符串，可以为任意数量。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 模拟硬币抛掷，获取前10个结果：</span></span><br><span class="line">[user2@pc ~]$ head -r -n 10 -e &quot;正面&quot; -e &quot;反面&quot;</span><br><span class="line">反面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">反面</span><br><span class="line">反面</span><br><span class="line">反面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">正面</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>name（可选）：要删除的变量或函数。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非选项错误或要删除的变量或函数有只读属性。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除变量。</span></span><br><span class="line">declare paper_size=&#x27;B5&#x27;</span><br><span class="line">unset -v paper_size</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除函数。</span></span><br><span class="line">function show_result()&#123; echo &#x27;Last Command Return: $?&#x27;; &#125;</span><br><span class="line">unset -f show_result</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 当不指定选项时，优先删除变量，如果失败则删除函数。</span></span><br><span class="line">declare -i aa=100</span><br><span class="line">function aa()&#123; echo &#x27;aa&#x27;; &#125;</span><br><span class="line">unset aa</span><br><span class="line"><span class="meta">#</span><span class="bash"> 变量<span class="string">&#x27;aa&#x27;</span>已被删除。</span></span><br><span class="line">declare -p aa</span><br><span class="line"><span class="meta">#</span><span class="bash"> 函数<span class="string">&#x27;aa&#x27;</span>存在。</span></span><br><span class="line">declare -F|grep aa</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示<span class="built_in">unset</span>使用-n选项，name指定了引用变量时的情况。</span></span><br><span class="line">declare a=3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义引用变量</span></span><br><span class="line">declare -n b=a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看属性，显示<span class="built_in">declare</span> -n b=<span class="string">&quot;a&quot;</span></span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示3</span></span><br><span class="line">echo $&#123;b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示a</span></span><br><span class="line">echo $&#123;!b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定-n选项时</span></span><br><span class="line">unset -n b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 引用变量b已被删除</span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 被引用的变量a未被删除</span></span><br><span class="line">declare -p a</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 体彩超级大乐透：</span></span><br><span class="line">[user2@pc ~]$ shuf -i 1-35 -n 5|sort -n &amp;&amp; shuf -i 1-12 -n 2|sort -n</span><br><span class="line">4</span><br><span class="line">17</span><br><span class="line">20</span><br><span class="line">29</span><br><span class="line">31</span><br><span class="line">6</span><br><span class="line">11</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示<span class="built_in">unset</span>不使用-n选项，name指定了引用变量时的情况。</span></span><br><span class="line">declare a=3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义引用变量</span></span><br><span class="line">declare -n b=a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看属性，显示<span class="built_in">declare</span> -n b=<span class="string">&quot;a&quot;</span></span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示3</span></span><br><span class="line">echo $&#123;b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示a</span></span><br><span class="line">echo $&#123;!b&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 不指定-n选项时</span></span><br><span class="line">unset b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 引用变量b未被删除，显示<span class="built_in">declare</span> -n b=<span class="string">&quot;a&quot;</span></span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 被引用的变量a被删除</span></span><br><span class="line">declare -p a</span><br></pre></td></tr></table></figure>
 
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是<code>GNU coreutils</code>包中的命令，更多详细的帮助信息请查看<code>man -s 1 shuf</code>，<code>info coreutils &#39;shuf invocation&#39;</code>。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
 </ol>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
@@ -1193,7 +931,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shutdown/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/unrar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1210,7 +948,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/shutdown/" class="post-title-link" itemprop="url">【Linux 命令】shutdown</a>
+            <a href="/linux-command/unrar/" class="post-title-link" itemprop="url">【Linux 命令】unrar</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1220,8 +958,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:17:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1241,7 +980,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>442</span>
+      <span>755</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1259,24 +998,329 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>用来执行系统关机的命令</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>shutdown命令</strong> 用来系统关机命令。shutdown指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>解压rar文件命令，从rar档案中提取文件</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unrar [选项][switch 命令] [文件名...][路径]</span><br><span class="line">   unrar &lt;command&gt; [-&lt;switch 1&gt; -&lt;switch N&gt;] archive [files...] [path...]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c：当执行“shutdown -h 11:50”指令时，只要按+键就可以中断关机的指令；</span><br><span class="line">-f：重新启动时不执行fsck；</span><br><span class="line">-F：重新启动时执行fsck；</span><br><span class="line">-h：将系统关机；</span><br><span class="line">-k：只是送出信息给所有用户，但不会实际关机；</span><br><span class="line">-n：不调用init程序进行关机，而由shutdown自己进行；</span><br><span class="line">-r：shutdown之后重新启动；</span><br><span class="line">-t&lt;秒数&gt;：送出警告信息和删除信息之间要延迟多少秒。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- e  #将文件解压缩到当前目录。</span><br><span class="line">-l    # 列出存档内容。</span><br><span class="line">-p   #将文件打印到标准输出。</span><br><span class="line">-t    #测试存档文件。</span><br><span class="line">-v    #详细列出存档。</span><br><span class="line">-x    #使用完整路径提取文件。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>[时间]：设置多久时间后执行shutdown指令；</li>
-<li>[警告信息]：要传送给所有登入用户的信息。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>指定现在立即关机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
+<h3 id="SWITCHES-开关设置"><a href="#SWITCHES-开关设置" class="headerlink" title="SWITCHES  开关设置"></a>SWITCHES  开关设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">      注意：每个开关必须用空格分隔。你不能把它们放在一起。</span><br><span class="line">      -av-      #禁用真实性验证检查。</span><br><span class="line">-c-         #禁用评论显示</span><br><span class="line">      -f            #刷新文件</span><br><span class="line">      -kb        #保留破碎的提取文件</span><br><span class="line">      -ierr      #将所有消息发送给stderr。</span><br><span class="line">      -inul     #禁用所有消息。</span><br><span class="line">      -o+        #覆盖现有文件。</span><br><span class="line">      -o-         #不要覆盖现有文件</span><br><span class="line">      -p&lt;password&gt;</span><br><span class="line">                    #设置密码。</span><br><span class="line">      -p-        #不查询密码</span><br><span class="line">      -r           #递归子目录。</span><br><span class="line">      -u          #更新文件。</span><br><span class="line">      -v           #列出所有卷。</span><br><span class="line">      -x&lt;file&gt;</span><br><span class="line">                    #排除指定的文件。</span><br><span class="line">      -x@&lt;list&gt;</span><br><span class="line">                    #排除指定列表文件中的文件。</span><br><span class="line">      -x@      #读取要从stdin中排除的文件名。</span><br><span class="line">      -y          #对所有查询都假设为是。</span><br></pre></td></tr></table></figure>
 
-<p>指定5分钟后关机，同时送出警告信息给登入用户：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +5 &quot;System will shutdown after 5 minutes&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目录：指定要显示列表的目录，也可以是具体的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将压缩文件text.rar在当前目录下解压缩,并解压完整路径。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unrar x test.rar</span><br></pre></td></tr></table></figure>
 
+<h3 id="AUTHOR"><a href="#AUTHOR" class="headerlink" title="AUTHOR"></a>AUTHOR</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">This  manual  page  was  written by Petr Cech &lt;cech@debian.org&gt; according to &quot;unrar -h&quot;for the Debian</span><br><span class="line">GNU/Linux system (but may be used by others).</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/unprotoize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/unprotoize/" class="post-title-link" itemprop="url">【Linux 命令】unprotoize</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:17:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>132</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>删除C语言源代码文件中的函数原型</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>unprotoize命令</strong> 属于gcc套件，用于删除C语言源代码文件中的函数原型。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unprotoize(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d：设置需要转换代码的目录；</span><br><span class="line">-x：转换代码时排除的文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换代码的C语言源文件。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/unlink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/unlink/" class="post-title-link" itemprop="url">【Linux 命令】unlink</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:16:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>135</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>系统调用函数unlink去删除指定的文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>unlink命令</strong> 用于系统调用函数unlink去删除指定的文件。和rm命令作用一样，都是删除文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unlink(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本号。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要删除的文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/uniq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/uniq/" class="post-title-link" itemprop="url">【Linux 命令】uniq</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：12:16:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>970</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示或忽略重复的行。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uniq [OPTION]... [INPUT [OUTPUT]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>将输入文件（或标准输入）中邻近的重复行写入到输出文件（或标准输出）中。</li>
+<li>当没有选项时，邻近的重复行将合并为一个。</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-c, --count                在每行开头增加重复次数。</span><br><span class="line">-d, --repeated             所有邻近的重复行只被打印一次。</span><br><span class="line">-D                         所有邻近的重复行将全部打印。</span><br><span class="line">--all-repeated[=METHOD]    类似于 -D，但允许每组之间以空行分割。METHOD取值范围&#123;none(默认)，prepend，separate&#125;。</span><br><span class="line">-f, --skip-fields=N        跳过对前N个列的比较。</span><br><span class="line">--group[=METHOD]           显示所有行，允许每组之间以空行分割。METHOD取值范围：&#123;separate(默认)，prepend，append，both&#125;。</span><br><span class="line">-i, --ignore-case          忽略大小写的差异。</span><br><span class="line">-s, --skip-chars=N         跳过对前N个字符的比较。</span><br><span class="line">-u, --unique               只打印非邻近的重复行。</span><br><span class="line">-z, --zero-terminated      设置行终止符为NUL（空），而不是换行符。</span><br><span class="line">-w, --check-chars=N        只对每行前N个字符进行比较。</span><br><span class="line">--help                     显示帮助信息并退出。</span><br><span class="line">--version                  显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>INPUT（可选）：输入文件，不提供时为标准输入。</p>
+<p>OUTPUT（可选）：输出文件，不提供时为标准输出。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>注意：命令2和命令3结果一样，命令1仅作了相邻行的去重。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">uniq file.txt</span><br><span class="line">sort file.txt | uniq</span><br><span class="line">sort -u file.txt</span><br></pre></td></tr></table></figure>
+
+<p>只显示单一行，区别在于是否执行排序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uniq -u file.txt</span><br><span class="line">sort file.txt | uniq -u</span><br></pre></td></tr></table></figure>
+
+<p>统计各行在文件中出现的次数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort file.txt | uniq -c</span><br></pre></td></tr></table></figure>
+
+<p>在文件中找出重复的行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort file.txt | uniq -d</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><p><code>uniq</code>只检测邻近的行是否重复，<code>sort -u</code>将输入文件先排序然后再处理重复行。 </p>
+</li>
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 uniq</code>，<code>info coreutils &#39;uniq invocation&#39;</code>。</p>
+</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 

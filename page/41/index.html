@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logger/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gpasswd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/logger/" class="post-title-link" itemprop="url">【Linux 命令】logger</a>
+            <a href="/linux-command/gpasswd/" class="post-title-link" itemprop="url">【Linux 命令】gpasswd</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:25:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,7 +352,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>645</span>
+      <span>660</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -369,750 +370,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在系统日志中记录相应条目</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logger命令</strong> 是用于往系统中写入日志，他提供一个shell命令接口到syslog系统模块</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger [options] [message]</span><br></pre></td></tr></table></figure>
+          <p>Linux下工作组文件的管理工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gpasswd命令</strong> 是Linux下工作组文件<code>/etc/group</code>和<code>/etc/gshadow</code>管理工具。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-T, --tcp             使用流连接(TCP)</span><br><span class="line">-d, --udp             使用数据报(UDP)</span><br><span class="line">-i, --id              逐行记录每一次logger的进程ID</span><br><span class="line">-f, --file &lt;file&gt;     记录特定的文件</span><br><span class="line">-h, --help            显示帮助文本并退出</span><br><span class="line">-n, --server &lt;name&gt;   写入指定的远程syslog服务器，使用UDP代替内装式syslog的例程</span><br><span class="line">-P, --port &lt;port&gt;     使用指定的UDP端口。默认的端口号是514</span><br><span class="line">-p, --priority &lt;prio&gt; 指定输入消息的优先级，优先级可以是数字或者指定为 &quot; facility.level&quot; 的格式。</span><br><span class="line">                      比如：&quot; -p local3.info &quot; local3 这个设备的消息级别为 info。</span><br><span class="line">                      默认级别是 &quot;user.notice&quot;</span><br><span class="line">-s, --stderr          输出标准错误到系统日志。</span><br><span class="line">-t, --tag &lt;tag&gt;       指定标记记录</span><br><span class="line">-u, --socket &lt;socket&gt; 写入指定的socket，而不是到内置系统日志例程。</span><br><span class="line">-V, --version         输出版本信息并退出</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a：添加用户到组；</span><br><span class="line">-d：从组删除用户；</span><br><span class="line">-A：指定管理员；</span><br><span class="line">-M：指定组成员和-A的用途差不多；</span><br><span class="line">-r：删除密码；</span><br><span class="line">-R：限制用户登入组，只有组中的成员才可以用newgrp加入该组。</span><br></pre></td></tr></table></figure>
 
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logger -p syslog.info &quot;backup.sh is starting&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>组：指定要管理的工作组。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如系统有个peter账户，该账户本身不是groupname群组的成员，使用newgrp需要输入密码即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd groupname</span><br></pre></td></tr></table></figure>
 
+<p>让使用者暂时加入成为该组成员，之后peter建立的文件group也会是groupname。所以该方式可以暂时让peter建立文件时使用其他的组，而不是peter本身所在的组。</p>
+<p>所以使用<code>gpasswd groupname</code>设定密码，就是让知道该群组密码的人可以暂时切换具备groupname群组功能的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -A peter users</span><br></pre></td></tr></table></figure>
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+<p>这样peter就是users群组的管理员，就可以执行下面的操作:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -a mary users</span><br><span class="line">gpasswd -a allen users</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/login/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/login/" class="post-title-link" itemprop="url">【Linux 命令】login</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>229</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>登录系统或切换用户身份</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>login命令</strong> 用于给出登录界面，可用于重新登录或者切换用户身份，也可通过它的功能随时更换登入身份。在Slackware发行版中 ，您可在命令后面附加欲登入的用户名称，它会直接询问密码，等待用户输入。当<code>/etc/nologin</code>文件存在时，系统只root帐号登入系统，其他用户一律不准登入。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p：告诉login指令不销毁环境变量；</span><br><span class="line">-h：指定远程服务器的主机名。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户名：指定登录使用的用户名。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logname/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logname/" class="post-title-link" itemprop="url">【Linux 命令】logname</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>342</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>打印当前终端登录用户的名称。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logname [OPTION]...</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>打印当前终端登录用户的名称。</li>
-</ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help       显示帮助信息并退出。</span><br><span class="line">--version    显示版本信息并退出。</span><br></pre></td></tr></table></figure>
-
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# logname</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li><p>注意区分 <code>whoami</code> 和 <code>logname</code> 这两个命令；比如我们以用户 <code>root</code> 打开的终端，然后切换到了用户 <code>user2</code>。此时， <code>whoami</code>返回的是当前用户 <code>user2</code>, <code>logname</code> 返回的是 <code>root</code>，大家可以自行实践验证一下。</p>
-</li>
-<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 logname</code>，<code>info coreutils &#39;logname invocation&#39;</code>。</p>
-</li>
-</ol>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logout/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logout/" class="post-title-link" itemprop="url">【Linux 命令】logout</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>80</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>退出当前登录的Shell</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logout命令</strong> 用于退出当前登录的Shell，logout指令让用户退出系统，其功能和login指令相互对应。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logout</span><br></pre></td></tr></table></figure>
+<p>注意：添加用户到某一个组 可以使用<code>usermod -G group_name user_name</code>这个命令可以添加一个用户到指定的组，但是以前添加的组就会清空掉。</p>
+<p>所以想要添加一个用户到一个组，同时保留以前添加的组时，请使用gpasswd这个命令来添加操作用户：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -a user_name group_name</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logrotate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logrotate/" class="post-title-link" itemprop="url">【Linux 命令】logrotate</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>系统日志进行轮转、压缩和删除</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logrotate命令</strong> 用于对系统日志进行轮转、压缩和删除，也可以将日志发送到指定邮箱。使用logrotate指令，可让你轻松管理系统所产生的记录文件。每个记录文件都可被设置成每日，每周或每月处理，也能在文件太大时立即处理。您必须自行编辑，指定配置文件，预设的配置文件存放在<code>/etc/logrotate.conf</code>文件中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logrotate(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-?或--help：在线帮助；</span><br><span class="line">-d或--debug：详细显示指令执行过程，便于排错或了解程序执行的情况；</span><br><span class="line">-f或--force ：强行启动记录文件维护操作，纵使logrotate指令认为没有需要亦然；</span><br><span class="line">-s&lt;状态文件&gt;或--state=&lt;状态文件&gt;：使用指定的状态文件；</span><br><span class="line">-v或--version：显示指令执行过程；</span><br><span class="line">-usage：显示指令基本用法。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>配置文件：指定lograote指令的配置文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>crontab 会定时调用logrotate命令 在 <code>/etc/cron.daily/logrotate</code> 文件中配置使用</p>
-<p>logrotate的配置文件<code>/etc/logrotate.conf</code> 定义引用<code>/etc/logrotate.d</code>目录下的一些自定义的log配置 </p>
-<p>在<code>/etc/logrotate.d</code>目录下创建任意后缀名的文件,即可使用对日志进行轮转</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/tmp/log/log.txt</span><br><span class="line">&#123;</span><br><span class="line">    copytruncate</span><br><span class="line">    daily</span><br><span class="line">    rotate 30</span><br><span class="line">    missingok</span><br><span class="line">    ifempty</span><br><span class="line">    compress</span><br><span class="line">    noolddir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个配置文件代表的意思是将<code>/tmp/log/log.txt</code>文件 进行轮转压缩</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">compress                 通过gzip 压缩转储以后的日志</span><br><span class="line">nocompress               不做gzip压缩处理</span><br><span class="line">copytruncate             用于还在打开中的日志文件，把当前日志备份并截断；是先拷贝再清空的方式，拷贝和清空之间有一个时间差，可能会丢失部分日志数据。</span><br><span class="line">nocopytruncate 备份日志文件不过不截断</span><br><span class="line">create mode owner<span class="built_in"> group </span> 轮转时指定创建新文件的属性，如create 0777 nobody nobody</span><br><span class="line">nocreate                 不建立新的日志文件</span><br><span class="line">delaycompress            和compress 一起使用时，转储的日志文件到下一次转储时才压缩</span><br><span class="line">nodelaycompress          覆盖 delaycompress 选项，转储同时压缩</span><br><span class="line">missingok                如果日志丢失，不报错继续滚动下一个日志</span><br><span class="line">errors<span class="built_in"> address </span>          专储时的错误信息发送到指定的Email 地址</span><br><span class="line">ifempty                  即使日志文件为空文件也做轮转，这个是logrotate的缺省选项。</span><br><span class="line">notifempty               当日志文件为空时，不进行轮转</span><br><span class="line">mail<span class="built_in"> address </span>            把转储的日志文件发送到指定的E-mail 地址</span><br><span class="line">nomail                   转储时不发送日志文件</span><br><span class="line">olddir directory         转储后的日志文件放入指定的目录，必须和当前日志文件在同一个文件系统</span><br><span class="line">noolddir                 转储后的日志文件和当前日志文件放在同一个目录下</span><br><span class="line">sharedscripts            运行postrotate脚本，作用是在所有日志都轮转后统一执行一次脚本。如果没有配置这个，那么每个日志轮转后都会执行一次脚本</span><br><span class="line">prerotate                在logrotate转储之前需要执行的指令，例如修改文件的属性等动作；必须独立成行</span><br><span class="line">postrotate               在logrotate转储之后需要执行的指令，例如重新启动 (kill -HUP) 某个服务！必须独立成行</span><br><span class="line">daily                    指定转储周期为每天</span><br><span class="line">weekly                   指定转储周期为每周</span><br><span class="line">monthly                  指定转储周期为每月</span><br><span class="line">rotate count             指定日志文件删除之前转储的次数，0 指没有备份，5 指保留5 个备份</span><br><span class="line">dateext                  使用当期日期作为命名格式</span><br><span class="line">dateformat .%s           配合dateext使用，紧跟在下一行出现，定义文件切割后的文件名，必须配合dateext使用，只支持 %Y %m %d %s 这四个参数</span><br><span class="line">size(或minsize) log-size 当日志文件到达指定的大小时才转储</span><br></pre></td></tr></table></figure>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>在<code>/etc/logrotate.d</code>目录下创建任意后缀名的文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/tmp/log/log*</span><br><span class="line">&#123;</span><br><span class="line">    copytruncate</span><br><span class="line">    daily</span><br><span class="line">    rotate 30</span><br><span class="line">    missingok</span><br><span class="line">    ifempty</span><br><span class="line">    compress</span><br><span class="line">    noolddir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种情况下，会将轮转过的log再重新轮转,因为轮转过后的文件名也是已log开头的</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/iptables/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/iptables/" class="post-title-link" itemprop="url">【Linux 命令】iptables</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>10k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Linux上常用的防火墙软件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>iptables命令</strong> 是Linux上常用的防火墙软件，是netfilter项目的一部分。可以直接配置，也可以通过许多前端和图形界面配置。</p>
-<!-- TOC -->
-
-<ul>
-<li><a href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E">补充说明</a><ul>
-<li><a href="#%E8%AF%AD%E6%B3%95">语法</a></li>
-<li><a href="#%E9%80%89%E9%A1%B9">选项</a></li>
-</ul>
-</li>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E5%8F%82%E6%95%B0">基本参数</a><ul>
-<li><a href="#%E5%91%BD%E4%BB%A4%E9%80%89%E9%A1%B9%E8%BE%93%E5%85%A5%E9%A1%BA%E5%BA%8F">命令选项输入顺序</a></li>
-<li><a href="#%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6">工作机制</a></li>
-<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E7%AD%96%E7%95%A5">防火墙的策略</a></li>
-<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9A%84%E7%AD%96%E7%95%A5-1">防火墙的策略</a><ul>
-<li><a href="#%E5%AE%9E%E4%BE%8B">实例</a></li>
-</ul>
-</li>
-<li><a href="#%E7%A9%BA%E5%BD%93%E5%89%8D%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%84%E5%88%99%E5%92%8C%E8%AE%A1%E6%95%B0">空当前的所有规则和计数</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8ssh%E7%AB%AF%E5%8F%A3%E8%BF%9E%E6%8E%A5">配置允许ssh端口连接</a></li>
-<li><a href="#%E5%85%81%E8%AE%B8%E6%9C%AC%E5%9C%B0%E5%9B%9E%E7%8E%AF%E5%9C%B0%E5%9D%80%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8">允许本地回环地址可以正常使用</a></li>
-<li><a href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%9A%84%E8%A7%84%E5%88%99">设置默认的规则</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E7%99%BD%E5%90%8D%E5%8D%95">配置白名单</a></li>
-<li><a href="#%E5%BC%80%E5%90%AF%E7%9B%B8%E5%BA%94%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%A3">开启相应的服务端口</a></li>
-<li><a href="#%E4%BF%9D%E5%AD%98%E8%A7%84%E5%88%99%E5%88%B0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD">保存规则到配置文件中</a></li>
-<li><a href="#%E5%88%97%E5%87%BA%E5%B7%B2%E8%AE%BE%E7%BD%AE%E7%9A%84%E8%A7%84%E5%88%99">列出已设置的规则</a></li>
-<li><a href="#%E6%B8%85%E9%99%A4%E5%B7%B2%E6%9C%89%E8%A7%84%E5%88%99">清除已有规则</a></li>
-<li><a href="#%E5%88%A0%E9%99%A4%E5%B7%B2%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%A7%84%E5%88%99">删除已添加的规则</a></li>
-<li><a href="#%E5%BC%80%E6%94%BE%E6%8C%87%E5%AE%9A%E7%9A%84%E7%AB%AF%E5%8F%A3">开放指定的端口</a></li>
-<li><a href="#%E5%B1%8F%E8%94%BDip">屏蔽IP</a></li>
-<li><a href="#%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%8C%85%E5%87%BA%E5%8E%BB%E7%9A%84%E7%BD%91%E7%BB%9C%E6%8E%A5%E5%8F%A3">指定数据包出去的网络接口</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E5%B7%B2%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%A7%84%E5%88%99">查看已添加的规则</a></li>
-<li><a href="#%E5%90%AF%E5%8A%A8%E7%BD%91%E7%BB%9C%E8%BD%AC%E5%8F%91%E8%A7%84%E5%88%99">启动网络转发规则</a></li>
-<li><a href="#%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84">端口映射</a></li>
-<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D">字符串匹配</a></li>
-<li><a href="#%E9%98%BB%E6%AD%A2windows%E8%A0%95%E8%99%AB%E7%9A%84%E6%94%BB%E5%87%BB">阻止Windows蠕虫的攻击</a></li>
-<li><a href="#%E9%98%B2%E6%AD%A2syn%E6%B4%AA%E6%B0%B4%E6%94%BB%E5%87%BB">防止SYN洪水攻击</a></li>
-</ul>
-</li>
-</ul>
-<!-- /TOC -->
-
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-t, --table table 对指定的表 table 进行操作， table 必须是 raw， nat，filter，mangle 中的一个。如果不指定此选项，默认的是 filter 表。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通用匹配：源地址目标地址的匹配</span></span><br><span class="line">-p：指定要匹配的数据包协议类型；</span><br><span class="line">-s, --source [!] address[/mask] ：把指定的一个／一组地址作为源地址，按此规则进行过滤。当后面没有 mask 时，address 是一个地址，比如：192.168.1.1；当 mask 指定时，可以表示一组范围内的地址，比如：192.168.1.0/255.255.255.0。</span><br><span class="line">-d, --destination [!] address[/mask] ：地址格式同上，但这里是指定地址为目的地址，按此进行过滤。</span><br><span class="line">-i, --in-interface [!] &lt;网络接口name&gt; ：指定数据包的来自来自网络接口，比如最常见的 eth0 。注意：它只对 INPUT，FORWARD，PREROUTING 这三个链起作用。如果没有指定此选项， 说明可以来自任何一个网络接口。同前面类似，&quot;!&quot; 表示取反。</span><br><span class="line">-o, --out-interface [!] &lt;网络接口name&gt; ：指定数据包出去的网络接口。只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看管理命令</span></span><br><span class="line">-L, --list [chain] 列出链 chain 上面的所有规则，如果没有指定链，列出表上所有链的所有规则。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 规则管理命令</span></span><br><span class="line">-A, --append chain rule-specification 在指定链 chain 的末尾插入指定的规则，也就是说，这条规则会被放到最后，最后才会被执行。规则是由后面的匹配来指定。</span><br><span class="line">-I, --insert chain [rulenum] rule-specification 在链 chain 中的指定位置插入一条或多条规则。如果指定的规则号是1，则在链的头部插入。这也是默认的情况，如果没有指定规则号。</span><br><span class="line">-D, --delete chain rule-specification -D, --delete chain rulenum 在指定的链 chain 中删除一个或多个指定规则。</span><br><span class="line">-R num：Replays替换/修改第几条规则</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 链管理命令（这都是立即生效的）</span></span><br><span class="line">-P, --policy chain target ：为指定的链 chain 设置策略 target。注意，只有内置的链才允许有策略，用户自定义的是不允许的。</span><br><span class="line">-F, --flush [chain] 清空指定链 chain 上面的所有规则。如果没有指定链，清空该表上所有链的所有规则。</span><br><span class="line">-N, --new-chain chain 用指定的名字创建一个新的链。</span><br><span class="line">-X, --delete-chain [chain] ：删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。如果没有指定链名，则会删除该表中所有非内置的链。</span><br><span class="line">-E, --rename-chain old-chain new-chain ：用指定的新名字去重命名指定的链。这并不会对链内部造成任何影响。</span><br><span class="line">-Z, --zero [chain] ：把指定链，或者表中的所有链上的所有计数器清零。</span><br><span class="line"></span><br><span class="line">-j, --jump target &lt;指定目标&gt; ：即满足某条件时该执行什么样的动作。target 可以是内置的目标，比如 ACCEPT，也可以是用户自定义的链。</span><br><span class="line">-h：显示帮助信息；</span><br></pre></td></tr></table></figure>
-
-<h2 id="基本参数"><a href="#基本参数" class="headerlink" title="基本参数"></a>基本参数</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>-P</td>
-<td>设置默认策略:iptables -P INPUT (DROP</td>
-</tr>
-<tr>
-<td>-F</td>
-<td>清空规则链</td>
-</tr>
-<tr>
-<td>-L</td>
-<td>查看规则链</td>
-</tr>
-<tr>
-<td>-A</td>
-<td>在规则链的末尾加入新规则</td>
-</tr>
-<tr>
-<td>-I</td>
-<td>num  在规则链的头部加入新规则</td>
-</tr>
-<tr>
-<td>-D</td>
-<td>num  删除某一条规则</td>
-</tr>
-<tr>
-<td>-s</td>
-<td>匹配来源地址IP/MASK，加叹号”!”表示除这个IP外。</td>
-</tr>
-<tr>
-<td>-d</td>
-<td>匹配目标地址</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>网卡名称 匹配从这块网卡流入的数据</td>
-</tr>
-<tr>
-<td>-o</td>
-<td>网卡名称 匹配从这块网卡流出的数据</td>
-</tr>
-<tr>
-<td>-p</td>
-<td>匹配协议,如tcp,udp,icmp</td>
-</tr>
-<tr>
-<td>–dport num</td>
-<td>匹配目标端口号</td>
-</tr>
-<tr>
-<td>–sport num</td>
-<td>匹配来源端口号</td>
-</tr>
-</tbody></table>
-<h4 id="命令选项输入顺序"><a href="#命令选项输入顺序" class="headerlink" title="命令选项输入顺序"></a>命令选项输入顺序</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t 表名 &lt;-A/I/D/R&gt; 规则链名 [规则号] &lt;-i/o 网卡名&gt; -p 协议名 &lt;-s 源IP/源子网&gt; --sport 源端口 &lt;-d 目标IP/目标子网&gt; --dport 目标端口 -j 动作</span><br></pre></td></tr></table></figure>
-
-<h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><p>规则链名包括(也被称为五个钩子函数（hook functions）)：</p>
-<ul>
-<li><strong>INPUT链</strong> ：处理输入数据包。</li>
-<li><strong>OUTPUT链</strong> ：处理输出数据包。</li>
-<li><strong>FORWARD链</strong> ：处理转发数据包。</li>
-<li><strong>PREROUTING链</strong> ：用于目标地址转换（DNAT）。</li>
-<li><strong>POSTOUTING链</strong> ：用于源地址转换（SNAT）。</li>
-</ul>
-<h4 id="防火墙的策略"><a href="#防火墙的策略" class="headerlink" title="防火墙的策略"></a>防火墙的策略</h4><p>防火墙策略一般分为两种，一种叫<code>通</code>策略，一种叫<code>堵</code>策略，通策略，默认门是关着的，必须要定义谁能进。堵策略则是，大门是洞开的，但是你必须有身份认证，否则不能进。所以我们要定义，让进来的进来，让出去的出去，<code>所以通，是要全通，而堵，则是要选择</code>。当我们定义的策略的时候，要分别定义多条功能，其中：定义数据包中允许或者不允许的策略，filter过滤的功能，而定义地址转换的功能的则是nat选项。为了让这些功能交替工作，我们制定出了“表”这个定义，来定义、区分各种不同的工作功能和处理方式。</p>
-<p>我们现在用的比较多个功能有3个：</p>
-<ol>
-<li>filter 定义允许或者不允许的，只能做在3个链上：INPUT ，FORWARD ，OUTPUT</li>
-<li>nat 定义地址转换的，也只能做在3个链上：PREROUTING ，OUTPUT ，POSTROUTING</li>
-<li>mangle功能:修改报文原数据，是5个链都可以做：PREROUTING，INPUT，FORWARD，OUTPUT，POSTROUTING</li>
-</ol>
-<p>我们修改报文原数据就是来修改TTL的。能够实现将数据包的元数据拆开，在里面做标记/修改内容的。而防火墙标记，其实就是靠mangle来实现的。</p>
-<p>小扩展:</p>
-<ul>
-<li>对于filter来讲一般只能做在3个链上：INPUT ，FORWARD ，OUTPUT</li>
-<li>对于nat来讲一般也只能做在3个链上：PREROUTING ，OUTPUT ，POSTROUTING</li>
-<li>而mangle则是5个链都可以做：PREROUTING，INPUT，FORWARD，OUTPUT，POSTROUTING</li>
-</ul>
-<p>iptables/netfilter（这款软件）是工作在用户空间的，它可以让规则进行生效的，本身不是一种服务，而且规则是立即生效的。而我们iptables现在被做成了一个服务，可以进行启动，停止的。启动，则将规则直接生效，停止，则将规则撤销。</p>
-<p>iptables还支持自己定义链。但是自己定义的链，必须是跟某种特定的链关联起来的。在一个关卡设定，指定当有数据的时候专门去找某个特定的链来处理，当那个链处理完之后，再返回。接着在特定的链中继续检查。</p>
-<p>注意：规则的次序非常关键，<code>谁的规则越严格，应该放的越靠前</code>，而检查规则的时候，是按照从上往下的方式进行检查的。</p>
-<p>表名包括：</p>
-<ul>
-<li><strong>raw</strong> ：高级功能，如：网址过滤。</li>
-<li><strong>mangle</strong> ：数据包修改（QOS），用于实现服务质量。</li>
-<li><strong>nat</strong> ：地址转换，用于网关路由器。</li>
-<li><strong>filter</strong> ：包过滤，用于防火墙规则。</li>
-</ul>
-<p>动作包括：</p>
-<ul>
-<li><strong>ACCEPT</strong> ：接收数据包。</li>
-<li><strong>DROP</strong> ：丢弃数据包。</li>
-<li><strong>REDIRECT</strong> ：重定向、映射、透明代理。</li>
-<li><strong>SNAT</strong> ：源地址转换。</li>
-<li><strong>DNAT</strong> ：目标地址转换。</li>
-<li><strong>MASQUERADE</strong> ：IP伪装（NAT），用于ADSL。</li>
-<li><strong>LOG</strong> ：日志记录。</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">                             ┏╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍┓</span><br><span class="line"> ┌───────────────┐           ┃    Network    ┃</span><br><span class="line"> │ table: filter │           ┗━━━━━━━┳━━━━━━━┛</span><br><span class="line"> │ chain: INPUT  │◀────┐             │</span><br><span class="line"> └───────┬───────┘     │             ▼</span><br><span class="line">         │             │   ┌───────────────────┐</span><br><span class="line">  ┌      ▼      ┐      │   │ table: nat        │</span><br><span class="line">  │local process│      │   │ chain: PREROUTING │</span><br><span class="line">  └             ┘      │   └─────────┬─────────┘</span><br><span class="line">         │             │             │</span><br><span class="line">         ▼             │             ▼              ┌─────────────────┐</span><br><span class="line">┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅    │     ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅      │table: nat       │</span><br><span class="line"> Routing decision      └───── outing decision ─────▶│chain: PREROUTING│</span><br><span class="line">┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅          ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅      └────────┬────────┘</span><br><span class="line">         │                                                   │</span><br><span class="line">         ▼                                                   │</span><br><span class="line"> ┌───────────────┐                                           │</span><br><span class="line"> │ table: nat    │           ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅               │</span><br><span class="line"> │ chain: OUTPUT │    ┌─────▶ outing decision ◀──────────────┘</span><br><span class="line"> └───────┬───────┘    │      ┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅</span><br><span class="line">         │            │              │</span><br><span class="line">         ▼            │              ▼</span><br><span class="line"> ┌───────────────┐    │   ┌────────────────────┐</span><br><span class="line"> │ table: filter │    │   │ chain: POSTROUTING │</span><br><span class="line"> │ chain: OUTPUT ├────┘   └──────────┬─────────┘</span><br><span class="line"> └───────────────┘                   │</span><br><span class="line">                                     ▼</span><br><span class="line">                             ┏╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍┓</span><br><span class="line">                             ┃    Network    ┃</span><br><span class="line">                             ┗━━━━━━━━━━━━━━━┛</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="空当前的所有规则和计数"><a href="#空当前的所有规则和计数" class="headerlink" title="空当前的所有规则和计数"></a>空当前的所有规则和计数</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置允许ssh端口连接"><a href="#配置允许ssh端口连接" class="headerlink" title="配置允许ssh端口连接"></a>配置允许ssh端口连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash"> 22为你的ssh端口， -s 192.168.1.0/24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="允许本地回环地址可以正常使用"><a href="#允许本地回环地址可以正常使用" class="headerlink" title="允许本地回环地址可以正常使用"></a>允许本地回环地址可以正常使用</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash">本地圆环地址就是那个127.0.0.1，是本机上使用的,它进与出都设置为允许</span></span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br></pre></td></tr></table></figure>
-
-<h4 id="设置默认的规则"><a href="#设置默认的规则" class="headerlink" title="设置默认的规则"></a>设置默认的规则</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP # 配置默认的不让进</span><br><span class="line">iptables -P FORWARD DROP # 默认的不允许转发</span><br><span class="line">iptables -P OUTPUT ACCEPT # 默认的可以出去</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置白名单"><a href="#配置白名单" class="headerlink" title="配置白名单"></a>配置白名单</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p all -s 192.168.1.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p all -s 192.168.140.0/24 -j ACCEPT  # 允许机房内网机器可以访问</span><br><span class="line">iptables -A INPUT -p tcp -s 183.121.3.7 --dport 3380 -j ACCEPT # 允许183.121.3.7访问本机的3380端口</span><br></pre></td></tr></table></figure>
-
-<h4 id="开启相应的服务端口"><a href="#开启相应的服务端口" class="headerlink" title="开启相应的服务端口"></a>开启相应的服务端口</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT # 开启80端口，因为web对外都是这个端口</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 8 -j ACCEPT # 允许被ping</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 已经建立的连接得让它进来</span><br></pre></td></tr></table></figure>
-
-<h4 id="保存规则到配置文件中"><a href="#保存规则到配置文件中" class="headerlink" title="保存规则到配置文件中"></a>保存规则到配置文件中</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sysconfig/iptables /etc/sysconfig/iptables.bak # 任何改动之前先备份，请保持这一优秀的习惯</span><br><span class="line">iptables-save &gt; /etc/sysconfig/iptables</span><br><span class="line">cat /etc/sysconfig/iptables</span><br></pre></td></tr></table></figure>
-
-<h4 id="列出已设置的规则"><a href="#列出已设置的规则" class="headerlink" title="列出已设置的规则"></a>列出已设置的规则</h4><blockquote>
-<p>iptables -L [-t 表名] [链名]</p>
-</blockquote>
-<ul>
-<li>四个表名 <code>raw</code>，<code>nat</code>，<code>filter</code>，<code>mangle</code></li>
-<li>五个规则链名 <code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>、<code>PREROUTING</code>、<code>POSTROUTING</code></li>
-<li>filter表包含<code>INPUT</code>、<code>OUTPUT</code>、<code>FORWARD</code>三个规则链</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -t nat                  # 列出 nat 上面的所有规则</span><br><span class="line"><span class="meta">#</span><span class="bash">            ^ -t 参数指定，必须是 raw， nat，filter，mangle 中的一个</span></span><br><span class="line">iptables -L -t nat  --line-numbers  # 规则带编号</span><br><span class="line">iptables -L INPUT</span><br><span class="line"></span><br><span class="line">iptables -L -nv  # 查看，这个列表看起来更详细</span><br></pre></td></tr></table></figure>
-
-<h4 id="清除已有规则"><a href="#清除已有规则" class="headerlink" title="清除已有规则"></a>清除已有规则</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -F INPUT  # 清空指定链 INPUT 上面的所有规则</span><br><span class="line">iptables -X INPUT  # 删除指定的链，这个链必须没有被其它任何规则引用，而且这条上必须没有任何规则。</span><br><span class="line">                   # 如果没有指定链名，则会删除该表中所有非内置的链。</span><br><span class="line">iptables -Z INPUT  # 把指定链，或者表中的所有链上的所有计数器清零。</span><br></pre></td></tr></table></figure>
-
-<h4 id="删除已添加的规则"><a href="#删除已添加的规则" class="headerlink" title="删除已添加的规则"></a>删除已添加的规则</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加一条规则</span></span><br><span class="line">iptables -A INPUT -s 192.168.1.5 -j DROP</span><br></pre></td></tr></table></figure>
-
-<p>将所有iptables以序号标记显示，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n --line-numbers</span><br></pre></td></tr></table></figure>
-
-<p>比如要删除INPUT里序号为8的规则，执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -D INPUT 8</span><br></pre></td></tr></table></figure>
-
-<h4 id="开放指定的端口"><a href="#开放指定的端口" class="headerlink" title="开放指定的端口"></a>开放指定的端口</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT               #允许本地回环接口(即运行本机访问本机)</span><br><span class="line">iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT    #允许已建立的或相关连的通行</span><br><span class="line">iptables -A OUTPUT -j ACCEPT         #允许所有本机向外的访问</span><br><span class="line">iptables -A INPUT -p tcp --dport 22 -j ACCEPT    #允许访问22端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 80 -j ACCEPT    #允许访问80端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 21 -j ACCEPT    #允许ftp服务的21端口</span><br><span class="line">iptables -A INPUT -p tcp --dport 20 -j ACCEPT    #允许FTP服务的20端口</span><br><span class="line">iptables -A INPUT -j reject       #禁止其他未允许的规则访问</span><br><span class="line">iptables -A FORWARD -j REJECT     #禁止其他未允许的规则访问</span><br></pre></td></tr></table></figure>
-
-<h4 id="屏蔽IP"><a href="#屏蔽IP" class="headerlink" title="屏蔽IP"></a>屏蔽IP</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m tcp -s 192.168.0.8 -j DROP  # 屏蔽恶意主机（比如，192.168.0.8</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP       #屏蔽单个IP的命令</span><br><span class="line">iptables -I INPUT -s 123.0.0.0/8 -j DROP      #封整个段即从123.0.0.1到123.255.255.254的命令</span><br><span class="line">iptables -I INPUT -s 124.45.0.0/16 -j DROP    #封IP段即从123.45.0.1到123.45.255.254的命令</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP    #封IP段即从123.45.6.1到123.45.6.254的命令是</span><br></pre></td></tr></table></figure>
-
-<h4 id="指定数据包出去的网络接口"><a href="#指定数据包出去的网络接口" class="headerlink" title="指定数据包出去的网络接口"></a>指定数据包出去的网络接口</h4><p>只对 OUTPUT，FORWARD，POSTROUTING 三个链起作用。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
-
-<h4 id="查看已添加的规则"><a href="#查看已添加的规则" class="headerlink" title="查看已添加的规则"></a>查看已添加的规则</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n -v</span><br><span class="line">Chain INPUT (policy DROP 48106 packets, 2690K bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"> 191K   90M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:22</span><br><span class="line">1499K  133M ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           tcp dpt:80</span><br><span class="line">4364K 6351M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED</span><br><span class="line"> 6256  327K ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 3382K packets, 1819M bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br><span class="line"> 5075  589K ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0</span><br></pre></td></tr></table></figure>
-
-<h4 id="启动网络转发规则"><a href="#启动网络转发规则" class="headerlink" title="启动网络转发规则"></a>启动网络转发规则</h4><p>公网<code>210.14.67.7</code>让内网<code>192.168.188.0/24</code>上网</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.188.0/24 -j SNAT --to-source 210.14.67.127</span><br></pre></td></tr></table></figure>
-
-<h4 id="端口映射"><a href="#端口映射" class="headerlink" title="端口映射"></a>端口映射</h4><p>本机的 2222 端口映射到内网 虚拟机的22 端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 210.14.67.127 -p tcp --dport 2222  -j DNAT --to-dest 192.168.188.115:22</span><br></pre></td></tr></table></figure>
-
-<h4 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h4><p>比如，我们要过滤所有TCP连接中的字符串<code>test</code>，一旦出现它我们就终止这个连接，我们可以这么做：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -m string --algo kmp --string &quot;test&quot; -j REJECT --reject-with tcp-reset</span><br><span class="line">iptables -L</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Chain INPUT (policy ACCEPT)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> REJECT     tcp  --  anywhere             anywhere            STRING match <span class="string">&quot;test&quot;</span> ALGO name kmp TO 65535 reject-with tcp-reset</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Chain FORWARD (policy ACCEPT)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Chain OUTPUT (policy ACCEPT)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> target     prot opt <span class="built_in">source</span>               destination</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="阻止Windows蠕虫的攻击"><a href="#阻止Windows蠕虫的攻击" class="headerlink" title="阻止Windows蠕虫的攻击"></a>阻止Windows蠕虫的攻击</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string &quot;cmd.exe&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="防止SYN洪水攻击"><a href="#防止SYN洪水攻击" class="headerlink" title="防止SYN洪水攻击"></a>防止SYN洪水攻击</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT</span><br></pre></td></tr></table></figure>
-
-<h2 id="更多实例"><a href="#更多实例" class="headerlink" title="更多实例"></a>更多实例</h2><blockquote>
-<p>用iptables搭建一套强大的安全防护盾 <span class="exturl" data-url="aHR0cDovL3d3dy5pbW9vYy5jb20vbGVhcm4vMzg5">http://www.imooc.com/learn/389<i class="fa fa-external-link-alt"></i></span></p>
-</blockquote>
-<p>iptables: linux 下应用层防火墙工具</p>
-<p>iptables 5链: 对应 Hook point<br>netfilter: linux 操作系统核心层内部的一个数据包处理模块<br>Hook point: 数据包在 netfilter 中的挂载点; <code>PRE_ROUTING / INPUT / OUTPUT / FORWARD / POST_ROUTING</code></p>
-<p>iptables &amp; netfilter<br><img src="http://7xq89b.com1.z0.glb.clouddn.com/netfilter&iptables.jpg"></p>
-<p>iptables 4表5链<br><img src="http://7xq89b.com1.z0.glb.clouddn.com/iptables-data-stream.jpg"></p>
-<p>iptables rules<br><img src="http://7xq89b.com1.z0.glb.clouddn.com/iptables-rules.jpg"></p>
-<ul>
-<li>4表</li>
-</ul>
-<p><strong>filter</strong>: 访问控制 / 规则匹配<br><strong>nat</strong>: 地址转发<br> mangle / raw</p>
-<ul>
-<li>规则</li>
-</ul>
-<p>数据访问控制: ACCEPT / DROP / REJECT<br>数据包改写(nat -&gt; 地址转换): snat / dnat<br>信息记录: log</p>
-<h2 id="使用场景实例"><a href="#使用场景实例" class="headerlink" title="使用场景实例"></a>使用场景实例</h2><ul>
-<li>场景一</li>
-</ul>
-<p>开放 tcp 10-22/80 端口<br>开放 icmp<br>其他未被允许的端口禁止访问</p>
-<p>存在的问题: 本机无法访问本机; 本机无法访问其他主机</p>
-<ul>
-<li>场景二</li>
-</ul>
-<p>ftp: 默认被动模式(服务器产生随机端口告诉客户端, 客户端主动连接这个端口拉取数据)<br>vsftpd: 使 ftp 支持主动模式(客户端产生随机端口通知服务器, 服务器主动连接这个端口发送数据)</p>
-<ul>
-<li>场景三</li>
-</ul>
-<p>允许外网访问:<br>web<br>http -&gt; 80/tcp; https -&gt; 443/tcp<br>mail<br>smtp -&gt; 25/tcp; smtps -&gt; 465/tcp<br>pop3 -&gt; 110/tcp; pop3s -&gt; 995/tcp<br>imap -&gt; 143/tcp</p>
-<p>内部使用:<br>file<br>nfs -&gt; 123/udp<br>samba -&gt; 137/138/139/445/tcp<br>ftp -&gt; 20/21/tcp<br>remote<br>ssh -&gt; 22/tcp<br>sql<br>mysql -&gt; 3306/tcp<br>oracle -&gt; 1521/tcp</p>
-<ul>
-<li>场景四</li>
-</ul>
-<p>nat 转发</p>
-<ul>
-<li>场景五</li>
-</ul>
-<p>防CC攻击</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -F -A -D # list flush append delete</span><br><span class="line"><span class="meta">#</span><span class="bash"> 场景一</span></span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -j ACCEPT # 允许 tcp 80 端口</span><br><span class="line">iptables -I INPUT -p tcp --dport 10:22 -j ACCEPT # 允许 tcp 10-22 端口</span><br><span class="line">iptables -I INPUT -p icmp -j ACCEPT # 允许 icmp</span><br><span class="line">iptables -A INPUT -j REJECT # 添加一条规则, 不允许所有</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 优化场景一</span></span><br><span class="line">iptables -I INPUT -i lo -j ACCEPT # 允许本机访问</span><br><span class="line">iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 允许访问外网</span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -s 10.10.188.233 -j ACCEPT # 只允许固定ip访问80</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 场景二</span></span><br><span class="line">vi /etc/vsftpd/vsftpd.conf # 使用 vsftpd 开启 ftp 主动模式</span><br><span class="line">port_enable=yes</span><br><span class="line">connect_from_port_20=YES</span><br><span class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line"></span><br><span class="line">vi /etc/vsftpd/vsftpd.conf # 建议使用 ftp 被动模式</span><br><span class="line">pasv_min_port=50000</span><br><span class="line">pasv_max_port=60000</span><br><span class="line">iptables -I INPUT -p tcp --dport 21 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 50000:60000 -j ACCEPT</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 还可以使用 iptables 模块追踪来自动开发对应的端口</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 场景三</span></span><br><span class="line">iptables -I INPUT -i lo -j ACCEPT # 允许本机访问</span><br><span class="line">iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT # 允许访问外网</span><br><span class="line">iptables -I INPUT -s 10.10.155.0/24 -j ACCEPT # 允许内网访问</span><br><span class="line">iptables -I INPUT -p tcp -m multiport --dports 80,1723 -j ACCEPT # 允许端口, 80 -&gt; http, 1723 -&gt; vpn</span><br><span class="line">iptables -A INPUT -j REJECT # 添加一条规则, 不允许所有</span><br><span class="line"></span><br><span class="line">iptables-save # 保存设置到配置文件</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 场景四</span></span><br><span class="line">iptables -t nat -L # 查看 nat 配置</span><br><span class="line"></span><br><span class="line">iptables -t nat -A POST_ROUTING -s 10.10.177.0/24 -j SNAT --to 10.10.188.232 # SNAT</span><br><span class="line">vi /etc/sysconfig/network # 配置网关</span><br><span class="line"></span><br><span class="line">iptables -t nat -A POST_ROUTING -d 10.10.188.232 -p tcp --dport 80 -j DNAT --to 10.10.177.232:80 # DNAT</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">场景五</span></span><br><span class="line">iptables -I INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 100 -j REJECT # 限制并发连接访问数</span><br><span class="line">iptables -I INPUT -m limit --limit 3/hour --limit-burst 10 -j ACCEPT # limit模块; --limit-burst 默认为5</span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
       
     </div>
 
@@ -1160,8 +440,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:25:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1584,7 +865,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/consoletype/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/getsebool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1601,7 +882,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/consoletype/" class="post-title-link" itemprop="url">【Linux 命令】consoletype</a>
+            <a href="/linux-command/getsebool/" class="post-title-link" itemprop="url">【Linux 命令】getsebool</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1611,8 +892,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:24:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1632,7 +914,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>118</span>
+      <span>479</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1650,11 +932,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>输出已连接的终端类型</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>consoletype命令</strong> 用于打印已连接的终端类型到标准输出，并能够检查已连接的终端是当前终端还是虚拟终端。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">consoletype</span><br></pre></td></tr></table></figure>
+          <p>查询SElinux策略内各项规则的布尔值</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>getsebool命令</strong> 是用来查询SElinux策略内各项规则的布尔值。SELinux的策略与规则管理相关命令：seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getsebool [-a] [布尔值条款]</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# consoletype</span><br><span class="line">pty</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-a：列出目前系统上面的所有布尔值条款设置为开启或关闭值。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查询本系统内所有的布尔值设置状况：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">getsebool -a</span><br><span class="line">NetworkManager_disable_trans --&gt; off</span><br><span class="line">allow_console_login --&gt; off</span><br><span class="line">allow_cvs_read_shadow --&gt; off</span><br><span class="line">allow_daemons_dump_core --&gt; on</span><br><span class="line">....(底下省略)....</span><br></pre></td></tr></table></figure>
+
+<p>查询httpd_enable_homedirs是否为关闭，若没关闭，请关闭它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getsebool httpd_enable_homedirs</span><br><span class="line">setsebool -P httpd_enable_homedirs=0    # 0是关闭  1是开启</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
@@ -1678,7 +966,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/continue/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/getenforce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1695,7 +983,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/continue/" class="post-title-link" itemprop="url">【Linux 命令】continue</a>
+            <a href="/linux-command/getenforce/" class="post-title-link" itemprop="url">【Linux 命令】getenforce</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1705,8 +993,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:24:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1726,7 +1015,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>595</span>
+      <span>122</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1744,23 +1033,705 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>结束本次循环，继续执行下一个for，while或until循环。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">continue [n]</span><br></pre></td></tr></table></figure>
+          <p>显示当前SELinux的应用模式，是强制、执行还是停用</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>grename命令</strong> 可以重命名卷组的名称。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getenforce</span><br></pre></td></tr></table></figure>
 
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>结束本次循环，继续执行下一个for，while或until循环；可指定从第几层循环继续执行。</li>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>查看当前SELinux的应用模式。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# getenforce</span><br><span class="line">Enforcing</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/get_module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/get_module/" class="post-title-link" itemprop="url">【Linux 命令】get_module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:23:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>897</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>获取Linux内核模块的详细信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>get_module命令</strong> 用于获取Linux内核模块的详细信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_module 模块名</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用lsmod命令查看内核模块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lsmod | head -5</span><br><span class="line">Module                  Size  Used by</span><br><span class="line">ipv6                  272801  15</span><br><span class="line">xfrm_nalgo             13381  1 ipv6</span><br><span class="line">crypto_api             12609  1 xfrm_nalgo</span><br><span class="line">ip_conntrack_ftp       11569  0</span><br></pre></td></tr></table></figure>
+
+<p>使用get_module命令查看模块详细信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">get_module ipv6</span><br><span class="line">        refcnt               : 15</span><br><span class="line">        srcversion           : 8CC9C024755B4483E56C0EF</span><br><span class="line"></span><br><span class="line">Parameters:</span><br><span class="line">        autoconf             : 1</span><br><span class="line">        disable              : 0</span><br><span class="line">        disable_ipv6         : 0</span><br><span class="line">Sections:</span><br><span class="line">        .altinstr_replacement : 0xf8f1a3cf</span><br><span class="line">        .altinstructions     : 0xf8f1d03c</span><br><span class="line">        .bss                 : 0xf8f36000</span><br><span class="line">        .data.read_mostly    : 0xf8f34d20</span><br><span class="line">        .data                : 0xf8f2f7a0</span><br><span class="line">        .exit.text           : 0xf8f1a234</span><br><span class="line">        .gnu.linkonce.this_module : 0xf8f34e00</span><br><span class="line">        .init.data           : 0xf8a16a60</span><br><span class="line">        .init.text           : 0xf8a16000</span><br><span class="line">        .module_sig          : 0xf8f37960</span><br><span class="line">        .rodata.str1.1       : 0xf8f1ae46</span><br><span class="line">        .rodata              : 0xf8f1a420</span><br><span class="line">        .smp_locks           : 0xf8f1d150</span><br><span class="line">        .strtab              : 0xf8f29840</span><br><span class="line">        .symtab              : 0xf8f24000</span><br><span class="line">        .text                : 0xf8ef5000</span><br><span class="line">        __kcrctab            : 0xf8f1de70</span><br><span class="line">        __kcrctab_gpl        : 0xf8f1d9cc</span><br><span class="line">        __ksymtab            : 0xf8f1dd78</span><br><span class="line">        __ksymtab_gpl        : 0xf8f1d954</span><br><span class="line">        __ksymtab_strings    : 0xf8f1da44</span><br><span class="line">        __param              : 0xf8f1da08</span><br><span class="line">        __versions           : 0xf8f1df00</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gdb/" class="post-title-link" itemprop="url">【Linux 命令】gdb</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:23:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>功能强大的程序调试器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gdb命令</strong> 包含在GNU的gcc开发套件中，是功能强大的程序调试器。GDB中的命令固然很多，但我们只需掌握其中十个左右的命令，就大致可以完成日常的基本的程序调试工作。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-cd：设置工作目录；</span><br><span class="line">-q：安静模式，不打印介绍信息和版本信息；</span><br><span class="line">-d：添加文件查找路径；</span><br><span class="line">-x：从指定文件中执行GDB指令；</span><br><span class="line">-s：设置读取的符号表文件。</span><br></pre></td></tr></table></figure>
+
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file &lt;文件名&gt;</td>
+<td>加载被调试的可执行程序文件。<br /> 因为一般都在被调试程序所在目录下执行GDB，因而文本名不需要带路径。</td>
+<td>(gdb) file gdb-sample</td>
+</tr>
+<tr>
+<td>r</td>
+<td>Run的简写，运行被调试的程序。<br /> 如果此前没有下过断点，则执行完整个程序；如果有断点，则程序暂停在第一个可用断点处。</td>
+<td>(gdb) r</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Continue的简写，继续执行被调试程序，直至下一个断点或程序结束。</td>
+<td>(gdb) c</td>
+</tr>
+<tr>
+<td>b &lt;行号&gt;<br />b &lt;函数名称&gt;<br />b *&lt;函数名称&gt;<br />b *&lt;代码地址&gt; d [编号]</td>
+<td>b: Breakpoint的简写，设置断点。两可以使用“行号”“函数名称”“执行地址”等方式指定断点位置。 <br /> 其中在函数名称前面加“*”符号表示将断点设置在“由编译器生成的prolog代码处”。如果不了解汇编，可以不予理会此用法。 d: Delete breakpoint的简写，删除指定编号的某个断点，或删除所有断点。断点编号从1开始递增。</td>
+<td>(gdb) b 8(gdb) b main <br /> (gdb) b *main <br /> (gdb) b *0x804835c (gdb) d</td>
+</tr>
+<tr>
+<td>s, n</td>
+<td>s: 执行一行源程序代码，如果此行代码中有函数调用，则进入该函数；<br /> n: 执行一行源程序代码，此行代码中的函数调用也一并执行。 s 相当于其它调试器中的“Step Into (单步跟踪进入)”；<br /> n 相当于其它调试器中的“Step Over (单步跟踪)”。 这两个命令必须在有源代码调试信息的情况下才可以使用（GCC编译时使用“-g”参数）。</td>
+<td>(gdb) s <br /> (gdb) n</td>
+</tr>
+<tr>
+<td>si, ni</td>
+<td>si命令类似于s命令，ni命令类似于n命令。所不同的是，这两个命令（si/ni）所针对的是汇编指令，而s/n针对的是源代码。</td>
+<td>(gdb) si <br />(gdb) ni</td>
+</tr>
+<tr>
+<td>p &lt;变量名称&gt;</td>
+<td>Print的简写，显示指定变量（临时变量或全局变量）的值。</td>
+<td>(gdb) p i <br /> (gdb) p nGlobalVar</td>
+</tr>
+<tr>
+<td>display … undisplay &lt;编号&gt;</td>
+<td>display，设置程序中断后欲显示的数据及其格式。 <br /> 例如，如果希望每次程序中断后可以看到即将被执行的下一条汇编指令，可以使用命令 <br /> “display /i $pc” <br /> 其中 $pc 代表当前汇编指令，/i 表示以十六进行显示。当需要关心汇编代码时，此命令相当有用。 undispaly，取消先前的display设置，编号从1开始递增。</td>
+<td>(gdb) display /i $pc (gdb) undisplay 1</td>
+</tr>
+<tr>
+<td>i</td>
+<td>info的简写，用于显示各类信息，详情请查阅“help i”。</td>
+<td>(gdb) i r</td>
+</tr>
+<tr>
+<td>q</td>
+<td>Quit的简写，退出GDB调试环境。</td>
+<td>(gdb) q</td>
+</tr>
+<tr>
+<td>help [命令名称]</td>
+<td>GDB帮助命令，提供对GDB名种命令的解释说明。<br /> 如果指定了“命令名称”参数，则显示该命令的详细说明；如果没有指定参数，则分类显示所有GDB命令，供用户进一步浏览和查询。</td>
+<td>(gdb) help</td>
+</tr>
+</tbody></table>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：二进制可执行程序。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下是linux下dgb调试的一个实例，先给出一个示例用的小程序，C语言代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">include &lt;stdio.h&gt;</span></span><br><span class="line">int nGlobalVar = 0;</span><br><span class="line"></span><br><span class="line">int tempFunction(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;tempFunction is called, a = %d, b = %d /n&quot;, a, b);</span><br><span class="line">    return (a + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">        n = 1;</span><br><span class="line">        n++;</span><br><span class="line">        n--;</span><br><span class="line"></span><br><span class="line">        nGlobalVar += 100;</span><br><span class="line">        nGlobalVar -= 12;</span><br><span class="line"></span><br><span class="line">    printf(&quot;n = %d, nGlobalVar = %d /n&quot;, n, nGlobalVar);</span><br><span class="line"></span><br><span class="line">        n = tempFunction(1, 2);</span><br><span class="line">    printf(&quot;n = %d&quot;, n);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请将此代码复制出来并保存到文件 gdb-sample.c 中，然后切换到此文件所在目录，用GCC编译之：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc gdb-sample.c -o gdb-sample -g</span><br></pre></td></tr></table></figure>
+
+<p>在上面的命令行中，使用 -o 参数指定了编译生成的可执行文件名为 gdb-sample，使用参数 -g 表示将源代码信息编译到可执行文件中。如果不使用参数 -g，会给后面的GDB调试造成不便。当然，如果我们没有程序的源代码，自然也无从使用 -g 参数，调试/跟踪时也只能是汇编代码级别的调试/跟踪。</p>
+<p>下面“gdb”命令启动GDB，将首先显示GDB说明，不管它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GNU gdb Red Hat Linux (5.3post-0.20021129.18rh)</span><br><span class="line">Copyright 2003 free Software Foundation, Inc.</span><br><span class="line">GDB is free software, covered by the GNU General Public License, and you are</span><br><span class="line">welcome to change it and/or distribute copies of it under certain conditions.</span><br><span class="line">type &quot;show copying&quot; to see the conditions.</span><br><span class="line">There is absolutely no warranty for GDB. Type &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;i386-redhat-linux-gnu&quot;.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行“(gdb)”为GDB内部命令引导符，等待用户输入GDB命令。</p>
+<p>下面使用“file”命令载入被调试程序 gdb-sample（这里的 gdb-sample 即前面 GCC 编译输出的可执行文件）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) file gdb-sample</span><br><span class="line">Reading symbols from gdb-sample...done.</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行提示已经加载成功。</p>
+<p>下面使用“r”命令执行（Run）被调试文件，因为尚未设置任何断点，将直接执行到程序结束：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line">n = 1, nGlobalVar = 88</span><br><span class="line">tempFunction is called, a = 1, b = 2</span><br><span class="line">n = 3</span><br><span class="line">Program exited normally.</span><br></pre></td></tr></table></figure>
+
+<p>下面使用“b”命令在 main 函数开头设置一个断点（Breakpoint）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x804835c: file gdb-sample.c, line 19.</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行提示已经成功设置断点，并给出了该断点信息：在源文件 gdb-sample.c 第19行处设置断点；这是本程序的第一个断点（序号为1）；断点处的代码地址为 0x804835c（此值可能仅在本次调试过程中有效）。回过头去看源代码，第19行中的代码为“n = 1”，恰好是 main 函数中的第一个可执行语句（前面的“int n;”为变量定义语句，并非可执行语句）。</p>
+<p>再次使用“r”命令执行（Run）被调试程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main () at gdb-sample.c:19</span><br><span class="line">19 n = 1;</span><br></pre></td></tr></table></figure>
+
+<p>程序中断在gdb-sample.c第19行处，即main函数是第一个可执行语句处。</p>
+<p>上面最后一行信息为：下一条将要执行的源代码为“n = 1;”，它是源代码文件gdb-sample.c中的第19行。</p>
+<p>下面使用“s”命令（Step）执行下一行代码（即第19行“n = 1;”）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) s</span><br><span class="line">20 n++;</span><br></pre></td></tr></table></figure>
+
+<p>上面的信息表示已经执行完“n = 1;”，并显示下一条要执行的代码为第20行的“n++;”。</p>
+<p>既然已经执行了“n = 1;”，即给变量 n 赋值为 1，那我们用“p”命令（Print）看一下变量 n 的值是不是 1 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) p n</span><br><span class="line"><span class="meta">$</span><span class="bash">1 = 1</span></span><br></pre></td></tr></table></figure>
+
+<p>果然是 1。（$1大致是表示这是第一次使用“p”命令——再次执行“p n”将显示“$2 = 1”——此信息应该没有什么用处。）</p>
+<p>下面我们分别在第26行、tempFunction 函数开头各设置一个断点（分别使用命令“b 26”“b tempFunction”）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b 26</span><br><span class="line">Breakpoint 2 at 0x804837b: file gdb-sample.c, line 26.</span><br><span class="line">(gdb) b tempFunction</span><br><span class="line">Breakpoint 3 at 0x804832e: file gdb-sample.c, line 12.</span><br></pre></td></tr></table></figure>
+
+<p>使用“c”命令继续（Continue）执行被调试程序，程序将中断在第二 个断点（26行），此时全局变量 nGlobalVar 的值应该是 88；再一次执行“c”命令，程序将中断于第三个断点（12行，tempFunction 函数开头处），此时tempFunction 函数的两个参数 a、b 的值应分别是 1 和 2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line"></span><br><span class="line">Breakpoint 2, main () at gdb-sample.c:26</span><br><span class="line">26 printf(&quot;n = %d, nGlobalVar = %d /n&quot;, n, nGlobalVar);</span><br><span class="line">(gdb) p nGlobalVar</span><br><span class="line"><span class="meta">$</span><span class="bash">2 = 88</span></span><br><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">n = 1, nGlobalVar = 88</span><br><span class="line"></span><br><span class="line">Breakpoint 3, tempFunction (a=1, b=2) at gdb-sample.c:12</span><br><span class="line">12 printf(&quot;tempFunction is called, a = %d, b = %d /n&quot;, a, b);</span><br><span class="line">(gdb) p a</span><br><span class="line"><span class="meta">$</span><span class="bash">3 = 1</span></span><br><span class="line">(gdb) p b</span><br><span class="line"><span class="meta">$</span><span class="bash">4 = 2</span></span><br></pre></td></tr></table></figure>
+
+<p>上面反馈的信息一切都在我们预料之中~~</p>
+<p>再一次执行“c”命令（Continue），因为后面再也没有其它断点，程序将一直执行到结束：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">tempFunction is called, a = 1, b = 2</span><br><span class="line">n = 3</span><br><span class="line">Program exited normally.</span><br></pre></td></tr></table></figure>
+
+<p>有时候需要看到编译器生成的汇编代码，以进行汇编级的调试或跟踪，又该如何操作呢？</p>
+<p>这就要用到display命令“display /i $pc”了（此命令前面已有详细解释）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) display /i $pc</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>此后程序再中断时，就可以显示出汇编代码了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main () at gdb-sample.c:19</span><br><span class="line">19 n = 1;</span><br><span class="line">1: x/i $pc 0x804835c &lt;main+16&gt;: movl $0x1,0xfffffffc(%ebp)</span><br></pre></td></tr></table></figure>
+
+<p>看到了汇编代码，“n = 1;”对应的汇编代码是“movl $0x1,0xfffffffc(%ebp)”。</p>
+<p>并且以后程序每次中断都将显示下一条汇编指定（“si”命令用于执行一条汇编代码——区别于“s”执行一行C代码）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(gdb) si</span><br><span class="line">20 n++;</span><br><span class="line">1: x/i $pc 0x8048363 &lt;main+23&gt;: lea 0xfffffffc(%ebp),%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048366 20 n++;</span><br><span class="line">1: x/i $pc 0x8048366 &lt;main+26&gt;: incl (%eax)</span><br><span class="line">(gdb) si</span><br><span class="line">21 n--;</span><br><span class="line">1: x/i $pc 0x8048368 &lt;main+28&gt;: lea 0xfffffffc(%ebp),%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804836b 21 n--;</span><br><span class="line">1: x/i $pc 0x804836b &lt;main+31&gt;: decl (%eax)</span><br><span class="line">(gdb) si</span><br><span class="line">23 nGlobalVar += 100;</span><br><span class="line">1: x/i $pc 0x804836d &lt;main+33&gt;: addl $0x64,0x80494fc</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们试一下命令“b *&lt;函数名称&gt;”。</p>
+<p>为了更简明，有必要先删除目前所有断点（使用“d”命令——Delete breakpoint）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb) d</span><br><span class="line">Delete all breakpoints? (y or n) y</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>当被询问是否删除所有断点时，输入“y”并按回车键即可。</p>
+<p>下面使用命令“b *main”在 main 函数的 prolog 代码处设置断点（prolog、epilog，分别表示编译器在每个函数的开头和结尾自行插入的代码）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b *main</span><br><span class="line">Breakpoint 4 at 0x804834c: file gdb-sample.c, line 17.</span><br><span class="line">(gdb) r</span><br><span class="line">The program being debugged has been started already.</span><br><span class="line">Start it from the beginning? (y or n) y</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 4, main () at gdb-sample.c:17</span><br><span class="line">17 &#123;</span><br><span class="line">1: x/i $pc 0x804834c &lt;main&gt;: push %ebp</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804834d 17 &#123;</span><br><span class="line">1: x/i $pc 0x804834d &lt;main+1&gt;: mov %esp,%ebp</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804834f in main () at gdb-sample.c:17</span><br><span class="line">17 &#123;</span><br><span class="line">1: x/i $pc 0x804834f &lt;main+3&gt;: sub $0x8,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048352 17 &#123;</span><br><span class="line">1: x/i $pc 0x8048352 &lt;main+6&gt;: and $0xfffffff0,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048355 17 &#123;</span><br><span class="line">1: x/i $pc 0x8048355 &lt;main+9&gt;: mov $0x0,%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804835a 17 &#123;</span><br><span class="line">1: x/i $pc 0x804835a &lt;main+14&gt;: sub %eax,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">19 n = 1;</span><br><span class="line">1: x/i $pc 0x804835c &lt;main+16&gt;: movl $0x1,0xfffffffc(%ebp)</span><br></pre></td></tr></table></figure>
+
+<p>此时可以使用“i r”命令显示寄存器中的当前值———“i r”即“Infomation Register”：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) i r</span><br><span class="line">eax 0xbffff6a4 -1073744220</span><br><span class="line">ecx 0x42015554 1107383636</span><br><span class="line">edx 0x40016bc8 1073834952</span><br><span class="line">ebx 0x42130a14 1108544020</span><br><span class="line">esp 0xbffff6a0 0xbffff6a0</span><br><span class="line">ebp 0xbffff6a8 0xbffff6a8</span><br><span class="line">esi 0x40015360 1073828704</span><br><span class="line">edi 0x80483f0 134513648</span><br><span class="line">eip 0x8048366 0x8048366</span><br><span class="line">eflags 0x386 902</span><br><span class="line">cs 0x23 35</span><br><span class="line">ss 0x2b 43</span><br><span class="line">ds 0x2b 43</span><br><span class="line">es 0x2b 43</span><br><span class="line">fs 0x0 0</span><br><span class="line">gs 0x33 51</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以显示任意一个指定的寄存器值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) i r eax</span><br><span class="line">eax 0xbffff6a4 -1073744220</span><br></pre></td></tr></table></figure>
+
+<p>最后一个要介绍的命令是“q”，退出（Quit）GDB调试环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) q</span><br><span class="line">The program is running. exit anyway? (y or n)</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h2><blockquote>
+<p>gdb 教程：<span class="exturl" data-url="aHR0cDovL3d3dy5pbW9vYy5jb20vbGVhcm4vMzk0">慕课网-Linux C语言指针与内存-第三章<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>如果删除源代码, 就无法显示行号等辅助信息了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">gcc -g gdb.c -o gdb.out # -g 支持gdb调试; -o 输出, 默认为 a.out</span><br><span class="line"></span><br><span class="line">gdb gdb.out # 进入 gdb 调试环境</span><br><span class="line">enter # 继续执行上条命令</span><br><span class="line">l # 列出源代码, 默认 10 行, 按 l 继续</span><br><span class="line"></span><br><span class="line">start # 开始单步调试, 默认 main() 第一行</span><br><span class="line">p a # 查看 a 变量的值</span><br><span class="line">n # 继续到下一行</span><br><span class="line">s # 进入子函数</span><br><span class="line">bt # 查看函数栈</span><br><span class="line">f 1 # 切换函数栈</span><br><span class="line"></span><br><span class="line">q 退出调试</span><br></pre></td></tr></table></figure>
+
+<p>测试用代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=a;</span><br><span class="line">    a=b; b=tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change2</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=*a;</span><br><span class="line">    *a=*b; *b=tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">3</span>;</span><br><span class="line">    change(a,b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;change:\na=%d\nb=%d\n&quot;</span>, a,b);</span><br><span class="line">    change2(&amp;a,&amp;b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;change2:\na=%d\nb=%d\n&quot;</span>, a,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gcov/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gcov/" class="post-title-link" itemprop="url">【Linux 命令】gcov</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:22:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>126</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>测试程序的代码覆盖率的工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gcov命令</strong> 是一款测试程序的代码覆盖率的工具。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcov(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-v：显示版本信息；</span><br><span class="line">-a：输出所有的基本块的执行计数；</span><br><span class="line">-n：并创建输出文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>V语言文件：C语言源代码文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gcc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gcc/" class="post-title-link" itemprop="url">【Linux 命令】gcc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:22:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>基于C/C++的编译器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gcc命令</strong> 使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。现在很多程序员都应用GCC，怎样才能更好的应用GCC。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-o：指定生成的输出文件；</span><br><span class="line">-E：仅执行编译预处理；</span><br><span class="line">-S：将C代码转换为汇编代码；</span><br><span class="line">-wall：显示警告信息；</span><br><span class="line">-c：仅执行编译操作，不进行连接操作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>C源文件：指定C语言源代码文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>常用编译命令选项</strong> </p>
+<p>假设源程序文件名为test.c</p>
+<p><strong>无选项编译链接</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理、汇编、编译并链接形成可执行文件。这里未指定输出文件，默认输出为a.out。</p>
+<p><strong>选项 -o</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理、汇编、编译并链接形成可执行文件test。-o选项用来指定输出文件的文件名。</p>
+<p><strong>选项 -E</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c -o test.i</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理输出test.i文件。</p>
+<p><strong>选项 -S</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.i</span><br></pre></td></tr></table></figure>
+
+<p>将预处理输出文件test.i汇编成test.s文件。</p>
+<p><strong>选项 -c</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test.s</span><br></pre></td></tr></table></figure>
+
+<p>将汇编输出文件test.s编译输出test.o文件。</p>
+<p><strong>无选项链接</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.o -o test</span><br></pre></td></tr></table></figure>
+
+<p>将编译输出文件test.o链接成最终可执行文件test。</p>
+<p><strong>选项 -O</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O1 test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长。</p>
+<p><strong>多源文件的编译方法</strong> </p>
+<p>如果有多个源文件，基本上有两种编译方法：</p>
+<p>假设有两个源文件为test.c和testfun.c</p>
+<p><strong>多个文件一起编译</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc testfun.c test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>将testfun.c和test.c分别编译后链接成test可执行文件。</p>
+<p><strong>分别编译各个源文件，之后对编译后输出的目标文件链接。</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c testfun.c    #将testfun.c编译成testfun.o</span><br><span class="line">gcc -c test.c       #将test.c编译成test.o</span><br><span class="line">gcc -o testfun.o test.o -o test    #将testfun.o和test.o链接成test</span><br></pre></td></tr></table></figure>
+
+<p>以上两种方法相比较，第一中方法编译时需要所有文件重新编译，而第二种方法可以只重新编译修改的文件，未修改的文件不用重新编译。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fuser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/fuser/" class="post-title-link" itemprop="url">【Linux 命令】fuser</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:21:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>846</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用文件或文件结构识别进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>fuser命令</strong> 用于报告进程使用的文件和网络套接字。fuser命令列出了本地进程的进程号，那些本地进程使用file，参数指定的本地或远程文件。对于阻塞特别设备，此命令列出了使用该设备上任何文件的进程。</p>
+<p>每个进程号后面都跟随一个字母，该字母指示进程如何使用文件。</p>
+<ul>
+<li><code>c</code> ：指示进程的工作目录。</li>
+<li><code>e</code> ：指示该文件为进程的可执行文件(即进程由该文件拉起)。</li>
+<li><code>f</code> ：指示该文件被进程打开，默认情况下f字符不显示。</li>
+<li><code>F</code> ：指示该文件被进程打开进行写入，默认情况下F字符不显示。</li>
+<li><code>r</code> ：指示该目录为进程的根目录。</li>
+<li><code>m</code> ：指示进程使用该文件进行内存映射，抑或该文件为共享库文件，被进程映射进内存。</li>
 </ul>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>n（可选）：大于等于1的整数，用于指定从第几层循环继续执行。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回状态为成功除非n小于1。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">continue</span>的可选参数n缺省值为1。</span></span><br><span class="line">for((i=3;i&gt;0;i--)); do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 跳到内层<span class="keyword">for</span>循环继续执行。</span></span><br><span class="line">  for((j=3;j&gt;0;j--)); do</span><br><span class="line">    if((j==2)); then</span><br><span class="line">      # 换成continue 1时结果一样</span><br><span class="line">      continue</span><br><span class="line">    fi</span><br><span class="line">  printf &quot;%s %s\n&quot; $&#123;i&#125; $&#123;j&#125;</span><br><span class="line">  done</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">3 3</span><br><span class="line">3 1</span><br><span class="line">2 3</span><br><span class="line">2 1</span><br><span class="line">1 3</span><br><span class="line">1 1</span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 当n为2时：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 跳到外层<span class="keyword">for</span>循环继续执行。</span></span><br><span class="line">for((i=3;i&gt;0;i--)); do</span><br><span class="line">  for((j=3;j&gt;0;j--)); do</span><br><span class="line">    if((j==2)); then</span><br><span class="line">      continue 2</span><br><span class="line">    fi</span><br><span class="line">  printf &quot;%s %s\n&quot; $&#123;i&#125; $&#123;j&#125;</span><br><span class="line">  done</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">3 3</span><br><span class="line">2 3</span><br><span class="line">1 3</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a：显示命令行中指定的所有文件；</span><br><span class="line">-k：杀死访问指定文件的所有进程；</span><br><span class="line">-i：杀死进程前需要用户进行确认；</span><br><span class="line">-l：列出所有已知信号名；</span><br><span class="line">-m：指定一个被加载的文件系统或一个被加载的块设备；</span><br><span class="line">-n：选择不同的名称空间；</span><br><span class="line">-u：在每个进程后显示所属的用户名。</span><br></pre></td></tr></table></figure>
 
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-</ol>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：可以是文件名或者TCP、UDP端口号。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>要列出使用<code>/etc/passwd</code>文件的本地进程的进程号，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>要列出使用<code>/etc/filesystems</code>文件的进程的进程号和用户登录名，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -u /etc/filesystems</span><br></pre></td></tr></table></figure>
+
+<p>要终止使用给定文件系统的所有进程，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -k -x -u -c /dev/hd1  或者  fuser -kxuc /home</span><br></pre></td></tr></table></figure>
+
+<p>任一命令都列出了进程号和用户名，然后终止每个正在使用<code>/dev/hd1 (/home)</code>文件系统的进程。仅有root用户能终止属于另一用户的进程。如果您正在试图卸下<code>/dev/hd1</code>文件系统，而一个正在访问<code>/dev/hd1</code>文件系统的进程不允许这样，您可能希望使用此命令。</p>
+<p>要列出正在使用已从给定文件系统删除的文件的全部进程，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -d /usr文件</span><br></pre></td></tr></table></figure>
+
+<p><code>/dev/kmem</code> 用于系统映像。<br><code>/dev/mem</code>  也用于系统映像。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
       
     </div>
 
@@ -1781,7 +1752,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/convertquota/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ftpwho/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1798,7 +1769,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/convertquota/" class="post-title-link" itemprop="url">【Linux 命令】convertquota</a>
+            <a href="/linux-command/ftpwho/" class="post-title-link" itemprop="url">【Linux 命令】ftpwho</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1808,8 +1779,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:21:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1829,7 +1801,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>357</span>
+      <span>104</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1847,15 +1819,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>把老的配额文件转换为新的格式</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>convertquota命令</strong> 用于将老的磁盘额数据文件（“quota.user”和“quota.group”）转换为新格式的文件（“quota.user”和“quota.group”）。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convertquota(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>显示当前每个ftp会话信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ftpwho命令</strong> ftp服务器套件proftpd的工作指令，用于显示当前每个ftp会话信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftpwho(选项)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-u：仅转换用户磁盘配额数据文件；</span><br><span class="line">-g：仅转换组磁盘配额数据文件；</span><br><span class="line">-f：将老的磁盘配额文件转换为新的格式；</span><br><span class="line">-e：将新的文件格式从大字节序换为小字节序。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件系统：指定要转换磁盘配额数据文件格式的文件系统（硬盘分区）。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用convertquota指令转换指定文件系统<code>/data</code>的磁盘配额数据文件。在命令行中输入下面的命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convertquota -u /data     //转换文件系统&quot;/data&quot;上的用户磁盘配额文件</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-v：详细模式，输出更多信息。</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -303,7 +303,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/rsync/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/printf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -320,7 +320,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/rsync/" class="post-title-link" itemprop="url">【Linux 命令】rsync</a>
+            <a href="/linux-command/printf/" class="post-title-link" itemprop="url">【Linux 命令】printf</a>
         </h2>
 
         <div class="post-meta-container">
@@ -330,8 +330,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:00:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -351,936 +352,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>远程数据同步工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>rsync命令</strong> 是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。rsync使用所谓的“rsync算法”来使本地和远程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。 rsync是一个功能非常强大的工具，其命令也有很多功能特色选项，我们下面就对它的选项一一进行分析说明。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rsync [OPTION]... SRC DEST</span><br><span class="line">rsync [OPTION]... SRC [USER@]host:DEST</span><br><span class="line">rsync [OPTION]... [USER@]HOST:SRC DEST</span><br><span class="line">rsync [OPTION]... [USER@]HOST::SRC DEST</span><br><span class="line">rsync [OPTION]... SRC [USER@]HOST::DEST</span><br><span class="line">rsync [OPTION]... rsync://[USER@]HOST[:PORT]/SRC [DEST]</span><br></pre></td></tr></table></figure>
-
-<p>对应于以上六种命令格式，rsync有六种不同的工作模式：</p>
-<ol>
-<li>拷贝本地文件。当SRC和DES路径信息都不包含有单个冒号”:”分隔符时就启动这种工作模式。如：<code>rsync -a /data /backup</code></li>
-<li>使用一个远程shell程序(如rsh、ssh)来实现将本地机器的内容拷贝到远程机器。当DST路径地址包含单个冒号”:”分隔符时启动该模式。如：<code>rsync -avz *.c foo:src</code></li>
-<li>使用一个远程shell程序(如rsh、ssh)来实现将远程机器的内容拷贝到本地机器。当SRC地址路径包含单个冒号”:”分隔符时启动该模式。如：<code>rsync -avz foo:src/bar /data</code></li>
-<li>从远程rsync服务器中拷贝文件到本地机。当SRC路径信息包含”::”分隔符时启动该模式。如：<code>rsync -av root@192.168.78.192::www /databack</code></li>
-<li>从本地机器拷贝文件到远程rsync服务器中。当DST路径信息包含”::”分隔符时启动该模式。如：<code>rsync -av /databack root@192.168.78.192::www</code></li>
-<li>列远程机的文件列表。这类似于rsync传输，不过只要在命令中省略掉本地机信息即可。如：<code>rsync -v rsync://192.168.78.192/www</code></li>
-</ol>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">-v, --verbose 详细模式输出。</span><br><span class="line">-q, --quiet 精简输出模式。</span><br><span class="line">-c, --checksum 打开校验开关，强制对文件传输进行校验。</span><br><span class="line">-a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD。</span><br><span class="line">-r, --recursive 对子目录以递归模式处理。</span><br><span class="line">-R, --relative 使用相对路径信息。</span><br><span class="line">-b, --backup 创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。</span><br><span class="line">--backup-dir 将备份文件(如~filename)存放在在目录下。</span><br><span class="line">-suffix=SUFFIX 定义备份文件前缀。</span><br><span class="line">-u, --update 仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件，不覆盖更新的文件。</span><br><span class="line">-l, --links 保留软链结。</span><br><span class="line">-L, --copy-links 想对待常规文件一样处理软链结。</span><br><span class="line">--copy-unsafe-links 仅仅拷贝指向SRC路径目录树以外的链结。</span><br><span class="line">--safe-links 忽略指向SRC路径目录树以外的链结。</span><br><span class="line">-H, --hard-links 保留硬链结。</span><br><span class="line">-p, --perms 保持文件权限。</span><br><span class="line">-o, --owner 保持文件属主信息。</span><br><span class="line">-g, --group 保持文件属组信息。</span><br><span class="line">-D, --devices 保持设备文件信息。</span><br><span class="line">-t, --times 保持文件时间信息。</span><br><span class="line">-S, --sparse 对稀疏文件进行特殊处理以节省DST的空间。</span><br><span class="line">-n, --dry-run现实哪些文件将被传输。</span><br><span class="line">-w, --whole-file 拷贝文件，不进行增量检测。</span><br><span class="line">-x, --one-file-system 不要跨越文件系统边界。</span><br><span class="line">-B, --block-size=SIZE 检验算法使用的块尺寸，默认是700字节。</span><br><span class="line">-e, --rsh=command 指定使用rsh、ssh方式进行数据同步。</span><br><span class="line">--rsync-path=PATH 指定远程服务器上的rsync命令所在路径信息。</span><br><span class="line">-C, --cvs-exclude 使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件。</span><br><span class="line">--existing 仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件。</span><br><span class="line">--delete 删除那些DST中SRC没有的文件。</span><br><span class="line">--delete-excluded 同样删除接收端那些被该选项指定排除的文件。</span><br><span class="line">--delete-after 传输结束以后再删除。</span><br><span class="line">--ignore-errors 及时出现IO错误也进行删除。</span><br><span class="line">--max-delete=NUM 最多删除NUM个文件。</span><br><span class="line">--partial 保留那些因故没有完全传输的文件，以是加快随后的再次传输。</span><br><span class="line">--force 强制删除目录，即使不为空。</span><br><span class="line">--numeric-ids 不将数字的用户和组id匹配为用户名和组名。</span><br><span class="line">--timeout=time ip超时时间，单位为秒。</span><br><span class="line">-I, --ignore-times 不跳过那些有同样的时间和长度的文件。</span><br><span class="line">--size-only 当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间。</span><br><span class="line">--modify-window=NUM 决定文件是否时间相同时使用的时间戳窗口，默认为0。</span><br><span class="line">-T --temp-dir=DIR 在DIR中创建临时文件。</span><br><span class="line">--compare-dest=DIR 同样比较DIR中的文件来决定是否需要备份。</span><br><span class="line">-P 等同于 --partial。</span><br><span class="line">--progress 显示备份过程。</span><br><span class="line">-z, --compress 对备份的文件在传输时进行压缩处理。</span><br><span class="line">--exclude=PATTERN 指定排除不需要传输的文件模式。</span><br><span class="line">--include=PATTERN 指定不排除而需要传输的文件模式。</span><br><span class="line">--exclude-from=FILE 排除FILE中指定模式的文件。</span><br><span class="line">--include-from=FILE 不排除FILE指定模式匹配的文件。</span><br><span class="line">--version 打印版本信息。</span><br><span class="line">--address 绑定到特定的地址。</span><br><span class="line">--config=FILE 指定其他的配置文件，不使用默认的rsyncd.conf文件。</span><br><span class="line">--port=PORT 指定其他的rsync服务端口。</span><br><span class="line">--blocking-io 对远程shell使用阻塞IO。</span><br><span class="line">-stats 给出某些文件的传输状态。</span><br><span class="line">--progress 在传输时现实传输过程。</span><br><span class="line">--log-format=formAT 指定日志文件格式。</span><br><span class="line">--password-file=FILE 从FILE中得到密码。</span><br><span class="line">--bwlimit=KBPS 限制I/O带宽，KBytes per second。</span><br><span class="line">-h, --help 显示帮助信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>SSH方式</strong></p>
-<p>首先在服务端启动ssh服务：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service sshd start</span><br><span class="line">启动 sshd： [确定]</span><br></pre></td></tr></table></figure>
-
-<p> <strong>使用rsync进行同步</strong></p>
-<p>接下来就可以在客户端使用rsync命令来备份服务端上的数据了，SSH方式是通过系统用户来进行备份的，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rsync -vzrtopg --progress -e ssh --delete work@172.16.78.192:/www/* /databack/experiment/rsync</span><br><span class="line">work@172.16.78.192&#x27;s password:</span><br><span class="line">receiving file list ...</span><br><span class="line">5 files to consider</span><br><span class="line">test/</span><br><span class="line">a</span><br><span class="line">0 100% 0.00kB/s 527:35:41 (1, 20.0% of 5)</span><br><span class="line">b</span><br><span class="line">67 100% 65.43kB/s 0:00:00 (2, 40.0% of 5)</span><br><span class="line">c</span><br><span class="line">0 100% 0.00kB/s 527:35:41 (3, 60.0% of 5)</span><br><span class="line">dd</span><br><span class="line">100663296 100% 42.22MB/s 0:00:02 (4, 80.0% of 5)</span><br><span class="line">sent 96 bytes received 98190 bytes 11563.06 bytes/sec</span><br><span class="line">total size is 100663363 speedup is 1024.19</span><br></pre></td></tr></table></figure>
-
-<p>上面的信息描述了整个的备份过程，以及总共备份数据的大小。</p>
-<p> <strong>后台服务方式</strong></p>
-<p>启动rsync服务，编辑<code>/etc/xinetd.d/rsync</code>文件，将其中的<code>disable=yes</code>改为<code>disable=no</code>，并重启xinetd服务，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/xinetd.d/rsync</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">default: off</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: The rsync server is a good addition to an ftp server, as it \</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> allows crc checksumming etc.</span></span><br><span class="line">service rsync &#123;</span><br><span class="line">disable = no</span><br><span class="line">socket_type = stream</span><br><span class="line">wait = no</span><br><span class="line">user = root</span><br><span class="line">server = /usr/bin/rsync</span><br><span class="line">server_args = --daemon</span><br><span class="line">log_on_failure += USERID</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/xinetd restart</span><br><span class="line">停止 xinetd： [确定]</span><br><span class="line">启动 xinetd： [确定]</span><br></pre></td></tr></table></figure>
-
-<p>创建配置文件，默认安装好rsync程序后，并不会自动创建rsync的主配置文件，需要手工来创建，其主配置文件为“/etc/rsyncd.conf”，创建该文件并插入如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/rsyncd.conf</span><br><span class="line"></span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">max connections=4</span><br><span class="line">log file=/var/log/rsyncd.log</span><br><span class="line">pid file=/var/run/rsyncd.pid</span><br><span class="line">lock file=/var/run/rsyncd.lock</span><br><span class="line">secrets file=/etc/rsyncd.passwd</span><br><span class="line">hosts deny=172.16.78.0/22</span><br><span class="line"></span><br><span class="line">[www]</span><br><span class="line">comment= backup web</span><br><span class="line">path=/www</span><br><span class="line">read only = no</span><br><span class="line">exclude=test</span><br><span class="line">auth users=work</span><br></pre></td></tr></table></figure>
-
-<p>创建密码文件，采用这种方式不能使用系统用户对客户端进行认证，所以需要创建一个密码文件，其格式为“username:password”，用户名可以和密码可以随便定义，最好不要和系统帐户一致，同时要把创建的密码文件权限设置为600，这在前面的模块参数做了详细介绍。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;work:abc123&quot; &gt; /etc/rsyncd.passwd</span><br><span class="line">chmod 600 /etc/rsyncd.passwd</span><br></pre></td></tr></table></figure>
-
-<p>备份，完成以上工作，现在就可以对数据进行备份了，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --progress --delete work@172.16.78.192::www /databack/experiment/rsync</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line">receiving file list ...</span><br><span class="line">6 files to consider</span><br><span class="line">./ files...</span><br><span class="line">a</span><br><span class="line">0 100% 0.00kB/s 528:20:41 (1, 50.0% of 6)</span><br><span class="line">b</span><br><span class="line">67 100% 65.43kB/s 0:00:00 (2, 66.7% of 6)</span><br><span class="line">c</span><br><span class="line">0 100% 0.00kB/s 528:20:41 (3, 83.3% of 6)</span><br><span class="line">dd</span><br><span class="line">100663296 100% 37.49MB/s 0:00:02 (4, 100.0% of 6)</span><br><span class="line">sent 172 bytes received 98276 bytes 17899.64 bytes/sec</span><br><span class="line">total size is 150995011 speedup is 1533.75</span><br></pre></td></tr></table></figure>
-
-<p>恢复，当服务器的数据出现问题时，那么这时就需要通过客户端的数据对服务端进行恢复，但前提是服务端允许客户端有写入权限，否则也不能在客户端直接对服务端进行恢复，使用rsync对数据进行恢复的方法如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">rsync -avz --progress /databack/experiment/rsync/ work@172.16.78.192::www</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line">building file list ...</span><br><span class="line">6 files to consider</span><br><span class="line">./</span><br><span class="line">a</span><br><span class="line">b</span><br><span class="line">67 100% 0.00kB/s 0:00:00 (2, 66.7% of 6)</span><br><span class="line">c</span><br><span class="line">sent 258 bytes received 76 bytes 95.43 bytes/sec</span><br><span class="line">total size is 150995011 speedup is 452080.87</span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/runlevel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/runlevel/" class="post-title-link" itemprop="url">【Linux 命令】runlevel</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>792</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>打印当前Linux系统的运行等级</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>runlevel命令</strong> 用于打印当前Linux系统的运行等级。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runlevel</span><br></pre></td></tr></table></figure>
-
-<h3 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h3><p>linux操作系统自从开始启动至启动完毕需要经历几个不同的阶段，这几个阶段就叫做runlevel，同样，当linux操作系统关闭时也要经历另外几个不同的runlevel，下面我们就准备详细介绍一下runlevel，并向您展示一些小技巧来让您的linux系统避免不必要的重启动。</p>
-<p>runlevel可以认为是系统状态，形象一点，您可以认为runlevel有点象微软的windows操作系统中的Normal，safemode，和command prompt only。进入每个runlevel都需要启动或关闭相应的一系列服务(services)，这些服务(services)以初始化脚本的方式放置于目录<code>/etc/rc.d/rc?.d/</code>或者<code>/etc/rc?.d</code>下面（?代表runlevel的对应序号）。</p>
-<p>在大多数的linux发行版本中，通常有8个runlevel：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">0 停机</span><br><span class="line">1 单用户模式</span><br><span class="line">2 多用户，没有 NFS</span><br><span class="line">3 完全多用户模式</span><br><span class="line">4 没有用到</span><br><span class="line">5 图形界面</span><br><span class="line">6 重新启动</span><br><span class="line">S s Single user mode</span><br></pre></td></tr></table></figure>
-
-<p>多数的桌面的linux系统缺省的runlevel是5，用户登陆时是图形界面，而多数的服务器版本的linux系统缺省的runlevel是3，用户登陆时是字符界面，runlevel 1和2除了调试之外很少使用，runlevel s和S并不是直接给用户使用，而是用来为Single user mode作准备。</p>
-<p>linux的运行模式比起windows的启动模式的优势在于：你可以在系统空闲时使用init命令切换你现在使用的runlevel，另外，当你关闭或者启动linux系统时你已经不知不觉中切换你的runlevel，系统关机进程需要调用runlevel(0或6)来关闭所有正在运行中的进程。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sar/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/sar/" class="post-title-link" itemprop="url">【Linux 命令】sar</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>854</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>系统运行状态统计工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sar命令</strong> 是Linux下系统运行状态统计工具，它将指定的操作系统状态计数器显示到标准输出设备。sar工具将对系统当前的状态进行取样，然后通过计算数据和比例来表达系统的当前运行状态。它的特点是可以连续对系统取样，获得大量的取样数据。取样数据和分析的结果都可以存入文件，使用它时消耗的系统资源很小。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sar(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-A：显示所有的报告信息；</span><br><span class="line">-b：显示I/O速率；</span><br><span class="line">-B：显示换页状态；</span><br><span class="line">-c：显示进程创建活动；</span><br><span class="line">-d：显示每个块设备的状态；</span><br><span class="line">-e：设置显示报告的结束时间；</span><br><span class="line">-f：从指定文件提取报告；</span><br><span class="line">-i：设状态信息刷新的间隔时间；</span><br><span class="line">-P：报告每个CPU的状态；</span><br><span class="line">-R：显示内存状态；</span><br><span class="line">-u：显示CPU利用率；</span><br><span class="line">-v：显示索引节点，文件和其他内核表的状态；</span><br><span class="line">-w：显示交换分区状态；</span><br><span class="line">-x：显示给定进程的状态。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>间隔时间：每次报告的间隔时间（秒）；</li>
-<li>次数：显示报告的次数。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>察看内存和交换空间的使用率：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sar -r</span><br><span class="line">Linux 2.4.20-8 (www.jsdig.com)    20130503  </span><br><span class="line">12:00:01 AM kbmemfree kbmemused  %memused </span><br><span class="line">kbmemshrd kbbuffers  kbcached  </span><br><span class="line">12:10:00 AM    240468   1048252     81.34    </span><br><span class="line">0    133724    485772  </span><br><span class="line">12:20:00 AM    240508   1048212     81.34   </span><br><span class="line">0    134172    485600  </span><br><span class="line">…  </span><br><span class="line">08:40:00 PM    934132    354588     27.51    </span><br><span class="line">0     26080    185364  </span><br><span class="line">Average:       324346    964374     74.83  </span><br><span class="line">0     96072    467559 </span><br></pre></td></tr></table></figure>
-
-<p>kbmemfree与kbmemused字段分别显示内存的未使用与已使用空间，后面跟着的是已使用空间的百分比（%memused字段）。kbbuffers与kbcached字段分别显示缓冲区与系统全域的数据存取量，单位为KB。</p>
-<p> <strong>观察系统部件10分钟，并对数据进行排序：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sar -o temp 60 10</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/scp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/scp/" class="post-title-link" itemprop="url">【Linux 命令】scp</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>加密的方式在本地主机和远程主机之间复制文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>scp命令</strong> 用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 rsync比scp会快一点，但当小文件众多的情况下，rsync会导致硬盘I/O非常高，而scp基本不影响系统正常使用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-1：使用ssh协议版本1；</span><br><span class="line">-2：使用ssh协议版本2；</span><br><span class="line">-4：使用ipv4；</span><br><span class="line">-6：使用ipv6；</span><br><span class="line">-B：以批处理模式运行；</span><br><span class="line">-C：使用压缩；</span><br><span class="line">-F：指定ssh配置文件；</span><br><span class="line">-i：identity_file 从指定文件中读取传输时使用的密钥文件（例如亚马逊云pem），此参数直接传递给ssh；</span><br><span class="line">-l：指定宽带限制；</span><br><span class="line">-o：指定使用的ssh选项；</span><br><span class="line">-P：指定远程主机的端口号；</span><br><span class="line">-p：保留文件的最后修改时间，最后访问时间和权限模式；</span><br><span class="line">-q：不显示复制进度；</span><br><span class="line">-r：以递归方式复制。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>源文件：指定要复制的源文件。</li>
-<li>目标文件：目标文件。格式为<code>user@host：filename</code>（文件名为目标文件的名称）。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>从远程复制到本地的scp命令与上面的命令雷同，只要将从本地复制到远程的命令后面2个参数互换顺序就行了。</p>
-<p> <strong>从远处复制文件到本地目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp root@10.10.10.10:/opt/soft/nginx-0.5.38.tar.gz /opt/soft/</span><br></pre></td></tr></table></figure>
-
-<p>从10.10.10.10机器上的<code>/opt/soft/</code>的目录中下载nginx-0.5.38.tar.gz 文件到本地<code>/opt/soft/</code>目录中。</p>
-<p><strong>从亚马逊云复制OpenVPN到本地目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -i amazon.pem ubuntu@10.10.10.10:/usr/local/openvpn_as/etc/exe/openvpn-connect-2.1.3.110.dmg openvpn-connect-2.1.3.110.dmg</span><br></pre></td></tr></table></figure>
-<p>从10.10.10.10机器上下载openvpn安装文件到本地当前目录来。</p>
-<p> <strong>从远处复制到本地</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r root@10.10.10.10:/opt/soft/mongodb /opt/soft/</span><br></pre></td></tr></table></figure>
-
-<p>从10.10.10.10机器上的<code>/opt/soft/</code>中下载mongodb目录到本地的<code>/opt/soft/</code>目录来。</p>
-<p> <strong>上传本地文件到远程机器指定目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp /opt/soft/nginx-0.5.38.tar.gz root@10.10.10.10:/opt/soft/scptest</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定端口 2222</span></span><br><span class="line">scp -rp -P 2222 /opt/soft/nginx-0.5.38.tar.gz root@10.10.10.10:/opt/soft/scptest</span><br></pre></td></tr></table></figure>
-
-<p>复制本地<code>/opt/soft/</code>目录下的文件nginx-0.5.38.tar.gz到远程机器10.10.10.10的<code>opt/soft/scptest</code>目录。</p>
-<p> <strong>上传本地目录到远程机器指定目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /opt/soft/mongodb root@10.10.10.10:/opt/soft/scptest</span><br></pre></td></tr></table></figure>
-
-<p>上传本地目录<code>/opt/soft/mongodb</code>到远程机器10.10.10.10上<code>/opt/soft/scptest</code>的目录中去。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/screen/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/screen/" class="post-title-link" itemprop="url">【Linux 命令】screen</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用于命令行终端切换</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>Screen</strong> 是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</p>
-<p> <strong>会话恢复</strong> </p>
-<p>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</p>
-<p> <strong>多窗口</strong> </p>
-<p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。 会话共享 Screen可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。</p>
-<p>GNU’s Screen 官方站点：<span class="exturl" data-url="aHR0cDovL3d3dy5nbnUub3JnL3NvZnR3YXJlL3NjcmVlbi8=">http://www.gnu.org/software/screen/<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> screen -AmRvx -[ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A 　将所有的视窗都调整为目前终端机的大小。</span><br><span class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</span><br><span class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</span><br><span class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</span><br><span class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</span><br><span class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</span><br><span class="line">-s 　指定建立新视窗时，所要执行的shell。</span><br><span class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</span><br><span class="line">-v 　显示版本信息。</span><br><span class="line">-x 　恢复之前离线的screen作业。</span><br><span class="line">-ls或--list 　显示目前所有的screen作业。</span><br><span class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用screen参数"><a href="#常用screen参数" class="headerlink" title="常用screen参数"></a>常用screen参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname -&gt; 新建一个叫yourname的session</span><br><span class="line">screen -ls -&gt; 列出当前所有的session</span><br><span class="line">screen -r yourname -&gt; 回到yourname这个session</span><br><span class="line">screen -d yourname -&gt; 远程detach某个session</span><br><span class="line">screen -d -r yourname -&gt; 结束当前session并回到yourname这个session</span><br></pre></td></tr></table></figure>
-
-<p>在每个screen session 下，所有命令都以 ctrl+a(C-a) 开始。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">C-a ? -&gt; 显示所有键绑定信息</span><br><span class="line">C-a c -&gt; 创建一个新的运行shell的窗口并切换到该窗口</span><br><span class="line">C-a n -&gt; Next，切换到下一个 window </span><br><span class="line">C-a p -&gt; Previous，切换到前一个 window </span><br><span class="line">C-a 0..9 -&gt; 切换到第 0..9 个 window</span><br><span class="line">Ctrl+a [Space] -&gt; 由视窗0循序切换到视窗9</span><br><span class="line">C-a C-a -&gt; 在两个最近使用的 window 间切换 </span><br><span class="line">C-a x -&gt; 锁住当前的 window，需用用户密码解锁</span><br><span class="line">C-a d -&gt; detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。 </span><br><span class="line">C-a z -&gt; 把当前session放到后台执行，用 shell 的 fg 命令则可回去。</span><br><span class="line">C-a w -&gt; 显示所有窗口列表</span><br><span class="line">C-a t -&gt; time，显示当前时间，和系统的 load </span><br><span class="line">C-a k -&gt; kill window，强行关闭当前的 window</span><br><span class="line">C-a  -&gt; 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 [vi 一样</span><br><span class="line">    C-b Backward，PageUp </span><br><span class="line">    C-f Forward，PageDown </span><br><span class="line">    H(大写) High，将光标移至左上角 </span><br><span class="line">    L Low，将光标移至左下角 </span><br><span class="line">    0 移到行首 </span><br><span class="line">    $ 行末 </span><br><span class="line">    w forward one word，以字为单位往前移 </span><br><span class="line">    b backward one word，以字为单位往后移 </span><br><span class="line">    Space 第一次按为标记区起点，第二次按为终点 </span><br><span class="line">    Esc 结束 copy mode </span><br><span class="line">C-a ] -&gt; paste，把刚刚在 copy mode 选定的内容贴上</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-screen"><a href="#使用-screen" class="headerlink" title="使用 screen"></a>使用 screen</h3><p> <strong>安装screen</strong> </p>
-<p>流行的Linux发行版（例如Red Hat Enterprise Linux）通常会自带screen实用程序，如果没有的话，可以从GNU screen的官方网站下载。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# yum install screen</span><br><span class="line">[root@TS-DEV ~]# rpm -qa|grep screen</span><br><span class="line">screen-4.0.3-4.el5</span><br><span class="line">[root@TS-DEV ~]#</span><br></pre></td></tr></table></figure>
-
-<p> <strong>创建一个新的窗口</strong> </p>
-<p>安装完成后，直接敲命令screen就可以启动它。但是这样启动的screen会话没有名字，实践上推荐为每个screen会话取一个名字，方便分辨：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -S david </span><br></pre></td></tr></table></figure>
-
-<p>screen启动后，会创建第一个窗口，也就是窗口No. 0，并在其中打开一个系统默认的shell，一般都会是bash。所以你敲入命令screen之后，会立刻又返回到命令提示符，仿佛什么也没有发生似的，其实你已经进入Screen的世界了。当然，也可以在screen命令之后加入你喜欢的参数，使之直接打开你指定的程序，例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen vi david.txt</span><br></pre></td></tr></table></figure>
-
-<p>screen创建一个执行vi david.txt的单窗口会话，退出vi 将退出该窗口/会话。</p>
-<p> <strong>查看窗口和窗口名称</strong> </p>
-<p>打开多个窗口后，可以使用快捷键C-a w列出当前所有窗口。如果使用文本终端，这个列表会列在屏幕左下角，如果使用X环境下的终端模拟器，这个列表会列在标题栏里。窗口列表的样子一般是这样：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">0$</span><span class="bash"> bash  1-$ bash  2*$ bash  </span></span><br></pre></td></tr></table></figure>
-
-<p>这个例子中我开启了三个窗口，其中*号表示当前位于窗口2，-号表示上一次切换窗口时位于窗口1。</p>
-<p>Screen默认会为窗口命名为编号和窗口中运行程序名的组合，上面的例子中窗口都是默认名字。练习了上面查看窗口的方法，你可能就希望各个窗口可以有不同的名字以方便区分了。可以使用快捷键C-a A来为当前窗口重命名，按下快捷键后，Screen会允许你为当前窗口输入新的名字，回车确认。</p>
-<p> <strong>会话分离与恢复</strong> </p>
-<p>你可以不中断screen窗口中程序的运行而暂时断开（detach）screen会话，并在随后时间重新连接（attach）该会话，重新控制各窗口中运行的程序。例如，我们打开一个screen窗口编辑/tmp/david.txt文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen vi /tmp/david.txt</span><br></pre></td></tr></table></figure>
-
-<p>之后我们想暂时退出做点别的事情，比如出去散散步，那么在screen窗口键入C-a d，Screen会给出detached提示：</p>
-<p>暂时中断会话</p>
-<p>半个小时之后回来了，找到该screen会话：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -ls</span><br></pre></td></tr></table></figure>
-
-<p>重新连接会话：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -r 12865</span><br></pre></td></tr></table></figure>
-
-<p>一切都在。</p>
-<p>当然，如果你在另一台机器上没有分离一个Screen会话，就无从恢复会话了。这时可以使用下面命令强制将这个会话从它所在的终端分离，转移到新的终端上来：</p>
-<p> <strong>清除dead 会话</strong> </p>
-<p>如果由于某种原因其中一个会话死掉了（例如人为杀掉该会话），这时screen -list会显示该会话为dead状态。使用screen -wipe命令清除该会话：</p>
-<p> <strong>关闭或杀死窗口</strong> </p>
-<p>正常情况下，当你退出一个窗口中最后一个程序（通常是bash）后，这个窗口就关闭了。另一个关闭窗口的方法是使用C-a k，这个快捷键杀死当前的窗口，同时也将杀死这个窗口中正在运行的进程。</p>
-<p>如果一个Screen会话中最后一个窗口被关闭了，那么整个Screen会话也就退出了，screen进程会被终止。</p>
-<p>除了依次退出/杀死当前Screen会话中所有窗口这种方法之外，还可以使用快捷键C-a :，然后输入quit命令退出Screen会话。需要注意的是，这样退出会杀死所有窗口并退出其中运行的所有程序。其实C-a :这个快捷键允许用户直接输入的命令有很多，包括分屏可以输入split等，这也是实现Screen功能的一个途径，不过个人认为还是快捷键比较方便些。</p>
-<h3 id="screen-高级应用"><a href="#screen-高级应用" class="headerlink" title="screen 高级应用 "></a>screen 高级应用 </h3><p> <strong>会话共享</strong> </p>
-<p>还有一种比较好玩的会话恢复，可以实现会话共享。假设你在和朋友在不同地点以相同用户登录一台机器，然后你创建一个screen会话，你朋友可以在他的终端上命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -x</span><br></pre></td></tr></table></figure>
-
-<p>这个命令会将你朋友的终端Attach到你的Screen会话上，并且你的终端不会被Detach。这样你就可以和朋友共享同一个会话了，如果你们当前又处于同一个窗口，那就相当于坐在同一个显示器前面，你的操作会同步演示给你朋友，你朋友的操作也会同步演示给你。当然，如果你们切换到这个会话的不同窗口中去，那还是可以分别进行不同的操作的。</p>
-<p> <strong>会话锁定与解锁</strong> </p>
-<p>Screen允许使用快捷键C-a s锁定会话。锁定以后，再进行任何输入屏幕都不会再有反应了。但是要注意虽然屏幕上看不到反应，但你的输入都会被Screen中的进程接收到。快捷键C-a q可以解锁一个会话。</p>
-<p>也可以使用C-a x锁定会话，不同的是这样锁定之后，会话会被Screen所属用户的密码保护，需要输入密码才能继续访问这个会话。</p>
-<p> <strong>发送命令到screen会话</strong> </p>
-<p>在Screen会话之外，可以通过screen命令操作一个Screen会话，这也为使用Screen作为脚本程序增加了便利。关于Screen在脚本中的应用超出了入门的范围，这里只看一个例子，体会一下在会话之外对Screen的操作：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -S sandy -X screen ping www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p>这个命令在一个叫做sandy的screen会话中创建一个新窗口，并在其中运行ping命令。</p>
-<p> <strong>屏幕分割</strong> </p>
-<p>现在显示器那么大，将一个屏幕分割成不同区域显示不同的Screen窗口显然是个很酷的事情。可以使用快捷键C-a S将显示器水平分割，Screen 4.00.03版本以后，也支持垂直分屏，快捷键是C-a |。分屏以后，可以使用C-a <tab>在各个区块间切换，每一区块上都可以创建窗口并在其中运行进程。</p>
-<p>可以用C-a X快捷键关闭当前焦点所在的屏幕区块，也可以用C-a Q关闭除当前区块之外其他的所有区块。关闭的区块中的窗口并不会关闭，还可以通过窗口切换找到它。</p>
-<p> <strong>C/P模式和操作</strong> </p>
-<p>screen的另一个很强大的功能就是可以在不同窗口之间进行复制粘贴了。使用快捷键C-a <Esc>或者C-a [可以进入copy/paste模式，这个模式下可以像在vi中一样移动光标，并可以使用空格键设置标记。其实在这个模式下有很多类似vi的操作，譬如使用/进行搜索，使用y快速标记一行，使用w快速标记一个单词等。关于C/P模式下的高级操作，其文档的这一部分有比较详细的说明。</p>
-<p>一般情况下，可以移动光标到指定位置，按下空格设置一个开头标记，然后移动光标到结尾位置，按下空格设置第二个标记，同时会将两个标记之间的部分储存在copy/paste buffer中，并退出copy/paste模式。在正常模式下，可以使用快捷键C-a ]将储存在buffer中的内容粘贴到当前窗口。</p>
-<p> <strong>更多screen功能</strong> </p>
-<p>同大多数UNIX程序一样，GNU Screen提供了丰富强大的定制功能。你可以在Screen的默认两级配置文件/etc/screenrc和$HOME/.screenrc中指定更多，例如设定screen选项，定制绑定键，设定screen会话自启动窗口，启用多用户模式，定制用户访问权限控制等等。如果你愿意的话，也可以自己指定screen配置文件。</p>
-<p>以多用户功能为例，screen默认是以单用户模式运行的，你需要在配置文件中指定multiuser on 来打开多用户模式，通过acl*（acladd,acldel,aclchg…）命令，你可以灵活配置其他用户访问你的screen会话。更多配置文件内容请参考screen的man页。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/sed/" class="post-title-link" itemprop="url">【Linux 命令】sed</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>5.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>功能强大的流式文本编辑器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sed</strong> 是一种流编辑器，它是文本处理中非常重要的工具，能够完美的配合正则表达式使用，功能不同凡响。处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有 改变，除非你使用重定向存储输出。Sed主要用来自动编辑一个或多个文件；简化对文件的反复操作；编写转换程序等。</p>
-<h2 id="sed的选项、命令、替换标记"><a href="#sed的选项、命令、替换标记" class="headerlink" title="sed的选项、命令、替换标记"></a>sed的选项、命令、替换标记</h2><p> <strong>命令格式</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#x27;command&#x27; file(s)</span><br><span class="line">sed [options] -f scriptfile file(s)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-e&lt;script&gt;或--expression=&lt;script&gt;：以选项中的指定的script来处理输入的文本文件；</span><br><span class="line">-f&lt;script文件&gt;或--file=&lt;script文件&gt;：以选项中指定的script文件来处理输入的文本文件；</span><br><span class="line">-h或--help：显示帮助；</span><br><span class="line">-n或--quiet或——silent：仅显示script处理后的结果；</span><br><span class="line">-V或--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定待处理的文本文件列表。</p>
-<h3 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">a\ # 在当前行下面插入文本。</span><br><span class="line">i\ # 在当前行上面插入文本。</span><br><span class="line">c\ # 把选定的行改为新的文本。</span><br><span class="line">d # 删除，删除选择的行。</span><br><span class="line">D # 删除模板块的第一行。</span><br><span class="line">s # 替换指定字符</span><br><span class="line">h # 拷贝模板块的内容到内存中的缓冲区。</span><br><span class="line">H # 追加模板块的内容到内存中的缓冲区。</span><br><span class="line">g # 获得内存缓冲区的内容，并替代当前模板块中的文本。</span><br><span class="line">G # 获得内存缓冲区的内容，并追加到当前模板块文本的后面。</span><br><span class="line">l # 列表不能打印字符的清单。</span><br><span class="line">n # 读取下一个输入行，用下一个命令处理新的行而不是用第一个命令。</span><br><span class="line">N # 追加下一个输入行到模板块后面并在二者间嵌入一个新行，改变当前行号码。</span><br><span class="line">p # 打印模板块的行。</span><br><span class="line">P # (大写) 打印模板块的第一行。</span><br><span class="line">q # 退出Sed。</span><br><span class="line">b lable # 分支到脚本中带有标记的地方，如果分支不存在则分支到脚本的末尾。</span><br><span class="line">r file # 从file中读行。</span><br><span class="line">t label # if分支，从最后一行开始，条件一旦满足或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</span><br><span class="line">T label # 错误分支，从最后一行开始，一旦发生错误或者T，t命令，将导致分支到带有标号的命令处，或者到脚本的末尾。</span><br><span class="line">w file # 写并追加模板块到file末尾。  </span><br><span class="line">W file # 写并追加模板块的第一行到file末尾。  </span><br><span class="line">! # 表示后面的命令对所有没有被选定的行发生作用。  </span><br><span class="line">= # 打印当前行号码。  </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 把注释扩展到下一个换行符以前。  </span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="sed替换标记"><a href="#sed替换标记" class="headerlink" title="sed替换标记"></a>sed替换标记</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g # 表示行内全面替换。  </span><br><span class="line">p # 表示打印行。  </span><br><span class="line">w # 表示把行写入一个文件。  </span><br><span class="line">x # 表示互换模板块中的文本和缓冲区中的文本。  </span><br><span class="line">y # 表示把一个字符翻译为另外的字符（但是不用于正则表达式）</span><br><span class="line">\1 # 子串匹配标记</span><br><span class="line">&amp; # 已匹配字符串标记</span><br></pre></td></tr></table></figure>
-
-<h3 id="sed元字符集"><a href="#sed元字符集" class="headerlink" title="sed元字符集"></a>sed元字符集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">^ # 匹配行开始，如：/^sed/匹配所有以sed开头的行。</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</span></span></span><br><span class="line">. # 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</span><br><span class="line">* # 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</span><br><span class="line">[] # 匹配一个指定范围内的字符，如/[ss]ed/匹配sed和Sed。  </span><br><span class="line">[^] # 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</span><br><span class="line">\(..\) # 匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。</span><br><span class="line">&amp; # 保存搜索字符用来替换其他字符，如s/love/ **&amp;** /，love这成 **love** 。</span><br><span class="line">\&lt; # 匹配单词的开始，如:/\&lt;love/匹配包含以love开头的单词的行。</span><br><span class="line">\&gt; # 匹配单词的结束，如/love\&gt;/匹配包含以love结尾的单词的行。</span><br><span class="line">x\&#123;m\&#125; # 重复字符x，m次，如：/0\&#123;5\&#125;/匹配包含5个0的行。</span><br><span class="line">x\&#123;m,\&#125; # 重复字符x，至少m次，如：/0\&#123;5,\&#125;/匹配至少有5个0的行。</span><br><span class="line">x\&#123;m,n\&#125; # 重复字符x，至少m次，不多于n次，如：/0\&#123;5,10\&#125;/匹配5~10个0的行。  </span><br></pre></td></tr></table></figure>
-
-<h2 id="sed用法实例"><a href="#sed用法实例" class="headerlink" title="sed用法实例"></a>sed用法实例</h2><h3 id="替换操作：s命令"><a href="#替换操作：s命令" class="headerlink" title="替换操作：s命令"></a>替换操作：s命令</h3><p>替换文本中的字符串：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/book/books/&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p> <strong>-n选项</strong> 和 <strong>p命令</strong> 一起使用表示只打印那些发生替换的行：</p>
-<p>sed -n ‘s/test/TEST/p’ file</p>
-<p>直接编辑文件 <strong>选项-i</strong> ，会匹配file文件中每一行的所有book替换为books：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/book/books/g&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="全面替换标记g"><a href="#全面替换标记g" class="headerlink" title="全面替换标记g"></a>全面替换标记g</h3><p>使用后缀 /g 标记会替换每一行中的所有匹配：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/book/books/g&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>当需要从第N处匹配开始替换时，可以使用 /Ng：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo sksksksksksk | sed &#x27;s/sk/SK/2g&#x27;</span><br><span class="line">skSKSKSKSKSK</span><br><span class="line"></span><br><span class="line">echo sksksksksksk | sed &#x27;s/sk/SK/3g&#x27;</span><br><span class="line">skskSKSKSKSK</span><br><span class="line"></span><br><span class="line">echo sksksksksksk | sed &#x27;s/sk/SK/4g&#x27;</span><br><span class="line">skskskSKSKSK</span><br></pre></td></tr></table></figure>
-
-<h3 id="定界符"><a href="#定界符" class="headerlink" title="定界符"></a>定界符</h3><p>以上命令中字符 / 在sed中作为定界符使用，也可以使用任意的定界符：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s:test:TEXT:g&#x27;</span><br><span class="line">sed &#x27;s|test|TEXT|g&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>定界符出现在样式内部时，需要进行转义：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/\/bin/\/usr\/local\/bin/g&#x27;</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除操作：d命令"><a href="#删除操作：d命令" class="headerlink" title="删除操作：d命令"></a>删除操作：d命令</h3><p>删除空白行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^$/d&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>删除文件的第2行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;2d&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>删除文件的第2行到末尾所有行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;2,$d&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>删除文件最后一行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;$d&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>删除文件中所有开头是test的行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^test/&#x27;d file</span><br></pre></td></tr></table></figure>
-
-<h3 id="已匹配字符串标记-amp"><a href="#已匹配字符串标记-amp" class="headerlink" title="已匹配字符串标记&amp;"></a>已匹配字符串标记&amp;</h3><p>正则表达式 \w+ 匹配每一个单词，使用 [&amp;] 替换它，&amp; 对应于之前所匹配到的单词：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo this is a test line | sed &#x27;s/\w\+/[&amp;]/g&#x27;</span><br><span class="line">[this] [is] [a] [test] [line]</span><br></pre></td></tr></table></figure>
-
-<p>所有以192.168.0.1开头的行都会被替换成它自已加localhost：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/^192.168.0.1/&amp;localhost/&#x27; file</span><br><span class="line">192.168.0.1localhost</span><br></pre></td></tr></table></figure>
-
-<h3 id="子串匹配标记-1"><a href="#子串匹配标记-1" class="headerlink" title="子串匹配标记\1"></a>子串匹配标记\1</h3><p>匹配给定样式的其中一部分：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo this is digit 7 in a number | sed &#x27;s/digit \([0-9]\)/\1/&#x27;</span><br><span class="line">this is 7 in a number</span><br></pre></td></tr></table></figure>
-
-<p>命令中 digit 7，被替换成了 7。样式匹配到的子串是 7，(..) 用于匹配子串，对于匹配到的第一个子串就标记为  <strong>\1</strong> ，依此类推匹配到的第二个结果就是  <strong>\2</strong> ，例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo aaa BBB | sed &#x27;s/\([a-z]\+\) \([A-Z]\+\)/\2 \1/&#x27;</span><br><span class="line">BBB aaa</span><br></pre></td></tr></table></figure>
-
-<p>love被标记为1，所有loveable会被替换成lovers，并打印出来：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;s/\(love\)able/\1rs/p&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="组合多个表达式"><a href="#组合多个表达式" class="headerlink" title="组合多个表达式"></a>组合多个表达式</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;表达式&#x27; | sed &#x27;表达式&#x27;</span><br><span class="line"></span><br><span class="line">等价于：</span><br><span class="line"></span><br><span class="line">sed &#x27;表达式; 表达式&#x27;</span><br></pre></td></tr></table></figure>
-
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>sed表达式可以使用单引号来引用，但是如果表达式内部包含变量字符串，就需要使用双引号。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test=hello</span><br><span class="line">echo hello WORLD | sed &quot;s/$test/HELLO&quot;</span><br><span class="line">HELLO WORLD</span><br></pre></td></tr></table></figure>
-
-<h3 id="选定行的范围：-（逗号）"><a href="#选定行的范围：-（逗号）" class="headerlink" title="选定行的范围：,（逗号）"></a>选定行的范围：,（逗号）</h3><p>所有在模板test和check所确定的范围内的行都被打印：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;/test/,/check/p&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>打印从第5行开始到第一个包含以test开始的行之间的所有行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;5,/^test/p&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>对于模板test和west之间的行，每行的末尾用字符串aaa bbb替换：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/test/,/west/s/$/aaa bbb/&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="多点编辑：e命令"><a href="#多点编辑：e命令" class="headerlink" title="多点编辑：e命令"></a>多点编辑：e命令</h3><p>-e选项允许在同一行里执行多条命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e &#x27;1,5d&#x27; -e &#x27;s/test/check/&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>上面sed表达式的第一条命令删除1至5行，第二条命令用check替换test。命令的执行顺序对结果有影响。如果两个命令都是替换命令，那么第一个替换命令将影响第二个替换命令的结果。</p>
-<p>和 -e 等价的命令是 –expression：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed --expression=&#x27;s/test/check/&#x27; --expression=&#x27;/love/d&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="从文件读入：r命令"><a href="#从文件读入：r命令" class="headerlink" title="从文件读入：r命令"></a>从文件读入：r命令</h3><p>file里的内容被读进来，显示在与test匹配的行后面，如果匹配多行，则file的内容将显示在所有匹配行的下面：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/test/r file&#x27; filename</span><br></pre></td></tr></table></figure>
-
-<h3 id="写入文件：w命令"><a href="#写入文件：w命令" class="headerlink" title="写入文件：w命令  "></a>写入文件：w命令  </h3><p>在example中所有包含test的行都被写入file里：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;/test/w file&#x27; example</span><br></pre></td></tr></table></figure>
-
-<h3 id="追加（行下）：a-命令"><a href="#追加（行下）：a-命令" class="headerlink" title="追加（行下）：a\命令"></a>追加（行下）：a\命令</h3><p>将 this is a test line 追加到 以test 开头的行后面：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^test/a\this is a test line&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>在 test.conf 文件第2行之后插入 this is a test line：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;2a\this is a test line&#x27; test.conf</span><br></pre></td></tr></table></figure>
-
-<h3 id="插入（行上）：i-命令"><a href="#插入（行上）：i-命令" class="headerlink" title="插入（行上）：i\命令"></a>插入（行上）：i\命令</h3><p>将 this is a test line 追加到以test开头的行前面：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^test/i\this is a test line&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>在test.conf文件第5行之前插入this is a test line：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;5i\this is a test line&#x27; test.conf</span><br></pre></td></tr></table></figure>
-
-<h3 id="下一个：n命令"><a href="#下一个：n命令" class="headerlink" title="下一个：n命令"></a>下一个：n命令</h3><p>如果test被匹配，则移动到匹配行的下一行，替换这一行的aa，变为bb，并打印该行，然后继续：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/test/&#123; n; s/aa/bb/; &#125;&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="变形：y命令"><a href="#变形：y命令" class="headerlink" title="变形：y命令"></a>变形：y命令</h3><p>把1~10行内所有abcde转变为大写，注意，正则表达式元字符不能使用这个命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;1,10y/abcde/ABCDE/&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="退出：q命令"><a href="#退出：q命令" class="headerlink" title="退出：q命令"></a>退出：q命令</h3><p>打印完第10行后，退出sed</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;10q&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="保持和获取：h命令和G命令"><a href="#保持和获取：h命令和G命令" class="headerlink" title="保持和获取：h命令和G命令"></a>保持和获取：h命令和G命令</h3><p>在sed处理文件的时候，每一行都被保存在一个叫模式空间的临时缓冲区中，除非行被删除或者输出被取消，否则所有被处理的行都将 打印在屏幕上。接着模式空间被清空，并存入新的一行等待处理。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e &#x27;/test/h&#x27; -e &#x27;$G&#x27; file</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子里，匹配test的行被找到后，将存入模式空间，h命令将其复制并存入一个称为保持缓存区的特殊缓冲区内。第二条语句的意思是，当到达最后一行后，G命令取出保持缓冲区的行，然后把它放回模式空间中，且追加到现在已经存在于模式空间中的行的末尾。在这个例子中就是追加到最后一行。简单来说，任何包含test的行都被复制并追加到该文件的末尾。</p>
-<h3 id="保持和互换：h命令和x命令"><a href="#保持和互换：h命令和x命令" class="headerlink" title="保持和互换：h命令和x命令"></a>保持和互换：h命令和x命令</h3><p>互换模式空间和保持缓冲区的内容。也就是把包含test与check的行互换：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e &#x27;/test/h&#x27; -e &#x27;/check/x&#x27; file</span><br></pre></td></tr></table></figure>
-
-<h3 id="脚本scriptfile"><a href="#脚本scriptfile" class="headerlink" title="脚本scriptfile"></a>脚本scriptfile</h3><p>sed脚本是一个sed的命令清单，启动Sed时以-f选项引导脚本文件名。Sed对于脚本中输入的命令非常挑剔，在命令的末尾不能有任何空白或文本，如果在一行中有多个命令，要用分号分隔。以#开头的行为注释行，且不能跨行。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] -f scriptfile file(s)</span><br></pre></td></tr></table></figure>
-
-<h3 id="打印奇数行或偶数行"><a href="#打印奇数行或偶数行" class="headerlink" title="打印奇数行或偶数行"></a>打印奇数行或偶数行</h3><p>方法1：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;p;n&#x27; test.txt  #奇数行</span><br><span class="line">sed -n &#x27;n;p&#x27; test.txt  #偶数行</span><br></pre></td></tr></table></figure>
-
-<p>方法2：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -n &#x27;1~2p&#x27; test.txt  #奇数行</span><br><span class="line">sed -n &#x27;2~2p&#x27; test.txt  #偶数行</span><br></pre></td></tr></table></figure>
-
-<h3 id="打印匹配字符串的下一行"><a href="#打印匹配字符串的下一行" class="headerlink" title="打印匹配字符串的下一行"></a>打印匹配字符串的下一行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -A 1 SCC URFILE</span><br><span class="line">sed -n &#x27;/SCC/&#123;n;p&#125;&#x27; URFILE</span><br><span class="line">awk &#x27;/SCC/&#123;getline; print&#125;&#x27; URFILE</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/seinfo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/seinfo/" class="post-title-link" itemprop="url">【Linux 命令】seinfo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>403</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>查询SELinux的策略提供多少相关规则</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>seinfo命令</strong> 是用来查询SELinux的策略提供多少相关规则，一个主体进程能否读取到目标文件资源的重点是在于SELinux的策略以及策略内的各项规则，然后再通过该规则的定义去处理各项目标文件的安全上下文，尤其是“类型”部分。SELinux的策略与规则管理相关命令：seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seinfo（选项）</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-A：列出SELinux的状态、规则布尔值、身份识别、角色、类型等所有信息。</span><br><span class="line">-t：列出SELinux所有类型(type)的种类。</span><br><span class="line">-r：列出SELinux所有角色(role)的种类。</span><br><span class="line">-u：列出SELinux所有身份识别(user)的种类。</span><br><span class="line">-b：列出所有规则的种类（布尔值）。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>列出与httpd有关的规则：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seinfo -b | grep httpd</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/semanage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/semanage/" class="post-title-link" itemprop="url">【Linux 命令】semanage</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
+      <span>2.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1298,30 +370,155 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>默认目录的安全上下文查询与修改</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>semanage命令</strong> 是用来查询与修改SELinux默认目录的安全上下文。SELinux的策略与规则管理相关命令：seinfo命令、sesearch命令、getsebool命令、setsebool命令、semanage命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">semanage &#123;login|user|port|interface|fcontext|translation&#125; -l</span><br><span class="line">semanage fcontext -&#123;a|d|m&#125; [-frst] file_spec</span><br></pre></td></tr></table></figure>
+          <p>格式化并输出结果。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E5%86%85%E5%BB%BA%E5%91%BD%E4%BB%A4">bash内建命令</a></li>
+<li><a href="#%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4">GNU coreutils中的命令</a></li>
+</ul>
+<h2 id="内建命令"><a href="#内建命令" class="headerlink" title="内建命令"></a>内建命令</h2><h4 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf [-v var] format [arguments]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-l：查询。</span><br><span class="line">fcontext：主要用在安全上下文方面。</span><br><span class="line">-a：增加，你可以增加一些目录的默认安全上下文类型设置。</span><br><span class="line">-m：修改。</span><br><span class="line">-d：删除。</span><br></pre></td></tr></table></figure>
+<h4 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h4><ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-v var：将结果输出到变量var中而不是输出到标准输出。</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查询一下<code>/var/www/html</code>的默认安全性本文的设置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -l</span><br><span class="line">SELinux fcontext    type          Context</span><br><span class="line">....(前面省略)....</span><br><span class="line">/var/www(/.*)?      all files     system_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">....(後面省略)....</span><br></pre></td></tr></table></figure>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">转义序列：除了支持printf(1)和printf(3)的转义序列，内建printf还支持以下转义序列：</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">b       展开参数中的反斜杠转义字符。</span></span><br><span class="line"><span class="meta">%</span><span class="bash">q       将参数扩起以用作shell输入。</span></span><br><span class="line"><span class="meta">%</span><span class="bash">(fmt)T  根据strftime(3)中的转义字符来输出日期时间字符串。</span></span><br></pre></td></tr></table></figure>
 
-<p>如上面例子所示，我们可以查询的到每个目录的安全性本文！而目录的设定可以使用正则表达式去指定一个范围。那么如果我们想要增加某些自定义目录的安全性本文呢？举例来说，我想要色设置<code>/srv/samba</code>成为 <code>public_content_t</code>的类型时，应该如何设置呢？</p>
-<p>用semanage命令设置<code>/srv/samba</code>目录的默认安全性本文为<code>public_content_t</code>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /srv/samba</span><br><span class="line">ll -Zd /srv/samba</span><br><span class="line">drwxr-xr-x  root root root:object_r:var_t    /srv/samba</span><br></pre></td></tr></table></figure>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>返回状态为成功除非给出了非法选项、写错误、赋值错误。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> %-5s 格式为左对齐且宽度为5的字符串代替（<span class="string">&#x27;-&#x27;</span>表示左对齐），不使用则默认右对齐。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> %-4.2f 格式为左对齐宽度为4，保留两位小数。</span></span><br><span class="line"></span><br><span class="line">printf &quot;%-5s %-10s %-4s\n&quot; NO Name Mark</span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 01 Tom 90.3456</span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 02 Jack 89.2345</span><br><span class="line">printf &quot;%-5s %-10s %-4.2f\n&quot; 03 Jeff 98.4323</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">NO    Name       Mark</span><br><span class="line">01    Tom        90.35</span><br><span class="line">02    Jack       89.23</span><br><span class="line">03    Jeff       98.43</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> %b %q %(fmt)T 的例子。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> see it again with a newline.</span></span><br><span class="line">printf &quot;%s\n&quot; &#x27;hello world&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 展开换行符，和上面的结果一样。</span></span><br><span class="line">printf &quot;%b&quot; &#x27;hello world\n&#x27;</span><br><span class="line"></span><br><span class="line">printf &#x27;%q\n&#x27; &#x27;a b c&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">a\ b\ c</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> %z为时区，%n为换行符。</span></span><br><span class="line">printf &quot;%(%F %T %z%n)T&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">2019-09-10 01:48:07 +0000</span><br></pre></td></tr></table></figure>
 
-<p>如上所示，默认的情况应该是<code>var_t</code>这个咚咚的！</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -l | grep &#x27;/srv&#x27;</span><br><span class="line">/srv/.*                     all files   system_u:object_r:var_t:s0</span><br><span class="line">/srv/([^/]*/)?ftp(/.*)?     all files   system_u:object_r:public_content_t:s0</span><br><span class="line">/srv/([^/]*/)?www(/.*)?     all files   system_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">/srv/([^/]*/)?rsync(/.*)?   all files   system_u:object_r:public_content_t:s0</span><br><span class="line">/srv/gallery2(/.*)?         all files   system_u:object_r:httpd_sys_content_t:s0</span><br><span class="line">/srv                        directory   system_u:object_r:var_t:s0   //看这里！</span><br></pre></td></tr></table></figure>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ol>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h2 id="外部命令"><a href="#外部命令" class="headerlink" title="外部命令"></a>外部命令</h2><h4 id="概要-1"><a href="#概要-1" class="headerlink" title="概要"></a>概要</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printf FORMAT [ARGUMENT]...</span><br><span class="line">printf OPTION</span><br></pre></td></tr></table></figure>
 
-<p>上面则是默认的<code>/srv</code>底下的安全性本文资料，不过，并没有指定到<code>/srv/samba</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">semanage fcontext -a -t public_content_t &quot;/srv/samba(/.*)?&quot;</span><br><span class="line">semanage fcontext -l | grep &#x27;/srv/samba&#x27;</span><br><span class="line">/srv/samba(/.*)?            all files   system_u:object_r:public_content_t:s0</span><br></pre></td></tr></table></figure>
+<h4 id="主要用途-1"><a href="#主要用途-1" class="headerlink" title="主要用途"></a>主要用途</h4><ul>
+<li>格式化参数并输出。</li>
+</ul>
+<h4 id="选项-1"><a href="#选项-1" class="headerlink" title="选项"></a>选项</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help 显示帮助信息并退出。</span><br><span class="line">--version 显示版本信息并退出。</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/selinux/targeted/contexts/files/file_contexts.local</span><br><span class="line"><span class="meta">#</span><span class="bash"> This file is auto-generated by libsemanage</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please use the semanage <span class="built_in">command</span> to make changes</span></span><br><span class="line">/srv/samba(/.*)?    system_u:object_r:public_content_t:s0  #写入这个档案</span><br></pre></td></tr></table></figure>
+<h4 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h4><p>format：输出格式。</p>
+<p>arguments：一到多个参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">在这里忽略了（%b %q），如果你安装的coreutils版本支持它们，那么请参考上面的例子。</span><br><span class="line">支持的转义序列：</span><br><span class="line"></span><br><span class="line">\&quot;          双引号</span><br><span class="line">\\          反斜杠</span><br><span class="line">\a          响铃</span><br><span class="line">\b          退格</span><br><span class="line">\c          截断输出</span><br><span class="line">\e          退出</span><br><span class="line">\f          翻页</span><br><span class="line">\n          换行</span><br><span class="line">\r          回车</span><br><span class="line">\t          水平制表符</span><br><span class="line">\v          竖直制表符</span><br><span class="line">\NNN        八进制数 (1到3位数字)</span><br><span class="line">\xHH        十六进制数 (1到2位数字)</span><br><span class="line">\uHHHH      Unicode字符附加4位十六进制数字</span><br><span class="line">\UHHHHHHHH  Unicode字符附加8位十六进制数字</span><br><span class="line"><span class="meta">%</span><span class="bash">%          百分号</span></span><br><span class="line"></span><br><span class="line">以及&#x27;diouxXfeEgGcs&#x27;中的一个结尾的C格式规范，将被转换为正确的类型并处理可变宽度。</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">restorecon -Rv /srv/samba* #尝试恢复默认值</span><br><span class="line">ll -Zd /srv/samba</span><br><span class="line">drwxr-xr-x  root root system_u:object_r:public_content_t /srv/samba/  #有默认值，以后用restorecon命令来修改比较简单！</span><br></pre></td></tr></table></figure>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用 /usr/bin/<span class="built_in">printf</span> 确保调用的不是内建命令。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 当然，在你关闭内建<span class="built_in">printf</span>以及确认当前环境没有<span class="built_in">printf</span>函数的情况下，可直接使用<span class="built_in">printf</span>，详见末尾<span class="string">&quot;注意&quot;</span>的链接。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 按行打印数组和关联数组的下标及值。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 声明数组可以不加<span class="string">&#x27;declare -a&#x27;</span>或<span class="string">&#x27;local -a&#x27;</span>（在函数内声明的局部变量）。</span></span><br><span class="line">arr=(&#x27;line1&#x27; &#x27;line2&#x27;)</span><br><span class="line">/usr/bin/printf &quot;%s\n&quot; $&#123;!arr[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出下标</span></span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">/usr/bin/printf &quot;%s\n&quot; $&#123;arr[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出值</span></span><br><span class="line">line1</span><br><span class="line">line2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">声明关联数组（也就是字典）必须加<span class="string">&#x27;declare -A&#x27;</span>或<span class="string">&#x27;local -A&#x27;</span>（在函数内声明的局部变量）。</span></span><br><span class="line">declare -A assoc_arr=([&#x27;key1&#x27;]=&#x27;value1&#x27; [&#x27;key2&#x27;]=&#x27;value2&#x27;)</span><br><span class="line">/usr/bin/printf &quot;%s\n&quot; $&#123;!assoc_arr[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出键。</span></span><br><span class="line">key2</span><br><span class="line">key1</span><br><span class="line">/usr/bin/printf &quot;%s\n&quot; $&#123;assoc_arr[@]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出值。</span></span><br><span class="line">value2</span><br><span class="line">value1</span><br></pre></td></tr></table></figure>
 
-<p>semanage命令的功能很多，这里主要用到的仅有fcontext这个选项的用法而已。如上所示，你可以使用semanage来查询所有的目录默认值，也能够使用它来增加默认值的设置！</p>
+<h4 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h4><p>返回状态为成功除非给出了非法选项等。</p>
+<h4 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h4><ol>
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 printf</code>或<code>info coreutils &#39;pwd invocation&#39;</code>。</p>
+</li>
+<li><p>启动或关闭内建命令请查看<code>enable</code>命令，关于同名优先级的问题请查看<code>builtin</code>命令的例子部分的相关讨论。</p>
+</li>
+<li><p>我通过和<code>bug-bash@gnu.org</code>的交流，得到了关于这几个格式说明符<code>%b %q %(fmt)T</code>的解释：</p>
+<blockquote>
+<p>printf(1)中的%b格式说明符是printf(3)支持的格式之外增加的一个POSIX特性。</p>
+<p>%q和%T说明符是非标准的，并且不受所有独立实现的printf的支持。</p>
+</blockquote>
+<p>更多细节请参考链接：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wdWJzLm9wZW5ncm91cC5vcmcvb25saW5lcHVicy85Njk5OTE5Nzk5L3V0aWxpdGllcy9wcmludGYuaHRtbA==">POSIX printf<i class="fa fa-external-link-alt"></i></span><br><code>APPLICATION USAGE</code>段落的第五节。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wdWJzLm9wZW5ncm91cC5vcmcvb25saW5lcHVicy85Njk5OTE5Nzk5L2Z1bmN0aW9ucy9wcmludGYuaHRtbA==">POSIX printf格式说明符<i class="fa fa-external-link-alt"></i></span><br>的<code>Description</code>段落。</li>
+</ul>
+</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/pr/" class="post-title-link" itemprop="url">【Linux 命令】pr</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>146</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将文本文件转换成适合打印的格式</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pr命令</strong> 用来将文本文件转换成适合打印的格式，它可以把较大的文件分割成多个页面进行打印，并为每个页面添加标题。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pr(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-h&lt;标题&gt;：为页指定标题；</span><br><span class="line">-l&lt;行数&gt;：指定每页的行数。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换格式的文件。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1343,7 +540,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sendmail/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ppp-off/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1360,7 +557,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/sendmail/" class="post-title-link" itemprop="url">【Linux 命令】sendmail</a>
+            <a href="/linux-command/ppp-off/" class="post-title-link" itemprop="url">【Linux 命令】ppp-off</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1370,8 +567,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:59:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1391,7 +589,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>278</span>
+      <span>55</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1409,11 +607,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>著名电子邮件服务器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sendmail命令</strong> 是一款著名的电子邮件传送代理程序，也就是平常说的电子邮件服务器，它基于标准的简单邮件传输协议（SMTP）。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendmail(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-bd：以守护进程方式运行指令；</span><br><span class="line">-bD：以前台运行方式运行；</span><br><span class="line">-bi：初始化别名数据库；</span><br><span class="line">-bm：以常规发送电子邮件；</span><br><span class="line">-bp：显示邮件的发送队列；</span><br><span class="line">-C：指定配置文件；</span><br><span class="line">-D：将调试的输出信息保存到日志文件，而不显示在标准输出设备上；</span><br><span class="line">-F：指定邮件发送者全名；</span><br><span class="line">-n：禁止使用邮件别名功能；</span><br><span class="line">-f：指定发件人的名字；</span><br><span class="line">-q：设置处理邮件队列中邮件的时间间隔。</span><br></pre></td></tr></table></figure>
+          <p>关闭ppp连线</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>这是Slackware发行版内附的程序，让用户切断PPP的网络连线。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ppp-off</span><br></pre></td></tr></table></figure>
 
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
@@ -1437,7 +633,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/seq/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/poweroff/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1454,7 +650,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/seq/" class="post-title-link" itemprop="url">【Linux 命令】seq</a>
+            <a href="/linux-command/poweroff/" class="post-title-link" itemprop="url">【Linux 命令】poweroff</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1464,8 +660,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2020-09-25 09:36:07" itemprop="dateCreated datePublished" datetime="2020-09-25T09:36:07+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:59:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1485,7 +682,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>675</span>
+      <span>220</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1503,33 +700,625 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>以指定增量从首数开始打印数字到尾数</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>seq命令</strong> 用于产生从某个数到另外一个数之间的所有整数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seq [选项]... 尾数</span><br><span class="line">seq [选项]... 首数 尾数</span><br><span class="line">seq [选项]... 首数 增量 尾数</span><br></pre></td></tr></table></figure>
+          <p>关闭Linux系统，关闭记录会被写入到/var/log/wtmp日志文件中</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>grename命令</strong> 可以重命名卷组的名称。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poweroff [选项]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-f, --format=格式        使用printf 样式的浮点格式</span><br><span class="line">-s, --separator=字符串   使用指定字符串分隔数字（默认使用：\n）</span><br><span class="line">-w, --equal-width        在列前添加0 使得宽度相同</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n 关闭之前不同步</span><br><span class="line">-p 当被称为halt时关闭电源</span><br><span class="line">-v 增加输出，包括消息</span><br><span class="line">-q 降低输出错误唯一的消息</span><br><span class="line">-w 并不实际关闭系统，只是写入/var/log/wtmp文件中</span><br><span class="line">-f 强制关机，不调用shutdown</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>-f选项：指定格式</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">seq -f<span class="string">&quot;%3g&quot;</span> 9 11</span></span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td></tr></table></figure>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>关闭Linux系统。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# poweroff</span><br></pre></td></tr></table></figure>
 
-<p><code>%</code>后面指定数字的位数 默认是<code>%g</code>，<code>%3g</code>那么数字位数不足部分是空格。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">sed -f<span class="string">&quot;%03g&quot;</span> 9 11</span></span><br><span class="line"><span class="meta">#</span><span class="bash">seq -f<span class="string">&quot;str%03g&quot;</span> 9 11</span></span><br><span class="line">str009</span><br><span class="line">str010</span><br><span class="line">str011</span><br></pre></td></tr></table></figure>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
-<p>这样的话数字位数不足部分是0，<code>%</code>前面制定字符串。</p>
-<p> <strong>-w选项：指定输出数字同宽</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">seq -w 98 101</span><br><span class="line">098</span><br><span class="line">099</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>不能和<code>-f</code>一起用，输出是同宽的。</p>
-<p> <strong>-s选项：指定分隔符（默认是回车）</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq -s&quot; &quot; -f&quot;str%03g&quot; 9 11</span><br><span class="line">str009 str010 str011</span><br></pre></td></tr></table></figure>
+    
+    
+    
 
-<p>要指定<code>/t</code>做为分隔符号：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq -s&quot;`echo -e &quot;/t&quot;`&quot; 9 11</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
 
-<p>指定<code>\n</code>作为分隔符号：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq -s&quot;`echo -e &quot;\n&quot;`&quot; 9 11</span><br><span class="line">19293949596979899910911</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/popd/">
 
-<p>得到的是个错误结果，不过一般也没有这个必要，它默认的就是回车作为分隔符。</p>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/popd/" class="post-title-link" itemprop="url">【Linux 命令】popd</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:58:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>793</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从目录堆栈中删除目录。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popd [-n] [+N | -N]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li><p>从目录堆栈中删除目录，如果是顶部目录被删除，那么当前工作目录会切换到新的顶部目录。</p>
+</li>
+<li><p>没有参数时，删除目录堆栈顶部。</p>
+</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n    抑制删除目录引起的当前工作目录变化。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>+N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，左起的第N个目录将被删除。（从0开始计数）</p>
+<p>-N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，右起的第N个目录将被删除。（从0开始计数）</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非提供了非法选项或执行出现错误。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加目录到堆栈，当前工作目录不变。</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Pictures</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/bin</span><br><span class="line">~ ~/bin ~/Pictures ~/Desktop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从目录堆栈中删除目录，删除顶部目录时会改变当前工作目录：</span></span><br><span class="line">[user2@pc ~]$ popd -2</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd +1</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd</span><br><span class="line">~/Desktop</span><br><span class="line">[user2@pc Desktop]$</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从目录堆栈中删除目录，删除顶部目录时不会改变当前工作目录：</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd -n</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ </span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><code>bash</code>的目录堆栈命令包括<code>dirs popd pushd</code>。</li>
+<li>当前目录始终是目录堆栈的顶部。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdXBlcnVzZXIuY29tL3F1ZXN0aW9ucy83ODQ0NTAvcG9wZC1hbmQtcHVzaGQtYmVoYXZpb3Itd2l0aC1uLW9wdGlvbg==">popd、pushd命令’-n’选项的行为<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/pmap/" class="post-title-link" itemprop="url">【Linux 命令】pmap</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:58:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>报告进程的内存映射关系</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pmap命令</strong> 用于报告进程的内存映射关系，是Linux调试及运维一个很好的工具。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pmap(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-x：显示扩展格式；</span><br><span class="line">-d：显示设备格式；</span><br><span class="line">-q：不显示头尾行；</span><br><span class="line">-V：显示指定版本。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程号：指定需要显示内存映射关系的进程号，可以是多个进程号。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">pidof nginx</span><br><span class="line">13312 5371</span><br><span class="line"></span><br><span class="line">pmap -x 5371</span><br><span class="line">5371:   nginx: worker process                </span><br><span class="line">Address           Kbytes     RSS   Dirty Mode   Mapping</span><br><span class="line">0000000000400000     564     344       0 r-x--  nginx</span><br><span class="line">000000000068c000      68      68      60 rw---  nginx</span><br><span class="line">000000000069d000      56      12      12 rw---    [ anon ]</span><br><span class="line">000000000a0c8000    1812    1684    1684 rw---    [ anon ]</span><br><span class="line">0000003ac0a00000     112      40       0 r-x--  ld-2.5.so</span><br><span class="line">0000003ac0c1c000       4       4       4 r----  ld-2.5.so</span><br><span class="line">0000003ac0c1d000       4       4       4 rw---  ld-2.5.so</span><br><span class="line">0000003ac0e00000    1340     284       0 r-x--  libc-2.5.so</span><br><span class="line">0000003ac0f4f000    2044       0       0 -----  libc-2.5.so</span><br><span class="line">0000003ac114e000      16      16       8 r----  libc-2.5.so</span><br><span class="line">0000003ac1152000       4       4       4 rw---  libc-2.5.so</span><br><span class="line">0000003ac1153000      20      20      20 rw---    [ anon ]</span><br><span class="line">0000003ac1200000       8       4       0 r-x--  libdl-2.5.so</span><br><span class="line">0000003ac1202000    2048       0       0 -----  libdl-2.5.so</span><br><span class="line">0000003ac1402000       4       4       4 r----  libdl-2.5.so</span><br><span class="line">0000003ac1403000       4       4       4 rw---  libdl-2.5.so</span><br><span class="line">0000003ac1600000      84       0       0 r-x--  libselinux.so.1</span><br><span class="line">0000003ac1615000    2048       0       0 -----  libselinux.so.1</span><br><span class="line">0000003ac1815000       8       8       8 rw---  libselinux.so.1</span><br><span class="line">0000003ac1817000       4       4       4 rw---    [ anon ]</span><br><span class="line">0000003ac1a00000     236       0       0 r-x--  libsepol.so.1</span><br><span class="line">0000003ac1a3b000    2048       0       0 -----  libsepol.so.1</span><br><span class="line">0000003ac1c3b000       4       4       4 rw---  libsepol.so.1</span><br><span class="line">0000003ac1c3c000      40       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac1e00000      88      44       0 r-x--  libpthread-2.5.so</span><br><span class="line">0000003ac1e16000    2048       0       0 -----  libpthread-2.5.so</span><br><span class="line">0000003ac2016000       4       4       4 r----  libpthread-2.5.so</span><br><span class="line">0000003ac2017000       4       4       4 rw---  libpthread-2.5.so</span><br><span class="line">0000003ac2018000      16       4       4 rw---    [ anon ]</span><br><span class="line">0000003ac2600000      80      52       0 r-x--  libz.so.1.2.3</span><br><span class="line">0000003ac2614000    2044       0       0 -----  libz.so.1.2.3</span><br><span class="line">0000003ac2813000       4       4       4 rw---  libz.so.1.2.3</span><br><span class="line">0000003ac2a00000      36       4       0 r-x--  libcrypt-2.5.so</span><br><span class="line">0000003ac2a09000    2044       0       0 -----  libcrypt-2.5.so</span><br><span class="line">0000003ac2c08000       4       4       4 r----  libcrypt-2.5.so</span><br><span class="line">0000003ac2c09000       4       4       4 rw---  libcrypt-2.5.so</span><br><span class="line">0000003ac2c0a000     184       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac3600000       8       0       0 r-x--  libkeyutils-1.2.so</span><br><span class="line">0000003ac3602000    2044       0       0 -----  libkeyutils-1.2.so</span><br><span class="line">0000003ac3801000       4       4       4 rw---  libkeyutils-1.2.so</span><br><span class="line">0000003ac3a00000      68       0       0 r-x--  libresolv-2.5.so</span><br><span class="line">0000003ac3a11000    2048       0       0 -----  libresolv-2.5.so</span><br><span class="line">0000003ac3c11000       4       4       4 r----  libresolv-2.5.so</span><br><span class="line">0000003ac3c12000       4       4       4 rw---  libresolv-2.5.so</span><br><span class="line">0000003ac3c13000       8       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac3e00000       8       0       0 r-x--  libcom_err.so.2.1</span><br><span class="line">0000003ac3e02000    2044       0       0 -----  libcom_err.so.2.1</span><br><span class="line">0000003ac4001000       4       4       4 rw---  libcom_err.so.2.1</span><br><span class="line">0000003ac4200000    1204       8       0 r-x--  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac432d000    2044       0       0 -----  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac452c000     132      88      12 rw---  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac454d000      16      12      12 rw---    [ anon ]</span><br><span class="line">0000003ac4600000     176       0       0 r-x--  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac462c000    2048       0       0 -----  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac482c000       8       8       8 rw---  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac4a00000     144       0       0 r-x--  libk5crypto.so.3.1</span><br><span class="line">0000003ac4a24000    2044       0       0 -----  libk5crypto.so.3.1</span><br><span class="line">0000003ac4c23000       8       8       8 rw---  libk5crypto.so.3.1</span><br><span class="line">0000003ac4e00000      32       0       0 r-x--  libkrb5support.so.0.1</span><br><span class="line">0000003ac4e08000    2044       0       0 -----  libkrb5support.so.0.1</span><br><span class="line">0000003ac5007000       4       4       4 rw---  libkrb5support.so.0.1</span><br><span class="line">0000003ac5200000     580       0       0 r-x--  libkrb5.so.3.3</span><br><span class="line">0000003ac5291000    2048       0       0 -----  libkrb5.so.3.3</span><br><span class="line">0000003ac5491000      16      16      12 rw---  libkrb5.so.3.3</span><br><span class="line">0000003ac5a00000     288       4       0 r-x--  libssl.so.0.9.8e</span><br><span class="line">0000003ac5a48000    2048       0       0 -----  libssl.so.0.9.8e</span><br><span class="line">0000003ac5c48000      24      16      12 rw---  libssl.so.0.9.8e</span><br><span class="line">00002b5751808000       8       8       8 rw---    [ anon ]</span><br><span class="line">00002b5751810000     108      36       0 r-x--  libpcre.so.1.2.0</span><br><span class="line">00002b575182b000    2044       0       0 -----  libpcre.so.1.2.0</span><br><span class="line">00002b5751a2a000       4       4       4 rw---  libpcre.so.1.2.0</span><br><span class="line">00002b5751a2b000      28      28      28 rw---    [ anon ]</span><br><span class="line">00002b5751a32000      40      20       0 r-x--  libnss_files-2.5.so</span><br><span class="line">00002b5751a3c000    2044       0       0 -----  libnss_files-2.5.so</span><br><span class="line">00002b5751c3b000       4       4       4 r----  libnss_files-2.5.so</span><br><span class="line">00002b5751c3c000       4       4       4 rw---  libnss_files-2.5.so</span><br><span class="line">00002b5751c3d000       4       4       4 rw-s-  zero (deleted)</span><br><span class="line">00002b5751c3e000   20012   20000   20000 rw---    [ anon ]</span><br><span class="line">00007fffbf2ce000      84      20      20 rw---    [ stack ]</span><br><span class="line">00007fffbf35e000      12       0       0 r-x--    [ anon ]</span><br><span class="line">ffffffffff600000    8192       0       0 -----    [ anon ]</span><br><span class="line">----------------  ------  ------  ------</span><br><span class="line">total kB           72880   22940   22000</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pkill/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/pkill/" class="post-title-link" itemprop="url">【Linux 命令】pkill</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:57:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>298</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>可以按照进程名杀死进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pkill命令</strong> 可以按照进程名杀死进程。pkill和killall应用方法差不多，也是直接杀死运行中的程序；如果您想杀掉单个进程，请用kill来杀掉。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-o：仅向找到的最小（起始）进程号发送信号；</span><br><span class="line">-n：仅向找到的最大（结束）进程号发送信号；</span><br><span class="line">-P：指定父进程号发送信号；</span><br><span class="line">-g：指定进程组；</span><br><span class="line">-t：指定开启进程的终端。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程名称：指定要查找的进程名称，同时也支持类似grep指令中的匹配模式。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pgrep -l gaim</span><br><span class="line">2979 gaim</span><br><span class="line"></span><br><span class="line">pkill gaim</span><br></pre></td></tr></table></figure>
+
+<p>也就是说：kill对应的是PID，pkill对应的是command。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ping/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ping/" class="post-title-link" itemprop="url">【Linux 命令】ping</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:57:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>测试主机之间网络的连通性</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ping命令</strong> 用来测试主机之间网络的连通性。执行ping指令会使用ICMP传输协议，发出要求回应的信息，若远端主机的网络功能没有问题，就会回应该信息，因而得知该主机运作正常。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-d：使用Socket的SO_DEBUG功能；</span><br><span class="line">-c&lt;完成次数&gt;：设置完成要求回应的次数；</span><br><span class="line">-f：极限检测；</span><br><span class="line">-i&lt;间隔秒数&gt;：指定收发信息的间隔时间；</span><br><span class="line">-I&lt;网络界面&gt;：使用指定的网络界面送出数据包；</span><br><span class="line">-l&lt;前置载入&gt;：设置在送出要求信息之前，先行发出的数据包；</span><br><span class="line">-n：只输出数值；</span><br><span class="line">-p&lt;范本样式&gt;：设置填满数据包的范本样式；</span><br><span class="line">-q：不显示指令执行过程，开头和结尾的相关信息除外；</span><br><span class="line">-r：忽略普通的Routing Table，直接将数据包送到远端主机上；</span><br><span class="line">-R：记录路由过程；</span><br><span class="line">-s&lt;数据包大小&gt;：设置数据包的大小；</span><br><span class="line">-t&lt;存活数值&gt;：设置存活数值TTL的大小；</span><br><span class="line">-v：详细显示指令的执行过程。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目的主机：指定发送ICMP报文的目的主机。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@AY1307311912260196fcZ ~]# ping www.jsdig.com</span><br><span class="line">PING host.1.jsdig.com (100.42.212.8) 56(84) bytes of data.</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=1 ttl=50 time=177 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=2 ttl=50 time=178 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=3 ttl=50 time=174 ms</span><br><span class="line">64 bytes from 100-42-212-8.static.webnx.com (100.42.212.8): icmp_seq=4 ttl=50 time=177 ms</span><br><span class="line">...按Ctrl+C结束</span><br><span class="line"></span><br><span class="line">--- host.1.jsdig.com ping statistics ---</span><br><span class="line">4 packets transmitted, 4 received, 0% packet loss, time 2998ms</span><br><span class="line">rtt min/avg/max/mdev = 174.068/176.916/178.182/1.683 ms</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pigz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/pigz/" class="post-title-link" itemprop="url">【Linux 命令】pigz</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:56:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>可以用来解压缩文件，gzip的并行实现升级版</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pigz命令</strong>可以用来解压缩文件，最重要的是支持多线程并行处理，解压缩比gzip快。主页: <span class="exturl" data-url="aHR0cDovL3psaWIubmV0L3BpZ3ov">http://zlib.net/pigz/<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pigz [ -cdfhikKlLmMnNqrRtz0..9,11 ] [ -b blocksize ] [ -p threads ] [ -S suffix ] [ name ...  ]</span><br><span class="line">unpigz [ -cfhikKlLmMnNqrRtz ] [ -b blocksize ] [ -p threads ] [ -S suffix ] [ name ...  ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-0 to -9, -11       # Compression level (level 11, zopfli, is much slower)</span><br><span class="line">--fast, --best      # Compression levels 1 and 9 respectively</span><br><span class="line">-b, --blocksize mmm # Set compression block size to mmmK (default 128K)</span><br><span class="line">-c, --stdout        # Write all processed output to stdout (won&#x27;t delete)</span><br><span class="line">-d, --decompress    # Decompress the compressed input</span><br><span class="line">-f, --force         # Force overwrite, compress .gz, links, and to terminal</span><br><span class="line">-F  --first         # Do iterations first, before block split for -11</span><br><span class="line">-h, --help          # Display a help screen and quit</span><br><span class="line">-i, --independent   # Compress blocks independently for damage recovery</span><br><span class="line">-I, --iterations n  # Number of iterations for -11 optimization</span><br><span class="line">-J, --maxsplits n   # Maximum number of split blocks for -11</span><br><span class="line">-k, --keep          # Do not delete original file after processing</span><br><span class="line">-K, --zip           # Compress to PKWare zip (.zip) single entry format</span><br><span class="line">-l, --list          # List the contents of the compressed input</span><br><span class="line">-L, --license       # Display the pigz license and quit</span><br><span class="line">-m, --no-time       # Do not store or restore mod time</span><br><span class="line">-M, --time          # Store or restore mod time</span><br><span class="line">-n, --no-name       # Do not store or restore file name or mod time</span><br><span class="line">-N, --name          # Store or restore file name and mod time</span><br><span class="line">-O  --oneblock      # Do not split into smaller blocks for -11</span><br><span class="line">-p, --processes n   # Allow up to n compression threads (default is the number of online processors, or 8 if unknown)</span><br><span class="line">-q, --quiet         # Print no messages, even on error</span><br><span class="line">-r, --recursive     # Process the contents of all subdirectories</span><br><span class="line">-R, --rsyncable     # Input-determined block locations for rsync</span><br><span class="line">-S, --suffix .sss   # Use suffix .sss instead of .gz (for compression)</span><br><span class="line">-t, --test          # Test the integrity of the compressed input</span><br><span class="line">-v, --verbose       # Provide more verbose output</span><br><span class="line">-V  --version       # Show the version of pigz</span><br><span class="line">-Y  --synchronous   # Force output file write to permanent storage</span><br><span class="line">-z, --zlib          # Compress to zlib (.zz) instead of gzip format</span><br><span class="line">--                  # All arguments after &quot;--&quot; are treated as files</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>可以结合<code>tar</code>使用, 压缩命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf - dir1 dir2 dir3 | pigz -p 8 &gt; output.tgz</span><br></pre></td></tr></table></figure>
+
+<p>解压命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pigz -p 8 -d output.tgz</span><br></pre></td></tr></table></figure>
+
+<p>如果是gzip格式，也支持用tar解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf output.tgz</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pidof/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/pidof/" class="post-title-link" itemprop="url">【Linux 命令】pidof</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:56:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>201</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>查找指定名称的进程的进程号ID号</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pidof命令</strong> 用于查找指定名称的进程的进程号id号。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pidof(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-s：仅返回一个进程号；</span><br><span class="line">-c：仅显示具有相同“root”目录的进程；</span><br><span class="line">-x：显示由脚本开启的进程；</span><br><span class="line">-o：指定不显示的进程ID。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程名称：指定要查找的进程名称。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pidof nginx</span><br><span class="line">13312 5371</span><br><span class="line"></span><br><span class="line">pidof crond</span><br><span class="line">1509</span><br><span class="line"></span><br><span class="line">pidof init</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
