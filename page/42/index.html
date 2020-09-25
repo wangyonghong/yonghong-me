@@ -138,17 +138,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">573</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">577</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">580</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">588</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-开源">
@@ -227,20 +227,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">573</span>
+          <span class="site-state-item-count">577</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">580</span>
+        <span class="site-state-item-count">588</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -299,6 +299,692 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gdb/" class="post-title-link" itemprop="url">【Linux 命令】gdb</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:23:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>功能强大的程序调试器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gdb命令</strong> 包含在GNU的gcc开发套件中，是功能强大的程序调试器。GDB中的命令固然很多，但我们只需掌握其中十个左右的命令，就大致可以完成日常的基本的程序调试工作。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-cd：设置工作目录；</span><br><span class="line">-q：安静模式，不打印介绍信息和版本信息；</span><br><span class="line">-d：添加文件查找路径；</span><br><span class="line">-x：从指定文件中执行GDB指令；</span><br><span class="line">-s：设置读取的符号表文件。</span><br></pre></td></tr></table></figure>
+
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file &lt;文件名&gt;</td>
+<td>加载被调试的可执行程序文件。<br /> 因为一般都在被调试程序所在目录下执行GDB，因而文本名不需要带路径。</td>
+<td>(gdb) file gdb-sample</td>
+</tr>
+<tr>
+<td>r</td>
+<td>Run的简写，运行被调试的程序。<br /> 如果此前没有下过断点，则执行完整个程序；如果有断点，则程序暂停在第一个可用断点处。</td>
+<td>(gdb) r</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Continue的简写，继续执行被调试程序，直至下一个断点或程序结束。</td>
+<td>(gdb) c</td>
+</tr>
+<tr>
+<td>b &lt;行号&gt;<br />b &lt;函数名称&gt;<br />b *&lt;函数名称&gt;<br />b *&lt;代码地址&gt; d [编号]</td>
+<td>b: Breakpoint的简写，设置断点。两可以使用“行号”“函数名称”“执行地址”等方式指定断点位置。 <br /> 其中在函数名称前面加“*”符号表示将断点设置在“由编译器生成的prolog代码处”。如果不了解汇编，可以不予理会此用法。 d: Delete breakpoint的简写，删除指定编号的某个断点，或删除所有断点。断点编号从1开始递增。</td>
+<td>(gdb) b 8(gdb) b main <br /> (gdb) b *main <br /> (gdb) b *0x804835c (gdb) d</td>
+</tr>
+<tr>
+<td>s, n</td>
+<td>s: 执行一行源程序代码，如果此行代码中有函数调用，则进入该函数；<br /> n: 执行一行源程序代码，此行代码中的函数调用也一并执行。 s 相当于其它调试器中的“Step Into (单步跟踪进入)”；<br /> n 相当于其它调试器中的“Step Over (单步跟踪)”。 这两个命令必须在有源代码调试信息的情况下才可以使用（GCC编译时使用“-g”参数）。</td>
+<td>(gdb) s <br /> (gdb) n</td>
+</tr>
+<tr>
+<td>si, ni</td>
+<td>si命令类似于s命令，ni命令类似于n命令。所不同的是，这两个命令（si/ni）所针对的是汇编指令，而s/n针对的是源代码。</td>
+<td>(gdb) si <br />(gdb) ni</td>
+</tr>
+<tr>
+<td>p &lt;变量名称&gt;</td>
+<td>Print的简写，显示指定变量（临时变量或全局变量）的值。</td>
+<td>(gdb) p i <br /> (gdb) p nGlobalVar</td>
+</tr>
+<tr>
+<td>display … undisplay &lt;编号&gt;</td>
+<td>display，设置程序中断后欲显示的数据及其格式。 <br /> 例如，如果希望每次程序中断后可以看到即将被执行的下一条汇编指令，可以使用命令 <br /> “display /i $pc” <br /> 其中 $pc 代表当前汇编指令，/i 表示以十六进行显示。当需要关心汇编代码时，此命令相当有用。 undispaly，取消先前的display设置，编号从1开始递增。</td>
+<td>(gdb) display /i $pc (gdb) undisplay 1</td>
+</tr>
+<tr>
+<td>i</td>
+<td>info的简写，用于显示各类信息，详情请查阅“help i”。</td>
+<td>(gdb) i r</td>
+</tr>
+<tr>
+<td>q</td>
+<td>Quit的简写，退出GDB调试环境。</td>
+<td>(gdb) q</td>
+</tr>
+<tr>
+<td>help [命令名称]</td>
+<td>GDB帮助命令，提供对GDB名种命令的解释说明。<br /> 如果指定了“命令名称”参数，则显示该命令的详细说明；如果没有指定参数，则分类显示所有GDB命令，供用户进一步浏览和查询。</td>
+<td>(gdb) help</td>
+</tr>
+</tbody></table>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：二进制可执行程序。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>以下是linux下dgb调试的一个实例，先给出一个示例用的小程序，C语言代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">include &lt;stdio.h&gt;</span></span><br><span class="line">int nGlobalVar = 0;</span><br><span class="line"></span><br><span class="line">int tempFunction(int a, int b)</span><br><span class="line">&#123;</span><br><span class="line">    printf(&quot;tempFunction is called, a = %d, b = %d /n&quot;, a, b);</span><br><span class="line">    return (a + b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">        n = 1;</span><br><span class="line">        n++;</span><br><span class="line">        n--;</span><br><span class="line"></span><br><span class="line">        nGlobalVar += 100;</span><br><span class="line">        nGlobalVar -= 12;</span><br><span class="line"></span><br><span class="line">    printf(&quot;n = %d, nGlobalVar = %d /n&quot;, n, nGlobalVar);</span><br><span class="line"></span><br><span class="line">        n = tempFunction(1, 2);</span><br><span class="line">    printf(&quot;n = %d&quot;, n);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请将此代码复制出来并保存到文件 gdb-sample.c 中，然后切换到此文件所在目录，用GCC编译之：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc gdb-sample.c -o gdb-sample -g</span><br></pre></td></tr></table></figure>
+
+<p>在上面的命令行中，使用 -o 参数指定了编译生成的可执行文件名为 gdb-sample，使用参数 -g 表示将源代码信息编译到可执行文件中。如果不使用参数 -g，会给后面的GDB调试造成不便。当然，如果我们没有程序的源代码，自然也无从使用 -g 参数，调试/跟踪时也只能是汇编代码级别的调试/跟踪。</p>
+<p>下面“gdb”命令启动GDB，将首先显示GDB说明，不管它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GNU gdb Red Hat Linux (5.3post-0.20021129.18rh)</span><br><span class="line">Copyright 2003 free Software Foundation, Inc.</span><br><span class="line">GDB is free software, covered by the GNU General Public License, and you are</span><br><span class="line">welcome to change it and/or distribute copies of it under certain conditions.</span><br><span class="line">type &quot;show copying&quot; to see the conditions.</span><br><span class="line">There is absolutely no warranty for GDB. Type &quot;show warranty&quot; for details.</span><br><span class="line">This GDB was configured as &quot;i386-redhat-linux-gnu&quot;.</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行“(gdb)”为GDB内部命令引导符，等待用户输入GDB命令。</p>
+<p>下面使用“file”命令载入被调试程序 gdb-sample（这里的 gdb-sample 即前面 GCC 编译输出的可执行文件）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) file gdb-sample</span><br><span class="line">Reading symbols from gdb-sample...done.</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行提示已经加载成功。</p>
+<p>下面使用“r”命令执行（Run）被调试文件，因为尚未设置任何断点，将直接执行到程序结束：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line">n = 1, nGlobalVar = 88</span><br><span class="line">tempFunction is called, a = 1, b = 2</span><br><span class="line">n = 3</span><br><span class="line">Program exited normally.</span><br></pre></td></tr></table></figure>
+
+<p>下面使用“b”命令在 main 函数开头设置一个断点（Breakpoint）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b main</span><br><span class="line">Breakpoint 1 at 0x804835c: file gdb-sample.c, line 19.</span><br></pre></td></tr></table></figure>
+
+<p>上面最后一行提示已经成功设置断点，并给出了该断点信息：在源文件 gdb-sample.c 第19行处设置断点；这是本程序的第一个断点（序号为1）；断点处的代码地址为 0x804835c（此值可能仅在本次调试过程中有效）。回过头去看源代码，第19行中的代码为“n = 1”，恰好是 main 函数中的第一个可执行语句（前面的“int n;”为变量定义语句，并非可执行语句）。</p>
+<p>再次使用“r”命令执行（Run）被调试程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main () at gdb-sample.c:19</span><br><span class="line">19 n = 1;</span><br></pre></td></tr></table></figure>
+
+<p>程序中断在gdb-sample.c第19行处，即main函数是第一个可执行语句处。</p>
+<p>上面最后一行信息为：下一条将要执行的源代码为“n = 1;”，它是源代码文件gdb-sample.c中的第19行。</p>
+<p>下面使用“s”命令（Step）执行下一行代码（即第19行“n = 1;”）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) s</span><br><span class="line">20 n++;</span><br></pre></td></tr></table></figure>
+
+<p>上面的信息表示已经执行完“n = 1;”，并显示下一条要执行的代码为第20行的“n++;”。</p>
+<p>既然已经执行了“n = 1;”，即给变量 n 赋值为 1，那我们用“p”命令（Print）看一下变量 n 的值是不是 1 ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) p n</span><br><span class="line"><span class="meta">$</span><span class="bash">1 = 1</span></span><br></pre></td></tr></table></figure>
+
+<p>果然是 1。（$1大致是表示这是第一次使用“p”命令——再次执行“p n”将显示“$2 = 1”——此信息应该没有什么用处。）</p>
+<p>下面我们分别在第26行、tempFunction 函数开头各设置一个断点（分别使用命令“b 26”“b tempFunction”）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b 26</span><br><span class="line">Breakpoint 2 at 0x804837b: file gdb-sample.c, line 26.</span><br><span class="line">(gdb) b tempFunction</span><br><span class="line">Breakpoint 3 at 0x804832e: file gdb-sample.c, line 12.</span><br></pre></td></tr></table></figure>
+
+<p>使用“c”命令继续（Continue）执行被调试程序，程序将中断在第二 个断点（26行），此时全局变量 nGlobalVar 的值应该是 88；再一次执行“c”命令，程序将中断于第三个断点（12行，tempFunction 函数开头处），此时tempFunction 函数的两个参数 a、b 的值应分别是 1 和 2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line"></span><br><span class="line">Breakpoint 2, main () at gdb-sample.c:26</span><br><span class="line">26 printf(&quot;n = %d, nGlobalVar = %d /n&quot;, n, nGlobalVar);</span><br><span class="line">(gdb) p nGlobalVar</span><br><span class="line"><span class="meta">$</span><span class="bash">2 = 88</span></span><br><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">n = 1, nGlobalVar = 88</span><br><span class="line"></span><br><span class="line">Breakpoint 3, tempFunction (a=1, b=2) at gdb-sample.c:12</span><br><span class="line">12 printf(&quot;tempFunction is called, a = %d, b = %d /n&quot;, a, b);</span><br><span class="line">(gdb) p a</span><br><span class="line"><span class="meta">$</span><span class="bash">3 = 1</span></span><br><span class="line">(gdb) p b</span><br><span class="line"><span class="meta">$</span><span class="bash">4 = 2</span></span><br></pre></td></tr></table></figure>
+
+<p>上面反馈的信息一切都在我们预料之中~~</p>
+<p>再一次执行“c”命令（Continue），因为后面再也没有其它断点，程序将一直执行到结束：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">tempFunction is called, a = 1, b = 2</span><br><span class="line">n = 3</span><br><span class="line">Program exited normally.</span><br></pre></td></tr></table></figure>
+
+<p>有时候需要看到编译器生成的汇编代码，以进行汇编级的调试或跟踪，又该如何操作呢？</p>
+<p>这就要用到display命令“display /i $pc”了（此命令前面已有详细解释）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) display /i $pc</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>此后程序再中断时，就可以显示出汇编代码了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(gdb) r</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 1, main () at gdb-sample.c:19</span><br><span class="line">19 n = 1;</span><br><span class="line">1: x/i $pc 0x804835c &lt;main+16&gt;: movl $0x1,0xfffffffc(%ebp)</span><br></pre></td></tr></table></figure>
+
+<p>看到了汇编代码，“n = 1;”对应的汇编代码是“movl $0x1,0xfffffffc(%ebp)”。</p>
+<p>并且以后程序每次中断都将显示下一条汇编指定（“si”命令用于执行一条汇编代码——区别于“s”执行一行C代码）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(gdb) si</span><br><span class="line">20 n++;</span><br><span class="line">1: x/i $pc 0x8048363 &lt;main+23&gt;: lea 0xfffffffc(%ebp),%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048366 20 n++;</span><br><span class="line">1: x/i $pc 0x8048366 &lt;main+26&gt;: incl (%eax)</span><br><span class="line">(gdb) si</span><br><span class="line">21 n--;</span><br><span class="line">1: x/i $pc 0x8048368 &lt;main+28&gt;: lea 0xfffffffc(%ebp),%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804836b 21 n--;</span><br><span class="line">1: x/i $pc 0x804836b &lt;main+31&gt;: decl (%eax)</span><br><span class="line">(gdb) si</span><br><span class="line">23 nGlobalVar += 100;</span><br><span class="line">1: x/i $pc 0x804836d &lt;main+33&gt;: addl $0x64,0x80494fc</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们试一下命令“b *&lt;函数名称&gt;”。</p>
+<p>为了更简明，有必要先删除目前所有断点（使用“d”命令——Delete breakpoint）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb) d</span><br><span class="line">Delete all breakpoints? (y or n) y</span><br><span class="line">(gdb)</span><br></pre></td></tr></table></figure>
+
+<p>当被询问是否删除所有断点时，输入“y”并按回车键即可。</p>
+<p>下面使用命令“b *main”在 main 函数的 prolog 代码处设置断点（prolog、epilog，分别表示编译器在每个函数的开头和结尾自行插入的代码）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">(gdb) b *main</span><br><span class="line">Breakpoint 4 at 0x804834c: file gdb-sample.c, line 17.</span><br><span class="line">(gdb) r</span><br><span class="line">The program being debugged has been started already.</span><br><span class="line">Start it from the beginning? (y or n) y</span><br><span class="line">Starting program: /home/liigo/temp/test_jmp/test_jmp/gdb-sample</span><br><span class="line"></span><br><span class="line">Breakpoint 4, main () at gdb-sample.c:17</span><br><span class="line">17 &#123;</span><br><span class="line">1: x/i $pc 0x804834c &lt;main&gt;: push %ebp</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804834d 17 &#123;</span><br><span class="line">1: x/i $pc 0x804834d &lt;main+1&gt;: mov %esp,%ebp</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804834f in main () at gdb-sample.c:17</span><br><span class="line">17 &#123;</span><br><span class="line">1: x/i $pc 0x804834f &lt;main+3&gt;: sub $0x8,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048352 17 &#123;</span><br><span class="line">1: x/i $pc 0x8048352 &lt;main+6&gt;: and $0xfffffff0,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">0x08048355 17 &#123;</span><br><span class="line">1: x/i $pc 0x8048355 &lt;main+9&gt;: mov $0x0,%eax</span><br><span class="line">(gdb) si</span><br><span class="line">0x0804835a 17 &#123;</span><br><span class="line">1: x/i $pc 0x804835a &lt;main+14&gt;: sub %eax,%esp</span><br><span class="line">(gdb) si</span><br><span class="line">19 n = 1;</span><br><span class="line">1: x/i $pc 0x804835c &lt;main+16&gt;: movl $0x1,0xfffffffc(%ebp)</span><br></pre></td></tr></table></figure>
+
+<p>此时可以使用“i r”命令显示寄存器中的当前值———“i r”即“Infomation Register”：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) i r</span><br><span class="line">eax 0xbffff6a4 -1073744220</span><br><span class="line">ecx 0x42015554 1107383636</span><br><span class="line">edx 0x40016bc8 1073834952</span><br><span class="line">ebx 0x42130a14 1108544020</span><br><span class="line">esp 0xbffff6a0 0xbffff6a0</span><br><span class="line">ebp 0xbffff6a8 0xbffff6a8</span><br><span class="line">esi 0x40015360 1073828704</span><br><span class="line">edi 0x80483f0 134513648</span><br><span class="line">eip 0x8048366 0x8048366</span><br><span class="line">eflags 0x386 902</span><br><span class="line">cs 0x23 35</span><br><span class="line">ss 0x2b 43</span><br><span class="line">ds 0x2b 43</span><br><span class="line">es 0x2b 43</span><br><span class="line">fs 0x0 0</span><br><span class="line">gs 0x33 51</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以显示任意一个指定的寄存器值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) i r eax</span><br><span class="line">eax 0xbffff6a4 -1073744220</span><br></pre></td></tr></table></figure>
+
+<p>最后一个要介绍的命令是“q”，退出（Quit）GDB调试环境：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) q</span><br><span class="line">The program is running. exit anyway? (y or n)</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h2><blockquote>
+<p>gdb 教程：<span class="exturl" data-url="aHR0cDovL3d3dy5pbW9vYy5jb20vbGVhcm4vMzk0">慕课网-Linux C语言指针与内存-第三章<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>如果删除源代码, 就无法显示行号等辅助信息了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">gcc -g gdb.c -o gdb.out # -g 支持gdb调试; -o 输出, 默认为 a.out</span><br><span class="line"></span><br><span class="line">gdb gdb.out # 进入 gdb 调试环境</span><br><span class="line">enter # 继续执行上条命令</span><br><span class="line">l # 列出源代码, 默认 10 行, 按 l 继续</span><br><span class="line"></span><br><span class="line">start # 开始单步调试, 默认 main() 第一行</span><br><span class="line">p a # 查看 a 变量的值</span><br><span class="line">n # 继续到下一行</span><br><span class="line">s # 进入子函数</span><br><span class="line">bt # 查看函数栈</span><br><span class="line">f 1 # 切换函数栈</span><br><span class="line"></span><br><span class="line">q 退出调试</span><br></pre></td></tr></table></figure>
+
+<p>测试用代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=a;</span><br><span class="line">    a=b; b=tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change2</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=*a;</span><br><span class="line">    *a=*b; *b=tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">3</span>;</span><br><span class="line">    change(a,b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;change:\na=%d\nb=%d\n&quot;</span>, a,b);</span><br><span class="line">    change2(&amp;a,&amp;b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;change2:\na=%d\nb=%d\n&quot;</span>, a,b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gcov/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gcov/" class="post-title-link" itemprop="url">【Linux 命令】gcov</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:22:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>126</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>测试程序的代码覆盖率的工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gcov命令</strong> 是一款测试程序的代码覆盖率的工具。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcov(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-v：显示版本信息；</span><br><span class="line">-a：输出所有的基本块的执行计数；</span><br><span class="line">-n：并创建输出文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>V语言文件：C语言源代码文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gcc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/gcc/" class="post-title-link" itemprop="url">【Linux 命令】gcc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:22:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>基于C/C++的编译器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gcc命令</strong> 使用GNU推出的基于C/C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。现在很多程序员都应用GCC，怎样才能更好的应用GCC。目前，GCC可以用来编译C/C++、FORTRAN、JAVA、OBJC、ADA等语言的程序，可根据需要选择安装支持的语言。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-o：指定生成的输出文件；</span><br><span class="line">-E：仅执行编译预处理；</span><br><span class="line">-S：将C代码转换为汇编代码；</span><br><span class="line">-wall：显示警告信息；</span><br><span class="line">-c：仅执行编译操作，不进行连接操作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>C源文件：指定C语言源代码文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>常用编译命令选项</strong> </p>
+<p>假设源程序文件名为test.c</p>
+<p><strong>无选项编译链接</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理、汇编、编译并链接形成可执行文件。这里未指定输出文件，默认输出为a.out。</p>
+<p><strong>选项 -o</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理、汇编、编译并链接形成可执行文件test。-o选项用来指定输出文件的文件名。</p>
+<p><strong>选项 -E</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -E test.c -o test.i</span><br></pre></td></tr></table></figure>
+
+<p>将test.c预处理输出test.i文件。</p>
+<p><strong>选项 -S</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S test.i</span><br></pre></td></tr></table></figure>
+
+<p>将预处理输出文件test.i汇编成test.s文件。</p>
+<p><strong>选项 -c</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c test.s</span><br></pre></td></tr></table></figure>
+
+<p>将汇编输出文件test.s编译输出test.o文件。</p>
+<p><strong>无选项链接</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc test.o -o test</span><br></pre></td></tr></table></figure>
+
+<p>将编译输出文件test.o链接成最终可执行文件test。</p>
+<p><strong>选项 -O</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O1 test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>使用编译优化级别1编译程序。级别为1~3，级别越大优化效果越好，但编译时间越长。</p>
+<p><strong>多源文件的编译方法</strong> </p>
+<p>如果有多个源文件，基本上有两种编译方法：</p>
+<p>假设有两个源文件为test.c和testfun.c</p>
+<p><strong>多个文件一起编译</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc testfun.c test.c -o test</span><br></pre></td></tr></table></figure>
+
+<p>将testfun.c和test.c分别编译后链接成test可执行文件。</p>
+<p><strong>分别编译各个源文件，之后对编译后输出的目标文件链接。</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -c testfun.c    #将testfun.c编译成testfun.o</span><br><span class="line">gcc -c test.c       #将test.c编译成test.o</span><br><span class="line">gcc -o testfun.o test.o -o test    #将testfun.o和test.o链接成test</span><br></pre></td></tr></table></figure>
+
+<p>以上两种方法相比较，第一中方法编译时需要所有文件重新编译，而第二种方法可以只重新编译修改的文件，未修改的文件不用重新编译。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fuser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/fuser/" class="post-title-link" itemprop="url">【Linux 命令】fuser</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:21:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>846</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用文件或文件结构识别进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>fuser命令</strong> 用于报告进程使用的文件和网络套接字。fuser命令列出了本地进程的进程号，那些本地进程使用file，参数指定的本地或远程文件。对于阻塞特别设备，此命令列出了使用该设备上任何文件的进程。</p>
+<p>每个进程号后面都跟随一个字母，该字母指示进程如何使用文件。</p>
+<ul>
+<li><code>c</code> ：指示进程的工作目录。</li>
+<li><code>e</code> ：指示该文件为进程的可执行文件(即进程由该文件拉起)。</li>
+<li><code>f</code> ：指示该文件被进程打开，默认情况下f字符不显示。</li>
+<li><code>F</code> ：指示该文件被进程打开进行写入，默认情况下F字符不显示。</li>
+<li><code>r</code> ：指示该目录为进程的根目录。</li>
+<li><code>m</code> ：指示进程使用该文件进行内存映射，抑或该文件为共享库文件，被进程映射进内存。</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a：显示命令行中指定的所有文件；</span><br><span class="line">-k：杀死访问指定文件的所有进程；</span><br><span class="line">-i：杀死进程前需要用户进行确认；</span><br><span class="line">-l：列出所有已知信号名；</span><br><span class="line">-m：指定一个被加载的文件系统或一个被加载的块设备；</span><br><span class="line">-n：选择不同的名称空间；</span><br><span class="line">-u：在每个进程后显示所属的用户名。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：可以是文件名或者TCP、UDP端口号。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>要列出使用<code>/etc/passwd</code>文件的本地进程的进程号，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>要列出使用<code>/etc/filesystems</code>文件的进程的进程号和用户登录名，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -u /etc/filesystems</span><br></pre></td></tr></table></figure>
+
+<p>要终止使用给定文件系统的所有进程，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -k -x -u -c /dev/hd1  或者  fuser -kxuc /home</span><br></pre></td></tr></table></figure>
+
+<p>任一命令都列出了进程号和用户名，然后终止每个正在使用<code>/dev/hd1 (/home)</code>文件系统的进程。仅有root用户能终止属于另一用户的进程。如果您正在试图卸下<code>/dev/hd1</code>文件系统，而一个正在访问<code>/dev/hd1</code>文件系统的进程不允许这样，您可能希望使用此命令。</p>
+<p>要列出正在使用已从给定文件系统删除的文件的全部进程，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser -d /usr文件</span><br></pre></td></tr></table></figure>
+
+<p><code>/dev/kmem</code> 用于系统映像。<br><code>/dev/mem</code>  也用于系统映像。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ftpwho/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ftpwho/" class="post-title-link" itemprop="url">【Linux 命令】ftpwho</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:21:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>104</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示当前每个ftp会话信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ftpwho命令</strong> ftp服务器套件proftpd的工作指令，用于显示当前每个ftp会话信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftpwho(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-v：详细模式，输出更多信息。</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -797,570 +1483,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/free/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/free/" class="post-title-link" itemprop="url">【Linux 命令】free</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:18:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示内存的使用情况</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>free命令</strong> 可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b # 以Byte为单位显示内存使用情况；</span><br><span class="line">-k # 以KB为单位显示内存使用情况；</span><br><span class="line">-m # 以MB为单位显示内存使用情况；</span><br><span class="line">-g # 以GB为单位显示内存使用情况。 </span><br><span class="line">-o # 不显示缓冲区调节列；</span><br><span class="line">-s&lt;间隔秒数&gt; # 持续观察内存使用状况；</span><br><span class="line">-t # 显示内存总和列；</span><br><span class="line">-V # 显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">free -t    # 以总和的形式显示内存的使用信息</span><br><span class="line">free -s 10 # 周期性的查询内存使用信息，每10s 执行一次命令</span><br></pre></td></tr></table></figure>
-
-<p>显示内存使用情况</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
-
-<p> <strong>第一部分Mem行解释：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">total：内存总数；</span><br><span class="line">used：已经使用的内存数；</span><br><span class="line">free：空闲的内存数；</span><br><span class="line">shared：当前已经废弃不用；</span><br><span class="line">buffers Buffer：缓存内存数；</span><br><span class="line">cached Page：缓存内存数。</span><br></pre></td></tr></table></figure>
-
-<p>关系：total = used + free</p>
-<p> <strong>第二部分(-/+ buffers/cache)解释:</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(-buffers/cache) used内存数：第一部分Mem行中的 used – buffers – cached</span><br><span class="line">(+buffers/cache) free内存数: 第一部分Mem行中的 free + buffers + cached</span><br></pre></td></tr></table></figure>
-
-<p>可见-buffers/cache反映的是被程序实实在在吃掉的内存，而+buffers/cache反映的是可以挪用的内存总数。</p>
-<p>第三部分是指交换分区。</p>
-<p>输出结果的第四行是交换分区SWAP的，也就是我们通常所说的虚拟内存。<br>区别：第二行(mem)的used/free与第三行(-/+ buffers/cache) used/free的区别。 这两个的区别在于使用的角度来看，第一行是从OS的角度来看，因为对于OS，buffers/cached 都是属于被使用，所以他的可用内存是2098428KB,已用内存是30841684KB,其中包括，内核（OS）使用+Application(X, oracle,etc)使用的+buffers+cached.</p>
-<p>第三行所指的是从应用程序角度来看，对于应用程序来说，buffers/cached 是等于可用的，因为buffer/cached是为了提高文件读取的性能，当应用程序需在用到内存的时候，buffer/cached会很快地被回收。</p>
-<p>所以从应用程序的角度来说，可用内存=系统free memory+buffers+cached。<br>如本机情况的可用内存为：</p>
-<p>18007156=2098428KB+4545340KB+11363424KB</p>
-<p>接下来解释什么时候内存会被交换，以及按什么方交换。 </p>
-<p>当可用内存少于额定值的时候，就会开会进行交换。如何看额定值：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">cat /proc/meminfo</span><br><span class="line"></span><br><span class="line">MemTotal:       16140816 kB</span><br><span class="line">MemFree:          816004 kB</span><br><span class="line">MemAvailable:    2913824 kB</span><br><span class="line">Buffers:           17912 kB</span><br><span class="line">Cached:          2239076 kB</span><br><span class="line">SwapCached:            0 kB</span><br><span class="line">Active:         12774804 kB</span><br><span class="line">Inactive:        1594328 kB</span><br><span class="line">Active(anon):   12085544 kB</span><br><span class="line">Inactive(anon):    94572 kB</span><br><span class="line">Active(file):     689260 kB</span><br><span class="line">Inactive(file):  1499756 kB</span><br><span class="line">Unevictable:      116888 kB</span><br><span class="line">Mlocked:          116888 kB</span><br><span class="line">SwapTotal:       8191996 kB</span><br><span class="line">SwapFree:        8191996 kB</span><br><span class="line">Dirty:                56 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:      12229228 kB</span><br><span class="line">Mapped:           117136 kB</span><br><span class="line">Shmem:             58736 kB</span><br><span class="line">Slab:             395568 kB</span><br><span class="line">SReclaimable:     246700 kB</span><br><span class="line">SUnreclaim:       148868 kB</span><br><span class="line">KernelStack:       30496 kB</span><br><span class="line">PageTables:       165104 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:    16262404 kB</span><br><span class="line">Committed_AS:   27698600 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:      311072 kB</span><br><span class="line">VmallocChunk:   34350899200 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:   3104768 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:      225536 kB</span><br><span class="line">DirectMap2M:    13279232 kB</span><br><span class="line">DirectMap1G:     5242880 kB</span><br></pre></td></tr></table></figure>
-
-<p>交换将通过三个途径来减少系统中使用的物理页面的个数：　</p>
-<ol>
-<li>减少缓冲与页面cache的大小， </li>
-<li>将系统V类型的内存页面交换出去，　 </li>
-<li>换出或者丢弃页面。(Application 占用的内存页，也就是物理内存不足）。 </li>
-</ol>
-<p>事实上，少量地使用swap是不是影响到系统性能的。</p>
-<p>那buffers和cached都是缓存，两者有什么区别呢？</p>
-<p>为了提高磁盘存取效率, Linux做了一些精心的设计, 除了对dentry进行缓存(用于VFS,加速文件路径名到inode的转换), 还采取了两种主要Cache方式：</p>
-<p>Buffer Cache和Page Cache。前者针对磁盘块的读写，后者针对文件inode的读写。这些Cache有效缩短了 I/O系统调用(比如read,write,getdents)的时间。<br>磁盘的操作有逻辑级（文件系统）和物理级（磁盘块），这两种Cache就是分别缓存逻辑和物理级数据的。</p>
-<p>Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。当page cache的数据需要刷新时，page cache中的数据交给buffer cache，因为Buffer Cache就是缓存磁盘块的。但是这种处理在2.6版本的内核之后就变的很简单了，没有真正意义上的cache操作。</p>
-<p>Buffer cache是针对磁盘块的缓存，也就是在没有文件系统的情况下，直接对磁盘进行操作的数据会缓存到buffer cache中，例如，文件系统的元数据都会缓存到buffer cache中。</p>
-<p>简单说来，page cache用来缓存文件数据，buffer cache用来缓存磁盘数据。在有文件系统的情况下，对文件操作，那么数据会缓存到page cache，如果直接采用dd等工具对磁盘进行读写，那么数据会缓存到buffer cache。</p>
-<p>所以我们看linux,只要不用swap的交换空间,就不用担心自己的内存太少.如果常常swap用很多,可能你就要考虑加物理内存了.这也是linux看内存是否够用的标准.</p>
-<p>如果是应用服务器的话，一般只看第二行，+buffers/cache,即对应用程序来说free的内存太少了，也是该考虑优化程序或加内存了。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fping/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/fping/" class="post-title-link" itemprop="url">【Linux 命令】fping</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:17:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>842</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>fping检测主机是否存在</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>fping命令</strong> fping类似于ping，但比ping强大。与ping要等待某一主机连接超时或发回反馈信息不同，fping给一个主机发送完数据包后，马上给下一个主机发送数据包，实现多主机同时ping，fping还可以在命令行中指定要ping的主机数量范围。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fping(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a  # 显示存活的主机</span><br><span class="line">-b  # ping 数据包的大小。（默认为56）</span><br><span class="line">-c  # ping每个目标的次数 (默认为1)</span><br><span class="line">-f  # 从文件获取目标列表(不能与 -g 同时使用)</span><br><span class="line">-l  # 循环发送ping</span><br><span class="line">-g  # 通过指定开始和结束地址来生成目标列表,可以使网段</span><br><span class="line">-u  # 显示不可到达的目标</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>安装fping命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装epel源：</span></span><br><span class="line">yum install epel* -y</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装fping包：</span></span><br><span class="line">yum install fping -y</span><br></pre></td></tr></table></figure>
-
-<p>选择性ping指定ip：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~]# fping 192.168.0.1 192.168.0.125 192.168.0.126 2&gt;/dev/null</span><br><span class="line">192.168.0.1 is alive</span><br><span class="line">192.168.0.125 is alive</span><br><span class="line">192.168.0.126 is unreachable</span><br></pre></td></tr></table></figure>
-
-<p>ping整个网段：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~]<span class="comment"># fping -g 192.168.0.0/24 2&gt;/dev/null</span></span><br><span class="line">192.168.0.1 is alive</span><br><span class="line">192.168.0.103 is alive</span><br><span class="line">...</span><br><span class="line">192.168.0.253 is unreachable</span><br><span class="line">192.168.0.254 is unreachable</span><br></pre></td></tr></table></figure>
-
-<p>ping整个网段，只显示存活的主机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~]# fping -ag 192.168.0.0/24 2&gt;/dev/null</span><br><span class="line">192.168.0.1</span><br><span class="line">192.168.0.103</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>ping某一段ip：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~]# fping -ag 192.168.0.5 192.168.0.130 2&gt;/dev/null</span><br><span class="line">192.168.0.103</span><br><span class="line">...</span><br><span class="line">192.168.0.125</span><br><span class="line">192.168.0.130</span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fold/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/fold/" class="post-title-link" itemprop="url">【Linux 命令】fold</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:17:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>278</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>控制文件内容输出时所占用的屏幕宽度</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>fold命令</strong> 用于控制文件内容输出时所占用的屏幕宽度。fold命令会从指定的文件里读取内容，将超过限定列宽的列加入增列字符后，输出到标准输出设备。若不指定任何文件名称，或是所给予的文件名为“-”，则fold指令会从标准输入设备读取数据。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fold(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-b或——bytes：以Byte为单位计算列宽，而非采用行数编号为单位；</span><br><span class="line">-s或——spaces：以空格字符作为换列点；</span><br><span class="line">-w&lt;每列行数&gt;或--width&lt;每列行数&gt;：设置每列的最大行数。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要显示内容的文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fmt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/fmt/" class="post-title-link" itemprop="url">【Linux 命令】fmt</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:16:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>404</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>读取文件后优化处理并输出</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>fmt命令</strong> 读取文件的内容，根据选项的设置对文件格式进行简单的优化处理，并将结果送到标准输出设备。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-c或--crown-margin：每段前两列缩排；</span><br><span class="line">-p&lt;列起始字符串&gt;或-prefix=&lt;列起始字符串&gt;：仅合并含有指定字符串的列，通常运用在程序语言的注解方面；</span><br><span class="line">-s或--split-only：只拆开字数超出每列字符数的列，但不合并字数不足每列字符数的列；</span><br><span class="line">-t或--tagged-paragraph：每列前两列缩排，但第1列和第2列的缩排格式不同；</span><br><span class="line">-u或--uniform-spacing：每列字符之间都以一个空格字符间隔，每个句子之间则两个空格字符分隔；</span><br><span class="line">-w&lt;每列字符数&gt;或--width=&lt;每列字符数&gt;或-&lt;每列字符数&gt;：设置每列的最大字符数。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>指定要优化格式的文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/fishshell/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/fishshell/" class="post-title-link" itemprop="url">【Linux 命令】fishshell</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:16:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>比 bash 更好用的 shell</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Ubuntu 和 Debian 的安装方法。</span></span><br><span class="line">sudo apt-get install fish</span><br><span class="line"><span class="meta">#</span><span class="bash"> Mac 的安装方法。</span></span><br><span class="line">brew install fish</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动与帮助"><a href="#启动与帮助" class="headerlink" title="启动与帮助"></a>启动与帮助</h2><p>由于 <code>Fish</code> 的语法与 <code>Bash</code> 有很大差异，<code>Bash</code> 脚本一般不兼容。因此，建议不要将 <code>Fish</code> 设为默认 <code>Shell</code>，而是每次手动启动它。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装完成后，就可以启动 Fish。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> fish</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用过程中，如果需要帮助，可以输入 <span class="built_in">help</span> 命令</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">help</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="彩色显示"><a href="#彩色显示" class="headerlink" title="彩色显示"></a>彩色显示</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 无效命令为红色</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkd</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 有效命令为蓝色</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 有效路径会有下划线。如果没有下划线，你就知道这个路径不存在。</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat ~/somefi </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自动建议"><a href="#自动建议" class="headerlink" title="自动建议"></a>自动建议</h2><p>Fish 会自动在光标后面给出建议，表示可能的选项，颜色为灰色。如果采纳建议，可以按下 <code>→</code> 或 <code>Control + F</code> 。如果只采纳一部分，可以按下 <code>Alt + →</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> /bin/hostname <span class="comment"># 命令建议</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> grep --ignore-case <span class="comment"># 参数建议</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls node_modules <span class="comment"># 路径建议</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自动补全"><a href="#自动补全" class="headerlink" title="自动补全"></a>自动补全</h2><p>输入命令时，<code>Fish</code> 会自动显示匹配的上一条历史记录。如果没有匹配的历史记录，<code>Fish</code> 会猜测可能的结果，自动补全各种输入。比如，输入 <code>pyt</code> 再按下 <code>Tab</code> ，就会自动补全为 <code>python</code> 命令。</p>
-<p><code>Fish</code> 还可以自动补全 <code>Git</code> 分支。</p>
-<h2 id="脚本语法"><a href="#脚本语法" class="headerlink" title="脚本语法"></a>脚本语法</h2><h3 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a>if 语句</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if grep fish /etc/shells</span><br><span class="line">    echo Found fish</span><br><span class="line">else if grep bash /etc/shells</span><br><span class="line">    echo Found bash</span><br><span class="line">else</span><br><span class="line">    echo Got nothing</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h3 id="switch-语句"><a href="#switch-语句" class="headerlink" title="switch 语句"></a>switch 语句</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">switch (uname)</span><br><span class="line">case Linux</span><br><span class="line">    echo Hi Tux!</span><br><span class="line">case Darwin</span><br><span class="line">    echo Hi Hexley!</span><br><span class="line">case FreeBSD NetBSD DragonFly</span><br><span class="line">    echo Hi Beastie!</span><br><span class="line">case &#x27;*&#x27;</span><br><span class="line">    echo Hi, stranger!</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while true</span><br><span class="line">    echo &quot;Loop forever&quot;</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for file in *.txt</span><br><span class="line">    cp $file $file.bak</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><code>Fish</code> 的函数用来封装命令，或者为现有的命令起别名。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function ll</span><br><span class="line">    ls -lhG $argv</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>上面代码定义了一个 <code>ll</code> 函数。命令行执行这个函数以后，就可以用 <code>ll</code> 命令替代 <code>ls -lhG</code>。其中，变量 <code>$argv</code> 表示函数的参数。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function ls</span><br><span class="line">    command ls -hG $argv</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码重新定义 <code>ls</code> 命令。注意，函数体内的 <code>ls</code> 之前，要加上 <code>command</code>，否则会因为无限循环而报错。</p>
-<h3 id="提示符"><a href="#提示符" class="headerlink" title="提示符"></a>提示符</h3><p><code>fish_prompt</code> 函数用于定义命令行提示符（prompt）。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fish_prompt</span><br><span class="line">  set_color purple</span><br><span class="line">  date &quot;+%m/%d/%y&quot;</span><br><span class="line">  set_color FF0</span><br><span class="line">  echo (pwd) &#x27;&gt;&#x27;</span><br><span class="line">  set_color normal</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<p>执行上面的函数以后，你的命令行提示符就会变成下面这样。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">02</span><span class="regexp">/06/</span><span class="number">13</span></span><br><span class="line"><span class="regexp">/home/</span>tutorial &gt; </span><br></pre></td></tr></table></figure>
-
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>Fish 的配置文件是 <code>~/.config/fish/config.fish</code>，每次 <code>Fish</code> 启动，就会自动加载这个文件。Fish 还提供 Web 界面配置该文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> fish_config <span class="comment"># 浏览器打开 Web 界面配置</span></span></span><br></pre></td></tr></table></figure>
-
-<p>Running Commands: 兼容 bash 等shell的命令执行方式<br>Getting Help: <code>help/man cmd -&gt; browser/terminal</code><br>Syntax Highlighting: 实时检查命令是否正确<br>Wildcards: 支持缩写  <code>*</code> 递归 匹配<br>Pipes and Redirections: 使用 <code>^</code> 代表 stderr<br>Autosuggestions: 自动建议, 可以使用 <code>Ctrl-f / -&gt;</code> 来补全<br>Tab Completions: 更强大的 tab 补全<br>Variables: 使用 set 设置<br>Exit Status: 使用 <code>echo $status</code> 替代 <code>$?</code><br>Exports (Shell Variables)<br>Lists: all variables in fish are really lists<br>Command Substitutions: 使用 <code>(cmd)</code> 来执行命令, 而不是 反引号、<code>$()</code><br>Combiners (And, Or, Not): 不支持使用符合来表示逻辑运算<br>Functions：使用 <code>$argv</code> 替代 <code>$1</code><br>Conditionals (If, Else, Switch) / Functions / Loops: 更人性化的写法(参考 py)<br>Prompt: <code>function fish_prompt</code> 实现<br>Startup (Where’s .bashrc?): <code>~/.config/fish/config.fish</code>，更好的方式是 autoloading-function、universal-variables<br>Autoloading Functions: <code> ~/.config/fish/functions/.</code><br>Universal Variables：a variable whose value is shared across all instances of fish  </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">set name &#x27;czl&#x27; # 设置变量，替代 name=czl</span><br><span class="line">echo $name</span><br><span class="line">echo $status # exit status，替代 $?</span><br><span class="line">env # 环境变量</span><br><span class="line">set -x MyVariable SomeValue # 替代 export</span><br><span class="line">set -e MyVariable</span><br><span class="line">set PATH $PATH /usr/local/bin # 使用 lists 记录 PATH</span><br><span class="line">set -U fish_user_paths /usr/local/bin $fish_user_paths # 永久生效</span><br><span class="line">touch &quot;testing_&quot;(date +%s)&quot;.txt&quot; # command subtitution，替代 `date +%s`</span><br><span class="line">cp file.txt file.txt.bak; and echo &#x27;back success&#x27;; or echo &#x27;back fail&#x27; # combiner</span><br><span class="line">functions # 列出 fish 下定义的函数</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cDovL2Zpc2hzaGVsbC5jb20v">fish-shell官网<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1419,14 +1541,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">701k</span>
+    <span title="站点总字数">705k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">10:38</span>
+    <span title="站点阅读时长">10:41</span>
   </span>
 </div>
 <div class="busuanzi-count">
