@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - grep
 title: 【Linux 命令】grep
+updated: '2020-09-25 09:26:30'
 ---
 
 强大的文本搜索工具

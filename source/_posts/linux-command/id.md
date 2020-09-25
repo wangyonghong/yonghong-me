@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - id
 title: 【Linux 命令】id
+updated: '2020-09-25 09:40:00'
 ---
 
 打印真实以及有效的用户和所在组的信息

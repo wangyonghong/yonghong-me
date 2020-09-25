@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ftptop
 title: 【Linux 命令】ftptop
+updated: '2020-09-25 09:20:30'
 ---
 
 proftpd服务器的连接状态

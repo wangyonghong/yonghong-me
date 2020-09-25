@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - updatedb
 title: 【Linux 命令】updatedb
+updated: '2020-09-25 12:19:00'
 ---
 
 创建或更新slocate命令所必需的数据库文件

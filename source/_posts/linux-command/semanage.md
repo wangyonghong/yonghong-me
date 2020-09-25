@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - semanage
 title: 【Linux 命令】semanage
+updated: '2020-09-25 11:30:00'
 ---
 
 默认目录的安全上下文查询与修改

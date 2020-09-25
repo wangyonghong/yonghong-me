@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - setsebool
 title: 【Linux 命令】setsebool
+updated: '2020-09-25 11:34:00'
 ---
 
 修改SElinux策略内各项规则的布尔值

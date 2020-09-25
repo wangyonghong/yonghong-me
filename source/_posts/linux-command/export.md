@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - export
 title: 【Linux 命令】export
+updated: '2020-09-25 09:09:30'
 ---
 
 为shell变量或函数设置导出属性。

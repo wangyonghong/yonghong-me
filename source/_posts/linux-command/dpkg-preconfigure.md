@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dpkg-preconfigure
 title: 【Linux 命令】dpkg-preconfigure
+updated: '2020-09-25 08:55:30'
 ---
 
 Debian Linux中软件包安装之前询问问题

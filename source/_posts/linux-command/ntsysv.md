@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ntsysv
 title: 【Linux 命令】ntsysv
+updated: '2020-09-25 10:48:30'
 ---
 
 集中管理系统的各种服务

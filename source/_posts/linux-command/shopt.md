@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - shopt
 title: 【Linux 命令】shopt
+updated: '2020-09-25 11:37:00'
 ---
 
 显示和设置shell操作选项

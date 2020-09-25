@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xz
 title: 【Linux 命令】xz
+updated: '2020-09-25 12:41:00'
 ---
 
 POSIX 平台开发具有高压缩率的工具

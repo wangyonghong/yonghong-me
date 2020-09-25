@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - wget
 title: 【Linux 命令】wget
+updated: '2020-09-25 12:33:00'
 ---
 
 Linux系统下载文件工具

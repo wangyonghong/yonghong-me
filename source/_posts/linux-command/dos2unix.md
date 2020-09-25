@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dos2unix
 title: 【Linux 命令】dos2unix
+updated: '2020-09-25 08:54:00'
 ---
 
 将DOS格式文本文件转换成Unix格式

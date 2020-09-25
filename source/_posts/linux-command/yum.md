@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - yum
 title: 【Linux 命令】yum
+updated: '2020-09-25 12:42:30'
 ---
 
 基于RPM的软件包管理器

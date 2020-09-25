@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iptraf
 title: 【Linux 命令】iptraf
+updated: '2020-09-25 09:53:00'
 ---
 
 实时地监视网卡流量

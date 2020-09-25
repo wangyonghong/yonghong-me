@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - groupmod
 title: 【Linux 命令】groupmod
+updated: '2020-09-25 09:28:00'
 ---
 
 更改群组识别码或名称

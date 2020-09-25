@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - volname
 title: 【Linux 命令】volname
+updated: '2020-09-25 12:30:00'
 ---
 
 显示指定的ISO-9660格式的设备的卷名称

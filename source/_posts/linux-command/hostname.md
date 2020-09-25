@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - hostname
 title: 【Linux 命令】hostname
+updated: '2020-09-25 09:36:30'
 ---
 
 显示和设置系统的主机名

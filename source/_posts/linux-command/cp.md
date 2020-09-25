@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cp
 title: 【Linux 命令】cp
+updated: '2020-09-25 08:39:00'
 ---
 
 将源文件或目录复制到目标文件或目录中

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - apropos
 title: 【Linux 命令】apropos
+updated: '2020-09-25 08:03:30'
 ---
 
 在 whatis 数据库中查找字符串

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - gcov
 title: 【Linux 命令】gcov
+updated: '2020-09-25 09:22:30'
 ---
 
 测试程序的代码覆盖率的工具

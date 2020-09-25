@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pvscan
 title: 【Linux 命令】pvscan
+updated: '2020-09-25 11:07:30'
 ---
 
 扫描系统中所有硬盘的物理卷列表

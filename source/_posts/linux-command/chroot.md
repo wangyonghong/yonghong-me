@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chroot
 title: 【Linux 命令】chroot
+updated: '2020-09-25 08:31:30'
 ---
 
 把根目录换成指定的目的目录

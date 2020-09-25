@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - time
 title: 【Linux 命令】time
+updated: '2020-09-25 12:04:30'
 ---
 
 统计给定命令所花费的总时间

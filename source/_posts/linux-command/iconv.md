@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iconv
 title: 【Linux 命令】iconv
+updated: '2020-09-25 09:39:30'
 ---
 
 转换文件的编码方式

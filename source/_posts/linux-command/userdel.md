@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - userdel
 title: 【Linux 命令】userdel
+updated: '2020-09-25 12:20:30'
 ---
 
 用于删除给定的用户以及与用户相关的文件

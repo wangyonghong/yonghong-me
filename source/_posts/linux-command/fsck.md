@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - fsck
 title: 【Linux 命令】fsck
+updated: '2020-09-25 09:18:30'
 ---
 
 检查并且试图修复文件系统中的错误

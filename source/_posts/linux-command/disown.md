@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - disown
 title: 【Linux 命令】disown
+updated: '2020-09-25 08:51:00'
 ---
 
 从当前的shell中移除作业。

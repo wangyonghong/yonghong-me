@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - col
 title: 【Linux 命令】col
+updated: '2020-09-25 08:35:00'
 ---
 
 过滤控制字符

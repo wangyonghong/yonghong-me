@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xlsfonts
 title: 【Linux 命令】xlsfonts
+updated: '2020-09-25 12:40:00'
 ---
 
 列出X Server使用的字体

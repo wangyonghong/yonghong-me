@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - blockdev
 title: 【Linux 命令】blockdev
+updated: '2020-09-25 08:17:30'
 ---
 
 从命令行调用区块设备控制程序

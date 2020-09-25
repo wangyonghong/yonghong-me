@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - zipinfo
 title: 【Linux 命令】zipinfo
+updated: '2020-09-25 12:44:30'
 ---
 
 用来列出压缩文件信息

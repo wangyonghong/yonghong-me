@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - setpci
 title: 【Linux 命令】setpci
+updated: '2020-09-25 11:33:30'
 ---
 
 查询和配置PCI设备的使用工具

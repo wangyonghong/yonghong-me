@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - killall
 title: 【Linux 命令】killall
+updated: '2020-09-25 09:58:30'
 ---
 
 使用进程的名称来杀死一组进程

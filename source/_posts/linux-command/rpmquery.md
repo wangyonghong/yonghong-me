@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rpmquery
 title: 【Linux 命令】rpmquery
+updated: '2020-09-25 11:24:30'
 ---
 
 从RPM数据库中查询软件包信息

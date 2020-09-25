@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bg
 title: 【Linux 命令】bg
+updated: '2020-09-25 08:16:00'
 ---
 
 将前台终端作业移动到后台运行

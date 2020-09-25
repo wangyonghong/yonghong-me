@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dpkg-divert
 title: 【Linux 命令】dpkg-divert
+updated: '2020-09-25 08:55:00'
 ---
 
 Debian Linux中创建并管理一个转向列表

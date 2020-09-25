@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mke2fs
 title: 【Linux 命令】mke2fs
+updated: '2020-09-25 10:29:30'
 ---
 
 创建磁盘分区上的“etc2/etc3”文件系统

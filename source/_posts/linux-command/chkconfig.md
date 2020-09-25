@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chkconfig
 title: 【Linux 命令】chkconfig
+updated: '2020-09-25 08:29:30'
 ---
 
 检查或设置系统的各种服务

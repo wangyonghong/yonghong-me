@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - seq
 title: 【Linux 命令】seq
+updated: '2020-09-25 11:31:00'
 ---
 
 以指定增量从首数开始打印数字到尾数

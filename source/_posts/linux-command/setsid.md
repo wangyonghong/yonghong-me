@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - setsid
 title: 【Linux 命令】setsid
+updated: '2020-09-25 11:34:30'
 ---
 
 在新的会话中运行程序

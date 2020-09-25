@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - times
 title: 【Linux 命令】times
+updated: '2020-09-25 12:05:00'
 ---
 
 显示进程累计时间。

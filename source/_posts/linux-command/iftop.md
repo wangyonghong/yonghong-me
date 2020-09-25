@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iftop
 title: 【Linux 命令】iftop
+updated: '2020-09-25 09:42:30'
 ---
 
 一款实时流量监控工具

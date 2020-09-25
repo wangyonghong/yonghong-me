@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xset
 title: 【Linux 命令】xset
+updated: '2020-09-25 12:40:30'
 ---
 
 设置X-Window系统中的用户爱好的实用工具

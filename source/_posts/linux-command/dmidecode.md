@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dmidecode
 title: 【Linux 命令】dmidecode
+updated: '2020-09-25 08:52:00'
 ---
 
 在Linux系统下获取有关硬件方面的信息

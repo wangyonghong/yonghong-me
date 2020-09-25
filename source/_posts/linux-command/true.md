@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - 'true'
 title: 【Linux 命令】true
+updated: '2020-09-25 12:10:30'
 ---
 
 返回状态为成功。

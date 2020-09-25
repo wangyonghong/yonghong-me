@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - fmt
 title: 【Linux 命令】fmt
+updated: '2020-09-25 09:16:30'
 ---
 
 读取文件后优化处理并输出

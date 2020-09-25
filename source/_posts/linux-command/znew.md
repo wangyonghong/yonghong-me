@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - znew
 title: 【Linux 命令】znew
+updated: '2020-09-25 12:45:30'
 ---
 
 将.Z压缩包重新转化为gzip命令压缩的.gz压缩包

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rpm2cpio
 title: 【Linux 命令】rpm2cpio
+updated: '2020-09-25 11:23:00'
 ---
 
 将RPM软件包转换为cpio格式的文件

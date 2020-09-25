@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bzless
 title: 【Linux 命令】bzless
+updated: '2020-09-25 08:23:30'
 ---
 
 增强.bz2压缩包查看器

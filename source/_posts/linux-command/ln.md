@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ln
 title: 【Linux 命令】ln
+updated: '2020-09-25 10:05:00'
 ---
 
 用来为文件创建链接

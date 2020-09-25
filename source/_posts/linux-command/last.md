@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - last
 title: 【Linux 命令】last
+updated: '2020-09-25 09:59:00'
 ---
 
 列出目前与过去登入系统的用户相关信息

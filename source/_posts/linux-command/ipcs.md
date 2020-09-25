@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ipcs
 title: 【Linux 命令】ipcs
+updated: '2020-09-25 09:50:30'
 ---
 
 分析消息队列共享内存和信号量 

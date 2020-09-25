@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ftpwho
 title: 【Linux 命令】ftpwho
+updated: '2020-09-25 09:21:00'
 ---
 
 显示当前每个ftp会话信息

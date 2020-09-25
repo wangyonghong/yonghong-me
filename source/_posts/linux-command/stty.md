@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - stty
 title: 【Linux 命令】stty
+updated: '2020-09-25 11:51:30'
 ---
 
 修改终端命令行的相关设置

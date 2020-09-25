@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - logger
 title: 【Linux 命令】logger
+updated: '2020-09-25 10:07:00'
 ---
 
 在系统日志中记录相应条目

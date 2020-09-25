@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mysqladmin
 title: 【Linux 命令】mysqladmin
+updated: '2020-09-25 10:36:30'
 ---
 
 MySQL服务器管理客户端

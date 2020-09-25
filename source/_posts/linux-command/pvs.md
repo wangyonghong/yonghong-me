@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pvs
 title: 【Linux 命令】pvs
+updated: '2020-09-25 11:07:00'
 ---
 
 输出物理卷信息报表

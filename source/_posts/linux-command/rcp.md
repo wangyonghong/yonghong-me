@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rcp
 title: 【Linux 命令】rcp
+updated: '2020-09-25 11:12:30'
 ---
 
 使在两台Linux主机之间的文件复制操作更简单

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ltrace
 title: 【Linux 命令】ltrace
+updated: '2020-09-25 10:19:30'
 ---
 
 用来跟踪进程调用库函数的情况

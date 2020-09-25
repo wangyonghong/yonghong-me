@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - help
 title: 【Linux 命令】help
+updated: '2020-09-25 09:34:00'
 ---
 
 该命令是bash内建命令，用于显示bash内建命令的帮助信息。

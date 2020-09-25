@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - gpm
 title: 【Linux 命令】gpm
+updated: '2020-09-25 09:26:00'
 ---
 
 提供文字模式下的滑鼠事件处理

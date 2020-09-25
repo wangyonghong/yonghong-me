@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - repquota
 title: 【Linux 命令】repquota
+updated: '2020-09-25 11:16:30'
 ---
 
 报表的格式输出磁盘空间限制的状态

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rexec
 title: 【Linux 命令】rexec
+updated: '2020-09-25 11:19:30'
 ---
 
 运程执行Linux系统下命令 

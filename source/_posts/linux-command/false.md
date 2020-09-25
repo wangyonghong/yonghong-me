@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - 'false'
 title: 【Linux 命令】false
+updated: '2020-09-25 09:11:00'
 ---
 
 返回状态为失败。

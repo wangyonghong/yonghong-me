@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - whereis
 title: 【Linux 命令】whereis
+updated: '2020-09-25 12:34:00'
 ---
 
 查找二进制程序、代码等相关文件路径

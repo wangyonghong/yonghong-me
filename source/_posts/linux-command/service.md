@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - service
 title: 【Linux 命令】service
+updated: '2020-09-25 11:31:30'
 ---
 
 控制系统服务的实用工具

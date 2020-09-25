@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - quotaoff
 title: 【Linux 命令】quotaoff
+updated: '2020-09-25 11:11:00'
 ---
 
 关闭Linux内核中指定文件系统的磁盘配额功能

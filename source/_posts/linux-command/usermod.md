@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - usermod
 title: 【Linux 命令】usermod
+updated: '2020-09-25 12:21:00'
 ---
 
 用于修改用户的基本信息

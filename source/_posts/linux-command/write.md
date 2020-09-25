@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - write
 title: 【Linux 命令】write
+updated: '2020-09-25 12:36:00'
 ---
 
 向指定登录用户终端上发送信息

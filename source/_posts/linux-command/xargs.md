@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xargs
 title: 【Linux 命令】xargs
+updated: '2020-09-25 12:36:30'
 ---
 
 给其他命令传递参数的一个过滤器

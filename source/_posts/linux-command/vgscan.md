@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - vgscan
 title: 【Linux 命令】vgscan
+updated: '2020-09-25 12:28:30'
 ---
 
 扫描并显示系统中的卷组

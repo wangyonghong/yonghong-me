@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - arch
 title: 【Linux 命令】arch
+updated: '2020-09-25 08:06:30'
 ---
 
 显示当前主机的硬件架构类型

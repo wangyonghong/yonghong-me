@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dd
 title: 【Linux 命令】dd
+updated: '2020-09-25 08:44:00'
 ---
 
 复制文件并对原文件的内容进行转换和格式化处理

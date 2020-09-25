@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - su
 title: 【Linux 命令】su
+updated: '2020-09-25 11:52:00'
 ---
 
 用于切换当前用户身份到其他用户身份

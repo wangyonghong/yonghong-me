@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rpmbuild
 title: 【Linux 命令】rpmbuild
+updated: '2020-09-25 11:23:30'
 ---
 
 创建RPM的二进制软件包和源码软件包

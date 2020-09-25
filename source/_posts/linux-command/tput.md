@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - tput
 title: 【Linux 命令】tput
+updated: '2020-09-25 12:07:30'
 ---
 
 通过terminfo数据库对终端会话进行初始化和操作

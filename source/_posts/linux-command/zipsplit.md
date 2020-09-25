@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - zipsplit
 title: 【Linux 命令】zipsplit
+updated: '2020-09-25 12:45:00'
 ---
 
 将较大的zip压缩包分割成各个较小的压缩包

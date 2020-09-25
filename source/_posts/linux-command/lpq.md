@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lpq
 title: 【Linux 命令】lpq
+updated: '2020-09-25 10:13:00'
 ---
 
 显示打印队列中的打印任务的状态信息

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - squidclient
 title: 【Linux 命令】squidclient
+updated: '2020-09-25 11:45:00'
 ---
 
 squid服务器的客户端管理工具

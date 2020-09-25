@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - runlevel
 title: 【Linux 命令】runlevel
+updated: '2020-09-25 11:27:00'
 ---
 
 打印当前Linux系统的运行等级

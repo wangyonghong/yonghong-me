@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bc
 title: 【Linux 命令】bc
+updated: '2020-09-25 08:15:30'
 ---
 
 算术操作精密运算工具

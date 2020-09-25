@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - w
 title: 【Linux 命令】w
+updated: '2020-09-25 12:30:30'
 ---
 
 显示目前登入系统的用户信息

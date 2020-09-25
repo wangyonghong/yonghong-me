@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - setfacl
 title: 【Linux 命令】setfacl
+updated: '2020-09-25 11:33:00'
 ---
 
 设置文件访问控制列表

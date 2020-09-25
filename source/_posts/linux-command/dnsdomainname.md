@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dnsdomainname
 title: 【Linux 命令】dnsdomainname
+updated: '2020-09-25 08:53:00'
 ---
 
 定义DNS系统中FQDN名称的域名

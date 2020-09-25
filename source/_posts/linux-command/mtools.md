@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mtools
 title: 【Linux 命令】mtools
+updated: '2020-09-25 10:35:00'
 ---
 
 显示mtools支持的指令

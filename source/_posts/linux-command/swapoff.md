@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - swapoff
 title: 【Linux 命令】swapoff
+updated: '2020-09-25 11:54:30'
 ---
 
 关闭指定的交换空间

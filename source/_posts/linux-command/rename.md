@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rename
 title: 【Linux 命令】rename
+updated: '2020-09-25 11:15:30'
 ---
 
 用字符串替换的方式批量改变文件名

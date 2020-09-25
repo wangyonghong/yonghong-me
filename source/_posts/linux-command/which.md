@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - which
 title: 【Linux 命令】which
+updated: '2020-09-25 12:34:30'
 ---
 
 查找并显示给定命令的绝对路径

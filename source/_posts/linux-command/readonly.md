@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - readonly
 title: 【Linux 命令】readonly
+updated: '2020-09-25 11:14:00'
 ---
 
 标记shell变量或函数为只读

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - make
 title: 【Linux 命令】make
+updated: '2020-09-25 10:25:30'
 ---
 
 GNU的工程化编译工具

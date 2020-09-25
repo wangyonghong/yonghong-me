@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - printf
 title: 【Linux 命令】printf
+updated: '2020-09-25 11:00:30'
 ---
 
 格式化并输出结果。

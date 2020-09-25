@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rpm
 title: 【Linux 命令】rpm
+updated: '2020-09-25 11:22:30'
 ---
 
 RPM软件包的管理工具

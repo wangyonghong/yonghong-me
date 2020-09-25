@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - sysctl
 title: 【Linux 命令】sysctl
+updated: '2020-09-25 11:56:00'
 ---
 
 时动态地修改内核的运行参数

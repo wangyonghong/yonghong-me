@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lp
 title: 【Linux 命令】lp
+updated: '2020-09-25 10:11:30'
 ---
 
 打印文件或修改排队的打印任务

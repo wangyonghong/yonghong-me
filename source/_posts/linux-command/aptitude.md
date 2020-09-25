@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - aptitude
 title: 【Linux 命令】aptitude
+updated: '2020-09-25 08:05:30'
 ---
 
 Debian Linux系统中软件包管理工具

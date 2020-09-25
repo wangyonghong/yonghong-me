@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - clock
 title: 【Linux 命令】clock
+updated: '2020-09-25 08:33:30'
 ---
 
 用于调整 RTC 时间

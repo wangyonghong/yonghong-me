@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dhclient
 title: 【Linux 命令】dhclient
+updated: '2020-09-25 08:46:00'
 ---
 
 动态获取或释放IP地址

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - trap
 title: 【Linux 命令】trap
+updated: '2020-09-25 12:09:30'
 ---
 
 捕捉信号和其他事件并执行命令。

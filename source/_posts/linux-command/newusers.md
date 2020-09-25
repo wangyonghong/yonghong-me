@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - newusers
 title: 【Linux 命令】newusers
+updated: '2020-09-25 10:41:30'
 ---
 
 用于批处理的方式一次创建多个命令

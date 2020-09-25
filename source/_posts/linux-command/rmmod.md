@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rmmod
 title: 【Linux 命令】rmmod
+updated: '2020-09-25 11:21:30'
 ---
 
 从运行的内核中移除指定的内核模块

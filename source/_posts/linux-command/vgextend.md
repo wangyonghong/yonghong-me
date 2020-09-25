@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - vgextend
 title: 【Linux 命令】vgextend
+updated: '2020-09-25 12:26:30'
 ---
 
 向卷组中添加物理卷

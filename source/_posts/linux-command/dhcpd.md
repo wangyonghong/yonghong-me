@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dhcpd
 title: 【Linux 命令】dhcpd
+updated: '2020-09-25 08:46:30'
 ---
 
 运行DHCP服务器

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - tr
 title: 【Linux 命令】tr
+updated: '2020-09-25 12:08:00'
 ---
 
 将字符进行替换压缩和删除

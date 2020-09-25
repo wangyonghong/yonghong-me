@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lpr
 title: 【Linux 命令】lpr
+updated: '2020-09-25 10:13:30'
 ---
 
 将文件发送给指定打印机进行打印

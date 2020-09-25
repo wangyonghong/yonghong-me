@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - quota
 title: 【Linux 命令】quota
+updated: '2020-09-25 11:10:00'
 ---
 
 显示磁盘已使用的空间与限制

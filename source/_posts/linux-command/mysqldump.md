@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mysqldump
 title: 【Linux 命令】mysqldump
+updated: '2020-09-25 10:37:00'
 ---
 
 MySQL数据库中备份工具

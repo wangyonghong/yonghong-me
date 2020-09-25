@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - supervisord
 title: 【Linux 命令】supervisord
+updated: '2020-09-25 11:53:30'
 ---
 
 配置后台服务/常驻进程的进程管家工具

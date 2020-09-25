@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ssh
 title: 【Linux 命令】ssh
+updated: '2020-09-25 11:48:30'
 ---
 
 openssh套件中的客户端连接工具

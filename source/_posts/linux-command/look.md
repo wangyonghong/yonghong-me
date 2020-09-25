@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - look
 title: 【Linux 命令】look
+updated: '2020-09-25 10:10:30'
 ---
 
 显示文件中以指定字符串开头的任意行

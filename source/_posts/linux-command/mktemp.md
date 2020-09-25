@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mktemp
 title: 【Linux 命令】mktemp
+updated: '2020-09-25 10:32:30'
 ---
 
 创建临时文件供shell脚本使用

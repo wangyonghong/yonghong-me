@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cksum
 title: 【Linux 命令】cksum
+updated: '2020-09-25 08:32:30'
 ---
 
 检查文件的CRC是否正确

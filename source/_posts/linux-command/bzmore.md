@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bzmore
 title: 【Linux 命令】bzmore
+updated: '2020-09-25 08:24:00'
 ---
 
 查看bzip2压缩过的文本文件的内容

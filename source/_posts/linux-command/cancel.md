@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cancel
 title: 【Linux 命令】cancel
+updated: '2020-09-25 08:25:00'
 ---
 
 取消已存在的打印任务

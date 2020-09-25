@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - readelf
 title: 【Linux 命令】readelf
+updated: '2020-09-25 11:13:30'
 ---
 
 用于显示elf格式文件的信息

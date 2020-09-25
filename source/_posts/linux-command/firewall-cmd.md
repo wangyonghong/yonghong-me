@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - firewall-cmd
 title: 【Linux 命令】firewall-cmd
+updated: '2020-09-25 09:15:30'
 ---
 
 Linux上新用的防火墙软件，跟iptables差不多的工具

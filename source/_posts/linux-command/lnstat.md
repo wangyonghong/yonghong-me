@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lnstat
 title: 【Linux 命令】lnstat
+updated: '2020-09-25 10:05:30'
 ---
 
 显示Linux系统的网路状态

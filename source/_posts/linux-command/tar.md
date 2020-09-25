@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - tar
 title: 【Linux 命令】tar
+updated: '2020-09-25 12:00:00'
 ---
 
 将许多文件一起保存至一个单独的磁带或磁盘归档，并能从归档中单独还原所需文件。

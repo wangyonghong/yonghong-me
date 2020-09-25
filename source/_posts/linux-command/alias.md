@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - alias
 title: 【Linux 命令】alias
+updated: '2020-09-25 08:02:00'
 ---
 
 定义或显示别名。

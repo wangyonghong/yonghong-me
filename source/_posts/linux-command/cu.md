@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cu
 title: 【Linux 命令】cu
+updated: '2020-09-25 08:41:00'
 ---
 
 用于连接另一个系统主机

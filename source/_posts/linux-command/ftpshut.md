@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ftpshut
 title: 【Linux 命令】ftpshut
+updated: '2020-09-25 09:20:00'
 ---
 
 在指定的时间关闭FTP服务器

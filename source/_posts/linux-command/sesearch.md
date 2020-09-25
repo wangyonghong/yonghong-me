@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - sesearch
 title: 【Linux 命令】sesearch
+updated: '2020-09-25 11:32:00'
 ---
 
 查询SELinux策略的规则详情

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ps
 title: 【Linux 命令】ps
+updated: '2020-09-25 11:01:30'
 ---
 
 报告当前系统的进程状态

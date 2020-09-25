@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lsattr
 title: 【Linux 命令】lsattr
+updated: '2020-09-25 10:15:30'
 ---
 
 查看文件的第二扩展文件系统属性

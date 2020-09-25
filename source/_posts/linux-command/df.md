@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - df
 title: 【Linux 命令】df
+updated: '2020-09-25 08:45:30'
 ---
 
 显示磁盘的相关信息

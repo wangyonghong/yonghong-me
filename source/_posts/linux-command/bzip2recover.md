@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bzip2recover
 title: 【Linux 命令】bzip2recover
+updated: '2020-09-25 08:23:00'
 ---
 
 恢复被破坏的.bz2压缩包中的文件

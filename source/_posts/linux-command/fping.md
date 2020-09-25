@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - fping
 title: 【Linux 命令】fping
+updated: '2020-09-25 09:17:30'
 ---
 
 fping检测主机是否存在

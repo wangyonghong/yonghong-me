@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ack
 title: 【Linux 命令】ack
+updated: '2020-09-25 08:01:30'
 ---
 
 比grep好用的文本搜索工具

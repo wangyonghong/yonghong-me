@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - grpconv
 title: 【Linux 命令】grpconv
+updated: '2020-09-25 09:29:30'
 ---
 
 用来开启群组的投影密码

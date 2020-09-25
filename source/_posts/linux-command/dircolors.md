@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dircolors
 title: 【Linux 命令】dircolors
+updated: '2020-09-25 08:49:30'
 ---
 
 置ls命令在显示目录或文件时所用的色彩

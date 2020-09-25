@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - inotifywait
 title: 【Linux 命令】inotifywait
+updated: '2020-09-25 09:45:00'
 ---
 
 异步文件系统监控机制

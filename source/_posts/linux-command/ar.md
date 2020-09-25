@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ar
 title: 【Linux 命令】ar
+updated: '2020-09-25 08:06:00'
 ---
 
 建立或修改备存文件，或是从备存文件中抽取文件

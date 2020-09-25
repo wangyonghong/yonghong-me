@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - hdparm
 title: 【Linux 命令】hdparm
+updated: '2020-09-25 09:33:00'
 ---
 
 显示与设定硬盘的参数

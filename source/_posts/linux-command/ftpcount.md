@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ftpcount
 title: 【Linux 命令】ftpcount
+updated: '2020-09-25 09:19:30'
 ---
 
 显示目前已FTP登入的用户人数

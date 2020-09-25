@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - gzip
 title: 【Linux 命令】gzip
+updated: '2020-09-25 09:32:00'
 ---
 
 用来压缩文件

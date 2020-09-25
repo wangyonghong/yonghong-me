@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cut
 title: 【Linux 命令】cut
+updated: '2020-09-25 08:43:00'
 ---
 
 连接文件并打印到标准输出设备上

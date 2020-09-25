@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - showmount
 title: 【Linux 命令】showmount
+updated: '2020-09-25 11:37:30'
 ---
 
 显示NFS服务器加载的信息

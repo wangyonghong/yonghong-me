@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - split
 title: 【Linux 命令】split
+updated: '2020-09-25 11:44:00'
 ---
 
 分割任意大小的文件

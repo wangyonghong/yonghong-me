@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ypdomainname
 title: 【Linux 命令】ypdomainname
+updated: '2020-09-25 12:42:00'
 ---
 
 显示主机的NIS的域名

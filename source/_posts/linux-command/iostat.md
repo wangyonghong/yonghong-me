@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iostat
 title: 【Linux 命令】iostat
+updated: '2020-09-25 09:46:30'
 ---
 
 监视系统输入输出设备和CPU的使用情况

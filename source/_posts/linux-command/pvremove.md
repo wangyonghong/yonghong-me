@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pvremove
 title: 【Linux 命令】pvremove
+updated: '2020-09-25 11:06:30'
 ---
 
 删除一个存在的物理卷

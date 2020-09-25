@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - arj
 title: 【Linux 命令】arj
+updated: '2020-09-25 08:07:00'
 ---
 
 用于创建和管理.arj压缩包

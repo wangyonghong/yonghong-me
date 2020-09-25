@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - passwd
 title: 【Linux 命令】passwd
+updated: '2020-09-25 10:51:30'
 ---
 
 用于让用户可以更改自己的密码

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - getsebool
 title: 【Linux 命令】getsebool
+updated: '2020-09-25 09:24:30'
 ---
 
 查询SElinux策略内各项规则的布尔值

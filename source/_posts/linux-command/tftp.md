@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - tftp
 title: 【Linux 命令】tftp
+updated: '2020-09-25 12:04:00'
 ---
 
 在本机和tftp服务器之间使用TFTP协议传输文件

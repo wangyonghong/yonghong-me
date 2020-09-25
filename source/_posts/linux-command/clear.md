@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - clear
 title: 【Linux 命令】clear
+updated: '2020-09-25 08:33:00'
 ---
 
 清除当前屏幕终端上的任何信息

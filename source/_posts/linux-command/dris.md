@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dris
 title: 【Linux 命令】dris
+updated: '2020-09-25 08:59:00'
 ---
 
 显示和清空目录堆栈中的内容

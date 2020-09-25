@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xinit
 title: 【Linux 命令】xinit
+updated: '2020-09-25 12:38:30'
 ---
 
 是Linux下X-Window系统的初始化程序

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iptables-restore
 title: 【Linux 命令】iptables-restore
+updated: '2020-09-25 09:51:30'
 ---
 
 还原iptables表的配置

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cmp
 title: 【Linux 命令】cmp
+updated: '2020-09-25 08:34:30'
 ---
 
 比较两个文件是否有差异

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pushd
 title: 【Linux 命令】pushd
+updated: '2020-09-25 11:03:30'
 ---
 
 将目录添加到目录堆栈顶部。

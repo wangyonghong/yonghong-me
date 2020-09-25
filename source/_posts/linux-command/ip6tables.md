@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ip6tables
 title: 【Linux 命令】ip6tables
+updated: '2020-09-25 09:49:00'
 ---
 
 linux中防火墙软件

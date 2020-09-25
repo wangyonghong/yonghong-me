@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - useradd
 title: 【Linux 命令】useradd
+updated: '2020-09-25 12:20:00'
 ---
 
 创建的新的系统用户

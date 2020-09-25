@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - netstat
 title: 【Linux 命令】netstat
+updated: '2020-09-25 10:41:00'
 ---
 
 查看Linux中网络系统状态信息

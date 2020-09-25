@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chattr
 title: 【Linux 命令】chattr
+updated: '2020-09-25 08:27:30'
 ---
 
 用来改变文件属性

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - curl
 title: 【Linux 命令】curl
+updated: '2020-09-25 08:42:30'
 ---
 
 利用URL规则在命令行下工作的文件传输工具

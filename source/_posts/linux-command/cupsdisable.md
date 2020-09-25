@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cupsdisable
 title: 【Linux 命令】cupsdisable
+updated: '2020-09-25 08:41:30'
 ---
 
 停止指定的打印机

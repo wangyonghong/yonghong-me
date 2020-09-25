@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - diff3
 title: 【Linux 命令】diff3
+updated: '2020-09-25 08:48:00'
 ---
 
 比较3个文件不同的地方

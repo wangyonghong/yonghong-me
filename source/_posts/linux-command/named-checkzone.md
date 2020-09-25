@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - named-checkzone
 title: 【Linux 命令】named-checkzone
+updated: '2020-09-25 10:38:30'
 ---
 
 使用named-checkzone命令可以进行区域文件有效性检查和转换，必须指定区域名称和区域文件名称

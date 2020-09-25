@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - iptables-save
 title: 【Linux 命令】iptables-save
+updated: '2020-09-25 09:52:00'
 ---
 
 备份iptables的表配置

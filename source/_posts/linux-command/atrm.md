@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - atrm
 title: 【Linux 命令】atrm
+updated: '2020-09-25 08:12:00'
 ---
 
 删除待执行任务队列中的指定任务

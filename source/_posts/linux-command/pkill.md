@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pkill
 title: 【Linux 命令】pkill
+updated: '2020-09-25 10:57:30'
 ---
 
 可以按照进程名杀死进程

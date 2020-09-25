@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pgrep
 title: 【Linux 命令】pgrep
+updated: '2020-09-25 10:54:30'
 ---
 
 根据用户给出的信息在当前运行进程中查找并列出符合条件的进程ID（PID）

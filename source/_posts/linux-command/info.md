@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - info
 title: 【Linux 命令】info
+updated: '2020-09-25 09:44:00'
 ---
 
 Linux下info格式的帮助指令

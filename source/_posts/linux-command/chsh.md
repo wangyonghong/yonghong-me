@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chsh
 title: 【Linux 命令】chsh
+updated: '2020-09-25 08:32:00'
 ---
 
 用来更换登录系统时使用的shell

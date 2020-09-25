@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - reboot
 title: 【Linux 命令】reboot
+updated: '2020-09-25 11:14:30'
 ---
 
 重新启动正在运行的Linux操作系统

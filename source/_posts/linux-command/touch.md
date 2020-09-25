@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - touch
 title: 【Linux 命令】touch
+updated: '2020-09-25 12:07:00'
 ---
 
 创建新的空文件

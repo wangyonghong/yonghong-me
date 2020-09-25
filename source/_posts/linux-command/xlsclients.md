@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xlsclients
 title: 【Linux 命令】xlsclients
+updated: '2020-09-25 12:39:30'
 ---
 
 列出显示器中的客户端应用程序

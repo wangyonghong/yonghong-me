@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bzip2
 title: 【Linux 命令】bzip2
+updated: '2020-09-25 08:22:30'
 ---
 
 将文件压缩成bz2格式

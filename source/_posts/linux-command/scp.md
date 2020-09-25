@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - scp
 title: 【Linux 命令】scp
+updated: '2020-09-25 11:28:00'
 ---
 
 加密的方式在本地主机和远程主机之间复制文件

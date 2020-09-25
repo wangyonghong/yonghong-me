@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - e2fsck
 title: 【Linux 命令】e2fsck
+updated: '2020-09-25 09:01:00'
 ---
 
 用于检查第二扩展文件系统的完整性

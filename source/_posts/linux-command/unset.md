@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - unset
 title: 【Linux 命令】unset
+updated: '2020-09-25 12:18:00'
 ---
 
 删除指定的shell变量或函数。

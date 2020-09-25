@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dirname
 title: 【Linux 命令】dirname
+updated: '2020-09-25 08:50:00'
 ---
 
 去除文件名中的非目录部分

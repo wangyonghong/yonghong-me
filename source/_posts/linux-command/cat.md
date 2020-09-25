@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cat
 title: 【Linux 命令】cat
+updated: '2020-09-25 08:25:30'
 ---
 
 连接多个文件并打印到标准输出。

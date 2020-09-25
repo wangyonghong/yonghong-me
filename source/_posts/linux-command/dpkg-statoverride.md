@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dpkg-statoverride
 title: 【Linux 命令】dpkg-statoverride
+updated: '2020-09-25 08:57:30'
 ---
 
 Debian Linux中覆盖文件的所有权和模式

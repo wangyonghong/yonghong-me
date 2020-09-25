@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lpadmin
 title: 【Linux 命令】lpadmin
+updated: '2020-09-25 10:12:00'
 ---
 
 配置CUPS套件中的打印机和类

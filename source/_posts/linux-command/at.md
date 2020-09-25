@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - at
 title: 【Linux 命令】at
+updated: '2020-09-25 08:10:30'
 ---
 
 在指定时间执行一个任务

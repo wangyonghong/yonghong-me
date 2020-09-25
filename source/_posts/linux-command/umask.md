@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - umask
 title: 【Linux 命令】umask
+updated: '2020-09-25 12:12:30'
 ---
 
 显示或设置创建文件的权限掩码。

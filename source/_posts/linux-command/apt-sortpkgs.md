@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - apt-sortpkgs
 title: 【Linux 命令】apt-sortpkgs
+updated: '2020-09-25 08:05:00'
 ---
 
 Debian Linux下对软件包索引文件进行排序的工具

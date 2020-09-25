@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ifstat
 title: 【Linux 命令】ifstat
+updated: '2020-09-25 09:42:00'
 ---
 
 统计网络接口流量状态

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - pigz
 title: 【Linux 命令】pigz
+updated: '2020-09-25 10:56:30'
 ---
 
 可以用来解压缩文件，gzip的并行实现升级版

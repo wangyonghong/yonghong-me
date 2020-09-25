@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mkfs
 title: 【Linux 命令】mkfs
+updated: '2020-09-25 10:30:00'
 ---
 
 用于在设备上创建Linux文件系统

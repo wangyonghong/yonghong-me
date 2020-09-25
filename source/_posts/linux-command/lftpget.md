@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lftpget
 title: 【Linux 命令】lftpget
+updated: '2020-09-25 10:03:30'
 ---
 
 调用lftp指令下载指定的文件

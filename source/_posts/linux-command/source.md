@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - source
 title: 【Linux 命令】source
+updated: '2020-09-25 11:42:30'
 ---
 
 在当前Shell环境中从指定文件读取和执行命令。

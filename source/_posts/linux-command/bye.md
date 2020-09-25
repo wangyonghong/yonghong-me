@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bye
 title: 【Linux 命令】bye
+updated: '2020-09-25 08:20:00'
 ---
 
 命令用于中断FTP连线并结束程序

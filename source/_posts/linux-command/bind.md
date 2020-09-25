@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - bind
 title: 【Linux 命令】bind
+updated: '2020-09-25 08:16:30'
 ---
 
 显示或设置键盘按键与其相关的功能

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - rm
 title: 【Linux 命令】rm
+updated: '2020-09-25 11:20:30'
 ---
 
 用于删除给定的文件和目录

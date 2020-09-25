@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ex
 title: 【Linux 命令】ex
+updated: '2020-09-25 09:07:30'
 ---
 
 启动vim编辑器的ex编辑模式

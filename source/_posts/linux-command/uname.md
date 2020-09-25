@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - uname
 title: 【Linux 命令】uname
+updated: '2020-09-25 12:14:00'
 ---
 
 打印系统信息。

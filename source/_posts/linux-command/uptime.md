@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - uptime
 title: 【Linux 命令】uptime
+updated: '2020-09-25 12:19:30'
 ---
 
 查看Linux系统负载信息

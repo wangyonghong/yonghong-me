@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - users
 title: 【Linux 命令】users
+updated: '2020-09-25 12:22:00'
 ---
 
 打印当前主机所有登陆用户的名称。

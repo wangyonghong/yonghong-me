@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dump
 title: 【Linux 命令】dump
+updated: '2020-09-25 09:00:30'
 ---
 
 用于备份ext2或者ext3文件系统

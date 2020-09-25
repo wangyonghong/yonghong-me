@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - mapfile
 title: 【Linux 命令】mapfile
+updated: '2020-09-25 10:26:30'
 ---
 
 从标准输入读取行并赋值到数组。

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - uncompress
 title: 【Linux 命令】uncompress
+updated: '2020-09-25 12:15:00'
 ---
 
 用来解压.Z文件

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ifdown
 title: 【Linux 命令】ifdown
+updated: '2020-09-25 09:41:30'
 ---
 
 禁用指定的网络接口

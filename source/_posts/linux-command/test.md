@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - test
 title: 【Linux 命令】test
+updated: '2020-09-25 12:03:30'
 ---
 
 执行条件表达式。

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - gzexe
 title: 【Linux 命令】gzexe
+updated: '2020-09-25 09:31:30'
 ---
 
 用来压缩可执行文件

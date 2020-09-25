@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - sendmail
 title: 【Linux 命令】sendmail
+updated: '2020-09-25 11:30:30'
 ---
 
 著名电子邮件服务器

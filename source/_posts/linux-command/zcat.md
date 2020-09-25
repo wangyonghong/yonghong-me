@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - zcat
 title: 【Linux 命令】zcat
+updated: '2020-09-25 12:43:00'
 ---
 
 显示压缩包中文件的内容

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - vgrename
 title: 【Linux 命令】vgrename
+updated: '2020-09-25 12:28:00'
 ---
 
 使用vgrename命令可以重命名卷组的名称

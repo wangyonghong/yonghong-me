@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - xauth
 title: 【Linux 命令】xauth
+updated: '2020-09-25 12:37:00'
 ---
 
 显示和编辑被用于连接X服务器的认证信息

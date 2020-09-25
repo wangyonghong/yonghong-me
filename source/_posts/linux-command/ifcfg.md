@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ifcfg
 title: 【Linux 命令】ifcfg
+updated: '2020-09-25 09:40:30'
 ---
 
 置Linux中的网络接口参数

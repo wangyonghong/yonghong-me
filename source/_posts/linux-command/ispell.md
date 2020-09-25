@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ispell
 title: 【Linux 命令】ispell
+updated: '2020-09-25 09:54:00'
 ---
 
 检查文件中出现的拼写错误

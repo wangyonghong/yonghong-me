@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - cupsenable
 title: 【Linux 命令】cupsenable
+updated: '2020-09-25 08:42:00'
 ---
 
 启动指定的打印机

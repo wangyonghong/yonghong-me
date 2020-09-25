@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - speedtest-cli
 title: 【Linux 命令】speedtest-cli
+updated: '2020-09-25 11:43:00'
 ---
 
 命令行下测试服务器外网速度

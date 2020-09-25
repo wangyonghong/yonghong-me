@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - du
 title: 【Linux 命令】du
+updated: '2020-09-25 09:00:00'
 ---
 
 显示每个文件和目录的磁盘使用空间

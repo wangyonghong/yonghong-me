@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - groupdel
 title: 【Linux 命令】groupdel
+updated: '2020-09-25 09:27:30'
 ---
 
 用于删除指定的工作组

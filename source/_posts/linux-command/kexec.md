@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - kexec
 title: 【Linux 命令】kexec
+updated: '2020-09-25 09:57:30'
 ---
 
 从当前正在运行的内核引导到一个新内核

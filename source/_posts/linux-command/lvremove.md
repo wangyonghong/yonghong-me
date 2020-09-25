@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - lvremove
 title: 【Linux 命令】lvremove
+updated: '2020-09-25 10:22:00'
 ---
 
 删除指定LVM逻辑卷

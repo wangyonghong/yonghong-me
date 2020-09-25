@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - diffstat
 title: 【Linux 命令】diffstat
+updated: '2020-09-25 08:48:30'
 ---
 
 显示diff命令输出信息的柱状图

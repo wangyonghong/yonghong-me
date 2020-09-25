@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - colrm
 title: 【Linux 命令】colrm
+updated: '2020-09-25 08:35:30'
 ---
 
 删除文件中的指定列

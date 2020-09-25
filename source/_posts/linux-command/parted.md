@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - parted
 title: 【Linux 命令】parted
+updated: '2020-09-25 10:50:30'
 ---
 
 磁盘分区和分区大小调整工具

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - dirs
 title: 【Linux 命令】dirs
+updated: '2020-09-25 08:50:30'
 ---
 
 显示目录堆栈。

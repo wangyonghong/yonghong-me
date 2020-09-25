@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chfn
 title: 【Linux 命令】chfn
+updated: '2020-09-25 08:28:30'
 ---
 
 用来改变finger命令显示的信息

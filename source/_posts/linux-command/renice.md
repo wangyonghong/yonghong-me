@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - renice
 title: 【Linux 命令】renice
+updated: '2020-09-25 11:16:00'
 ---
 
 修改正在运行的进程的调度优先级

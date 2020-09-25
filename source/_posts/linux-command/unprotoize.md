@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - unprotoize
 title: 【Linux 命令】unprotoize
+updated: '2020-09-25 12:17:00'
 ---
 
 删除C语言源代码文件中的函数原型

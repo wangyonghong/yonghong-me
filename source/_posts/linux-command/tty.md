@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - tty
 title: 【Linux 命令】tty
+updated: '2020-09-25 12:11:00'
 ---
 
 显示连接到当前标准输入的终端设备文件名

@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - crontab
 title: 【Linux 命令】crontab
+updated: '2020-09-25 08:40:00'
 ---
 
 提交和管理用户的需要周期性执行的任务

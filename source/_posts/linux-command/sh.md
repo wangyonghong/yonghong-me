@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - sh
 title: 【Linux 命令】sh
+updated: '2020-09-25 11:36:00'
 ---
 
 shell命令解释器

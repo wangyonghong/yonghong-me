@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chcon
 title: 【Linux 命令】chcon
+updated: '2020-09-25 08:28:00'
 ---
 
 修改对象（文件）的安全上下文

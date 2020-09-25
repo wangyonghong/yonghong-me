@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - stat
 title: 【Linux 命令】stat
+updated: '2020-09-25 11:50:00'
 ---
 
 用于显示文件的状态信息

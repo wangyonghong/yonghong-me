@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - ssh-copy-id
 title: 【Linux 命令】ssh-copy-id
+updated: '2020-09-25 11:47:00'
 ---
 
 把本地的ssh公钥文件安装到远程主机对应的账户下

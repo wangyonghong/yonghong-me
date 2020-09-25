@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - chmod
 title: 【Linux 命令】chmod
+updated: '2020-09-25 08:30:00'
 ---
 
 用来变更文件或目录的权限

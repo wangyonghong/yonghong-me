@@ -1,12 +1,14 @@
 ---
 categories:
 - Linux 命令
+date: '2020-09-25 08:00:00'
 tags:
 - Linux
 - Linux Command
 - Linux 命令
 - skill
 title: 【Linux 命令】skill
+updated: '2020-09-25 11:39:00'
 ---
 
 向选定的进程发送信号冻结进程
