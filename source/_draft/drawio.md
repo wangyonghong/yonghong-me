@@ -1,5 +1,5 @@
 ---
-title: 【推荐】超级好用的图表绘制工具 Draw.io 网站、私有部署、Desktop 版本和 VSCode 插件
+title: 【推荐】超级好用的图表绘制工具 Draw.io 网站、Desktop 版本、VSCode 插件和私有化部署
 tags:
 - 推荐
 - drawio
