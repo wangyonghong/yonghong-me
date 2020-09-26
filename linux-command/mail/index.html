@@ -406,12 +406,12 @@
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjeDZkOyYjMTA1OyYjMTEwOyYjeDQwOyYjeDZhOyYjMTE1OyYjMTAwOyYjeDY5OyYjMTAzOyYjeDJlOyYjOTk7JiN4NmY7JiMxMDk7">&#x61;&#x64;&#x6d;&#105;&#110;&#x40;&#x6a;&#115;&#100;&#x69;&#103;&#x2e;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjMTA5OyYjeDY5OyYjMTEwOyYjeDQwOyYjMTA2OyYjMTE1OyYjMTAwOyYjMTA1OyYjeDY3OyYjeDJlOyYjOTk7JiMxMTE7JiN4NmQ7">&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#106;&#115;&#100;&#105;&#x67;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjMTE1OyYjMTAxOyYjMTE0OyYjNjQ7JiN4NmE7JiMxMTU7JiMxMDA7JiN4Njk7JiMxMDM7JiM0NjsmIzk5OyYjMTExOyYjMTA5Ow==">&#x75;&#115;&#101;&#114;&#64;&#x6a;&#115;&#100;&#x69;&#103;&#46;&#99;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjMTE1OyYjMTAxOyYjeDcyOyYjNjQ7JiN4NmE7JiMxMTU7JiMxMDA7JiMxMDU7JiMxMDM7JiN4MmU7JiN4NjM7JiMxMTE7JiMxMDk7">&#x75;&#115;&#101;&#x72;&#64;&#x6a;&#115;&#100;&#105;&#103;&#x2e;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -766,6 +766,30 @@ NexT.utils.loadComments('#lv-container', () => {
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
 });
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
 </script>
 
     </div>
