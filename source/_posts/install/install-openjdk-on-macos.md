@@ -5,6 +5,8 @@ tags:
 - Install
 - OpenJDK
 - AdoptOpenJDK
+- JDK
+- Java
 - Homebrew
 categories:
 - 安装
