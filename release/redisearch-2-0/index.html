@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+  <meta name="yandex-verification" content="bb13e36c670d98c2">
+  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","scheme":"Gemini","version":"8.0.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="RediSearch 2.0.0 的 GA 版本现已发布，此版本在 RediSearch 1.0 的性能和可用性上进行了多项改进。这些改进需要对 API 进行一些向后的更改。具体更新内容如下： Highlights 此版本改变了搜索索引与数据保持同步的方式。在 RediSearch 1.x 中，用户必须使用 FT.ADD 命令手动添加数据到索引中。在 RediSearch 2.x 中，用户的数据会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【release】高性能全文搜索引擎 RediSearch 2.0 正式发布！">
+<meta property="og:url" content="http://yonghong.tech/release/redisearch-2-0/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="RediSearch 2.0.0 的 GA 版本现已发布，此版本在 RediSearch 1.0 的性能和可用性上进行了多项改进。这些改进需要对 API 进行一些向后的更改。具体更新内容如下： Highlights 此版本改变了搜索索引与数据保持同步的方式。在 RediSearch 1.x 中，用户必须使用 FT.ADD 命令手动添加数据到索引中。在 RediSearch 2.x 中，用户的数据会">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-08-newarchitecture-jhGq6x.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-architecture-1-hBkQjU.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-active-active-1-Aor8lj.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-2.0-graph-1-1024x639-pz1WCV.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-2.0-graph-2-1024x658-EArYyF.png">
+<meta property="article:published_time" content="2020-09-27T15:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-27T15:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="release">
+<meta property="article:tag" content="RediSearch">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="高性能">
+<meta property="article:tag" content="全文搜索">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2020/09/27-16-08-newarchitecture-jhGq6x.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/release/redisearch-2-0/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【release】高性能全文搜索引擎 RediSearch 2.0 正式发布！ | 永红的互联网手记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-开源">
+
+    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-is-the-GA-release-for-RedisSearch-2-0"><span class="nav-number">1.</span> <span class="nav-text">This is the GA release for RedisSearch 2.0.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Highlights"><span class="nav-number">1.1.</span> <span class="nav-text">Highlights</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Details"><span class="nav-number">1.2.</span> <span class="nav-text">Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Noteworthy-changes"><span class="nav-number">1.3.</span> <span class="nav-text">Noteworthy changes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Behavior-changes"><span class="nav-number">1.4.</span> <span class="nav-text">Behavior changes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaling-a-single-index-over-multiple-shards-with-the-open-source-Redis-cluster-API"><span class="nav-number">1.5.</span> <span class="nav-text">Scaling a single index over multiple shards with the open source Redis cluster API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introducing-RediSearch-2-0"><span class="nav-number">2.</span> <span class="nav-text">Introducing RediSearch 2.0</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inside-RediSearch-2-0%E2%80%99s-new-architecture"><span class="nav-number">2.1.</span> <span class="nav-text">Inside RediSearch 2.0’s new architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSS-cluster-support-for-open-source-Redis"><span class="nav-number">2.2.</span> <span class="nav-text">OSS cluster support for open source Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Show-me-the-numbers"><span class="nav-number">2.3.</span> <span class="nav-text">Show me the numbers!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What%E2%80%99s-next-for-RediSearch-2-0"><span class="nav-number">2.4.</span> <span class="nav-text">What’s next for RediSearch 2.0</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">583</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">616</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMHhsMm9vdA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;0xl2oot"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/release/redisearch-2-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【release】高性能全文搜索引擎 RediSearch 2.0 正式发布！
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-27 23:00:00" itemprop="dateCreated datePublished" datetime="2020-09-27T23:00:00+08:00">2020-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/release/" itemprop="url" rel="index"><span itemprop="name">release</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>RediSearch 2.0.0 的 GA 版本现已发布，此版本在 RediSearch 1.0 的性能和可用性上进行了多项改进。这些改进需要对 API 进行一些向后的更改。具体更新内容如下：</p>
+<p><strong>Highlights</strong></p>
+<p>此版本改变了搜索索引与数据保持同步的方式。在 RediSearch 1.x 中，用户必须使用 FT.ADD 命令手动添加数据到索引中。在 RediSearch 2.x 中，用户的数据会根据键模式自动建立索引。</p>
+<p>这些变化旨在提高开发人员的工作效率，并确保用户的搜索索引始终与其数据保持同步。为了支持这一点，开发团队对 API 做了一些改动。</p>
+<p>除了简化索引之外，RediSearch 2.0 还允许用户使用 Redis cluster API 在多个 Redis shards 上扩展单个索引。</p>
+<p>最后，RediSearch 2.x 将其索引保留在 main Redis key space 之外。官方表示，其对索引代码的改进使查询性能提高了 2.4 倍。</p>
+<a id="more"></a>
+
+<p><strong>Details</strong></p>
+<ul>
+<li>创建索引时，必须指定前缀条件和/或过滤器。这决定了 RediSearch 将为哪些 hash 建立索引。</li>
+<li>现在，有几个 RediSearch 命令可以映射到它们的 Redis  equivalents：<code>FT.ADD</code>-&gt; <code>HSET</code>、<code>FT.DEL</code>-&gt; <code>DEL</code>（相当于 RediSearch 1.x 中带有 DD 标志的<a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftdel"><code>FT.DEL</code></a>）、<code>FT.GET</code>-&gt; <code>HGETALL</code>、<code>FT.MGET</code>-&gt; <code>HGETALL</code>。</li>
+<li>RediSearch 索引不再驻留在 key space 中，并且索引不再保存到 RDB 中。</li>
+<li>用户可以<span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL21hc3Rlci9VcGdyYWRlX3RvXzIuMC8=">从 RediSearch 1.x 升级到 RediSearch2.x<i class="fa fa-external-link-alt"></i></span>。</li>
+</ul>
+<p><strong>Noteworthy changes</strong></p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEyNDY=">＃1246<i class="fa fa-external-link-alt"></i></span> 适用于 <code>FT.AGGREGATE</code> APPLY 操作的 <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/master/Aggregations/#list_of_geo_apply_functions"><code>geodistance</code></a> 函数。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzOTQ=">＃1394<i class="fa fa-external-link-alt"></i></span>：过期的文档（TTL）将从索引中删除。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzOTQ=">＃1394<i class="fa fa-external-link-alt"></i></span>: 进行优化，以避免在更新非索引字段时重新索引文件。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODQ=">＃1384<i class="fa fa-external-link-alt"></i></span>：<a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftdropindex"><code>FT.DROPINDEX</code></a>，默认情况下不会删除该索引下的文档（请参见已弃用的<code>FT.DROP</code>）。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODU=">＃1385<i class="fa fa-external-link-alt"></i></span>：在<a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/master/Commands/#ftinfo"><code>FT.INFO</code></a>response 中添加索引定义。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEwOTc=">＃1097<i class="fa fa-external-link-alt"></i></span>：添加 Hindi snowball stemmer。</li>
+<li>RediSearch 2.x 需要 Redis 6.0 或更高版本。</li>
+<li>……</li>
+</ul>
+<hr>
+<h2 id="This-is-the-GA-release-for-RedisSearch-2-0"><a href="#This-is-the-GA-release-for-RedisSearch-2-0" class="headerlink" title="This is the GA release for RedisSearch 2.0."></a>This is the GA release for RedisSearch 2.0.</h2><p>This is the GA release for RedisSearch 2.0. This release includes several improvements in performance and usability over RediSearch 1.0. These improvements necessitate a few backward-breaking changes to the API.</p>
+<h3 id="Highlights"><a href="#Highlights" class="headerlink" title="Highlights"></a>Highlights</h3><p>For this release, we changed the way in which the search indexes are kept in sync with your data. In RediSearch 1.x, you had to manually add data to your indexes using the <code>FT.ADD</code> command. In RediSearch 2.x, your data is indexed automatically based on a key pattern.</p>
+<p>These changes are designed to enhance developer productivity, and to ensure that<br>your search indexes are always kept in sync with your data. To support this, we’ve<br>made a few changes to the API.</p>
+<p>In addition to simplifying indexing, RediSearch 2.0 allows you to scale a single index over multiple Redis shards using the Redis cluster API.</p>
+<p>Finally, RediSearch 2.x keeps its indexes outside of the main Redis key space. Improvements to the indexing code have increased query performance 2.4x.</p>
+<p>You can read more details in <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvaW50cm9kdWNpbmctcmVkaXNlYXJjaC0yLTAv">the RediSearch 2.0 announcement blog post<i class="fa fa-external-link-alt"></i></span>, and you can get started by checking out this <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvZ2V0dGluZy1zdGFydGVkLXdpdGgtcmVkaXNlYXJjaC0yLTAv">quick start blog post<i class="fa fa-external-link-alt"></i></span>.<br><a target="_blank" rel="noopener" href="https://github.com/RediSearch/RediSearch/blob/master/docs/img/newarchitecture.png"><img src="https://up-img.yonghong.tech/pic/2020/09/27-16-08-newarchitecture-jhGq6x.png" alt="architecture"></a></p>
+<h3 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h3><ul>
+<li>When you create an index, you must specify a prefix condition and/or a filter. This determines which hashes RediSearch will index.</li>
+<li>Several RediSearch commands now map to their Redis equivalents: <code>FT.ADD</code> -&gt; <code>HSET</code>, <code>FT.DEL</code> -&gt; <code>DEL</code> (equivalent to <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftdel"><code>FT.DEL</code> with the DD flag in RediSearch 1.x</a>), <code>FT.GET</code> -&gt; <code>HGETALL</code>, <code>FT.MGET</code> -&gt; <code>HGETALL</code>.</li>
+<li>RediSearch indexes no longer reside within the key space, and the indexes are no longer saved to the RDB.</li>
+<li>You can <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL21hc3Rlci9VcGdyYWRlX3RvXzIuMC8=">upgrade from RediSearch 1.x to RediSearch 2.x<i class="fa fa-external-link-alt"></i></span>.</li>
+</ul>
+<h3 id="Noteworthy-changes"><a href="#Noteworthy-changes" class="headerlink" title="Noteworthy changes"></a>Noteworthy changes</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEyNDY=">#1246<i class="fa fa-external-link-alt"></i></span>: <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/master/Aggregations/#list_of_geo_apply_functions"><code>geodistance</code></a> function for <code>FT.AGGREGATE</code> APPLY operation.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzOTQ=">#1394<i class="fa fa-external-link-alt"></i></span>: Expired documents (TTL) will be removed from the index.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzOTQ=">#1394<i class="fa fa-external-link-alt"></i></span>: <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL21hc3Rlci9Db25maWd1cmluZy8jcGFydGlhbF9pbmRleGVkX2RvY3M=">Optimization<i class="fa fa-external-link-alt"></i></span> to avoid reindexing documents when non-indexed fields are updated.</li>
+<li>After <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL0NvbW1hbmRzLyNmdGNyZWF0ZQ==">index creation<i class="fa fa-external-link-alt"></i></span>, an initial scan starts for existing documents. You can check the status of this scan by calling <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftinfo"><code>FT.INFO</code></a> and looking at the <code>indexing</code> and <code>percent_indexed</code> values. While <code>indexing</code> is true, queries return partial results.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzE0MzU=">#1435<i class="fa fa-external-link-alt"></i></span>: <code>NOINITIALINDEX</code> flag on <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftcreate"><code>FT.CREATE</code></a> to skip the initial scan of documents on index creation.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzE0MDE=">#1401<i class="fa fa-external-link-alt"></i></span>: Support upgrade from v1.x and for reading RDB’s created by RediSearch 1.x (<span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL21hc3Rlci9VcGdyYWRlX3RvXzIuMC8=">more information<i class="fa fa-external-link-alt"></i></span>).</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzE0NDU=">#1445<i class="fa fa-external-link-alt"></i></span>: Support for load event. This event indexes documents when they are loaded from RDB, ensuring that indexes are fully available when RDB loading is complete (available from Redis 6.0.7 and above).</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODQ=">#1384<i class="fa fa-external-link-alt"></i></span>: <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftdropindex"><code>FT.DROPINDEX</code></a>, which by default does not delete documents underlying the index (see deprecated <code>FT.DROP</code>).</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODU=">#1385<i class="fa fa-external-link-alt"></i></span>: Add index definition to <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/master/Commands/#ftinfo"><code>FT.INFO</code></a> response.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEwOTc=">#1097<i class="fa fa-external-link-alt"></i></span>: Add Hindi snowball stemmer.</li>
+<li>The <code>FT._LIST</code> command returns a list of all available indices. Note that this is a temporary command, as indicated by the <code>_</code> in the name, so it’s not documented. We’re working on a <a target="_blank" rel="noopener" href="https://redis.io/commands/scan"><code>SCAN</code></a>-like command for databases with many indexes.</li>
+<li>The RediSearch version will appear in Redis as <code>20000</code>, which is equivalent to 2.0.0 in semantic versioning. Since the version of a module in Redis is numeric, we cannot explicitly add an GA flag.</li>
+<li>RediSearch 2.x requires Redis 6.0 or later.</li>
+</ul>
+<h3 id="Behavior-changes"><a href="#Behavior-changes" class="headerlink" title="Behavior changes"></a>Behavior changes</h3><p>Please familiarize yourself with these changes before upgrading to RediSearch 2.0:</p>
+<ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODE=">#1381<i class="fa fa-external-link-alt"></i></span>: <code>FT.SYNADD</code> is removed; use <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftsynupdate"><code>FT.SYNUPDATE</code></a> instead. <code>FT.SYNUPDATE</code> requires both<br>and index name and a synonym group ID. This ID can be any ASCII string.</p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzE0Mzc=">#1437<i class="fa fa-external-link-alt"></i></span>: Documents that expire during query execution time will not appear in the results (but might have been counted in the number of produced documents).</p>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEyMjE=">#1221<i class="fa fa-external-link-alt"></i></span>: Synonyms support for lower case. This can result in a different result set on FT.SEARCH when using synonyms.</p>
+</li>
+<li><p>RediSearch will not index hashes whose fields do not match an existing index schema. You can see the number of hashes not indexed using <a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisearch/Commands/#ftinfo"><code>FT.INFO</code></a> - <code>hash_indexing_failures </code>. The requirement for adding support for partially indexing and blocking is captured here: <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzE0NTU=">#1455<i class="fa fa-external-link-alt"></i></span>.</p>
+</li>
+<li><p>Removed support for <code>NOSAVE</code> (for details see <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoLzEuNi9Db21tYW5kcy8jZnRhZGQ=">v1.6 docs<i class="fa fa-external-link-alt"></i></span>).</p>
+</li>
+<li><p>RDB loading will take longer due to the index not being persisted.</p>
+</li>
+<li><p>Field names in the <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL1F1ZXJ5X1N5bnRheC8=">query syntax<i class="fa fa-external-link-alt"></i></span> are now case-sensitive.</p>
+</li>
+<li><p>Deprecated commands:</p>
+<ul>
+<li><code>FT.DROP</code> (replaced by <code>FT.DROPINDEX</code>, which by default keeps the documents)</li>
+<li><code>FT.ADD</code> (mapped to <code>HSET</code> for backward compatibility)</li>
+<li><code>FT.DEL</code> (mapped to <code>DEL</code> for backward compatibility)</li>
+<li><code>FT.GET</code> (mapped to <code>HGETALL</code> for backward compatibility)</li>
+<li><code>FT.MGET</code> (mapped to <code>HGETALL</code> for backward compatibility)</li>
+</ul>
+</li>
+<li><p>Removed commands:</p>
+<ul>
+<li><code>FT.ADDHASH</code> (no longer makes sense)</li>
+<li><code>FT.SYNADD</code> (see <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUmVkaVNlYXJjaC9wdWxsLzEzODE=">#1381<i class="fa fa-external-link-alt"></i></span>)</li>
+<li><code>FT.OPTIMIZE</code> (see <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoLzEuNi9Db21tYW5kcy8jZnRvcHRpbWl6ZQ==">v1.6 docs<i class="fa fa-external-link-alt"></i></span>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Scaling-a-single-index-over-multiple-shards-with-the-open-source-Redis-cluster-API"><a href="#Scaling-a-single-index-over-multiple-shards-with-the-open-source-Redis-cluster-API" class="headerlink" title="Scaling a single index over multiple shards with the open source Redis cluster API"></a>Scaling a single index over multiple shards with the open source Redis cluster API</h3><p>Previously, a single RediSearch index, and its documents, had to reside on a single shard. This meant that dataset size and throughput was bound to what a single Redis process could handle.</p>
+<p>Redis Enterprise offered the ability to distribute documents in a clustered database and aggregate the results at query time. This fan-out and aggregation is handled by a component called the “coordinator” that is now also available under the same [Redis Source Available License] for all Redis OSS users in it’s own repository <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvUlNDb29yZGluYXRvcg==">RSCoordinator<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>Notes:</p>
+<ul>
+<li>The version inside Redis will be 20000 or 2.0.0 in semantic versioning. Since the version of a module in Redis is numeric, we could not add an GA flag.</li>
+<li>Requires Redis v6 or above.</li>
+</ul>
+<hr>
+<h2 id="Introducing-RediSearch-2-0"><a href="#Introducing-RediSearch-2-0" class="headerlink" title="Introducing RediSearch 2.0"></a>Introducing RediSearch 2.0</h2><blockquote>
+<p>RediSearch 2.0 is designed to improve the developer experience and be the most scalable version of RediSearch. Plus: it’s 2.4x faster than the previous version.</p>
+</blockquote>
+<p>RediSearch, a real-time secondary index with full-text search capabilities for Redis, is one of the most mature and feature-rich Redis modules. It is also becoming even more popular every day—in the past few months RediSearch Docker pulls have jumped 500%! That soaring popularity has led customers to come up with a wide variety of interesting use cases ranging from <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3NvbHV0aW9ucy91c2UtY2FzZXMvcmVhbC10aW1lLWludmVudG9yeS8=">real-time inventory management<i class="fa fa-external-link-alt"></i></span> to <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvdGhlLWNhc2UtZm9yLWVwaGVtZXJhbC1zZWFyY2gv">ephemeral search<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>To extend that momentum, we’re now introducing the public preview of RediSearch 2.0, designed to <strong>improve the developer experience</strong> and be <strong>the most scalable version of Redisearch</strong>. RediSearch 2.0 supports Redis Labs’ <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3JlZGlzLWVudGVycHJpc2UvdGVjaG5vbG9neS9hY3RpdmUtYWN0aXZlLWdlby1kaXN0cmlidXRpb24v">Active-Active geo-distribution<i class="fa fa-external-link-alt"></i></span> technology, is <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3JlZGlzLWVudGVycHJpc2UvdGVjaG5vbG9neS9saW5lYXItc2NhbGluZy1yZWRpcy1lbnRlcnByaXNlLw==">scalable<i class="fa fa-external-link-alt"></i></span> without downtime, and includes <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3JlZGlzLWVudGVycHJpc2UvdGVjaG5vbG9neS9yZWRpcy1vbi1mbGFzaC8=">Redis on Flash<i class="fa fa-external-link-alt"></i></span> support (currently in private preview). To meet those goals without negatively impacting performance, we created a brand new architecture for RediSearch 2.0—and it worked: <strong>RediSearch 2.0 is 2.4x faster</strong> than RediSearch 1.6. </p>
+<h3 id="Inside-RediSearch-2-0’s-new-architecture"><a href="#Inside-RediSearch-2-0’s-new-architecture" class="headerlink" title="Inside RediSearch 2.0’s new architecture"></a>Inside RediSearch 2.0’s new architecture</h3><p>Having a rich query-and-aggregation engine in your Redis database enables a wide variety of new use cases that extend well beyond caching. RediSearch lets you use Redis as your primary database in situations where you need to access data using complex queries. Even better, it preserves Redis’ world-class speed, reliability, and scalability, and doesn’t require you to add complexity to the code to let you update and index data. </p>
+<p>For RediSearch 2.0 we re-architected the way indices are kept in sync with the data. Instead of having to write data through the index (using the FT.ADD command), RediSearch now follows the data written in hashes and synchronously indexes it. This re-architecture comes with several changes in the API, which we discussed in a previous post when <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvcmVkaXNlYXJjaC0yLTAtaGl0cy1pdHMtZmlyc3QtbWlsZXN0b25lLw==">RediSearch 2.0 Hit Its First Milestone<i class="fa fa-external-link-alt"></i></span>.</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-architecture-1-hBkQjU.png" alt="img"></p>
+<p>This new architecture brings two main benefits. First, it’s now easier than ever to create a secondary index on top of your existing data. You can just <strong>add RediSearch to your existing Redis database, create an index, and start querying it</strong>, without having to migrate your data or use new commands for adding data to the index. This drastically lowers the learning curve for new RediSearch users and lets you create indexes on your existing Redis databases—without even having to restart them.</p>
+<p>In addition to implementing a new way to index data, we also took the index out of the keyspace. This enables Redis Enterprise’s <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3JlZGlzLWVudGVycHJpc2UvdGVjaG5vbG9neS9hY3RpdmUtYWN0aXZlLWdlby1kaXN0cmlidXRpb24v">Active-Active technology<i class="fa fa-external-link-alt"></i></span>, which is based on <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvZGl2aW5nLWludG8tY3JkdHMv">conflict-free replicated data types (CRDTs)<i class="fa fa-external-link-alt"></i></span>. Merging two inverted indices conflict-free is difficult, but Redis Labs already has <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Nhc2Utc3R1ZGllcy9tdXR1YWxpbmsv">a proven<i class="fa fa-external-link-alt"></i></span> <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3ZpZGVvcy9hY3RpdmUtYWN0aXZlLWdlby1kaXN0cmlidXRpb24tcmVkaXMtZW50ZXJwcmlzZS8=">CRDTs implementation<i class="fa fa-external-link-alt"></i></span> of Hashes. So the second big benefit of <strong>this new architecture is making RediSearch 2.0 even more scalable</strong>. Because RediSearch now follows Hashes and the index was moved out of the keyspace, you can now run RediSearch in an Active-Active geo-distributed database.</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-active-active-1-Aor8lj.png" alt="img"><em>Active-Active technology seamlessly resolves conflicts between documents, and RediSearch updates local indices accordingly.</em></p>
+<p>A document will be replicated to all databases in the replication set in a <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2RvY3MvdW5kZXItdGhlLWhvb2Qv">strongly eventual consistent manner<i class="fa fa-external-link-alt"></i></span>. In each replica, RediSearch will simply follow all the updates on the Hashes, which means all indices are strongly eventual consistent as well.</p>
+<h3 id="OSS-cluster-support-for-open-source-Redis"><a href="#OSS-cluster-support-for-open-source-Redis" class="headerlink" title="OSS cluster support for open source Redis"></a>OSS cluster support for open source Redis</h3><p>We didn’t want to limit increasing the scalability capabilities to only Redis Enterprise users, so we added support for scaling a single index over multiple shards with the open source Redis cluster API. Previously, a single RediSearch index, and its documents, had to reside on a single shard. This meant that dataset size and throughput for OSS Redis was bound to what a single Redis process could handle. Redis Enterprise offered the ability to distribute documents in a clustered database and aggregate the results at query time. This fan-out and aggregation is handled by a component called the “coordinator” that is now also <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlzTGFic01vZHVsZXMvUlNDb29yZGluYXRvcg==">publicly available <i class="fa fa-external-link-alt"></i></span>under the <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2xlZ2FsL2xpY2Vuc2VzLw==">Redis Source Available License<i class="fa fa-external-link-alt"></i></span> so it will work with open source Redis clusters as well as Redis Enterprise. The result is the most scalable version of RediSearch yet. </p>
+<h3 id="Show-me-the-numbers"><a href="#Show-me-the-numbers" class="headerlink" title="Show me the numbers!"></a>Show me the numbers!</h3><p>To assess RediSearch 2.0’s ingestion performance, we extended our full-text search benchmark (<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvZnRzYg==">FTSB<i class="fa fa-external-link-alt"></i></span>) suite with <span class="exturl" data-url="aHR0cHM6Ly93d3cxLm55Yy5nb3Yvc2l0ZS90bGMvYWJvdXQvdGxjLXRyaXAtcmVjb3JkLWRhdGEucGFnZQ==">the publicly available NYC Taxi dataset<i class="fa fa-external-link-alt"></i></span>. This dataset is used across the industry due to its rich set of data types (text, tag, geographic, and numeric), and a large number of documents. </p>
+<p>This benchmark focuses on write performance, using trip-record data of rides in yellow cabs in New York City. Specifically for this benchmark we used the January 2015 dataset, which loads more than 12 million documents with an average size of 500 bytes per document. For the full benchmark specification please refer to the <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvZnRzYi9ibG9iL21hc3Rlci9kb2NzL255Y190YXhpcy1iZW5jaG1hcmsvZGVzY3JpcHRpb24ubWQ=">FTSB on GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>All benchmark variations were run on Amazon Web Services instances, provisioned through our benchmark-testing infrastructure. The tests were executed on a 3-node cluster with 15 shards, with RediSearch Enterprise versions 1.6 and 2.0. Both the benchmarking client and the 3 nodes comprising the database with RediSearch enabled were running on separate c5.9xlarge instances.</p>
+<p>Given that RediSearch 2.0 comes with the ability to follow changes in Hashes in Redis and automatically index them, we’ve added variants for the <span class="exturl" data-url="aHR0cHM6Ly9vc3MucmVkaXNsYWJzLmNvbS9yZWRpc2VhcmNoL0NvbW1hbmRzLyNmdGFkZA==">FT.ADD<i class="fa fa-external-link-alt"></i></span> and <span class="exturl" data-url="aHR0cHM6Ly9yZWRpcy5pby9jb21tYW5kcy9oc2V0">HSET<i class="fa fa-external-link-alt"></i></span> commands. To make upgrades easier, we remapped the now deprecated FT.ADD command to the HSET commands in RediSearch 2.0. The two charts below display overall ingestion rate and latency for both RediSearch 1.6 and RediSearch 2.0, while retaining sub-millisecond latencies.</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-2.0-graph-1-1024x639-pz1WCV.png" alt="img"></p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-16-10-redisearch-2.0-graph-2-1024x658-EArYyF.png" alt="img"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvcmVkaXNlYXJjaC0xLTYtYm9vc3RzLXBlcmZvcm1hbmNlLXVwLXRvLTY0Lw==">RediSearch has always been fast<i class="fa fa-external-link-alt"></i></span>, but with this architectural change we’ve moved from indexing 96K documents per second to 132K docs/sec at an overall p50 ingestion latency of 0.4ms, drastically improving write scaling. </p>
+<p>Not only will you benefit from the boost in the throughput, but each ingestion also becomes faster. Apart from the overall ingestion improvement due to the changes in architecture, you can now also rely on the OSS Redis Cluster API capabilities to linearly scale the ingestion of your search database. </p>
+<p>Combining throughput and latency improvements, <strong>RediSearch 2.0 delivers up to a 2.4X speedup</strong> compared to the RediSearch 1.6.</p>
+<h3 id="What’s-next-for-RediSearch-2-0"><a href="#What’s-next-for-RediSearch-2-0" class="headerlink" title="What’s next for RediSearch 2.0"></a>What’s next for RediSearch 2.0</h3><p>To sum up, <strong>RediSearch 2.0 is the fastest and most scalable version for all Redis users that we have ever released.</strong> In addition, RediSearch 2.0’s new architecture improves the developer experience of creating indices for existing data within Redis in a seamless manner and removes the need to migrate your Redis data to another RediSearch-enabled database. This new architecture allows RediSearch to follow and auto-index other data structures, such as Streams or Strings. In upcoming releases, it will let you work with additional data structures such as the nested data structure in <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL21vZHVsZXMvcmVkaXMtanNvbi8=">RedisJSON<i class="fa fa-external-link-alt"></i></span>. </p>
+<p>We plan to keep on adding more features to further enhance the developer experience. Coming next, look for a new command that allows you to profile your search queries to better understand where performance bottlenecks occur during query execution.</p>
+<p>Ready to get started? Check out Tug Grall’s blog on …<span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL2Jsb2cvZ2V0dGluZy1zdGFydGVkLXdpdGgtcmVkaXNlYXJjaC0yLTAv"> Getting Started with RediSearch 2.0<i class="fa fa-external-link-alt"></i></span>! Then follow the steps in this <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JlZGlTZWFyY2gvcmVkaXNlYXJjaC1nZXR0aW5nLXN0YXJ0ZWQ=">tutorial on GitHub<i class="fa fa-external-link-alt"></i></span> or create a free database in <span class="exturl" data-url="aHR0cHM6Ly9yZWRpc2xhYnMuY29tL3RyeS1mcmVlLw==">Redis Enterprise Cloud Essentials<i class="fa fa-external-link-alt"></i></span>. (Note that the public preview of RediSearch 2.0 is available in two Redis Enterprise Cloud Essentials regions: Mumbai and Oregon.)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/release/redisearch-2-0/" title="【release】高性能全文搜索引擎 RediSearch 2.0 正式发布！">http://yonghong.tech/release/redisearch-2-0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          
+
+  <div class="followme">
+    <span>欢迎关注我的其它发布渠道</span>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div class="post-tags">
+              <a href="/tags/release/" rel="tag"># release</a>
+              <a href="/tags/RediSearch/" rel="tag"># RediSearch</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/%E9%AB%98%E6%80%A7%E8%83%BD/" rel="tag"># 高性能</a>
+              <a href="/tags/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2/" rel="tag"># 全文搜索</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/release/ozone-1-0-0/" rel="prev" title="【release】腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布">
+                  <i class="fa fa-chevron-left"></i> 【release】腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/release/deepin-20/" rel="next" title="【release】深度操作系统 20——崭新视界，创无止境">
+                  【release】深度操作系统 20——崭新视界，创无止境 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备 18012168号-5 </span>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">733k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">11:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/motion.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script data-pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/release/redisearch-2-0/',]
+      });
+      });
+  </script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : '4502584224f50bea088db258c7c6c4bf',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "release/redisearch-2-0/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+  <meta name="yandex-verification" content="bb13e36c670d98c2">
+  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","scheme":"Gemini","version":"8.0.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="微软最近宣布 Visual Studio Code 的 C++ 扩展已达到 1.0 稳定版本。C++ 扩展为 C++ 开发人员带来了包括 IntelliSense 智能代码补全、调试、重构、代码导航等在内的功能。这些功能可适应多个平台、架构和编译器，从而实现各种交叉编译和远程开发方案。  VS Code C++ 扩展 1.0 版本的一大亮点是对 ARM Linux 和 ARM 64 的支持，并提供">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【release】Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）!">
+<meta property="og:url" content="http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="微软最近宣布 Visual Studio Code 的 C++ 扩展已达到 1.0 稳定版本。C++ 扩展为 C++ 开发人员带来了包括 IntelliSense 智能代码补全、调试、重构、代码导航等在内的功能。这些功能可适应多个平台、架构和编译器，从而实现各种交叉编译和远程开发方案。  VS Code C++ 扩展 1.0 版本的一大亮点是对 ARM Linux 和 ARM 64 的支持，并提供">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-11-38-editing-screenshot-02eKoJ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/09/27-11-38-debug-screenshot-nEYKCp.png">
+<meta property="article:published_time" content="2020-09-27T13:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-27T13:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="release">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Visual Studio Code">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2020/09/27-11-38-editing-screenshot-02eKoJ.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【release】Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）! | 永红的互联网手记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-开源">
+
+    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Editing"><span class="nav-number">1.</span> <span class="nav-text">Editing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debugging"><span class="nav-number">2.</span> <span class="nav-text">Debugging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What%E2%80%99s-new-in-1-0"><span class="nav-number">3.</span> <span class="nav-text">What’s new in 1.0?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Support-for-Linux-on-ARM-and-ARM64"><span class="nav-number">3.1.</span> <span class="nav-text">Support for Linux on ARM and ARM64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Easy-IntelliSense-configuration"><span class="nav-number">3.2.</span> <span class="nav-text">Easy IntelliSense configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customizable-code-formatting"><span class="nav-number">3.3.</span> <span class="nav-text">Customizable code formatting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-extension-pack"><span class="nav-number">3.4.</span> <span class="nav-text">C++ extension pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quality"><span class="nav-number">3.5.</span> <span class="nav-text">Quality</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Give-it-a-try"><span class="nav-number">4.</span> <span class="nav-text">Give it a try</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">583</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">616</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMHhsMm9vdA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;0xl2oot"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【release】Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-27 21:00:00" itemprop="dateCreated datePublished" datetime="2020-09-27T21:00:00+08:00">2020-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/release/" itemprop="url" rel="index"><span itemprop="name">release</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>微软最近<span class="exturl" data-url="aHR0cHM6Ly9kZXZibG9ncy5taWNyb3NvZnQuY29tL2NwcGJsb2cvYy1pbi12aXN1YWwtc3R1ZGlvLWNvZGUtcmVhY2hlcy12ZXJzaW9uLTEtMC8=">宣布<i class="fa fa-external-link-alt"></i></span> Visual Studio Code 的 C++ 扩展已达到 1.0 稳定版本。C++ 扩展为 C++ 开发人员带来了包括 IntelliSense 智能代码补全、调试、重构、代码导航等在内的功能。这些功能可适应多个平台、架构和编译器，从而实现各种交叉编译和远程开发方案。 </p>
+<p>VS Code C++ 扩展 1.0 版本的一大亮点是对 ARM Linux 和 ARM 64 的支持，并提供了 IntelliSense 以及远程构建和调试支持。现在用户可以使用 VS Code 和 Remote-SSH 在 Raspberry Pi 上构建 C++ 应用程序。</p>
+<p>另外，此发行版附带了一个<span class="exturl" data-url="aHR0cHM6Ly9ha2EubXMvY3BwLWludGVsbGlTZW5zZQ==">教学视频<i class="fa fa-external-link-alt"></i></span>，用来告诉大家如何配置 C++ IntelliSense。</p>
+<a id="more"></a>
+
+<p>原文如下：</p>
+<p>We’re excited to announce the first generally available release of the <strong>C++ extension for Visual Studio Code</strong>! Visual Studio Code is a free code editor that runs on Linux, macOS, and Windows, and is highly-customizable to make it exactly what you want it to be.</p>
+<p>The C++ extension brings a rich set of productivity features to VS Code for C++ developers, including IntelliSense smart code completion, debugging, refactoring, code navigation, and more! On top of that, these features are adaptable to various platforms, architectures and compilers, enabling all your cross-compiling and remote development scenarios.</p>
+<p>Throughout the years, our customers have helped shape the direction of C++ development in VS Code by asking for key features and reporting bugs. The version 1.0 of the C++ extension for Visual Studio Code delivers these features in high quality. You asked, we listened.</p>
+<h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><p>When it comes to editing, the C++ extension provides an abundance of productivity features to boost your coding efficiency. To name a few, the extension comes with:</p>
+<ul>
+<li>IntelliSense: code completion, parameter info, quick info, and member lists</li>
+<li>Code navigation: Find All References, Go to Definition/Declaration, Peek Definition/Declaration</li>
+<li>Refactoring support: Rename Symbol</li>
+<li>Code formatting</li>
+<li>Semantic colorization, which provides colorization to variables even when they are used outside of the scope in which they are declared</li>
+<li>Doxygen comment documentation</li>
+</ul>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-11-38-editing-screenshot-02eKoJ.png" alt="Screenshot of member list from C++ IntelliSense engine"></p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>Visual Studio Code’s built-in debugger UI launches your C++ debugger of choice under the hood, creating an intuitive, yet customizable, debugging experience across Linux, macOS, and Windows. With the C++ extension’s debugger, you can:</p>
+<ul>
+<li>Set breakpoints (conditional, unconditional, and function breakpoints)</li>
+<li>Set watch variables</li>
+<li>Step through your program</li>
+<li>Debug multi-threaded programs</li>
+<li>Debug a remote process</li>
+<li>And more!</li>
+</ul>
+<p><img src="https://up-img.yonghong.tech/pic/2020/09/27-11-38-debug-screenshot-nEYKCp.png" alt="Screenshot showing C++ debug session in VS Code"></p>
+<p>The C++ extension 1.0 also includes all our recent fixes to previous issues with the debugger, such as:</p>
+<ul>
+<li>Support for macOS Catalina (GitHub issue <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC92c2NvZGUtY3BwdG9vbHMvaXNzdWVzLzM4Mjk=">#3829<i class="fa fa-external-link-alt"></i></span>)</li>
+<li>Support for modifying conditional breakpoints while debugging (cppdbg) (GitHub issue <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC92c2NvZGUtY3BwdG9vbHMvaXNzdWVzLzIyOTc=">#2297<i class="fa fa-external-link-alt"></i></span>)</li>
+<li>Watch local variables support for LLDB (GitHub issue <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC92c2NvZGUtY3BwdG9vbHMvaXNzdWVzLzE3Njg=">#1768<i class="fa fa-external-link-alt"></i></span>)</li>
+</ul>
+<h2 id="What’s-new-in-1-0"><a href="#What’s-new-in-1-0" class="headerlink" title="What’s new in 1.0?"></a>What’s new in 1.0?</h2><h3 id="Support-for-Linux-on-ARM-and-ARM64"><a href="#Support-for-Linux-on-ARM-and-ARM64" class="headerlink" title="Support for Linux on ARM and ARM64"></a>Support for Linux on ARM and ARM64</h3><p>We’re excited to announce that version 1.0 of the C++ extension brings a first-class development experience for Linux on ARM and ARM64, complete with IntelliSense and remote build and debug support. You can now develop C++ applications on Raspberry Pi with VS Code and Remote-SSH!</p>
+<h3 id="Easy-IntelliSense-configuration"><a href="#Easy-IntelliSense-configuration" class="headerlink" title="Easy IntelliSense configuration"></a>Easy IntelliSense configuration</h3><p>We know that configuring C++ IntelliSense hasn’t always been easy. So, we’ve created a <span class="exturl" data-url="aHR0cHM6Ly9ha2EubXMvY3BwLWludGVsbGlTZW5zZQ==">video tutorial<i class="fa fa-external-link-alt"></i></span> to help you out. Get rid of your error squiggles in minutes!</p>
+<h3 id="Customizable-code-formatting"><a href="#Customizable-code-formatting" class="headerlink" title="Customizable code formatting"></a>Customizable code formatting</h3><p>Version 1.0 of the C++ extension brings a new, rich set of C++ formatting settings. All C++ code formatting settings from the Visual Studio IDE are now supported in VS Code. What’s more, the C++ extension has built-in <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vZW4tdXMvdmlzdWFsc3R1ZGlvL2lkZS9jcHAtZWRpdG9yY29uZmlnLXByb3BlcnRpZXM/dmlldz12cy0yMDE5">EditorConfig<i class="fa fa-external-link-alt"></i></span> support for all these new settings, giving you more control and flexibility with code formatting than ever before.</p>
+<h3 id="C-extension-pack"><a href="#C-extension-pack" class="headerlink" title="C++ extension pack"></a>C++ extension pack</h3><p>To make it as easy as possible to take full advantage of everything Visual Studio Code has to offer—remote development, GitHub integration, first-class CMake support to name a few—we’ve created a <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPW1zLXZzY29kZS5jcHB0b29scy1leHRlbnNpb24tcGFjaw==">C++ Extension Pack<i class="fa fa-external-link-alt"></i></span> for you. The extension pack includes:</p>
+<ul>
+<li>C/C++</li>
+<li>C/C++ Themes</li>
+<li>CMake</li>
+<li>CMake Tools</li>
+<li>Remote Development Extension Pack</li>
+<li>GitHub Pull Requests and Issues</li>
+<li>Visual Studio Codespaces</li>
+<li>LiveShare Extension Pack</li>
+<li>Doxygen Documentation Generator</li>
+<li>Better C++ Syntax</li>
+</ul>
+<h3 id="Quality"><a href="#Quality" class="headerlink" title="Quality"></a>Quality</h3><p>If you haven’t tried Visual Studio Code with C++ in a while, it is time to give it another go. Our team has been hard at work for months fixing a myriad of reported issues and the C++ extension is now better for it. For example, we’ve addressed nine <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC92c2NvZGUtY3BwdG9vbHMvaXNzdWVzP3E9aXM6aXNzdWUraXM6Y2xvc2VkK2xhYmVsOnBlcmZvcm1hbmNlK2xhYmVsOiUyMmZpeGVkKyhyZWxlYXNlK3BlbmRpbmcpJTIyK3NvcnQ6dXBkYXRlZC1kZXNj">performance-related GitHub issues<i class="fa fa-external-link-alt"></i></span> in the past nine months. In fact, many VS Code extensions build off of the C++ extension’s high quality IntelliSense engine, such as <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPXBsYXRmb3JtaW8ucGxhdGZvcm1pby1pZGU=">PlatformIO IDE<i class="fa fa-external-link-alt"></i></span>, a popular extension for embedded development in VS Code. Version 1.0 of the C++ extension meets the high bar we, and our customers, have set for quality—but we won’t stop there. Performance will continue to be a prioritization for the C++ extension.</p>
+<h2 id="Give-it-a-try"><a href="#Give-it-a-try" class="headerlink" title="Give it a try"></a>Give it a try</h2><p>Install the <span class="exturl" data-url="aHR0cHM6Ly9tYXJrZXRwbGFjZS52aXN1YWxzdHVkaW8uY29tL2l0ZW1zP2l0ZW1OYW1lPW1zLXZzY29kZS5jcHB0b29scy1leHRlbnNpb24tcGFjaw==">C/C++ Extension Pack<i class="fa fa-external-link-alt"></i></span>, check out the new <a target="_blank" rel="noopener" href="https://aka.ms/cpp-intelliSense"><em>Configure C++ IntelliSense in Visual Studio Code</em> video tutorial</a>, and let us know what you think! You can also find Hello World build and debug tutorials for different compilers and platforms in the <span class="exturl" data-url="aHR0cHM6Ly9ha2EubXMvY3BwaGVsbG93b3JsZA==">VS Code C++ documentation<i class="fa fa-external-link-alt"></i></span>.</p>
+<p>If you run into any issues, or have any suggestions, please report them in the <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pY3Jvc29mdC92c2NvZGUtY3BwdG9vbHMvaXNzdWVz">Issues section of our GitHub repository<i class="fa fa-external-link-alt"></i></span>. You can also join our Insiders program and get access to early builds of our release by going to <strong>File &gt; Preferences &gt; Settings</strong> and under <strong>Extensions &gt; C/C++,</strong> change the “C_Cpp: Update Channel” to “Insiders”.</p>
+<p>We can be reached via the comments below or in email at <span class="exturl" data-url="bWFpbHRvOnZpc3VhbGNwcEBtaWNyb3NvZnQuY29t">visualcpp@microsoft.com<i class="fa fa-external-link-alt"></i></span>. You can also find our team on Twitter at <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS92aXN1YWxj">@VisualC<i class="fa fa-external-link-alt"></i></span>.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/" title="【release】Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）!">http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          
+
+  <div class="followme">
+    <span>欢迎关注我的其它发布渠道</span>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div class="post-tags">
+              <a href="/tags/release/" rel="tag"># release</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Visual-Studio-Code/" rel="tag"># Visual Studio Code</a>
+              <a href="/tags/vscode/" rel="tag"># vscode</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/release/jdk-15/" rel="prev" title="【release】JDK 15 正式发布！">
+                  <i class="fa fa-chevron-left"></i> 【release】JDK 15 正式发布！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/release/ozone-1-0-0/" rel="next" title="【release】腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布">
+                  【release】腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备 18012168号-5 </span>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">733k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">11:06</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/motion.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script data-pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/release/c-plus-plus-in-visual-studio-code-1-0/',]
+      });
+      });
+  </script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : '96d3966b5ac1b53ba28402f94f2ab247',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "release/c-plus-plus-in-visual-studio-code-1-0/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+    </div>
+</body>
+</html>

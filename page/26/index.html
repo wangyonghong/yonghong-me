@@ -143,12 +143,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">578</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">591</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">578</span>
+          <span class="site-state-item-count">583</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -245,7 +245,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">591</span>
+        <span class="site-state-item-count">616</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -304,6 +304,518 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nohup/" class="post-title-link" itemprop="url">【Linux 命令】nohup</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:46:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>589</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将程序以忽略挂起信号的方式运行起来</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nohup命令</strong> 可以将程序以忽略挂起信号的方式运行起来，被运行的程序的输出信息将不会显示到终端。</p>
+<p>无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中。如果当前目录的 nohup.out 文件不可写，输出重定向到<code>$HOME/nohup.out</code>文件中。如果没有文件能创建或打开以用于追加，那么 command 参数指定的命令不可调用。如果标准错误是一个终端，那么把指定的命令写给标准错误的所有输出作为标准输出重定向到相同的文件描述符。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>nohup(选项)(参数)</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>程序及选项：要运行的程序及选项。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用nohup命令提交作业，如果使用nohup命令提交作业，那么在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中，除非另外指定了输出文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup command &gt; myout.file 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，输出被重定向到myout.file文件中。</p>
+<p>该指令表示不做挂断操作，后台下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup wget site.com/file.zip</span><br></pre></td></tr></table></figure>
+
+<p>下面命令，会在同一个目录下生成一个名称为 <code>nohup.out</code> 的文件，其中包含了正在运行的程序的输出内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ping -c 10 baidu.com</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nmcli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nmcli/" class="post-title-link" itemprop="url">【Linux 命令】nmcli</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:45:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>954</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>地址配置工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nmcli命令</strong> 是 NetworkManager client 网络管理客户端。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli [OPTIONS] OBJECT &#123; COMMAND | help &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS</span><br><span class="line">  -t[erse]                                  # terse output 简洁的输出</span><br><span class="line">  -p[retty]                                 # pretty output 漂亮的输出</span><br><span class="line">  -m[ode] tabular|multiline                 # output mode  输出模式</span><br><span class="line">  -f[ields] &lt;field1,field2,...&gt;|all|common  # specify fields to output 指定要输出的字段</span><br><span class="line">  -e[scape] yes|no                          # escape columns separators in values 在值中转义列分隔符</span><br><span class="line">  -n[ocheck]                                # 不要检查nmcli和NetworkManager版本</span><br><span class="line">  -a[sk]                                    # 要求缺少参数</span><br><span class="line">  -w[ait] &lt;seconds&gt;                         # 设置超时等待整理操作</span><br><span class="line">  -v[ersion]                                # 显示程序版本</span><br><span class="line">  -h[elp]                                   # 打印此帮助</span><br><span class="line"></span><br><span class="line">OBJECT</span><br><span class="line">  g[eneral]       NetworkManager的一般状态和操作</span><br><span class="line">  n[etworking]    整体组网控制</span><br><span class="line">  r[adio]         NetworkManager切换开关</span><br><span class="line">  c[onnection]    NetworkManager的连接</span><br><span class="line">  d[evice]        由NetworkManager管理的设备</span><br><span class="line">  a[gent]         NetworkManager秘密代理或polkit代理</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection show           # 查看当前连接状态</span><br><span class="line">nmcli connection reload         # 重启服务</span><br><span class="line">nmcli connection show -active   # 显示活动的连接</span><br><span class="line">nmcli connection show &quot;lan eth0&quot;# 显示指定一个网络连接配置</span><br><span class="line">nmcli device status             # 显示设备状态</span><br><span class="line">nmcli device show eno16777736   # 显示指定接口属性</span><br><span class="line">nmcli device show               # 显示全部接口属性</span><br><span class="line">nmcli con up static             # 启用static连接配置</span><br><span class="line">nmcli con up default            # 启用default连接配置 </span><br><span class="line">nmcli con add help              # 查看帮助</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nmap/" class="post-title-link" itemprop="url">【Linux 命令】nmap</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:45:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>972</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网络探测和安全审核</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nmap命令</strong> 是一款开放源代码的网络探测和安全审核工具，它的设计目标是快速地扫描大型网络。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-O：激活操作探测；</span><br><span class="line">-P0：值进行扫描，不ping主机；</span><br><span class="line">-PT：是同TCP的ping；</span><br><span class="line">-sV：探测服务版本信息；</span><br><span class="line">-sP：ping扫描，仅发现目标主机是否存活；</span><br><span class="line">-ps：发送同步（SYN）报文；</span><br><span class="line">-PU：发送udp ping；</span><br><span class="line">-PE：强制执行直接的ICMPping；</span><br><span class="line">-PB：默认模式，可以使用ICMPping和TCPping；</span><br><span class="line">-6：使用IPv6地址；</span><br><span class="line">-v：得到更多选项信息；</span><br><span class="line">-d：增加调试信息地输出；</span><br><span class="line">-oN：以人们可阅读的格式输出；</span><br><span class="line">-oX：以xml格式向指定文件输出信息；</span><br><span class="line">-oM：以机器可阅读的格式输出；</span><br><span class="line">-A：使用所有高级扫描选项；</span><br><span class="line">--resume：继续上次执行完的扫描；</span><br><span class="line">-P：指定要扫描的端口，可以是一个单独的端口，用逗号隔开多个端口，使用“-”表示端口范围；</span><br><span class="line">-e：在多网络接口Linux系统中，指定扫描使用的网络接口；</span><br><span class="line">-g：将指定的端口作为源端口进行扫描；</span><br><span class="line">--ttl：指定发送的扫描报文的生存期；</span><br><span class="line">--packet-trace：显示扫描过程中收发报文统计；</span><br><span class="line">--scanflags：设置在扫描报文中的TCP标志。</span><br><span class="line">--send-eth/--send-ip 使用原始以太网发送/构造指定IP发送</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>ip地址：指定待扫描报文中的TCP地址。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>安装nmap</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nmap</span><br></pre></td></tr></table></figure>
+
+<p> <strong>使用nmap扫描<span class="exturl" data-url="aHR0cDovL3d3dy5qc2RpZy5jb23nmoTlvIDmlL7nq6/lj6Mv">www.jsdig.com的开放端口<i class="fa fa-external-link-alt"></i></span></strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nmap www.jsdig.com</span><br><span class="line"></span><br><span class="line">Starting Nmap 4.11 ( http://www.insecure.org/nmap/ ) at 2013-12-28 00:06 CST</span><br><span class="line">Interesting ports on 100-42-212-8.static.webnx.com (100.42.212.8):</span><br><span class="line">Not shown: 1678 filtered ports</span><br><span class="line">PORT   STATE service</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br><span class="line"></span><br><span class="line">Nmap finished: 1 IP address (1 host up) scanned in 45.870 seconds</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nm/" class="post-title-link" itemprop="url">【Linux 命令】nm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:44:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>131</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示二进制目标文件的符号表</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nm命令</strong> 被用于显示二进制目标文件的符号表。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nm(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-A：每个符号前显示文件名；</span><br><span class="line">-D：显示动态符号；</span><br><span class="line">-g：仅显示外部符号；</span><br><span class="line">-r：反序显示符号表。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标文件：二进制目标文件，通常是库文件和可执行文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/nl/" class="post-title-link" itemprop="url">【Linux 命令】nl</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:44:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>为每一个文件添加行号。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nl [OPTION]... [FILE]...</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>将每一个输入的文件添加行号后发送到标准输出。</li>
+<li>当没有文件或文件为<code>-</code>时，读取标准输入</li>
+<li>处理逻辑页（logical page）。</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">-b, --body-numbering=STYLE           使用STYLE 为body部分的行附加行号。</span><br><span class="line">-d, --section-delimiter=CC           使用CC作为logical page的分隔符。</span><br><span class="line">-f, --footer-numbering=STYLE         使用STYLE 为footer部分的行附加行号。</span><br><span class="line">-h, --header-numbering=STYLE         使用STYLE 为header部分的行附加行号。</span><br><span class="line">-i, --line-increment=NUMBER          行号递增间隔为NUMBER。</span><br><span class="line">-l, --join-blank-lines=NUMBER        连续NUMBER行的空行作为一行处理。</span><br><span class="line">-n, --number-format=FORMAT           根据FORMAT插入行号。</span><br><span class="line">-p, --no-renumber                    不要在每个部分重置行号。</span><br><span class="line">-s, --number-separator=STRING        在行号后添加字符串STRING。</span><br><span class="line">-v, --starting-line-number=NUMBER    每部分的起始行号。</span><br><span class="line">-w, --number-width=NUMBER            行号宽度为NUMBER。</span><br><span class="line">--help                               显示帮助信息并退出。</span><br><span class="line">--version                            显示版本信息并退出。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">默认选项为：-bt -d&#x27;\:&#x27; -fn -hn -i1 -l1 -nrn -sTAB -v1 -w6</span><br><span class="line"></span><br><span class="line">CC是由两个字符组成的，默认为\: ,第二个字符如果缺失则默认为:</span><br><span class="line"></span><br><span class="line">STYLE可以为下列可用值之一：</span><br><span class="line"></span><br><span class="line">a       所有行标记行号。</span><br><span class="line">t       仅为非空行标记行号。</span><br><span class="line">n       不标记行号。</span><br><span class="line">pBRE    符合基础正则表达式（BRE）的行会标记行号。</span><br><span class="line"></span><br><span class="line">FORMAT可以为下列可用值之一：</span><br><span class="line"></span><br><span class="line">ln    左对齐，不会在开始部分补充0以满足宽度。</span><br><span class="line">rn    右对齐，不会在开始部分补充0以满足宽度。</span><br><span class="line">rz    右对齐，会在开始部分补充0以满足宽度。</span><br><span class="line"></span><br><span class="line">logical page</span><br><span class="line">三部分组成（header， body， footer）</span><br><span class="line">起始标记（header \:\:\:， body \:\:， footer \:）</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>FILE（可选）：要处理的文件，可以为一或多个。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nl_logicalpage.txt：该文件用于说明nl命令处理逻辑页，内容如下：</span><br><span class="line">\:\:\:</span><br><span class="line">header_1</span><br><span class="line">\:\:</span><br><span class="line">body_1</span><br><span class="line">\:</span><br><span class="line">footer_1</span><br><span class="line">\:\:\:</span><br><span class="line">header_2</span><br><span class="line">\:\:</span><br><span class="line">body_2</span><br><span class="line">\:</span><br><span class="line">footer_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[user2@pc ~]$ nl nl_logicalpage.txt</span><br><span class="line"></span><br><span class="line">       header_1</span><br><span class="line"></span><br><span class="line">     1	body_1</span><br><span class="line"></span><br><span class="line">       footer_1</span><br><span class="line"></span><br><span class="line">       header_2</span><br><span class="line"></span><br><span class="line">     1	body_2</span><br><span class="line"></span><br><span class="line">       footer_2</span><br><span class="line"></span><br><span class="line">[user2@pc ~]$ nl -v0 -fa -ha nl_logicalpage.txt</span><br><span class="line"></span><br><span class="line">     0	header_1</span><br><span class="line"></span><br><span class="line">     1	body_1</span><br><span class="line"></span><br><span class="line">     2	footer_1</span><br><span class="line"></span><br><span class="line">     0	header_2</span><br><span class="line"></span><br><span class="line">     1	body_2</span><br><span class="line"></span><br><span class="line">     2	footer_2</span><br><span class="line"></span><br><span class="line">[user2@pc ~]$ nl -p -fa -ha nl_logicalpage.txt</span><br><span class="line"></span><br><span class="line">     1	header_1</span><br><span class="line"></span><br><span class="line">     2	body_1</span><br><span class="line"></span><br><span class="line">     3	footer_1</span><br><span class="line"></span><br><span class="line">     4	header_2</span><br><span class="line"></span><br><span class="line">     5	body_2</span><br><span class="line"></span><br><span class="line">     6	footer_2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nl_normal.txt：该文件用于说明nl命令处理普通文件，内容如下：</span><br><span class="line">ZhuangZhu-74</span><br><span class="line">2019-11-21</span><br><span class="line">127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[user2@pc ~]$ nl nl_normal.txt</span><br><span class="line">     1	ZhuangZhu-74</span><br><span class="line">     2	2019-11-21</span><br><span class="line">     3	127.0.0.1</span><br><span class="line"></span><br><span class="line">[user2@pc ~]$ nl -b p&#x27;1$&#x27; nl_normal.txt</span><br><span class="line">       ZhuangZhu-74</span><br><span class="line">     1	2019-11-21</span><br><span class="line">     2	127.0.0.1</span><br><span class="line"></span><br><span class="line">[user2@pc ~]$ nl -b p&#x27;^[A-Z]&#x27; nl_normal.txt</span><br><span class="line">     1	ZhuangZhu-74</span><br><span class="line">       2019-11-21</span><br><span class="line">       127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 nl</code>，<code>info coreutils &#39;nl invocation&#39;</code>。</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -836,643 +1348,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/netstat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/netstat/" class="post-title-link" itemprop="url">【Linux 命令】netstat</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:41:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>查看Linux中网络系统状态信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>netstat命令</strong> 用来打印Linux中网络系统的状态信息，可让你得知整个Linux系统的网络情况。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：显示所有连线中的Socket；</span><br><span class="line">-A&lt;网络类型&gt;或--&lt;网络类型&gt;：列出该网络类型连线中的相关地址；</span><br><span class="line">-c或--continuous：持续列出网络状态；</span><br><span class="line">-C或--cache：显示路由器配置的快取信息；</span><br><span class="line">-e或--extend：显示网络其他相关信息；</span><br><span class="line">-F或--fib：显示FIB；</span><br><span class="line">-g或--groups：显示多重广播功能群组组员名单；</span><br><span class="line">-h或--help：在线帮助；</span><br><span class="line">-i或--interfaces：显示网络界面信息表单；</span><br><span class="line">-l或--listening：显示监控中的服务器的Socket；</span><br><span class="line">-M或--masquerade：显示伪装的网络连线；</span><br><span class="line">-n或--numeric：直接使用ip地址，而不通过域名服务器；</span><br><span class="line">-N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；</span><br><span class="line">-o或--timers：显示计时器；</span><br><span class="line">-p或--programs：显示正在使用Socket的程序识别码和程序名称；</span><br><span class="line">-r或--route：显示Routing Table；</span><br><span class="line">-s或--statistice：显示网络工作信息统计表；</span><br><span class="line">-t或--tcp：显示TCP传输协议的连线状况；</span><br><span class="line">-u或--udp：显示UDP传输协议的连线状况；</span><br><span class="line">-v或--verbose：显示指令执行过程；</span><br><span class="line">-V或--version：显示版本信息；</span><br><span class="line">-w或--raw：显示RAW传输协议的连线状况；</span><br><span class="line">-x或--unix：此参数的效果和指定&quot;-A unix&quot;参数相同；</span><br><span class="line">--ip或--inet：此参数的效果和指定&quot;-A inet&quot;参数相同。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>列出所有端口 (包括监听和未监听的)</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netstat -a     #列出所有端口</span><br><span class="line">netstat -at    #列出所有tcp端口</span><br><span class="line">netstat -au    #列出所有udp端口                             </span><br></pre></td></tr></table></figure>
-
-<p> <strong>列出所有处于监听状态的 Sockets</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">netstat -l        #只显示监听端口</span><br><span class="line">netstat -lt       #只列出所有监听 tcp 端口</span><br><span class="line">netstat -lu       #只列出所有监听 udp 端口</span><br><span class="line">netstat -lx       #只列出所有监听 UNIX 端口</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示每个协议的统计信息</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">netstat -s   显示所有端口的统计信息</span><br><span class="line">netstat -st   显示TCP端口的统计信息</span><br><span class="line">netstat -su   显示UDP端口的统计信息</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line"></span><br><span class="line"> **在netstat输出中显示 PID 和进程名称** </span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">netstat -pt</span><br></pre></td></tr></table></figure>
-
-<p><code>netstat -p</code>可以与其它开关一起使用，就可以添加“PID/进程名称”到netstat输出中，这样debugging的时候可以很方便的发现特定端口运行的程序。</p>
-<p> <strong>在netstat输出中不显示主机，端口和用户名(host, port or user)</strong> </p>
-<p>当你不想让主机，端口和用户名显示，使用<code>netstat -n</code>。将会使用数字代替那些名称。同样可以加速输出，因为不用进行比对查询。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an</span><br></pre></td></tr></table></figure>
-
-<p>如果只是不想让这三个名称中的一个被显示，使用以下命令:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">netsat -a --numeric-ports</span><br><span class="line">netsat -a --numeric-hosts</span><br><span class="line">netsat -a --numeric-users</span><br></pre></td></tr></table></figure>
-
-<p> <strong>持续输出netstat信息</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -c   #每隔一秒输出网络信息</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示系统不支持的地址族(Address Families)</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat --verbose</span><br></pre></td></tr></table></figure>
-
-<p>在输出的末尾，会有如下的信息：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">netstat: no support for `AF IPX&#x27; on this system.</span><br><span class="line">netstat: no support for `AF AX25&#x27; on this system.</span><br><span class="line">netstat: no support for `AF X25&#x27; on this system.</span><br><span class="line">netstat: no support for `AF NETROM&#x27; on this system.</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示核心路由信息</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -r</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>netstat -rn</code>显示数字格式，不查询主机名称。</p>
-<p> <strong>找出程序运行的端口</strong> </p>
-<p>并不是所有的进程都能找到，没有权限的会不显示，使用 root 权限查看所有的信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ap | grep ssh</span><br></pre></td></tr></table></figure>
-
-<p>找出运行在指定端口的进程：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -an | grep &#x27;:80&#x27;</span><br></pre></td></tr></table></figure>
-
-<p> <strong>通过端口找进程ID</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp|grep 8081 | grep LISTEN|awk <span class="string">&#x27;&#123;printf $7&#125;&#x27;</span>|cut -d/ -f1</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示网络接口列表</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -i</span><br></pre></td></tr></table></figure>
-
-<p>显示详细信息，像是ifconfig使用<code>netstat -ie</code>。</p>
-<p> <strong>IP和TCP分析</strong> </p>
-<p>查看连接某服务端口最多的的IP地址：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntu | grep :80 | awk &#x27;&#123;print $5&#125;&#x27; | cut -d: -f1 | awk &#x27;&#123;++ip[$1]&#125; END &#123;for(i in ip) print ip[i],&quot;\t&quot;,i&#125;&#x27; | sort -nr</span><br></pre></td></tr></table></figure>
-
-<p>TCP各种状态列表：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nt | grep -e 127.0.0.1 -e 0.0.0.0 -e ::: -v | awk &#x27;/^tcp/ &#123;++state[$NF]&#125; END &#123;for(i in state) print i,&quot;\t&quot;,state[i]&#125;&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>查看phpcgi进程数，如果接近预设值，说明不够用，需要增加：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anpo | grep &quot;php-cgi&quot; | wc -l</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nethogs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/nethogs/" class="post-title-link" itemprop="url">【Linux 命令】nethogs</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:40:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>终端下的网络流量监控工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>有很多适用于Linux系统的开源网络监视工具。比如说，你可以用命令iftop来检查带宽使用情况。netstat用来查看接口统计报告，还有top监控系统当前运行进程。但是如果你想要找一个能够按进程实时统计网络带宽利用率的工具，那么NetHogs值得一看。</p>
-<p> <strong>NetHogs</strong> 是一个开源的命令行工具（类似于Linux的top命令），用来按进程或程序实时统计网络带宽使用率。</p>
-<p>来自NetHogs项目网站:</p>
-<blockquote>
-<p>NetHogs是一个小型的net top工具，不像大多数工具那样拖慢每个协议或者是每个子网的速度而是按照进程进行带宽分组。NetHogs不需要依赖载入某个特殊的内核模块。如果发生了网络阻塞你可以启动NetHogs立即看到哪个PID造成的这种状况。这样就很容易找出哪个程序跑飞了然后突然占用你的带宽。</p>
-</blockquote>
-<p>本文为你介绍如何在Unix/Linux操作系统下如何安装和使用NetHogs按进程监控网络带宽使用率。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nethogs（选项）（参数）</span><br></pre></td></tr></table></figure>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">usage: nethogs [-V] [-h] [-b] [-d seconds] [-v mode] [-c count] [-t] [-p] [-s] [device [device [device ...]]]</span><br><span class="line">  -V : 打印版本。</span><br><span class="line">  -h : 打印此帮助。</span><br><span class="line">  -b : bughunt模式 - 暗示tracemode。</span><br><span class="line">  -d : 延迟更新刷新率（以秒为单位）。 默认值为1。</span><br><span class="line">  -v : 视图模式（0 = KB / s，1 =总KB，2 =总B，3 =总MB）。 默认值为0。</span><br><span class="line">  -c : 更新次数。 默认为0（无限制）。</span><br><span class="line">  -t : tracemode.</span><br><span class="line">  -p : 煽动混乱模式（不推荐）。</span><br><span class="line">  -s : 按发送列排序输出。</span><br><span class="line">  -a : 监控所有设备，甚至环回/停止。</span><br><span class="line">  device : 要监控的设备。 默认是所有接口启动和运行，不包括环回</span><br><span class="line"></span><br><span class="line">当nethogs运行时，按：</span><br><span class="line">  q：退出</span><br><span class="line">  s：按SENT流量排序</span><br><span class="line">  r：按RECEIVE流量排序</span><br><span class="line">  m：在总（KB，B，MB）和KB / s模式之间切换</span><br></pre></td></tr></table></figure>
-
-<p>其他参数和用法</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-d : 刷新间隔</span><br><span class="line">-h : 帮助</span><br><span class="line">-p : promiscious 模式</span><br><span class="line">-t : trace模式 </span><br><span class="line">-V : 版本</span><br></pre></td></tr></table></figure>
-
-<p><strong>交互命令</strong></p>
-<p>以下是NetHogs的一些交互命令（键盘快捷键）</p>
-<ul>
-<li>m : 修改单位</li>
-<li>r : 按流量排序</li>
-<li>s : 按发送流量排序</li>
-<li>q : 退出命令提示符</li>
-</ul>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><strong>在RHEL、CentOS和Fedora下安装NetHogs</strong></p>
-<p>要安装NetHogs，你必须要启用你所用Linux下的EPEL源。然后运行下面的yum命令下载安装NetHogs包。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nethogs</span><br></pre></td></tr></table></figure>
-
-<p><strong>在Ubuntu、Linux mint和Debian下安装NetHogs</strong></p>
-<p>键入apt-get命令安装NetHogs包：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get install nethogs</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="NetHogs用法"><a href="#NetHogs用法" class="headerlink" title="NetHogs用法"></a>NetHogs用法</h3><p>在基于RedHat系统下键入如下命令启动NetHogs工具。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nethogs</span><br></pre></td></tr></table></figure>
-
-<p>在Debian/Ubuntu/Linux Mint下要执行NetHogs你必须拥有root权限：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo nethogs</span></span><br></pre></td></tr></table></figure>
-
-<p>!nethogs</p>
-<p>Ubuntu 12.10 下的NetHogs预览</p>
-<p>正如上图所示，send列和received列显示的是按照每个进程的流量统计。总的收发数据带宽在最下方，而且可以用交互命令控制排序，下面将要讨论这些交互命令。</p>
-<h3 id="NetHogs-命令行参数"><a href="#NetHogs-命令行参数" class="headerlink" title="NetHogs 命令行参数"></a>NetHogs 命令行参数</h3><p>以下就是NetHogs命令行的参数，用-d来添加刷新频率参数，device name 用来检测给定的某个或者某些设备的带宽（默认是eth0）。例如：设置5秒钟的刷新频率，键入如下命令即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nethogs -d 5</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo nethogs -d 5</span></span><br></pre></td></tr></table></figure>
-
-<p>如果只用来监视设备（eth0）的网络带宽可以使用如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nethogs eth0</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo nethogs eth0</span></span><br></pre></td></tr></table></figure>
-
-<p>如果要同时监视eth0和eth1接口，使用以下命令即可：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nethogs eth0 eth1</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo nethogs eth0 eth1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>关于NetHogs命令行工具的完整参数列表，可以参考NetHogs的手册，使用方法是在终端里输入<code>man nethogs</code>或者<code>sudo man nethogs</code>，更多信息请参考NetHogs项目主页。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ncftp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/ncftp/" class="post-title-link" itemprop="url">【Linux 命令】ncftp</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:40:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>884</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>是增强的的FTP工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ncftp命令</strong> 是增强的的ftp工具，比传统的FTP指令更加强大。FTP让用户得以下载存放于服务器主机的文件，也能将文件上传到远端主机放置。ncftp是文字模式FTP程序的佼佼者，它具备多样特色，包括显示传输速率，下载进度，自动续传，标住书签，可通过防火墙和代理服务器等。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ncftp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-u：指定登录FTP服务器时使用的用户名；</span><br><span class="line">-p：指定登录FTP服务器时使用的密码；</span><br><span class="line">-P：如果FTP服务器没有使用默认的TCP协议的21端口，则使用此选项指定FTP服务器的端口号。</span><br><span class="line">-m：在传之前尝试在目录位置创建目录(用于传目录的情况)</span><br><span class="line">-R：递规传子目录</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>FTP服务器：指定远程FTP服务器的ip地址或主机名。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget ftp://ftp.ncftp.com/ncftp/ncftp-3.2.3-src.tar.gz</span><br><span class="line">tar zxvf ncftp-3.2.3-src.tar.gz</span><br><span class="line">cd ncftp-3.2.3/</span><br><span class="line">./configure --prefix=/usr/local/ncftp</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将本地/etc/目录内的所有文件和目录，上传到FTP服务器的flv/games/目录内(如果不存在flv/games/目录则自动创建)。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/ncftp/bin/ncftpput -u koumm -p koumm -P 21 -m -R 192.168.162.137  flv/games/ /etc/*</span><br></pre></td></tr></table></figure>
-
-<p> <strong>指令说明</strong> </p>
-<p>ncftp的基本命令和普通ftp一样，可以输入help获得命令列表。对于所有的命令，都可以使用help &lt;命令&gt;的格式获得详细帮助。l开头的就是对本地执行的命令，其它的就是对登入的ftp服务目录的操作命令。</p>
-<p>增加的本地文件系统的操作命令：</p>
-<ul>
-<li>lls: 列出本地当前目录文件；</li>
-<li>lmkdir : 本地建立目录；</li>
-<li>lrename: 本地文件改名；</li>
-<li>lpwd: 显示当前本地路 径；</li>
-<li>lchmod: 改变本地文件权限；</li>
-<li>lpage: 显示本地文件内容；</li>
-<li>lrm: 删除本地文件；</li>
-<li>lrmdir: 删除本地目录。</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/nc/" class="post-title-link" itemprop="url">【Linux 命令】nc</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:39:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用于设置路由器，是网络工具中的瑞士军刀</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nc命令</strong> 全称<strong>netcat</strong>，用于设置路由器。它能通过 TCP 和 UDP 在网络中读写数据。通过与其他工具结合和重定向，你可以在脚本中以多种方式使用它。使用 netcat 命令所能完成的事情令人惊讶。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc [-hlnruz][-g&lt;网关...&gt;][-G&lt;指向器数目&gt;][-i&lt;延迟秒数&gt;][-o&lt;输出文件&gt;][-p&lt;通信端口&gt;]</span><br><span class="line">[-s&lt;来源位址&gt;][-v...][-w&lt;超时秒数&gt;][主机名称][通信端口...]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-g&lt;网关&gt; 设置路由器跃程通信网关，最多可设置8个。</span><br><span class="line">-G&lt;指向器数目&gt; 设置来源路由指向器，其数值为4的倍数。</span><br><span class="line">-h 在线帮助。</span><br><span class="line">-i&lt;延迟秒数&gt; 设置时间间隔，以便传送信息及扫描通信端口。</span><br><span class="line">-l 使用监听模式，管控传入的资料。</span><br><span class="line">-n 直接使用IP地址，而不通过域名服务器。</span><br><span class="line">-o&lt;输出文件&gt; 指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存。</span><br><span class="line">-p&lt;通信端口&gt; 设置本地主机使用的通信端口。</span><br><span class="line">-r 乱数指定本地与远端主机的通信端口。</span><br><span class="line">-s&lt;来源位址&gt; 设置本地主机送出数据包的IP地址。</span><br><span class="line">-u 使用UDP传输协议。</span><br><span class="line">-v 显示指令执行过程。</span><br><span class="line">-w&lt;超时秒数&gt; 设置等待连线的时间。</span><br><span class="line">-z 使用0输入/输出模式，只在扫描通信端口时使用。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>TCP端口扫描</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -v -z -w2 192.168.0.3 1-100 </span><br><span class="line">192.168.0.3: inverse host lookup failed: Unknown host</span><br><span class="line">(UNKNOWN) [192.168.0.3] 80 (http) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 23 (telnet) open</span><br><span class="line">(UNKNOWN) [192.168.0.3] 22 (ssh) open</span><br></pre></td></tr></table></figure>
-
-<p>扫描192.168.0.3 的端口 范围是 1-100<br>扫描UDP端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -u -z -w2 192.168.0.1 1-1000  # 扫描192.168.0.3 的端口 范围是 1-1000</span><br></pre></td></tr></table></figure>
-
-<p>扫描指定端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# nc -nvv 192.168.0.1 80 # 扫描 80端口</span><br><span class="line">(UNKNOWN) [192.168.0.1] 80 (?) open</span><br><span class="line">y  //用户输入</span><br></pre></td></tr></table></figure>
-
-<p>查看从服务器到目的地的出站端口 443 是否被防火墙阻止</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc -vz acme-v02.api.letsencrypt.org 443 -w2</span><br><span class="line"># Ncat: Version 7.50 ( https:&#x2F;&#x2F;nmap.org&#x2F;ncat )</span><br><span class="line"># Ncat: Connected to 23.77.214.183:443.</span><br><span class="line"># Ncat: 0 bytes sent, 0 bytes received in 0.07 seconds.</span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nano/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/nano/" class="post-title-link" itemprop="url">【Linux 命令】nano</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:39:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>字符终端文本编辑器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nano</strong> 是一个字符终端的文本编辑器，有点像DOS下的editor程序。它比vi/vim要简单得多，比较适合Linux初学者使用。某些Linux发行版的默认编辑器就是nano。</p>
-<p>nano命令可以打开指定文件进行编辑，默认情况下它会自动断行，即在一行中输入过长的内容时自动拆分成几行，但用这种方式来处理某些文件可能会带来问题，比如Linux系统的配置文件，自动断行就会使本来只能写在一行上的内容折断成多行了，有可能造成系统不灵了。因此，如果你想避免这种情况出现，就加上<code>-w</code>选项吧。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano [选项] [[+行,列] 文件名]...</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">-h, -?         --help                  显示此信息</span><br><span class="line">+行,列                                 从所指列数与行数开始</span><br><span class="line">-A             --smarthome             启用智能 HOME 键</span><br><span class="line">-B             --backup                储存既有文件的备份</span><br><span class="line">-C &lt;目录&gt;      --backupdir=&lt;目录&gt;      用以储存独一备份文件的目录</span><br><span class="line">-D             --boldtext              用粗体替代颜色反转</span><br><span class="line">-E             --tabstospaces          将已输入的制表符转换为空白</span><br><span class="line">-F             --multibuffer           启用多重文件缓冲区功能</span><br><span class="line">-H             --historylog            记录与读取搜索/替换的历史字符串</span><br><span class="line">-I             --ignorercfiles         不要参考nanorc 文件</span><br><span class="line">-K             --rebindkeypad          修正数字键区按键混淆问题</span><br><span class="line">-L             --nonewlines            不要将换行加到文件末端</span><br><span class="line">-N             --noconvert             不要从 DOS/Mac 格式转换</span><br><span class="line">-O             --morespace             编辑时多使用一行</span><br><span class="line">-Q &lt;字符串&gt;    --quotestr=&lt;字符串&gt;     引用代表字符串</span><br><span class="line">-R             --restricted            限制模式</span><br><span class="line">-S             --smooth                按行滚动而不是半屏</span><br><span class="line">-T &lt;#列数&gt;     --tabsize=&lt;#列数&gt;       设定制表符宽度为 #列数</span><br><span class="line">-U             --quickblank            状态行快速闪动</span><br><span class="line">-V             --version               显示版本资讯并离开</span><br><span class="line">-W             --wordbounds            更正确地侦测单字边界</span><br><span class="line">-Y &lt;字符串&gt;    --syntax=&lt;字符串&gt;       用于加亮的语法定义</span><br><span class="line">-c             --const                 持续显示游标位置</span><br><span class="line">-d             --rebinddelete          修正退格键/删除键混淆问题</span><br><span class="line">-i             --autoindent            自动缩进新行</span><br><span class="line">-k             --cut                   从游标剪切至行尾</span><br><span class="line">-l             --nofollow              不要依照符号连结，而是覆盖</span><br><span class="line">-m             --mouse                 启用鼠标功能</span><br><span class="line">-o &lt;目录&gt;      --operatingdir=&lt;目录&gt;   设定操作目录</span><br><span class="line">-p             --preserve              保留XON (^Q) 和XOFF (^S) 按键</span><br><span class="line">-q             --quiet                 沉默忽略启动问题, 比如rc 文件错误</span><br><span class="line">-r &lt;#列数&gt;     --fill=&lt;#列数&gt;          设定折行宽度为 #列数</span><br><span class="line">-s &lt;程序&gt;      --speller=&lt;程序&gt;        启用替代的拼写检查程序</span><br><span class="line">-t             --tempfile              离开时自动储存，不要提示</span><br><span class="line">-u             --undo                  允许通用撤销[试验性特性]</span><br><span class="line">-v             --view                  查看(只读)模式</span><br><span class="line">-w             --nowrap                不要自动换行</span><br><span class="line">-x             --nohelp                不要显示辅助区</span><br><span class="line">-z             --suspend               启用暂停功能</span><br><span class="line"><span class="meta">-$</span><span class="bash">             --softwrap              启用软换行</span></span><br><span class="line">-a, -b, -e,</span><br><span class="line">-f, -g, -j                             (忽略，为与pico 相容)</span><br></pre></td></tr></table></figure>
-
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p><strong>光标控制</strong> </p>
-<ul>
-<li>移动光标：使用用方向键移动。</li>
-<li>选择文字：按住鼠标左键拖到。</li>
-</ul>
-<p><strong>复制、剪贴和粘贴</strong> </p>
-<ul>
-<li>复制一整行：Alt+6</li>
-<li>剪贴一整行：Ctrl+K</li>
-</ul>
-<p><strong>粘贴：Ctrl+U</strong> </p>
-<p>如果需要复制／剪贴多行或者一行中的一部分，先将光标移动到需要复制／剪贴的文本的开头，按Ctrl+6（或者Alt+A）做标记，然后移动光标到 待复制／剪贴的文本末尾。这时选定的文本会反白，用Alt+6来复制，Ctrl+K来剪贴。若在选择文本过程中要取消，只需要再按一次Ctrl+6。</p>
-<p><strong>搜索</strong> </p>
-<p>按Ctrl+W，然后输入你要搜索的关键字，回车确定。这将会定位到第一个匹配的文本，接着可以用Alt+W来定位到下一个匹配的文本。</p>
-<p><strong>翻页</strong> </p>
-<ul>
-<li><code>Ctrl+Y</code> 到上一页</li>
-<li><code>Ctrl+V</code> 到下一页</li>
-</ul>
-<p><strong>保存</strong> </p>
-<p>使用Ctrl+O来保存所做的修改</p>
-<p><strong>退出</strong> </p>
-<p>按Ctrl+X</p>
-<p>如果你修改了文件，下面会询问你是否需要保存修改。输入Y确认保存，输入N不保存，按Ctrl+C取消返回。如果输入了Y，下一步会让你输入想要保存的文件名。如果不需要修改文件名直接回车就行；若想要保存成别的名字（也就是另存为）则输入新名称然后确 定。这个时候也可用Ctrl+C来取消返回。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/25/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/27/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1527,14 +1406,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">708k</span>
+    <span title="站点总字数">733k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">10:43</span>
+    <span title="站点阅读时长">11:06</span>
   </span>
 </div>
 <div class="busuanzi-count">

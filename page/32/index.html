@@ -143,12 +143,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">578</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">591</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">578</span>
+          <span class="site-state-item-count">583</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -245,7 +245,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">591</span>
+        <span class="site-state-item-count">616</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -304,6 +304,544 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lsb_release/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/lsb_release/" class="post-title-link" itemprop="url">【Linux 命令】lsb_release</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:16:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>703</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示发行版本信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>LSB是Linux Standard Base的缩写， <strong>lsb_release命令</strong> 用来显示LSB和特定版本的相关信息。如果使用该命令时不带参数，则默认加上-v参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-v 显示版本信息。</span><br><span class="line">-i 显示发行版的id。</span><br><span class="line">-d 显示该发行版的描述信息。</span><br><span class="line">-r 显示当前系统是发行版的具体版本号。</span><br><span class="line">-c 发行版代号。</span><br><span class="line">-a 显示上面的所有信息。</span><br><span class="line">-h 显示帮助信息。</span><br></pre></td></tr></table></figure>
+
+<p>如果当前发行版是LSB兼容的，那么<code>/etc/lsb_release</code>文件中会包含LSB_VERSION域。这个域的值可以是用冒号隔开的一系列支持的模块。这些模块名是当前版本支持的LSB的模块名。如果当前版本不是LSB兼容的，就不要包含这个域。</p>
+<p>可选的域包括DISTRIB_ID, DISTRIB_RELEASE, DISTRIB_CODENAME,DISTRIB_DESCRIPTION，它们可以覆盖<code>/etc/distrib-release</code>文件中的内容。注：这里的distrib要替换为当前的发行版的名字。如果存在<code>/etc/lsb-release.d</code>目录，会在该目录中查找文件名并作为附加的模块版本加在LSB_VERSION前面。文件<code>/etc/distrib-release</code>中包含了一些描述信息，用来说明应该分析哪些文件名。</p>
+<p> 一般的格式是<code>Distributor release x.x (Codename)</code>  注意：Debian系统中缺乏相应的描述信息（见<code>/etc/debian-version</code>），为了支持Debian系统，大部分信息都被加在了lsb-release文件中。</p>
+<p>redhat和fedora系统中，还支持一个参数：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s, --short  输出简短的描述信息。</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lsattr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/lsattr/" class="post-title-link" itemprop="url">【Linux 命令】lsattr</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:15:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>376</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>查看文件的第二扩展文件系统属性</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lsattr命令</strong> 用于查看文件的第二扩展文件系统属性。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsattr(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-E：可显示设备属性的当前值，但这个当前值是从用户设备数据库中获得的，而不是从设备直接获得的。</span><br><span class="line">-D：显示属性的名称，属性的默认值，描述和用户是否可以修改属性值的标志。</span><br><span class="line">-R：递归的操作方式；</span><br><span class="line">-V：显示指令的版本信息；</span><br><span class="line">-a：列出目录中的所有文件，包括隐藏文件。</span><br></pre></td></tr></table></figure>
+
+<p>lsattr经常使用的几个选项-D，-E，-R这三个选项不可以一起使用，它们是互斥的，经常使用的还有-l,-H，使用lsattr时，必须指出具体的设备名，用-l选项指出要显示设备的逻辑名称，否则要用-c，-s，-t等选项唯一的确定某个已存在的设备。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定显示文件系统属性的文件名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsattr -E -l rmt0 -H</span><br><span class="line">lsattr -EO -l rmt0</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ls/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ls/" class="post-title-link" itemprop="url">【Linux 命令】ls</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:15:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>10k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示目录内容列表</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ls命令</strong> 用来显示目标列表，在Linux中是使用率较高的命令。ls命令的输出信息可以进行彩色加亮显示，以分区不同类型的文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ls [选项] [文件名...]</span><br><span class="line">   [-1abcdfgiklmnopqrstuxABCDFGLNQRSUX] [-w cols] [-T cols] [-I pattern] [--full-time] </span><br><span class="line">   [--format=&#123;long,verbose,commas,across,vertical,single-col‐umn&#125;] </span><br><span class="line">   [--sort=&#123;none,time,size,extension&#125;] [--time=&#123;atime,access,use,ctime,status&#125;] </span><br><span class="line">   [--color[=&#123;none,auto,always&#125;]] [--help] [--version] [--]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">-C     # 多列输出，纵向排序。</span><br><span class="line">-F     # 每个目录名加 &quot;/&quot; 后缀，每个 FIFO 名加 &quot;|&quot; 后缀， 每个可运行名加“ * ”后缀。</span><br><span class="line">-R     # 递归列出遇到的子目录。</span><br><span class="line">-a     # 列出所有文件，包括以 &quot;.&quot; 开头的隐含文件。</span><br><span class="line">-c     # 使用“状态改变时间”代替“文件修改时间”为依据来排序（使用“-t”选项时）或列出（使用“-l”选项时）。</span><br><span class="line">-d     # 将目录名像其它文件一样列出，而不是列出它们的内容。</span><br><span class="line">-i     # 输出文件前先输出文件系列号（即 i 节点号: i-node number）。 -l  列出（以单列格式）文件模式</span><br><span class="line">       # （file mode），文件的链接数，所有者名，组名，文件大小（以字节为单位），时间信息，及文件名。</span><br><span class="line">       # 缺省时，时间信息显示最近修改时间；可以以选项“-c”和“-u”选择显示其它两种时间信息。对于设备文件，</span><br><span class="line">       # 原先显示文件大小的区域通常显示的是主要和次要的信号（majorand minor device numbers）。</span><br><span class="line">-q     # 将文件名中的非打印字符输出为问号。（对于到终端的输出这是缺省的。）</span><br><span class="line">-r     # 逆序排列。</span><br><span class="line">-t     # 按时间信息排序。</span><br><span class="line">-u     # 使用最近访问时间代替最近修改时间为依据来排序（使用“-t”选项时）或列出（使用“-l”选项时）。</span><br><span class="line">-1     # 单列输出。</span><br><span class="line">-1, --format=single-column  # 一行输出一个文件（单列输出）。如标准输出不是到终端，此选项就是缺省选项。</span><br><span class="line">-a, --all # 列出目录中所有文件，包括以“.”开头的文件。</span><br><span class="line">-b, --escape # 把文件名中不可输出的字符用反斜杠加字符编号(就像在 C 语言里一样)的形式列出。</span><br><span class="line">-c, --time=ctime, --time=status</span><br><span class="line">      # 按文件状态改变时间（i节点中的ctime）排序并输出目录内</span><br><span class="line">      # 容。如采用长格式输出（选项“-l”），使用文件的状态改</span><br><span class="line">      # 变时间取代文件修改时间。【译注：所谓文件状态改变（i节</span><br><span class="line">      # 点中以ctime标志），既包括文件被修改，又包括文件属性（ 如所有者、组、链接数等等）的变化】</span><br><span class="line">-d, --directory</span><br><span class="line">      # 将目录名像其它文件一样列出，而不是列出它们的内容。</span><br><span class="line">-f    # 不排序目录内容；按它们在磁盘上存储的顺序列出。同时启 动“ -a ”选项，如果在“ -f ”之前存在“ -l”、</span><br><span class="line">      # “ - -color ”或“ -s ”，则禁止它们。</span><br><span class="line">-g    # 忽略，为兼容UNIX用。</span><br><span class="line">-i, --inode</span><br><span class="line">      # 在每个文件左边打印  i  节点号（也叫文件序列号和索引号:  file  serial  number and index num‐</span><br><span class="line">      # ber）。i节点号在每个特定的文件系统中是唯一的。</span><br><span class="line">-k, --kilobytes</span><br><span class="line">      # 如列出文件大小，则以千字节KB为单位。</span><br><span class="line">-l, --format=long, --format=verbose</span><br><span class="line">      # 除每个文件名外，增加显示文件类型、权限、硬链接数、所       有者名、组名、大小（        byte</span><br><span class="line">      # ）、及时间信息（如未指明是      其它时间即指修改时间）。对于6个月以上的文件或超出未来     1</span><br><span class="line">      # 小时的文件，时间信息中的时分将被年代取代。</span><br><span class="line">      # 每个目录列出前，有一行“总块数”显示目录下全部文件所       占的磁盘空间。块默认是        1024</span><br><span class="line">      # 字节；如果设置了   POSIXLY_CORRECT  的环境变量，除非用“  -k  ”选项，则默认块大小是  512  字</span><br><span class="line">      # 节。每一个硬链接都计入总块数（因此可能重复计数），这无 疑是个缺点。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出的权限类似于以符号表示（文件）模式的规范。但是 ls</span></span><br><span class="line">      # 在每套权限的第三个字符中结合了多位（ multiple bits ） 的信息，如下： s 如果设置了  setuid</span><br><span class="line">      # 位或 setgid   位，而且也设置了相应的可执行位。 S 如果设置了 setuid 位或 setgid</span><br><span class="line">      # 位，但是没有设置相应的可执行位。 t 如果设置了  sticky  位，而且也设置了相应的可执行位。  T</span><br><span class="line">      # 如果设置了 sticky 位，但是没有设置相应的可执行位。              x</span><br><span class="line">      # 如果仅仅设置了可执行位而非以上四种情况。 - 其它情况（即可执行位未设置）。</span><br><span class="line">-m, --format=commas</span><br><span class="line">      # 水平列出文件，每行尽可能多，相互用逗号和一个空格分隔。</span><br><span class="line">-n, --numeric-uid-gid</span><br><span class="line">      # 列出数字化的 UID 和 GID 而不是用户名和组名。</span><br><span class="line">-o    #  以长格式列出目录内容，但是不显示组信息。等于使用“         --format=long          --no-group</span><br><span class="line">      # ”选项。提供此选项是为了与其它版本的 ls 兼容。</span><br><span class="line">-p    #  在每个文件名后附上一个字符以说明该文件的类型。类似“ -F ”选项但是不 标示可执行文件。</span><br><span class="line">-q, --hide-control-chars</span><br><span class="line">      # 用问号代替文件名中非打印的字符。这是缺省选项。</span><br><span class="line">-r, --reverse</span><br><span class="line">      # 逆序排列目录内容。</span><br><span class="line">-s, --size</span><br><span class="line">      # 在每个文件名左侧输出该文件的大小，以    1024   字节的块为单位。如果设置了   POSIXLY_CORRECT</span><br><span class="line">      # 的环境变量，除非用“ -k ”选项，块大小是 512 字节。</span><br><span class="line">-t, --sort=time</span><br><span class="line">      # 按文件最近修改时间（ i 节点中的 mtime ）而不是按文件名字典序排序，新文件 靠前。</span><br><span class="line">-u, --time=atime, --time=access, --time=use</span><br><span class="line">      # 类似选项“    -t    ”，但是用文件最近访问时间（    i     节点中的     atime     ）取代文件修</span><br><span class="line">      # 改时间。如果使用长格式列出，打印的时间是最近访问时间。</span><br><span class="line">-w, --width cols</span><br><span class="line">       # 假定屏幕宽度是      cols      （      cols     以实际数字取代）列。如未用此选项，缺省值是这</span><br><span class="line">       # 样获得的：如可能先尝试取自终端驱动，否则尝试取自环境变量          COLUMNS          （如果设</span><br><span class="line">       # 置了的话），都不行则取 80 。</span><br><span class="line"></span><br><span class="line">-x, --format=across, --format=horizontal</span><br><span class="line">       # 多列输出，横向排序。</span><br><span class="line"></span><br><span class="line">-A, --almost-all</span><br><span class="line">       # 显示除 &quot;.&quot; 和 &quot;..&quot; 外的所有文件。</span><br><span class="line"></span><br><span class="line">-B, --ignore-backups</span><br><span class="line">       # 不输出以“ ~ ”结尾的备份文件，除非已经在命令行中给出。</span><br><span class="line"></span><br><span class="line">-C, --format=vertical</span><br><span class="line">       # 多列输出，纵向排序。当标准输出是终端时这是缺省项。使用命令名 dir 和 d 时， 则总是缺省的。</span><br><span class="line"></span><br><span class="line">-D, --dired</span><br><span class="line">       # 当采用长格式（“-l”选项）输出时，在主要输出后，额外打印一行：  //DIRED//  BEG1 END1 BEG2</span><br><span class="line">       # END2 ...</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> BEGn 和 ENDn 是无符号整数，记录每个文件名的起始、结束位置在输出中的位置（</span></span><br><span class="line"><span class="meta">#</span><span class="bash">        字节偏移量）。这使得          Emacs          易于找到文件名，即使文件名包含空格或换行等非正</span></span><br><span class="line"><span class="meta">#</span><span class="bash">        常字符也无需特异的搜索。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果目录是递归列出的（“ -R ”选项），每个子目录后列出类似一行：</span></span><br><span class="line">       # //SUBDIRED//  BEG1 END1 ...  【译注：我测试了 TurboLinux4.0 和 RedHat6.1 ，发现它们都是在 “</span><br><span class="line">       # //DIRED//     BEG1...     ”之后列出“     //SUBDIRED//     BEG1     ...      ”，也即只有一个</span><br><span class="line">       # 而不是在每个子目录后都有。而且“ //SUBDIRED// BEG1 ... ”列出的是各个子目 录名的偏移。】</span><br><span class="line"></span><br><span class="line">-F, --classify, --file-type</span><br><span class="line">       # 在每个文件名后附上一个字符以说明该文件的类型。“  * ”表示普通的可执行文件； “ / ”表示目录；“</span><br><span class="line">       # @ ”表示符号链接；“ | ”表示FIFOs；“ = ”表示套接字 (sockets) ；什么也没有则表示普通文件。</span><br><span class="line"></span><br><span class="line">-G, --no-group</span><br><span class="line">       # 以长格式列目录时不显示组信息。</span><br><span class="line"></span><br><span class="line">-I, --ignorepattern</span><br><span class="line">       # 除非在命令行中给定，不要列出匹配shell文件名匹配式（pattern ，不是指一般</span><br><span class="line">       # 表达式）的文件。在shell中，文件名以&quot;.&quot;起始的不与在文件名匹配式(pattern)</span><br><span class="line">       # 开头的通配符匹配。</span><br><span class="line"></span><br><span class="line">-L, --dereference</span><br><span class="line">       # 列出符号链接指向的文件的信息，而不是符号链接本身。</span><br><span class="line"></span><br><span class="line">-N, --literal</span><br><span class="line">       # 不要用引号引起文件名。</span><br><span class="line"></span><br><span class="line">-Q, --quote-name</span><br><span class="line">       # 用双引号引起文件名，非打印字符以 C 语言的方法表示。</span><br><span class="line"></span><br><span class="line">-R, --recursive</span><br><span class="line">       # 递归列出全部目录的内容。</span><br><span class="line"></span><br><span class="line">-S, --sort=size</span><br><span class="line">       # 按文件大小而不是字典序排序目录内容，大文件靠前。</span><br><span class="line"></span><br><span class="line">-T, --tabsize cols</span><br><span class="line">       # 假定每个制表符宽度是 cols 。缺省为 8。为求效率， ls 可能在输出中使用制表符。  若 cols 为</span><br><span class="line">       0，则不使用制表符。</span><br><span class="line"></span><br><span class="line">-U, --sort=none</span><br><span class="line">       # 不排序目录内容；按它们在磁盘上存储的顺序列出。（选项“-U”和“-f”的不</span><br><span class="line">       # 同是前者不启动或禁止相关的选项。）这在列很大的目录时特别有用，因为不加排序</span><br><span class="line">       # 能显著地加快速度。</span><br><span class="line"></span><br><span class="line">-X, --sort=extension</span><br><span class="line">       # 按文件扩展名（由最后的 &quot;.&quot; 之后的字符组成）的字典序排序。没有扩展名的先列 出。</span><br><span class="line"></span><br><span class="line">--color[=when]</span><br><span class="line">       # 指定是否使用颜色区别文件类别。环境变量  LS_COLORS  指定使用的颜色。如何设置 这个变量见 dir‐</span><br><span class="line">       # colors(1) 。 when 可以被省略，或是以下几项之一：</span><br><span class="line">none # 不使用颜色，这是缺省项。</span><br><span class="line">       # auto 仅当标准输出是终端时使用。 always 总是使用颜色。指定 --color 而且省略 when  时就等同于</span><br><span class="line">       # --color=always 。</span><br><span class="line"></span><br><span class="line">--full-time</span><br><span class="line">       # 列出完整的时间，而不是使用标准的缩写。格式如同          date(1)          的缺省格式；此格式</span><br><span class="line">       # 是不能改变的，但是你可以用 cut(1) 取出其中的日期字串并将结果送至命令 “ date -d ”。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出的时间包括秒是非常有用的。（ Unix 文件系统储存文件的时间信息精确到秒，</span></span><br><span class="line">       # 因此这个选项已经给出了系统所知的全部信息。）例如，当你有一个         Makefile          文件</span><br><span class="line">       # 不能恰当地生成文件时，这个选项会提供帮助。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目录：指定要显示列表的目录，也可以是具体的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls       <span class="comment"># 仅列出当前目录可见文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -l    <span class="comment"># 列出当前目录可见文件详细信息</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -hl   <span class="comment"># 列出详细信息并以可读大小显示文件大小</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls -al   <span class="comment"># 列出所有文件（包括隐藏）的详细信息</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls --human-readable --size -1 -S --classify <span class="comment"># 按文件大小排序</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> du -sh * | sort -h <span class="comment"># 按文件大小排序(同上)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>显示当前目录下包括影藏文件在内的所有文件列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -a</span><br><span class="line">.   anaconda-ks.cfg  .bash_logout   .bashrc  install.log         .mysql_history  satools  .tcshrc   .vimrc</span><br><span class="line">..  .bash_history    .bash_profile  .cshrc   install.log.syslog  .rnd            .ssh     .viminfo</span><br></pre></td></tr></table></figure>
+
+<p>输出长格式列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -1</span><br><span class="line"></span><br><span class="line">anaconda-ks.cfg</span><br><span class="line">install.log</span><br><span class="line">install.log.syslog</span><br><span class="line">satools</span><br></pre></td></tr></table></figure>
+
+<p>显示文件的inode信息</p>
+<p>索引节点（index inode简称为“inode”）是Linux中一个特殊的概念，具有相同的索引节点号的两个文本本质上是同一个文件（除文件名不同外）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -i -l anaconda-ks.cfg install.log</span><br><span class="line">2345481 -rw------- 1 root root   859 Jun 11 22:49 anaconda-ks.cfg</span><br><span class="line">2345474 -rw-r--r-- 1 root root 13837 Jun 11 22:49 install.log</span><br></pre></td></tr></table></figure>
+
+<p>水平输出文件列表</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -m</span><br><span class="line"></span><br><span class="line">bin, boot, data, dev, etc, home, lib, lost+found, media, misc, mnt, opt, proc, root, sbin, selinux, srv, sys, tmp, usr, var</span><br></pre></td></tr></table></figure>
+
+<p>修改最后一次编辑的文件</p>
+<p>最近修改的文件显示在最上面。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -t</span><br><span class="line"></span><br><span class="line">tmp  root  etc  dev  lib  boot  sys  proc  data  home  bin  sbin  usr  var  lost+found  media  mnt  opt  selinux  srv  misc</span><br></pre></td></tr></table></figure>
+
+<p>显示递归文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -R</span><br><span class="line">.:</span><br><span class="line">anaconda-ks.cfg  install.log  install.log.syslog  satools</span><br><span class="line"></span><br><span class="line">./satools:</span><br><span class="line">black.txt  freemem.sh  iptables.sh  lnmp.sh  mysql  php502_check.sh  ssh_safe.sh</span><br></pre></td></tr></table></figure>
+
+<p>打印文件的UID和GID</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -n</span><br><span class="line"></span><br><span class="line">total 254</span><br><span class="line">drwxr-xr-x   2 0 0  4096 Jun 12 04:03 bin</span><br><span class="line">drwxr-xr-x   4 0 0  1024 Jun 15 14:45 boot</span><br><span class="line">drwxr-xr-x   6 0 0  4096 Jun 12 10:26 data</span><br><span class="line">drwxr-xr-x  10 0 0  3520 Sep 26 15:38 dev</span><br><span class="line">drwxr-xr-x  75 0 0  4096 Oct 16 04:02 etc</span><br><span class="line">drwxr-xr-x   4 0 0  4096 Jun 12 10:26 home</span><br><span class="line">drwxr-xr-x  14 0 0 12288 Jun 16 04:02 lib</span><br><span class="line">drwx------   2 0 0 16384 Jun 11 22:46 lost+found</span><br><span class="line">drwxr-xr-x   2 0 0  4096 May 11  2011 media</span><br><span class="line">drwxr-xr-x   2 0 0  4096 Nov  8  2010 misc</span><br><span class="line">drwxr-xr-x   2 0 0  4096 May 11  2011 mnt</span><br><span class="line">drwxr-xr-x   2 0 0  4096 May 11  2011 opt</span><br><span class="line">dr-xr-xr-x 232 0 0     0 Jun 15 11:04 proc</span><br><span class="line">drwxr-x---   4 0 0  4096 Oct 15 14:43 root</span><br><span class="line">drwxr-xr-x   2 0 0 12288 Jun 12 04:03 sbin</span><br><span class="line">drwxr-xr-x   2 0 0  4096 May 11  2011 selinux</span><br><span class="line">drwxr-xr-x   2 0 0  4096 May 11  2011 srv</span><br><span class="line">drwxr-xr-x  11 0 0     0 Jun 15 11:04 sys</span><br><span class="line">drwxrwxrwt   3 0 0 98304 Oct 16 08:45 tmp</span><br><span class="line">drwxr-xr-x  13 0 0  4096 Jun 11 23:38 usr</span><br><span class="line">drwxr-xr-x  19 0 0  4096 Jun 11 23:38 var</span><br></pre></td></tr></table></figure>
+
+<p>列出文件和文件夹的详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -l</span><br><span class="line"></span><br><span class="line">total 254</span><br><span class="line">drwxr-xr-x   2 root root  4096 Jun 12 04:03 bin</span><br><span class="line">drwxr-xr-x   4 root root  1024 Jun 15 14:45 boot</span><br><span class="line">drwxr-xr-x   6 root root  4096 Jun 12 10:26 data</span><br><span class="line">drwxr-xr-x  10 root root  3520 Sep 26 15:38 dev</span><br><span class="line">drwxr-xr-x  75 root root  4096 Oct 16 04:02 etc</span><br><span class="line">drwxr-xr-x   4 root root  4096 Jun 12 10:26 home</span><br><span class="line">drwxr-xr-x  14 root root 12288 Jun 16 04:02 lib</span><br><span class="line">drwx------   2 root root 16384 Jun 11 22:46 lost+found</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 media</span><br><span class="line">drwxr-xr-x   2 root root  4096 Nov  8  2010 misc</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 mnt</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 opt</span><br><span class="line">dr-xr-xr-x 232 root root     0 Jun 15 11:04 proc</span><br><span class="line">drwxr-x---   4 root root  4096 Oct 15 14:43 root</span><br><span class="line">drwxr-xr-x   2 root root 12288 Jun 12 04:03 sbin</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 selinux</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 srv</span><br><span class="line">drwxr-xr-x  11 root root     0 Jun 15 11:04 sys</span><br><span class="line">drwxrwxrwt   3 root root 98304 Oct 16 08:48 tmp</span><br><span class="line">drwxr-xr-x  13 root root  4096 Jun 11 23:38 usr</span><br><span class="line">drwxr-xr-x  19 root root  4096 Jun 11 23:38 var</span><br></pre></td></tr></table></figure>
+
+<p>列出可读文件和文件夹详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -lh</span><br><span class="line"></span><br><span class="line">total 254K</span><br><span class="line">drwxr-xr-x   2 root root 4.0K Jun 12 04:03 bin</span><br><span class="line">drwxr-xr-x   4 root root 1.0K Jun 15 14:45 boot</span><br><span class="line">drwxr-xr-x   6 root root 4.0K Jun 12 10:26 data</span><br><span class="line">drwxr-xr-x  10 root root 3.5K Sep 26 15:38 dev</span><br><span class="line">drwxr-xr-x  75 root root 4.0K Oct 16 04:02 etc</span><br><span class="line">drwxr-xr-x   4 root root 4.0K Jun 12 10:26 home</span><br><span class="line">drwxr-xr-x  14 root root  12K Jun 16 04:02 lib</span><br><span class="line">drwx------   2 root root  16K Jun 11 22:46 lost+found</span><br><span class="line">drwxr-xr-x   2 root root 4.0K May 11  2011 media</span><br><span class="line">drwxr-xr-x   2 root root 4.0K Nov  8  2010 misc</span><br><span class="line">drwxr-xr-x   2 root root 4.0K May 11  2011 mnt</span><br><span class="line">drwxr-xr-x   2 root root 4.0K May 11  2011 opt</span><br><span class="line">dr-xr-xr-x 235 root root    0 Jun 15 11:04 proc</span><br><span class="line">drwxr-x---   4 root root 4.0K Oct 15 14:43 root</span><br><span class="line">drwxr-xr-x   2 root root  12K Jun 12 04:03 sbin</span><br><span class="line">drwxr-xr-x   2 root root 4.0K May 11  2011 selinux</span><br><span class="line">drwxr-xr-x   2 root root 4.0K May 11  2011 srv</span><br><span class="line">drwxr-xr-x  11 root root    0 Jun 15 11:04 sys</span><br><span class="line">drwxrwxrwt   3 root root  96K Oct 16 08:49 tmp</span><br><span class="line">drwxr-xr-x  13 root root 4.0K Jun 11 23:38 usr</span><br><span class="line">drwxr-xr-x  19 root root 4.0K Jun 11 23:38 var</span><br></pre></td></tr></table></figure>
+
+<p>显示文件夹信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -ld /etc/</span><br><span class="line"></span><br><span class="line">drwxr-xr-x 75 root root 4096 Oct 16 04:02 /etc/</span><br></pre></td></tr></table></figure>
+
+<p>按时间列出文件和文件夹详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -lt</span><br><span class="line"></span><br><span class="line">total 254</span><br><span class="line">drwxrwxrwt   3 root root 98304 Oct 16 08:53 tmp</span><br><span class="line">drwxr-xr-x  75 root root  4096 Oct 16 04:02 etc</span><br><span class="line">drwxr-x---   4 root root  4096 Oct 15 14:43 root</span><br><span class="line">drwxr-xr-x  10 root root  3520 Sep 26 15:38 dev</span><br><span class="line">drwxr-xr-x  14 root root 12288 Jun 16 04:02 lib</span><br><span class="line">drwxr-xr-x   4 root root  1024 Jun 15 14:45 boot</span><br><span class="line">drwxr-xr-x  11 root root     0 Jun 15 11:04 sys</span><br><span class="line">dr-xr-xr-x 232 root root     0 Jun 15 11:04 proc</span><br><span class="line">drwxr-xr-x   6 root root  4096 Jun 12 10:26 data</span><br><span class="line">drwxr-xr-x   4 root root  4096 Jun 12 10:26 home</span><br><span class="line">drwxr-xr-x   2 root root  4096 Jun 12 04:03 bin</span><br><span class="line">drwxr-xr-x   2 root root 12288 Jun 12 04:03 sbin</span><br><span class="line">drwxr-xr-x  13 root root  4096 Jun 11 23:38 usr</span><br><span class="line">drwxr-xr-x  19 root root  4096 Jun 11 23:38 var</span><br><span class="line">drwx------   2 root root 16384 Jun 11 22:46 lost+found</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 media</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 mnt</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 opt</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 selinux</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 srv</span><br><span class="line">drwxr-xr-x   2 root root  4096 Nov  8  2010 misc</span><br></pre></td></tr></table></figure>
+
+<p>按修改时间列出文件和文件夹详细信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# ls -ltr</span><br><span class="line"></span><br><span class="line">total 254</span><br><span class="line">drwxr-xr-x   2 root root  4096 Nov  8  2010 misc</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 srv</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 selinux</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 opt</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 mnt</span><br><span class="line">drwxr-xr-x   2 root root  4096 May 11  2011 media</span><br><span class="line">drwx------   2 root root 16384 Jun 11 22:46 lost+found</span><br><span class="line">drwxr-xr-x  19 root root  4096 Jun 11 23:38 var</span><br><span class="line">drwxr-xr-x  13 root root  4096 Jun 11 23:38 usr</span><br><span class="line">drwxr-xr-x   2 root root 12288 Jun 12 04:03 sbin</span><br><span class="line">drwxr-xr-x   2 root root  4096 Jun 12 04:03 bin</span><br><span class="line">drwxr-xr-x   4 root root  4096 Jun 12 10:26 home</span><br><span class="line">drwxr-xr-x   6 root root  4096 Jun 12 10:26 data</span><br><span class="line">dr-xr-xr-x 232 root root     0 Jun 15 11:04 proc</span><br><span class="line">drwxr-xr-x  11 root root     0 Jun 15 11:04 sys</span><br><span class="line">drwxr-xr-x   4 root root  1024 Jun 15 14:45 boot</span><br><span class="line">drwxr-xr-x  14 root root 12288 Jun 16 04:02 lib</span><br><span class="line">drwxr-xr-x  10 root root  3520 Sep 26 15:38 dev</span><br><span class="line">drwxr-x---   4 root root  4096 Oct 15 14:43 root</span><br><span class="line">drwxr-xr-x  75 root root  4096 Oct 16 04:02 etc</span><br><span class="line">drwxrwxrwt   3 root root 98304 Oct 16 08:54 tmp</span><br></pre></td></tr></table></figure>
+
+<p>按照特殊字符对文件进行分类</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost nginx-1.2.1]# ls -F</span><br><span class="line"></span><br><span class="line">auto/  CHANGES  CHANGES.ru  conf/  configure*  contrib/  html/  LICENSE  Makefile  man/  objs/  README  src/</span><br></pre></td></tr></table></figure>
+
+<p>列出文件并标记颜色分类</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost nginx-1.2.1]# ls --color=auto</span><br><span class="line"></span><br><span class="line">auto  CHANGES  CHANGES.ru  conf  configure  contrib  html  LICENSE  Makefile  man  objs  README  src</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lpstat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/lpstat/" class="post-title-link" itemprop="url">【Linux 命令】lpstat</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:14:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>218</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示CUPS中打印机的状态信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lpstat命令</strong> 用于显示CUPS中打印机的状态信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpstat(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-E：与打印机连接时加密；</span><br><span class="line">-R：显示打印任务的等级；</span><br><span class="line">-U：指定可选用户名；</span><br><span class="line">-a：显示接受打印任务的打印机；</span><br><span class="line">-c：显示打印机类；</span><br><span class="line">-d：显示默认打印机；</span><br><span class="line">-h：指定可选的服务器信息；</span><br><span class="line">-l：显示长格式；</span><br><span class="line">-p：显示指定打印机，以及打印机是否接受打印任务；</span><br><span class="line">-s：显示汇总信息；</span><br><span class="line">-t：显示所有的状态信息。</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/lprm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/lprm/" class="post-title-link" itemprop="url">【Linux 命令】lprm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:14:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>236</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>删除打印队列中的打印任务</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>lprm命令</strong> 用于删除打印队列中的打印任务。尚未完成的打印机任务会被放在打印机贮列之中，这个命令可用来将常未送到打印机的任务取消。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lprm(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-E：与打印服务器连接时强制使用加密；</span><br><span class="line">-P：指定接受打印任务的目标打印机；</span><br><span class="line">-U：指定可选的用户名。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>打印任务：指定需删除的打印任务号。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将打印机hpprint中的第102号任务移除：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lprm -Phpprint 102</span><br></pre></td></tr></table></figure>
+
+<p>将第101号任务由预设打印机中移除：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lprm 101</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -807,541 +1345,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/losetup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/losetup/" class="post-title-link" itemprop="url">【Linux 命令】losetup</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:11:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>设定与控制循环（loop）设备</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>losetup命令</strong> 用来设置循环设备。循环设备可把文件虚拟成块设备，籍此来模拟整个文件系统，让用户得以将其视为硬盘驱动器，光驱或软驱等设备，并挂入当作目录来使用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">losetup [ -e encryption ] [ -o offset ] loop_device file</span><br><span class="line">losetup [ -d ] loop_device</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a 显示所有循环设备的状态。</span><br><span class="line">-d 卸除设备。</span><br><span class="line">-e &lt;加密选项&gt; 启动加密编码 。</span><br><span class="line">-f 寻找第一个未使用的循环设备。</span><br><span class="line">-o &lt;偏移量&gt;设置数据偏移量，单位是字节。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>loop_device：循环设备可以是/dev/loop0, /dev/loop1 … /dev/loop7。</li>
-<li>file：要与循环设备相关联的文件名，这个往往是一个磁盘镜象文件，如 *.img</li>
-</ul>
-<h3 id="loop设备介绍"><a href="#loop设备介绍" class="headerlink" title="loop设备介绍"></a>loop设备介绍</h3><p>在类 UNIX 系统里，loop 设备是一种伪设备(pseudo-device)，或者也可以说是仿真设备。它能使我们像块设备一样访问一个文件。在使用之前，一个 loop 设备必须要和一个文件进行连接。这种结合方式给用户提供了一个替代块特殊文件的接口。因此，如果这个文件包含有一个完整的文件系统，那么这个文件就可以像一个磁盘设备一样被 mount 起来。</p>
-<p>上面说的文件格式，我们经常见到的是 cd 或 DVD 的 ISO 光盘镜像文件或者是软盘(硬盘)的 *.img 镜像文件。通过这种 loop mount (回环mount)的方式，这些镜像文件就可以被 mount 到当前文件系统的一个目录下。</p>
-<p>至此，顺便可以再理解一下 loop 之含义：对于第一层文件系统，它直接安装在我们计算机的物理设备之上；而对于这种被 mount 起来的镜像文件(它也包含有文件系统)，它是建立在第一层文件系统之上，这样看来，它就像是在第一层文件系统之上再绕了一圈的文件系统，所以称为 loop。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>创建空的磁盘镜像文件，这里创建一个1.44M的软盘：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=floppy.img bs=512 count=2880</span><br></pre></td></tr></table></figure>
-
-<p>使用 losetup将磁盘镜像文件虚拟成快设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">losetup /dev/loop1 floppy.img</span><br></pre></td></tr></table></figure>
-
-<p>挂载块设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/loop0 /tmp</span><br></pre></td></tr></table></figure>
-
-<p>经过上面的三步之后，我们就可以通过/tmp目录，像访问真实快设备一样来访问磁盘镜像文件floppy.img。</p>
-<p>卸载loop设备：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount /tmp</span><br><span class="line">losetup -d /dev/loop1</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/look/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/look/" class="post-title-link" itemprop="url">【Linux 命令】look</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:10:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>196</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>显示文件中以指定字符串开头的任意行</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>look命令</strong> 用于显示文件中以指定字符串开头的任意行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">look(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：使用另一个字典文件web2，该文件也位于/usr/dict目录下；</span><br><span class="line">-d：只对比英文字母和数字，其余一概忽略不予比对；</span><br><span class="line">-f：忽略字符大小写差别；</span><br><span class="line">-t&lt;字尾字符串&gt;：设置字尾字符串。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>字符串：指定要查找的字符串；</li>
-<li>文件：指定要查找的目标文件。</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logwatch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logwatch/" class="post-title-link" itemprop="url">【Linux 命令】logwatch</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:10:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>可定制和可插入式的日志监视系统</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logwatch命令</strong> 是一个可定制和可插入式的日志监视系统，它通过遍历给定时间范围内的系统日志文件而产生日志报告。logwatch默认每天执行一次，可以从<code>/etc/cron.daily</code>里看到。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logwatch(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--detail&lt;报告详细程度&gt;：指定日志报告的详细程度；</span><br><span class="line">--logfile&lt;日志文件&gt;：仅处理指定的日志文件；</span><br><span class="line">--service&lt;服务名&gt;：仅处理指定服务的日志文件；</span><br><span class="line">--print：打印结果到标准输出；</span><br><span class="line">--mailto&lt;邮件地址&gt;：将结果发送到指定邮箱；</span><br><span class="line">--range&lt;日期范围&gt;：指定处理日志的日期范围；</span><br><span class="line">--archives：处理归档日志文件；</span><br><span class="line">--debug&lt;调试等级&gt;：调试模式；</span><br><span class="line">--save&lt;文件名&gt;：将结果保存到指定文件中，而不显示或者发送到指定邮箱；</span><br><span class="line">--logdir&lt;目录&gt;：指定查找日志文件的目录，而不使用默认的日志目录；</span><br><span class="line">--hostname&lt;主机名&gt;：指定在日志报告中使用的主机名，不使用系统默认的主机名；</span><br><span class="line">--numeric：在报告中显示ip地址而不是主机名；</span><br><span class="line">--help：显示指令的帮助信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>检查你的主机上是否已经存在Logwatch（Redhat默认已经安装了Logwatch，不过版本比较旧）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa logwatch</span><br></pre></td></tr></table></figure>
-
-<p>如果主机上没有logwatch，则执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Ivh logwatch***.rpm</span><br></pre></td></tr></table></figure>
-
-<p>如果有老版本的logwatch，则执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh logwatch***.rpm</span><br></pre></td></tr></table></figure>
-
-<p>安装完毕后，开始配置：</p>
-<p>可以修改和添加它的logfiles、services和其他配置，但默认已经有很多脚本了，只要在1）里设置<code>Detail = High</code>就可以了。</p>
-<ul>
-<li>可以添加新的配置到<code>/etc/logwatch/conf/logwatch.conf</code></li>
-<li>也可以修改<code>/usr/share/logwatch/default.conf/logwatch.conf</code></li>
-</ul>
-<p><code>/etc/logwatch/conf/</code>会自动覆盖<code>/usr/share/logwatch/default.conf/</code>下的同名文件。</p>
-<p>如果没有设置logwatch.conf也没关系，可以直接在命令行下设置。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logwatch --detail High --Service All --range All --print    基本就可以显示出所有日志的情况了</span><br><span class="line">logwatch --service sshd --detail High                       只看sshd的日志情况</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logsave/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logsave/" class="post-title-link" itemprop="url">【Linux 命令】logsave</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:09:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>130</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将命令的输出信息保存到指定的日志文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logsave命令</strong> 运行给定的命令，并将命令的输出信息保存到指定的日志文件中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logsave(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-a：追加信息到指定的日志文件中。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>日志文件：指定记录运行信息的日志文件；</li>
-<li>指令：需要执行的指令。</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/logrotate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/logrotate/" class="post-title-link" itemprop="url">【Linux 命令】logrotate</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：10:09:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>系统日志进行轮转、压缩和删除</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logrotate命令</strong> 用于对系统日志进行轮转、压缩和删除，也可以将日志发送到指定邮箱。使用logrotate指令，可让你轻松管理系统所产生的记录文件。每个记录文件都可被设置成每日，每周或每月处理，也能在文件太大时立即处理。您必须自行编辑，指定配置文件，预设的配置文件存放在<code>/etc/logrotate.conf</code>文件中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logrotate(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-?或--help：在线帮助；</span><br><span class="line">-d或--debug：详细显示指令执行过程，便于排错或了解程序执行的情况；</span><br><span class="line">-f或--force ：强行启动记录文件维护操作，纵使logrotate指令认为没有需要亦然；</span><br><span class="line">-s&lt;状态文件&gt;或--state=&lt;状态文件&gt;：使用指定的状态文件；</span><br><span class="line">-v或--version：显示指令执行过程；</span><br><span class="line">-usage：显示指令基本用法。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>配置文件：指定lograote指令的配置文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>crontab 会定时调用logrotate命令 在 <code>/etc/cron.daily/logrotate</code> 文件中配置使用</p>
-<p>logrotate的配置文件<code>/etc/logrotate.conf</code> 定义引用<code>/etc/logrotate.d</code>目录下的一些自定义的log配置 </p>
-<p>在<code>/etc/logrotate.d</code>目录下创建任意后缀名的文件,即可使用对日志进行轮转</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/tmp/log/log.txt</span><br><span class="line">&#123;</span><br><span class="line">    copytruncate</span><br><span class="line">    daily</span><br><span class="line">    rotate 30</span><br><span class="line">    missingok</span><br><span class="line">    ifempty</span><br><span class="line">    compress</span><br><span class="line">    noolddir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个配置文件代表的意思是将<code>/tmp/log/log.txt</code>文件 进行轮转压缩</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">compress                 通过gzip 压缩转储以后的日志</span><br><span class="line">nocompress               不做gzip压缩处理</span><br><span class="line">copytruncate             用于还在打开中的日志文件，把当前日志备份并截断；是先拷贝再清空的方式，拷贝和清空之间有一个时间差，可能会丢失部分日志数据。</span><br><span class="line">nocopytruncate 备份日志文件不过不截断</span><br><span class="line">create mode owner<span class="built_in"> group </span> 轮转时指定创建新文件的属性，如create 0777 nobody nobody</span><br><span class="line">nocreate                 不建立新的日志文件</span><br><span class="line">delaycompress            和compress 一起使用时，转储的日志文件到下一次转储时才压缩</span><br><span class="line">nodelaycompress          覆盖 delaycompress 选项，转储同时压缩</span><br><span class="line">missingok                如果日志丢失，不报错继续滚动下一个日志</span><br><span class="line">errors<span class="built_in"> address </span>          专储时的错误信息发送到指定的Email 地址</span><br><span class="line">ifempty                  即使日志文件为空文件也做轮转，这个是logrotate的缺省选项。</span><br><span class="line">notifempty               当日志文件为空时，不进行轮转</span><br><span class="line">mail<span class="built_in"> address </span>            把转储的日志文件发送到指定的E-mail 地址</span><br><span class="line">nomail                   转储时不发送日志文件</span><br><span class="line">olddir directory         转储后的日志文件放入指定的目录，必须和当前日志文件在同一个文件系统</span><br><span class="line">noolddir                 转储后的日志文件和当前日志文件放在同一个目录下</span><br><span class="line">sharedscripts            运行postrotate脚本，作用是在所有日志都轮转后统一执行一次脚本。如果没有配置这个，那么每个日志轮转后都会执行一次脚本</span><br><span class="line">prerotate                在logrotate转储之前需要执行的指令，例如修改文件的属性等动作；必须独立成行</span><br><span class="line">postrotate               在logrotate转储之后需要执行的指令，例如重新启动 (kill -HUP) 某个服务！必须独立成行</span><br><span class="line">daily                    指定转储周期为每天</span><br><span class="line">weekly                   指定转储周期为每周</span><br><span class="line">monthly                  指定转储周期为每月</span><br><span class="line">rotate count             指定日志文件删除之前转储的次数，0 指没有备份，5 指保留5 个备份</span><br><span class="line">dateext                  使用当期日期作为命名格式</span><br><span class="line">dateformat .%s           配合dateext使用，紧跟在下一行出现，定义文件切割后的文件名，必须配合dateext使用，只支持 %Y %m %d %s 这四个参数</span><br><span class="line">size(或minsize) log-size 当日志文件到达指定的大小时才转储</span><br></pre></td></tr></table></figure>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>在<code>/etc/logrotate.d</code>目录下创建任意后缀名的文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/tmp/log/log*</span><br><span class="line">&#123;</span><br><span class="line">    copytruncate</span><br><span class="line">    daily</span><br><span class="line">    rotate 30</span><br><span class="line">    missingok</span><br><span class="line">    ifempty</span><br><span class="line">    compress</span><br><span class="line">    noolddir</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种情况下，会将轮转过的log再重新轮转,因为轮转过后的文件名也是已log开头的</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1396,14 +1403,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">708k</span>
+    <span title="站点总字数">733k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">10:43</span>
+    <span title="站点阅读时长">11:06</span>
   </span>
 </div>
 <div class="busuanzi-count">

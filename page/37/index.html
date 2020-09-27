@@ -143,12 +143,12 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">578</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">591</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">578</span>
+          <span class="site-state-item-count">583</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -245,7 +245,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">591</span>
+        <span class="site-state-item-count">616</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -304,6 +304,729 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/iperf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/iperf/" class="post-title-link" itemprop="url">【Linux 命令】iperf</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:51:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网络性能测试工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>iperf命令</strong> 是一个网络性能测试工具。iperf可以测试TCP和UDP带宽质量。iperf可以测量最大TCP带宽，具有多种参数和UDP特性。iperf可以报告带宽，延迟抖动和数据包丢失。利用iperf这一特性，可以用来测试一些网络设备如路由器，防火墙，交换机等的性能。</p>
+<p>iperf分为两种版本，Unix/Linux版和Windows版，Unix/Linux版更新比较快，版本最新。Windows版更新慢。Windows版的iperf叫jperf，或者xjperf。jperf是在iperf基础上开发了更好的UI和新的功能。</p>
+<p>Linux版本下载地址：<span class="exturl" data-url="aHR0cDovL2NvZGUuZ29vZ2xlLmNvbS9wL2lwZXJmL2Rvd25sb2Fkcy9saXN0">http://code.google.com/p/iperf/downloads/list<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="安装iperf"><a href="#安装iperf" class="headerlink" title="安装iperf"></a>安装iperf</h3><p>对于windows版的iperf，直接将解压出来的iperf.exe和cygwin1.dll复制到%systemroot%目录即可，对于linux版的iperf，请使用如下命令安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gunzip -c iperf-&lt;version&gt;.tar.gz | tar -xvf -</span><br><span class="line">cd iperf-&lt;version&gt;</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><table>
+<tbody>
+<tr>
+<th>命令行选项</th>
+<th>描述</th>
+</tr>
+<tr>
+<td>客户端与服务器共用选项</td>
+</tr>
+<tr>
+<td>-f, --format [bkmaBKMA]</td>
+<td>格式化带宽数输出。支持的格式有：  
+'b' = bits/sec 'B' = Bytes/sec  
+'k' = Kbits/sec 'K' = KBytes/sec  
+'m' = Mbits/sec 'M' = MBytes/sec  
+'g' = Gbits/sec 'G' = GBytes/sec  
+'a' = adaptive bits/sec 'A' = adaptive Bytes/sec  
+自适应格式是kilo-和mega-二者之一。除了带宽之外的字段都输出为字节，除非指定输出的格式，默认的参数是a。  
+注意：在计算字节byte时，Kilo = 1024， Mega = 1024^2，Giga = 1024^3。通常，在网络中，Kilo = 1000， Mega = 1000^2， and Giga = 1000^3，所以，Iperf也按此来计算比特（位）。如果这些困扰了你，那么请使用-f b参数，然后亲自计算一下。</td>
+</tr>
+<tr>
+<td>-i, --interval #</td>
+<td>设置每次报告之间的时间间隔，单位为秒。如果设置为非零值，就会按照此时间间隔输出测试报告。默认值为零。</td>
+</tr>
+<tr>
+<td>-l, --len #[KM]</td>
+<td>设置读写缓冲区的长度。TCP方式默认为8KB，UDP方式默认为1470字节。</td>
+</tr>
+<tr>
+<td>-m, --print_mss</td>
+<td>输出TCP MSS值（通过TCP_MAXSEG支持）。MSS值一般比MTU值小40字节。通常情况</td>
+</tr>
+<tr>
+<td>-p, --port #</td>
+<td>设置端口，与服务器端的监听端口一致。默认是5001端口，与ttcp的一样。</td>
+</tr>
+<tr>
+<td>-u, --udp</td>
+<td>使用UDP方式而不是TCP方式。参看-b选项。</td>
+</tr>
+<tr>
+<td>-w, --window #[KM]</td>
+<td>设置套接字缓冲区为指定大小。对于TCP方式，此设置为TCP窗口大小。对于UDP方式，此设置为接受UDP数据包的缓冲区大小，限制可以接受数据包的最大值。</td>
+</tr>
+<tr>
+<td>-B, --bind host</td>
+<td>绑定到主机的多个地址中的一个。对于客户端来说，这个参数设置了出栈接口。对于服务器端来说，这个参数设置入栈接口。这个参数只用于具有多网络接口的主机。在Iperf的UDP模式下，此参数用于绑定和加入一个多播组。使用范围在224.0.0.0至239.255.255.255的多播地址。参考-T参数。</td>
+</tr>
+<tr>
+<td>-C, --compatibility</td>
+<td>与低版本的Iperf使用时，可以使用兼容模式。不需要两端同时使用兼容模式，但是强烈推荐两端同时使用兼容模式。某些情况下，使用某些数据流可以引起1.7版本的服务器端崩溃或引起非预期的连接尝试。</td>
+</tr>
+<tr>
+<td>-M, --mss #ip头减去40字节。在以太网中，MSS值 为1460字节（MTU1500字节）。许多操作系统不支持此选项。</td>
+</tr>
+<tr>
+<td>-N, --nodelay</td>
+<td>设置TCP无延迟选项，禁用Nagle's运算法则。通常情况此选项对于交互程序，例如telnet，是禁用的。</td>
+</tr>
+<tr>
+<td>-V (from v1.6 or higher)</td>
+<td>绑定一个IPv6地址。  
+服务端：$ iperf -s –V  
+客户端：$ iperf -c <Server IPv6 Address> -V  
+注意：在1.6.3或更高版本中，指定IPv6地址不需要使用-B参数绑定，在1.6之前的版本则需要。在大多数操作系统中，将响应IPv4客户端映射的IPv4地址。</td>
+</tr>
+<tr>
+<td>服务器端专用选项</td>
+</tr>
+<tr>
+<td>-s, --server</td>
+<td>Iperf服务器模式</td>
+</tr>
+<tr>
+<td>-D (v1.2或更高版本)</td>
+<td>Unix平台下Iperf作为后台守护进程运行。在Win32平台下，Iperf将作为服务运行。</td>
+</tr>
+<tr>
+<td>-R(v1.2或更高版本，仅用于Windows)</td>
+<td>卸载Iperf服务（如果它在运行）。</td>
+</tr>
+<tr>
+<td>-o(v1.2或更高版本，仅用于Windows)</td>
+<td>重定向输出到指定文件</td>
+</tr>
+<tr>
+<td>-c, --client host</td>
+<td>如果Iperf运行在服务器模式，并且用-c参数指定一个主机，那么Iperf将只接受指定主机的连接。此参数不能工作于UDP模式。</td>
+</tr>
+<tr>
+<td>-P, --parallel #</td>
+<td>服务器关闭之前保持的连接数。默认是0，这意味着永远接受连接。</td>
+</tr>
+<tr>
+<td>客户端专用选项</td>
+</tr>
+<tr>
+<td>-b, --bandwidth #[KM]</td>
+<td>UDP模式使用的带宽，单位bits/sec。此选项与-u选项相关。默认值是1 Mbit/sec。</td>
+</tr>
+<tr>
+<td>-c, --client host</td>
+<td>运行Iperf的客户端模式，连接到指定的Iperf服务器端。</td>
+</tr>
+<tr>
+<td>-d, --dualtest</td>
+<td>运行双测试模式。这将使服务器端反向连接到客户端，使用-L 参数中指定的端口（或默认使用客户端连接到服务器端的端口）。这些在操作的同时就立即完成了。如果你想要一个交互的测试，请尝试-r参数。</td>
+</tr>
+<tr>
+<td>-n, --num #[KM]</td>
+<td>传送的缓冲器数量。通常情况，Iperf按照10秒钟发送数据。-n参数跨越此限制，按照指定次数发送指定长度的数据，而不论该操作耗费多少时间。参考-l与-t选项。</td>
+</tr>
+<tr>
+<td>-r, --tradeoff</td>
+<td>往复测试模式。当客户端到服务器端的测试结束时，服务器端通过-l选项指定的端口（或默认为客户端连接到服务器端的端口），反向连接至客户端。当客户端连接终止时，反向连接随即开始。如果需要同时进行双向测试，请尝试-d参数。</td>
+</tr>
+<tr>
+<td>-t, --time #</td>
+<td>设置传输的总时间。Iperf在指定的时间内，重复的发送指定长度的数据包。默认是10秒钟。参考-l与-n选项。</td>
+</tr>
+<tr>
+<td>-L, --listenport #</td>
+<td>指定服务端反向连接到客户端时使用的端口。默认使用客户端连接至服务端的端口。</td>
+</tr>
+<tr>
+<td>-P, --parallel #</td>
+<td>线程数。指定客户端与服务端之间使用的线程数。默认是1线程。需要客户端与服务器端同时使用此参数。</td>
+</tr>
+<tr>
+<td>-S, --tos #</td>
+<td>出栈数据包的服务类型。许多路由器忽略TOS字段。你可以指定这个值，使用以"0x"开始的16进制数，或以"0"开始的8进制数或10进制数。  
+例如，16进制'0x10' = 8进制'020' = 十进制'16'。TOS值1349就是：  
+IPTOS_LOWDELAY minimize delay 0x10  
+IPTOS_THROUGHPUT maximize throughput 0x08  
+IPTOS_RELIABILITY maximize reliability 0x04  
+IPTOS_LOWCOST minimize cost 0x02</td>
+</tr>
+<tr>
+<td>-T, --ttl #</td>
+<td>出栈多播数据包的TTL值。这本质上就是数据通过路由器的跳数。默认是1，链接本地。</td>
+</tr>
+<tr>
+<td>-F (from v1.2 or higher)</td>
+<td>使用特定的数据流测量带宽，例如指定的文件。  
+$ iperf -c <server address> -F <file-name></td>
+</tr>
+<tr>
+<td>-I (from v1.2 or higher)</td>
+<td>与-F一样，由标准输入输出文件输入数据。</td>
+</tr>
+<tr>
+<td>杂项</td>
+</tr>
+<tr>
+<td>-h, --help</td>
+<td>显示命令行参考并退出 。</td>
+</tr>
+<tr>
+<td>-v, --version</td>
+<td>显示版本信息和编译信息并退出。</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>带宽测试通常采用UDP模式，因为能测出极限带宽、时延抖动、丢包率。在进行测试时，首先以链路理论带宽作为数据发送速率进行测试，例如，从客户端到服务器之间的链路的理论带宽为100Mbps，先用<code>-b 100M</code>进行测试，然后根据测试结果（包括实际带宽，时延抖动和丢包率），再以实际带宽作为数据发送速率进行测试，会发现时延抖动和丢包率比第一次好很多，重复测试几次，就能得出稳定的实际带宽。</p>
+<p> <strong>UDP模式</strong> </p>
+<p>服务器端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -u -s</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -u -c 192.168.1.1 -b 100M -t 60</span><br></pre></td></tr></table></figure>
+
+<p>在udp模式下，以100Mbps为数据发送速率，客户端到服务器192.168.1.1上传带宽测试，测试时间为60秒。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -u -c 192.168.1.1 -b 5M -P 30 -t 60</span><br></pre></td></tr></table></figure>
+
+<p>客户端同时向服务器端发起30个连接线程，以5Mbps为数据发送速率。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -u -c 192.168.1.1 -b 100M -d -t 60</span><br></pre></td></tr></table></figure>
+
+<p>以100M为数据发送速率，进行上下行带宽测试。</p>
+<p> <strong>TCP模式</strong> </p>
+<p>服务器端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -s</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -c 192.168.1.1 -t 60</span><br></pre></td></tr></table></figure>
+
+<p>在tcp模式下，客户端到服务器192.168.1.1上传带宽测试，测试时间为60秒。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -c 192.168.1.1  -P 30 -t 60</span><br></pre></td></tr></table></figure>
+
+<p>客户端同时向服务器端发起30个连接线程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iperf -c 192.168.1.1  -d -t 60</span><br></pre></td></tr></table></figure>
+
+<p>进行上下行带宽测试。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ipcs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ipcs/" class="post-title-link" itemprop="url">【Linux 命令】ipcs</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:50:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>345</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>分析消息队列共享内存和信号量 </p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ipcs命令</strong> 用于报告Linux中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipcs(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a：显示全部可显示的信息；</span><br><span class="line">-q：显示活动的消息队列信息；</span><br><span class="line">-m：显示活动的共享内存信息；</span><br><span class="line">-s：显示活动的信号量信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ipcs -a</span><br><span class="line">------ Shared Memory Segments --------</span><br><span class="line">key        shmid      owner      perms      bytes      nattch     status      </span><br><span class="line">0x7401833d 2654208    root      600        4          0                       </span><br><span class="line">0x00000000 3145729    root      600        4194304    9          dest         </span><br><span class="line">0x7401833c 2621442    root      600        4          0                       </span><br><span class="line">0xd201012b 3080195    root      600        1720       2</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ipcrm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ipcrm/" class="post-title-link" itemprop="url">【Linux 命令】ipcrm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:50:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>636</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>删除消息队列、信号集、或者共享内存标识</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ipcrm命令</strong> 用来删除一个或更多的消息队列、信号量集或者共享内存标识。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipcrm [ -m SharedMemoryID ] [ -M SharedMemoryKey ] [ -q MessageID ] [ -Q MessageKey ] [ -s SemaphoreID ] [ -S SemaphoreKey ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-m SharedMemory id 删除共享内存标识 SharedMemoryID。与 SharedMemoryID 有关联的共享内存段以及数据结构都会在最后一次拆离操作后删除。</span><br><span class="line">-M SharedMemoryKey 删除用关键字 SharedMemoryKey 创建的共享内存标识。与其相关的共享内存段和数据结构段都将在最后一次拆离操作后删除。</span><br><span class="line">-q MessageID 删除消息队列标识 MessageID 和与其相关的消息队列和数据结构。</span><br><span class="line">-Q MessageKey 删除由关键字 MessageKey 创建的消息队列标识和与其相关的消息队列和数据结构。</span><br><span class="line">-s SemaphoreID 删除信号量标识 SemaphoreID 和与其相关的信号量集及数据结构。</span><br><span class="line">-S SemaphoreKey 删除由关键字 SemaphoreKey 创建的信号标识和与其相关的信号量集和数据结构。</span><br></pre></td></tr></table></figure>
+
+<p>msgctl、shmctl 和 semctl 子例程提供了删除操作的细节。标识和关键字可以用 ipcs 命令找到。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>如果要删除和 SharedMemoryID 18602 相关的共享内存段，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipcrm -m 18602</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ipcalc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ipcalc/" class="post-title-link" itemprop="url">【Linux 命令】ipcalc</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:49:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>603</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>简单的IP地址计算器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ipcalc命令</strong> 是一个简单的ip地址计算器，可以完成简单的IP地址计算任务。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ipcalc(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-b：由给定的IP地址和网络掩码计算出广播地址；</span><br><span class="line">-h：显示给定UP地址所对应的主机名；</span><br><span class="line">-m：由给定的IP地址计算器网络掩码；</span><br><span class="line">-p：显示给定的掩码或IP地址的前缀；</span><br><span class="line">-n：由给定的IP地址和网络掩码计算网络地址；</span><br><span class="line">-s：安静模式；</span><br><span class="line">--help：显示帮助信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ipcalc -p 192.168.2.1 255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -n 192.168.2.1 255.255.255.0</span><br><span class="line">NETWORK=192.168.2.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -h 127.0.0.1</span><br><span class="line">hostname=localhost.localdomain</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -m 192.168.2.1</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -pnbm 192.168.2.1 255.255.255.0</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line">BROADCAST=192.168.2.255</span><br><span class="line">NETWORK=192.168.2.0</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ip6tables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ip6tables/" class="post-title-link" itemprop="url">【Linux 命令】ip6tables</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:49:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>linux中防火墙软件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ip6tables命令</strong> 和iptables一样，都是linux中防火墙软件，不同的是ip6tables采用的TCP/ip协议为IPv6。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip6tables(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-t&lt;表&gt;：指定要操纵的表；</span><br><span class="line">-A：向规则链中添加条目；</span><br><span class="line">-D：从规则链中删除条目；</span><br><span class="line">-i：向规则链中插入条目；</span><br><span class="line">-R：替换规则链中的条目；</span><br><span class="line">-L：显示规则链中已有的条目；</span><br><span class="line">-F：清楚规则链中已有的条目；</span><br><span class="line">-Z：清空规则链中的数据包计算器和字节计数器；</span><br><span class="line">-N：创建新的用户自定义规则链；</span><br><span class="line">-P：定义规则链中的默认目标；</span><br><span class="line">-h：显示帮助信息；</span><br><span class="line">-p：指定要匹配的数据包协议类型；</span><br><span class="line">-s：指定要匹配的数据包源ip地址；</span><br><span class="line">-j&lt;目标&gt;：指定要跳转的目标；</span><br><span class="line">-i&lt;网络接口&gt;：指定数据包进入本机的网络接口；</span><br><span class="line">-o&lt;网络接口&gt;：指定数据包要离开本机所使用的网络接口。</span><br><span class="line">-c&lt;计数器&gt;：在执行插入操作（insert），追加操作（append），替换操作（replace）时初始化包计数器和字节计数器。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>在命令行窗口输入下面的指令就可以查看当前的 IPv6 防火墙配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip6tables -nl --line-numbers</span><br></pre></td></tr></table></figure>
+
+<p> <strong>/etc/sysconfig/ip6tables文件</strong> </p>
+<p>使用编辑器编辑<code>/etc/sysconfig/ip6tables</code>文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/ip6tables</span><br></pre></td></tr></table></figure>
+
+<p>可能会看到下面的默认 ip6tables 规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">*filter</span><br><span class="line">:INPUT accept [0:0]</span><br><span class="line">:FORWARD ACCEPT [0:0]</span><br><span class="line">:OUTPUT ACCEPT [0:0]</span><br><span class="line">:RH-Firewall-1-INPUT - [0:0]</span><br><span class="line">-A INPUT -j RH-Firewall-1-INPUT</span><br><span class="line">-A FORWARD -j RH-Firewall-1-INPUT</span><br><span class="line">-A RH-Firewall-1-INPUT -i lo -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p icmpv6 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p 50 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p 51 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p udp --dport 5353 -d ff02::fb -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p udp -m udp --dport 631 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 631 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p udp -m udp --dport 32768:61000 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 32768:61000 ! --syn -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 22 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -j reject --reject-with icmp6-adm-prohibited</span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+
+<p>与 IPv4 的 iptables 规则类似，但又不完全相同。</p>
+<p>要开启 80 端口（HTTP 服务器端口），在 COMMIT 一行之前添加如下规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 80 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p><code>-p tcp</code>表示仅针对 tcp 协议的通信。<code>--dport</code>指定端口号。</p>
+<p>要开启 53 端口（DNS 服务器端口），在 COMMIT 一行之前添加如下规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 53 -j ACCEPT</span><br><span class="line">-A RH-Firewall-1-INPUT -m udp -p tcp --dport 53 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>同时针对 tcp 和 udp 协议开启 53 端口。</p>
+<p>要开启 443 端口，在 COMMIT 一行之前添加如下规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 443 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>要开启 25 端口（SMTP 邮件服务器端口），在 COMMIT 一行之前添加如下规则：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -m tcp -p tcp --dport 25 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>对于那些没有特定规则与之匹配的数据包，可能是我们不想要的，多半是有问题的。我们可能也希望在丢弃（DROP）之前记录它们。此时，可以将最后一行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -j REJECT --reject-with icmp6-adm-prohibited</span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-A RH-Firewall-1-INPUT -j LOG</span><br><span class="line">-A RH-Firewall-1-INPUT -j DROP</span><br><span class="line">COMMIT</span><br></pre></td></tr></table></figure>
+
+<p>保存并关闭该文件。然后重新启动 ip6tables 防火墙：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> service ip6tables restart</span></span><br></pre></td></tr></table></figure>
+
+<p>然后重新查看 ip6tables 规则，可以看到如下所示的输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ip6tables -vnL --line-numbers</span></span><br></pre></td></tr></table></figure>
+
+<p>输出示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Chain INPUT (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line">num   pkts bytes target     prot opt in     out     source               destination</span><br><span class="line">1    42237 3243K RH-Firewall-1-INPUT  all      *      *       ::/0                 ::/0</span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line">num   pkts bytes target     prot opt in     out     source               destination</span><br><span class="line">1        0     0 RH-Firewall-1-INPUT  all      *      *       ::/0                 ::/0</span><br><span class="line">Chain OUTPUT (policy ACCEPT 12557 packets, 2042K bytes)</span><br><span class="line">num   pkts bytes target     prot opt in     out     source               destination</span><br><span class="line">Chain RH-Firewall-1-INPUT (2 references)</span><br><span class="line">num   pkts bytes target     prot opt in     out     source               destination</span><br><span class="line">1        6   656 ACCEPT     all      lo     *       ::/0                 ::/0</span><br><span class="line">2    37519 2730K ACCEPT     icmpv6    *      *       ::/0                 ::/0</span><br><span class="line">3        0     0 ACCEPT     esp      *      *       ::/0                 ::/0</span><br><span class="line">4        0     0 ACCEPT     ah       *      *       ::/0                 ::/0</span><br><span class="line">5      413 48385 ACCEPT     udp      *      *       ::/0                 ff02::fb/128       udp dpt:5353</span><br><span class="line">6        0     0 ACCEPT     udp      *      *       ::/0                 ::/0               udp dpt:631</span><br><span class="line">7        0     0 ACCEPT     tcp      *      *       ::/0                 ::/0               tcp dpt:631</span><br><span class="line">8      173 79521 ACCEPT     udp      *      *       ::/0                 ::/0               udp dpts:32768:61000</span><br><span class="line">9        0     0 ACCEPT     tcp      *      *       ::/0                 ::/0               tcp dpts:32768:61000 flags:!0x16/0x02</span><br><span class="line">10       0     0 ACCEPT     tcp      *      *       ::/0                 ::/0               tcp dpt:22</span><br><span class="line">11       0     0 ACCEPT     tcp      *      *       ::/0                 ::/0               tcp dpt:80</span><br><span class="line">12       0     0 ACCEPT     tcp      *      *       ::/0                 ::/0               tcp dpt:53</span><br><span class="line">13    4108  380K ACCEPT     udp      *      *       ::/0                 ::/0               udp dpt:53</span><br><span class="line">14      18  4196 REJECT     all      *      *       ::/0                 ::/0</span><br></pre></td></tr></table></figure>
+
+<p> <strong>IPv6 私有 IP</strong> </p>
+<p>IPv4 通常默认即可保护内部局域网私有 IP 上的主机。但是 IPv6 的地址非常丰富，不再需要使用类似 NAT 等协议的私有网络。这样一来，所有的内部主机都可以拥有公网 IP 而直接连接到互联网，也就同时暴露于互联网上的各种威胁之中了。那么，如何配置 IPv6 防火墙使其默认将除了 ping6 请求之外的所有输入数据包都丢弃呢？可以使用FC00::/7 前缀来标识本地 IPv6 单播地址。</p>
+<p> <strong>允许特定的 ICMPv6 通信</strong> </p>
+<p>使用 IPv6 的时候需要允许比 IPv4 更多类型的 ICMP 通信以保证路由和 IP 地址自动配置等功能正常工作。有时候，如果你的规则设置太过苛刻，可能都无法分配到正确的 IPv6 地址。当然，不使用 DHCP 而是手动配置 IP 地址的除外。</p>
+<p>下面是一些比较常见的 ipv6-icmp 配置实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">:ICMPv6 - [0:0]</span><br><span class="line"><span class="meta">#</span><span class="bash"> Approve certain ICMPv6 types and all outgoing ICMPv6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://forum.linode.com/viewtopic.php?p=39840<span class="comment">#39840</span></span></span><br><span class="line">-A INPUT -p icmpv6 -j ICMPv6</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type echo-request -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type destination-unreachable -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type packet-too-big -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type time-exceeded -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type parameter-problem -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type router-solicitation -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type router-advertisement -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type neighbour-solicitation -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type neighbour-advertisement -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type redirect -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 141 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 142 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 148 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 149 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 130 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 131 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 132 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 143 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 151 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 152 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -p icmpv6 --icmpv6-type 153 -s fe80::/10 -j ACCEPT</span><br><span class="line">-A ICMPv6 -j RETURN</span><br><span class="line">-A OUTPUT -p icmpv6 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -891,600 +1614,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/install/" class="post-title-link" itemprop="url">【Linux 命令】install</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:46:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>安装或升级软件或备份数据</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>install命令</strong> 的作用是安装或升级软件或备份数据，它的使用权限是所有用户。install命令和cp命令类似，都可以将文件/目录拷贝到指定的地点。但是，install允许你控制目标文件的属性。install通常用于程序的makefile，使用它来将程序拷贝到目标（安装）目录。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install [OPTION]... [-T] SOURCE DEST</span><br><span class="line">install [OPTION]... SOURCE... DIRECTORY</span><br><span class="line">install [OPTION]... -t DIRECTORY SOURCE...</span><br><span class="line">install [OPTION]... -d DIRECTORY...</span><br></pre></td></tr></table></figure>
-
-<p>在前两种格式中，会将&lt;来源&gt;复制至&lt;目的地&gt;或将多个&lt;来源&gt;文件复制至已存在的&lt;目录&gt;，同时设定权限模式及所有者/所属组。在第三种格式中，会创建所有指定的目录及它们的主目录。长选项必须用的参数在使用短选项时也是必须的。</p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">--backup[=CONTROL]：为每个已存在的目的地文件进行备份。</span><br><span class="line">-b：类似 --backup，但不接受任何参数。</span><br><span class="line">-c：(此选项不作处理)。</span><br><span class="line">-d，--directory：所有参数都作为目录处理，而且会创建指定目录的所有主目录。</span><br><span class="line">-D：创建&lt;目的地&gt;前的所有主目录，然后将&lt;来源&gt;复制至 &lt;目的地&gt;；在第一种使用格式中有用。</span><br><span class="line">-g，--group=组：自行设定所属组，而不是进程目前的所属组。</span><br><span class="line">-m，--mode=模式：自行设定权限模式 (像chmod)，而不是rwxr-xr-x。</span><br><span class="line">-o，--owner=所有者：自行设定所有者 (只适用于超级用户)。</span><br><span class="line">-p，--preserve-timestamps：以&lt;来源&gt;文件的访问/修改时间作为相应的目的地文件的时间属性。</span><br><span class="line">-s，--strip：用strip命令删除symbol table，只适用于第一及第二种使用格式。</span><br><span class="line">-S，--suffix=后缀：自行指定备份文件的&lt;后缀&gt;。</span><br><span class="line">-v，--verbose：处理每个文件/目录时印出名称。</span><br><span class="line">--help：显示此帮助信息并离开。</span><br><span class="line">--version：显示版本信息并离开。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install -d [option] DIRECTORY [DIRECTORY...]</span><br></pre></td></tr></table></figure>
-
-<p>支持多个，类似<code>mkdir -p</code>支持递归。例如：<code>install -d a/b/c e/f</code>结果和<code>mkdir -p a/b/c e/f</code>一样。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install [option] SOURCE DEST</span><br></pre></td></tr></table></figure>
-
-<p> <strong>复制SOURCE文件（测试不能是目录）到DEST file（文件）：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">install a/e c</span><br><span class="line">结果类似：</span><br><span class="line">cp a/e c    #注意c必须是文件。</span><br></pre></td></tr></table></figure>
-
-<p> <strong>有用选项<code>-D</code>：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">install -D x a/b/c</span><br><span class="line">效果类似：</span><br><span class="line">mkdir -p a/b &amp;&amp; cp x a/b/c</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install [option] SOURCE [SOURCE...] DIRECTORY</span><br></pre></td></tr></table></figure>
-
-<p> <strong>复制多个SOURCE文件到目的目录：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install a/* d</span><br></pre></td></tr></table></figure>
-
-<p>其中d是目录。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/insmod/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/insmod/" class="post-title-link" itemprop="url">【Linux 命令】insmod</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:45:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>590</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将给定的模块加载到内核中</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>insmod命令</strong> 用于将给定的模块加载到内核中。Linux有许多功能是通过模块的方式，在需要时才载入kernel。如此可使kernel较为精简，进而提高效率，以及保有较大的弹性。这类可载入的模块，通常是设备驱动程序。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insmod(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-f：不检查目前kernel版本与模块编译时的kernel版本是否一致，强制将模块载入；</span><br><span class="line">-k：将模块设置为自动卸除；</span><br><span class="line">-m：输出模块的载入信息；</span><br><span class="line">-o&lt;模块名称&gt;：指定模块的名称，可使用模块文件的文件名；</span><br><span class="line">-p：测试模块是否能正确地载入kernel；</span><br><span class="line">-s：将所有信息记录在系统记录文件中；</span><br><span class="line">-v：执行时显示详细的信息；</span><br><span class="line">-x：不要汇出模块的外部符号；</span><br><span class="line">-X：汇出模块所有的外部符号，此为预设置。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>内核模块：指定要加载的内核模块文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>加载RAID1阵列级别模块，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost boot]# insmod /lib/modules/2.6.</span><br><span class="line">18-8.el5/kernel/drivers/md/raid1.ko  </span><br><span class="line"></span><br><span class="line">[root@localhost boot]# lsmod | grep raid1</span><br><span class="line">raid1                  25153  0</span><br></pre></td></tr></table></figure>
-
-<p>从以上显示结果可知，RAID1模块已加载成功。只是在使用insmod命令加载模块时，需要使用绝对路径方能加载，且加载时无法自动解决依赖关系。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/inotifywait/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/inotifywait/" class="post-title-link" itemprop="url">【Linux 命令】inotifywait</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:45:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>异步文件系统监控机制</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>Inotify</strong> 一种强大的、细粒度的、异步文件系统监控机制，它满足各种各样的文件监控需要，可以监控文件系统的访问属性、读写属性、权限属性、删除创建、移动等操作，也就是可以监控文件发生的一切变化。。</p>
-<p> <strong>inotify-tools</strong> 是一个C库和一组命令行的工作提供Linux下inotify的简单接口。inotify-tools安装后会得到<code>inotifywait</code>和<code>inotifywatch</code>这两条命令：</p>
-<ul>
-<li><strong>inotifywait命令</strong> 可以用来收集有关文件访问信息，Linux发行版一般没有包括这个命令，需要安装inotify-tools，这个命令还需要将inotify支持编译入Linux内核，好在大多数Linux发行版都在内核中启用了inotify。</li>
-<li><strong>inotifywatch命令</strong> 用于收集关于被监视的文件系统的统计数据，包括每个 inotify 事件发生多少次。</li>
-</ul>
-<p>开始之前需要检测系统内核是否支持inotify：</p>
-<p>使用<code>uname -r</code>命令检查Linux内核，如果低于2.6.13，就需要重新编译内核加入inotify的支持。</p>
-<p>使用<code>ll /proc/sys/fs/inotify</code>命令，是否有以下三条信息输出，如果没有表示不支持。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ll /proc/sys/fs/inotify</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_queued_events</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_user_instances</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_user_watches</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装inotify-tools"><a href="#安装inotify-tools" class="headerlink" title="安装inotify-tools"></a>安装inotify-tools</h3><ul>
-<li>inotify-tools项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xz">https://github.com/rvoicilas/inotify-tools<i class="fa fa-external-link-alt"></i></span></li>
-<li>inotify-tools下载地址：<span class="exturl" data-url="aHR0cDovL2dpdGh1Yi5jb20vZG93bmxvYWRzL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xzL2lub3RpZnktdG9vbHMtMy4xNC50YXIuZ3o=">http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">CentOS release 5.8/64位：</span></span><br><span class="line">tar zxvf inotify-tools-3.14.tar.gz</span><br><span class="line">cd inotify-tools-3.14</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>其他Linux发行版安装方法可以参见：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xzL3dpa2kjd2lraS1nZXR0aW5n">https://github.com/rvoicilas/inotify-tools/wiki#wiki-getting<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="inotify相关参数"><a href="#inotify相关参数" class="headerlink" title="inotify相关参数"></a>inotify相关参数</h3><p>inotify定义了下列的接口参数，可以用来限制inotify消耗kernel memory的大小。由于这些参数都是内存参数，因此，可以根据应用需求，实时的调节其大小：</p>
-<ul>
-<li><code>/proc/sys/fs/inotify/max_queued_evnets</code>表示调用inotify_init时分配给inotify instance中可排队的event的数目的最大值，超出这个值的事件被丢弃，但会触发IN_Q_OVERFLOW事件。</li>
-<li><code>/proc/sys/fs/inotify/max_user_instances</code>表示每一个real user id可创建的inotify instatnces的数量上限。</li>
-<li><code>/proc/sys/fs/inotify/max_user_watches</code>表示每个inotify instatnces可监控的最大目录数量。如果监控的文件数目巨大，需要根据情况，适当增加此值的大小。</li>
-</ul>
-<p>根据以上在32位或者64位系统都可以执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 104857600 &gt; /proc/sys/fs/inotify/max_user_watches</span><br><span class="line">echo &#x27;echo 104857600 &gt; /proc/sys/fs/inotify/max_user_watches&#x27; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
-
-<p>如果遇到以下错误：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inotifywait: error while loading shared libraries: libinotifytools.so.0: cannot open shared object file: No such file or directory </span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> **解决方法：** </span><br><span class="line">32位系统：ln -s /usr/local/lib/libinotifytools.so.0 /usr/lib/libinotifytools.so.0</span><br><span class="line">64位系统：ln -s /usr/local/lib/libinotifytools.so.0 /usr/lib64/libinotifytools.so.0</span><br></pre></td></tr></table></figure>
-
-<h3 id="inotifywait命令使用"><a href="#inotifywait命令使用" class="headerlink" title="inotifywait命令使用"></a>inotifywait命令使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">filename watchdir.sh</span></span><br><span class="line">path=$1</span><br><span class="line">/usr/local/bin/inotifywait -mrq --timefmt &#x27;%d/%m/%y/%H:%M&#x27; --format &#x27;%T %w %f&#x27; -e modify,delete,create,attrib $path</span><br><span class="line"></span><br><span class="line">执行输出：</span><br><span class="line">./watchdir.sh /data/wsdata/tools/</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swx</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swx</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp~</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ .j.jsp.swp</span><br></pre></td></tr></table></figure>
-
-<h3 id="inotifywait命令参数"><a href="#inotifywait命令参数" class="headerlink" title="inotifywait命令参数"></a>inotifywait命令参数</h3><ul>
-<li><code>-m</code>是要持续监视变化。</li>
-<li><code>-r</code>使用递归形式监视目录。</li>
-<li><code>-q</code>减少冗余信息，只打印出需要的信息。</li>
-<li><code>-e</code>指定要监视的事件列表。</li>
-<li><code>--timefmt</code>是指定时间的输出格式。</li>
-<li><code>--format</code>指定文件变化的详细信息。</li>
-</ul>
-<h3 id="可监听的事件"><a href="#可监听的事件" class="headerlink" title="可监听的事件"></a>可监听的事件</h3><table>
-<thead>
-<tr>
-<th>事件</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>access</td>
-<td><strong>访问</strong> ，读取文件。</td>
-</tr>
-<tr>
-<td>modify</td>
-<td><strong>修改</strong> ，文件内容被修改。</td>
-</tr>
-<tr>
-<td>attrib</td>
-<td><strong>属性</strong> ，文件元数据被修改。</td>
-</tr>
-<tr>
-<td>move</td>
-<td><strong>移动</strong> ，对文件进行移动操作。</td>
-</tr>
-<tr>
-<td>create</td>
-<td><strong>创建</strong> ，生成新文件</td>
-</tr>
-<tr>
-<td>open</td>
-<td><strong>打开</strong> ，对文件进行打开操作。</td>
-</tr>
-<tr>
-<td>close</td>
-<td><strong>关闭</strong> ，对文件进行关闭操作。</td>
-</tr>
-<tr>
-<td>delete</td>
-<td><strong>删除</strong> ，文件被删除。</td>
-</tr>
-</tbody></table>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/init/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/init/" class="post-title-link" itemprop="url">【Linux 命令】init</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:44:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>495</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>init进程是所有Linux进程的父进程</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>init命令</strong> 是Linux下的进程初始化工具，init进程是所有Linux进程的父进程，它的进程号为1。init命令是Linux操作系统中不可缺少的程序之一，init进程是Linux内核引导运行的，是系统中的第一个进程。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-b：不执行相关脚本而直接进入单用户模式；</span><br><span class="line">-s：切换到单用户模式。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>运行等级：指定Linux系统要切换到的运行等级。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>几个常用的命令</p>
-<p>查看系统进程命令：<code>ps -ef | head</code><br>查看init的配置文件：<code>more /etc/inittab</code><br>查看系统当前运行的级别：<code>runlevel</code></p>
-<p> <strong>运行级别</strong> </p>
-<p>到底什么是运行级呢？简单的说，运行级就是操作系统当前正在运行的功能级别。这个级别从0到6 ，具有不同的功能。你也可以在<code>/etc/inittab</code>中查看它的英文介绍。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">0  停机（千万不能把initdefault 设置为0）</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  单用户模式</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  多用户，没有 NFS(和级别3相似，会停止部分服务)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  完全多用户模式</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  没有用到</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  x11(Xwindow)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  重新启动（千万不要把initdefault 设置为6）</span></span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/info/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/info/" class="post-title-link" itemprop="url">【Linux 命令】info</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：09:44:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Linux下info格式的帮助指令</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>info命令</strong> 是Linux下info格式的帮助指令。</p>
-<p>就内容来说，info页面比man page编写得要更好、更容易理解，也更友好，但man page使用起来确实要更容易得多。一个man page只有一页，而info页面几乎总是将它们的内容组织成多个区段（称为节点），每个区段也可能包含子区段（称为子节点）。理解这个命令的窍门就是不仅要学习如何在单独的Info页面中浏览导航，还要学习如何在节点和子节点之间切换。可能刚开始会一时很难在info页面的节点之间移动和找到你要的东西，真是具有讽刺意味：原本以为对于新手来说，某个东西比man命令会更好些，但实际上学习和使用起来更困难。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-d：添加包含info格式帮助文档的目录；</span><br><span class="line">-f：指定要读取的info格式的帮助文档；</span><br><span class="line">-n：指定首先访问的info帮助文件的节点；</span><br><span class="line">-o：输出被选择的节点内容到指定文件。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>帮助主题：指定需要获得帮助的主题，可以是指令、函数以及配置文件。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>在info后面输入命令的名称就可以查看该命令的info帮助文档了：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info info</span><br></pre></td></tr></table></figure>
-
-<p>面介绍一下它的几个常用快捷键。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">**?键：** 它就会显示info的常用快捷键。</span><br><span class="line">**N键：** 显示（相对于本节点的）下一节点的文档内容。</span><br><span class="line">**P键：** 显示（相对于本节点的）前一节点的文档内容。</span><br><span class="line">**U键：** 进入当前命令所在的主题。</span><br><span class="line">**M键：** 敲M键后输入命令的名称就可以查看该命令的帮助文档了。</span><br><span class="line">**G键：** 敲G键后输入主题名称，进入该主题。</span><br><span class="line">**L键：** 回到上一个访问的页面。</span><br><span class="line">**SPACE键：** 向前滚动一页。</span><br><span class="line">**BACKUP或DEL键：** 向后滚动一页。</span><br><span class="line">**Q：** 退出info。</span><br></pre></td></tr></table></figure>
-
-<p><strong>命令</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> **？**      显示帮助窗口</span><br><span class="line"></span><br><span class="line">在帮助窗口中：</span><br><span class="line"> **Ctrl-x 0**           关闭帮助窗口</span><br><span class="line"> **Ctrl-x Ctrl-c**     关闭整个 Info</span><br><span class="line"></span><br><span class="line"> **q**       退出 info</span><br><span class="line"> **n**       打开与本 Node 关联的下一个 Node</span><br><span class="line"> **p**       打开与本 Node 关联的前一个 Node</span><br><span class="line"> **u**       打开与本 Node 关联的上一个 Node</span><br><span class="line"> **l**       回到上一次访问的 Node</span><br><span class="line"> **m或g**    选择一个菜单项（Node 的名字）</span><br><span class="line">       输入指定菜单的名字后按回车，打开指定菜单项关联的 Node</span><br><span class="line"> **空格键**  下一页（PageDown 也可以，下一页从当前页的最后两行开始算起）</span><br><span class="line">       下一个 Node （若当前页在 Node 文档的末尾）</span><br><span class="line"> **Del 键**  上一页（PageUp 也可以，上一页从当前页的开始两行开始算起）</span><br><span class="line">       上一个 Node （若当前页 Node 文档的开始）</span><br><span class="line"></span><br><span class="line"> **b 或 t 或 Home**    文档的开始（b 是 begining 的意思）</span><br><span class="line"> **e 或 End**          文档的末尾（b 是 ending 的意思）</span><br><span class="line"> **Ctrl-l**     刷新当前页，若当前文档显示情况有问题时</span><br><span class="line"> **Ctrl-g**     取消所键入的指令</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1539,14 +1672,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">708k</span>
+    <span title="站点总字数">733k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">10:43</span>
+    <span title="站点阅读时长">11:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
