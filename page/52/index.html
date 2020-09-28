@@ -143,17 +143,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">619</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">641</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-开源">
@@ -232,20 +232,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">583</span>
+          <span class="site-state-item-count">619</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">616</span>
+        <span class="site-state-item-count">641</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,7 +308,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/comm/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dos2unix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -325,7 +325,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/comm/" class="post-title-link" itemprop="url">【Linux 命令】comm</a>
+            <a href="/linux-command/dos2unix/" class="post-title-link" itemprop="url">【Linux 命令】dos2unix</a>
         </h2>
 
         <div class="post-meta-container">
@@ -335,10 +335,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:36:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:54:00 08:54:00" itemprop="dateModified" datetime="2020-09-25T08:54:00+08:00">2020-09-25 08:54:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -357,7 +363,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>917</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -375,51 +381,467 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>按行比较两个已排序的文件。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">comm [OPTION]... FILE1 FILE2</span><br></pre></td></tr></table></figure>
+          <p>将DOS格式文本文件转换成Unix格式</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dos2unix命令</strong> 用来将DOS格式的文本文件转换成UNIX格式的（DOS/MAC to UNIX text file format converter）。DOS下的文本文件是以<code>\r\n</code>作为断行标志的，表示成十六进制就是0D 0A。而Unix下的文本文件是以\n作为断行标志的，表示成十六进制就是0A。DOS格式的文本文件在Linux底下，用较低版本的vi打开时行尾会显示<code>^M</code>，而且很多命令都无法很好的处理这种格式的文件，如果是个shell脚本，。而Unix格式的文本文件在Windows下用Notepad打开时会拼在一起显示。因此产生了两种格式文件相互转换的需求，对应的将UNIX格式文本文件转成成DOS格式的是unix2dos命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dos2unix [-hkqV] [-c convmode] [-o file ...] [-n infile outfile ...]</span><br></pre></td></tr></table></figure>
 
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>按行比较两个已排序的文件。</li>
-<li>当<code>FILE1</code>或<code>FILE2</code>为<code>-</code>时，读取标准输入。</li>
-<li>无选项时输出三列，第一列为<code>FILE1</code>独有的行，第二列为<code>FILE2</code>独有的行，第三列为<code>FILE1</code>，<code>FILE2</code>共有的行。</li>
-</ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-1                        不输出第一列。</span><br><span class="line">-2                        不输出第二列。</span><br><span class="line">-3                        不输出第三列。</span><br><span class="line">--check-order             检查输入行是否正确的排序，即使它们确实是已排序过的。</span><br><span class="line">--nocheck-order           不检查输入行是否正确的排序。</span><br><span class="line">--output-delimiter=STR    使用STR作为输出列之间的分隔符而不是默认的TAB。</span><br><span class="line">--total                   额外地增加第四列输出概要。</span><br><span class="line">-z, --zero-terminated     设置行终止符为NUL（空），而不是换行符。</span><br><span class="line">--help                    显示帮助信息并退出。</span><br><span class="line">--version                 显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-k：保持输出文件的日期不变</span><br><span class="line">-q：安静模式，不提示任何警告信息。</span><br><span class="line">-V：查看版本</span><br><span class="line">-c：转换模式，模式有：ASCII, 7bit, ISO, Mac, 默认是：ASCII。</span><br><span class="line">-o：写入到源文件</span><br><span class="line">-n：写入到新文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>参数：需要转换到文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>最简单的用法就是dos2unix直接跟上文件名：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dos2unix file</span><br></pre></td></tr></table></figure>
+
+<p>如果一次转换多个文件，把这些文件名直接跟在dos2unix之后。（注：也可以加上<code>-o</code>参数，也可以不加，效果一样）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dos2unix file1 file2 file3</span><br><span class="line">dos2unix -o file1 file2 file3</span><br></pre></td></tr></table></figure>
+
+<p>上面在转换时，都会直接在原来的文件上修改，如果想把转换的结果保存在别的文件，而源文件不变，则可以使用<code>-n</code>参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dos2unix oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p>如果要保持文件时间戳不变，加上<code>-k</code>参数。所以上面几条命令都是可以加上<code>-k</code>参数来保持文件时间戳的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dos2unix -k file</span><br><span class="line">dos2unix -k file1 file2 file3</span><br><span class="line">dos2unix -k -o file1 file2 file3</span><br><span class="line">dos2unix -k -n oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p>转换当前目录下所有文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f | xargs dos2unix</span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/domainname/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/domainname/" class="post-title-link" itemprop="url">【Linux 命令】domainname</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:53:30 08:53:30" itemprop="dateModified" datetime="2020-09-25T08:53:30+08:00">2020-09-25 08:53:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>347</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示和设置系统的NIS域名</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>domainname命令</strong> 用于显示和设置系统的NIS域名。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">domainname(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-v：详细信息模式；</span><br><span class="line">-F：指定读取域名信息的文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>NIS域名：指定要设置的NIS域名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@AY1307311912260196fcZ ~]# domainname -v</span><br><span class="line">getdomainname()=`(none)&#x27;</span><br><span class="line">(none)</span><br><span class="line"> [root@AY1307311912260196fcZ ~]# domainname</span><br><span class="line">www.jsdig.com</span><br><span class="line"></span><br><span class="line">[root@AY1307311912260196fcZ ~]# domainname -v</span><br><span class="line">getdomainname()=`www.jsdig.com&#x27;</span><br><span class="line">www.jsdig.com</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>文本 <code>aaa.txt</code> 内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cat aaa.txt </span><br><span class="line">aaa</span><br><span class="line">bbb</span><br><span class="line">ccc</span><br><span class="line">ddd</span><br><span class="line">eee</span><br><span class="line">111</span><br><span class="line">222</span><br></pre></td></tr></table></figure>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
 
-<p>文本 <code>bbb.txt</code> 内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cat bbb.txt </span><br><span class="line">bbb</span><br><span class="line">ccc</span><br><span class="line">aaa</span><br><span class="line">hhh</span><br><span class="line">ttt</span><br><span class="line">jjj</span><br></pre></td></tr></table></figure>
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dnsdomainname/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/dnsdomainname/" class="post-title-link" itemprop="url">【Linux 命令】dnsdomainname</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:53:00 08:53:00" itemprop="dateModified" datetime="2020-09-25T08:53:00+08:00">2020-09-25 08:53:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>315</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>定义DNS系统中FQDN名称的域名</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dnsdomainname命令</strong> 用于定义DNS系统中FQDN名称中的域名。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnsdomainname(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-v：详细信息模式，输出指令执行的详细信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@AY1307311912260196fcZ ~]# dnsdomainname -v</span><br><span class="line">gethostname()=`AY1307311912260196fcZ&#x27;</span><br><span class="line">Resolving `AY1307311912260196fcZ&#x27; ...</span><br><span class="line">Result: h_name=`AY1307311912260196fcZ&#x27;</span><br><span class="line">Result: h_addr_list=`10.160.7.81&#x27;</span><br></pre></td></tr></table></figure>
 
 
-<p>比较结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# comm --nocheck-order aaa.txt bbb.txt </span><br><span class="line">aaa</span><br><span class="line">                bbb</span><br><span class="line">                ccc</span><br><span class="line">        aaa</span><br><span class="line">ddd</span><br><span class="line">eee</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">        hhh</span><br><span class="line">        ttt</span><br><span class="line">        jjj</span><br></pre></td></tr></table></figure>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
 
-<p>输出的第一列只包含在aaa.txt中出现的行，第二列包含在bbb.txt中出现的行，第三列包含在aaa.txt和bbb.txt中相同的行。各列之间以制表符（\t）作为分隔符。</p>
-<h3 id="比较排序过的文档"><a href="#比较排序过的文档" class="headerlink" title="比较排序过的文档"></a>比较排序过的文档</h3><p>先通过 sort 将文件内容排序：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# sort aaa.txt &gt; aaa1.txt</span><br><span class="line">[root@localhost ~]# sort bbb.txt &gt; bbb1.txt</span><br></pre></td></tr></table></figure>
+    
+    
+    
 
-<p>比较结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# comm aaa1.txt bbb1.txt</span><br><span class="line">111</span><br><span class="line">222</span><br><span class="line">		aaa</span><br><span class="line">		bbb</span><br><span class="line">		ccc</span><br><span class="line">ddd</span><br><span class="line">eee</span><br><span class="line">	hhh</span><br><span class="line">	jjj</span><br><span class="line">	ttt</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
 
-<h3 id="交集"><a href="#交集" class="headerlink" title="交集"></a>交集</h3><p>打印两个文件的交集，需要删除第一列和第二列：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# comm aaa.txt bbb.txt -1 -2</span><br><span class="line">bbb</span><br><span class="line">ccc</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dnf/">
 
-<h3 id="差集"><a href="#差集" class="headerlink" title="差集"></a>差集</h3><p>通过删除不需要的列，可以得到aaa.txt和bbb.txt的差集：</p>
-<p>aaa.txt的差集</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# comm aaa.txt bbb.txt -2 -3</span><br><span class="line">aaa</span><br><span class="line">ddd</span><br><span class="line">eee</span><br><span class="line">111</span><br><span class="line">222</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
 
-<p>bbb.txt的差集</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# comm aaa.txt bbb.txt -1 -3</span><br><span class="line">aaa</span><br><span class="line">hhh</span><br><span class="line">ttt</span><br><span class="line">jjj</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
 
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/dnf/" class="post-title-link" itemprop="url">【Linux 命令】dnf</a>
+        </h2>
 
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 comm</code>，<code>info coreutils &#39;comm invocation&#39;</code>。</li>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:52:30 08:52:30" itemprop="dateModified" datetime="2020-09-25T08:52:30+08:00">2020-09-25 08:52:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>新一代的RPM软件包管理器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>DNF</strong> 是新一代的rpm软件包管理器。他首先出现在 Fedora 18 这个发行版中。而最近，它取代了yum，正式成为 Fedora 22 的包管理器。</p>
+<p>DNF包管理器克服了YUM包管理器的一些瓶颈，提升了包括用户体验，内存占用，依赖分析，运行速度等多方面的内容。DNF使用 RPM, libsolv 和 hawkey 库进行包管理操作。尽管它没有预装在 CentOS 和 RHEL 7 中，但你可以在使用 YUM 的同时使用 DNF 。你可以在这里获得关于 DNF 的更多知识：《 DNF 代替 YUM ，你所不知道的缘由》</p>
+<p>DNF 的最新稳定发行版版本号是 1.0，发行日期是2015年5月11日。 这一版本的额 DNF 包管理器（包括在他之前的所有版本） 都大部分采用 Python 编写，发行许可为GPL v2.</p>
+<h3 id="安装-DNF-包管理器"><a href="#安装-DNF-包管理器" class="headerlink" title="安装 DNF 包管理器"></a>安装 DNF 包管理器</h3><p>DNF 并未默认安装在 RHEL 或 CentOS 7系统中，但是 Fedora 22 已经默认使用 DNF .</p>
+<p>1、为了安装 DNF ，您必须先安装并启用 epel-release 依赖。</p>
+<p>在系统中执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br></pre></td></tr></table></figure>
+
+<p>其实这里并没有强制使用”-y”的理由，相反的，在不使用”-y”的情况下，用户可以在安装过程中查看到底有哪些东西被安装进了系统。但对于没有这个需求的用户，您可以在 YUM 中使用”-y”参数来自动安装所有东西。</p>
+<p>2、使用 epel-release 依赖中的 YUM 命令来安装 DNF 包。在系统中执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install dnf</span><br></pre></td></tr></table></figure>
+
+<p>然后， DNF 包管理器就被成功的安装到你的系统中了。接下来，是时候开始我们的教程了！在这个教程中，您将会学到27个用于 DNF 包管理器的命令。使用这些命令，你可以方便有效的管理您系统中的 RPM 软件包。现在，让我们开始学习 DNF 包管理器的27条常用命令吧！</p>
+<p><strong>查看 DNF 包管理器版本</strong> </p>
+<p>用处：该命令用于查看安装在您系统中的 DNF 包管理器的版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf –version</span><br></pre></td></tr></table></figure>
+
+<p>!Check-DNF-Version</p>
+<p><strong>查看系统中可用的 DNF 软件库</strong> </p>
+<p>用处：该命令用于显示系统中可用的 DNF 软件库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf repolist</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看系统中可用和不可用的所有的 DNF 软件库</strong> </p>
+<p>用处：该命令用于显示系统中可用和不可用的所有的 DNF 软件库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf repolist all</span><br></pre></td></tr></table></figure>
+
+<p><strong>列出所有 RPM 包</strong> </p>
+<p>用处：该命令用于列出用户系统上的所有来自软件库的可用软件包和所有已经安装在系统上的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf list</span><br></pre></td></tr></table></figure>
+
+<p><strong>列出所有安装了的 RPM 包</strong> </p>
+<p>用处：该命令用于列出所有安装了的 RPM 包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf list installed</span><br></pre></td></tr></table></figure>
+
+<p><strong>列出所有可供安装的 RPM 包</strong> </p>
+<p>用处：该命令用于列出来自所有可用软件库的可供安装的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf list available</span><br></pre></td></tr></table></figure>
+
+<p><strong>搜索软件库中的 RPM 包</strong> </p>
+<p>用处：当你不知道你想要安装的软件的准确名称时，你可以用该命令来搜索软件包。你需要在”search”参数后面键入软件的部分名称来搜索。（在本例中我们使用”nano”）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf search nano</span><br></pre></td></tr></table></figure>
+
+<p><strong>查找某一文件的提供者</strong> </p>
+<p>用处：当你想要查看是哪个软件包提供了系统中的某一文件时，你可以使用这条命令。（在本例中，我们将查找”/bin/bash”这个文件的提供者）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf provides /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看软件包详情</strong> </p>
+<p>用处：当你想在安装某一个软件包之前查看它的详细信息时，这条命令可以帮到你。（在本例中，我们将查看”nano”这一软件包的详细信息）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf info nano</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装软件包</strong> </p>
+<p>用处：使用该命令，系统将会自动安装对应的软件及其所需的所有依赖（在本例中，我们将用该命令安装nano软件）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf install nano</span><br></pre></td></tr></table></figure>
+
+<p><strong>升级软件包</strong> </p>
+<p>用处：该命令用于升级制定软件包（在本例中，我们将用命令升级”systemd”这一软件包）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf update systemd</span><br></pre></td></tr></table></figure>
+
+<p><strong>检查系统软件包的更新</strong> </p>
+<p>用处：该命令用于检查系统中所有软件包的更新</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf check-update</span><br></pre></td></tr></table></figure>
+
+<p><strong>升级所有系统软件包</strong> </p>
+<p>用处：该命令用于升级系统中所有有可用升级的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf update 或 dnf upgrade</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除软件包</strong> </p>
+<p>用处：删除系统中指定的软件包（在本例中我们将使用命令删除”nano”这一软件包）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf remove nano 或 dnf erase nano</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除无用孤立的软件包</strong> </p>
+<p>用处：当没有软件再依赖它们时，某一些用于解决特定软件依赖的软件包将会变得没有存在的意义，该命令就是用来自动移除这些没用的孤立软件包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf autoremove</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除缓存的无用软件包</strong> </p>
+<p>用处：在使用 DNF 的过程中，会因为各种原因在系统中残留各种过时的文件和未完成的编译工程。我们可以使用该命令来删除这些没用的垃圾文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf clean all</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取有关某条命令的使用帮助</strong> </p>
+<p>用处：该命令用于获取有关某条命令的使用帮助（包括可用于该命令的参数和该命令的用途说明）（本例中我们将使用命令获取有关命令”clean”的使用帮助）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf help clean</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看所有的 DNF 命令及其用途</strong> </p>
+<p>用处：该命令用于列出所有的 DNF 命令及其用途</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf help</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看 DNF 命令的执行历史</strong> </p>
+<p>用处：您可以使用该命令来查看您系统上 DNF 命令的执行历史。通过这个手段您可以知道在自您使用 DNF 开始有什么软件被安装和卸载。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf history</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看所有的软件包组</strong> </p>
+<p>用处：该命令用于列出所有的软件包组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf grouplist</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装一个软件包组</strong> </p>
+<p>用处：该命令用于安装一个软件包组（本例中，我们将用命令安装”Educational Software”这个软件包组）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf groupinstall ‘Educational Software’</span><br></pre></td></tr></table></figure>
+
+<p><strong>升级一个软件包组中的软件包</strong> </p>
+<p>用处：该命令用于升级一个软件包组中的软件包（本例中，我们将用命令升级”Educational Software”这个软件包组中的软件）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf groupupdate ‘Educational Software’</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除一个软件包组</strong> </p>
+<p>用处：该命令用于删除一个软件包组（本例中，我们将用命令删除”Educational Software”这个软件包组）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf groupremove ‘Educational Software’</span><br></pre></td></tr></table></figure>
+
+<p><strong>从特定的软件包库安装特定的软件</strong> </p>
+<p>用处：该命令用于从特定的软件包库安装特定的软件（本例中我们将使用命令从软件包库 epel 中安装 phpmyadmin 软件包）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf –enablerepo=epel install phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<p><strong>更新软件包到最新的稳定发行版</strong> </p>
+<p>用处：该命令可以通过所有可用的软件源将已经安装的所有软件包更新到最新的稳定发行版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf distro-sync</span><br></pre></td></tr></table></figure>
+
+<p><strong>重新安装特定软件包</strong> </p>
+<p>用处：该命令用于重新安装特定软件包（本例中，我们将使用命令重新安装”nano”这个软件包）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf reinstall nano</span><br></pre></td></tr></table></figure>
+
+<p><strong>回滚某个特定软件的版本</strong> </p>
+<p>用处：该命令用于降低特定软件包的版本（如果可能的话）（本例中，我们将使用命令降低”acpid”这个软件包的版本）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf downgrade acpid</span><br></pre></td></tr></table></figure>
+
+<p>样例输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Using metadata from Wed May 20 12:44:59 2015</span><br><span class="line">No match for available package: acpid-2.0.19-5.el7.x86_64</span><br><span class="line">Error: Nothing to do.</span><br></pre></td></tr></table></figure>
+
+<p>原作者注：在执行这条命令的时候， DNF 并没有按照我期望的那样降级指定的软件（“acpid”）。该问题已经上报。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>DNF 包管理器作为 YUM 包管理器的升级替代品，它能自动完成更多的操作。但在我看来，正因如此，所以 DNF 包管理器不会太受那些经验老道的 Linux 系统管理者的欢迎。举例如下：</p>
+<ol>
+<li>在 DNF 中没有 –skip-broken 命令，并且没有替代命令供选择。</li>
+<li>在 DNF 中没有判断哪个包提供了指定依赖的 resolvedep 命令。</li>
+<li>在 DNF 中没有用来列出某个软件依赖包的 deplist 命令。</li>
+<li>当你在 DNF 中排除了某个软件库，那么该操作将会影响到你之后所有的操作，不像在 YUM 下那样，你的排除操作只会咋升级和安装软件时才起作用。</li>
 </ol>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
       
     </div>
 
@@ -440,7 +862,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/colrm/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dmidecode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -457,7 +879,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/colrm/" class="post-title-link" itemprop="url">【Linux 命令】colrm</a>
+            <a href="/linux-command/dmidecode/" class="post-title-link" itemprop="url">【Linux 命令】dmidecode</a>
         </h2>
 
         <div class="post-meta-container">
@@ -467,10 +889,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:35:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:52:00 08:52:00" itemprop="dateModified" datetime="2020-09-25T08:52:00+08:00">2020-09-25 08:52:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -489,14 +917,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>133</span>
+      <span>5.6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -507,15 +935,160 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>删除文件中的指定列</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>colrm命令</strong> 用于删除文件中的指定列。colrm命令从标准输入设备读取书记，转而输出到标准输出设备。如果不加任何参数，则colrm命令不会过滤任何一行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">colrm(参数)</span><br></pre></td></tr></table></figure>
+          <p>在Linux系统下获取有关硬件方面的信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dmidecode命令</strong> 可以让你在Linux系统下获取有关硬件方面的信息。dmidecode的作用是将DMI数据库中的信息解码，以可读的文本方式显示。由于DMI信息可以人为修改，因此里面的信息不一定是系统准确的信息。dmidecode遵循SMBIOS/DMI标准，其输出的信息包括BIOS、系统、主板、处理器、内存、缓存等等。</p>
+<p>DMI（Desktop Management Interface,DMI）就是帮助收集电脑系统信息的管理系统，DMI信息的收集必须在严格遵照SMBIOS规范的前提下进行。SMBIOS（System Management BIOS）是主板或系统制造者以标准格式显示产品管理信息所需遵循的统一规范。SMBIOS和DMI是由行业指导机构Desktop Management Task Force(DMTF)起草的开放性的技术标准，其中DMI设计适用于任何的平台和操作系统。</p>
+<p>DMI充当了管理工具和系统层之间接口的角色。它建立了标准的可管理系统更加方便了电脑厂商和用户对系统的了解。DMI的主要组成部分是Management Information Format(MIF)数据库。这个数据库包括了所有有关电脑系统和配件的信息。通过DMI，用户可以获取序列号、电脑厂商、串口信息以及其它系统配件信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode [选项]</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>起始列号：指定要删除的指定列；</li>
-<li>结尾列号：指定要删除的结尾列。</li>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-d：(default:/dev/mem)从设备文件读取信息，输出内容与不加参数标准输出相同。</span><br><span class="line">-h：显示帮助信息。</span><br><span class="line">-s：只显示指定DMI字符串的信息。(string)</span><br><span class="line">-t：只显示指定条目的信息。(type)</span><br><span class="line">-u：显示未解码的原始条目内容。</span><br><span class="line">--dump-bin file：将DMI数据转储到一个二进制文件中。</span><br><span class="line">--from-dump FILE：从一个二进制文件读取DMI数据。</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<p> <strong>dmidecode参数string及type列表：</strong> </p>
+<p>（1）Valid string keywords are：</p>
+<ul>
+<li>bios-vendor</li>
+<li>bios-version</li>
+<li>bios-release-date</li>
+<li>system-manufacturer</li>
+<li>system-product-name</li>
+<li>system-version</li>
+<li>system-serial-number</li>
+<li>system-uuid</li>
+<li>baseboard-manufacturer</li>
+<li>baseboard-product-name</li>
+<li>baseboard-version</li>
+<li>baseboard-serial-number</li>
+<li>baseboard-asset-tag</li>
+<li>chassis-manufacturer</li>
+<li>chassis-type</li>
+<li>chassis-version</li>
+<li>chassis-serial-number</li>
+<li>chassis-asset-tag</li>
+<li>processor-family</li>
+<li>processor-manufacturer</li>
+<li>processor-version</li>
+<li>processor-frequency</li>
 </ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+<p>（2）Valid type keywords are：</p>
+<ul>
+<li>bios</li>
+<li>system</li>
+<li>baseboard</li>
+<li>chassis</li>
+<li>processor</li>
+<li>memory</li>
+<li>Cache</li>
+<li>connector</li>
+<li>slot</li>
+</ul>
+<p>（3）type全部编码列表：</p>
+<ul>
+<li>BIOS</li>
+<li>System</li>
+<li>Base Board</li>
+<li>Chassis</li>
+<li>Processor</li>
+<li>Memory Controller</li>
+<li>Memory Module</li>
+<li>Cache</li>
+<li>Port Connector</li>
+<li>System Slots</li>
+<li>On Board Devices</li>
+<li>OEM Strings</li>
+<li>System Configuration Options</li>
+<li>BIOS Language</li>
+<li>Group Associations</li>
+<li>System Event Log</li>
+<li>Physical Memory Array</li>
+<li>Memory Device</li>
+<li>32-bit Memory Error</li>
+<li>Memory Array Mapped Address</li>
+<li>Memory Device Mapped Address</li>
+<li>Built-in Pointing Device</li>
+<li>Portable Battery</li>
+<li>System Reset</li>
+<li>Hardware Security</li>
+<li>System Power Controls</li>
+<li>Voltage Probe</li>
+<li>Cooling Device</li>
+<li>Temperature Probe</li>
+<li>Electrical Current Probe</li>
+<li>Out-of-band Remote Access</li>
+<li>Boot Integrity Services</li>
+<li>System Boot</li>
+<li>64-bit Memory Error</li>
+<li>Management Device</li>
+<li>Management Device Component</li>
+<li>Management Device Threshold Data</li>
+<li>Memory Channel</li>
+<li>IPMI Device</li>
+<li>Power Supply</li>
+<li>Additional Information</li>
+<li>Onboard Device</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dmidecode -t 1  # 查看服务器信息</span><br><span class="line">dmidecode | grep &#x27;Product Name&#x27; # 查看服务器型号 </span><br><span class="line">dmidecode |grep &#x27;Serial Number&#x27; # 查看主板的序列号 </span><br><span class="line">dmidecode -t 2  # 查看主板信息</span><br><span class="line">dmidecode -s system-serial-number # 查看系统序列号 </span><br><span class="line">dmidecode -t memory # 查看内存信息 </span><br><span class="line">dmidecode -t 11 # 查看OEM信息 </span><br><span class="line">dmidecode -t 17 # 查看内存条数</span><br><span class="line">dmidecode -t 16 # 查询内存信息</span><br><span class="line">dmidecode -t 4  # 查看CPU信息</span><br><span class="line"></span><br><span class="line">cat /proc/scsi/scsi # 查看服务器硬盘信息</span><br></pre></td></tr></table></figure>
+
+<p>不带选项执行dmidecode命令通常会输出所有的硬件信息。dmidecode命令有个很有用的选项-t，可以按指定类型输出相关信息，假如要获得处理器方面的信息，则可以执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# dmidecode -t processor</span><br><span class="line"><span class="meta">#</span><span class="bash"> dmidecode 2.11</span></span><br><span class="line">SMBIOS 2.5 present.</span><br><span class="line"></span><br><span class="line">Handle 0x0001, DMI type 4, 40 bytes</span><br><span class="line">Processor Information</span><br><span class="line">        Socket Designation: Node 1 Socket 1</span><br><span class="line">        Type: Central Processor</span><br><span class="line">        Family: Xeon MP</span><br><span class="line">        Manufacturer: Intel(R) Corporation</span><br><span class="line">        id: C2 06 02 00 FF FB EB BF</span><br><span class="line">        Signature: Type 0, Family 6, Model 44, Stepping 2</span><br><span class="line">        Flags:</span><br><span class="line">                FPU (Floating-point unit on-chip)</span><br><span class="line">                VME (Virtual mode extension)</span><br><span class="line">                DE (Debugging extension)</span><br><span class="line">                PSE (Page size extension)</span><br><span class="line">                TSC (time stamp counter)</span><br><span class="line">                MSR (Model specific registers)</span><br><span class="line">                PAE (Physical address extension)</span><br><span class="line">                MCE (Machine check exception)</span><br><span class="line">                CX8 (CMPXCHG8 instruction supported)</span><br><span class="line">                APIC (On-chip APIC hardware supported)</span><br><span class="line">                SEP (Fast system call)</span><br><span class="line">                MTRR (Memory type range registers)</span><br><span class="line">                PGE (Page global enable)</span><br><span class="line">                MCA (Machine check architecture)</span><br><span class="line">                CMOV (Conditional move instruction supported)</span><br><span class="line">                PAT (Page attribute table)</span><br><span class="line">                PSE-36 (36-bit page size extension)</span><br><span class="line">                CLFSH (CLFLUSH instruction supported)</span><br><span class="line">                DS (Debug store)</span><br><span class="line">                ACPI (ACPI supported)</span><br><span class="line">                MMX (MMX technology supported)</span><br><span class="line">                FXSR (FXSAVE and FXSTOR instructions supported)</span><br><span class="line">                SSE (Streaming SIMD extensions)</span><br><span class="line">                SSE2 (Streaming SIMD extensions 2)</span><br><span class="line">                ss (Self-snoop)</span><br><span class="line">                HTT (Multi-threading)</span><br><span class="line">                TM (Thermal monitor supported)</span><br><span class="line">                PBE (Pending break enabled)</span><br><span class="line">        Version: Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz</span><br><span class="line">        Voltage: 1.2 V</span><br><span class="line">        External Clock: 5866 MHz</span><br><span class="line">        Max Speed: 4400 MHz</span><br><span class="line">        Current Speed: 2400 MHz</span><br><span class="line">        Status: Populated, Enabled</span><br><span class="line">        Upgrade: ZIF Socket</span><br><span class="line">        L1 Cache Handle: 0x0002</span><br><span class="line">        L2 Cache Handle: 0x0003</span><br><span class="line">        L3 Cache Handle: 0x0004</span><br><span class="line">        Serial Number: Not Specified</span><br><span class="line">        Asset Tag: Not Specified</span><br><span class="line">        Part Number: Not Specified</span><br><span class="line">        Core Count: 4</span><br><span class="line">        Core Enabled: 4</span><br><span class="line">        Thread Count: 8</span><br><span class="line">        Characteristics:</span><br><span class="line">                64-bit capable</span><br><span class="line"></span><br><span class="line">Handle 0x0055, DMI type 4, 40 bytes</span><br><span class="line">Processor Information</span><br><span class="line">        Socket Designation: Node 1 Socket 2</span><br><span class="line">        Type: Central Processor</span><br><span class="line">        Family: Xeon MP</span><br><span class="line">        Manufacturer: Not Specified</span><br><span class="line">        ID: 00 00 00 00 00 00 00 00</span><br><span class="line">        Signature: Type 0, Family 0, Model 0, Stepping 0</span><br><span class="line">        Flags: None</span><br><span class="line">        Version: Not Specified</span><br><span class="line">        Voltage: 1.2 V</span><br><span class="line">        External Clock: 5866 MHz</span><br><span class="line">        Max Speed: 4400 MHz</span><br><span class="line">        Current Speed: Unknown</span><br><span class="line">        Status: Unpopulated</span><br><span class="line">        Upgrade: ZIF Socket</span><br><span class="line">        L1 Cache Handle: Not Provided</span><br><span class="line">        L2 Cache Handle: Not Provided</span><br><span class="line">        L3 Cache Handle: Not Provided</span><br><span class="line">        Serial Number: Not Specified</span><br><span class="line">        Asset Tag: Not Specified</span><br><span class="line">        Part Number: Not Specified</span><br><span class="line">        Characteristics: None</span><br></pre></td></tr></table></figure>
+
+<p>查看内存的插槽数，已经使用多少插槽。每条内存多大，已使用内存多大</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dmidecode|grep -P -A5 &quot;Memory\s+Device&quot;|grep Size|grep -v Range </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: 2048 MB</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: 2048 MB</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: 4096 MB</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: No Module Installed</span></span><br></pre></td></tr></table></figure>
+
+<p>查看内存支持的最大内存容量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dmidecode|grep -P &#x27;Maximum\s+Capacity&#x27;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  Maximum Capacity: 16 GB</span></span><br></pre></td></tr></table></figure>
+
+<p>查看内存的频率</p>
+<pre><code class="shell">dmidecode|grep -A16 &quot;Memory Device&quot;
+
+#   Memory Device
+#     Array Handle: 0x1000
+#     Error Information Handle: Not Provided
+#     Total Width: 72 bits
+#     Data Width: 64 bits
+#     Size: 2048 MB
+#     Form Factor: DIMM
+#     Set: 1
+#     Locator: DIMM_A1
+#     Bank Locator: Not Specified
+#     Type: DDR3
+#     Type Detail: Synchronous Unbuffered (Unregistered)
+#     Speed: 1333 MHz
+#     Manufacturer: 00CE000080CE
+#     Serial Number: 4830F3E1
+#     Asset Tag: 01093200
+#     Part Number: M391B5673EH1-CH9
+#   --
+#   Memory Device
+#     Array Handle: 0x1000
+#     Error Information Handle: Not Provided
+#     Total Width: 72 bits
+#     Data Width: 64 bits
+#     Size: 2048 MB
+#     Form Factor: DIMM
+#     Set: 1
+#     Locator: DIMM_A2
+#     Bank Locator: Not Specified
+#     Type: DDR3
+#     Type Detail: Synchronous Unbuffered (Unregistered)
+#     Speed: 1333 MHz
+#     Manufacturer: 00AD000080AD
+#     Serial Number: 1BA1F0B5
+#     Asset Tag: 01110900
+#     Part Number: HMT325U7BFR8C-H9
+#   --
+
+dmidecode|grep -A16 &quot;Memory Device&quot;|grep &#39;Speed&#39;
+
+#  Speed: 1333 MHz
+#  Speed: 1333 MHz
+#  Speed: 1333 MHz
+#  Speed: Unknown
+
+```shell
+
+
+&lt;!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ --&gt;</code></pre>
+
       
     </div>
 
@@ -536,7 +1109,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/col/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dmesg/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -553,7 +1126,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/col/" class="post-title-link" itemprop="url">【Linux 命令】col</a>
+            <a href="/linux-command/dmesg/" class="post-title-link" itemprop="url">【Linux 命令】dmesg</a>
         </h2>
 
         <div class="post-meta-container">
@@ -563,10 +1136,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:35:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:51:30 08:51:30" itemprop="dateModified" datetime="2020-09-25T08:51:30+08:00">2020-09-25 08:51:30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -585,7 +1164,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>284</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -603,14 +1182,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>过滤控制字符</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>col命令</strong> 是一个标准输入文本过滤器，它从标注输入设备读取文本内容，并把内容显示到标注输出设备。在许多UNIX说明文件里，都有RLF控制字符。当我们运用shell特殊字符<code>&gt;</code>和<code>&gt;&gt;</code>，把说明文件的内容输出成纯文本文件时，控制字符会变成乱码，col命令则能有效滤除这些控制字符。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">col(选项)</span><br></pre></td></tr></table></figure>
+          <p>显示Linux系统启动信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dmesg命令</strong> 被用于检查和控制内核的环形缓冲区。kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息保存在<code>/var/log/dmesg</code>文件里。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg(选项)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-b：过滤掉所有的控制字符，包括RLF和HRLF；</span><br><span class="line">-f：滤掉RLF字符，但允许将HRLF字符呈现出来；</span><br><span class="line">-x：以多个空格字符来表示跳格字符；</span><br><span class="line">-l&lt;缓冲区列数&gt;：预设的内存缓冲区有128列，用户可以自行指定缓冲区的大小。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-c：显示信息后，清除ring buffer中的内容；</span><br><span class="line">-s&lt;缓冲区大小&gt;：预设置为8196，刚好等于ring buffer的大小；</span><br><span class="line">-n：设置记录信息的层级。</span><br></pre></td></tr></table></figure>
 
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# dmesg | head</span><br><span class="line">Linux version 2.6.18-348.6.1.el5 (mockbuild@builder17.centos.org) (gcc version 4.1.2 20080704 (Red Hat 4.1.2-54)) #1 SMP Tue May 21 15:34:22 EDT 2013</span><br><span class="line">BIOS-provided physical RAM map:</span><br><span class="line"> BIOS-e820: 0000000000010000 - 000000000009f400 (usable)</span><br><span class="line"> BIOS-e820: 000000000009f400 - 00000000000a0000 (reserved)</span><br><span class="line"> BIOS-e820: 00000000000f0000 - 0000000000100000 (reserved)</span><br><span class="line"> BIOS-e820: 0000000000100000 - 000000007f590000 (usable)</span><br><span class="line"> BIOS-e820: 000000007f590000 - 000000007f5e3000 (ACPI NVS)</span><br><span class="line"> BIOS-e820: 000000007f5e3000 - 000000007f5f0000 (ACPI data)</span><br><span class="line"> BIOS-e820: 000000007f5f0000 - 000000007f600000 (reserved)</span><br><span class="line"> BIOS-e820: 00000000e0000000 - 00000000e8000000 (reserved)</span><br></pre></td></tr></table></figure>
+
+<p>查看硬盘基础信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep sda</span><br><span class="line"></span><br><span class="line">[    2.442555] sd 0:0:0:0: [sda] 488281250 512-byte logical blocks: (250 GB/232 GiB)</span><br><span class="line">[    2.442590] sd 0:0:0:0: [sda] Write Protect is off</span><br><span class="line">[    2.442592] sd 0:0:0:0: [sda] Mode Sense: 00 3a 00 00</span><br><span class="line">[    2.442607] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn&#x27;t support DPO or FUA</span><br><span class="line">[    2.447533]  sda: sda1</span><br><span class="line">[    2.448503] sd 0:0:0:0: [sda] Attached SCSI disk</span><br></pre></td></tr></table></figure>
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -631,7 +1215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/cmp/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/disown/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -648,7 +1232,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/cmp/" class="post-title-link" itemprop="url">【Linux 命令】cmp</a>
+            <a href="/linux-command/disown/" class="post-title-link" itemprop="url">【Linux 命令】disown</a>
         </h2>
 
         <div class="post-meta-container">
@@ -658,636 +1242,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:34:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
         </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:51:00 08:51:00" itemprop="dateModified" datetime="2020-09-25T08:51:00+08:00">2020-09-25 08:51:00</time>
       </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>714</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>比较两个文件是否有差异</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cmp命令</strong> 用来比较两个文件是否有差异。当相互比较的两个文件完全一样时，则该指令不会显示任何信息。若发现有差异，预设会标示出第一个不通之处的字符和列数编号。若不指定任何文件名称或是所给予的文件名为“-”，则cmp指令会从标准输入设备读取数据。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-c或--print-chars：除了标明差异处的十进制字码之外，一并显示该字符所对应字符；</span><br><span class="line">-i&lt;字符数目&gt;或--ignore-initial=&lt;字符数目&gt;：指定一个数目；</span><br><span class="line">-l或——verbose：标示出所有不一样的地方；</span><br><span class="line">-s或--quiet或——silent：不显示错误信息；</span><br><span class="line">-v或——version：显示版本信息；</span><br><span class="line">--help：在线帮助。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目录：比较两个文件的差异。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用cmp命令比较文件”testfile”和文件”testfile1”两个文件，则输入下面的命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmp testfile testfile1            #比较两个指定的文件</span><br></pre></td></tr></table></figure>
-
-<p>在上述指令执行之前，使用cat命令查看两个指定的文件内容，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat testfile                    #查看文件内容  </span><br><span class="line">Absncn 50                       #显示文件“testfile”  </span><br><span class="line">Asldssja 60  </span><br><span class="line">Jslkadjls 85 </span><br><span class="line"></span><br><span class="line">cat testfile1                   #查看文件内容  </span><br><span class="line">Absncn 50                       #显示文件“testfile1”  </span><br><span class="line">AsldssjE 62  </span><br><span class="line">Jslkadjls 85  </span><br></pre></td></tr></table></figure>
-
-<p>然后，再执行cmp命令，并返回比较结果，具体如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmp testfile testfile1       #比较两个文件  </span><br><span class="line">testfile testfile1           #有差异：第8字节，第2行  </span><br></pre></td></tr></table></figure>
-
-<p>注意：在比较结果中，只能够显示第一比较结果。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/clockdiff/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/clockdiff/" class="post-title-link" itemprop="url">【Linux 命令】clockdiff</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:34:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>检测两台linux主机的时间差</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>在ip报文的首部和ICMP报文的首部都可以放入时间戳数据。 <strong>clockdiff</strong> 程序正是使用时间戳来测算目的主机和本地主机的系统时间差。</p>
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-o：使用IP时间戳选项来测量系统时间差。时间戳只用3个。</span><br><span class="line">-o1：使用IP时间戳选项来测量系统时间差。用4个时间戳。如果-o和-o1都没有设置，那么就是用ICMP时间戳来测试系统时间差。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lixi@lixi-desktop:~$ ping -T tsandaddr www.ustc.edu.cn -c 1</span><br><span class="line">PING www.ustc.edu.cn (202.38.64.9) 56(124) bytes of data.</span><br><span class="line">64 bytes from 202.38.64.9: icmp_seq=1 ttl=62 time=0.823 ms</span><br><span class="line">TS:     lixi-desktop.local (210.45.74.25)    12522473 absolute</span><br><span class="line">    210.45.74.1    -251</span><br><span class="line">    local-gw.ustc.edu.cn (202.38.64.126)    248</span><br><span class="line">    202.38.64.9    -857514</span><br><span class="line">Unrecorded hops: 3</span><br><span class="line"></span><br><span class="line">--- www.ustc.edu.cn ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.823/0.823/0.823/0.000 ms</span><br></pre></td></tr></table></figure>
-
-<p>首先由上面的得出在RRT不大的时候，几个ICMP时间戳的关系。本地主机和202.38.64.9之间的时间差约为：-857514+248-251=-857517。分别用-o（IP选项中时间戳）和不带选项（ICMP路由时间戳）上述路由的系统时间进行测试。得到的结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lixi@lixi-desktop:~# ./clockdiff -o 202.38.64.9  </span><br><span class="line">..................................................</span><br><span class="line">host=202.38.64.9 rtt=1(0)ms/1ms delta=-857517ms/-857517ms Wed Dec 17 11:28:30 2008</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lixi@lixi-desktop:~# ./clockdiff 202.38.64.9</span><br><span class="line">.</span><br><span class="line">host=202.38.64.9 rtt=750(187)ms/0ms delta=-857517ms/-857517ms Wed Dec 17 11:28:35 2008</span><br></pre></td></tr></table></figure>
-
-<p>两种方法测试的都比较准确。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lixi@lixi-desktop:~#./clockdiff gigagate1.Princeton.EDU</span><br><span class="line">..................................................</span><br><span class="line">host=gigagate1.Princeton.EDU rtt=307(21)ms/271ms delta=-5ms/-5ms Wed Dec 17 11:50:16 2008</span><br></pre></td></tr></table></figure>
-
-<p>上面是测试一个RTT较大的目的主机和本地主机的系统时间差。不过在使用clockdiff的时候，需要一点运气，因为很多路由会忽略ICMP或IP时间戳。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/clock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/clock/" class="post-title-link" itemprop="url">【Linux 命令】clock</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:33:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用于调整 RTC 时间</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>clock命令</strong>用于调整 RTC 时间。 RTC 是电脑内建的硬件时间，执行这项指令可以显示现在时刻，调整硬件时钟的时间，将系统时间设成与硬件时钟之时间一致，或是把系统时间回存到硬件时钟。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clock [--adjust][--debug][--directisa][--getepoch][--hctosys][--set --date=&quot;&lt;日期时间&gt;&quot;]</span><br><span class="line">[--setepoch --epoch=&lt; &gt;][--show][--systohc][--test][--utc][--version]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">--adjust 　第一次使用&quot;--set&quot;或&quot;--systohc&quot;参数设置硬件时钟，会在/etc目录下产生一个名称为adjtime的文件。当再次使用这两个参数调整硬件时钟，此文件便会记录两次调整间之差异，日后执行clock指令加上&quot;--adjust&quot;参数时，程序会自动根 据记录文件的数值差异，计算出平均值，自动调整硬件时钟的时间。</span><br><span class="line">--debug 　详细显示指令执行过程，便于排错或了解程序执行的情形。</span><br><span class="line">--directisa 　告诉clock指令不要通过/dev/rtc设备文件，直接对硬件时钟进行存取。这个参数适用于仅有ISA总线结构的老式电脑。</span><br><span class="line">--getepoch 　把系统核心内的硬件时钟新时代数值，呈现到标准输出设备。</span><br><span class="line">--hctosys 　Hardware Clock to System Time，把系统时间设成和硬件时钟一致。由于这个动作将会造成系统全面更新文件的存取时间，所以最好在系统启动时就执行它。</span><br><span class="line">--set--date 　设置硬件时钟的日期和时间。</span><br><span class="line">--setepoch--epoch=&lt;年份&gt; 　设置系统核心之硬件时钟的新时代数值，年份以四位树字表示。</span><br><span class="line">--show 　读取硬件时钟的时间，并将其呈现至标准输出设备。</span><br><span class="line">--systohc 　System Time to Hardware Clock，将系统时间存回硬件时钟内。</span><br><span class="line">--test 　仅作测试，并不真的将时间写入硬件时钟或系统时间。</span><br><span class="line">--utc 　把硬件时钟上的时间时为CUT，有时也称为UTC或UCT。</span><br><span class="line">--version 　显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>获取当前的时间</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clock # 获取当前的时间</span><br></pre></td></tr></table></figure>
-
-<p>显示UTC时间</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clock -utc #显示UTC时间</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/clear/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/clear/" class="post-title-link" itemprop="url">【Linux 命令】clear</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:33:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>79</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>清除当前屏幕终端上的任何信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>clear命令</strong> 用于清除当前屏幕终端上的任何信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>直接输入clear命令当前终端上的任何信息就可被清除。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/cksum/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/cksum/" class="post-title-link" itemprop="url">【Linux 命令】cksum</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:32:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>501</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>检查文件的CRC是否正确</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cksum命令</strong> 是检查文件的CRC是否正确，确保文件从一个系统传输到另一个系统的过程中不被损坏。这种方法要求校验和在源系统中被计算出来，在目的系统中又被计算一次，两个数字进行比较，如果校验和相等，则该文件被认为是正确传输了。</p>
-<p>注意：CRC是指一种排错检查方法，即循环冗余校验法。</p>
-<p>指定文件交由cksum命令进行校验后，会返回校验结果供用户核对文件是否正确无误。若不指定任何文件名称或是所给予的文件名为”-“，则cksum命令会从标准输入设备中读取数据。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cksum(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要计算校验的版本信息。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用cksum命令计算文件”testfile1”的完整性，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cksum testfile1            #对指定文件进行CRC校验</span><br></pre></td></tr></table></figure>
-
-<p>以上命令执行后，将输出校验码等相关的信息，具体输出信息如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1263453430 78 testfile1     #输出信息</span><br></pre></td></tr></table></figure>
-
-<p>上面的输出信息中，”1263453430”表示校验码，”78”表示字节数。</p>
-<p>注意：如果文件中有任何字符被修改，都将改变计算后CRC校验码的值。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/chsh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/chsh/" class="post-title-link" itemprop="url">【Linux 命令】chsh</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:32:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用来更换登录系统时使用的shell</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chsh命令</strong> 用来更换登录系统时使用的shell。若不指定任何参数与用户名称，则chsh会以应答的方式进行设置。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-s&lt;shell 名称&gt;或--shell&lt;shell 名称&gt;：更改系统预设的shell环境。；</span><br><span class="line">-l或--list-shells：列出目前系统可用的shell清单；</span><br><span class="line">-u或--help：在线帮助；</span><br><span class="line">-v或-version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户名：要改变默认shell的用户。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>查看系统安装了哪些shell的两种方法：</strong> </p>
-<p>第一种：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ chsh -l</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
-
-<p>第二种：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ cat /etc/shells</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
-
-<p>其实<code>chsh -l</code>也是来查看这个文件。</p>
-<p> <strong>查看当前正在使用的shell：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ echo $SHELL</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>注意SHELL一定要是大写。可以看到，目前使用的shell是<code>/bin/bash</code></p>
-<p> <strong>把我的shell改成zsh：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ chsh -s /bin/zsh</span><br><span class="line">Changing shell for rocrocket.</span><br><span class="line">Password:</span><br><span class="line">Shell changed.</span><br><span class="line">[rocrocket@localhost ~]$</span><br></pre></td></tr></table></figure>
-
-<p>使用chsh加选项<code>-s</code>就可以修改登录的shell了！你会发现你现在执行<code>echo $SHELL</code>后仍然输出为<code>/bin/bash</code>，这是因为你需要重启你的shell才完全投入到zsh怀抱中去。<code>chsh -s</code>其实修改的就是<code>/etc/passwd</code>文件里和你的用户名相对应的那一行。现在来查看下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ cat /etc/passwd|grep ^rocrocket</span><br><span class="line">rocrocket:x:500:500:rocrocket,China:/rocrocket/PSB/home:/bin/zsh</span><br></pre></td></tr></table></figure>
-
-<p>你可以发现输出内容的最后部分已经变成了<code>/bin/zsh</code>了，下次重启的时候，linux就会读取这一命令来启动shell了！</p>
-<p> <strong>把shell修改回/bin/bash：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[rocrocket@localhost ~]$ chsh -s /bin/bash</span><br><span class="line">Changing shell for rocrocket.</span><br><span class="line">Password:</span><br><span class="line">Shell changed.</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/chroot/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/chroot/" class="post-title-link" itemprop="url">【Linux 命令】chroot</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：08:31:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -1324,61 +1288,361 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>把根目录换成指定的目的目录</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chroot命令</strong> 用来在指定的根目录下运行指令。chroot，即 change root directory （更改 root 目录）。在 linux 系统中，系统默认的目录结构都是以<code>/</code>，即是以根 (root) 开始的。而在使用 chroot 之后，系统的目录结构将以指定的位置作为<code>/</code>位置。</p>
-<p>在经过 chroot 命令之后，系统读取到的目录和文件将不在是旧系统根下的而是新根下（即被指定的新的位置）的目录结构和文件，因此它带来的好处大致有以下3个：</p>
-<p><strong>增加了系统的安全性，限制了用户的权力：</strong> </p>
-<p>在经过 chroot 之后，在新根下将访问不到旧系统的根目录结构和文件，这样就增强了系统的安全性。这个一般是在登录 (login) 前使用 chroot，以此达到用户不能访问一些特定的文件。</p>
-<p><strong>建立一个与原系统隔离的系统目录结构，方便用户的开发：</strong> </p>
-<p>使用 chroot 后，系统读取的是新根下的目录和文件，这是一个与原系统根下文件不相关的目录结构。在这个新的环境中，可以用来测试软件的静态编译以及一些与系统不相关的独立开发。</p>
-<p><strong>切换系统的根目录位置，引导 Linux 系统启动以及急救系统等：</strong> </p>
-<p>chroot 的作用就是切换系统的根位置，而这个作用最为明显的是在系统初始引导磁盘的处理过程中使用，从初始 RAM 磁盘 (initrd) 切换系统的根位置并执行真正的 init。另外，当系统出现一些问题时，我们也可以使用 chroot 来切换到一个临时的系统。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chroot(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>从当前的shell中移除作业。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disown [-h] [-ar] [jobspec ... | pid ...]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：在线帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>目录：指定新的根目录；</li>
-<li>指令：指定要执行的指令。</li>
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li><p>从当前shell的作业列表中移除全部作业。</p>
+</li>
+<li><p>从当前shell的作业列表中移除指定的一到多个作业。</p>
+</li>
+<li><p>从当前shell的作业列表中移除正在运行的作业。</p>
+</li>
+<li><p>标记作业，使得它们在当前shell退出后也不会结束。</p>
+</li>
 </ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>将target作为根目录（运行其中的<code>/bin/sh</code>）:</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chroot target /bin/sh</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-h    标记每个作业标识符，这些作业将不会在shell接收到sighup信号时接收到sighup信号。</span><br><span class="line">-a    移除所有的作业。</span><br><span class="line">-r    移除运行的作业。</span><br></pre></td></tr></table></figure>
 
-<p>这里,target是busybox安装好的路径，类似一个文件系统包含了许多工具。这样，将会进入一个shell界面，这个shell以target为根。运行exit退出该shell又返回原来的本机环境了，也可以使用Ctrl+D。</p>
-<p>注意：</p>
-<ul>
-<li>根用户才行</li>
-<li>如果直接chroot target默认寻找target的/bin/bash.这会以target作为根目录</li>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>jobspec（可选）：要移除的作业标识符，可以是一到多个。</p>
+<p>pid（可选）：要移除的作业对应的进程ID，可以是一到多个。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非未开启作业控制或执行出现错误。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示。</span></span><br><span class="line">[user2@pc] ssh 192.168.1.4</span><br><span class="line">user2@192.168.1.4&#x27;s password:</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时按下ctrl+z使得交互停止。</span></span><br><span class="line">[1]+  Stopped                 ssh 192.168.1.4</span><br><span class="line"></span><br><span class="line">[user2@pc] ssh 192.168.1.7</span><br><span class="line">user2@192.168.1.7&#x27;s password:</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时按下ctrl+z使得交互停止。</span></span><br><span class="line">[1]+  Stopped                 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line">[user2@pc] sleep 120 &amp;</span><br><span class="line">[3] 28986</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出作业及pid信息。</span></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line">[2]+ 28833 Stopped                 ssh 192.168.1.7</span><br><span class="line">[3]  28986 Running                 sleep 120 &amp;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除运行状态的作业。</span></span><br><span class="line">[user2@pc] disown -r</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line">[2]+ 28833 Stopped                 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;sleep 120&#x27;</span><br><span class="line">28986 sleep 120</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除指定的作业。</span></span><br><span class="line">[user2@pc] disown %2</span><br><span class="line">bash: warning: deleting stopped job 2 with process group 28833</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;ssh 192.168.1.7&#x27;</span><br><span class="line">28833 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除全部作业。</span></span><br><span class="line">[user2@pc] disown -a</span><br><span class="line">bash: warning: deleting stopped job 1 with process group 28756</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;ssh 192.168.1.4&#x27;</span><br><span class="line">28756 ssh 192.168.1.4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示-h选项的作用。</span></span><br><span class="line">[user2@pc] sleep 90 &amp;</span><br><span class="line">[1] 109080</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]+ 109080 Running                 sleep 90 &amp;</span><br><span class="line"></span><br><span class="line">[user2@pc] disown -h %1</span><br><span class="line"></span><br><span class="line">[user2@pc] exit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时前一个终端已经关闭，现在打开新终端查找该作业。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;sleep 90&#x27;</span><br><span class="line">109080 sleep 90</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><code>bash</code>的作业控制命令包括<code>bg fg kill wait disown suspend</code>。</li>
+<li>该命令需要<code>set</code>选项<code>monitor</code>处于开启状态时才能执行；查看作业控制状态：输入<code>set -o</code>查看<code>monitor</code>行；执行<code>set -o monitor</code>或<code>set -m</code>开启该选项。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3liZXJjaXRpLmJpei9mYXEvdW5peC1saW51eC1kaXNvd24tY29tbWFuZC1leGFtcGxlcy11c2FnZS1zeW50YXgv">disown的用法<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<p>将target作为根目录(运行其中的<code>/bin/ls</code>):</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chroot target /bin/ls</span><br></pre></td></tr></table></figure>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
-<p>这里，target是busybox安装好的路径，类似一个文件系统包含了许多工具。这样运行的是target中的ls（不是本机的<code>/bin/ls</code>），然后返回立即本机的目录环境。</p>
-<p>注意，自己在本地编译一个程序生成a.out之后，拷进<code>target/bin/</code>中这样运行却不行,因为它包含了动态连接的库，需要用ldd查看a.out需要那些动态库，将这些库拷贝到新根的对应路径下才能执行。</p>
-<p> <strong>用chroot运行自己编译的一个程序：</strong> </p>
-<p>准备chroot的根目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir newRoot</span><br></pre></td></tr></table></figure>
+      
+    </div>
 
-<p>编译自己的程序：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c</span><br></pre></td></tr></table></figure>
+    
+    
+    
 
-<p>这里main.c生成a.out，功能是输出hello。</p>
-<p>查看程序需要的库：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd a.out</span><br></pre></td></tr></table></figure>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
 
-<p>输入之后，输出如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">linux-gate.so.1 = &amp;gt;  (0xb8034000)</span><br><span class="line">libc.so.6 = &amp;gt; /lib/tls/i686/cmov/libc.so.6 (0xb7eab000)</span><br><span class="line">/lib/ld-linux.so.2 (0xb801a000)</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dirs/">
 
-<p>将程序需要的库和程序拷贝到新根目录下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp a.out newRoot</span><br><span class="line">mkdir newRoot/lib</span><br><span class="line">cp /lib/tls/i686/cmov/libc.so.6 newRoot/lib</span><br><span class="line">cp /lib/ld-linux.so.2 newRoot/lib</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
 
-<p>这里newRoot内容将如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.out lib/</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
 
-<p>使用chroot运行自己的程序：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">chroot newRoot /a.out</span><br></pre></td></tr></table></figure>
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/dirs/" class="post-title-link" itemprop="url">【Linux 命令】dirs</a>
+        </h2>
 
-<p>这样就能够正确运行a.out了，因为a.out使用到了其他的动态连接库，所以需要将库拷贝到newRoot中，如果没有其他库那么直接拷贝a.out就能运行。例如静态编译后的busybox，其安装目录中的<code>/bin/busybox</code>就没有依赖其他库。</p>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:50:30 08:50:30" itemprop="dateModified" datetime="2020-09-25T08:50:30+08:00">2020-09-25 08:50:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>812</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示目录堆栈。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirs [-clpv] [+N] [-N]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li><p>显示目录堆栈。</p>
+</li>
+<li><p>清空目录堆栈。</p>
+</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-c    清空目录堆栈。</span><br><span class="line">-l    堆栈内以~开头的目录在显示时展开。</span><br><span class="line">-p    将目录堆栈内的每一个目录按行显示。</span><br><span class="line">-v    将目录堆栈内的每一个目录按行显示并在每行前加上堆栈内的位置编号。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>+N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，左起的第N个目录将被显示。（从0开始计数）</p>
+<p>-N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，右起的第N个目录将被显示。（从0开始计数）</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非提供了非法选项或执行出现错误。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加目录到堆栈。</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Pictures</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/bin</span><br><span class="line">~ ~/bin ~/Pictures ~/Desktop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 选项和参数的示例：</span></span><br><span class="line">[user2@pc ~]$ dirs -l</span><br><span class="line">/home/user2 /home/user2/bin /home/user2/Pictures /home/user2/Desktop</span><br><span class="line">[user2@pc ~]$ dirs -p</span><br><span class="line">~</span><br><span class="line">~/bin</span><br><span class="line">~/Pictures</span><br><span class="line">~/Desktop</span><br><span class="line">[user2@pc ~]$ dirs -v</span><br><span class="line"> 0  ~</span><br><span class="line"> 1  ~/bin</span><br><span class="line"> 2  ~/Pictures</span><br><span class="line"> 3  ~/Desktop</span><br><span class="line">[user2@pc ~]$ dirs +2</span><br><span class="line">~/Pictures</span><br><span class="line">[user2@pc ~]$ dirs -2</span><br><span class="line">~/bin</span><br><span class="line">[user2@pc ~]$ dirs -c</span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><code>bash</code>的目录堆栈命令包括<code>dirs popd pushd</code>。</li>
+<li>当前目录始终是目录堆栈的顶部。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dirname/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/dirname/" class="post-title-link" itemprop="url">【Linux 命令】dirname</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:50:00 08:50:00" itemprop="dateModified" datetime="2020-09-25T08:50:00+08:00">2020-09-25 08:50:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>321</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>去除文件名中的非目录部分</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dirname命令</strong> 去除文件名中的非目录部分，仅显示与目录有关的内容。dirname命令读取指定路径名保留最后一个<code>/</code>及其后面的字符，删除其他部分，并写结果到标准输出。如果最后一个<code>/</code>后无字符，dirname 命令使用倒数第二个<code>/</code>，并忽略其后的所有字符。dirname 和 basename 通常在 shell 内部命令替换使用，以指定一个与指定输入文件名略有差异的输出文件名。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirname(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：显示帮助；</span><br><span class="line">--version：显示版本号。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dirname //</span><br><span class="line">结果为 /</span><br><span class="line"></span><br><span class="line">dirname /a/b/</span><br><span class="line">结果为：/a</span><br><span class="line"></span><br><span class="line">dirname a</span><br><span class="line">结果为 .</span><br><span class="line"></span><br><span class="line">dirname a/b</span><br><span class="line">结果为路径名 a</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dircolors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/dircolors/" class="post-title-link" itemprop="url">【Linux 命令】dircolors</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:49:30 08:49:30" itemprop="dateModified" datetime="2020-09-25T08:49:30+08:00">2020-09-25 08:49:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>置ls命令在显示目录或文件时所用的色彩</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dircolors命令</strong> 设置ls命令在显示目录或文件时所用的色彩。dircolors可根据[色彩配置文件]来设置LS_COLORS环境变量或是显示设置LS_COLORS环境变量的命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dircolors(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-b或--sh或--bourne-shell：显示在Boume shell中，将LS_COLORS设为目前预设置的shell指令；</span><br><span class="line">-c或--csh或--c-shell：显示在C shell中，将LS_COLORS设为目前预设置的shell指令；</span><br><span class="line">-p或--print-database：显示预设置；</span><br><span class="line">-help：显示帮助；</span><br><span class="line">-version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定用来设置颜色的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# dircolors -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> Configuration file <span class="keyword">for</span> dircolors, a utility to <span class="built_in">help</span> you <span class="built_in">set</span> the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> LS_COLORS environment variable used by GNU ls with the --color option.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> The keywords COLOR, OPTIONS, and EIGHTBIT (honored by the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> slackware version of dircolors) are recognized but ignored.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Below, there should be one TERM entry <span class="keyword">for</span> each termtype that is colorizable</span></span><br><span class="line">TERM linux</span><br><span class="line">TERM linux-c</span><br><span class="line">TERM mach-color</span><br><span class="line">TERM console</span><br><span class="line">TERM con132x25</span><br><span class="line">TERM con132x30</span><br><span class="line">TERM con132x43</span><br><span class="line">TERM con132x60</span><br><span class="line">TERM con80x25</span><br><span class="line">TERM con80x28</span><br><span class="line">TERM con80x30</span><br><span class="line">TERM con80x43</span><br><span class="line">TERM con80x50</span><br><span class="line">TERM con80x60</span><br><span class="line">TERM cygwin</span><br><span class="line">TERM dtterm</span><br><span class="line">TERM putty</span><br><span class="line">TERM xterm</span><br><span class="line">TERM xterm-color</span><br><span class="line">TERM xterm-debian</span><br><span class="line">TERM rxvt</span><br><span class="line">TERM screen</span><br><span class="line">TERM screen-bce</span><br><span class="line">TERM screen-w</span><br><span class="line">TERM vt100</span><br><span class="line">TERM Eterm</span><br><span class="line"><span class="meta">#</span><span class="bash"> Below are the color init strings <span class="keyword">for</span> the basic file types. A color init</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> string consists of one or more of the following numeric codes:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Attribute codes:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Text color codes:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Background color codes:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white</span></span><br><span class="line">NORMAL 00 # global default, although everything should be something.</span><br><span class="line">FILE 00 # normal file</span><br><span class="line">DIR 01;34 # directory</span><br><span class="line">LINK 01;36 # symbolic link. (If you set this to &#x27;target&#x27; instead of a</span><br><span class="line"><span class="meta"> #</span><span class="bash"> numerical value, the color is as <span class="keyword">for</span> the file pointed to.)</span></span><br><span class="line">FIFO 40;33 # pipe</span><br><span class="line">SOCK 01;35 # socket</span><br><span class="line">DOOR 01;35 # door</span><br><span class="line">BLK 40;33;01 # block device driver</span><br><span class="line">CHR 40;33;01 # character device driver</span><br><span class="line">ORPHAN 40;31;01 # symlink to nonexistent file</span><br><span class="line">SETUID 37;41 # file that is setuid (u+s)</span><br><span class="line">SETGID 30;43 # file that is setgid (g+s)</span><br><span class="line">STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)</span><br><span class="line">OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky</span><br><span class="line">STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable</span><br><span class="line"><span class="meta">#</span><span class="bash"> This is <span class="keyword">for</span> files with execute permission:</span></span><br><span class="line">exec 01;32</span><br><span class="line"><span class="meta">#</span><span class="bash"> List any file extensions like <span class="string">&#x27;.gz&#x27;</span> or <span class="string">&#x27;.tar&#x27;</span> that you would like ls</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> to colorize below. Put the extension, a space, and the color init string.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (and any comments you want to add after a <span class="string">&#x27;#&#x27;</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> If you use DOS-style suffixes, you may want to uncomment the following:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">.cmd 01;32 <span class="comment"># executables (bright green)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">.exe 01;32</span></span><br><span class="line"><span class="meta">#</span><span class="bash">.com 01;32</span></span><br><span class="line"><span class="meta">#</span><span class="bash">.btm 01;32</span></span><br><span class="line"><span class="meta">#</span><span class="bash">.bat 01;32</span></span><br><span class="line">.tar 01;31 # archives or compressed (bright red)</span><br><span class="line">.tgz 01;31</span><br><span class="line">.arj 01;31</span><br><span class="line">.taz 01;31</span><br><span class="line">.lzh 01;31</span><br><span class="line">.zip 01;31</span><br><span class="line">.z 01;31</span><br><span class="line">.Z 01;31</span><br><span class="line">.gz 01;31</span><br><span class="line">.bz2 01;31</span><br><span class="line">.deb 01;31</span><br><span class="line">.rpm 01;31</span><br><span class="line">.jar 01;31</span><br><span class="line"><span class="meta">#</span><span class="bash"> image formats</span></span><br><span class="line">.jpg 01;35</span><br><span class="line">.jpeg 01;35</span><br><span class="line">.gif 01;35</span><br><span class="line">.bmp 01;35</span><br><span class="line">.pbm 01;35</span><br><span class="line">.pgm 01;35</span><br><span class="line">.ppm 01;35</span><br><span class="line">.tga 01;35</span><br><span class="line">.xbm 01;35</span><br><span class="line">.xpm 01;35</span><br><span class="line">.tif 01;35</span><br><span class="line">.tiff 01;35</span><br><span class="line">.png 01;35</span><br><span class="line">.mov 01;35</span><br><span class="line">.mpg 01;35</span><br><span class="line">.mpeg 01;35</span><br><span class="line">.avi 01;35</span><br><span class="line">.fli 01;35</span><br><span class="line">.gl 01;35</span><br><span class="line">.dl 01;35</span><br><span class="line">.xcf 01;35</span><br><span class="line">.xwd 01;35</span><br><span class="line"><span class="meta">#</span><span class="bash"> audio formats</span></span><br><span class="line">.flac 01;35</span><br><span class="line">.mp3 01;35</span><br><span class="line">.mpc 01;35</span><br><span class="line">.ogg 01;35</span><br><span class="line">.wav 01;35</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1399,7 +1663,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1454,14 +1718,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">733k</span>
+    <span title="站点总字数">820k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">11:06</span>
+    <span title="站点阅读时长">12:26</span>
   </span>
 </div>
 <div class="busuanzi-count">

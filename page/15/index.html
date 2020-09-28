@@ -143,17 +143,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">583</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">619</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">616</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">641</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">5</span></a>
 
   </li>
         <li class="menu-item menu-item-开源">
@@ -232,20 +232,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">583</span>
+          <span class="site-state-item-count">619</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">616</span>
+        <span class="site-state-item-count">641</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,7 +308,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/smbclient/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/tailf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -325,7 +325,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/smbclient/" class="post-title-link" itemprop="url">【Linux 命令】smbclient</a>
+            <a href="/linux-command/tailf/" class="post-title-link" itemprop="url">【Linux 命令】tailf</a>
         </h2>
 
         <div class="post-meta-container">
@@ -335,10 +335,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:41:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:59:00 11:59:00" itemprop="dateModified" datetime="2020-09-25T11:59:00+08:00">2020-09-25 11:59:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -357,7 +363,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>680</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -375,33 +381,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>交互方式访问samba服务器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>smbclient命令</strong> 属于samba套件，它提供一种命令行使用交互式方式访问samba服务器的共享资源。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>在屏幕上显示指定文件的末尾若干行内容，通常用于日志文件的跟踪输出</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>tailf命令几乎等同于<code>tail -f</code>，严格说来应该与<code>tail --follow=name</code>更相似些。当文件改名之后它也能继续跟踪，特别适合于日志文件的跟踪（follow the growth of a log file）。与<code>tail -f</code>不同的是，如果文件不增长，它不会去访问磁盘文件。tailf特别适合那些便携机上跟踪日志文件，因为它能省电，因为减少了磁盘访问。tailf命令不是个脚本，而是一个用C代码编译后的二进制执行文件，某些Linux安装之后没有这个命令。</p>
+<p>tailf和tail -f的区别</p>
+<ol>
+<li>tailf 总是从文件开头一点一点的读， 而tail -f 则是从文件尾部开始读</li>
+<li>tailf check文件增长时，使用的是文件名， 用stat系统调用；而tail -f 则使用的是已打开的文件描述符； 注：tail 也可以做到类似跟踪文件名的效果； 但是tail总是使用fstat系统调用，而不是stat系统调用；结果就是：默认情况下，当tail的文件被偷偷删除时，tail是不知道的，而tailf是知道的。</li>
+</ol>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tailf logfile # 动态跟踪日志文件logfile，最初的时候打印文件的最后10行内容。</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-B&lt;ip地址&gt;：传送广播数据包时所用的IP地址；</span><br><span class="line">-d&lt;排错层级&gt;：指定记录文件所记载事件的详细程度；</span><br><span class="line">-E：将信息送到标准错误输出设备；</span><br><span class="line">-h：显示帮助；</span><br><span class="line">-i&lt;范围&gt;：设置NetBIOS名称范围；</span><br><span class="line">-I&lt;IP地址&gt;：指定服务器的IP地址；</span><br><span class="line">-l&lt;记录文件&gt;：指定记录文件的名称；</span><br><span class="line">-L：显示服务器端所分享出来的所有资源；</span><br><span class="line">-M&lt;NetBIOS名称&gt;：可利用WinPopup协议，将信息送给选项中所指定的主机；</span><br><span class="line">-n&lt;NetBIOS名称&gt;：指定用户端所要使用的NetBIOS名称；</span><br><span class="line">-N：不用询问密码；</span><br><span class="line">-O&lt;连接槽选项&gt;：设置用户端TCP连接槽的选项；</span><br><span class="line">-p&lt;TCP连接端口&gt;：指定服务器端TCP连接端口编号；</span><br><span class="line">-R&lt;名称解析顺序&gt;：设置NetBIOS名称解析的顺序；</span><br><span class="line">-s&lt;目录&gt;：指定smb.conf所在的目录；</span><br><span class="line">-t&lt;服务器字码&gt;：设置用何种字符码来解析服务器端的文件名称；</span><br><span class="line">-T&lt;tar选项&gt;：备份服务器端分享的全部文件，并打包成tar格式的文件；</span><br><span class="line">-U&lt;用户名称&gt;：指定用户名称；</span><br><span class="line">-w&lt;工作群组&gt;：指定工作群组名称。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n, --lines NUMBER  # 输出最后数行</span><br><span class="line">-NUMBER             # 与NUMBER相同 `-n NUMBER&#x27;</span><br><span class="line">-V, --version       # 输出版本信息并退出</span><br><span class="line">-h, --help          # 显示帮助并退出</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>smb服务器：指定要连接的smb服务器。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>列出某个IP地址所提供的共享文件夹</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L 198.168.0.1 -U username%password</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标：指定目标日志。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tailf log/WEB.LOG </span><br><span class="line">tailf -n 5 log2014.log   # 显示文件最后5行内容</span><br></pre></td></tr></table></figure>
 
-<p> <strong>像ftp客户端一样使用smbclient</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient //192.168.0.1/tmp  -U username%password</span><br></pre></td></tr></table></figure>
 
-<p>执行smbclient命令成功后，进入smbclient环境，出现提示符：<code>smb:/&gt;</code></p>
-<p>这里有许多命令和ftp命令相似，如cd 、lcd、get、megt、put、mput等。通过这些命令，我们可以访问远程主机的共享资源。</p>
-<p> <strong>直接一次性使用smbclient命令</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -c &quot;ls&quot;  //192.168.0.1/tmp  -U username%password</span><br></pre></td></tr></table></figure>
-
-<p>和</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smbclient //192.168.0.1/tmp  -U username%password</span><br><span class="line">smb:/&gt;ls</span><br></pre></td></tr></table></figure>
-
-<p>功能一样的。</p>
-<p> <strong>创建一个共享文件夹</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -c &quot;mkdir share1&quot; //192.168.0.1/tmp -U username%password</span><br></pre></td></tr></table></figure>
-
-<p>如果用户共享<code>//192.168.0.1/tmp</code>的方式是只读的，会提示<code>NT_STATUS_ACCESS_DENIED making remote directory /share1</code></p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -422,7 +418,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/slocate/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/tail/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -439,7 +435,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/slocate/" class="post-title-link" itemprop="url">【Linux 命令】slocate</a>
+            <a href="/linux-command/tail/" class="post-title-link" itemprop="url">【Linux 命令】tail</a>
         </h2>
 
         <div class="post-meta-container">
@@ -449,10 +445,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:40:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:58:30 11:58:30" itemprop="dateModified" datetime="2020-09-25T11:58:30+08:00">2020-09-25 11:58:30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -471,7 +473,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>585</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -489,17 +491,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>命令查找文件或目录</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>slocate命令</strong> 是一个命令查找文件或目录。slocate本身具有一个数据库，里面存放了系统中文件与目录的相关信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slocate [-u][--help][--version][-d &lt;目录&gt;][查找的文件]</span><br></pre></td></tr></table></figure>
+          <p>在屏幕上显示指定文件的末尾若干行</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>tail命令</strong> 用于输入文件中的尾部内容。tail命令默认在屏幕上显示指定文件的末尾10行。如果给定的文件不止一个，则在显示的每个文件前面加一个文件名标题。如果没有指定文件或者文件名为“-”，则读取标准输入。</p>
+<p>注意：如果表示字节或行数的N值之前有一个”+”号，则从文件开头的第N项开始显示，而不是显示文件的最后N项。N值后面可以有后缀：b表示512，k表示1024，m表示1 048576(1M)。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-d&lt;目录&gt;或--database=&lt;目录&gt; 　指定数据库所在的目录。</span><br><span class="line">-u 　更新slocate数据库。</span><br><span class="line">--help 　显示帮助。</span><br><span class="line">--version 　显示版本信息。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--retry：即是在tail命令启动时，文件不可访问或者文件稍后变得不可访问，都始终尝试打开文件。使用此选项时需要与选项“——follow=name”连用；</span><br><span class="line">-c&lt;N&gt;或——bytes=&lt;N&gt;：输出文件尾部的N（N为整数）个字节内容；</span><br><span class="line">-f&lt;name/descriptor&gt;或；--follow&lt;nameldescript&gt;：显示文件最新追加的内容。“name”表示以文件名的方式监视文件的变化。“-f”与“-fdescriptor”等效；</span><br><span class="line">-F：与选项“-follow=name”和“--retry&quot;连用时功能相同；</span><br><span class="line">-n&lt;N&gt;或——line=&lt;N&gt;：输出文件的尾部N（N位数字）行内容。</span><br><span class="line">--pid=&lt;进程号&gt;：与“-f”选项连用，当指定的进程号的进程终止后，自动退出tail命令；</span><br><span class="line">-q或——quiet或——silent：当有多个文件参数时，不输出各个文件名；</span><br><span class="line">-s&lt;秒数&gt;或——sleep-interal=&lt;秒数&gt;：与“-f”选项连用，指定监视文件变化时间隔的秒数；</span><br><span class="line">-v或——verbose：当有多个文件参数时，总是输出各个文件名；</span><br><span class="line">--help：显示指令的帮助信息；</span><br><span class="line">--version：显示指令的版本信息。</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用指令”slocate”显示文件名中含有关键字”fdisk”的文件路径信息，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk关键字的文件的路径信息 </span></span></span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：指定要显示尾部内容的文件列表。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tail file #（显示文件file的最后10行）</span><br><span class="line">tail -n +20 file #（显示文件file的内容，从第20行至文件末尾）</span><br><span class="line">tail -c 10 file #（显示文件file的最后10个字符）</span><br><span class="line"></span><br><span class="line">tail -25 mail.log # 显示 mail.log 最后的 25 行</span><br><span class="line">tail -f mail.log # 等同于--follow=descriptor，根据文件描述符进行追踪，当文件改名或被删除，追踪停止</span><br><span class="line">tail -F mail.log # 等同于--follow=name  --retry，根据文件名进行追踪，并保持重试，即该文件被删除或改名后，如果再次创建相同的文件名，会继续追踪</span><br></pre></td></tr></table></figure>
 
-<p>执行以上命令后，指令执行的输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk 关键字的文件的路径信息  </span></span></span><br><span class="line">/root/cfdisk        #搜索到的文件路径列表  </span><br><span class="line">/root/fdisk  </span><br><span class="line">/root/sfdisk  </span><br><span class="line">/usr/include/grub/ieee1275/ofdisk.h  </span><br><span class="line">/usr/share/doc/util-Linux/README.cfdisk  </span><br><span class="line">/usr/share/doc/util-Linux/README.fdisk.gz  </span><br><span class="line">/usr/share/doc/util-Linux/examples/sfdisk.examples.gz  </span><br></pre></td></tr></table></figure>
+
 
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
@@ -523,7 +525,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sleep/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/tac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -540,7 +542,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/sleep/" class="post-title-link" itemprop="url">【Linux 命令】sleep</a>
+            <a href="/linux-command/tac/" class="post-title-link" itemprop="url">【Linux 命令】tac</a>
         </h2>
 
         <div class="post-meta-container">
@@ -550,10 +552,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:40:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:58:00 11:58:00" itemprop="dateModified" datetime="2020-09-25T11:58:00+08:00">2020-09-25 11:58:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -572,7 +580,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>286</span>
+      <span>727</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -590,467 +598,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>将目前动作延迟一段时间</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sleep命令</strong> 暂停指定的时间。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sleep(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>时间：指定要暂停时间的长度。</p>
-<p>时间长度，后面可接 s、m、h 或 d，其中 s 为秒，m 为 分钟，h 为小时，d 为日数。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>有时在写一些以循环方式运行的监控脚本，设置时间间隔是必不可少的，下面是一个Shell进度条的脚本演示在脚本中生成延时。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">b=&#x27;&#x27;</span><br><span class="line">for ((i=0;$i&lt;=100;i++))</span><br><span class="line"> do</span><br><span class="line"> printf &quot;Progress:[%-100s]%d%%\r&quot; $b $i</span><br><span class="line"> sleep 0.1</span><br><span class="line"> b=#$b</span><br><span class="line"> done</span><br><span class="line">echo</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/slabtop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/slabtop/" class="post-title-link" itemprop="url">【Linux 命令】slabtop</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:39:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>实时显示内核slab内存缓存信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>slabtop命令</strong> 以实时的方式显示内核“slab”缓冲区的细节信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slabtop(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--delay=n, -d n：每n秒更新一次显示的信息，默认是每3秒；</span><br><span class="line">--sort=S, -s S：指定排序标准进行排序（排序标准，参照下面或者man手册）；</span><br><span class="line">--once, -o：显示一次后退出；</span><br><span class="line">--version, -V：显示版本；</span><br><span class="line">--help：显示帮助信息。</span><br></pre></td></tr></table></figure>
-
-<p>排序标准：</p>
-<ul>
-<li>a: sort by number of active objects</li>
-<li>b: sort by objects per slab</li>
-<li>c: sort by cache size</li>
-<li>l: sort by number of slabs</li>
-<li>v：sort by number of active slabs</li>
-<li>n: sort by name</li>
-<li>o: sort by number of objects</li>
-<li>p: sort by pages per slab</li>
-<li>s: sort by object size</li>
-<li>u: sort by cache utilization</li>
-</ul>
-<h3 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h3><p>内核的模块在分配资源的时候，为了提高效率和资源的利用率，都是透过slab来分配的。通过slab的信息，再配合源码能粗粗了解系统的运行情况，比如说什么资源有没有不正常的多，或者什么资源有没有泄漏。linux系统透过/proc/slabinfo来向用户暴露slab的使用情况。</p>
-<p>Linux 所使用的 slab 分配器的基础是 Jeff Bonwick 为 SunOS 操作系统首次引入的一种算法。Jeff 的分配器是围绕对象缓存进行的。在内核中，会为有限的对象集（例如文件描述符和其他常见结构）分配大量内存。Jeff 发现对内核中普通对象进行初始化所需的时间超过了对其进行分配和释放所需的时间。因此他的结论是不应该将内存释放回一个全局的内存池，而是将内存保持为针对特定目而初始化的状态。Linux slab 分配器使用了这种思想和其他一些思想来构建一个在空间和时间上都具有高效性的内存分配器。</p>
-<p>保存着监视系统中所有活动的 slab 缓存的信息的文件为/proc/slabinfo。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">slabtop</span><br><span class="line"></span><br><span class="line"> Active / Total Objects (% used)    : 897519 / 1245930 (72.0%)</span><br><span class="line"> Active / Total Slabs (% used)      : 38605 / 38605 (100.0%)</span><br><span class="line"> Active / Total Caches (% used)     : 94 / 145 (64.8%)</span><br><span class="line"> Active / Total Size (% used)       : 129558.22K / 153432.58K (84.4%)</span><br><span class="line"> Minimum / Average / Maximum Object : 0.01K / 0.12K / 128.00K</span><br><span class="line"></span><br><span class="line">  OBJS ACTIVE  USE OBJ SIZE  SLABS OBJ/SLAB CACHE SIZE NAME                   </span><br><span class="line">440136 171471  38%    0.05K   6113       72     24452K buffer_head</span><br><span class="line">190086 148576  78%    0.05K   2437       78      9748K selinux_inode_security</span><br><span class="line">151840 146366  96%    0.48K  18980        8     75920K ext3_inode_cache</span><br><span class="line">144333 144143  99%    0.02K    711      203      2844K avtab_node</span><br><span class="line">130529 128488  98%    0.13K   4501       29     18004K dentry_cache</span><br><span class="line"> 99214  99071  99%    0.03K    878      113      3512K size-32</span><br><span class="line"> 43834  28475  64%    0.27K   3131       14     12524K radix_tree_node</span><br><span class="line"> 17818   9450  53%    0.06K    302       59      1208K size-64</span><br><span class="line">  4602   4562  99%    0.05K     59       78       236K sysfs_dir_cache</span><br><span class="line">  3220   2855  88%    0.08K     70       46       280K vm_area_struct</span><br><span class="line">  2460   2114  85%    0.12K     82       30       328K size-128</span><br><span class="line">  1564   1461  93%    0.04K     17       92        68K Acpi-Operand</span><br><span class="line">  1540   1540 100%    0.33K    140       11       560K inode_cache</span><br><span class="line">  1524    466  30%    0.01K      6      254        24K anon_vma</span><br><span class="line">  1440    515  35%    0.05K     20       72        80K avc_node</span><br><span class="line">  1440   1154  80%    0.19K     72       20       288K filp</span><br><span class="line">  1170   1023  87%    0.05K     15       78        60K ext3_xattr</span><br><span class="line">   845    724  85%    0.02K      5      169        20K Acpi-Namespace</span><br><span class="line">   638    315  49%    0.35K     58       11       232K proc_inode_cache</span><br><span class="line">   450    434  96%    0.25K     30       15       120K size-256</span><br><span class="line">   424    386  91%    0.50K     53        8       212K size-512</span><br><span class="line">   312    107  34%    0.05K      4       78        16K delayacct_cache</span><br><span class="line">   306    284  92%    0.43K     34        9       136K shmem_inode_cache</span><br><span class="line">   303    108  35%    0.04K      3      101        12K pid</span><br><span class="line">   300    261  87%    0.19K     15       20        60K skbuff_head_cache</span><br><span class="line">   300    300 100%    0.12K     10       30        40K bio</span><br><span class="line">   260    260 100%   32.00K    260        1      8320K size-32768</span><br><span class="line">   254      6   2%    0.01K      1      254         4K revoke_table</span><br><span class="line">   236     55  23%    0.06K      4       59        16K fs_cache</span><br><span class="line">   216    203  93%    1.00K     54        4       216K size-1024</span><br><span class="line">   214    214 100%    2.00K    107        2       428K size-2048</span><br><span class="line">   203     83  40%    0.02K      1      203         4K biovec-1</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/skill/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/skill/" class="post-title-link" itemprop="url">【Linux 命令】skill</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:39:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>向选定的进程发送信号冻结进程</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>skill命令</strong> 用于向选定的进程发送信号，冻结进程。这个命令初学者并不常用，深入之后牵涉到系统服务优化之后可能会用到。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-f：快速模式；</span><br><span class="line">-i：交互模式，每一步操作都需要确认；</span><br><span class="line">-v：冗余模式；</span><br><span class="line">-w：激活模式；</span><br><span class="line">-V：显示版本号；</span><br><span class="line">-t：指定开启进程的终端号；</span><br><span class="line">-u：指定开启进程的用户；</span><br><span class="line">-p：指定进程的id号；</span><br><span class="line">-c：指定开启进程的指令名称。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如果您发现了一个占用大量CPU和内存的进程，但又不想停止它，该怎么办？考虑下面的top命令输出：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">top -c -p 16514</span><br><span class="line">23:00:44  up 12 days,  2:04,  4 users,  load average: 0.47, 0.35, 0.31</span><br><span class="line">1 processes: 1 sleeping, 0 running, 0 zombie, 0 stopped</span><br><span class="line">CPU states:  cpu    user    nice  system    irq  softirq  iowait    idle</span><br><span class="line">           total    0.0%    0.6%    8.7%   2.2%     0.0%   88.3%    0.0%</span><br><span class="line">Mem:  1026912k av, 1010476k used,   16436k free,       0k shrd,   52128k buff</span><br><span class="line">                    766724k actv,  143128k in_d,   14264k in_c</span><br><span class="line">Swap: 2041192k av,   83160k used, 1958032k free                  799432k cached</span><br><span class="line"></span><br><span class="line">  PID USER     PRI  NI  SIZE  RSS SHARE stat %CPU %MEM   time CPU command</span><br><span class="line">16514 oracle    19   4 28796  26M 20252 D N   7.0  2.5   0:03   0 oraclePRODB2...</span><br></pre></td></tr></table></figure>
-
-<p>既然您确认进程16514占用了大量内存，您就可以使用skill命令“冻结”它，而不是停止它。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -STOP 1</span><br></pre></td></tr></table></figure>
-
-<p>之后，检查top输出：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">23:01:11  up 12 days,  2:05,  4 users,  load average: 1.20, 0.54, 0.38</span><br><span class="line">1 processes: 0 sleeping, 0 running, 0 zombie, 1 stopped</span><br><span class="line">CPU states:  cpu    user    nice  system    irq  softirq  iowait    idle</span><br><span class="line">           total    2.3%    0.0%    0.3%   0.0%     0.0%    2.3%   94.8%</span><br><span class="line">Mem:  1026912k av, 1008756k used,   18156k free,       0k shrd,    3976k buff</span><br><span class="line">                    770024k actv,  143496k in_d,   12876k in_c</span><br><span class="line">Swap: 2041192k av,   83152k used, 1958040k free                  851200k cached</span><br><span class="line"></span><br><span class="line">  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME CPU COMMAND</span><br><span class="line">16514 oracle    19   4 28796  26M 20252 T N   0.0  2.5   0:04   0 oraclePRODB2...</span><br></pre></td></tr></table></figure>
-
-<p>现在，CPU 从 0% 空闲变为 94% 空闲。该进程被有效冻结。过一段时间之后，您可能希望唤醒该进程：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -CONT 16514</span><br></pre></td></tr></table></figure>
-
-<p>如果希望暂时冻结进程以便为完成更重要的进程腾出空间，该方法非常有用。</p>
-<p>此命令用途很广。如果您要停止 “oracle” 用户的所有进程，只需要一个命令即可实现：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -STOP oracle</span><br></pre></td></tr></table></figure>
-
-<p>可以使用用户、PID、命令或终端 id 作为参数。以下命令可停止所有 rman 命令。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -STOP rman</span><br></pre></td></tr></table></figure>
-
-<p>如您所见，skill 决定您输入的参数（进程 ID、用户 ID 或命令）并进行相应操作。这可能会导致在某些情况下出现这样的问题：您可能具有同名的用户和命令。最好的示例是 “oracle” 进程，通常由用户 “oracle” 运行。因此，当您希望停止名为 “oracle” 的进程时，可执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -STOP oracle</span><br></pre></td></tr></table></figure>
-
-<p>用户 “oracle” 的所有进程都停止，包括您可能要使用的会话。要非常明确地执行命令，您可以选择使用一个新参数指定参数的类型。要停止一个名为 oracle 的命令，可执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">skill -STOP -c oracle</span><br></pre></td></tr></table></figure>
-
-<p>snice命令的功能与skill类似。但它用于降低进程的优先级，而不是停止进程。首先，检查 top 输出：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME CPU COMMAND</span><br><span class="line">    3 root      15   0     0    0     0 RW    0.0  0.0   0:00   0 kapmd</span><br><span class="line">13680 oracle    15   0 11336  10M  8820 T     0.0  1.0   0:00   0 oracle</span><br><span class="line">13683 oracle    15   0  9972 9608  7788 T     0.0  0.9   0:00   0 oracle</span><br><span class="line">13686 oracle    15   0  9860 9496  7676 T     0.0  0.9   0:00   0 oracle</span><br><span class="line">13689 oracle    15   0 10004 9640  7820 T     0.0  0.9   0:00   0 oracle</span><br><span class="line">13695 oracle    15   0  9984 9620  7800 T     0.0  0.9   0:00   0 oracle</span><br><span class="line">13698 oracle    15   0 10064 9700  7884 T     0.0  0.9   0:00   0 oracle</span><br><span class="line">13701 oracle    15   0 22204  21M 16940 T     0.0  2.1   0:00   0 oracle</span><br></pre></td></tr></table></figure>
-
-<p>现在，将 “oracle” 进程的优先级降低四个点。注意，该值越高，优先级越低。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">snice +4 -u oracle</span><br><span class="line">  PID USER     PRI  NI  SIZE  RSS SHARE STAT %CPU %MEM   TIME CPU COMMAND</span><br><span class="line">16894 oracle    20   4 38904  32M 26248 D N   5.5  3.2   0:01   0 oracle</span><br></pre></td></tr></table></figure>
-
-<p>注意，NI 列（nice 值）现在是 4，优先级现在设置为 20，而不是 15。这对于降低优先级非常有帮助。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shutdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/shutdown/" class="post-title-link" itemprop="url">【Linux 命令】shutdown</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:38:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>442</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用来执行系统关机的命令</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>shutdown命令</strong> 用来系统关机命令。shutdown指令可以关闭所有程序，并依用户的需要，进行重新开机或关机的动作。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-c：当执行“shutdown -h 11:50”指令时，只要按+键就可以中断关机的指令；</span><br><span class="line">-f：重新启动时不执行fsck；</span><br><span class="line">-F：重新启动时执行fsck；</span><br><span class="line">-h：将系统关机；</span><br><span class="line">-k：只是送出信息给所有用户，但不会实际关机；</span><br><span class="line">-n：不调用init程序进行关机，而由shutdown自己进行；</span><br><span class="line">-r：shutdown之后重新启动；</span><br><span class="line">-t&lt;秒数&gt;：送出警告信息和删除信息之间要延迟多少秒。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>[时间]：设置多久时间后执行shutdown指令；</li>
-<li>[警告信息]：要传送给所有登入用户的信息。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>指定现在立即关机：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown -h now</span><br></pre></td></tr></table></figure>
-
-<p>指定5分钟后关机，同时送出警告信息给登入用户：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown +5 &quot;System will shutdown after 5 minutes&quot;</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shuf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/shuf/" class="post-title-link" itemprop="url">【Linux 命令】shuf</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:38:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>754</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>产生随机的排列。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shuf [OPTION]... [FILE]</span><br><span class="line">shuf -e [OPTION]... [ARG]...</span><br><span class="line">shuf -i LO-HI [OPTION]...</span><br></pre></td></tr></table></figure>
+          <p>连接多个文件并以行为单位反向打印到标准输出。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tac [OPTION]... [FILE]...</span><br></pre></td></tr></table></figure>
 
 <h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>将输入的内容随机排列并输出。</li>
-<li>当没有文件或文件为<code>-</code>时，读取标准输入。</li>
+<li>按行为单位反向显示文件内容，如果没有文件或文件为<code>-</code>则读取标准输入。</li>
+<li>处理多个文件时，依次将每个文件反向显示，而不是将所有文件连在一起再反向显示。</li>
 </ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-e, --echo                  将每个ARG视为输入行。</span><br><span class="line">-i, --input-range=LO-HI     将数字范围LO（最低）到HI（最高）之间的作为输入行。</span><br><span class="line">-n, --head-count=COUNT      只输出前COUNT行。</span><br><span class="line">-o, --output=FILE           将结果写入到文件而不是标准输出。</span><br><span class="line">    --random-source=FILE    将FILE中内容作为随机数据源。</span><br><span class="line">-r, --repeat                输出行可以重复。</span><br><span class="line">-z, --zero-terminated       行终止符为NUL（空字符）而不是默认的换行符。</span><br><span class="line">--help                      显示帮助信息并退出。</span><br><span class="line">--version                   显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>FILE（可选）：要处理的文件，可以为一或多个。</p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">长选项与短选项等价</span><br><span class="line"></span><br><span class="line">-b, --before              在之前而不是之后连接分隔符。</span><br><span class="line">-r, --regex               将分隔符作为基础正则表达式（BRE）处理。</span><br><span class="line">-s, --separator=STRING    使用STRING作为分隔符代替默认的换行符。</span><br><span class="line">--help                    显示帮助信息并退出。</span><br><span class="line">--version                 显示版本信息并退出。</span><br></pre></td></tr></table></figure>
 
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>FILE（可选）：要处理的文件，可以为任意数量。</p>
-<p>ARG（可选）：作为输入行的字符串，可以为任意数量。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 模拟硬币抛掷，获取前10个结果：</span></span><br><span class="line">[user2@pc ~]$ head -r -n 10 -e &quot;正面&quot; -e &quot;反面&quot;</span><br><span class="line">反面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">反面</span><br><span class="line">反面</span><br><span class="line">反面</span><br><span class="line">正面</span><br><span class="line">正面</span><br><span class="line">正面</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 体彩超级大乐透：</span></span><br><span class="line">[user2@pc ~]$ shuf -i 1-35 -n 5|sort -n &amp;&amp; shuf -i 1-12 -n 2|sort -n</span><br><span class="line">4</span><br><span class="line">17</span><br><span class="line">20</span><br><span class="line">29</span><br><span class="line">31</span><br><span class="line">6</span><br><span class="line">11</span><br></pre></td></tr></table></figure>
-
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回状态为成功除非给出了非法选项或非法参数。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 选自官方info文档的例子：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 一个接着一个字符的反转一个文件：</span></span><br><span class="line">tac -r -s &#x27;x\|[^x]&#x27; test.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关于-b选项：</span></span><br><span class="line">seq 1 3 |tac</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出</span></span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用-b选项：</span></span><br><span class="line">seq 1 3 |tac -b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出，注意21后面没有换行符：</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">21</span><br><span class="line"><span class="meta">#</span><span class="bash"> 前一个例子相当于将 <span class="string">&#x27;1\n2\n3\n&#x27;</span> 转换为 <span class="string">&#x27;3\n2\n1\n&#x27;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 前一个例子相当于将 <span class="string">&#x27;1\n2\n3\n&#x27;</span> 转换为 <span class="string">&#x27;\n\n3\n21&#x27;</span></span></span><br></pre></td></tr></table></figure>
 
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是<code>GNU coreutils</code>包中的命令，更多详细的帮助信息请查看<code>man -s 1 shuf</code>，<code>info coreutils &#39;shuf invocation&#39;</code>。</li>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 tac</code>或<code>info coreutils &#39;tac invocation&#39;</code>。</li>
+<li>关于基础正则表达式（BRE）的内容，详见<code>man -s 1 grep</code>的<code>REGULAR EXPRESSIONS</code>段落。</li>
 </ol>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
@@ -1074,7 +637,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/showmount/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/systool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1091,7 +654,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/showmount/" class="post-title-link" itemprop="url">【Linux 命令】showmount</a>
+            <a href="/linux-command/systool/" class="post-title-link" itemprop="url">【Linux 命令】systool</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1101,10 +664,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:37:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:57:30 11:57:30" itemprop="dateModified" datetime="2020-09-25T11:57:30+08:00">2020-09-25 11:57:30</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -1123,14 +692,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>150</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1141,13 +710,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>显示NFS服务器加载的信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>showmount命令</strong> 查询“mountd”守护进程，以显示NFS服务器加载的信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showmount(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>显示基于总线、类和拓扑显示系统中设备的信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>systool命令</strong> 指令显示基于总线、类和拓扑显示系统中设备的信息。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systool(选项)(参数)</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d：仅显示已被NFS客户端加载的目录；</span><br><span class="line">-e：显示NFS服务器上所有的共享目录。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-a：显示被请求资源的属性；</span><br><span class="line">-b&lt;总线&gt;：显示指定总线的信息；</span><br><span class="line">-c&lt;class&gt;：显示指定类的信息；</span><br><span class="line">-d：仅显示设备；</span><br><span class="line">-h：显示指令的用法；</span><br><span class="line">-m&lt;模块名称&gt;：显示指定模块的信息；</span><br><span class="line">-p：显示资源的“sysfs”绝对路径；</span><br><span class="line">-v：显示所有属性；</span><br><span class="line">-A&lt;属性&gt;：显示请求资源的属性值；</span><br><span class="line">-D：仅显示驱动程序信息；</span><br><span class="line">-P：显示设备的父类。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>NFS服务器：指定NFS服务器的ip地址或者主机名。</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>设备：指定要查看信息的设备名称。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systool</span><br><span class="line">Supported sysfs buses:</span><br><span class="line">        acpi</span><br><span class="line">        i2c</span><br><span class="line">        ide</span><br><span class="line">        pci_express</span><br><span class="line">        pci</span><br><span class="line">        pcmcia</span><br><span class="line">        platform</span><br><span class="line">        pnp</span><br><span class="line">        scsi</span><br><span class="line">        serio</span><br><span class="line">        usb</span><br><span class="line">Supported sysfs classes:</span><br><span class="line">        backlight</span><br><span class="line">        cpuid</span><br><span class="line">        dma_v3</span><br><span class="line">        firmware</span><br><span class="line">        graphics</span><br><span class="line">        hidraw</span><br><span class="line">        hwmon</span><br><span class="line">        i2c-adapter</span><br><span class="line">        input</span><br><span class="line">        leds</span><br><span class="line">        mem</span><br><span class="line">        misc</span><br><span class="line">        msr</span><br><span class="line">        net</span><br><span class="line">        pci_bus</span><br><span class="line">        pcmcia_socket</span><br><span class="line">        printer</span><br><span class="line">        raw</span><br><span class="line">        sas_device</span><br><span class="line">        sas_end_device</span><br><span class="line">        sas_expander</span><br><span class="line">        sas_host</span><br><span class="line">        sas_phy</span><br><span class="line">        sas_port</span><br><span class="line">        scsi_device</span><br><span class="line">        scsi_disk</span><br><span class="line">        scsi_generic</span><br><span class="line">        scsi_host</span><br><span class="line">        sound</span><br><span class="line">        tty</span><br><span class="line">        usb_device</span><br><span class="line">        usb_endpoint</span><br><span class="line">        usb_host</span><br><span class="line">        vc</span><br><span class="line">        vtconsole</span><br><span class="line">Supported sysfs devices:</span><br><span class="line">        acpi</span><br><span class="line">        pci0000:00</span><br><span class="line">        platform</span><br><span class="line">        pnp0</span><br><span class="line">        sequencer2</span><br><span class="line">        sequencer</span><br><span class="line">        seq</span><br><span class="line">        system</span><br><span class="line">        timer</span><br><span class="line">Supported sysfs modules:</span><br><span class="line">        8250</span><br><span class="line">        acpi_memhotplug</span><br><span class="line">        ac</span><br><span class="line">        asus_acpi</span><br><span class="line">        ata_piix</span><br><span class="line">        auth_rpcgss</span><br><span class="line">        backlight</span><br><span class="line">        battery</span><br><span class="line">        button</span><br><span class="line">        cifs</span><br><span class="line">        cpufreq</span><br><span class="line">        crypto_api</span><br><span class="line">        dell_wmi</span><br><span class="line">        dm_log</span><br><span class="line">        dm_mem_cache</span><br><span class="line">        dm_message</span><br><span class="line">        dm_mirror</span><br><span class="line">        dm_mod</span><br><span class="line">        dm_multipath</span><br><span class="line">        dm_raid45</span><br><span class="line">        dm_region_hash</span><br><span class="line">        dock</span><br><span class="line">        e1000e</span><br><span class="line">        edac_mc</span><br><span class="line">        ehci_hcd</span><br><span class="line">        exportfs</span><br><span class="line">        ext3</span><br><span class="line">        hwmon</span><br><span class="line">        i2c_core</span><br><span class="line">        i2c_ec</span><br><span class="line">        i2c_i801</span><br><span class="line">        i7core_edac</span><br><span class="line">        i8042</span><br><span class="line">        ip_conntrack_netbios_ns</span><br><span class="line">        ip_conntrack</span><br><span class="line">        ip_tables</span><br><span class="line">        iptable_filter</span><br><span class="line">        ipv6</span><br><span class="line">        it821x</span><br><span class="line">        jbd</span><br><span class="line">        joydev</span><br><span class="line">        keyboard</span><br><span class="line">        libata</span><br><span class="line">        lockd</span><br><span class="line">        lp</span><br><span class="line">        md_mod</span><br><span class="line">        mousedev</span><br><span class="line">        mpt2sas</span><br><span class="line">        nfnetlink</span><br><span class="line">        nfs_acl</span><br><span class="line">        nfsd</span><br><span class="line">        nls_utf8</span><br><span class="line">        ohci_hcd</span><br><span class="line">        parport_pc</span><br><span class="line">        parport</span><br><span class="line">        pci_hotplug</span><br><span class="line">        pcmcia</span><br><span class="line">        pcmcia_core</span><br><span class="line">        pcspkr</span><br><span class="line">        piix</span><br><span class="line">        power_meter</span><br><span class="line">        printk</span><br><span class="line">        processor</span><br><span class="line">        psmouse</span><br><span class="line">        rsrc_nonstatic</span><br><span class="line">        sbs</span><br><span class="line">        scsi_dh</span><br><span class="line">        scsi_mod</span><br><span class="line">        scsi_transport_sas</span><br><span class="line">        sd_mod</span><br><span class="line">        serio_raw</span><br><span class="line">        sg</span><br><span class="line">        shpchp</span><br><span class="line">        snd_hda_intel</span><br><span class="line">        snd_hwdep</span><br><span class="line">        snd_mixer_oss</span><br><span class="line">        snd_page_alloc</span><br><span class="line">        snd_pcm_oss</span><br><span class="line">        snd_pcm</span><br><span class="line">        snd_seq_device</span><br><span class="line">        snd_seq_dummy</span><br><span class="line">        snd_seq_midi_event</span><br><span class="line">        snd_seq_oss</span><br><span class="line">        snd_seq</span><br><span class="line">        snd_timer</span><br><span class="line">        snd</span><br><span class="line">        soundcore</span><br><span class="line">        sunrpc</span><br><span class="line">        tcp_bic</span><br><span class="line">        tpm_bios</span><br><span class="line">        tpm_tis</span><br><span class="line">        tpm</span><br><span class="line">        uhci_hcd</span><br><span class="line">        usbcore</span><br><span class="line">        usbhid</span><br><span class="line">        video</span><br><span class="line">        wmi</span><br><span class="line">        x_tables</span><br><span class="line">        xfrm_nalgo</span><br><span class="line">        xt_limit</span><br><span class="line">        xt_state</span><br><span class="line">        xt_tcpudp</span><br><span class="line">        yenta_socket</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1169,7 +741,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shopt/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/systemctl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1186,7 +758,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/shopt/" class="post-title-link" itemprop="url">【Linux 命令】shopt</a>
+            <a href="/linux-command/systemctl/" class="post-title-link" itemprop="url">【Linux 命令】systemctl</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1196,10 +768,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:37:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:57:00 11:57:00" itemprop="dateModified" datetime="2020-09-25T11:57:00+08:00">2020-09-25 11:57:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -1218,7 +796,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>566</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1236,23 +814,176 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>显示和设置shell操作选项</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>shopt命令</strong> 用于显示和设置shell中的行为选项，通过这些选项以增强shell易用性。shopt命令若不带任何参数选项，则可以显示所有可以设置的shell操作选项。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shopt(选项)(参数)</span><br></pre></td></tr></table></figure>
+          <p>系统服务管理器指令</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>systemctl命令</strong> 是系统服务管理器指令，它实际上将 service 和 chkconfig 这两个命令组合到一起。</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>旧指令</th>
+<th>新指令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使某服务自动启动</td>
+<td>chkconfig –level 3 httpd on</td>
+<td>systemctl enable httpd.service</td>
+</tr>
+<tr>
+<td>使某服务不自动启动</td>
+<td>chkconfig –level 3 httpd off</td>
+<td>systemctl disable httpd.service</td>
+</tr>
+<tr>
+<td>检查服务状态</td>
+<td>service httpd status</td>
+<td>systemctl status httpd.service （服务详细信息） systemctl is-active httpd.service （仅显示是否 Active)</td>
+</tr>
+<tr>
+<td>显示所有已启动的服务</td>
+<td>chkconfig –list</td>
+<td>systemctl list-units –type=service</td>
+</tr>
+<tr>
+<td>启动服务</td>
+<td>service httpd start</td>
+<td>systemctl start httpd.service</td>
+</tr>
+<tr>
+<td>停止服务</td>
+<td>service httpd stop</td>
+<td>systemctl stop httpd.service</td>
+</tr>
+<tr>
+<td>重启服务</td>
+<td>service httpd restart</td>
+<td>systemctl restart httpd.service</td>
+</tr>
+<tr>
+<td>重载服务</td>
+<td>service httpd reload</td>
+<td>systemctl reload httpd.service</td>
+</tr>
+</tbody></table>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nfs-server.service . # 启动nfs服务</span><br><span class="line">systemctl enable nfs-server.service # 设置开机自启动</span><br><span class="line">systemctl disable nfs-server.service # 停止开机自启动</span><br><span class="line">systemctl status nfs-server.service # 查看服务当前状态</span><br><span class="line">systemctl restart nfs-server.service # 重新启动某服务</span><br><span class="line">systemctl list-units --type=service # 查看所有已启动的服务</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s：激活指定的shell行为选项；</span><br><span class="line">-u：关闭指定的shell行为选项。</span><br></pre></td></tr></table></figure>
+<p>开启防火墙22端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 22 -j accept</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>shell选项：指定要操作的shell选项。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用shopt命令显示当前所有可以设置的shell操作选项，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">shopt           #输出所有可以设置的shell操作选项</span><br><span class="line">cdable_vars     off</span><br><span class="line">cdspell         off</span><br><span class="line">checkhash       off</span><br><span class="line">checkwinsize    on</span><br><span class="line">cmdhist         on</span><br><span class="line">dotglob         off</span><br><span class="line">execfail        off</span><br><span class="line">expand_aliases  on</span><br><span class="line">extdebug        off</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>如果仍然有问题，就可能是SELinux导致的</p>
+<p>关闭SElinux：</p>
+<p>修改<code>/etc/selinux/config</code>文件中的<code>SELINUX=&quot;&quot;</code>为disabled，然后重启。</p>
+<p>彻底关闭防火墙：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status firewalld.service</span><br><span class="line">sudo systemctl stop firewalld.service          </span><br><span class="line">sudo systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
 
-<p>如图上所示，选项”cdspell”的状态为”off”，即关闭cd拼写检查选项。现在，可以使用shopt命令将其开启，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shopt -s cdspell          #开启cd拼写检查</span><br></pre></td></tr></table></figure>
 
-<p>执行上面的命令后，该选项的状态将变为”on”，即开启状态。可以再次通过该命令显示一下shell操作选项即可，输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdspell on                #开启cdspell选项</span><br></pre></td></tr></table></figure>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
-<p>用户可以通过实际执行cd命令检查该选项是否被成功开启。</p>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/syslog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/syslog/" class="post-title-link" itemprop="url">【Linux 命令】syslog</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:56:30 11:56:30" itemprop="dateModified" datetime="2020-09-25T11:56:30+08:00">2020-09-25 11:56:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>761</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>系统默认的日志守护进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>syslog</strong> 是Linux系统默认的日志守护进程。默认的syslog配置文件是/etc/syslog.conf文件。程序，守护进程和内核提供了访问系统的日志信息。因此，任何希望生成日志信息的程序都可以向 syslog 接口呼叫生成该信息。</p>
+<p>几乎所有的网络设备都可以通过syslog协议，将日志信息以用户数据报协议(UDP)方式传送到远端服务器，远端接收日志服务器必须通过syslogd监听UDP 端口514，并根据 syslog.conf配置文件中的配置处理本机，接收访问系统的日志信息，把指定的事件写入特定文件中，供后台数据库管理和响应之用。意味着可以让任何事件都登录到一台或多台服务器上，以备后台数据库用off-line(离线) 方法分析远端设备的事件。</p>
+<p>通常，syslog 接受来自系统的各种功能的信息，每个信息都包括重要级。/etc/syslog.conf 文件通知 syslogd 如何根据设备和信息重要级别来报告信息。</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>在/var/log中创建并写入日志信息是由syslog协议处理的，是由守护进程sylogd负责执行。每个标准的进程都可以用syslog记录日志。可以使用logger命令通过syslogd记录日志。</p>
+<p>要向syslog文件/var/log/messages中记录日志信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logger this is a test log line</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">tail -n 1 messages</span><br><span class="line">Jan  5 10:07:03 localhost root: this is a test log line</span><br></pre></td></tr></table></figure>
+
+<p>如果要记录特定的标记（tag）可以使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">logger -t TAG this is a test log line</span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">tail -n 1 messages</span><br><span class="line">Jan  5 10:37:14 localhost TAG: this is a test log line</span><br></pre></td></tr></table></figure>
+
+
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
@@ -1274,7 +1005,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/shift/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sysctl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1291,7 +1022,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/linux-command/shift/" class="post-title-link" itemprop="url">【Linux 命令】shift</a>
+            <a href="/linux-command/sysctl/" class="post-title-link" itemprop="url">【Linux 命令】sysctl</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1301,10 +1032,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-25 08:00:00 / 修改时间：11:36:30" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25</time>
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:56:00 11:56:00" itemprop="dateModified" datetime="2020-09-25T11:56:00+08:00">2020-09-25 11:56:00</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -1323,7 +1060,130 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>319</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>时动态地修改内核的运行参数</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sysctl命令</strong> 被用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录<code>/proc/sys</code>中。它包含一些TCP/ip堆栈和虚拟内存系统的高级选项， 这可以让有经验的管理员提高引人注目的系统性能。用sysctl可以读取设置超过五百个系统变量。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-n：打印值时不打印关键字；</span><br><span class="line">-e：忽略未知关键字错误；</span><br><span class="line">-N：仅打印名称；</span><br><span class="line">-w：当改变sysctl设置时使用此项；</span><br><span class="line">-p：从配置文件“/etc/sysctl.conf”加载内核参数设置；</span><br><span class="line">-a：打印当前所有可用的内核参数变量和值；</span><br><span class="line">-A：以表格方式打印当前所有可用的内核参数变量和值。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>变量=值：设置内核参数对应的变量值。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看所有可读变量：</p>
+<p>sysctl -a</p>
+<p>读一个指定的变量，例如<code>kern.maxproc</code>：</p>
+<p>sysctl kern.maxproc kern.maxproc: 1044</p>
+<p>要设置一个指定的变量，直接用<code>variable=value</code>这样的语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl kern.maxfiles=5000</span><br><span class="line">kern.maxfiles: 2088 -&gt; 5000</span><br></pre></td></tr></table></figure>
+
+<p>您可以使用sysctl修改系统变量，也可以通过编辑sysctl.conf文件来修改系统变量。sysctl.conf看起来很像rc.conf。它用<code>variable=value</code>的形式来设定值。指定的值在系统进入多用户模式之后被设定。并不是所有的变量都可以在这个模式下设定。</p>
+<p>sysctl变量的设置通常是字符串、数字或者布尔型。（布尔型用 1 来表示’yes’，用 0 来表示’no’）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w kernel.sysrq=0</span><br><span class="line">sysctl -w kernel.core_uses_pid=1</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_redirects=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_source_route=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.rp_filter=1</span><br><span class="line">sysctl -w net.ipv4.tcp_syncookies=1</span><br><span class="line">sysctl -w net.ipv4.tcp_max_syn_backlog=2048</span><br><span class="line">sysctl -w net.ipv4.tcp_fin_timeout=30</span><br><span class="line">sysctl -w net.ipv4.tcp_synack_retries=2</span><br><span class="line">sysctl -w net.ipv4.tcp_keepalive_time=3600</span><br><span class="line">sysctl -w net.ipv4.tcp_window_scaling=1</span><br><span class="line">sysctl -w net.ipv4.tcp_sack=1</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置sysctl"><a href="#配置sysctl" class="headerlink" title="配置sysctl"></a>配置sysctl</h3><p>编辑此文件：<code>/etc/sysctl.conf</code></p>
+<p>如果该文件为空，则输入以下内容，否则请根据情况自己做调整：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Controls <span class="built_in">source</span> route verification</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.rp_filter = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.rp_filter = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disables IP <span class="built_in">source</span> routing</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_source_route = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_source_route = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls the System Request debugging functionality of the kernel</span></span><br><span class="line">kernel.sysrq = 0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls whether core dumps will append the PID to the core filename.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Useful <span class="keyword">for</span> debugging multi-threaded applications.</span></span><br><span class="line">kernel.core_uses_pid = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase maximum amount of memory allocated to shm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only uncomment <span class="keyword">if</span> needed!</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> kernel.shmmax = 67108864</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disable ICMP Redirect Acceptance</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_redirects = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_redirects = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">enable</span> Log Spoofed Packets, Source Routed Packets, Redirect Packets</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.log_martians = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.log_martians = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_fin_timeout connection</span></span><br><span class="line">net.ipv4.tcp_fin_timeout = 25</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_keepalive_time connection</span></span><br><span class="line">net.ipv4.tcp_keepalive_time = 1200</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_window_scaling</span></span><br><span class="line">net.ipv4.tcp_window_scaling = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_sack</span></span><br><span class="line">net.ipv4.tcp_sack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tcp_fack should be on because of sack</span></span><br><span class="line">net.ipv4.tcp_fack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_timestamps</span></span><br><span class="line">net.ipv4.tcp_timestamps = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable TCP SYN Cookie Protection</span></span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable ignoring broadcasts request</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_broadcasts = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable bad error message Protection</span></span><br><span class="line">net.ipv4.icmp_ignore_bogus_error_responses = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> make more <span class="built_in">local</span> ports available</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.ip_local_port_range = 1024 65000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> TCP Re-Ordering value <span class="keyword">in</span> kernel to ‘5′</span></span><br><span class="line">net.ipv4.tcp_reordering = 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Lower syn retry rates</span></span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Set Max SYN Backlog to ‘2048′</span></span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 2048</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Various Settings</span></span><br><span class="line">net.core.netdev_max_backlog = 1024</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the maximum number of skb-heads to be cached</span></span><br><span class="line">net.core.hot_list_length = 256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the tcp-time-wait buckets pool size</span></span><br><span class="line">net.ipv4.tcp_max_tw_buckets = 360000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> This will increase the amount of memory available <span class="keyword">for</span> socket input/output queues</span></span><br><span class="line">net.core.rmem_default = 65535</span><br><span class="line">net.core.rmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_rmem = 4096 87380 8388608</span><br><span class="line">net.core.wmem_default = 65535</span><br><span class="line">net.core.wmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_wmem = 4096 65535 8388608</span><br><span class="line">net.ipv4.tcp_mem = 8388608 8388608 8388608</span><br><span class="line">net.core.optmem_max = 40960</span><br></pre></td></tr></table></figure>
+
+<p>如果希望屏蔽别人 ping 你的主机，则加入以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Disable ping requests</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_all = 1</span><br></pre></td></tr></table></figure>
+
+<p>编辑完成后，请执行以下命令使变动立即生效：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/sbin/sysctl -p</span><br><span class="line">/sbin/sysctl -w net.ipv4.route.flush=1</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sync/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/sync/" class="post-title-link" itemprop="url">【Linux 命令】sync</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:55:30 11:55:30" itemprop="dateModified" datetime="2020-09-25T11:55:30+08:00">2020-09-25 11:55:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>600</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1341,28 +1201,230 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>移动位置参数。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shift [n]</span><br></pre></td></tr></table></figure>
+          <p>用于强制被改变的内容立刻写入磁盘</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sync命令</strong> 用于强制被改变的内容立刻写入磁盘，更新超块信息。</p>
+<p>在Linux/Unix系统中，在文件或数据处理过程中一般先放到内存缓冲区中，等到适当的时候再写入磁盘，以提高系统的运行效率。sync命令则可用来强制将内存缓冲区中的数据立即写入磁盘中。用户通常不需执行sync命令，系统会自动执行update或bdflush操作，将缓冲区的数据写 入磁盘。只有在update或bdflush无法执行或用户需要非正常关机时，才需手动执行sync命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync(选项)</span><br></pre></td></tr></table></figure>
 
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>将位置参数<code>$n, $n+1...</code>重命名为<code>$1, $2...</code>。</li>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：显示帮助；</span><br><span class="line"> --version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="buffer与cache"><a href="#buffer与cache" class="headerlink" title="buffer与cache"></a>buffer与cache</h3><ul>
+<li>buffer：为了解决写磁盘的效率</li>
+<li>cache：为了解决读磁盘的效率</li>
 </ul>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>n（可选）：大于等于1且小于等于参数个数的整数，默认为1。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非n大于参数个数或n小于1以及其他非法值。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>假设我们的脚本文件（test.sh）如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示前三个位置参数。</span></span><br><span class="line">echo &quot;$1 $2 $3&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除前两个位置参数，并将<span class="variable">$3</span>重命名为<span class="variable">$1</span>，之后的以此类推。</span></span><br><span class="line">shift 2</span><br><span class="line">echo &quot;$1 $2 $3&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在终端执行该脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh test.sh q w e r t</span><br></pre></td></tr></table></figure>
-
-<p>返回信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">q w e</span><br><span class="line">e r t</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-</ol>
+<p>linux系统为了提高读写磁盘的效率，会先将数据放在一块buffer中。在写磁盘时并不是立即将数据写到磁盘中，而是先写入这块buffer中了。此时如果重启系统，就可能造成数据丢失。</p>
+<p>sync命令用来flush文件系统buffer，这样数据才会真正的写到磁盘中，并且buffer才能够释放出来，flush就是用来清空buffer。sync命令会强制将数据写入磁盘中，并释放该数据对应的buffer，所以常常会在写磁盘后输入sync命令来将数据真正的写入磁盘。</p>
+<p>如果不去手动的输入sync命令来真正的去写磁盘，linux系统也会周期性的去sync数据。</p>
 <!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
 
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/swapon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/swapon/" class="post-title-link" itemprop="url">【Linux 命令】swapon</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:55:00 11:55:00" itemprop="dateModified" datetime="2020-09-25T11:55:00+08:00">2020-09-25 11:55:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>387</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>激活Linux系统中交换空间</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>swapon命令</strong> 用于激活Linux系统中交换空间，Linux系统的内存管理必须使用交换区来建立虚拟内存。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a：将/etc/fstab文件中所有设置为swap的设备，启动为交换区；</span><br><span class="line">-h：显示帮助；</span><br><span class="line">-p&lt;优先顺序&gt;：指定交换区的优先顺序；</span><br><span class="line">-s：显示交换区的使用状况；</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>交换空间：指定需要激活的交换空间，可以是交换文件和交换分区，如果是交换分区则指定交换分区对应的设备文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkswap -c /dev/hdb4 （-c是检查有无坏块）</span><br><span class="line">swapon -v /dev/hdb4</span><br><span class="line">swapon -s</span><br><span class="line">Filename                                type            Size    Used    Priority</span><br><span class="line">/dev/hda5                               partition       506008 96      -1</span><br><span class="line">/dev/hdb4                               partition       489972 0       -2</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/swapoff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/swapoff/" class="post-title-link" itemprop="url">【Linux 命令】swapoff</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:54:30 11:54:30" itemprop="dateModified" datetime="2020-09-25T11:54:30+08:00">2020-09-25 11:54:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>212</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>关闭指定的交换空间</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>swapoff命令</strong> 用于关闭指定的交换空间（包括交换文件和交换分区）。swapoff实际上为swapon的符号连接，可用来关闭系统的交换区。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-a：关闭配置文件“/etc/fstab”中所有的交换空间。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>交换空间：指定需要激活的交换空间，可以是交换文件和交换分区，如果是交换分区则指定交换分区对应的设备文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>关闭交换分区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff /dev/sda2</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
 
@@ -1382,7 +1444,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1437,14 +1499,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">733k</span>
+    <span title="站点总字数">820k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">11:06</span>
+    <span title="站点阅读时长">12:26</span>
   </span>
 </div>
 <div class="busuanzi-count">
