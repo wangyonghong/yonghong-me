@@ -4,11 +4,33 @@
 import time
 import yaml
 import os
+import requests
+import zipfile
+import shutil
 
-# 下载
-# wget https://github.com/jaywcjlove/linux-command/archive/master.zip -O linux-command-master.zip
-# unzip linux-command-master.zip
+linux_command_zip = 'linux-command-master.zip'
+linux_command_unzip = 'linux-command-master/'
 linux_command_dir = 'linux-command-master/command/'
+try:
+    os.remove(linux_command_zip)
+except:
+    pass
+
+try:
+    shutil.rmtree(linux_command_unzip)
+except:
+    pass
+
+# download
+url = 'https://github.com/jaywcjlove/linux-command/archive/master.zip'
+r = requests.get(url)
+with open(linux_command_zip, 'wb') as f:
+    f.write(r.content)
+# unzip
+fz = zipfile.ZipFile(linux_command_zip, 'r')
+for file in fz.namelist():
+    fz.extract(file, './')
+
 create_time = "2020-09-25 08:00:00"
 update_time = time.mktime(time.strptime(create_time, '%Y-%m-%d %H:%M:%S'))
 file_list = os.listdir(linux_command_dir)
@@ -27,7 +49,8 @@ for file in file_list:
     metadata['categories'] = ['Linux 命令']
     metadata['date'] = create_time
     update_time = update_time + 30
-    metadata['updated'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(update_time))
+    metadata['updated'] = time.strftime(
+        "%Y-%m-%d %H:%M:%S", time.localtime(update_time))
     metadata_text = yaml.dump(data=metadata, allow_unicode=True)
     # print(metadata_text)
 
@@ -35,3 +58,13 @@ for file in file_list:
     # print(content)
     fout = open('../source/_posts/linux-command/' + file, 'w')
     fout.write(content)
+
+try:
+    os.remove(linux_command_zip)
+except:
+    pass
+
+try:
+    shutil.rmtree(linux_command_unzip)
+except:
+    pass
