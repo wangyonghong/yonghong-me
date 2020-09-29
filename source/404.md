@@ -8,7 +8,7 @@ sitemap: false
 
 [回到我的主页](/)
 
-<iframe width="100%" height="750px" src="/404/t404/"></iframe>
+<iframe width="100%" height="750px" src="/404/t404.html"></iframe>
 
 [回到我的主页](/)
 
