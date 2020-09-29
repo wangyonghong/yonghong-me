@@ -2680,62 +2680,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】cp</title>
-    <url>/linux-command/cp/</url>
-    <content><![CDATA[<p>将源文件或目录复制到目标文件或目录中</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cp命令</strong> 用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同；</span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在；</span><br><span class="line">-i：覆盖既有文件之前先询问用户；</span><br><span class="line">-l：对源文件建立硬连接，而非复制文件；</span><br><span class="line">-p：保留源文件或目录的属性；</span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</span><br><span class="line">-s：对源文件建立符号连接，而非复制文件；</span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份；</span><br><span class="line">-v：详细显示命令执行的操作。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>源文件：制定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用<code>-R</code>选项；</li>
-<li>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的第一行中是 cp 命令和具体的参数（-r 是“递归”， -u 是“更新”，-v 是“详细”）。接下来的三行显示被复制文件的信息，最后一行显示命令行提示符。这样，只拷贝新的文件到我的存储设备上，我就使用 cp 的“更新”和“详细”选项。</p>
-<p>通常来说，参数 <code>-r</code> 也可用更详细的风格 <code>--recursive</code>。但是以简短的方式，也可以这么连用 <code>-ruv</code>。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r -u -v /usr/men/tmp ~/men/tmp</span><br></pre></td></tr></table></figure>
-
-<p>版本备份 <code>--backup=numbered</code> 参数意思为“我要做个备份，而且是带编号的连续备份”。所以一个备份就是 1 号，第二个就是 2 号，等等。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp --force --backup=numbered test1.py test1.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">test1.py test1.py.~1~ test1.py.~2~</span><br></pre></td></tr></table></figure>
-
-<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点<code>.</code>或点点<code>..</code>的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ../mary/homework/assign .</span><br></pre></td></tr></table></figure>
-
-<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。</p>
-<p>将文件file复制到目录<code>/usr/men/tmp</code>下，并改名为file1</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp file /usr/men/tmp/file1</span><br></pre></td></tr></table></figure>
-
-<p>将目录<code>/usr/men</code>下的所有文件及其子目录复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r /usr/men /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>交互式地将目录<code>/usr/men</code>中的以m打头的所有.c文件复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>我们在Linux下使用cp命令复制文件时候，有时候会需要覆盖一些同名文件，覆盖文件的时候都会有提示：需要不停的按Y来确定执行覆盖。文件数量不多还好，但是要是几百个估计按Y都要吐血了，于是折腾来半天总结了一个方法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制目录aaa下所有到/bbb目录下，这时如果/bbb目录下有和aaa同名的文件，需要按Y来确认并且会略过aaa目录下的子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这次依然需要按Y来确认操作，但是没有忽略子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 依然需要按Y来确认操作，并且把aaa目录以及子目录和文件属性也传递到了/bbb。</span></span><br><span class="line"></span><br><span class="line">\cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功，没有提示按Y、传递了目录属性、没有略过目录。</span></span><br></pre></td></tr></table></figure>
-
-<p>递归强制复制目录到指定目录中覆盖已存在文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -rfb ./* ../backup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将当前目录下所有文件，复制到当前目录的兄弟目录 backup 文件夹中</span></span><br></pre></td></tr></table></figure>
-
-<p>拷贝目录下的隐藏文件如 <code>.babelrc</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r aaa/.* ./bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 aaa 目录下的，所有`.`开头的文件，复制到 bbb 目录中。</span></span><br><span class="line"></span><br><span class="line">cp -a aaa ./bbb/ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 记住后面目录最好的<span class="string">&#x27;/&#x27;</span> 带上 `-a` 参数</span></span><br></pre></td></tr></table></figure>
-
-<p>复制到当前目录</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cp aaa.conf ./</span><br><span class="line"><span class="comment"># 将 aaa.conf 复制到当前目录</span></span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>cp</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】cpio</title>
     <url>/linux-command/cpio/</url>
     <content><![CDATA[<p>用来建立、还原备份档的工具程序</p>
@@ -2913,6 +2857,62 @@
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>csplit</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】cp</title>
+    <url>/linux-command/cp/</url>
+    <content><![CDATA[<p>将源文件或目录复制到目标文件或目录中</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cp命令</strong> 用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同；</span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在；</span><br><span class="line">-i：覆盖既有文件之前先询问用户；</span><br><span class="line">-l：对源文件建立硬连接，而非复制文件；</span><br><span class="line">-p：保留源文件或目录的属性；</span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</span><br><span class="line">-s：对源文件建立符号连接，而非复制文件；</span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份；</span><br><span class="line">-v：详细显示命令执行的操作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>源文件：制定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用<code>-R</code>选项；</li>
+<li>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的第一行中是 cp 命令和具体的参数（-r 是“递归”， -u 是“更新”，-v 是“详细”）。接下来的三行显示被复制文件的信息，最后一行显示命令行提示符。这样，只拷贝新的文件到我的存储设备上，我就使用 cp 的“更新”和“详细”选项。</p>
+<p>通常来说，参数 <code>-r</code> 也可用更详细的风格 <code>--recursive</code>。但是以简短的方式，也可以这么连用 <code>-ruv</code>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r -u -v /usr/men/tmp ~/men/tmp</span><br></pre></td></tr></table></figure>
+
+<p>版本备份 <code>--backup=numbered</code> 参数意思为“我要做个备份，而且是带编号的连续备份”。所以一个备份就是 1 号，第二个就是 2 号，等等。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp --force --backup=numbered test1.py test1.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">test1.py test1.py.~1~ test1.py.~2~</span><br></pre></td></tr></table></figure>
+
+<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点<code>.</code>或点点<code>..</code>的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ../mary/homework/assign .</span><br></pre></td></tr></table></figure>
+
+<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。</p>
+<p>将文件file复制到目录<code>/usr/men/tmp</code>下，并改名为file1</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp file /usr/men/tmp/file1</span><br></pre></td></tr></table></figure>
+
+<p>将目录<code>/usr/men</code>下的所有文件及其子目录复制到目录<code>/usr/zh</code>中</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r /usr/men /usr/zh</span><br></pre></td></tr></table></figure>
+
+<p>交互式地将目录<code>/usr/men</code>中的以m打头的所有.c文件复制到目录<code>/usr/zh</code>中</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
+
+<p>我们在Linux下使用cp命令复制文件时候，有时候会需要覆盖一些同名文件，覆盖文件的时候都会有提示：需要不停的按Y来确定执行覆盖。文件数量不多还好，但是要是几百个估计按Y都要吐血了，于是折腾来半天总结了一个方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制目录aaa下所有到/bbb目录下，这时如果/bbb目录下有和aaa同名的文件，需要按Y来确认并且会略过aaa目录下的子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这次依然需要按Y来确认操作，但是没有忽略子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 依然需要按Y来确认操作，并且把aaa目录以及子目录和文件属性也传递到了/bbb。</span></span><br><span class="line"></span><br><span class="line">\cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功，没有提示按Y、传递了目录属性、没有略过目录。</span></span><br></pre></td></tr></table></figure>
+
+<p>递归强制复制目录到指定目录中覆盖已存在文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -rfb ./* ../backup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将当前目录下所有文件，复制到当前目录的兄弟目录 backup 文件夹中</span></span><br></pre></td></tr></table></figure>
+
+<p>拷贝目录下的隐藏文件如 <code>.babelrc</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r aaa/.* ./bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 aaa 目录下的，所有`.`开头的文件，复制到 bbb 目录中。</span></span><br><span class="line"></span><br><span class="line">cp -a aaa ./bbb/ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 记住后面目录最好的<span class="string">&#x27;/&#x27;</span> 带上 `-a` 参数</span></span><br></pre></td></tr></table></figure>
+
+<p>复制到当前目录</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cp aaa.conf ./</span><br><span class="line"><span class="comment"># 将 aaa.conf 复制到当前目录</span></span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>cp</tag>
       </tags>
   </entry>
   <entry>
@@ -10669,12 +10669,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjOTc7JiMxMDA7JiN4NmQ7JiN4Njk7JiMxMTA7JiM2NDsmI3g2YTsmI3g3MzsmIzEwMDsmI3g2OTsmI3g2NzsmIzQ2OyYjOTk7JiN4NmY7JiN4NmQ7">&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x6a;&#x73;&#100;&#x69;&#x67;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjeDZkOyYjeDY5OyYjeDZlOyYjeDQwOyYjMTA2OyYjMTE1OyYjMTAwOyYjMTA1OyYjeDY3OyYjNDY7JiN4NjM7JiMxMTE7JiMxMDk7">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#106;&#115;&#100;&#105;&#x67;&#46;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjeDY1OyYjeDcyOyYjNjQ7JiMxMDY7JiN4NzM7JiMxMDA7JiMxMDU7JiMxMDM7JiN4MmU7JiN4NjM7JiMxMTE7JiMxMDk7">&#117;&#115;&#x65;&#x72;&#64;&#106;&#x73;&#100;&#105;&#103;&#x2e;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjeDczOyYjeDY1OyYjeDcyOyYjeDQwOyYjeDZhOyYjeDczOyYjMTAwOyYjMTA1OyYjeDY3OyYjeDJlOyYjeDYzOyYjMTExOyYjeDZkOw==">&#x75;&#x73;&#x65;&#x72;&#x40;&#x6a;&#x73;&#100;&#105;&#x67;&#x2e;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -16674,10 +16674,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjeDZiOyYjeDcyOyYjMTAxOyYjMTIxOyYjeDQwOyYjeDQ5OyYjeDUzOyYjNzM7JiM0NjsmIzY5OyYjeDQ0OyYjeDU1Ow==">&#106;&#x6b;&#x72;&#101;&#121;&#x40;&#x49;&#x53;&#73;&#46;&#69;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjMTExOyYjeDQwOyYjeDYzOyYjMTE1OyYjNDY7JiN4Njg7JiN4NzU7JiN4NzQ7JiN4MmU7JiMxMDI7JiMxMDU7">&#121;&#x6c;&#111;&#x40;&#x63;&#115;&#46;&#x68;&#x75;&#x74;&#x2e;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjOTc7JiN4NmU7JiN4NjE7JiN4NDA7JiN4NDk7JiM4MzsmI3g0OTsmIzQ2OyYjNjk7JiM2ODsmI3g1NTs=">&#105;&#97;&#x6e;&#x61;&#x40;&#x49;&#83;&#x49;&#46;&#69;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjeDZhOyYjMTA3OyYjMTE0OyYjeDY1OyYjMTIxOyYjeDQwOyYjeDQ5OyYjeDUzOyYjNzM7JiM0NjsmI3g0NTsmIzY4OyYjeDU1Ow==">&#x6a;&#107;&#114;&#x65;&#121;&#x40;&#x49;&#x53;&#73;&#46;&#x45;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjMTExOyYjeDQwOyYjeDYzOyYjMTE1OyYjeDJlOyYjeDY4OyYjeDc1OyYjMTE2OyYjNDY7JiMxMDI7JiMxMDU7">&#121;&#x6c;&#111;&#x40;&#x63;&#115;&#x2e;&#x68;&#x75;&#116;&#46;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjOTc7JiMxMTA7JiN4NjE7JiN4NDA7JiM3MzsmIzgzOyYjeDQ5OyYjeDJlOyYjeDQ1OyYjeDQ0OyYjODU7">&#105;&#97;&#110;&#x61;&#x40;&#73;&#83;&#x49;&#x2e;&#x45;&#x44;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiN4NzA7JiMxMDQ7JiMxMDE7JiN4NzI7JiMxMTI7JiMxMTc7JiMxMTA7JiN4NmI7JiMxMTU7JiN4NDA7JiMxMTY7JiMxMTE7JiM5NzsmIzEwMDsmI3gyZTsmI3g2MzsmI3g2ZjsmIzEwOTs=">&#99;&#121;&#x70;&#104;&#101;&#x72;&#112;&#117;&#110;&#x6b;&#115;&#x40;&#116;&#111;&#97;&#100;&#x2e;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiMxMTI7JiMxMDQ7JiMxMDE7JiMxMTQ7JiN4NzA7JiMxMTc7JiN4NmU7JiN4NmI7JiMxMTU7JiM2NDsmIzExNjsmI3g2ZjsmI3g2MTsmI3g2NDsmIzQ2OyYjeDYzOyYjeDZmOyYjeDZkOw==">&#99;&#121;&#112;&#104;&#101;&#114;&#x70;&#117;&#x6e;&#x6b;&#115;&#64;&#116;&#x6f;&#x61;&#x64;&#46;&#x63;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -16910,31 +16910,6 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】sum</title>
-    <url>/linux-command/sum/</url>
-    <content><![CDATA[<p>计算文件的校验码和显示块数</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sum命令</strong> 用于计算并显示指定文件的校验和与文件所占用的磁盘块数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sum(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-r：使用BSD的校验和算法，块大小为1k；</span><br><span class="line">-s：使用system V的校验和算法，块大小为512字节。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：需要计算和与磁盘块数的文件列表。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>计算文件校验码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# sum insert.sql</span><br><span class="line">00827    12</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>sum</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】sudo</title>
     <url>/linux-command/sudo/</url>
     <content><![CDATA[<p>以其他身份来执行命令</p>
@@ -17022,6 +16997,31 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>sudo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】sum</title>
+    <url>/linux-command/sum/</url>
+    <content><![CDATA[<p>计算文件的校验码和显示块数</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sum命令</strong> 用于计算并显示指定文件的校验和与文件所占用的磁盘块数。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sum(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-r：使用BSD的校验和算法，块大小为1k；</span><br><span class="line">-s：使用system V的校验和算法，块大小为512字节。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：需要计算和与磁盘块数的文件列表。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>计算文件校验码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# sum insert.sql</span><br><span class="line">00827    12</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>sum</tag>
       </tags>
   </entry>
   <entry>
