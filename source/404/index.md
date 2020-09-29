@@ -6,6 +6,12 @@ comments: false
 sitemap: false
 ---
 
+[回到我的主页](/)
+
+<iframe width="100%" height="750px" src="/404/t404/"></iframe>
+
+[回到我的主页](/)
+
 ![404](https://up-img.yonghong.tech/pic/2020/09/26-19-56-404-mgFbHw.png)
 
-[回到首页](/)
+[回到我的主页](/)
