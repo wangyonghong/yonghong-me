@@ -1896,6 +1896,36 @@
       </tags>
   </entry>
   <entry>
+    <title>【Linux 命令】chattr</title>
+    <url>/linux-command/chattr/</url>
+    <content><![CDATA[<p>用来改变文件属性</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chattr命令</strong> 用来改变文件属性。这项指令可改变存放在ext2文件系统上的文件或目录属性，这些属性共有以下8种模式：</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a：让文件或目录仅供附加用途；</span><br><span class="line">b：不更新文件或目录的最后存取时间；</span><br><span class="line">c：将文件或目录压缩后存放；</span><br><span class="line">d：将文件或目录排除在倾倒操作之外；</span><br><span class="line">i：不得任意更动文件或目录；</span><br><span class="line">s：保密性删除文件或目录；</span><br><span class="line">S：即时更新文件或目录；</span><br><span class="line">u：预防意外删除。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-R：递归处理，将指令目录下的所有文件及子目录一并处理；</span><br><span class="line">-v&lt;版本编号&gt;：设置文件或目录版本；</span><br><span class="line">-V：显示指令执行过程；</span><br><span class="line">+&lt;属性&gt;：开启文件或目录的该项属性；</span><br><span class="line">-&lt;属性&gt;：关闭文件或目录的该项属性；</span><br><span class="line">=&lt;属性&gt;：指定文件或目录的该项属性。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>用chattr命令防止系统中某个关键文件被修改：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr +i /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<p>然后试一下rm、mv、rename等命令操作于该文件，都是得到Operation not permitted的结果。</p>
+<p>让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr +a /data1/user_act.log</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>chattr</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Linux 命令】chcon</title>
     <url>/linux-command/chcon/</url>
     <content><![CDATA[<p>修改对象（文件）的安全上下文</p>
@@ -1932,36 +1962,6 @@
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>chcon</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】chattr</title>
-    <url>/linux-command/chattr/</url>
-    <content><![CDATA[<p>用来改变文件属性</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chattr命令</strong> 用来改变文件属性。这项指令可改变存放在ext2文件系统上的文件或目录属性，这些属性共有以下8种模式：</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a：让文件或目录仅供附加用途；</span><br><span class="line">b：不更新文件或目录的最后存取时间；</span><br><span class="line">c：将文件或目录压缩后存放；</span><br><span class="line">d：将文件或目录排除在倾倒操作之外；</span><br><span class="line">i：不得任意更动文件或目录；</span><br><span class="line">s：保密性删除文件或目录；</span><br><span class="line">S：即时更新文件或目录；</span><br><span class="line">u：预防意外删除。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-R：递归处理，将指令目录下的所有文件及子目录一并处理；</span><br><span class="line">-v&lt;版本编号&gt;：设置文件或目录版本；</span><br><span class="line">-V：显示指令执行过程；</span><br><span class="line">+&lt;属性&gt;：开启文件或目录的该项属性；</span><br><span class="line">-&lt;属性&gt;：关闭文件或目录的该项属性；</span><br><span class="line">=&lt;属性&gt;：指定文件或目录的该项属性。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>用chattr命令防止系统中某个关键文件被修改：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr +i /etc/fstab</span><br></pre></td></tr></table></figure>
-
-<p>然后试一下rm、mv、rename等命令操作于该文件，都是得到Operation not permitted的结果。</p>
-<p>让某个文件只能往里面追加内容，不能删除，一些日志文件适用于这种操作：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chattr +a /data1/user_act.log</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>chattr</tag>
       </tags>
   </entry>
   <entry>
@@ -2141,30 +2141,6 @@
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】chpasswd</title>
-    <url>/linux-command/chpasswd/</url>
-    <content><![CDATA[<p>批量更新用户口令的工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chpasswd命令</strong> 是批量更新用户口令的工具，是把一个文件内容重新定向添加到<code>/etc/shadow</code>中。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chpasswd(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-e：输入的密码是加密后的密文；</span><br><span class="line">-h：显示帮助信息并退出；</span><br><span class="line">-m：当被支持的密码未被加密时，使用MD5加密代替DES加密。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>先创建用户密码对应文件，格式为<code>username:password</code>，如<code>abc:abc123</code>，必须以这种格式来书写，并且不能有空行，保存成文本文件user.txt，然后执行chpasswd命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chpasswd &lt; user.txt</span><br></pre></td></tr></table></figure>
-
-<p>以上是运用chpasswd命令来批量修改密码。是linux系统管理中的捷径。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>chpasswd</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】chown</title>
     <url>/linux-command/chown/</url>
     <content><![CDATA[<p>用来变更文件或目录的拥有者或所属群组</p>
@@ -2188,6 +2164,30 @@
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>chown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】chpasswd</title>
+    <url>/linux-command/chpasswd/</url>
+    <content><![CDATA[<p>批量更新用户口令的工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chpasswd命令</strong> 是批量更新用户口令的工具，是把一个文件内容重新定向添加到<code>/etc/shadow</code>中。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chpasswd(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-e：输入的密码是加密后的密文；</span><br><span class="line">-h：显示帮助信息并退出；</span><br><span class="line">-m：当被支持的密码未被加密时，使用MD5加密代替DES加密。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>先创建用户密码对应文件，格式为<code>username:password</code>，如<code>abc:abc123</code>，必须以这种格式来书写，并且不能有空行，保存成文本文件user.txt，然后执行chpasswd命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chpasswd &lt; user.txt</span><br></pre></td></tr></table></figure>
+
+<p>以上是运用chpasswd命令来批量修改密码。是linux系统管理中的捷径。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>chpasswd</tag>
       </tags>
   </entry>
   <entry>
@@ -8035,49 +8035,6 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】iotop</title>
-    <url>/linux-command/iotop/</url>
-    <content><![CDATA[<p>用来监视磁盘I/O使用状况的工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>iotop命令</strong> 是一个用来监视磁盘I/O使用状况的top类工具。iotop具有与top相似的UI，其中包括PID、用户、I/O、进程等相关信息。Linux下的IO统计工具如iostat，nmon等大多数是只能统计到per设备的读写情况，如果你想知道每个进程是如何使用IO的就比较麻烦，使用iotop命令可以很方便的查看。</p>
-<p>iotop使用Python语言编写而成，要求Python2.5（及以上版本）和Linux kernel2.6.20（及以上版本）。iotop提供有源代码及rpm包，可从其官方主页下载。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p> <strong>Ubuntu</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get install iotop</span><br></pre></td></tr></table></figure>
-
-<p> <strong>CentOS</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install iotop</span><br></pre></td></tr></table></figure>
-
-<p> <strong>编译安装</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://guichaz.free.fr/iotop/files/iotop-0.4.4.tar.gz    </span><br><span class="line">tar zxf iotop-0.4.4.tar.gz    </span><br><span class="line">python setup.py build    </span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">iotop（选项）</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o：只显示有io操作的进程</span><br><span class="line">-b：批量显示，无交互，主要用作记录到文件。</span><br><span class="line">-n NUM：显示NUM次，主要用于非交互式模式。</span><br><span class="line">-d SEC：间隔SEC秒显示一次。</span><br><span class="line">-p PID：监控的进程pid。</span><br><span class="line">-u USER：监控的进程用户。</span><br></pre></td></tr></table></figure>
-
-<p> <strong>iotop常用快捷键：</strong> </p>
-<ol>
-<li>左右箭头：改变排序方式，默认是按IO排序。</li>
-<li>r：改变排序顺序。</li>
-<li>o：只显示有IO输出的进程。</li>
-<li>p：进程/线程的显示方式的切换。</li>
-<li>a：显示累积使用量。</li>
-<li>q：退出。</li>
-</ol>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>直接执行iotop就可以看到效果了：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Total DISK read:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    command</span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>iotop</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】iostat</title>
     <url>/linux-command/iostat/</url>
     <content><![CDATA[<p>监视系统输入输出设备和CPU的使用情况</p>
@@ -8167,6 +8124,49 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>iostat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】iotop</title>
+    <url>/linux-command/iotop/</url>
+    <content><![CDATA[<p>用来监视磁盘I/O使用状况的工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>iotop命令</strong> 是一个用来监视磁盘I/O使用状况的top类工具。iotop具有与top相似的UI，其中包括PID、用户、I/O、进程等相关信息。Linux下的IO统计工具如iostat，nmon等大多数是只能统计到per设备的读写情况，如果你想知道每个进程是如何使用IO的就比较麻烦，使用iotop命令可以很方便的查看。</p>
+<p>iotop使用Python语言编写而成，要求Python2.5（及以上版本）和Linux kernel2.6.20（及以上版本）。iotop提供有源代码及rpm包，可从其官方主页下载。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p> <strong>Ubuntu</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">apt-get install iotop</span><br></pre></td></tr></table></figure>
+
+<p> <strong>CentOS</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install iotop</span><br></pre></td></tr></table></figure>
+
+<p> <strong>编译安装</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://guichaz.free.fr/iotop/files/iotop-0.4.4.tar.gz    </span><br><span class="line">tar zxf iotop-0.4.4.tar.gz    </span><br><span class="line">python setup.py build    </span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">iotop（选项）</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-o：只显示有io操作的进程</span><br><span class="line">-b：批量显示，无交互，主要用作记录到文件。</span><br><span class="line">-n NUM：显示NUM次，主要用于非交互式模式。</span><br><span class="line">-d SEC：间隔SEC秒显示一次。</span><br><span class="line">-p PID：监控的进程pid。</span><br><span class="line">-u USER：监控的进程用户。</span><br></pre></td></tr></table></figure>
+
+<p> <strong>iotop常用快捷键：</strong> </p>
+<ol>
+<li>左右箭头：改变排序方式，默认是按IO排序。</li>
+<li>r：改变排序顺序。</li>
+<li>o：只显示有IO输出的进程。</li>
+<li>p：进程/线程的显示方式的切换。</li>
+<li>a：显示累积使用量。</li>
+<li>q：退出。</li>
+</ol>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>直接执行iotop就可以看到效果了：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Total DISK read:       0.00 B/s | Total DISK write:       0.00 B/s</span><br><span class="line">  TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN     IO&gt;    command</span><br><span class="line">    1 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % init [3]</span><br><span class="line">    2 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [kthreadd]</span><br><span class="line">    3 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/0]</span><br><span class="line">    4 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/0]</span><br><span class="line">    5 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/0]</span><br><span class="line">    6 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [migration/1]</span><br><span class="line">    7 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [ksoftirqd/1]</span><br><span class="line">    8 rt/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [watchdog/1]</span><br><span class="line">    9 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/0]</span><br><span class="line">   10 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [events/1]</span><br><span class="line">   11 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [khelper]</span><br><span class="line">2572 be/4 root        0.00 B/s    0.00 B/s  0.00 %  0.00 % [bluetooth]</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>iotop</tag>
       </tags>
   </entry>
   <entry>
@@ -8896,31 +8896,6 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】killall</title>
-    <url>/linux-command/killall/</url>
-    <content><![CDATA[<p>使用进程的名称来杀死一组进程</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>killall命令</strong> 使用进程的名称来杀死进程，使用此指令可以杀死一组同名进程。我们可以使用kill命令杀死指定进程PID的进程，如果要找到我们需要杀死的进程，我们还需要在之前使用ps等命令再配合grep来查找进程，而killall把这两个过程合二为一，是一个很好用的命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">killall(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-e：对长名称进行精确匹配；</span><br><span class="line">-l：忽略大小写的不同；</span><br><span class="line">-p：杀死进程所属的进程组；</span><br><span class="line">-i：交互式杀死进程，杀死进程前需要进行确认；</span><br><span class="line">-l：打印所有已知信号列表；</span><br><span class="line">-q：如果没有进程被杀死。则不输出任何信息；</span><br><span class="line">-r：使用正规表达式匹配要杀死的进程名称；</span><br><span class="line">-s：用指定的进程号代替默认信号“SIGTERM”；</span><br><span class="line">-u：杀死指定用户的进程。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程名称：指定要杀死的进程名称。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>杀死所有同名进程</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">killall vi</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>killall</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】kill</title>
     <url>/linux-command/kill/</url>
     <content><![CDATA[<p>发送信号到进程。</p>
@@ -9007,6 +8982,31 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>kill</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】killall</title>
+    <url>/linux-command/killall/</url>
+    <content><![CDATA[<p>使用进程的名称来杀死一组进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>killall命令</strong> 使用进程的名称来杀死进程，使用此指令可以杀死一组同名进程。我们可以使用kill命令杀死指定进程PID的进程，如果要找到我们需要杀死的进程，我们还需要在之前使用ps等命令再配合grep来查找进程，而killall把这两个过程合二为一，是一个很好用的命令。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">killall(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-e：对长名称进行精确匹配；</span><br><span class="line">-l：忽略大小写的不同；</span><br><span class="line">-p：杀死进程所属的进程组；</span><br><span class="line">-i：交互式杀死进程，杀死进程前需要进行确认；</span><br><span class="line">-l：打印所有已知信号列表；</span><br><span class="line">-q：如果没有进程被杀死。则不输出任何信息；</span><br><span class="line">-r：使用正规表达式匹配要杀死的进程名称；</span><br><span class="line">-s：用指定的进程号代替默认信号“SIGTERM”；</span><br><span class="line">-u：杀死指定用户的进程。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程名称：指定要杀死的进程名称。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>杀死所有同名进程</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">killall vi</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>killall</tag>
       </tags>
   </entry>
   <entry>
@@ -9640,6 +9640,30 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
+    <title>【Linux 命令】logger</title>
+    <url>/linux-command/logger/</url>
+    <content><![CDATA[<p>在系统日志中记录相应条目</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logger命令</strong> 是用于往系统中写入日志，他提供一个shell命令接口到syslog系统模块</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">logger [options] [message]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-T, --tcp             使用流连接(TCP)</span><br><span class="line">-d, --udp             使用数据报(UDP)</span><br><span class="line">-i, --id              逐行记录每一次logger的进程ID</span><br><span class="line">-f, --file &lt;file&gt;     记录特定的文件</span><br><span class="line">-h, --help            显示帮助文本并退出</span><br><span class="line">-n, --server &lt;name&gt;   写入指定的远程syslog服务器，使用UDP代替内装式syslog的例程</span><br><span class="line">-P, --port &lt;port&gt;     使用指定的UDP端口。默认的端口号是514</span><br><span class="line">-p, --priority &lt;prio&gt; 指定输入消息的优先级，优先级可以是数字或者指定为 &quot; facility.level&quot; 的格式。</span><br><span class="line">                      比如：&quot; -p local3.info &quot; local3 这个设备的消息级别为 info。</span><br><span class="line">                      默认级别是 &quot;user.notice&quot;</span><br><span class="line">-s, --stderr          输出标准错误到系统日志。</span><br><span class="line">-t, --tag &lt;tag&gt;       指定标记记录</span><br><span class="line">-u, --socket &lt;socket&gt; 写入指定的socket，而不是到内置系统日志例程。</span><br><span class="line">-V, --version         输出版本信息并退出</span><br></pre></td></tr></table></figure>
+
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">logger -p syslog.info &quot;backup.sh is starting&quot;</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>logger</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Linux 命令】login</title>
     <url>/linux-command/login/</url>
     <content><![CDATA[<p>登录系统或切换用户身份</p>
@@ -9709,30 +9733,6 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>logout</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】logger</title>
-    <url>/linux-command/logger/</url>
-    <content><![CDATA[<p>在系统日志中记录相应条目</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>logger命令</strong> 是用于往系统中写入日志，他提供一个shell命令接口到syslog系统模块</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">logger [options] [message]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-T, --tcp             使用流连接(TCP)</span><br><span class="line">-d, --udp             使用数据报(UDP)</span><br><span class="line">-i, --id              逐行记录每一次logger的进程ID</span><br><span class="line">-f, --file &lt;file&gt;     记录特定的文件</span><br><span class="line">-h, --help            显示帮助文本并退出</span><br><span class="line">-n, --server &lt;name&gt;   写入指定的远程syslog服务器，使用UDP代替内装式syslog的例程</span><br><span class="line">-P, --port &lt;port&gt;     使用指定的UDP端口。默认的端口号是514</span><br><span class="line">-p, --priority &lt;prio&gt; 指定输入消息的优先级，优先级可以是数字或者指定为 &quot; facility.level&quot; 的格式。</span><br><span class="line">                      比如：&quot; -p local3.info &quot; local3 这个设备的消息级别为 info。</span><br><span class="line">                      默认级别是 &quot;user.notice&quot;</span><br><span class="line">-s, --stderr          输出标准错误到系统日志。</span><br><span class="line">-t, --tag &lt;tag&gt;       指定标记记录</span><br><span class="line">-u, --socket &lt;socket&gt; 写入指定的socket，而不是到内置系统日志例程。</span><br><span class="line">-V, --version         输出版本信息并退出</span><br></pre></td></tr></table></figure>
-
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">logger -p syslog.info &quot;backup.sh is starting&quot;</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>logger</tag>
       </tags>
   </entry>
   <entry>
@@ -10669,12 +10669,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjOTc7JiMxMDA7JiMxMDk7JiMxMDU7JiN4NmU7JiN4NDA7JiN4NmE7JiMxMTU7JiMxMDA7JiMxMDU7JiMxMDM7JiM0NjsmIzk5OyYjeDZmOyYjeDZkOw==">&#97;&#100;&#109;&#105;&#x6e;&#x40;&#x6a;&#115;&#100;&#105;&#103;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjOTc7JiMxMDA7JiN4NmQ7JiN4Njk7JiMxMTA7JiM2NDsmI3g2YTsmI3g3MzsmIzEwMDsmI3g2OTsmI3g2NzsmIzQ2OyYjOTk7JiN4NmY7JiN4NmQ7">&#97;&#100;&#x6d;&#x69;&#110;&#64;&#x6a;&#x73;&#100;&#x69;&#x67;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjeDczOyYjMTAxOyYjeDcyOyYjNjQ7JiN4NmE7JiMxMTU7JiMxMDA7JiMxMDU7JiN4Njc7JiN4MmU7JiN4NjM7JiMxMTE7JiMxMDk7">&#x75;&#x73;&#101;&#x72;&#64;&#x6a;&#115;&#100;&#105;&#x67;&#x2e;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjeDY1OyYjeDcyOyYjNjQ7JiMxMDY7JiN4NzM7JiMxMDA7JiMxMDU7JiMxMDM7JiN4MmU7JiN4NjM7JiMxMTE7JiMxMDk7">&#117;&#115;&#x65;&#x72;&#64;&#106;&#x73;&#100;&#105;&#103;&#x2e;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -16674,10 +16674,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjMTA3OyYjMTE0OyYjMTAxOyYjeDc5OyYjeDQwOyYjNzM7JiM4MzsmI3g0OTsmIzQ2OyYjeDQ1OyYjeDQ0OyYjeDU1Ow==">&#106;&#107;&#114;&#101;&#x79;&#x40;&#73;&#83;&#x49;&#46;&#x45;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjMTA4OyYjeDZmOyYjeDQwOyYjOTk7JiN4NzM7JiN4MmU7JiMxMDQ7JiN4NzU7JiN4NzQ7JiN4MmU7JiN4NjY7JiMxMDU7">&#121;&#108;&#x6f;&#x40;&#99;&#x73;&#x2e;&#104;&#x75;&#x74;&#x2e;&#x66;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjeDY5OyYjOTc7JiN4NmU7JiN4NjE7JiM2NDsmI3g0OTsmIzgzOyYjNzM7JiM0NjsmI3g0NTsmI3g0NDsmI3g1NTs=">&#x69;&#97;&#x6e;&#x61;&#64;&#x49;&#83;&#73;&#46;&#x45;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjeDZiOyYjeDcyOyYjMTAxOyYjMTIxOyYjeDQwOyYjeDQ5OyYjeDUzOyYjNzM7JiM0NjsmIzY5OyYjeDQ0OyYjeDU1Ow==">&#106;&#x6b;&#x72;&#101;&#121;&#x40;&#x49;&#x53;&#73;&#46;&#69;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjMTExOyYjeDQwOyYjeDYzOyYjMTE1OyYjNDY7JiN4Njg7JiN4NzU7JiN4NzQ7JiN4MmU7JiMxMDI7JiMxMDU7">&#121;&#x6c;&#111;&#x40;&#x63;&#115;&#46;&#x68;&#x75;&#x74;&#x2e;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjOTc7JiN4NmU7JiN4NjE7JiN4NDA7JiN4NDk7JiM4MzsmI3g0OTsmIzQ2OyYjNjk7JiM2ODsmI3g1NTs=">&#105;&#97;&#x6e;&#x61;&#x40;&#x49;&#83;&#x49;&#46;&#69;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjMTIxOyYjeDcwOyYjeDY4OyYjeDY1OyYjMTE0OyYjMTEyOyYjeDc1OyYjeDZlOyYjeDZiOyYjMTE1OyYjeDQwOyYjeDc0OyYjMTExOyYjOTc7JiMxMDA7JiM0NjsmI3g2MzsmIzExMTsmIzEwOTs=">&#x63;&#121;&#x70;&#x68;&#x65;&#114;&#112;&#x75;&#x6e;&#x6b;&#115;&#x40;&#x74;&#111;&#97;&#100;&#46;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiN4NzA7JiMxMDQ7JiMxMDE7JiN4NzI7JiMxMTI7JiMxMTc7JiMxMTA7JiN4NmI7JiMxMTU7JiN4NDA7JiMxMTY7JiMxMTE7JiM5NzsmIzEwMDsmI3gyZTsmI3g2MzsmI3g2ZjsmIzEwOTs=">&#99;&#121;&#x70;&#104;&#101;&#x72;&#112;&#117;&#110;&#x6b;&#115;&#x40;&#116;&#111;&#97;&#100;&#x2e;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -16910,6 +16910,31 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
+    <title>【Linux 命令】sum</title>
+    <url>/linux-command/sum/</url>
+    <content><![CDATA[<p>计算文件的校验码和显示块数</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sum命令</strong> 用于计算并显示指定文件的校验和与文件所占用的磁盘块数。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sum(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-r：使用BSD的校验和算法，块大小为1k；</span><br><span class="line">-s：使用system V的校验和算法，块大小为512字节。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：需要计算和与磁盘块数的文件列表。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>计算文件校验码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# sum insert.sql</span><br><span class="line">00827    12</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>sum</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Linux 命令】sudo</title>
     <url>/linux-command/sudo/</url>
     <content><![CDATA[<p>以其他身份来执行命令</p>
@@ -16997,31 +17022,6 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>sudo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】sum</title>
-    <url>/linux-command/sum/</url>
-    <content><![CDATA[<p>计算文件的校验码和显示块数</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sum命令</strong> 用于计算并显示指定文件的校验和与文件所占用的磁盘块数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sum(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-r：使用BSD的校验和算法，块大小为1k；</span><br><span class="line">-s：使用system V的校验和算法，块大小为512字节。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：需要计算和与磁盘块数的文件列表。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>计算文件校验码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# sum insert.sql</span><br><span class="line">00827    12</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>sum</tag>
       </tags>
   </entry>
   <entry>
