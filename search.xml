@@ -2680,6 +2680,62 @@
       </tags>
   </entry>
   <entry>
+    <title>【Linux 命令】cp</title>
+    <url>/linux-command/cp/</url>
+    <content><![CDATA[<p>将源文件或目录复制到目标文件或目录中</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cp命令</strong> 用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同；</span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在；</span><br><span class="line">-i：覆盖既有文件之前先询问用户；</span><br><span class="line">-l：对源文件建立硬连接，而非复制文件；</span><br><span class="line">-p：保留源文件或目录的属性；</span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</span><br><span class="line">-s：对源文件建立符号连接，而非复制文件；</span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份；</span><br><span class="line">-v：详细显示命令执行的操作。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>源文件：制定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用<code>-R</code>选项；</li>
+<li>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的第一行中是 cp 命令和具体的参数（-r 是“递归”， -u 是“更新”，-v 是“详细”）。接下来的三行显示被复制文件的信息，最后一行显示命令行提示符。这样，只拷贝新的文件到我的存储设备上，我就使用 cp 的“更新”和“详细”选项。</p>
+<p>通常来说，参数 <code>-r</code> 也可用更详细的风格 <code>--recursive</code>。但是以简短的方式，也可以这么连用 <code>-ruv</code>。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r -u -v /usr/men/tmp ~/men/tmp</span><br></pre></td></tr></table></figure>
+
+<p>版本备份 <code>--backup=numbered</code> 参数意思为“我要做个备份，而且是带编号的连续备份”。所以一个备份就是 1 号，第二个就是 2 号，等等。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp --force --backup=numbered test1.py test1.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">test1.py test1.py.~1~ test1.py.~2~</span><br></pre></td></tr></table></figure>
+
+<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点<code>.</code>或点点<code>..</code>的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ../mary/homework/assign .</span><br></pre></td></tr></table></figure>
+
+<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。</p>
+<p>将文件file复制到目录<code>/usr/men/tmp</code>下，并改名为file1</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp file /usr/men/tmp/file1</span><br></pre></td></tr></table></figure>
+
+<p>将目录<code>/usr/men</code>下的所有文件及其子目录复制到目录<code>/usr/zh</code>中</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r /usr/men /usr/zh</span><br></pre></td></tr></table></figure>
+
+<p>交互式地将目录<code>/usr/men</code>中的以m打头的所有.c文件复制到目录<code>/usr/zh</code>中</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
+
+<p>我们在Linux下使用cp命令复制文件时候，有时候会需要覆盖一些同名文件，覆盖文件的时候都会有提示：需要不停的按Y来确定执行覆盖。文件数量不多还好，但是要是几百个估计按Y都要吐血了，于是折腾来半天总结了一个方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制目录aaa下所有到/bbb目录下，这时如果/bbb目录下有和aaa同名的文件，需要按Y来确认并且会略过aaa目录下的子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这次依然需要按Y来确认操作，但是没有忽略子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 依然需要按Y来确认操作，并且把aaa目录以及子目录和文件属性也传递到了/bbb。</span></span><br><span class="line"></span><br><span class="line">\cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功，没有提示按Y、传递了目录属性、没有略过目录。</span></span><br></pre></td></tr></table></figure>
+
+<p>递归强制复制目录到指定目录中覆盖已存在文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -rfb ./* ../backup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将当前目录下所有文件，复制到当前目录的兄弟目录 backup 文件夹中</span></span><br></pre></td></tr></table></figure>
+
+<p>拷贝目录下的隐藏文件如 <code>.babelrc</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r aaa/.* ./bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 aaa 目录下的，所有`.`开头的文件，复制到 bbb 目录中。</span></span><br><span class="line"></span><br><span class="line">cp -a aaa ./bbb/ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 记住后面目录最好的<span class="string">&#x27;/&#x27;</span> 带上 `-a` 参数</span></span><br></pre></td></tr></table></figure>
+
+<p>复制到当前目录</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cp aaa.conf ./</span><br><span class="line"><span class="comment"># 将 aaa.conf 复制到当前目录</span></span><br></pre></td></tr></table></figure>
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>cp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Linux 命令】cpio</title>
     <url>/linux-command/cpio/</url>
     <content><![CDATA[<p>用来建立、还原备份档的工具程序</p>
@@ -2857,62 +2913,6 @@
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>csplit</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】cp</title>
-    <url>/linux-command/cp/</url>
-    <content><![CDATA[<p>将源文件或目录复制到目标文件或目录中</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cp命令</strong> 用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同；</span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在；</span><br><span class="line">-i：覆盖既有文件之前先询问用户；</span><br><span class="line">-l：对源文件建立硬连接，而非复制文件；</span><br><span class="line">-p：保留源文件或目录的属性；</span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</span><br><span class="line">-s：对源文件建立符号连接，而非复制文件；</span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份；</span><br><span class="line">-v：详细显示命令执行的操作。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>源文件：制定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用<code>-R</code>选项；</li>
-<li>目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的第一行中是 cp 命令和具体的参数（-r 是“递归”， -u 是“更新”，-v 是“详细”）。接下来的三行显示被复制文件的信息，最后一行显示命令行提示符。这样，只拷贝新的文件到我的存储设备上，我就使用 cp 的“更新”和“详细”选项。</p>
-<p>通常来说，参数 <code>-r</code> 也可用更详细的风格 <code>--recursive</code>。但是以简短的方式，也可以这么连用 <code>-ruv</code>。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r -u -v /usr/men/tmp ~/men/tmp</span><br></pre></td></tr></table></figure>
-
-<p>版本备份 <code>--backup=numbered</code> 参数意思为“我要做个备份，而且是带编号的连续备份”。所以一个备份就是 1 号，第二个就是 2 号，等等。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp --force --backup=numbered test1.py test1.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">test1.py test1.py.~1~ test1.py.~2~</span><br></pre></td></tr></table></figure>
-
-<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点<code>.</code>或点点<code>..</code>的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ../mary/homework/assign .</span><br></pre></td></tr></table></figure>
-
-<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。</p>
-<p>将文件file复制到目录<code>/usr/men/tmp</code>下，并改名为file1</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp file /usr/men/tmp/file1</span><br></pre></td></tr></table></figure>
-
-<p>将目录<code>/usr/men</code>下的所有文件及其子目录复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r /usr/men /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>交互式地将目录<code>/usr/men</code>中的以m打头的所有.c文件复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>我们在Linux下使用cp命令复制文件时候，有时候会需要覆盖一些同名文件，覆盖文件的时候都会有提示：需要不停的按Y来确定执行覆盖。文件数量不多还好，但是要是几百个估计按Y都要吐血了，于是折腾来半天总结了一个方法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制目录aaa下所有到/bbb目录下，这时如果/bbb目录下有和aaa同名的文件，需要按Y来确认并且会略过aaa目录下的子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这次依然需要按Y来确认操作，但是没有忽略子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 依然需要按Y来确认操作，并且把aaa目录以及子目录和文件属性也传递到了/bbb。</span></span><br><span class="line"></span><br><span class="line">\cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功，没有提示按Y、传递了目录属性、没有略过目录。</span></span><br></pre></td></tr></table></figure>
-
-<p>递归强制复制目录到指定目录中覆盖已存在文件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -rfb ./* ../backup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将当前目录下所有文件，复制到当前目录的兄弟目录 backup 文件夹中</span></span><br></pre></td></tr></table></figure>
-
-<p>拷贝目录下的隐藏文件如 <code>.babelrc</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -r aaa/.* ./bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 aaa 目录下的，所有`.`开头的文件，复制到 bbb 目录中。</span></span><br><span class="line"></span><br><span class="line">cp -a aaa ./bbb/ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 记住后面目录最好的<span class="string">&#x27;/&#x27;</span> 带上 `-a` 参数</span></span><br></pre></td></tr></table></figure>
-
-<p>复制到当前目录</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">cp aaa.conf ./</span><br><span class="line"><span class="comment"># 将 aaa.conf 复制到当前目录</span></span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>cp</tag>
       </tags>
   </entry>
   <entry>
@@ -10669,12 +10669,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjeDZkOyYjeDY5OyYjeDZlOyYjeDQwOyYjMTA2OyYjMTE1OyYjMTAwOyYjMTA1OyYjeDY3OyYjNDY7JiN4NjM7JiMxMTE7JiMxMDk7">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#106;&#115;&#100;&#105;&#x67;&#46;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjMTAwOyYjMTA5OyYjeDY5OyYjeDZlOyYjNjQ7JiN4NmE7JiN4NzM7JiN4NjQ7JiMxMDU7JiMxMDM7JiN4MmU7JiN4NjM7JiN4NmY7JiMxMDk7">&#x61;&#100;&#109;&#x69;&#x6e;&#64;&#x6a;&#x73;&#x64;&#105;&#103;&#x2e;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjeDczOyYjeDY1OyYjeDcyOyYjeDQwOyYjeDZhOyYjeDczOyYjMTAwOyYjMTA1OyYjeDY3OyYjeDJlOyYjeDYzOyYjMTExOyYjeDZkOw==">&#x75;&#x73;&#x65;&#x72;&#x40;&#x6a;&#x73;&#100;&#105;&#x67;&#x2e;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjMTAxOyYjeDcyOyYjNjQ7JiMxMDY7JiMxMTU7JiMxMDA7JiN4Njk7JiMxMDM7JiM0NjsmIzk5OyYjeDZmOyYjMTA5Ow==">&#117;&#115;&#101;&#x72;&#64;&#106;&#115;&#100;&#x69;&#103;&#46;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -16674,10 +16674,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjeDZhOyYjMTA3OyYjMTE0OyYjeDY1OyYjMTIxOyYjeDQwOyYjeDQ5OyYjeDUzOyYjNzM7JiM0NjsmI3g0NTsmIzY4OyYjeDU1Ow==">&#x6a;&#107;&#114;&#x65;&#121;&#x40;&#x49;&#x53;&#73;&#46;&#x45;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjMTExOyYjeDQwOyYjeDYzOyYjMTE1OyYjeDJlOyYjeDY4OyYjeDc1OyYjMTE2OyYjNDY7JiMxMDI7JiMxMDU7">&#121;&#x6c;&#111;&#x40;&#x63;&#115;&#x2e;&#x68;&#x75;&#116;&#46;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjOTc7JiMxMTA7JiN4NjE7JiN4NDA7JiM3MzsmIzgzOyYjeDQ5OyYjeDJlOyYjeDQ1OyYjeDQ0OyYjODU7">&#105;&#97;&#110;&#x61;&#x40;&#73;&#83;&#x49;&#x2e;&#x45;&#x44;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjeDZhOyYjMTA3OyYjeDcyOyYjeDY1OyYjeDc5OyYjNjQ7JiM3MzsmI3g1MzsmI3g0OTsmI3gyZTsmI3g0NTsmIzY4OyYjODU7">&#x6a;&#107;&#x72;&#x65;&#x79;&#64;&#73;&#x53;&#x49;&#x2e;&#x45;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjeDZmOyYjNjQ7JiN4NjM7JiN4NzM7JiN4MmU7JiN4Njg7JiN4NzU7JiN4NzQ7JiN4MmU7JiMxMDI7JiN4Njk7">&#121;&#x6c;&#x6f;&#64;&#x63;&#x73;&#x2e;&#x68;&#x75;&#x74;&#x2e;&#102;&#x69;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjeDZlOyYjOTc7JiM2NDsmIzczOyYjODM7JiN4NDk7JiM0NjsmIzY5OyYjeDQ0OyYjeDU1Ow==">&#105;&#x61;&#x6e;&#97;&#64;&#73;&#83;&#x49;&#46;&#69;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiMxMTI7JiMxMDQ7JiMxMDE7JiMxMTQ7JiN4NzA7JiMxMTc7JiN4NmU7JiN4NmI7JiMxMTU7JiM2NDsmIzExNjsmI3g2ZjsmI3g2MTsmI3g2NDsmIzQ2OyYjeDYzOyYjeDZmOyYjeDZkOw==">&#99;&#121;&#112;&#104;&#101;&#114;&#x70;&#117;&#x6e;&#x6b;&#115;&#64;&#116;&#x6f;&#x61;&#x64;&#46;&#x63;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiN4NzA7JiMxMDQ7JiMxMDE7JiN4NzI7JiN4NzA7JiMxMTc7JiMxMTA7JiN4NmI7JiN4NzM7JiN4NDA7JiN4NzQ7JiMxMTE7JiN4NjE7JiN4NjQ7JiM0NjsmI3g2MzsmI3g2ZjsmI3g2ZDs=">&#99;&#121;&#x70;&#104;&#101;&#x72;&#x70;&#117;&#110;&#x6b;&#x73;&#x40;&#x74;&#111;&#x61;&#x64;&#46;&#x63;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -23372,6 +23372,168 @@ one two three</code></pre>
         <tag>Vue</tag>
         <tag>Vue3</tag>
         <tag>One Piece</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DaoCloud 写作规范和格式规范</title>
+    <url>//daocloud-copywriting-style-guide/</url>
+    <content><![CDATA[<blockquote>
+<p>本文转载自 <span class="exturl" data-url="aHR0cHM6Ly9ndWlkZS5kYW9jbG91ZC5pby9kY3MvJUU1JTg2JTk5JUU0JUJEJTlDJUU4JUE3JTg0JUU4JThDJTgzJUU1JTkyJThDJUU2JUEwJUJDJUU1JUJDJThGJUU4JUE3JTg0JUU4JThDJTgzLTkxNTM4MDMuaHRtbA==">DaoCloud 文案风格指南<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="公司及产品名称"><a href="#公司及产品名称" class="headerlink" title="公司及产品名称"></a>公司及产品名称</h2><p>我们的公司及产品名称是「DaoCloud」。注意这是两个单词的合成词，所以中间沒有空格（参考：GitHub）。如作为 URL 的一部分，应该使用全小写的「daocloud」。</p>
+<h2 id="文案风格"><a href="#文案风格" class="headerlink" title="文案风格"></a>文案风格</h2><ol>
+<li>一定多检查，确保没有错别字。</li>
+<li>即使是流行语中的谐音错别字也不要使用，比如「墙裂」、「童鞋」等。</li>
+<li>我们崇尚精练的文风。请在检查中把对表达意思没有明显作用的字、词、句删除，在不影响表达效果的前提下把文案长度减到最短。</li>
+<li>记住，如果你写了一条文案觉得非常聪明非常好笑，很可能需要停下来想一下用户是否能理解。（本条感谢 37signals 的文案建议）</li>
+</ol>
+<a id="more"></a>
+
+<h2 id="中文、英文、数字混排时空格的使用"><a href="#中文、英文、数字混排时空格的使用" class="headerlink" title="中文、英文、数字混排时空格的使用"></a>中文、英文、数字混排时空格的使用</h2><ol>
+<li>英文与非标点的中文之间需要有一个空格，如「使用 DaoCloud 自动构建和部署」而不是「使用DaoCloud自动构建和部署」。</li>
+<li>数字与非标点的中文之间需要有一个空格，如「我们发布了 5 个产品」而不是「我们发布了5个产品」。 正确：「这是 1 款 Android 应用」，错误：「这是1款Android应用」。 正确：「2014 年 2 月 14 日」，错误：「2014年2月14日」。</li>
+<li>尽可能使用中文数词，特别是当前后都是中文时。上面的例子写为「我们发布了五个产品」会更好。</li>
+<li>除了「%」、「°C」、以及倍数单位(如 2x、3n)之外，其余数字与单位之间需要加空格。</li>
+<li>注意特殊名词的大小写：Android、iOS、iPhone、Google、Apple，无论是否在句首都应该以同样的方式写。</li>
+<li>在官方文案中尽量使用中文，避免中英文混合的情况。例如「App」一般应写为「应用」或「移动应用」。品牌、产品名、人名、地名等特殊名词，如果来自英文，请使用英文以避免在不同译法之间选择。</li>
+<li>书写时括号中全为数字，则括号用半角括号且首括号前要空一格，例如「联系人 (22)」。</li>
+</ol>
+<h2 id="标点相关"><a href="#标点相关" class="headerlink" title="标点相关"></a>标点相关</h2><ol>
+<li>只有中文或中英文混排中，一律使用中文/全角标点。</li>
+<li>中英文混排中如果出现整句英文，则在这句英文中使用英文/半角标点。</li>
+<li>中文标点与其他字符间一律不加空格。 正确：「有：Apple、Android、诺基亚」错误：「有：Apple 、 Android 、 Nokia」</li>
+<li>中文文案中使用中文引号「」和『』，其中「」为外层引号。Mac 上如「百度输入法」等都可以方便地输入中文引号。</li>
+<li>省略号请使用「……」标准用法，不要使用「。。。」 ，也不要使用三个英文句点「.」。</li>
+<li>感叹号：请勿使用「！！」。尽量避免使用「！」。请先冷静下来再坐电脑前敲键盘。</li>
+<li>波浪号：请勿在文章内使用「<code>~</code>」，活泼地卖萌有很多其他的表达方式。</li>
+</ol>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><ol>
+<li>如果是纯文本，段落之间使用一个空行隔开。如果是 HTML 或其他富文本格式，使用额外空白作为段落间的分隔。</li>
+<li>段落开头不要留出空白字符。</li>
+</ol>
+<h2 id="引用来源"><a href="#引用来源" class="headerlink" title="引用来源"></a>引用来源</h2><ol>
+<li>如果在正文中部分引用第三方内容，请使用恰当的引用格式并注明出处。如： One man’s constant is another man’s variable. — Alan Perlis</li>
+<li>如果是全篇转载，请在全文开头显著位置注明作者和出处，并链接至原文，如： 本文转载自 WikiQuote</li>
+<li>如果格式不允许超链接，请以文本方式直接给出原文链接。如果原文链接太长影响美观，可以使用短链接服务。如： 本文转载自 WikiQuote：<span class="exturl" data-url="aHR0cDovL2JpdC5seS9VbEhJZE4=">http://bit.ly/UlHIdN<i class="fa fa-external-link-alt"></i></span></li>
+<li>文中有使用外站图片，必须在文末标明。来源如果来自外站必须添加链接，来源如果来自外部作品则不需要。如：「本文部分图片来自 ifanr」「题图来自：《春娇与志明》截图」。</li>
+<li>若文章为全文翻译，必须在注明作者和出处，并链接至原文。</li>
+<li>若文章为部分编译，则需在文末注明作者和出处。如：「本文部分内容编译自 Apple」「本文部分观点来自煮机网微博」。</li>
+</ol>
+<h2 id="细节问题"><a href="#细节问题" class="headerlink" title="细节问题"></a>细节问题</h2><ol>
+<li>「你」和「您」：在不是很正式或没有明确的个体指代对象的时候请用「你」，如文档、博客、群发的邮件等；在指代特定个体时请用「您」，如活动邀请函等。</li>
+<li>自我称呼：使用「我」，不推荐使用「小编」、「笔者」、「兼职编辑」、「兼职作者」自称。</li>
+<li>字体和字号的一致：在富文本格式文档中，特别是 HTML 邮件中，常有人因为从不同来源复制粘贴而导致同一层次的文本字体和字号不一致。这给人不专业的感觉，请避免。</li>
+<li>App 是 application 的缩写，发音为 /ˈæp/，所以要注意不要把三个字母拆开念。App 是一个普通名词而不是多个单词的首字母缩写，所以不应该用全大写的 APP。和其他词一样，大小写规则取决于是否处于句首、标题、或特殊短语（如 App Store）中。大多数情况下应该使用中文「应用」以避免这样的问题。</li>
+</ol>
+<h2 id="遣词造句"><a href="#遣词造句" class="headerlink" title="遣词造句"></a>遣词造句</h2><ol>
+<li>用主动语态，不要用被动语态。一般情况下，主动语态比被动语态更有力。</li>
+<li>使用具体、明确、展示细节的词汇，能激发想象，使读者自己代入情境。「把硬币放进口袋里，他咧开嘴笑了」，远远强过「他满意地拿走了辛苦挣来的奖赏」。</li>
+<li>减少形容词的使用，少用 「的」。</li>
+<li>「的」「地」「得」要用对。是的，连小学都不要求了但是要用对。</li>
+</ol>
+<h2 id="文章引言"><a href="#文章引言" class="headerlink" title="文章引言"></a>文章引言</h2><p>文章引言非常重要。它的作用主要是用于网站首页展示和微博分享，它是为了吸引读者阅读文章而存在，它的目的是让读者能够仅通过这一小段话，就能迅速了解到这篇文章的大致内容。因此，引言实际就是文章的「内容概要」，而非文章的开头首段。</p>
+<p>我们建议通常在写完整篇文章后，再结合内容大纲撰写引言。引言务必要讲清两个问题：</p>
+<ol>
+<li>是什么？（例如：这是一款什么应用？这篇文章是讲的什么？）</li>
+<li>为什么？（例如：这款应用之所以被推荐，是由于它有哪些特色/亮点？）</li>
+</ol>
+<p>引言的语言文字务必要清晰、直观、简洁，通常字数需控制在 90 字左右。</p>
+<h2 id="一些常用名词的正确用法"><a href="#一些常用名词的正确用法" class="headerlink" title="一些常用名词的正确用法"></a>一些常用名词的正确用法</h2><ul>
+<li>App / 应用（错误：APP、软件、程序）</li>
+<li>Android（错误：android、安卓）</li>
+<li>iOS（错误：ios、IOS）</li>
+<li>iPhone（错误：IPHONE、iphone）</li>
+<li>App Store（中间有空格，错误：AppStore、app store）</li>
+<li>WiFi（错误：wifi、Wifi、Wi-fi）</li>
+<li>email （错误：E-mail、Email）</li>
+<li>账号（错误：帐号，账户，帐户） [<span class="exturl" data-url="aHR0cDovL3d3dy5qaWFuc2h1LmNvbS9wL2JhYTg1Y2FlZGUyMV0=">http://www.jianshu.com/p/baa85caede21]<i class="fa fa-external-link-alt"></i></span> 苹果台湾用「帳號」，大陆用「账户」 谷歌用「帐户」，百度用「帐号」</li>
+<li>登陆（错误：登录）</li>
+<li>P.S. （错误：PS、ps、Ps.）</li>
+</ul>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><span class="exturl" data-url="aHR0cDovL29wZW4ubGVhbmNsb3VkLmNuL2ltcHJvdmUtY2hpbmVzZS5odG1s">余光中：怎样改进英式中文？——论中文的常态与变态<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h2><p>我们的写作和格式规范，基本上就是原文照搬了 LeanCloud 的<span class="exturl" data-url="aHR0cDovL29wZW4ubGVhbmNsb3VkLmNuL2NvcHl3cml0aW5nLXN0eWxlLWd1aWRlLmh0bWw=">这篇文章<i class="fa fa-external-link-alt"></i></span>，LeanCloud 在这方面做得非常棒！在此表示感谢！</p>
+]]></content>
+      <categories>
+        <category>文案风格</category>
+      </categories>
+      <tags>
+        <tag>DaoCloud</tag>
+        <tag>文案风格</tag>
+        <tag>写作规范</tag>
+        <tag>格式规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeanCloud 文案风格指南</title>
+    <url>//leancloud-copywriting-style-guide/</url>
+    <content><![CDATA[<blockquote>
+<p>本文转载自 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmxlYW5jbG91ZC5jbi9jb3B5d3JpdGluZy1zdHlsZS1ndWlkZS8=">LeanCloud 文案风格指南<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h2 id="公司及产品名称"><a href="#公司及产品名称" class="headerlink" title="公司及产品名称"></a>公司及产品名称</h2><p>我们的公司及产品名称是「LeanCloud」。注意这是两个单词的合成词，中间沒有空格（參考：GitHub）。如作为 URL 的一部分，应该使用全小写的「leancloud」。</p>
+<h2 id="文案风格"><a href="#文案风格" class="headerlink" title="文案风格"></a>文案风格</h2><ul>
+<li>一定多检查，确保没有错别字。</li>
+<li>即使是流行语中故意的谐音错别字也不要使用，比如「墙裂」、「童鞋」等。</li>
+<li>我们崇尚精练的文风。请在检查中把对表达意思没有明显作用的字、词、句删除，在不影响表达效果的前提下把文案长度减到最短。</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="中文、英文、数字混合时空格的使用"><a href="#中文、英文、数字混合时空格的使用" class="headerlink" title="中文、英文、数字混合时空格的使用"></a>中文、英文、数字混合时空格的使用</h2><ul>
+<li>英文与非标点的中文之间需要有一个空格，如「使用 LeanCloud 开发移动应用」而不是「使用LeanCloud开发移动应用」。</li>
+<li>数字与非标点的中文之间需要有一个空格，如「我们发布了 5 个产品」而不是「我们发布了5个产品」。</li>
+<li>尽可能使用中文数词，特别是当前后都是中文时。上面的例子写为「我们发布了五个产品」会更好。</li>
+<li>数字与单位之间需要有一个空格，如「5 GB」而不是「5GB」。</li>
+<li>注意特殊名词的大小写：Android、iOS、iPhone、Google、Apple，无论是否在句首都应该以同样的方式写。</li>
+<li>在官方文案中尽量使用中文，避免中英文混合的情况。例如「app」一般应写为「应用」或「移动应用」。品牌、产品名、人名、地名等特殊名词，如果来自英文，请使用英文以避免在不同译法间选择。</li>
+</ul>
+<h2 id="标点相关"><a href="#标点相关" class="headerlink" title="标点相关"></a>标点相关</h2><ul>
+<li>只有中文或中英文混排中，一律使用中文/全角标点。</li>
+<li>中英文混排中如果出现整句英文，则在这句英文中使用英文/半角标点。</li>
+<li>中文标点与其他字符间一律不加空格。</li>
+<li>中文文案中使用中文引号「」和『』，其中「」为外层引号。Mac 上如「百度输入法」等都可以方便地输入中文引号。</li>
+</ul>
+<h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><ul>
+<li>如果是纯文本，段落之间使用一个空行隔开。如果是 HTML 或其他富文本格式，使用额外空白作为段落间的分隔。</li>
+<li>段落开头不要留出空白字符。</li>
+</ul>
+<h2 id="对第三方内容的引用"><a href="#对第三方内容的引用" class="headerlink" title="对第三方内容的引用"></a>对第三方内容的引用</h2><ul>
+<li><p>如果在正文中部分引用第三方内容，请使用恰当的引用格式并给出出处。如：</p>
+<blockquote>
+<p>One man’s constant is another man’s variable.<br>— Alan Perlis</p>
+</blockquote>
+</li>
+<li><p>如果是全篇转载，请在全文开头显著位置注明出处并链接至原文，如：</p>
+<blockquote>
+<p>本文转载自 <span class="exturl" data-url="aHR0cDovL2VuLndpa2lxdW90ZS5vcmcvd2lraS9BbGFuX1Blcmxpcw==">WikiQuote<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+</li>
+<li><p>如果格式不允许超链接，请以文本方式直接给出原文链接。如果原文链接太长影响美观，可以使用短链接服务。如：</p>
+<blockquote>
+<p>本文转载自 WikiQuote：<code>http://bit.ly/UlHIdN</code></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="图片的使用"><a href="#图片的使用" class="headerlink" title="图片的使用"></a>图片的使用</h2><ul>
+<li>图片加载缓慢，经常因为被屏蔽或者加载失败而不能正常显示，并且图片上的文字无法自动适应屏幕大小和分辨率，所以在线上媒介上不要将大段文字放在图片上。Logo 等需要使用特殊字体的局部文字除外。作为文章一部分的各级标题也应该使用通用字体和文本形态。</li>
+</ul>
+<h2 id="一些具体用词"><a href="#一些具体用词" class="headerlink" title="一些具体用词"></a>一些具体用词</h2><ul>
+<li>「你」和「您」：在不是很正式或没有明确的个体指代对象的时候请用「你」，如文档、博客、群发的邮件等；在指代特定个体时请用「您」，如活动邀请函等。</li>
+<li>字体和字号的一致：在富文本格式文档中，特别是 HTML 邮件中，常有人因为从不同来源复制粘贴而导致同一层次的文本字体和字号不一致。这给人不专业的感觉，请避免。</li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5sZWFybmVyc2RpY3Rpb25hcnkuY29tL2RlZmluaXRpb24vYXBw">App<i class="fa fa-external-link-alt"></i></span> 是 application 的缩写，发音为 /ˈæp/，在演讲等口头表达里要注意不要把三个字母拆开念。App 是一个普通名词而不是多个单词的首字母缩写，所以不应该用全大写的 APP。和其他词一样，大小写规则取决于是否处于句首、标题、或特殊短语（如 App Store）中。大多数情况下应该使用中文「应用」以避免这样的问题。</li>
+<li>不要称呼喜欢我们的用户为「粉丝」，而是使用「用户」。粉丝的说法显得不平等。而且很多人不喜欢这种称呼，因为它含有缺乏独立思考的意思。</li>
+</ul>
+<h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmxlYW5jbG91ZC5jbi9pbXByb3ZlLWNoaW5lc2Uv">余光中：怎样改进英式中文？——论中文的常态与变态<i class="fa fa-external-link-alt"></i></span></li>
+<li>「The Elements of Style」，虽然是讲英语，但很多对中文也适用。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>文案风格</category>
+      </categories>
+      <tags>
+        <tag>文案风格</tag>
+        <tag>写作规范</tag>
+        <tag>格式规范</tag>
+        <tag>LeanCloud</tag>
       </tags>
   </entry>
   <entry>
