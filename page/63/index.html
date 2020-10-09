@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">632</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">636</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">632</span>
+          <span class="site-state-item-count">636</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -304,6 +304,454 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/arp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/arp/" class="post-title-link" itemprop="url">【Linux 命令】arp</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:07:30 08:07:30" itemprop="dateModified" datetime="2020-09-25T08:07:30+08:00">2020-09-25 08:07:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>arp 命令用于显示和修改 IP 到 MAC 转换表</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>arp 命令</strong> 是 Address Resolution Protocol，地址解析协议，是通过解析网络层地址来找寻数据链路层地址的一个网络协议包中极其重要的网络传输协议。而该命令可以显示和修改 arp 协议解析表中的缓冲数据。</p>
+<p>这个核心协议模块实现RFC826中定义的 Address Resolution Protocol [译注：即TCP/IP的第三层到第一层的地址转换协议]，用于在直接相连的网络中换第二层硬件地址和 Ipv4 协议地址之间的转换。 用户除非想对其进行配置，否则一般不会直接操作这个模块。</p>
+<p>实际上，它提供对核心中其它协议的服务。</p>
+<p>用户进程可以使用 packet(7) 的 sockets，收到 ARP 包（译注：一译分组）。 还有一种机制是使用 netlink(7) sockets，在用户空间管理 ARP 缓存的机制。我们也可以通过 ioctl (2) 控制任意 PF_INET socket上的 ARP 表</p>
+<p>ARP 模块维护一个硬件地址到协议地址映射的缓存。这个缓存有大小限制，所以不常用的和旧的记录（Entry）将被垃圾收集器清除（garbage-collected），垃圾收集器永远不能删除标为永久的记录。我们可以使用ioctls直接操纵缓冲， 并且其性状可以用下面定义的 sysctl 调节。</p>
+<p>如果在限定的时间（见下面的sysctl）内，一条现存映射没有肯定反馈时， 则认为相邻层的缓存记录失效。 为了再次向目标发送数据，ARP将首先试着询问本地arp进程 app_solicit 次，获取更新了的 MAC（介质访问控制）地址。 如果失败，并且旧的MAC地址是已知的，则发送 ucast_solicit 次的 unicast probe。如果仍然失败，则将向网络广播一个新的ARP请求,此时要 有待发送数据的队列</p>
+<p>如果 Linux 接到一个地址请求，而且该地址指向 Linux 转发的地址，并且接收接口打开了代理 arp 时，Linux 将自动添加一条非永久的代理 arp 记录；如果存在拒绝到目标的路由，则不添加代理 arp 记录。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp（选项）（参数）</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-a # 主机 ：显示 arp 缓冲区的所有条目；</span><br><span class="line">-H # 地址类型 ：指定 arp 指令使用的地址类型；</span><br><span class="line">-d # 主机 ：从 arp 缓冲区中删除指定主机的 arp 条目；</span><br><span class="line">-D # 使用指定接口的硬件地址；</span><br><span class="line">-e # 以 Linux 的显示风格显示 arp 缓冲区中的条目；</span><br><span class="line">-i # 接口 ：指定要操作 arp 缓冲区的网络接口；</span><br><span class="line">-s # 主机 MAC 地址 ：设置指定的主机的 IP 地址与 MAC 地址的静态映射；</span><br><span class="line">-n # 以数字方式显示 arp 缓冲区中的条目；</span><br><span class="line">-v # 显示详细的 arp 缓冲区条目，包括缓冲区条目的统计信息；</span><br><span class="line">-f # 文件 ：设置主机的 IP 地址与 MAC 地址的静态映射。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>主机：查询 arp 缓冲区中指定主机的 arp 条目。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>显示arp 缓冲区内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# arp -v</span><br><span class="line">Address                  HWtype  HWaddress           Flags Mask            Iface</span><br><span class="line">192.168.0.134            ether   00:21:5E:C7:4D:88   C                     eth1</span><br><span class="line">115.238.144.129          ether   38:22:D6:2F:B2:F1   C                     eth0</span><br><span class="line">Entries: 2      Skipped: 0      Found: 2</span><br></pre></td></tr></table></figure>
+
+<p>添加静态 arp 映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arp -s IP MAC-ADDRESS</span><br><span class="line">arp -s 192.168.1.1 00:b1:b2:b3:b4:b5</span><br></pre></td></tr></table></figure>
+
+<p>删除 arp 缓存条目</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -d 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<!-- Linux 命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/arj/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/arj/" class="post-title-link" itemprop="url">【Linux 命令】arj</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:07:00 08:07:00" itemprop="dateModified" datetime="2020-09-25T08:07:00+08:00">2020-09-25 08:07:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>109</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>用于创建和管理.arj压缩包</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>arj命令</strong> 是 <code>.arj</code> 格式的压缩文件的管理器，用于创建和管理 <code>.arj</code> 压缩包。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arj(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>操作指令：对  <code>.arj</code> 压缩包执行的操作指令；</li>
+<li>压缩包名称：指定要操作的arj压缩包名称。</li>
+</ul>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/arch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/arch/" class="post-title-link" itemprop="url">【Linux 命令】arch</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:06:30 08:06:30" itemprop="dateModified" datetime="2020-09-25T08:06:30+08:00">2020-09-25 08:06:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>275</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示当前主机的硬件架构类型</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch [OPTION]...</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>打印机器架构信息；<code>arch</code> 命令输出结果有：i386、i486、i586、alpha、sparc、arm、m68k、mips、ppc、i686等。</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help       显示帮助信息并退出。</span><br><span class="line">--version    显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# arch</span><br><span class="line">x86_64</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><p>该命令等价于 <code>uname -m</code>。</p>
+</li>
+<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 arch</code>，<code>info coreutils &#39;arch invocation&#39;</code>。</p>
+</li>
+</ol>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ar/" class="post-title-link" itemprop="url">【Linux 命令】ar</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:06:00 08:06:00" itemprop="dateModified" datetime="2020-09-25T08:06:00+08:00">2020-09-25 08:06:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>建立或修改备存文件，或是从备存文件中抽取文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ar命令</strong> 是一个建立或修改备存文件，或是从备存文件中抽取文件的工具，ar可让您集合许多文件，成为单一的备存文件。在备存文件中，所有成员文件皆保有原来的属性与权限</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ar [-]&#123;dmpqrtx&#125;[abcfilNoPsSuvV] [membername] [count] archive files...</span><br><span class="line">Usage: ar [emulation options] [-]&#123;dmpqrstx&#125;[abcDfilMNoPsSTuvV] [--plugin &lt;name&gt;] [member-name] [count] archive-file file...</span><br><span class="line">       ar -M [&lt;mri-脚本]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">ar 允许你 在第一个 命令行 参数中 以任意 顺序 混合 指定 操作码p 和修饰符mod .</span><br><span class="line"></span><br><span class="line">只要你 愿意, 也可以 用破折号 作为 命令行 第一个 参数的 开始.</span><br><span class="line"></span><br><span class="line">p 关键字 指明 要执行的 操作, 只能 指明为 如下 之一:</span><br><span class="line"></span><br><span class="line">d      从档案中删除 模块. 通过files 指明 要删除的 模块的 名称; 如果 没有 指出 要删除的  文件  名称,  档案不会  改变  任何</span><br><span class="line">      内容.</span><br><span class="line"></span><br><span class="line">      如果 给出了&#x27;v&#x27; 修饰符,ar 会例出 它删除的 每一个 模块.</span><br><span class="line"></span><br><span class="line">m      用此 操作 在档案中移动 成员.</span><br><span class="line">      如果 某个 符号名 在档案的 多个 成员中 有定义, 那么 程序 怎样 连接 档案 文件 得到的 结果 可能是 不同的.</span><br><span class="line">      如果  没有为m 指定 修饰符, 由files 指出的 成员 将移动到 档案的末尾 ; 可以 通过 `a&#x27;, `b&#x27; 或 `i&#x27; 等修饰符, 指定 成员</span><br><span class="line">      移动的 具体 位置.</span><br><span class="line"></span><br><span class="line">p      在标准 输出上 打印 档案中 指定的 成员.  如果 给出了`v&#x27; 修饰符, 在 打印 成员 内容 之前, 先打印 成员的 名字.</span><br><span class="line">      如果没有 指明files 参数, 档案中 所有的 成员 都会被 打印 出来.</span><br><span class="line"></span><br><span class="line">q      快速 追加; 增加 files 到 archive 的末尾, 不进行 替换 检查.</span><br><span class="line">      修饰符 `a&#x27; `b&#x27; 和 `i&#x27;不 影响此 操作, 新成员 始终 追加到 档案的 末尾处.</span><br><span class="line">      修饰符 `v&#x27; 可以使 ar 列出 它追加的 所有文件.</span><br><span class="line">      由于 本功能 是用于 快速操作, 即使 档案中 有 符号表 索引 也不 进行 更新; 可以 使用 `ar s&#x27; 或 ranlib 明确 要求  更新</span><br><span class="line">      这些索引.</span><br><span class="line"></span><br><span class="line">      在为快速 追加 重建 索引时,由于 有 太多 不同的 系统, 所以 GNU ar 采用 `q&#x27; 作为 `r&#x27;的一个 同义字.</span><br><span class="line"></span><br><span class="line">r      把文件  files  插入 archive ( 替换 ). 本操作与 `q&#x27; 是不同的, 如果 档案中 已有的 某个 成员与 插入 文件的 名称 相同,</span><br><span class="line">      此成员 将被删除.</span><br><span class="line">      如果 不存在 名称为 files 的文件, ar 显示 一个 错误 消息, 并且 保留 档案中 已有的 同名 成员.</span><br><span class="line">      缺省情况下, 新成员 增加到 挡案的 末尾; 可以 通过 使用 `a&#x27; `b&#x27; 或 `i&#x27; 等修饰符 指定 相对于 已有 成员的 位置.</span><br><span class="line">      通过 使用 `v&#x27; 修饰符 会为每个 插入的 文件 产生 一行 输出, 根据 输出中的 字符 `a&#x27; 或 `r&#x27; 可以 表明 该文件  是追加的</span><br><span class="line">      (没有 删除 以前的成员) 还是 替换的.</span><br><span class="line"></span><br><span class="line">t      显示  一个 archive 档案 所包含 内容的 列表 , 或 档案中的 由 files 指出的 文件 列表.  通常 只显示 成员的 名称, 如果</span><br><span class="line">      使用 `v&#x27; 修饰符, 可以 得到 成员的 权限, 时间属性, 属主, 组和 大小.</span><br><span class="line"></span><br><span class="line">      如果 没有 指出 files, 档案中的 所有 文件 都会 列出.</span><br><span class="line"></span><br><span class="line">      如果 档案中 (称为 `b.a&#x27;) 有多个 同名 成员 (称为 `fie&#x27;), `ar t b.a fie&#x27; 仅仅 列出 第一个; 要看到 它们的 全部,  必须</span><br><span class="line">      要求 完整的 列表 —在本例中是 `ar t b.a&#x27;.</span><br><span class="line"></span><br><span class="line">x      从档案中 抽取  成员 (名称为 files) .  如果 使用 `v&#x27; 修饰符, ar 会列出 它抽取的 每一个 文件的 名字.</span><br><span class="line">      如果没有给出 files, 抽取 档案中 所有的 文件.</span><br><span class="line"></span><br><span class="line">可以在 操作符 p 后紧随 一定数量的 修饰符 mod 以指明 操作的 各种 行为.</span><br><span class="line"></span><br><span class="line">a      增加 文件到 档案中 已有 成员 之后  , 如果 使用了 修饰符 a, 必须在 档案 名称 archive 之前 以 membername 参数的 形式</span><br><span class="line">      给出 档案中 已有 成员的 名字.</span><br><span class="line"></span><br><span class="line">b      增加 文件到 档案中 已有 成员 之前  , 如果 使用了 修饰符 b, 必须在 档案 名称 archive 之前 以 membername 参数的 形式</span><br><span class="line">      给出 档案中 已有 成员的 名字.  (和修饰符 `i&#x27; 相同).</span><br><span class="line"></span><br><span class="line">c      建立    档案.  指定的 档案 archive 始终 会被建立, 如果 你要求 执行的是 更新, 通过 此修饰符 建立 档案时 会给出 一个</span><br><span class="line">      警告.</span><br><span class="line">      </span><br><span class="line">f      截短 档案成员的 名字.  ar 通常 允许 任意 长度的 文件名, 但这会 导致 与某些 系统上的 ar 出现 兼容性  问题,  使用  f</span><br><span class="line">      修饰符 可以 在往档案中 追加 文件时 把名字 截短.</span><br><span class="line"></span><br><span class="line">i      插入 文件到 档案中 已有 成员 之前  , 如果 使用了 修饰符 i, 必须在 档案 名称 archive 之前 以 membername 参数的 形式</span><br><span class="line">      给出 档案中 已有 成员的 名字.  (与修饰符 `b&#x27; 相同).</span><br><span class="line"></span><br><span class="line">l      接受此修饰符, 但不起作用.</span><br><span class="line"></span><br><span class="line">N      使用 count 参数. 本修饰符 用于 在档案中 有多个 同名 成员的 情况.  删除 或抽取 档案中 给定 名字的第 count 个实例.</span><br><span class="line"></span><br><span class="line">o      抽取 成员时 保留 他们 原始的  时间属性. 如果 没有 此修饰符, 文件以抽取 的时间 作为 它的时间 属性.</span><br><span class="line"></span><br><span class="line">P      匹配 档案中的 名字时 使用 完整的 路径名.  ar 不能 建立 使用 完整 路径名的 档案  (这不符合  POSIX  标准),  但其它的</span><br><span class="line">      档案  工具  能够建立, 本选项 会使 ar 在抽取 由其它 工具 建立的 档案 文件时, 使用完整的 路径名 去匹配 档案中 成员的</span><br><span class="line">      名字.</span><br><span class="line"></span><br><span class="line">s      即使 没有对 档案 进行 改变, 用本 修饰符 也可以 往档案中 写一个 目标 文件的 索引 或更新 已经 存在的  索引.   可以与</span><br><span class="line">      其它 操作 一起 使用 本修饰符, 也可以 单独使用.  对一个 档案 执行 `ar s&#x27; 与执行 `ranlib&#x27; 等价.</span><br><span class="line"></span><br><span class="line">S      不生成  档案的 符号表. 这可以 加速 建立 大的档案 文件的 过程,但这样 建立的 档案 不能被 连接器 使用, 为建立 符号表,</span><br><span class="line">      在最后 执行 `ar&#x27; 时应该 不用 `S&#x27; 修饰符, 或者 对档案 执行 一次 `ranlib&#x27; .</span><br><span class="line"></span><br><span class="line">u      通常ar r... 把所有 列出的 文件 插入到 档案中, 如果 希望 仅仅 插入比 档案中 已有 成员 更新的  文件时,  就应该  使用</span><br><span class="line">      此修饰符.   `u&#x27;  修饰符  仅允许  与 `r&#x27; (替换) 操作 一起 使用.  某些 情况下, 由于 用 `q&#x27; 操作 比较 文件的 时间属性</span><br><span class="line">      会失去 速度上的 优势, 所以 不允许 执行 `qu&#x27; 组合操作.</span><br><span class="line"></span><br><span class="line">v      使用本修饰符可以进行 冗余的 操作。附加了此修饰符时，很多操作会显示 更多的消息，如处理的文件名等。</span><br><span class="line">V      显示 ar 的版本号。</span><br></pre></td></tr></table></figure>
+
+<p>选项参数 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--plugin &lt;p&gt; - load the specified plugin</span><br></pre></td></tr></table></figure>
+
+<p>ar：支持的目标： elf64-x86-64 elf32-i386 elf32-x86-64 a.out-i386-linux pei-i386 pei-x86-64 elf64-l1om elf64-k1om elf64-little elf64-big elf32-little elf32-big plugin srec symbolsrec verilog tekhex binary ihex</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>打包文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls   # 显示当前目录文件   </span><br><span class="line">a.c	b.c d.c   install.log	  qte</span><br><span class="line">anaconda-ks.cfg c.c Desktop </span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ar rv one.bak a.c b.c  # 打包 a.c b.c文件 </span><br><span class="line">ar: 正在创建 one.bak</span><br><span class="line">a - a.c</span><br><span class="line">a - b.c</span><br></pre></td></tr></table></figure>
+
+<p>打包多个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ar rv two.bak *.c  // 打包以.c结尾的文件  </span><br><span class="line">ar: 正在创建 two.bak</span><br><span class="line">a - a.c</span><br><span class="line">a - b.c</span><br><span class="line">a - c.c</span><br><span class="line">a - d.c</span><br></pre></td></tr></table></figure>
+
+<p>显示打包文件的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ar t two.bak    </span><br><span class="line">a.c</span><br><span class="line">b.c</span><br><span class="line">c.c</span><br><span class="line">d.c</span><br></pre></td></tr></table></figure>
+
+<p>删除打包文件的成员文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ar d two.bak a.c b.c c.c  </span><br><span class="line">[root@localhost ~]# ar t two.bak       </span><br><span class="line">d.c</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -963,502 +1411,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/apachectl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/apachectl/" class="post-title-link" itemprop="url">【Linux 命令】apachectl</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:02:30 08:02:30" itemprop="dateModified" datetime="2020-09-25T08:02:30+08:00">2020-09-25 08:02:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>263</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Apache服务器前端控制工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>apachectl命令</strong> 是Apache的Web服务器前端控制工具，用以启动、关闭和重新启动Web服务器进程。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">apachectl</span><span class="params">(参数)</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>configtest：检查设置文件中的语法是否正确；</li>
-<li>fullstatus：显示服务器完整的状态信息；</li>
-<li>graceful：重新启动Apache服务器，但不会中断原有的连接；</li>
-<li>help：显示帮助信息；</li>
-<li>restart：重新启动Apache服务器；</li>
-<li>start：启动Apache服务器；</li>
-<li>status：显示服务器摘要的状态信息；</li>
-<li>stop：停止Apache服务器。</li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/alias/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/alias/" class="post-title-link" itemprop="url">【Linux 命令】alias</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:02:00 08:02:00" itemprop="dateModified" datetime="2020-09-25T08:02:00+08:00">2020-09-25 08:02:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>定义或显示别名。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias [-p] [name[=value] ...]</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>简化较长的命令。</li>
-<li>定义一个或多个别名。</li>
-<li>修改一个或多个已定义别名的值。</li>
-<li>显示一个或多个已定义别名。</li>
-<li>显示全部已定义的别名。</li>
-</ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p：显示全部已定义的别名。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>name（可选）：指定要（定义、修改、显示）的别名。</p>
-<p>value（可选）：别名的值。</p>
-<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>alias返回true除非您要显示的别名未定义。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示全部已定义的别名</span></span><br><span class="line">alias</span><br><span class="line">alias -p</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示已定义的别名（假设当前环境存在以下别名）</span></span><br><span class="line">alias ls</span><br><span class="line">alias ls grep</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义或修改别名的值</span></span><br><span class="line">alias ls=&#x27;ls --color=auto&#x27;</span><br><span class="line">alias ls=&#x27;ls --color=never&#x27; grep=&#x27;grep --color=never&#x27;</span><br></pre></td></tr></table></figure>
-
-<h2 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h2><p>直接在shell里设定的命令别名，在终端关闭或者系统重新启动后都会失效，如何才能永久有效呢？</p>
-<p>使用编辑器打开<code>~/.bashrc</code>，在文件中加入别名设置，如：alias rm=’rm -i’，保存后执行<code>source ~/.bashrc</code>，这样就可以永久保存命令的别名了。</p>
-<p>因为修改的是当前用户目录下的<code>~/.bashrc</code>文件，所以这样的方式只对当前用户有用。如果要对所有用户都有效，修改<code>/etc/bashrc</code>文件就可以了。</p>
-<blockquote>
-<p>请注意，以下内容可能与您实际使用的系统有出入:</p>
-<p>在CentOS7下，这个文件是<code>/etc/bash.bashrc</code>。此外在CentOS7下，细看<code>~/.bashrc</code>文件，会发现有这样一段代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [ -f ~/.bash_aliases ]; then</span><br><span class="line">  . ~/.bash_aliases</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-<p>这个代码的意思就是如果存在那么就加载<code>.bash_aliases</code>文件，所以也可以在用户根目录下新建该文件用于单独存放命令别名设置。</p>
-</blockquote>
-<h2 id="错误用法"><a href="#错误用法" class="headerlink" title="错误用法"></a>错误用法</h2><ul>
-<li><p>要显示的别名未定义。</p>
-</li>
-<li><p>当您定义（修改）别名的值的时候，由于值的字符串有空格但您没有用<strong>单引号扩起</strong>，那么会导致严重的问题：</p>
-</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 为方便演示，删除全部别名</span></span><br><span class="line">unalias -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有用单引号扩起</span></span><br><span class="line">alias rm=rm -rf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行命令后报错 bash: <span class="built_in">alias</span>: -rf: not found</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这时使用<span class="built_in">alias</span>查看rm的别名时返回 <span class="built_in">alias</span> rm=<span class="string">&#x27;rm&#x27;</span></span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更具有迷惑性的例子</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为方便演示，删除全部别名</span></span><br><span class="line">unalias -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 仍然没有用单引号括起</span></span><br><span class="line">alias ls=ls --color=never</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行命令后看起来没有报错</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用<span class="built_in">alias</span>查看全部别名会发现运行结果如下：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> --color=never</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span> ls=<span class="string">&#x27;ls&#x27;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">alias</span>处理时将它们看成了两组</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>Q：如果我要显示一到多个别名，但不知道其中是否有未定义的该怎么办？</p>
-<p>A：正常执行就是了，alias不会因为有一个未定义的别名就结束对剩余参数的执行。</p>
-<p>Q：如果我这么定义<code>alias cd=&#39;ls&#39; ls=&#39;cd&#39;</code>，会有什么后果？</p>
-<p>A：运行cd依然会切换目录，运行ls依然会列出文件夹的内容；不要这样定义。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li><strong>执行脚本时请注意：</strong></li>
-</ol>
-<blockquote>
-<p>使用<code>source</code>命令执行的bash脚本如果执行了<code>alias</code>或<code>unalias</code>命令，那么有可能会对终端环境的别名设置产生影响；终端环境的别名设置也可能改变运行结果；</p>
-<p>通过<code>sh</code>方式调用的bash脚本或直接运行当前用户有执行权限的脚本不受终端环境的别名影响。</p>
-</blockquote>
-<ol start="2">
-<li><p>删除别名，请查看<code>unalias</code>命令。</p>
-</li>
-<li><p>建议您不要对<code>mv cp rm</code>等命令的别名设置危险的<code>-f</code>选项，比如<code>alias rm=&#39;rm -f&#39;</code>。</p>
-</li>
-<li><p>需要注意别名是否和其他命令有冲突的情况。</p>
-</li>
-<li><p>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</p>
-</li>
-</ol>
-<h3 id="其他参考链接"><a href="#其他参考链接" class="headerlink" title="其他参考链接"></a>其他参考链接</h3><p><span class="exturl" data-url="aHR0cHM6Ly9qaW5neWFuLmJhaWR1LmNvbS9hcnRpY2xlL2FjNmE5YTVlNjczODQyMmI2NTNlYWMwMS5odG1s">Linux命令详解：[8]alias创建自己的命令<i class="fa fa-external-link-alt"></i></span></p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/ack/" class="post-title-link" itemprop="url">【Linux 命令】ack</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:01:30 08:01:30" itemprop="dateModified" datetime="2020-09-25T08:01:30+08:00">2020-09-25 08:01:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>比grep好用的文本搜索工具</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu下要安装ack-grep，因为在debian系中，ack这个名字被其他的软件占用了。</span></span><br><span class="line">sudo apt-get install ack-grep</span><br><span class="line"><span class="meta">#</span><span class="bash"> alpine Linux-apk软件包管理器 安装 ack</span></span><br><span class="line">apk install ack</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>这些参数在linux上的适用频率是相当高的，尤其是你用vim做为IDE的话</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-c(统计)/ -i(忽略大小)/ -h(不显示名称)/</span><br><span class="line">-l(只显文件名)/ -n(加行号)/ -v(显示不匹配)</span><br></pre></td></tr></table></figure>
-
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>ack官网列出了这工具的5大卖点：</p>
-<ol>
-<li>速度非常快,因为它只搜索有意义的东西。</li>
-<li>更友好的搜索，忽略那些不是你源码的东西。</li>
-<li>为源代码搜索而设计，用更少的击键完成任务。</li>
-<li>非常轻便，移植性好。</li>
-<li>免费且开源</li>
-</ol>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>在记忆的时候大体上可以分为这几个部分：</p>
-<blockquote>
-<p>Searching 代码搜索<br>Search output 搜索结果处理<br>File presentation 文件展示<br>File finding 文件查找<br>File inclusion/exclusion 文件过滤  </p>
-</blockquote>
-<p>grep常用操作</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -r &#x27;hello_world&#x27; # 简单用法</span><br><span class="line">grep &#x27;^hello_world&#x27; . # 简单正则</span><br><span class="line">ls -l | grep .py # 管道用法</span><br></pre></td></tr></table></figure>
-
-<h3 id="Searching"><a href="#Searching" class="headerlink" title="Searching"></a>Searching</h3><p>简单的文本搜索，默认是递归的。</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ack-<span class="keyword">grep</span> hello</span><br><span class="line">ack-<span class="keyword">grep</span> -i hello</span><br><span class="line">ack-<span class="keyword">grep</span> -v hello</span><br><span class="line">ack-<span class="keyword">grep</span> -w hello</span><br><span class="line">ack-<span class="keyword">grep</span> -Q <span class="string">&#x27;hello*&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Search-File"><a href="#Search-File" class="headerlink" title="Search File"></a>Search File</h3><p>对搜索结果进行处理，比如只显示一个文件的一个匹配项，或者xxx</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ack-grep --line=1       # 输出所有文件第二行</span><br><span class="line">ack-grep -l &#x27;hello&#x27;     # 包含的文件名</span><br><span class="line">ack-grep -L &#x27;print&#x27;     # 非包含文件名</span><br></pre></td></tr></table></figure>
-
-<h3 id="File-presentation"><a href="#File-presentation" class="headerlink" title="File presentation"></a>File presentation</h3><p>输出的结果是以什么方式展示呢，这个部分有几个参数可以练习下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ack-grep hello --pager=&#x27;less -R&#x27;    # 以less形式展示</span><br><span class="line">ack-grep hello --noheading      # 不在头上显示文件</span><br><span class="line">ack-grep hello --nocolor        # 不对匹配字符着色</span><br></pre></td></tr></table></figure>
-
-<h3 id="File-finding"><a href="#File-finding" class="headerlink" title="File finding"></a>File finding</h3><p>没错，它可以查找文件，以省去你要不断的结合find和grep的麻烦，虽然在linux的思想是一个工具做好一件事。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ack-grep -f hello.py     # 查找全匹配文件</span><br><span class="line">ack-grep -g hello.py$    # 查找正则匹配文件</span><br><span class="line">ack-grep -g hello  --sort-files     # 查找然后排序</span><br></pre></td></tr></table></figure>
-
-<h3 id="File-Inclusion-Exclusion"><a href="#File-Inclusion-Exclusion" class="headerlink" title="File Inclusion/Exclusion"></a>File Inclusion/Exclusion</h3><p>文件过滤，个人觉得这是一个很不错的功能。如果你曾经在搜索项目源码是不小心命中日志中的某个关键字的话，你会觉得这个有用。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ack-grep --python hello       # 查找所有python文件</span><br><span class="line">ack-grep -G hello.py$ hello   # 查找匹配正则的文件</span><br></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9iZXlvbmRncmVwLmNvbS8=">ack官网<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/accept/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/accept/" class="post-title-link" itemprop="url">【Linux 命令】accept</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:01:00 08:01:00" itemprop="dateModified" datetime="2020-09-25T08:01:00+08:00">2020-09-25 08:01:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>153</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>指示打印系统接受发往指定目标打印机的打印任务</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>accept命令</strong> 属于CUPS套件，用于指示打印系统接受发往指定目标打印机的打印任务。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">accept</span><span class="params">(选项)</span><span class="params">(参数)</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-E：当连接到服务器时强制加密；</span></span><br><span class="line"><span class="deletion">-U：指定连接服务器时使用的用户名；</span></span><br><span class="line"><span class="deletion">-h：指定连接服务器名和端口号。</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标：指定目标打印机。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1517,14 +1469,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">855k</span>
+    <span title="站点总字数">864k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">12:57</span>
+    <span title="站点阅读时长">13:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
