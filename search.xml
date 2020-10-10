@@ -6156,64 +6156,6 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】free</title>
-    <url>/linux-command/free/</url>
-    <content><![CDATA[<p>显示内存的使用情况</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>free命令</strong> 可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-b # 以Byte为单位显示内存使用情况；</span><br><span class="line">-k # 以KB为单位显示内存使用情况；</span><br><span class="line">-m # 以MB为单位显示内存使用情况；</span><br><span class="line">-g # 以GB为单位显示内存使用情况。 </span><br><span class="line">-o # 不显示缓冲区调节列；</span><br><span class="line">-s&lt;间隔秒数&gt; # 持续观察内存使用状况；</span><br><span class="line">-t # 显示内存总和列；</span><br><span class="line">-V # 显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free -t    # 以总和的形式显示内存的使用信息</span><br><span class="line">free -s 10 # 周期性的查询内存使用信息，每10s 执行一次命令</span><br></pre></td></tr></table></figure>
-
-<p>显示内存使用情况</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
-
-<p> <strong>第一部分Mem行解释：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">total：内存总数；</span><br><span class="line">used：已经使用的内存数；</span><br><span class="line">free：空闲的内存数；</span><br><span class="line">shared：当前已经废弃不用；</span><br><span class="line">buffers Buffer：缓存内存数；</span><br><span class="line">cached Page：缓存内存数。</span><br></pre></td></tr></table></figure>
-
-<p>关系：total = used + free</p>
-<p> <strong>第二部分(-/+ buffers/cache)解释:</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">(-buffers/cache) used内存数：第一部分Mem行中的 used – buffers – cached</span><br><span class="line">(+buffers/cache) free内存数: 第一部分Mem行中的 free + buffers + cached</span><br></pre></td></tr></table></figure>
-
-<p>可见-buffers/cache反映的是被程序实实在在吃掉的内存，而+buffers/cache反映的是可以挪用的内存总数。</p>
-<p>第三部分是指交换分区。</p>
-<p>输出结果的第四行是交换分区SWAP的，也就是我们通常所说的虚拟内存。<br>区别：第二行(mem)的used/free与第三行(-/+ buffers/cache) used/free的区别。 这两个的区别在于使用的角度来看，第一行是从OS的角度来看，因为对于OS，buffers/cached 都是属于被使用，所以他的可用内存是2098428KB,已用内存是30841684KB,其中包括，内核（OS）使用+Application(X, oracle,etc)使用的+buffers+cached.</p>
-<p>第三行所指的是从应用程序角度来看，对于应用程序来说，buffers/cached 是等于可用的，因为buffer/cached是为了提高文件读取的性能，当应用程序需在用到内存的时候，buffer/cached会很快地被回收。</p>
-<p>所以从应用程序的角度来说，可用内存=系统free memory+buffers+cached。<br>如本机情况的可用内存为：</p>
-<p>18007156=2098428KB+4545340KB+11363424KB</p>
-<p>接下来解释什么时候内存会被交换，以及按什么方交换。 </p>
-<p>当可用内存少于额定值的时候，就会开会进行交换。如何看额定值：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /proc/meminfo</span><br><span class="line"></span><br><span class="line">MemTotal:       16140816 kB</span><br><span class="line">MemFree:          816004 kB</span><br><span class="line">MemAvailable:    2913824 kB</span><br><span class="line">Buffers:           17912 kB</span><br><span class="line">Cached:          2239076 kB</span><br><span class="line">SwapCached:            0 kB</span><br><span class="line">Active:         12774804 kB</span><br><span class="line">Inactive:        1594328 kB</span><br><span class="line">Active(anon):   12085544 kB</span><br><span class="line">Inactive(anon):    94572 kB</span><br><span class="line">Active(file):     689260 kB</span><br><span class="line">Inactive(file):  1499756 kB</span><br><span class="line">Unevictable:      116888 kB</span><br><span class="line">Mlocked:          116888 kB</span><br><span class="line">SwapTotal:       8191996 kB</span><br><span class="line">SwapFree:        8191996 kB</span><br><span class="line">Dirty:                56 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:      12229228 kB</span><br><span class="line">Mapped:           117136 kB</span><br><span class="line">Shmem:             58736 kB</span><br><span class="line">Slab:             395568 kB</span><br><span class="line">SReclaimable:     246700 kB</span><br><span class="line">SUnreclaim:       148868 kB</span><br><span class="line">KernelStack:       30496 kB</span><br><span class="line">PageTables:       165104 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:    16262404 kB</span><br><span class="line">Committed_AS:   27698600 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:      311072 kB</span><br><span class="line">VmallocChunk:   34350899200 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:   3104768 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:      225536 kB</span><br><span class="line">DirectMap2M:    13279232 kB</span><br><span class="line">DirectMap1G:     5242880 kB</span><br></pre></td></tr></table></figure>
-
-<p>交换将通过三个途径来减少系统中使用的物理页面的个数：　</p>
-<ol>
-<li>减少缓冲与页面cache的大小， </li>
-<li>将系统V类型的内存页面交换出去，　 </li>
-<li>换出或者丢弃页面。(Application 占用的内存页，也就是物理内存不足）。 </li>
-</ol>
-<p>事实上，少量地使用swap是不是影响到系统性能的。</p>
-<p>那buffers和cached都是缓存，两者有什么区别呢？</p>
-<p>为了提高磁盘存取效率, Linux做了一些精心的设计, 除了对dentry进行缓存(用于VFS,加速文件路径名到inode的转换), 还采取了两种主要Cache方式：</p>
-<p>Buffer Cache和Page Cache。前者针对磁盘块的读写，后者针对文件inode的读写。这些Cache有效缩短了 I/O系统调用(比如read,write,getdents)的时间。<br>磁盘的操作有逻辑级（文件系统）和物理级（磁盘块），这两种Cache就是分别缓存逻辑和物理级数据的。</p>
-<p>Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。当page cache的数据需要刷新时，page cache中的数据交给buffer cache，因为Buffer Cache就是缓存磁盘块的。但是这种处理在2.6版本的内核之后就变的很简单了，没有真正意义上的cache操作。</p>
-<p>Buffer cache是针对磁盘块的缓存，也就是在没有文件系统的情况下，直接对磁盘进行操作的数据会缓存到buffer cache中，例如，文件系统的元数据都会缓存到buffer cache中。</p>
-<p>简单说来，page cache用来缓存文件数据，buffer cache用来缓存磁盘数据。在有文件系统的情况下，对文件操作，那么数据会缓存到page cache，如果直接采用dd等工具对磁盘进行读写，那么数据会缓存到buffer cache。</p>
-<p>所以我们看linux,只要不用swap的交换空间,就不用担心自己的内存太少.如果常常swap用很多,可能你就要考虑加物理内存了.这也是linux看内存是否够用的标准.</p>
-<p>如果是应用服务器的话，一般只看第二行，+buffers/cache,即对应用程序来说free的内存太少了，也是该考虑优化程序或加内存了。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>free</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】fsck</title>
     <url>/linux-command/fsck/</url>
     <content><![CDATA[<p>检查并且试图修复文件系统中的错误</p>
@@ -6275,6 +6217,64 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>ftp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】free</title>
+    <url>/linux-command/free/</url>
+    <content><![CDATA[<p>显示内存的使用情况</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>free命令</strong> 可以显示当前系统未使用的和已使用的内存数目，还可以显示被内核使用的内存缓冲区。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-b # 以Byte为单位显示内存使用情况；</span><br><span class="line">-k # 以KB为单位显示内存使用情况；</span><br><span class="line">-m # 以MB为单位显示内存使用情况；</span><br><span class="line">-g # 以GB为单位显示内存使用情况。 </span><br><span class="line">-o # 不显示缓冲区调节列；</span><br><span class="line">-s&lt;间隔秒数&gt; # 持续观察内存使用状况；</span><br><span class="line">-t # 显示内存总和列；</span><br><span class="line">-V # 显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free -t    # 以总和的形式显示内存的使用信息</span><br><span class="line">free -s 10 # 周期性的查询内存使用信息，每10s 执行一次命令</span><br></pre></td></tr></table></figure>
+
+<p>显示内存使用情况</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">free -m</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          2016       1973         42          0        163       1497</span><br><span class="line">-/+ buffers/cache:        312       1703</span><br><span class="line">Swap:         4094          0       4094</span><br></pre></td></tr></table></figure>
+
+<p> <strong>第一部分Mem行解释：</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">total：内存总数；</span><br><span class="line">used：已经使用的内存数；</span><br><span class="line">free：空闲的内存数；</span><br><span class="line">shared：当前已经废弃不用；</span><br><span class="line">buffers Buffer：缓存内存数；</span><br><span class="line">cached Page：缓存内存数。</span><br></pre></td></tr></table></figure>
+
+<p>关系：total = used + free</p>
+<p> <strong>第二部分(-/+ buffers/cache)解释:</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">(-buffers/cache) used内存数：第一部分Mem行中的 used – buffers – cached</span><br><span class="line">(+buffers/cache) free内存数: 第一部分Mem行中的 free + buffers + cached</span><br></pre></td></tr></table></figure>
+
+<p>可见-buffers/cache反映的是被程序实实在在吃掉的内存，而+buffers/cache反映的是可以挪用的内存总数。</p>
+<p>第三部分是指交换分区。</p>
+<p>输出结果的第四行是交换分区SWAP的，也就是我们通常所说的虚拟内存。<br>区别：第二行(mem)的used/free与第三行(-/+ buffers/cache) used/free的区别。 这两个的区别在于使用的角度来看，第一行是从OS的角度来看，因为对于OS，buffers/cached 都是属于被使用，所以他的可用内存是2098428KB,已用内存是30841684KB,其中包括，内核（OS）使用+Application(X, oracle,etc)使用的+buffers+cached.</p>
+<p>第三行所指的是从应用程序角度来看，对于应用程序来说，buffers/cached 是等于可用的，因为buffer/cached是为了提高文件读取的性能，当应用程序需在用到内存的时候，buffer/cached会很快地被回收。</p>
+<p>所以从应用程序的角度来说，可用内存=系统free memory+buffers+cached。<br>如本机情况的可用内存为：</p>
+<p>18007156=2098428KB+4545340KB+11363424KB</p>
+<p>接下来解释什么时候内存会被交换，以及按什么方交换。 </p>
+<p>当可用内存少于额定值的时候，就会开会进行交换。如何看额定值：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /proc/meminfo</span><br><span class="line"></span><br><span class="line">MemTotal:       16140816 kB</span><br><span class="line">MemFree:          816004 kB</span><br><span class="line">MemAvailable:    2913824 kB</span><br><span class="line">Buffers:           17912 kB</span><br><span class="line">Cached:          2239076 kB</span><br><span class="line">SwapCached:            0 kB</span><br><span class="line">Active:         12774804 kB</span><br><span class="line">Inactive:        1594328 kB</span><br><span class="line">Active(anon):   12085544 kB</span><br><span class="line">Inactive(anon):    94572 kB</span><br><span class="line">Active(file):     689260 kB</span><br><span class="line">Inactive(file):  1499756 kB</span><br><span class="line">Unevictable:      116888 kB</span><br><span class="line">Mlocked:          116888 kB</span><br><span class="line">SwapTotal:       8191996 kB</span><br><span class="line">SwapFree:        8191996 kB</span><br><span class="line">Dirty:                56 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:      12229228 kB</span><br><span class="line">Mapped:           117136 kB</span><br><span class="line">Shmem:             58736 kB</span><br><span class="line">Slab:             395568 kB</span><br><span class="line">SReclaimable:     246700 kB</span><br><span class="line">SUnreclaim:       148868 kB</span><br><span class="line">KernelStack:       30496 kB</span><br><span class="line">PageTables:       165104 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:    16262404 kB</span><br><span class="line">Committed_AS:   27698600 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:      311072 kB</span><br><span class="line">VmallocChunk:   34350899200 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:   3104768 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:      225536 kB</span><br><span class="line">DirectMap2M:    13279232 kB</span><br><span class="line">DirectMap1G:     5242880 kB</span><br></pre></td></tr></table></figure>
+
+<p>交换将通过三个途径来减少系统中使用的物理页面的个数：　</p>
+<ol>
+<li>减少缓冲与页面cache的大小， </li>
+<li>将系统V类型的内存页面交换出去，　 </li>
+<li>换出或者丢弃页面。(Application 占用的内存页，也就是物理内存不足）。 </li>
+</ol>
+<p>事实上，少量地使用swap是不是影响到系统性能的。</p>
+<p>那buffers和cached都是缓存，两者有什么区别呢？</p>
+<p>为了提高磁盘存取效率, Linux做了一些精心的设计, 除了对dentry进行缓存(用于VFS,加速文件路径名到inode的转换), 还采取了两种主要Cache方式：</p>
+<p>Buffer Cache和Page Cache。前者针对磁盘块的读写，后者针对文件inode的读写。这些Cache有效缩短了 I/O系统调用(比如read,write,getdents)的时间。<br>磁盘的操作有逻辑级（文件系统）和物理级（磁盘块），这两种Cache就是分别缓存逻辑和物理级数据的。</p>
+<p>Page cache实际上是针对文件系统的，是文件的缓存，在文件层面上的数据会缓存到page cache。文件的逻辑层需要映射到实际的物理磁盘，这种映射关系由文件系统来完成。当page cache的数据需要刷新时，page cache中的数据交给buffer cache，因为Buffer Cache就是缓存磁盘块的。但是这种处理在2.6版本的内核之后就变的很简单了，没有真正意义上的cache操作。</p>
+<p>Buffer cache是针对磁盘块的缓存，也就是在没有文件系统的情况下，直接对磁盘进行操作的数据会缓存到buffer cache中，例如，文件系统的元数据都会缓存到buffer cache中。</p>
+<p>简单说来，page cache用来缓存文件数据，buffer cache用来缓存磁盘数据。在有文件系统的情况下，对文件操作，那么数据会缓存到page cache，如果直接采用dd等工具对磁盘进行读写，那么数据会缓存到buffer cache。</p>
+<p>所以我们看linux,只要不用swap的交换空间,就不用担心自己的内存太少.如果常常swap用很多,可能你就要考虑加物理内存了.这也是linux看内存是否够用的标准.</p>
+<p>如果是应用服务器的话，一般只看第二行，+buffers/cache,即对应用程序来说free的内存太少了，也是该考虑优化程序或加内存了。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>free</tag>
       </tags>
   </entry>
   <entry>
@@ -8475,29 +8475,6 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】ipcalc</title>
-    <url>/linux-command/ipcalc/</url>
-    <content><![CDATA[<p>简单的IP地址计算器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ipcalc命令</strong> 是一个简单的ip地址计算器，可以完成简单的IP地址计算任务。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ipcalc(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-b：由给定的IP地址和网络掩码计算出广播地址；</span><br><span class="line">-h：显示给定UP地址所对应的主机名；</span><br><span class="line">-m：由给定的IP地址计算器网络掩码；</span><br><span class="line">-p：显示给定的掩码或IP地址的前缀；</span><br><span class="line">-n：由给定的IP地址和网络掩码计算网络地址；</span><br><span class="line">-s：安静模式；</span><br><span class="line">--help：显示帮助信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# ipcalc -p 192.168.2.1 255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -n 192.168.2.1 255.255.255.0</span><br><span class="line">NETWORK=192.168.2.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -h 127.0.0.1</span><br><span class="line">hostname=localhost.localdomain</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -m 192.168.2.1</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -pnbm 192.168.2.1 255.255.255.0</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line">BROADCAST=192.168.2.255</span><br><span class="line">NETWORK=192.168.2.0</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>ipcalc</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】ipcrm</title>
     <url>/linux-command/ipcrm/</url>
     <content><![CDATA[<p>删除消息队列、信号集、或者共享内存标识</p>
@@ -8520,6 +8497,29 @@ driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>ipcrm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】ipcalc</title>
+    <url>/linux-command/ipcalc/</url>
+    <content><![CDATA[<p>简单的IP地址计算器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ipcalc命令</strong> 是一个简单的ip地址计算器，可以完成简单的IP地址计算任务。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ipcalc(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-b：由给定的IP地址和网络掩码计算出广播地址；</span><br><span class="line">-h：显示给定UP地址所对应的主机名；</span><br><span class="line">-m：由给定的IP地址计算器网络掩码；</span><br><span class="line">-p：显示给定的掩码或IP地址的前缀；</span><br><span class="line">-n：由给定的IP地址和网络掩码计算网络地址；</span><br><span class="line">-s：安静模式；</span><br><span class="line">--help：显示帮助信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]# ipcalc -p 192.168.2.1 255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -n 192.168.2.1 255.255.255.0</span><br><span class="line">NETWORK=192.168.2.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -h 127.0.0.1</span><br><span class="line">hostname=localhost.localdomain</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -m 192.168.2.1</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# ipcalc -pnbm 192.168.2.1 255.255.255.0</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">PREFIX=24</span><br><span class="line">BROADCAST=192.168.2.255</span><br><span class="line">NETWORK=192.168.2.0</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>ipcalc</tag>
       </tags>
   </entry>
   <entry>
@@ -10824,12 +10824,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjMTA5OyYjMTA1OyYjMTEwOyYjNjQ7JiN4NmE7JiMxMTU7JiN4NjQ7JiMxMDU7JiN4Njc7JiN4MmU7JiM5OTsmIzExMTsmI3g2ZDs=">&#x61;&#x64;&#109;&#105;&#110;&#64;&#x6a;&#115;&#x64;&#105;&#x67;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjeDZkOyYjeDY5OyYjeDZlOyYjNjQ7JiMxMDY7JiMxMTU7JiMxMDA7JiMxMDU7JiMxMDM7JiM0NjsmIzk5OyYjeDZmOyYjeDZkOw==">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#64;&#106;&#115;&#100;&#105;&#103;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjeDY1OyYjeDcyOyYjeDQwOyYjMTA2OyYjeDczOyYjeDY0OyYjMTA1OyYjMTAzOyYjNDY7JiM5OTsmIzExMTsmIzEwOTs=">&#117;&#115;&#x65;&#x72;&#x40;&#106;&#x73;&#x64;&#105;&#103;&#46;&#99;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjeDczOyYjMTAxOyYjeDcyOyYjNjQ7JiN4NmE7JiN4NzM7JiMxMDA7JiMxMDU7JiMxMDM7JiM0NjsmI3g2MzsmIzExMTsmIzEwOTs=">&#x75;&#x73;&#101;&#x72;&#64;&#x6a;&#x73;&#100;&#105;&#103;&#46;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -16829,10 +16829,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjMTA3OyYjMTE0OyYjMTAxOyYjMTIxOyYjNjQ7JiN4NDk7JiM4MzsmIzczOyYjNDY7JiN4NDU7JiN4NDQ7JiN4NTU7">&#106;&#107;&#114;&#101;&#121;&#64;&#x49;&#83;&#73;&#46;&#x45;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjMTA4OyYjMTExOyYjeDQwOyYjeDYzOyYjMTE1OyYjeDJlOyYjeDY4OyYjMTE3OyYjeDc0OyYjNDY7JiMxMDI7JiMxMDU7">&#121;&#108;&#111;&#x40;&#x63;&#115;&#x2e;&#x68;&#117;&#x74;&#46;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjMTEwOyYjOTc7JiM2NDsmI3g0OTsmI3g1MzsmI3g0OTsmIzQ2OyYjeDQ1OyYjeDQ0OyYjeDU1Ow==">&#105;&#x61;&#110;&#97;&#64;&#x49;&#x53;&#x49;&#46;&#x45;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjeDZiOyYjeDcyOyYjeDY1OyYjeDc5OyYjeDQwOyYjNzM7JiM4MzsmIzczOyYjNDY7JiM2OTsmIzY4OyYjODU7">&#106;&#x6b;&#x72;&#x65;&#x79;&#x40;&#73;&#83;&#73;&#46;&#69;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjMTA4OyYjMTExOyYjNjQ7JiM5OTsmIzExNTsmI3gyZTsmI3g2ODsmIzExNzsmI3g3NDsmIzQ2OyYjeDY2OyYjeDY5Ow==">&#121;&#108;&#111;&#64;&#99;&#115;&#x2e;&#x68;&#117;&#x74;&#46;&#x66;&#x69;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjeDZlOyYjeDYxOyYjeDQwOyYjNzM7JiM4MzsmIzczOyYjeDJlOyYjNjk7JiM2ODsmIzg1Ow==">&#105;&#x61;&#x6e;&#x61;&#x40;&#73;&#83;&#73;&#x2e;&#69;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjeDc5OyYjeDcwOyYjeDY4OyYjeDY1OyYjMTE0OyYjMTEyOyYjeDc1OyYjeDZlOyYjeDZiOyYjeDczOyYjeDQwOyYjMTE2OyYjMTExOyYjeDYxOyYjMTAwOyYjNDY7JiN4NjM7JiMxMTE7JiN4NmQ7">&#x63;&#x79;&#x70;&#x68;&#x65;&#114;&#112;&#x75;&#x6e;&#x6b;&#x73;&#x40;&#116;&#111;&#x61;&#100;&#46;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjMTIxOyYjeDcwOyYjeDY4OyYjeDY1OyYjMTE0OyYjMTEyOyYjMTE3OyYjMTEwOyYjMTA3OyYjeDczOyYjeDQwOyYjeDc0OyYjMTExOyYjeDYxOyYjMTAwOyYjNDY7JiN4NjM7JiN4NmY7JiMxMDk7">&#x63;&#121;&#x70;&#x68;&#x65;&#114;&#112;&#117;&#110;&#107;&#x73;&#x40;&#x74;&#111;&#x61;&#100;&#46;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -16860,6 +16860,27 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】sshd</title>
+    <url>/linux-command/sshd/</url>
+    <content><![CDATA[<p>openssh软件套件中的服务器守护进程</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sshd命令</strong> 是openssh软件套件中的服务器守护进程。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sshd(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-4：强制使用IPv4地址；</span><br><span class="line">-6：强制使用IPv6地址；</span><br><span class="line">-D：以后台守护进程方式运行服务器；</span><br><span class="line">-d：调试模式；</span><br><span class="line">-e：将错误发送到标准错误设备，而不是将其发送到系统日志；</span><br><span class="line">-f：指定服务器的配置文件；</span><br><span class="line">-g：指定客户端登录时的过期时间，如果在此期限内，用户没有正确认证，则服务器断开次客户端的连接；</span><br><span class="line">-h：指定读取主机key文件；</span><br><span class="line">-i：ssh以inetd方式运行；</span><br><span class="line">-o：指定ssh的配置选项；</span><br><span class="line">-p：静默模式，没有任何信息写入日志；</span><br><span class="line">-t：测试模式。</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>sshd</tag>
       </tags>
   </entry>
   <entry>
@@ -16930,27 +16951,6 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>stat</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】sshd</title>
-    <url>/linux-command/sshd/</url>
-    <content><![CDATA[<p>openssh软件套件中的服务器守护进程</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sshd命令</strong> 是openssh软件套件中的服务器守护进程。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sshd(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-4：强制使用IPv4地址；</span><br><span class="line">-6：强制使用IPv6地址；</span><br><span class="line">-D：以后台守护进程方式运行服务器；</span><br><span class="line">-d：调试模式；</span><br><span class="line">-e：将错误发送到标准错误设备，而不是将其发送到系统日志；</span><br><span class="line">-f：指定服务器的配置文件；</span><br><span class="line">-g：指定客户端登录时的过期时间，如果在此期限内，用户没有正确认证，则服务器断开次客户端的连接；</span><br><span class="line">-h：指定读取主机key文件；</span><br><span class="line">-i：ssh以inetd方式运行；</span><br><span class="line">-o：指定ssh的配置选项；</span><br><span class="line">-p：静默模式，没有任何信息写入日志；</span><br><span class="line">-t：测试模式。</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>sshd</tag>
       </tags>
   </entry>
   <entry>
