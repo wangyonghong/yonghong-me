@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+  <meta name="yandex-verification" content="bb13e36c670d98c2">
+  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","scheme":"Gemini","version":"8.0.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="webpack 4 于 2018 年 2 月发布。从那时起，我们在没有重大更新的情况下，推出了很多功能。我们知道，人们不喜欢带有突破性的重大变化。尤其是 webpack，人们通常一年只接触两次，剩下的时间就 “只管用”了。但是，在不做突破性改动的情况下推出功能也是有成本的：我们不能做重大的 API 或架构改进。 所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10)">
+<meta property="og:url" content="http://yonghong.tech/release/webpack-5-0/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="webpack 4 于 2018 年 2 月发布。从那时起，我们在没有重大更新的情况下，推出了很多功能。我们知道，人们不喜欢带有突破性的重大变化。尤其是 webpack，人们通常一年只接触两次，剩下的时间就 “只管用”了。但是，在不做突破性改动的情况下推出功能也是有成本的：我们不能做重大的 API 或架构改进。 所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-13T13:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-13T13:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="release">
+<meta property="article:tag" content="Webpack">
+<meta property="article:tag" content="Frontend">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yonghong.tech/release/webpack-5-0/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10) | 永红的互联网手记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">641</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">689</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-开源">
+
+    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">疑问解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E5%8F%91%E5%B8%83%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">那么发布意味着什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E5%8D%87%E7%BA%A7%E7%9A%84%E6%97%B6%E5%80%99%E5%91%A2%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">那么什么时候是升级的时候呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%9E%E5%8A%A9%E6%83%85%E5%86%B5"><span class="nav-number">2.</span> <span class="nav-text">赞助情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%96%B9%E5%90%91"><span class="nav-number">3.</span> <span class="nav-text">整体方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97"><span class="nav-number">4.</span> <span class="nav-text">迁移指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4-%E5%8A%9F%E8%83%BD%E6%B8%85%E9%99%A4"><span class="nav-number">5.</span> <span class="nav-text">重大变更: 功能清除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E5%BC%83%E7%94%A8%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">5.1.</span> <span class="nav-text">清理弃用的能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%9F%E5%BC%83%E4%BB%A3%E7%A0%81"><span class="nav-number">5.2.</span> <span class="nav-text">废弃代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%BA%9F%E5%BC%83"><span class="nav-number">5.3.</span> <span class="nav-text">语法废弃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%86%8D%E4%B8%BA-Node-js-%E6%A8%A1%E5%9D%97-%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8-Polyfills"><span class="nav-number">5.4.</span> <span class="nav-text">不再为 Node.js 模块 自动引用 Polyfills</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E9%95%BF%E6%9C%9F%E7%BC%93%E5%AD%98"><span class="nav-number">6.</span> <span class="nav-text">重大变更：长期缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%9A%84-Chunk%E3%80%81%E6%A8%A1%E5%9D%97-ID-%E5%92%8C%E5%AF%BC%E5%87%BA%E5%90%8D%E7%A7%B0"><span class="nav-number">6.1.</span> <span class="nav-text">确定的 Chunk、模块 ID 和导出名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%E5%93%88%E5%B8%8C"><span class="nav-number">6.2.</span> <span class="nav-text">真正的内容哈希</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E5%BC%80%E5%8F%91%E6%94%AF%E6%8C%81"><span class="nav-number">7.</span> <span class="nav-text">重大变更：开发支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E4%BB%A3%E7%A0%81%E5%9D%97-ID"><span class="nav-number">7.1.</span> <span class="nav-text">命名代码块 ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E8%81%94%E9%82%A6"><span class="nav-number">7.2.</span> <span class="nav-text">模块联邦</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%94%AF%E6%8C%81%E5%B4%AD%E6%96%B0%E7%9A%84-Web-%E5%B9%B3%E5%8F%B0%E7%89%B9%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text">重大变更：支持崭新的 Web 平台特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-%E6%A8%A1%E5%9D%97"><span class="nav-number">8.1.</span> <span class="nav-text">JSON 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-meta"><span class="nav-number">8.2.</span> <span class="nav-text">import.meta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97"><span class="nav-number">8.3.</span> <span class="nav-text">资源模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F-Worker-%E6%94%AF%E6%8C%81"><span class="nav-number">8.4.</span> <span class="nav-text">原生 Worker 支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URIs"><span class="nav-number">8.5.</span> <span class="nav-text">URIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">8.6.</span> <span class="nav-text">异步模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E8%B5%84%E6%BA%90"><span class="nav-number">8.7.</span> <span class="nav-text">外部资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%94%AF%E6%8C%81%E5%85%A8%E6%96%B0%E7%9A%84-Node-js-%E7%94%9F%E6%80%81%E7%89%B9%E6%80%A7"><span class="nav-number">9.</span> <span class="nav-text">重大变更：支持全新的 Node.js 生态特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">9.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C"><span class="nav-number">10.</span> <span class="nav-text">重大变更：开发体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E8%BF%87%E4%BC%98%E5%8C%96%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9B%AE%E6%A0%87-target"><span class="nav-number">10.1.</span> <span class="nav-text">经过优化的构建目标(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stats"><span class="nav-number">10.2.</span> <span class="nav-text">Stats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%BA%A6"><span class="nav-number">10.3.</span> <span class="nav-text">进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%94%AF%E4%B8%80%E5%91%BD%E5%90%8D"><span class="nav-number">10.4.</span> <span class="nav-text">自动添加唯一命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%85%AC%E5%85%B1%E8%B7%AF%E5%BE%84"><span class="nav-number">10.5.</span> <span class="nav-text">自动添加公共路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typescript-%E7%B1%BB%E5%9E%8B"><span class="nav-number">10.6.</span> <span class="nav-text">Typescript 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4-%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">重大变更: 构建优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E7%9A%84-tree-shaking"><span class="nav-number">11.1.</span> <span class="nav-text">嵌套的 tree-shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E6%A8%A1%E5%9D%97-tree-shaking"><span class="nav-number">11.2.</span> <span class="nav-text">内部模块 tree-shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJs-Tree-Shaking"><span class="nav-number">11.3.</span> <span class="nav-text">CommonJs Tree Shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90"><span class="nav-number">11.4.</span> <span class="nav-text">副作用分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">11.5.</span> <span class="nav-text">每个运行时的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%90%88%E5%B9%B6"><span class="nav-number">11.6.</span> <span class="nav-text">模块合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8-Tree-Shaking-%E6%94%B9%E8%BF%9B"><span class="nav-number">11.7.</span> <span class="nav-text">通用 Tree Shaking 改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E4%B8%8E%E7%94%9F%E4%BA%A7%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">11.8.</span> <span class="nav-text">开发与生产的一致性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="nav-number">11.9.</span> <span class="nav-text">改进代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B-target-%E9%85%8D%E7%BD%AE"><span class="nav-number">11.10.</span> <span class="nav-text">改进 target 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E6%8B%86%E5%88%86%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%A4%A7%E5%B0%8F"><span class="nav-number">11.11.</span> <span class="nav-text">代码块拆分与模块大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">重大变更：性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E7%BC%93%E5%AD%98"><span class="nav-number">12.1.</span> <span class="nav-text">持久缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E9%97%B2%E7%BD%AE%E5%92%8C%E5%85%B3%E9%97%AD"><span class="nav-number">12.2.</span> <span class="nav-text">编译器闲置和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90"><span class="nav-number">12.3.</span> <span class="nav-text">文件生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E9%95%BF%E6%9C%9F%E6%9C%AA%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">13.</span> <span class="nav-text">重大变更：长期未解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E6%96%87%E4%BB%B6%E7%9B%AE%E6%A0%87%E7%9A%84%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2"><span class="nav-number">13.1.</span> <span class="nav-text">单一文件目标的代码分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E4%BA%86%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">13.2.</span> <span class="nav-text">更新了解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89-JS-%E7%9A%84%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">13.3.</span> <span class="nav-text">没有 JS 的代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92"><span class="nav-number">14.</span> <span class="nav-text">重大变更：未来计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%89%B9%E6%80%A7"><span class="nav-number">14.1.</span> <span class="nav-text">实验特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F-Node-js-%E7%89%88%E6%9C%AC"><span class="nav-number">14.2.</span> <span class="nav-text">最小 Node.js 版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%98%E6%9B%B4"><span class="nav-number">15.</span> <span class="nav-text">配置变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%98%E5%8C%96"><span class="nav-number">15.1.</span> <span class="nav-text">结构的变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC%E5%8F%98%E6%9B%B4"><span class="nav-number">15.2.</span> <span class="nav-text">默认值变更</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4"><span class="nav-number">16.</span> <span class="nav-text">加载器相关变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this-getOptions"><span class="nav-number">16.1.</span> <span class="nav-text">this.getOptions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-exec"><span class="nav-number">16.2.</span> <span class="nav-text">this.exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-getResolve"><span class="nav-number">16.3.</span> <span class="nav-text">this.getResolve</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%86%85%E9%83%A8%E5%8F%98%E6%9B%B4"><span class="nav-number">17.</span> <span class="nav-text">重大内部变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%9A%84%E6%8F%92%E4%BB%B6%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">17.1.</span> <span class="nav-text">新的插件运行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A8%A1%E5%9D%97"><span class="nav-number">17.2.</span> <span class="nav-text">运行时模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">17.3.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E7%BC%93%E5%AD%98%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">17.4.</span> <span class="nav-text">用于缓存的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E9%92%A9%E5%AD%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">17.5.</span> <span class="nav-text">冻结钩子对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tapable-%E6%8F%92%E4%BB%B6%E5%8D%87%E7%BA%A7"><span class="nav-number">17.6.</span> <span class="nav-text">Tapable 插件升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-%E9%92%A9%E5%AD%90"><span class="nav-number">17.7.</span> <span class="nav-text">Stage 钩子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-Chunk-ModuleTemplate-%E5%BA%9F%E5%BC%83"><span class="nav-number">17.8.</span> <span class="nav-text">Main&#x2F;Chunk&#x2F;ModuleTemplate 废弃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">17.9.</span> <span class="nav-text">入口文件描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">17.9.1.</span> <span class="nav-text">入口文件输出文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">17.9.2.</span> <span class="nav-text">入口文件依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E7%B1%BB%E5%BA%93"><span class="nav-number">17.9.3.</span> <span class="nav-text">入口文件类库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">17.9.4.</span> <span class="nav-text">入口文件运行时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="nav-number">17.9.5.</span> <span class="nav-text">入口文件代码块加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E4%B8%8E-ID"><span class="nav-number">17.10.</span> <span class="nav-text">排序与 ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%95%B0%E7%BB%84%E5%88%B0%E9%9B%86%E5%90%88-Set"><span class="nav-number">17.11.</span> <span class="nav-text">从数组到集合(Set)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compilation-fileSystemInfo"><span class="nav-number">17.12.</span> <span class="nav-text">Compilation.fileSystemInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filesystems"><span class="nav-number">17.13.</span> <span class="nav-text">Filesystems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2"><span class="nav-number">17.14.</span> <span class="nav-text">模块热替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97"><span class="nav-number">17.15.</span> <span class="nav-text">工作队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging"><span class="nav-number">17.16.</span> <span class="nav-text">Logging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%92%8C-chunk-%E5%9B%BE"><span class="nav-number">17.17.</span> <span class="nav-text">模块和 chunk 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Init-Fragments"><span class="nav-number">17.18.</span> <span class="nav-text">Init Fragments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-Source-Types"><span class="nav-number">17.19.</span> <span class="nav-text">模块 Source Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stats-%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">17.20.</span> <span class="nav-text">Stats 的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%96%B0%E7%9A%84%E7%9B%91%E5%90%AC"><span class="nav-number">17.21.</span> <span class="nav-text">全新的监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SizeOnlySource-after-emit"><span class="nav-number">17.22.</span> <span class="nav-text">SizeOnlySource after emit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Emitting-assets-multiple-times"><span class="nav-number">17.23.</span> <span class="nav-text">Emitting assets multiple times</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExportsInfo"><span class="nav-number">17.24.</span> <span class="nav-text">ExportsInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5"><span class="nav-number">17.25.</span> <span class="nav-text">代码生成阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%8F%82%E8%80%83"><span class="nav-number">17.26.</span> <span class="nav-text">依赖关系参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Presentational-Dependencies"><span class="nav-number">17.27.</span> <span class="nav-text">Presentational Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%83%E7%94%A8-loaders"><span class="nav-number">17.28.</span> <span class="nav-text">弃用 loaders</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%B0%8F%E6%94%B9%E5%8A%A8"><span class="nav-number">18.</span> <span class="nav-text">微小改动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%BE%AE%E5%B0%8F%E6%94%B9%E5%8A%A8"><span class="nav-number">19.</span> <span class="nav-text">其他微小改动</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">641</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">689</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20vMHhsMm9vdA==" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;0xl2oot"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/release/webpack-5-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-13 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2020-10-13T21:00:00+08:00">2020-10-13 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/release/" itemprop="url" rel="index"><span itemprop="name">release</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/release/webpack-5-0/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="release/webpack-5-0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>35k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>32 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>webpack 4 于 2018 年 2 月发布。<br>从那时起，我们在没有重大更新的情况下，推出了很多功能。<br>我们知道，人们不喜欢带有突破性的重大变化。<br>尤其是 webpack，人们通常一年只接触两次，剩下的时间就 “只管用”了。<br>但是，在不做突破性改动的情况下推出功能也是有成本的：<br>我们不能做重大的 API 或架构改进。</p>
+<p>所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。<br>这时候就需要一个新的主要版本了。<br>所以 webpack 5 包含了这些架构上的改进，以及没有这些改进就不可能实现的功能。</p>
+<p>这个主要版本也是修改一些默认值的机会，并与此同时出现的建议和规范保持一致。</p>
+<p>所以今天（2020-10-10）webpack 5.0.0 发布了，但这并不意味着它已经完成了，没有 bug，甚至功能完整。<br>就像 webpack 4 一样，我们通过修复问题和增加功能来继续开发。<br>在接下来的日子里，可能会有很多 bug 修复。功能会在以后出现。</p>
+<a id="more"></a>
+<h2 id="疑问解答"><a href="#疑问解答" class="headerlink" title="疑问解答"></a>疑问解答</h2><h3 id="那么发布意味着什么呢？"><a href="#那么发布意味着什么呢？" class="headerlink" title="那么发布意味着什么呢？"></a>那么发布意味着什么呢？</h3><p>这意味着我们完成了重大的变更。<br>许多重构已经完成，以提高架构的水平，并为未来的功能（和当前的功能）创建一个良好的基础。</p>
+<h3 id="那么什么时候是升级的时候呢？"><a href="#那么什么时候是升级的时候呢？" class="headerlink" title="那么什么时候是升级的时候呢？"></a>那么什么时候是升级的时候呢？</h3><p>这要看情况。有一个很好的机会，升级失败，你需要给它第二次或第三次尝试。<br>如果你愿意的话，现在就尝试升级，并向 webpack、插件和加载器提供反馈。<br>我们很想解决这些问题。总得有人开始，而你将是第一批受益者之一。</p>
+<h2 id="赞助情况"><a href="#赞助情况" class="headerlink" title="赞助情况"></a>赞助情况</h2><p>webpack 是完全基于<span class="exturl" data-url="aHR0cHM6Ly9vcGVuY29sbGVjdGl2ZS5jb20vd2VicGFjaw==">赞助<i class="fa fa-external-link-alt"></i></span>的。<br>它不像其他一些开源项目那样与大公司挂钩（并由其支付费用）。<br>99% 的赞助收入是根据贡献者和维护者的贡献来分配的。<br>我们相信将这些钱投资于使 webpack 变得更好。</p>
+<p>但是由于疫情的原因，公司已经不怎么愿意赞助了。<br>在这种情况下，Webpack 也受到了影响（就像许多其他公司和人一样）。</p>
+<p>我们从来没有能力支付给我们的贡献者我们认为他们应得的金额，但现在我们只有一半的钱，所以我们需要更严重的削减。<br>在情况好转之前，我们将只向贡献者和维护者支付前 10 天或每个月的工资。<br>其余的日子，他们可以自愿工作，由雇主支付工资，从事其他工作，或者休息一些日子。<br>这样我们就可以在前 10 天的工作中支付更多相当于投入时间的报酬。</p>
+<p>我们最感激的是 <span class="exturl" data-url="aHR0cHM6Ly90ZWNoLnRyaXZhZ28uY29tL29wZW5zb3VyY2U=">trivago<i class="fa fa-external-link-alt"></i></span>，他们在过去的 3 年里为 webpack 提供了大量的赞助。<br>遗憾的是，由于受到 Covid-19 的冲击，他们今年无法继续赞助了。<br>希望有其他公司站出来，跟随这些（巨头）的脚步。</p>
+<p>感谢所有的赞助者。</p>
+<h2 id="整体方向"><a href="#整体方向" class="headerlink" title="整体方向"></a>整体方向</h2><p>这个版本的重点在于以下几点。</p>
+<ul>
+<li>尝试用持久性缓存来提高构建性能。</li>
+<li>尝试用更好的算法和默认值来改进长期缓存。</li>
+<li>尝试用更好的 Tree Shaking 和代码生成来改善包大小。</li>
+<li>尝试改善与网络平台的兼容性。</li>
+<li>尝试在不引入任何破坏性变化的情况下，清理那些在实现 v4 功能时处于奇怪状态的内部结构。</li>
+<li>试图通过现在引入突破性的变化来为未来的功能做准备，使其能够尽可能长时间地保持在 v5 版本上。</li>
+</ul>
+<h2 id="迁移指南"><a href="#迁移指南" class="headerlink" title="迁移指南"></a><strong>迁移</strong>指南</h2><p><span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmRvY3NjaGluYS5vcmcvbWlncmF0ZS81">在这里可查阅迁移指南<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="重大变更-功能清除"><a href="#重大变更-功能清除" class="headerlink" title="重大变更: 功能清除"></a>重大变更: 功能清除</h2><h3 id="清理弃用的能力"><a href="#清理弃用的能力" class="headerlink" title="清理弃用的能力"></a>清理弃用的能力</h3><p>所有在 v4 中被废弃的能力都被移除。</p>
+<p>迁移: 确保你的 webpack 4 构建没有打印废弃警告。</p>
+<p>以下是一些被移除但在 v4 中没有废弃警告的东西：</p>
+<ul>
+<li>IgnorePlugin 和 BannerPlugin 现在必须只传递一个参数，这个参数可以是对象、字符串或函数。</li>
+</ul>
+<h3 id="废弃代码"><a href="#废弃代码" class="headerlink" title="废弃代码"></a>废弃代码</h3><p>新的弃用包括一个弃用代码，这样他们更容易被引用。</p>
+<h3 id="语法废弃"><a href="#语法废弃" class="headerlink" title="语法废弃"></a>语法废弃</h3><p><code>require.include</code>已被废弃，使用时默认会发出警告。</p>
+<p>可以通过 <code>Rule.parser.requireInclude</code> 将行为改为允许、废弃或禁用。</p>
+<h3 id="不再为-Node-js-模块-自动引用-Polyfills"><a href="#不再为-Node-js-模块-自动引用-Polyfills" class="headerlink" title="不再为 Node.js 模块 自动引用 Polyfills"></a>不再为 Node.js 模块 自动引用 Polyfills</h3><p>在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 <code>cypto</code> 模块），webpack 就会自动引用这些 polyfills。</p>
+<p>尽管这会使得使用为 Node.js 编写模块变得容易，但它在构建时给 bundle 附加了庞大的 polyfills。在大部分情况下，这些 polyfills 并非必须。</p>
+<p>从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。</p>
+<p>迁移：</p>
+<ul>
+<li>尽量使用前端兼容的模块。</li>
+<li>可以手动为 Node.js 核心模块添加 polyfill。错误提示会告诉你如何实现。</li>
+<li>Package 作者：在 <code>package.json</code> 中添加 <code>browser</code> 字段，使 package 与前端兼容。为浏览器提供其他的实现/dependencies。</li>
+</ul>
+<h2 id="重大变更：长期缓存"><a href="#重大变更：长期缓存" class="headerlink" title="重大变更：长期缓存"></a>重大变更：长期缓存</h2><h3 id="确定的-Chunk、模块-ID-和导出名称"><a href="#确定的-Chunk、模块-ID-和导出名称" class="headerlink" title="确定的 Chunk、模块 ID 和导出名称"></a>确定的 Chunk、模块 ID 和导出名称</h3><p>新增了长期缓存的算法。这些算法在生产模式下是默认启用的。</p>
+<p><code>chunkIds: &quot;deterministic&quot;</code><br><code>moduleIds: &quot;deterministic&quot;</code><br><code>mangleExports: &quot;deterministic&quot;</code></p>
+<p>该算法以确定性的方式为模块和分块分配短的（3 或 5 位）数字 ID，<br>这是包大小和长期缓存之间的一种权衡。</p>
+<p><code>moduleIds/chunkIds/mangleExports: false</code> 禁用默认行为，你可以通过插件提供一个自定义算法。请注意，在 webpack 4 中，<code>moduleIds/chunkIds: false</code> 如果没有自定义插件，则可以正常运行，而在 webpack 5 中，你必须提供一个自定义插件。</p>
+<p><strong>迁移</strong>：最好使用 <code>chunkIds</code>、<code>moduleIds</code> 和 <code>mangleExports</code> 的默认值。你也可以选择使用旧的默认值<code>chunkIds: &quot;size&quot;，moduleIds: &quot;size&quot;, mangleExports: &quot;size&quot;</code>，这将会生成更小的包，但为了缓存，会更频繁地将其失效。</p>
+<p>注意：在 webpack 4 中，散列的模块 id 会导致 gzip 性能降低。这与模块顺序的改变有关，已经被修正。</p>
+<p>注意：在 webpack 5 中，<code>deterministic</code> Ids 在生产模式下是默认启用的。</p>
+<h3 id="真正的内容哈希"><a href="#真正的内容哈希" class="headerlink" title="真正的内容哈希"></a>真正的内容哈希</h3><p>当使用 <code>[contenthash]</code> 时，Webpack 5 将使用真正的文件内容哈希值。之前它 “只” 使用内部结构的哈希值。<br>当只有注释被修改或变量被重命名时，这对长期缓存会有积极影响。这些变化在压缩后是不可见的。</p>
+<h2 id="重大变更：开发支持"><a href="#重大变更：开发支持" class="headerlink" title="重大变更：开发支持"></a>重大变更：开发支持</h2><h3 id="命名代码块-ID"><a href="#命名代码块-ID" class="headerlink" title="命名代码块 ID"></a>命名代码块 ID</h3><p>在开发模式下，默认启用的新命名代码块 ID 算法为模块（和文件名）提供了人类可读的名称。<br>模块 ID 由其路径决定，相对于 <code>context</code>。<br>代码块 ID 由代码块的内容决定。</p>
+<p>所以你不再需要使用<code>import(/* webpackChunkName: &quot;name&quot; */ &quot;module&quot;)</code>来调试。<br>但如果你想控制生产环境的文件名，还是有意义的。</p>
+<p>可以在生产环境中使用 <code>chunkIds: &quot;named&quot;</code> 在生产环境中使用，但要确保不要不小心暴露模块名的敏感信息。</p>
+<p>迁移：如果你不喜欢在开发中改变文件名，你可以通过 <code>chunkIds: &quot;natural&quot;</code> 来使用旧的数字模式。</p>
+<h3 id="模块联邦"><a href="#模块联邦" class="headerlink" title="模块联邦"></a>模块联邦</h3><p>Webpack 5 增加了一个新的功能 “模块联邦”，它允许多个 webpack 构建一起工作。<br>从运行时的角度来看，多个构建的模块将表现得像一个巨大的连接模块图。<br>从开发者的角度来看，模块可以从指定的远程构建中导入，并以最小的限制来使用。</p>
+<p>更多细节请参见<span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmRvY3NjaGluYS5vcmcvY29uY2VwdHMvbW9kdWxlLWZlZGVyYXRpb24=">本单独指南<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="重大变更：支持崭新的-Web-平台特性"><a href="#重大变更：支持崭新的-Web-平台特性" class="headerlink" title="重大变更：支持崭新的 Web 平台特性"></a>重大变更：支持崭新的 Web 平台特性</h2><h3 id="JSON-模块"><a href="#JSON-模块" class="headerlink" title="JSON 模块"></a>JSON 模块</h3><p>JSON 模块现在与提案保持一致，并在使用非默认导出时发出警告。<br>当从严格的 ECMAScript 模块导入时，JSON 模块不再有命名的导出。</p>
+<p>迁移: 使用默认导出。</p>
+<p>即使使用默认导出，未使用的属性也会被 <code>optimization.usedExports</code> 优化丢弃，属性会被 <code>optimization.mangleExports</code> 优化打乱。</p>
+<p>可以在 <code>Rule.parser.parse</code> 中指定一个自定义的 JSON 解析器来导入类似 JSON 的文件（例如针对 toml、yaml、json5 等）。</p>
+<h3 id="import-meta"><a href="#import-meta" class="headerlink" title="import.meta"></a>import.meta</h3><ul>
+<li><code>import.meta.webpackHot</code> 是 <code>module.hot</code> 的别名，在严格的 ESM 中也可以使用。</li>
+<li><code>import.meta.webpack</code> 是 webpack 的主要版本号。</li>
+<li><code>import.meta.url</code> 是当前文件的 <code>file:</code> url(类似于<code>__filename</code>，但作为文件 url)。</li>
+</ul>
+<h3 id="资源模块"><a href="#资源模块" class="headerlink" title="资源模块"></a>资源模块</h3><p>Webpack 5 现在已经对表示资源的模块提供了内置支持。<br>这些模块可以向输出文件夹发送一个文件，或者向 javascript 包注入一个 DataURI。<br>无论哪种方式，它们都会给出一个 URL 来工作。</p>
+<p>它们可以通过多种方式被使用：</p>
+<ul>
+<li><code>import url from &quot;./image.png&quot;</code> 和 在<code>module.rule</code> 中设置 <code>type: &quot;asset&quot;</code> 当匹配这样的导入时。(老方法)</li>
+<li><code>new URL(&quot;./image.png&quot;, import.meta.url)</code> (新方式)</li>
+</ul>
+<p>选择 “新的方式 “语法是为了允许在没有打包工具的情况下运行代码。这种语法也可以在浏览器中的原生 ECMAScript 模块中使用。</p>
+<h3 id="原生-Worker-支持"><a href="#原生-Worker-支持" class="headerlink" title="原生 Worker 支持"></a>原生 Worker 支持</h3><p>当把资源的 <code>new URL</code> 和 <code>new Worker</code>/<code>new SharedWorker</code>/<code>navigator.serviceWorker.register</code> 结合起来时，webpack 会自动为 web worker 创建一个新的入口点（entrypoint）。</p>
+<p><code>new Worker(new URL(&quot;./worker.js&quot;, import.meta.url))</code></p>
+<p>选择这种语法也是为了允许在没有打包工具的情况下运行代码。这种语法在浏览器的原生 ECMAScript 模块中也可以使用。</p>
+<h3 id="URIs"><a href="#URIs" class="headerlink" title="URIs"></a>URIs</h3><p>Webpack 5 支持在请求中处理协议。</p>
+<ul>
+<li>支持<code>data:</code>。支持 Base64 或原始编码。Mimetype 可以在<code>module.rule</code>中被映射到加载器和模块类型。例如：<code>import x from &quot;data:text/javascript,export default 42&quot;</code>。</li>
+<li>支持<code>file:</code>。</li>
+<li>支持<code>http(s):</code>，但需要通过<code>new webpack.experiments.s schemesHttp(s)UriPlugin()</code>选择加入。<ul>
+<li>默认情况下，当目标为 “web “时，这些 URI 会导致对外部资源的请求（它们是外部资源）。</li>
+</ul>
+</li>
+</ul>
+<p>支持请求中的片段。例如：<code>./file.js#fragment</code>。</p>
+<h3 id="异步模块"><a href="#异步模块" class="headerlink" title="异步模块"></a>异步模块</h3><p>Webpack 5 支持所谓的 “异步模块”。<br>这些模块并不是同步解析的，而是基于异步和 Promise 的。</p>
+<p>通过 “import “导入它们会被自动处理，不需要额外的语法，而且几乎看不出区别。</p>
+<p>通过<code>require()</code>导入它们会返回一个解析到导出的 Promise。</p>
+<p>在 webpack 中，有多种方式来拥有异步模块。</p>
+<ul>
+<li>异步的外部资源(async externals)</li>
+<li>新规范中的 WebAssembly 模块</li>
+<li>使用顶层 Await 的 ECMAScript 模块。</li>
+</ul>
+<h3 id="外部资源"><a href="#外部资源" class="headerlink" title="外部资源"></a>外部资源</h3><p>Webpack 5 增加了更多的外部类型来覆盖更多的应用：</p>
+<p><code>promise</code>: 一个评估为 Promise 的表达式。外部模块是一个异步模块，解析值作为模块导出使用。</p>
+<p><code>import</code>。原生的 <code>import()</code> 用于加载指定的请求，外部模块是一个异步模块，解析值作为模块导出。外部模块是一个异步模块。</p>
+<p><code>module</code>: 尚未实现，但计划通过 <code>import x from &quot;...&quot;</code> 加载模块。</p>
+<p><code>script</code>: 通过 <code>&lt;script&gt;</code> 标签加载一个 url，并从一个全局变量（以及它的可选属性）中获取输出。外部模块是一个异步模块。</p>
+<h2 id="重大变更：支持全新的-Node-js-生态特性"><a href="#重大变更：支持全新的-Node-js-生态特性" class="headerlink" title="重大变更：支持全新的 Node.js 生态特性"></a>重大变更：支持全新的 Node.js 生态特性</h2><h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>现在支持 package.json 中的 <code>exports</code> 和 <code>imports</code> 字段。</p>
+<p>原生支持 Yarn PnP。</p>
+<p>更多细节请参见<span class="exturl" data-url="aHR0cHM6Ly93ZWJwYWNrLmRvY3NjaGluYS5vcmcvZ3VpZGVzL3BhY2thZ2UtZXhwb3J0cy8=">package exports<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="重大变更：开发体验"><a href="#重大变更：开发体验" class="headerlink" title="重大变更：开发体验"></a>重大变更：开发体验</h2><h3 id="经过优化的构建目标-target"><a href="#经过优化的构建目标-target" class="headerlink" title="经过优化的构建目标(target)"></a>经过优化的构建目标(target)</h3><p>Webpack 5 允许传递一个目标列表，并且支持目标的版本。</p>
+<p>例如 <code>target: &quot;node14&quot;``target: [&quot;web&quot;, &quot;es2020&quot;]</code>。</p>
+<p>这是一个简单的方法，为 webpack 提供它需要确定的所有信息：</p>
+<ul>
+<li>代码块加载机制，以及</li>
+<li>支持的语法，如箭头函数</li>
+</ul>
+<h3 id="Stats"><a href="#Stats" class="headerlink" title="Stats"></a>Stats</h3><p>改进了统计测试格式的可读性和冗余性。改进了默认值，使其不那么冗长，也适合大型构建。</p>
+<ul>
+<li>现在默认情况下，代码块关系是隐藏的，可以用 <code>stats.chunkRelations</code> 来切换。</li>
+<li>Stats 现在可以区分 <code>files</code> 和 <code>auxiliaryFiles</code>。</li>
+<li>Stats 现在默认隐藏模块和代码块的 id。这可以通过 <code>stats.ids</code> 来切换。</li>
+<li>现在所有模块的列表是按照到入口点的距离排序的。这可以通过 <code>stats.modulesSort</code> 来改变。</li>
+<li>代码块模块的列表现在按模块名称排序。这可以通过 <code>stats.chunkModulesSort</code> 来改变。</li>
+<li>嵌套模块的列表现在是按拓扑结构排序的。这可以通过 <code>stats.nestedModulesSort</code> 来改变。</li>
+<li>现在，代码块和资源会显示代码块 id 提示。</li>
+<li>资产和模块将以树状而不是列表/表格的形式显示。</li>
+<li>一般信息现在会在最后的摘要中显示。它显示了 webpack 版本，配置名称和警告/错误计数。</li>
+<li>哈希值现在默认是隐藏的。这可以通过 <code>stats.hash</code> 来改变。</li>
+<li>默认情况下不再显示构建的时间戳，这可以通过 <code>stats.builtAt</code> 开启。它会在摘要中显示时间戳。</li>
+<li>默认情况下，不再显示子编译。它们可以用 <code>stats.children</code> 来显示。</li>
+</ul>
+<h3 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h3><p>对 <code>ProgressPlugin</code> 做了一些改进，它被 CLI 在参数 <code>--progress</code> 开启时使用，但也可以作为插件手动使用。</p>
+<p>以前它只计算已处理的模块。现在它可以计算 “入口”、”依赖” 和 “模块”。<br>现在所有的模块都默认显示了。</p>
+<p>以前它只显示当前处理的模块。这造成了很多 stderr 输出，在一些控制台上产生了性能问题。<br>现在这个功能被默认关闭（<code>activeModules</code> 选项）。这也减少了控制台的垃圾信息量。<br>现在，在构建模块的过程中，向 stderr 写入的时间被控制在 500ms 以内。</p>
+<p>剖析模式也得到了升级，将显示嵌套进度消息的时间。<br>这使得它更容易弄清楚，当插件导致了性能问题。</p>
+<p>新增加的 <code>percentBy</code> -选项告知 <code>ProgressPlugin</code> 如何计算进度百分比。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> webpack.ProgressPlugin(&#123; <span class="attr">percentBy</span>: <span class="string">&#x27;entries&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>为了使进度百分比更准确，<code>ProgressPlugin</code> 会缓存最后已知的总模块数，并在下一次构建时重新使用这个值。第一次构建将预热缓存，但后续构建将使用并更新这个值。</p>
+<h3 id="自动添加唯一命名"><a href="#自动添加唯一命名" class="headerlink" title="自动添加唯一命名"></a>自动添加唯一命名</h3><p>在 webpack 4 中，多个 webpack 运行时可能会在同一个 HTML 页面上发生冲突，因为它们使用同一个全局变量进行代码块加载。为了解决这个问题，需要为 <code>output.jsonpFunction</code> 配置提供一个自定义的名称。</p>
+<p>Webpack 5 确实会从 <code>package.json</code> <code>name</code> 中自动推断出一个唯一的构建名称，并将其作为 <code>output.uniqueName</code> 的默认值。</p>
+<p>这个值用于使所有潜在的冲突的全局变量成为唯一。</p>
+<p>迁移: 由于 <code>package.json</code> 中有唯一的名称，可将 <code>output.jsonpFunction</code> 删除。</p>
+<h3 id="自动添加公共路径"><a href="#自动添加公共路径" class="headerlink" title="自动添加公共路径"></a>自动添加公共路径</h3><p>Webpack 5 会在可能的情况下自动确定 <code>output.publicPath</code>。</p>
+<h3 id="Typescript-类型"><a href="#Typescript-类型" class="headerlink" title="Typescript 类型"></a>Typescript 类型</h3><p>Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们。</p>
+<p>迁移：删除<code>@types/webpack</code>。当名称不同时更新引用。</p>
+<h2 id="重大变更-构建优化"><a href="#重大变更-构建优化" class="headerlink" title="重大变更: 构建优化"></a>重大变更: 构建优化</h2><h3 id="嵌套的-tree-shaking"><a href="#嵌套的-tree-shaking" class="headerlink" title="嵌套的 tree-shaking"></a>嵌套的 tree-shaking</h3><p>webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inner.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">as</span> inner <span class="keyword">from</span> <span class="string">&#x27;./inner&#x27;</span>;</span><br><span class="line"><span class="comment">// 或 import * as inner from &#x27;./inner&#x27;; export &#123; inner &#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// user.js</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="built_in">module</span> <span class="keyword">from</span> <span class="string">&#x27;./module&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.inner.a);</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，可以在生产模式下删除导出的<code>b</code>。</p>
+<h3 id="内部模块-tree-shaking"><a href="#内部模块-tree-shaking" class="headerlink" title="内部模块 tree-shaking"></a>内部模块 tree-shaking</h3><p>webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 <code>optimization.innerGraph</code>，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。</p>
+<p>在这样的模块中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; something &#125; <span class="keyword">from</span> <span class="string">&#x27;./something&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">usingSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> something;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> usingSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>内部依赖图算法会找出 <code>something</code> 只有在使用 <code>test</code> 导出时才会使用。这允许将更多的出口标记为未使用，并从代码包中省略更多的代码。</p>
+<p>当设置<code>&quot;sideEffects&quot;: false</code>时，可以省略更多的模块。在这个例子中，当 <code>test</code> 导出未被使用时，<code>./something</code> 将被省略。</p>
+<p>要获得未使用的导出信息，需要使用 <code>optimization.unusedExports</code>。要删除无副作用的模块，需要使用<code>optimization.sideEffects</code>。</p>
+<p>可以分析以下标记。</p>
+<ul>
+<li>函数声明</li>
+<li>类声明</li>
+<li><code>默认导出export default</code> 或定义变量以下的：<ul>
+<li>函数表达式</li>
+<li>类表达式</li>
+<li>顺序表达式</li>
+<li><code>/*#__PURE__*/</code> 表达式</li>
+<li>局部变量</li>
+<li>引入的捆绑(bindings)</li>
+</ul>
+</li>
+</ul>
+<p>反馈：如果你发现这个分析中缺少什么，请报告一个问题，我们会考虑增加它。</p>
+<p>使用 <code>eval()</code> 将为一个模块放弃这个优化，因为经过 eval 的代码可以引用范围内的任何标记。</p>
+<p>这种优化也被称为深度范围分析。</p>
+<h3 id="CommonJs-Tree-Shaking"><a href="#CommonJs-Tree-Shaking" class="headerlink" title="CommonJs Tree Shaking"></a>CommonJs Tree Shaking</h3><p>webpack 曾经不进行对 CommonJs 导出和 <code>require()</code> 调用时的导出使用分析。</p>
+<p>webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的 CommonJs 导出，并从 <code>require()</code> 调用中跟踪引用的导出名称。</p>
+<p>支持以下构造：</p>
+<ul>
+<li><code>exports|this|module.exports.xxx = ...</code></li>
+<li><code>exports|this|module.exports = require(&quot;...&quot;)</code> (reexport)</li>
+<li><code>exports|this|module.exports.xxx = require(&quot;...&quot;).xxx</code> (reexport)</li>
+<li><code>Object.defineProperty(exports|this|module.exports, &quot;xxx&quot;, ...)</code></li>
+<li><code>require(&quot;abc&quot;).xxx</code></li>
+<li><code>require(&quot;abc&quot;).xxx()</code></li>
+<li>从 ESM 导入</li>
+<li><code>require()</code> 一个 ESM 模块</li>
+<li>被标记的导出类型 (对非严格 ESM 导入做特殊处理):<ul>
+<li><code>Object.defineProperty(exports|this|module.exports, &quot;__esModule&quot;, &#123; value: true|!0 &#125;)</code></li>
+<li><code>exports|this|module.exports.__esModule = true|!0</code></li>
+</ul>
+</li>
+<li>未来计划支持更多的构造</li>
+</ul>
+<p>当检测到不可分析的代码时，webpack 会放弃，并且完全不跟踪这些模块的导出信息（出于性能考虑）。</p>
+<h3 id="副作用分析"><a href="#副作用分析" class="headerlink" title="副作用分析"></a>副作用分析</h3><p>在 package.json 中的 <code>&quot;sideEffects&quot;</code> 标志允许手动将模块标记为无副作用，这就允许在不使用时放弃它们。</p>
+<p>webpack 5 也可以根据对源代码的静态分析，自动将模块标记为无副作用。</p>
+<h3 id="每个运行时的优化"><a href="#每个运行时的优化" class="headerlink" title="每个运行时的优化"></a>每个运行时的优化</h3><p>Webpack 5 现在能够（默认情况下也是如此）分析和优化每个运行时的模块（一个运行时通常等于一个入口点）。<br>这允许只在真正需要的地方导出这些入口点。<br>入口点之间不会相互影响 (只要每个入口点使用一个运行时)</p>
+<h3 id="模块合并"><a href="#模块合并" class="headerlink" title="模块合并"></a>模块合并</h3><p>模块合并也可以在每个运行时工作，允许每个运行时进行不同的合并</p>
+<p>模块合并已经成为一等公民，现在任何模块和依赖都可以实现它。<br>在初始时 webpack 5 已经添加了对 ExternalModules 和 json 模块的支持，更多的模块可能很快就会发布。</p>
+<h3 id="通用-Tree-Shaking-改进"><a href="#通用-Tree-Shaking-改进" class="headerlink" title="通用 Tree Shaking 改进"></a>通用 Tree Shaking 改进</h3><p><code>export *</code> 已经得到改进，可以跟踪更多的信息，并且不再将<code>默认</code>导出标记为使用。</p>
+<p><code>export *</code> 现在会在 webpack 确定有冲突的导出时显示警告。</p>
+<p><code>import()</code> 允许通过 <code>/* webpackExports: [&quot;abc&quot;, &quot;default&quot;] */</code> 该魔法注释手动 tree shake 模块。</p>
+<h3 id="开发与生产的一致性问题"><a href="#开发与生产的一致性问题" class="headerlink" title="开发与生产的一致性问题"></a>开发与生产的一致性问题</h3><p>我们试图通过改善两种模式的相似性，在开发模式的构建性能和避免仅在生产模式的产生的问题之间找到一个很好的平衡点。</p>
+<p>Webpack 5 默认在两种模式下都启用了 “sideEffects “优化。在 webpack 4 中，由于 package.json 中的<code>&quot;sideEffects&quot;</code>标记不正确，这种优化导致了一些只在生产模式下出现的错误。在开发过程中启用这个优化可以更快更容易地发现这些问题。</p>
+<p>在很多情况下，开发和生产都是在不同的操作系统上进行的，文件系统的大小写敏感度不同，所以 webpack 5 增加了一些奇怪的大小写的警告/错误。</p>
+<h3 id="改进代码生成"><a href="#改进代码生成" class="headerlink" title="改进代码生成"></a>改进代码生成</h3><p>当 ASI 发生时，webpack 会检测到，当没有分号插入时，会生成更短的代码。<code>Object(...)</code>-&gt;<code>(0, ...)</code>。</p>
+<p>webpack 将多个导出的 getters 合并为一个运行时函数调用。<code>r.d(x, &quot;a&quot;, () =&gt; a); r.d(x, &quot;b&quot;, () =&gt; b);</code> -&gt; <code>r.d(x, &#123;a: () =&gt; a, b: () =&gt; b&#125;);</code>。</p>
+<p>现在在 <code>output.environment</code> 中有额外的选项。<br>它们允许指定哪些 ECMAScript 特性可以用于 webpack 生成的运行时代码。</p>
+<p>通常人们不会直接指定这个选项，而是会使用 <code>target</code> 选项。</p>
+<p>webpack 4 之前只生成 ES5 的代码。<br>webpack 5 则现在既可以生成 ES5 又可以生成 ES6/ES2015 代码。</p>
+<p>只支持现代浏览器，将使用箭头函数生成更短的代码，使用 <code>const</code> 声明与 TDZ 为 <code>export default</code> 生成更符合规范的代码。</p>
+<h3 id="改进-target-配置"><a href="#改进-target-配置" class="headerlink" title="改进 target 配置"></a>改进 <code>target</code> 配置</h3><p>在 webpack 4 中，”target “是在 <code>&quot;web&quot;</code> 和 <code>&quot;node&quot;</code> 之间的一个粗略的选择（还有一些其他的）。<br>Webpack 5 给你更多的选择。</p>
+<p><code>target</code>选项现在比以前影响了更多关于生成代码的事情。</p>
+<ul>
+<li>代码块加载方法</li>
+<li>代码块的格式</li>
+<li>wasm 加载方法</li>
+<li>代码块与 wasm 在 workers 中加载方法</li>
+<li>被使用的全局对象</li>
+<li>publicPath 是否应该被自动确定</li>
+<li>生成的代码中使用的 ECMAScript 特性/语法</li>
+<li><code>externals</code> 是否默认被启用</li>
+<li>一些 Node.js 兼容层的行为(<code>global</code>, <code>__filename</code>, <code>__dirname</code>)</li>
+<li>模块解析(<code>browser</code> 字段、<code>exports</code> 和 <code>imports</code> 条件)</li>
+<li>一些加载器可能会基于此改变行为</li>
+</ul>
+<p>对于其中的一些情况，在 <code>&quot;web&quot;</code> 和 <code>&quot;node&quot;</code> 之间的选择过于粗略，我们需要更多的信息。<br>因此，我们允许指定最低版本，例如 <code>&quot;node10.13&quot;</code>，并推断出更多关于目标环境的属性。</p>
+<p>现在也允许用一个数组组合多个目标，webpack 将确定所有目标的最小属性。使用数组也很有用，当使用像 <code>&quot;web&quot;</code> 或 <code>&quot;node&quot;</code> 这样没有提供完整信息的目标时（没有版本号）。例如，<code>[&quot;web&quot;, &quot;es2020&quot;]</code> 结合了这两个部分目标。</p>
+<p>有一个目标 <code>&quot;browserslist&quot;</code>，它将使用 browserslist 类库的数据来确定环境的属性。<br>当项目中存在可用的 browserslist 配置时，这个目标也会被默认使用。当没有可用的配置时，默认使用 <code>&quot;web&quot;</code> 目标。</p>
+<p>有些组合和功能还没有实现，会导致错误。它们是为未来的功能做准备。例如：</p>
+<ul>
+<li><code>[&quot;web&quot;, &quot;node&quot;]</code> 将导致一个通用的代码块加载方法，而这个方法还没有实现。</li>
+<li><code>[&quot;web&quot;, &quot;node&quot;]</code> + <code>output.module: true</code>将导致一个模块代码块加载方法，该方法尚未实现。</li>
+<li><code>&quot;web&quot;</code>会导致<code>http(s):</code>的导入被视为<code>模块</code>外部资源，而这些外部还没有实现(变通方法：<code>externalsPresets.&#123; web: false, webAsync: true &#125;</code>，将使用<code>import()</code>代替)。</li>
+</ul>
+<h3 id="代码块拆分与模块大小"><a href="#代码块拆分与模块大小" class="headerlink" title="代码块拆分与模块大小"></a>代码块拆分与模块大小</h3><p>现在模块的尺寸比单一的数字更好的表达方式。现在有不同类型的大小。</p>
+<p>SplitChunksPlugin 现在知道如何处理这些不同的大小，并将它们用于 <code>minSize</code> 和 <code>maxSize</code>。<br>默认情况下，只有 <code>javascript</code> 大小被处理，但你现在可以传递多个值来管理它们：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      minSize: &#123;</span><br><span class="line">        javascript: <span class="number">30000</span>,</span><br><span class="line">        webassembly: <span class="number">50000</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>你仍然可以使用一个数字来表示大小。在这种情况下，webpack 会自动使用默认的大小类型。</p>
+<p><code>mini-css-extract-plugin</code> 使用 <code>css/mini-extra</code> 作为大小类型，并将此大小类型自动添加到默认类型中。</p>
+<h2 id="重大变更：性能优化"><a href="#重大变更：性能优化" class="headerlink" title="重大变更：性能优化"></a>重大变更：性能优化</h2><h3 id="持久缓存"><a href="#持久缓存" class="headerlink" title="持久缓存"></a>持久缓存</h3><p>现在有一个文件系统缓存。它是可选的，可以通过以下配置启用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  cache: &#123;</span><br><span class="line">    <span class="comment">// 1. 将缓存类型设置为文件系统</span></span><br><span class="line">    type: <span class="string">&#x27;filesystem&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    buildDependencies: &#123;</span><br><span class="line">      <span class="comment">// 2. 将你的 config 添加为 buildDependency，以便在改变 config 时获得缓存无效</span></span><br><span class="line">      config: [__filename],</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 3. 如果你有其他的东西被构建依赖，你可以在这里添加它们</span></span><br><span class="line">      <span class="comment">// 注意，webpack、加载器和所有从你的配置中引用的模块都会被自动添加</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>重要说明：</p>
+<p>默认情况下，webpack 假定 webpack 所在的 <code>node_modules</code> 目录只被包管理器修改。对 <code>node_modules</code> 来说，哈希值和时间戳会被跳过。<br>出于性能考虑，只使用包名和版本。<br>只要不指定<code>resolve.symlinks: false</code>，Symlinks(即<code>npm/yarn link</code>)就没有问题(无论如何都要避免)。<br>不要直接编辑 <code>node_modules</code> 中的文件，除非你用 <code>snapshot.managedPaths: []</code>以剔除该优化。<br>当使用 Yarn PnP 时，webpack 假设 yarn 缓存是不可改变的（通常是这样）。<br>你可以使用 <code>snapshot.immutablePaths: []</code> 来退出这个优化。</p>
+<p>缓存将默认存储在 <code>node_modules/.cache/webpack</code>（当使用 node_modules 时）或 <code>.yarn/.cache/webpack</code>（当使用 Yarn PnP 时）中。<br>当所有的插件都正确处理缓存时，你可能永远都不需要手动删除它。</p>
+<p>许多内部插件也会使用持久性缓存。例如 <code>SourceMapDevToolPlugin</code> (缓存 SourceMap 的生成)或 <code>ProgressPlugin</code> (缓存模块数量)</p>
+<p>持久性缓存将根据使用情况自动创建多个缓存文件，以优化对缓存的读写访问。</p>
+<p>默认情况下，时间戳将用于开发模式的快照，而文件哈希将用于生产模式。<br>文件哈希也允许在 CI 中使用持久性缓存。</p>
+<h3 id="编译器闲置和关闭"><a href="#编译器闲置和关闭" class="headerlink" title="编译器闲置和关闭"></a>编译器闲置和关闭</h3><p>编译器现在需要在使用后关闭。编译器现在会进入和离开空闲状态，并且有这些状态的钩子。插件可能会使用这些钩子来做不重要的工作。(即将持久缓存缓慢地将缓存存储到磁盘上)。在编译器关闭时–所有剩余的工作应该尽可能快地完成。一个回调标志着关闭完成。</p>
+<p>插件和它们各自的作者应该预料到，有些用户可能会忘记关闭编译器。所以，所有的工作最终也应该在空闲状态下完成。当工作正在进行时，应该防止进程退出。</p>
+<p><code>webpack()</code> 用法在被传递回调时自动调用<code>close</code>。</p>
+<p>迁移：在使用 Node.js API 时，一定要在完成工作后调用 <code>Compiler.close</code>。</p>
+<h3 id="文件生成"><a href="#文件生成" class="headerlink" title="文件生成"></a>文件生成</h3><p>webpack 过去总是在第一次构建时发出所有的输出文件，但在增量（观察）构建时跳过了写入未更改的文件。<br>假设在 webpack 运行时，没有任何其他东西改变输出文件。</p>
+<p>增加了持久性缓存后，即使在重启 webpack 进程时，也应该会有类似监听的体验，但如果认为即使在 webpack 不运行时也没有其他东西改变输出目录，那这个假设就太强了。</p>
+<p>所以 webpack 现在会检查输出目录中现有的文件，并将其内容与内存中的输出文件进行比较。只有当文件被改变时，它才会写入文件。<br>这只在第一次构建时进行。任何增量构建都会在运行中的 webpack 进程中生成新的资产时写入文件。</p>
+<p>我们假设 webpack 和插件只有在内容被改变时才会生成新的资产。应该使用缓存来确保在输入相同时不会生成新的资产。<br>不遵循这个建议会降低性能。</p>
+<p>被标记为 <code>[不可变]</code> 的文件（包括内容哈希），当已经存在一个同名文件时，将永远不会被写入。<br>我们假设当文件内容发生变化时，内容哈希会发生变化。<br>这在一般情况下是正确的，但在 webpack 或插件开发过程中可能并不总是如此。</p>
+<h2 id="重大变更：长期未解决的问题"><a href="#重大变更：长期未解决的问题" class="headerlink" title="重大变更：长期未解决的问题"></a>重大变更：长期未解决的问题</h2><h3 id="单一文件目标的代码分割"><a href="#单一文件目标的代码分割" class="headerlink" title="单一文件目标的代码分割"></a>单一文件目标的代码分割</h3><p>只允许启动单个文件的目标（如 node、WebWorker、electron main）现在支持运行时自动加载引导所需的依赖代码片段。</p>
+<p>这允许对这些目标使用 <code>chunks: &quot;all&quot;</code> 和 <code>optimization.runtimeChunk</code>。</p>
+<p>请注意，如果目标的代码块加载是异步的，这使得初始评估也是异步的。当使用 <code>output.library</code> 时，这可能是一个问题，因为现在导出的值是一个 Promise。</p>
+<h3 id="更新了解析器"><a href="#更新了解析器" class="headerlink" title="更新了解析器"></a>更新了解析器</h3><p><code>enhanced-resolve</code> 更新到了 v5，有以下改进：</p>
+<ul>
+<li>追踪更多的依赖关系，比如丢失的文件。</li>
+<li>别名可能有多种选择</li>
+<li>现在可以别名为 <code>false</code> 了。</li>
+<li>支持 <code>exports</code> 和 <code>imports</code> 字段等功能。</li>
+<li>性能提高</li>
+</ul>
+<h3 id="没有-JS-的代码块"><a href="#没有-JS-的代码块" class="headerlink" title="没有 JS 的代码块"></a>没有 JS 的代码块</h3><p>不包含 JS 代码的块，将不再生成 JS 文件。<br>这就允许有只包含 CSS 的代码块。</p>
+<h2 id="重大变更：未来计划"><a href="#重大变更：未来计划" class="headerlink" title="重大变更：未来计划"></a>重大变更：未来计划</h2><h3 id="实验特性"><a href="#实验特性" class="headerlink" title="实验特性"></a>实验特性</h3><p>并不是所有的功能都是一开始就稳定的。在 webpack 4 中，我们添加了实验性功能，并在变更日志中注明它们是实验性的，但从配置中并不总是能清楚地看到这些功能是实验性的。</p>
+<p>在 webpack 5 中，有一个新的 <code>experiments</code> 配置选项，允许启用实验性功能。这使得哪些功能被启用/使用变得很清楚。</p>
+<p>虽然 webpack 遵循语义版本化，但它会对实验性功能进行例外处理。实验性功能可能会在 webpack 的次要版本中包含破坏性的变化。当这种情况发生时，我们会在变更日志中添加一个明确的注释。这将使我们能够更快地迭代实验性功能，同时也使我们能够在主要版本上为稳定的功能停留更长时间。</p>
+<p>以下的实验功能将随 webpack 5 一起发布。</p>
+<ul>
+<li>旧的 WebAssembly 支持，就像 webpack 4 一样 (<code>experiments.syncWebAssembly</code>)</li>
+<li>根据<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1dlYkFzc2VtYmx5L2VzbS1pbnRlZ3JhdGlvbg==">更新的规范<i class="fa fa-external-link-alt"></i></span>(<code>experiments.asyncWebAssembly</code>)，新增 WebAssembly 支持。<ul>
+<li>这使得一个 WebAssembly 模块成为一个异步模块。</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3RjMzkvcHJvcG9zYWwtdG9wLWxldmVsLWF3YWl0">顶层的 Await<i class="fa fa-external-link-alt"></i></span>第三阶段提案(<code>experiments.topLevelAwait</code>)<ul>
+<li>在顶层使用 <code>await</code> 使该模块成为一个异步模块。</li>
+</ul>
+</li>
+<li>以模块的形式生成代码包 (<code>experiments.outputModule</code>)<ul>
+<li>这就从代码包中移除了包装器 IIFE，执行严格模式，通过 <code>&lt;script type=&quot;module&quot;&gt;</code> 进行懒惰加载，并在模块模式下最小化压缩。</li>
+</ul>
+</li>
+</ul>
+<p>请注意，这也意味着 WebAssembly 的支持现在被默认禁用。</p>
+<h3 id="最小-Node-js-版本"><a href="#最小-Node-js-版本" class="headerlink" title="最小 Node.js 版本"></a>最小 Node.js 版本</h3><p>最低支持的 Node.js 版本从 6 增加到 10.13.0(LTS)。</p>
+<p>迁移：升级到最新的 Node.js 版本。</p>
+<h2 id="配置变更"><a href="#配置变更" class="headerlink" title="配置变更"></a>配置变更</h2><h3 id="结构的变化"><a href="#结构的变化" class="headerlink" title="结构的变化"></a>结构的变化</h3><ul>
+<li><code>entry: &#123;&#125;</code> 现在可以赋值一个空对象（允许使用插件来修改入口）。</li>
+<li><code>target</code> 支持数组，版本及 browserslist</li>
+<li>移除了 <code>cache: Object</code>：不能再设置内存缓存对象</li>
+<li>添加了 <code>cache.type</code>：现在可以在 <code>&quot;memory&quot;</code> 和 <code>&quot;filesystem&quot;</code> 间进行选择</li>
+<li>在 <code>cache.type = &quot;filesystem&quot;</code> 时，增加了新配置项：<ul>
+<li><code>cache.cacheDirectory</code></li>
+<li><code>cache.name</code></li>
+<li><code>cache.version</code></li>
+<li><code>cache.store</code></li>
+<li><code>cache.hashAlgorithm</code></li>
+<li><code>cache.idleTimeout</code></li>
+<li><code>cache.idleTimeoutForIntialStore</code></li>
+<li><code>cache.buildDependencies</code></li>
+</ul>
+</li>
+<li>添加了 <code>snapshot.resolveBuildDependencies</code></li>
+<li>添加了 <code>snapshot.resolve</code></li>
+<li>添加了 <code>snapshot.module</code></li>
+<li>添加了 <code>snapshot.managedPaths</code></li>
+<li>添加了 <code>snapshot.immutablePaths</code></li>
+<li>添加了 <code>resolve.cache</code>：此选项可禁用/启用 safe 解析缓存</li>
+<li>移除了 <code>resolve.concord</code></li>
+<li><code>resolve.alias</code> 值可以为数组或 <code>false</code></li>
+<li>添加了 <code>resolve.restrictions</code>：允许限制可能存在的结果</li>
+<li>添加了 <code>resolve.fallback</code>：允许为处理不了的别名请求设置降级</li>
+<li>添加了 <code>resolve.preferRelative</code>：允许处理模块请求</li>
+<li>移除了针对于 Node.js 原生模块的自动 polyfills<ul>
+<li>移除了 <code>node.Buffer</code></li>
+<li>移除了 <code>node.console</code></li>
+<li>移除了 <code>node.process</code></li>
+<li>移除了 <code>node.*</code>（Node.js 原生模块）</li>
+<li>迁移：<code>resolve.alias</code> 和 <code>ProvidePlugin</code>。错误会给出提示。（可以参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlYnBhY2svbm9kZS1saWJzLWJyb3dzZXI=">node-libs-browser<i class="fa fa-external-link-alt"></i></span>，了解 v4 中 polyfill 和 mock 的方式）</li>
+</ul>
+</li>
+<li><code>output.filename</code> 可以设置为函数</li>
+<li>添加了 <code>output.assetModuleFilename</code></li>
+<li><code>output.jsonpScriptType</code> 更名为 <code>output.scriptType</code></li>
+<li><code>devtool</code> 更加严格<ul>
+<li>格式化：<code>false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map</code></li>
+</ul>
+</li>
+<li>添加了 <code>optimization.chunkIds: &quot;deterministic&quot;</code></li>
+<li>添加了 <code>optimization.moduleIds: &quot;deterministic&quot;</code></li>
+<li><code>optimization.moduleIds: &quot;hashed&quot;</code> 已弃用</li>
+<li>移除了 <code>optimization.moduleIds: &quot;total-size&quot;</code></li>
+<li>废弃了模块的 flag 并移除了 chunk id<ul>
+<li>移除了 <code>optimization.hashedModuleIds</code></li>
+<li>移除了 <code>optimization.namedChunks</code> (<code>NamedChunksPlugin</code> too)</li>
+<li>移除了 <code>optimization.namedModules</code> (<code>NamedModulesPlugin</code> too)</li>
+<li>移除了 <code>optimization.occurrenceOrder</code></li>
+<li>迁移：使用 <code>chunkIds</code> 和 <code>moduleIds</code></li>
+</ul>
+</li>
+<li><code>optimization.splitChunks</code> <code>test</code> 不再匹配 chunk 名<ul>
+<li>迁移：使用 test 函数<br><code>(module, &#123; chunkGraph &#125;) =&gt; chunkGraph.getModuleChunks(module).some(chunk =&gt; chunk.name === &quot;name&quot;)</code></li>
+</ul>
+</li>
+<li>添加了 <code>optimization.splitChunks</code> <code>minRemainingSize</code></li>
+<li><code>optimization.splitChunks</code> 的 <code>filename</code> 可以设置为函数</li>
+<li><code>optimization.splitChunks</code> 的大小现在可以设置为每个源类型大小的对象<ul>
+<li><code>minSize</code></li>
+<li><code>minRemainingSize</code></li>
+<li><code>maxSize</code></li>
+<li><code>maxAsyncSize</code></li>
+<li><code>maxInitialSize</code></li>
+</ul>
+</li>
+<li><code>optimization.splitChunks</code> 中的 <code>maxAsyncSize</code> 和 <code>maxInitialSize</code> 添加了 <code>maxSize</code>：允许为初始和异步 chunk 指定不同的 maxSize</li>
+<li>移除了 <code>optimization.splitChunks</code> 的 <code>name: true</code>：不再支持自动命名<ul>
+<li>迁移：使用默认值。<code>chunkIds: &quot;named&quot;</code> 会为你的文件取一个有用的名字，以便于调试</li>
+</ul>
+</li>
+<li>添加了 <code>optimization.splitChunks.cacheGroups[].idHint</code>：会给出提示，如果选择命名的 chunk id</li>
+<li>移除了 <code>optimization.splitChunks</code> 的 <code>automaticNamePrefix</code><ul>
+<li>迁移：使用 <code>idHint</code> 代替</li>
+</ul>
+</li>
+<li><code>optimization.splitChunks</code> 的 <code>filename</code> 不再局限于初始 chunk</li>
+<li>添加了 <code>optimization.splitChunks</code> 的 <code>usedExports</code>，以便在比较模块时引入使用过的 export</li>
+<li>添加了 <code>optimization.splitChunks.defaultSizeTypes</code>：当使用数字表示 size 时，可以指定 size 的类型</li>
+<li>添加了 <code>optimization.mangleExports</code></li>
+<li><code>optimization.minimizer</code> <code>&quot;...&quot;</code> 可以用于引入默认值</li>
+<li><code>optimization.usedExports</code> <code>&quot;global&quot;</code> 增加了一个值，以允许在每个运行时中禁用分析，而在全局范围内进行分享（性能更好）</li>
+<li><code>optimization.noEmitOnErrors</code> 更名为 <code>optimization.emitOnErrors</code>，逻辑颠倒</li>
+<li>添加了 <code>optimization.realContentHash</code></li>
+<li>移除了 <code>output.devtoolLineToLine</code><ul>
+<li>迁移：没有替代项</li>
+</ul>
+</li>
+<li>现已允许 <code>output.chunkFilename: Function</code></li>
+<li><code>output.hotUpdateChunkFilename: Function</code> 已被禁止：反正也没什么用。</li>
+<li><code>output.hotUpdateMainFilename: Function</code> 已被禁止：反正也没什么用。</li>
+<li><code>output.importFunctionName: string</code> 指定用于替换 <code>import()</code> 的名称，以允许在不支持的环境中进行 polyfilling</li>
+<li>添加了 <code>output.charset</code>：将其设置为 false，会省略 script 标签上的 <code>charset</code> 属性</li>
+<li><code>output.hotUpdateFunction</code> 更名为 <code>output.hotUpdateGlobal</code></li>
+<li><code>output.jsonpFunction</code> 更名为 <code>output.chunkLoadingGlobal</code></li>
+<li><code>output.chunkCallbackFunction</code> 更名为 <code>output.chunkLoadingGlobal</code></li>
+<li>添加了 <code>output.chunkLoading</code></li>
+<li>添加了 <code>output.enabledChunkLoadingTypes</code></li>
+<li>添加了 <code>output.chunkFormat</code></li>
+<li><code>module.rules</code> 中的 <code>resolve</code> 和 <code>parser</code> 将以不同的方式进行合并（对象会进行深度合并，数组可能会使用 <code>&quot;...&quot;</code> 的形式来引用之前的值）</li>
+<li>添加了 <code>module.rules</code> <code>parser.worker</code>：允许为支持的 worker 添加配置</li>
+<li><code>module.rules</code> 中的 <code>query</code> 和 <code>loaders</code> 被移除</li>
+<li>向 <code>module.rules</code> 中的 <code>options</code> 传递字符串的形式被废弃<ul>
+<li>迁移：使用传递选项对象的方式代替，当不支持这种方式时，请在对应的 loader 中开启一个 issues</li>
+</ul>
+</li>
+<li>添加了 <code>module.rules</code> <code>mimetype</code>：允许匹配 DataURI 的 mimetype</li>
+<li>添加了 <code>module.rules</code> <code>descriptionData</code>：允许匹配来自 package.json 中的数据</li>
+<li><code>module.defaultRules</code> <code>&quot;...&quot;</code> 可以用于引用默认值</li>
+<li>添加了 <code>stats.chunkRootModules</code>：用于显示根模块的 chunk</li>
+<li>添加了 <code>stats.orphanModules</code>：用于显示为 emit 的模块</li>
+<li>添加了 <code>stats.runtime</code>：用于显示 runtime 模块</li>
+<li>添加了 <code>stats.chunkRelations</code>：用于显示 parent/children/sibling 的 chunk</li>
+<li>添加了 <code>stats.errorStack</code>：用于显示追踪 webpack 内部的堆栈错误</li>
+<li>添加了 <code>stats.preset</code>：选择 preset</li>
+<li>添加了 <code>stats.relatedAssets</code>：用于显示与其他 asset 相关的 asset（如，SourceMaps）</li>
+<li><code>stats.warningsFilter</code> 已被弃用，请改用 <code>ignoreWarnings</code></li>
+<li><code>BannerPlugin.banner</code> 签名已变更<ul>
+<li>移除了 <code>data.basename</code></li>
+<li>移除了 <code>data.query</code></li>
+<li>迁移：从 <code>filename</code> 中获取</li>
+</ul>
+</li>
+<li>移除了 <code>SourceMapDevToolPlugin</code> 的 <code>lineToLine</code><ul>
+<li>迁移：无可替代项</li>
+</ul>
+</li>
+<li><code>[hash]</code> 作为完整的编译 hash 值，现已被弃用<ul>
+<li>迁移：使用 <code>[fullhash]</code> 代替，或最好选用其他 hash 选项</li>
+</ul>
+</li>
+<li><code>[modulehash]</code> 已被弃用<ul>
+<li>迁移：使用 <code>[hash]</code> 代替</li>
+</ul>
+</li>
+<li><code>[moduleid]</code> 已被弃用<ul>
+<li>迁移：使用 <code>[id]</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>[filebase]</code><ul>
+<li>迁移：使用 <code>[base]</code> 代替</li>
+</ul>
+</li>
+<li>基于文件模板的新 placeholders（例如 SourceMapDevToolPlugin）<ul>
+<li><code>[name]</code></li>
+<li><code>[base]</code></li>
+<li><code>[path]</code></li>
+<li><code>[ext]</code></li>
+</ul>
+</li>
+<li>当给 <code>externals</code> 传递一个函数时，现在有一个不同的签名 <code>(&#123; context, request &#125;, callback)</code><ul>
+<li>迁移：改变函数签名</li>
+</ul>
+</li>
+<li>添加了 <code>externalsPresets</code></li>
+<li>添加了 <code>experiments</code>（见上述实验部分）</li>
+<li>添加了 <code>watchOptions.followSymlinks</code></li>
+<li><code>watchOptions.ignored</code> 可以使用正则匹配</li>
+<li>暴露了 <code>webpack.util.serialization</code></li>
+</ul>
+<h3 id="默认值变更"><a href="#默认值变更" class="headerlink" title="默认值变更"></a>默认值变更</h3><ul>
+<li>当 browserslist 配置可用时，<code>target</code> 默认为 <code>&quot;browserslist&quot;</code></li>
+<li><code>module.unsafeCache</code> 现默认只对 <code>node_modules</code> 启用</li>
+<li><code>optimization.moduleIds</code> 在生产环境下默认为 <code>deterministic</code>，而不再是 <code>size</code></li>
+<li><code>optimization.chunkIds</code> 在生产环境下默认为 <code>deterministic</code>，而不再是 <code>total-size</code></li>
+<li><code>optimization.nodeEnv</code> 在 <code>none</code> 模式下，默认为 <code>false</code></li>
+<li><code>optimization.splitChunks.minSize</code> 在生产环境下默认为 <code>20k</code></li>
+<li><code>optimization.splitChunks.enforceSizeThreshold</code> 在生产环境下默认为 <code>50k</code></li>
+<li><code>optimization.splitChunks</code> 中的 <code>minRemainingSize</code> 在生产环境下默认为 <code>minSize</code><ul>
+<li>这将导致在剩余部分过小的情况下，创建更少的 chunk</li>
+</ul>
+</li>
+<li><code>optimization.splitChunks</code> 中的 <code>maxAsyncRequests</code> 和 <code>maxInitialRequests</code> 默认值增加到了 30</li>
+<li><code>optimization.splitChunks.cacheGroups.vendors</code> 更名为 <code>optimization.splitChunks.cacheGroups.defaultVendors</code></li>
+<li><code>optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk</code> 默认为 <code>true</code></li>
+<li><code>optimization.minimizer</code> 的 target 默认在 terser 选项中使用 <code>compress.passes: 2</code></li>
+<li>当使用 <code>cache</code> 时， <code>resolve(Loader).cache</code> 默认为 <code>true</code></li>
+<li><code>resolve(Loader).cacheWithContext</code> 默认为 <code>false</code></li>
+<li><code>resolveLoader.extensions</code> 移除了 <code>.json</code></li>
+<li><code>node.global</code> 中的 <code>node.__filename</code> 和 <code>node.__dirname</code> 默认为 <code>false</code></li>
+<li><code>stats.errorStack</code> 默认为 <code>false</code></li>
+</ul>
+<h2 id="加载器相关变更"><a href="#加载器相关变更" class="headerlink" title="加载器相关变更"></a>加载器相关变更</h2><h3 id="this-getOptions"><a href="#this-getOptions" class="headerlink" title="this.getOptions"></a><code>this.getOptions</code></h3><p>这个新的 API 应该可以简化加载器中选项的使用。<br>它允许传递 JSON 模式进行验证。<br>详情请见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlYnBhY2svd2VicGFjay9wdWxsLzEwMDE3">PR<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="this-exec"><a href="#this-exec" class="headerlink" title="this.exec"></a><code>this.exec</code></h3><p>这一点已从加载器上下文中删除</p>
+<p>迁移：这可以在加载器本身实现。</p>
+<h3 id="this-getResolve"><a href="#this-getResolve" class="headerlink" title="this.getResolve"></a><code>this.getResolve</code></h3><p>loader API 中的 <code>getResolve(options)</code> 将以另一种方式合并选项，参见<code>module.rule``resolve</code>。</p>
+<p>由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 <code>dependencyType</code> 作为选项可能是有意义的（例如<code>&quot;esm&quot;</code>，<code>&quot;commonjs&quot;</code>，或者其他）。</p>
+<h2 id="重大内部变更"><a href="#重大内部变更" class="headerlink" title="重大内部变更"></a>重大内部变更</h2><p>?&gt; 这一部分可能需要更多的完善。</p>
+<p>以下改动只与插件作者有关：</p>
+<h3 id="新的插件运行顺序"><a href="#新的插件运行顺序" class="headerlink" title="新的插件运行顺序"></a>新的插件运行顺序</h3><p>现在 webpack 5 中的插件在应用配置默认值 <strong>之前</strong> 就会被应用。<br>这使得插件可以应用自己的默认值，或者作为配置预设。</p>
+<p>但这也是一个突破性的变化，因为插件在应用时不能依赖配置值的设置。</p>
+<p>迁移：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。</p>
+<h3 id="运行时模块"><a href="#运行时模块" class="headerlink" title="运行时模块"></a>运行时模块</h3><p>大部分的运行时代码被移到了所谓的”运行时模块”中。这些特殊模块负责添加运行时代码。它们可以被添加到任何块中，但目前总是被添加到运行时块中。”运行时需求”控制哪些运行时模块（或核心运行时部件）被添加到代码包中。这确保了只有使用的运行时代码才会被添加到代码包中。未来，运行时模块也可以添加到按需加载的块中，以便在需要时加载运行时代码。</p>
+<p>在大多数情况下，核心运行代码时允许内联入口模块，而不是用 <code>__webpack_require__</code> 来调用它。如果代码包中没有其他模块，则根本不需要使用 <code>__webpack_require__</code>。这与模块合并很好地结合在一起，即多个模块被合并成一个模块。</p>
+<p>在最好的情况下，根本不需要运行时代码。</p>
+<p>迁移：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.</p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>我们添加了一个序列化机制，以允许在 webpack 中对复杂对象进行序列化。它有一个可选的语义，所以那些应该被序列化的类需要被明确地标记出来（并且实现它们的序列化）。大多数模块、所有的依赖关系和一些错误都已经这样做了。</p>
+<p>迁移：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。</p>
+<h3 id="用于缓存的插件"><a href="#用于缓存的插件" class="headerlink" title="用于缓存的插件"></a>用于缓存的插件</h3><p>增加了一个带有插件接口的 <code>Cache</code> 类。该类可用于写入和读取缓存。根据配置的不同，不同的插件可以为缓存添加功能。<code>MemoryCachePlugin</code> 增加了内存缓存功能。<code>FileCachePlugin</code> 增加了持久性（文件系统）缓存。</p>
+<p><code>FileCachePlugin</code> 使用序列化机制将缓存项目持久化到磁盘上或从磁盘上恢复。</p>
+<h3 id="冻结钩子对象"><a href="#冻结钩子对象" class="headerlink" title="冻结钩子对象"></a>冻结钩子对象</h3><p>有 <code>hooks</code> 的类会冻结其 <code>hooks</code> 对象，所以通过这种方式添加自定义钩子已经不可能了。</p>
+<p>迁移：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 <code>getXXXHooks(XXX)</code>(即<code>getCompilationHook(compilation)</code>)方法。内部类使用与自定义钩子相同的机制。</p>
+<h3 id="Tapable-插件升级"><a href="#Tapable-插件升级" class="headerlink" title="Tapable 插件升级"></a>Tapable 插件升级</h3><p>webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取消了。</p>
+<p>一些较少使用的 tapable API 被删除或废弃。</p>
+<p>迁移：使用新的 tapable API。</p>
+<h3 id="Stage-钩子"><a href="#Stage-钩子" class="headerlink" title="Stage 钩子"></a>Stage 钩子</h3><p>在封装代码包过程的几个步骤中，不同阶段有多个钩子，即 <code>optimizeDependenciesBasic</code>, <code>optimizeDependencies</code> 和 <code>optimizeDependenciesAdvanced</code>。这些已经被删除，改为一个单一的钩子，它可以与 <code>stage</code> 选项一起使用。参见 <code>OptimizationStages</code>了解可能的 <code>stage</code> 选项值。</p>
+<p>MIGRATION: 侵入剩余的钩子。你可以添加一个 <code>stage</code> 选项。</p>
+<h3 id="Main-Chunk-ModuleTemplate-废弃"><a href="#Main-Chunk-ModuleTemplate-废弃" class="headerlink" title="Main/Chunk/ModuleTemplate 废弃"></a>Main/Chunk/ModuleTemplate 废弃</h3><p>打包模板已经重构。MainTemplate/ChunkTemplate/ModuleTemplate 被废弃，现在 JavascriptModulesPlugin 负责 JS 模板。</p>
+<p>在那次重构之前，JS 输出由 Main/ChunkTemplate 处理，而另一个输出（即 WASM、CSS）则由插件处理。这样看起来 JS 是一等公民，而其它输出是二等。重构改变了这一点，所有的输出都由他们的插件处理。</p>
+<p>依然可以侵入部分模板。钩子现在在 JavascriptModulesPlugin 中，而不是 Main/ChunkTemplate 中。(是的，插件也可以有钩子，我称之为附加钩子。)</p>
+<p>有一个兼容层，所以 Main/Chunk/ModuleTemplate 仍然存在，但只是将 tap 调用委托给新的钩子位置。</p>
+<p>迁移：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。</p>
+<h3 id="入口文件描述符"><a href="#入口文件描述符" class="headerlink" title="入口文件描述符"></a>入口文件描述符</h3><p>如果传递一个对象作为入口文件，其值可能是一个字符串、字符串数组或描述符：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    catalog: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./catalog.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>描述符语法可用于向入口文件传递附加选项。</p>
+<h4 id="入口文件输出文件名"><a href="#入口文件输出文件名" class="headerlink" title="入口文件输出文件名"></a>入口文件输出文件名</h4><p>默认情况下，入口文件代码块的输出文件名是从<code>output.filename</code>中提取的，<br>但你可以为特定入口文件指定一个自定义的输出文件名：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    about: &#123; <span class="attr">import</span>: <span class="string">&#x27;./about.js&#x27;</span>, <span class="attr">filename</span>: <span class="string">&#x27;pages/[name][ext]&#x27;</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="入口文件依赖"><a href="#入口文件依赖" class="headerlink" title="入口文件依赖"></a>入口文件依赖</h4><p>默认情况下，每个入口文件代码块都存储了它所使用的所有模块。使用 <code>dependOn</code>-选项，<br>你可以将模块从一个入口文件代码块共享到另一个：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123; <span class="attr">import</span>: <span class="string">&#x27;./app.js&#x27;</span>, <span class="attr">dependOn</span>: <span class="string">&#x27;react-vendors&#x27;</span> &#125;,</span><br><span class="line">    <span class="string">&#x27;react-vendors&#x27;</span>: [<span class="string">&#x27;react&#x27;</span>, <span class="string">&#x27;react-dom&#x27;</span>, <span class="string">&#x27;prop-types&#x27;</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>app 代码块 将不包含 <code>react-vendors</code> 所拥有的模块。</p>
+<h4 id="入口文件类库"><a href="#入口文件类库" class="headerlink" title="入口文件类库"></a>入口文件类库</h4><p>入口文件描述符允许为每个入口文件传递不同的 <code>library</code> 选项。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    commonjs: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./lib.js&#x27;</span>,</span><br><span class="line">      library: &#123;</span><br><span class="line">        type: <span class="string">&#x27;commonjs-module&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    amd: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./lib.js&#x27;</span>,</span><br><span class="line">      library: &#123;</span><br><span class="line">        type: <span class="string">&#x27;amd&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="入口文件运行时"><a href="#入口文件运行时" class="headerlink" title="入口文件运行时"></a>入口文件运行时</h4><p>入口文件描述符允许为每个入口文件指定一个 <code>运行时代码</code>。<br>当指定时，将创建一个以该名称命名的代码块，其中仅包含该条目的运行时代码。<br>当多个条目指定相同的<code>运行时代码</code>时，该块将包含所有这些入口文件的共同运行时代码。<br>这意味着它们可以在同一个 HTML 页面中一起使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./app.js&#x27;</span>,</span><br><span class="line">      runtime: <span class="string">&#x27;app-runtime&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="入口文件代码块加载"><a href="#入口文件代码块加载" class="headerlink" title="入口文件代码块加载"></a>入口文件代码块加载</h4><p>入口文件描述符允许为每个入口文件指定一个 <code>chunkLoading</code>。<br>这个入口文件的运行时代码将使用这个来加载代码块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./app.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    worker: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./worker.js&#x27;</span>,</span><br><span class="line">      chunkLoading: <span class="string">&#x27;importScripts&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序与-ID"><a href="#排序与-ID" class="headerlink" title="排序与 ID"></a>排序与 ID</h3><p>webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。</p>
+<p>优化模块和代码块顺序的钩子已经被移除。</p>
+<p>迁移：在编译阶段，你不能再依赖模块和代码块的顺序了。</p>
+<h3 id="从数组到集合-Set"><a href="#从数组到集合-Set" class="headerlink" title="从数组到集合(Set)"></a>从数组到集合(Set)</h3><ul>
+<li>Compilation.modules 现在是一个集合</li>
+<li>Compilation.chunks 现在是一个集合</li>
+<li>Chunk.files 现在是一个集合</li>
+</ul>
+<p>存在一个适配层但会打印废弃的警告。</p>
+<p>迁移: 使用集合方法代替数组方法。</p>
+<h3 id="Compilation-fileSystemInfo"><a href="#Compilation-fileSystemInfo" class="headerlink" title="Compilation.fileSystemInfo"></a>Compilation.fileSystemInfo</h3><p>这个新 class 可以用来以缓存的方式访问文件系统的信息。目前，它允许访问文件和目录的时间戳。如果可能的话，关于时间戳的信息会从监听那里传输过了，否则将由文件系统访问决定。</p>
+<p>后续，会增加访问文件内容 hash 值的功能，模块可以用文件内容代替文件 hash 来检查有效性。</p>
+<p>迁移：使用 <code>compilation.fileSystemInfo</code> API，替代 <code>file/contextTimestamps</code>。</p>
+<p>现在可以对目录进行时间戳管理，允许对 ContextModules 进行序列化。</p>
+<p>增加了 <code>Compiler.modifiedFiles</code>（类似于 <code>Compiler.removedFiles</code>），以便更容易引用更改后的文件。</p>
+<h3 id="Filesystems"><a href="#Filesystems" class="headerlink" title="Filesystems"></a>Filesystems</h3><p>新增了一个类似于 <code>compiler.inputFileSystem</code> 和 <code>compiler.outputFileSystem</code> 的新 API <code>compiler.intermediateFileSystem</code>，用于所有不被认为是输入或输出的 fs 操作，如写入 records，缓存或输出 profiling。</p>
+<p>文件系统现在有 <code>fs</code> 接口，不再需要 <code>join</code> 或 <code>mkdirp</code> 等额外方式。但如果它们包含 <code>join</code> 或 <code>dirname</code> 等类似方法，也会被使用。</p>
+<h3 id="模块热替换"><a href="#模块热替换" class="headerlink" title="模块热替换"></a>模块热替换</h3><p>HMR 运行时已被重构为运行时模块。<code>HotUpdateChunkTemplate</code> 已被合并入 <code>ChunkTemplate</code> 中。ChunkTemplates 和 plugins 也应处理 <code>HotUpdateChunk</code> 了。</p>
+<p>HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来。其他模块类型现在也可以使用它们自己的方式处理 HMR。在未来，这将使得 HMR 处理诸如 mini-css-extract-plugin 或 WASM 模块。</p>
+<p>迁移：此为新功能，无需迁移。</p>
+<p><code>import.meta.webpackHot</code> 公开了与 <code>module.hot</code> 相同的 API。当然可以在 ESM 模块（.mjs，package.json 中的 type: “module”）中使用，这些模块不能访问 <code>module</code>。</p>
+<h3 id="工作队列"><a href="#工作队列" class="headerlink" title="工作队列"></a>工作队列</h3><p>webpack 曾经通过函数调用函数的形式来进行模块处理，还有一个 <code>semaphore</code> 选项限制并行性。<code>Compilation.semaphore</code> 已被移除，现在可以使用异步队列处理，每个步骤都有独立的队列：</p>
+<ul>
+<li><code>Compilation.factorizeQueue</code>：为一组 dependencies 调用模块工厂。</li>
+<li><code>Compilation.addModuleQueue</code>：将模块添加到编译队列中（可以使用缓存恢复模块）</li>
+<li><code>Compilation.buildQueue</code>：必要时构建模块（可将模块存储到缓存中）</li>
+<li><code>Compilation.rebuildQueue</code>：如需手动触发，则会重新构建模块</li>
+<li><code>Compilation.processDependenciesQueue</code>：处理模块的 dependencies。</li>
+</ul>
+<p>这些队列会有一些 hook 来监听并拦截工作的进程。</p>
+<p>未来，多个编译器会同时工作，可以通过拦截这些队列来进行编译工作的编排。</p>
+<p>迁移：此为新功能，无需迁移。</p>
+<h3 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h3><p>webpack 内部引入了一些日志记录的方法。<br><code>stats.logging</code> 和 <code>infrastructureLogging</code> 选项可用于启用这些信息。</p>
+<h3 id="模块和-chunk-图"><a href="#模块和-chunk-图" class="headerlink" title="模块和 chunk 图"></a>模块和 chunk 图</h3><p>webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中存储引入的模块。但现已发生变化。所有关于模块在模块图中如何连接的信息，现在都存储在 ModulGraph 的 class 中。所有关于模块与 chunk 如何连接的信息现在都已存储在 ChunkGraph 的 class 中。依赖于 chunk 图的信息也存储在相关的 class 中。</p>
+<p>这意味着以下关于模块的信息已被移动：</p>
+<ul>
+<li>Module connections -&gt; ModuleGraph</li>
+<li>Module issuer -&gt; ModuleGraph</li>
+<li>Module optimization bailout -&gt; ModuleGraph (TODO: check if it should ChunkGraph instead)</li>
+<li>Module usedExports -&gt; ModuleGraph</li>
+<li>Module providedExports -&gt; ModuleGraph</li>
+<li>Module pre order index -&gt; ModuleGraph</li>
+<li>Module post order index -&gt; ModuleGraph</li>
+<li>Module depth -&gt; ModuleGraph</li>
+<li>Module profile -&gt; ModuleGraph</li>
+<li>Module id -&gt; ChunkGraph</li>
+<li>Module hash -&gt; ChunkGraph</li>
+<li>Module runtime requirements -&gt; ChunkGraph</li>
+<li>Module is in chunk -&gt; ChunkGraph</li>
+<li>Module is entry in chunk -&gt; ChunkGraph</li>
+<li>Module is runtime module in chunk -&gt; ChunkGraph</li>
+<li>Chunk runtime requirements -&gt; ChunkGraph</li>
+</ul>
+<p>当从缓存中恢复模块时，webpack 会将模块从图中断开。现在已无需这么做。一个模块不存储图形的任何信息，技术上可以在多个图形中使用。这会使得缓存变得更加容易。</p>
+<p>这部分变化中大多数都有一个 compat-layer，当使用时，它会打印一个弃用警告。</p>
+<p>迁移：在 ModuleGraph 和 ChunkGraph 上使用新的 API。</p>
+<h3 id="Init-Fragments"><a href="#Init-Fragments" class="headerlink" title="Init Fragments"></a>Init Fragments</h3><p><code>DependenciesBlockVariables</code> 已被移除，改为 <code>InitFragments</code>。<code>DependencyTemplates</code> 现在可以添加 <code>InitFragments</code>，以将代码注入模块源的起始位置。<code>InitFragments</code> 允许删除重复数据。</p>
+<p>迁移：使用 <code>InitFragments</code> 代替，而无需在源文件的负索引出插入。</p>
+<h3 id="模块-Source-Types"><a href="#模块-Source-Types" class="headerlink" title="模块 Source Types"></a>模块 Source Types</h3><p>Modules 现在必须通过 <code>Module.getSourceTypes()</code> 来定义它们支持的源码类型。根据这一点，不同的插件会用这些类型调用 <code>source()</code>。对于源类型为 <code>javascript</code> 的 <code>JavascriptModulesPlugin</code> 会将源代码嵌入到 bundle 中。源类型 <code>webassembly</code> 的 <code>WebAssemblyModulesPlugin</code> 会 emit 一个 wasm 文件。同时，也支持自定义源类型，例如，mini-css-extract-plugin 会使用源类型为 <code>stylesheet</code> 将源码嵌入到 css 文件中。</p>
+<p>模块类型与源类型间没有关系。即使模块类型为 <code>json</code>，也可以使用源类型为 <code>javascript</code> 和模块类型为 <code>webassembly/experimental</code> 的 <code>javascript</code> 和 <code>webassembly</code>。</p>
+<p>迁移：自定义模块需要实现这些新的接口方法。</p>
+<h3 id="Stats-的插件"><a href="#Stats-的插件" class="headerlink" title="Stats 的插件"></a>Stats 的插件</h3><p>Stats 的 <code>preset</code>，<code>default</code>，<code>json</code> 和 <code>toString</code> 现已由插件系统内置。将当前的 Stats 转换为插件。</p>
+<p>迁移：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。</p>
+<h3 id="全新的监听"><a href="#全新的监听" class="headerlink" title="全新的监听"></a>全新的监听</h3><p>webpack 所使用的监听已重构。它之前使用的是 <code>chokidar</code> 和原生依赖 <code>fsevents</code>（仅在 OSX 上）。现在它在只基于原生的 Node.js 中的 <code>fs</code>。这意味着在 webpack 中已经没有原生依赖了。</p>
+<p>它还能在监听时捕捉更多关于文件系统的信息。目前，它还可以捕获 mtimes 和监视事件时间，以及丢失文件的信息。为此，<code>WatchFileSystem</code> API 做了一点小改动。在修改的同时，我们还将 Arrays 转换为 Sets，Objects 转换为 Maps。</p>
+<h3 id="SizeOnlySource-after-emit"><a href="#SizeOnlySource-after-emit" class="headerlink" title="SizeOnlySource after emit"></a>SizeOnlySource after emit</h3><p>webpack 现在使用 <code>SizeOnlySource</code> 替换 <code>Compilation.assets</code> 中的 Sources，以减少内存占用。</p>
+<h3 id="Emitting-assets-multiple-times"><a href="#Emitting-assets-multiple-times" class="headerlink" title="Emitting assets multiple times"></a>Emitting assets multiple times</h3><p>原来的 <code>Multiple assets emit different content to the same filename</code> 警告，现在成为错误。</p>
+<h3 id="ExportsInfo"><a href="#ExportsInfo" class="headerlink" title="ExportsInfo"></a>ExportsInfo</h3><p>重构了模块导出信息的存储方式。ModuleGraph 现在为每个 <code>Module</code> 提供了一个 <code>ExportsInfo</code>，它用于存储每个 export 的信息。如果模块仅以副作用的方式使用，它还存储了关于未知 export 的信息，</p>
+<p>对于每个 export，都会存储以下信息：</p>
+<ul>
+<li>是否使用 export? 是否使用并不确定。（详见 <code>optimization.usedExports</code>）</li>
+<li>是否提供 export? 是否提供并不确定。（详见 <code>optimization.providedExports</code>）</li>
+<li>能否重命名 export 名? 是否重命名，也不确定</li>
+<li>如果 export 已重新命名，则为新名称。（详见 <code>optimization.mangleExports</code>）</li>
+<li>嵌套的 ExportsInfo，如果 export 是一个含有附加信息的对象，那么它本身就是一个对象<ul>
+<li>用于重新导出命名空间对象：<code>import * as X from &quot;...&quot;; export &#123; X &#125;;</code></li>
+<li>用于表示 JSON 模块中的结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="代码生成阶段"><a href="#代码生成阶段" class="headerlink" title="代码生成阶段"></a>代码生成阶段</h3><p>编译的代码生成功能作为单独的编译阶段。它不再隐藏在 <code>Module.source()</code> 和 <code>Module.getRuntimeRequirements()</code> 中运行了。</p>
+<p>这应该会使得流程更加简洁。它还运行报告该阶段的进度。并使得代码生成在剖析时更加清晰可见。</p>
+<p>迁移：<code>Module.source()</code> 和 <code>Module.getRuntimeRequirements()</code> 已弃用。使用 <code>Module.codeGeneration()</code> 代替。</p>
+<h3 id="依赖关系参考"><a href="#依赖关系参考" class="headerlink" title="依赖关系参考"></a>依赖关系参考</h3><p>webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（<code>Compilation.getDependencyReference</code> 会返回一个 <code>DependencyReference</code>）<br>该类型用于引入关于该引用的所有信息，如 被引用的模块，已经引入了哪些 export，如果是弱引用，还需要订阅一些相关信息。</p>
+<p>把所有这些信息构建在一起，拿到参考的成本就很高，而且很频繁（每次有人需要一个信息）。</p>
+<p>在 webpack5 中，这部分代码库被重构了，方法进行了拆分。</p>
+<ul>
+<li>引用的模块可以从 ModuleGraphConnection 中读取</li>
+<li>引入的导出名，可以通过 <code>Dependency.getReferencedExports()</code> 获取</li>
+<li><code>Dependency</code> 的 class 上会有一个 <code>weak</code> 的 flag</li>
+<li>排序只与 <code>HarmonyImportDependencies</code> 相关，可以通过 <code>sourceOrder</code> 属性获取</li>
+</ul>
+<h3 id="Presentational-Dependencies"><a href="#Presentational-Dependencies" class="headerlink" title="Presentational Dependencies"></a>Presentational Dependencies</h3><p>这是 <code>NormalModules</code> 的一种新 Dependencies 类型：Presentational Dependencies</p>
+<p>这些 dependencies 只在代码生成阶段使用，但在模块图构建过程中未使用。<br>所以它们永远不能引用模块或影响导出/导入。</p>
+<p>这些依赖关系的处理成本较低，webpack 会尽可能地使用它们</p>
+<h3 id="弃用-loaders"><a href="#弃用-loaders" class="headerlink" title="弃用 loaders"></a>弃用 loaders</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/null-loader"><code>null-loader</code></a></p>
+<p>已被弃用。使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      xyz$: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用绝对路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      [path.resolve(__dirname, <span class="string">&#x27;....&#x27;</span>)]: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="微小改动"><a href="#微小改动" class="headerlink" title="微小改动"></a>微小改动</h2><ul>
+<li><code>Compiler.name</code>：当生成带有绝对路径的编译器名称时，请确保名称使用 <code>|</code> 或 <code>!</code> 分隔。<ul>
+<li>使用空格作为分隔符的做法现已不再适用。（路径可以保护空格）</li>
+<li>温馨提示：在 Stats 中输出时 <code>|</code> 会被替换为空格。</li>
+</ul>
+</li>
+<li><code>SystemPlugin</code> 现已被默认禁用。<ul>
+<li>迁移：应避免使用它，因为此规范已被删除。你可以使用 <code>Rule.parser.system: true</code> 来重新启用它。</li>
+</ul>
+</li>
+<li><code>ModuleConcatenationPlugin</code>：<code>DependencyVariables</code> 已被移除，将不再阻止连接。<ul>
+<li>这意味着它现在可以在 <code>module</code>，<code>global</code>，<code>process</code> 或 ProvidePlugin 的情况下进行连接。</li>
+</ul>
+</li>
+<li>移除了 <code>Stats.presetToOptions</code><ul>
+<li>迁移：使用 <code>compilation.createStatsOptions</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>SingleEntryPlugin</code> 和 <code>SingleEntryDependency</code><ul>
+<li>迁移：使用 <code>EntryPlugin</code> 和 <code>EntryDependency</code> 代替</li>
+</ul>
+</li>
+<li>chunk 现在可以有多个入口</li>
+<li>移除了 <code>ExtendedAPIPlugin</code><ul>
+<li>迁移：不再需要此插件，在必要时，你可以使用 <code>__webpack_hash__</code> 和 <code>__webpack_chunkname__</code> 注入运行时代码。</li>
+</ul>
+</li>
+<li><code>ProgressPlugin</code> 不再为 <code>reportProgress</code> 使用 tapable 上下文。<ul>
+<li>迁移：使用 <code>ProgressPlugin.getReporter(compiler)</code> 代替</li>
+</ul>
+</li>
+<li>现已对 <code>.mjs</code> 文件重新启用 <code>ProvidePlugin</code></li>
+<li><code>Stats</code> json 中的 <code>errors</code> 和 <code>warnings</code> 不再是字符串类型，而是包含必要信息的对象，这些信息会被分割为熟悉。<ul>
+<li>迁移：查阅具体属性信息，如 <code>message</code> 字段</li>
+</ul>
+</li>
+<li>移除了 <code>Compilation.hooks.normalModuleLoader</code><ul>
+<li>迁移：使用 <code>NormalModule.getCompilationHooks(compilation).loader</code> 代替</li>
+</ul>
+</li>
+<li>将 <code>NormalModuleFactory</code> 中的 hook 从 waterfall 改为 bailing，修改并对 waterfall 函数的 hook 进行了重命名操作。</li>
+<li>移除了 <code>compilationParams.compilationDependencies</code><ul>
+<li>插件可以在编译中使用 <code>compilation.file/context/missingDependencies</code> 添加依赖关系</li>
+<li>Compat 层将 <code>compilationDependencies.add</code> 委托给 <code>fileDependencies.add</code>。</li>
+</ul>
+</li>
+<li><code>stats.assetsByChunkName[x]</code> 始终为一个数组</li>
+<li>增加了 <code>__webpack_get_script_filename__</code> 函数用于获取 script 文件的文件名。</li>
+<li>在 package.json 中 <code>&quot;sideEffects&quot;</code> 将使用 <code>glob-to-regex</code> 来代替 <code>micromatch</code> 处理。<ul>
+<li>这可能会改变边缘案例的语义。</li>
+</ul>
+</li>
+<li>从 <code>IgnorePlugin</code> 中移除了 <code>checkContext</code></li>
+<li>全新的 <code>__webpack_exports_info__</code> API 允许导出使用自省。</li>
+<li>SourceMapDevToolPlugin 现已适用于非 chunk 资源。</li>
+<li>当引用的 env 变量缺失且没有降级数据时，EnvironmentPlugin 目前会展示一个错。</li>
+<li>从 schema 中移除 <code>serve</code> 熟悉。</li>
+</ul>
+<h2 id="其他微小改动"><a href="#其他微小改动" class="headerlink" title="其他微小改动"></a>其他微小改动</h2><ul>
+<li>移除 build 目录，用运行时代替 build</li>
+<li>移除不适用的特性<ul>
+<li>BannerPlugin 目前只支持一个参数，这个参数可以是对象，字符串或函数</li>
+</ul>
+</li>
+<li>移除 <code>CachePlugin</code></li>
+<li><code>Chunk.entryModule</code> 已弃用，使用 ChunkGraph 代替</li>
+<li><code>Chunk.hasEntryModule</code> 已弃用</li>
+<li><code>Chunk.addModule</code> 已弃用</li>
+<li><code>Chunk.removeModule</code> 已弃用</li>
+<li><code>Chunk.getNumberOfModules</code> 已弃用</li>
+<li><code>Chunk.modulesIterable</code> 已弃用</li>
+<li><code>Chunk.compareTo</code> 已弃用</li>
+<li><code>Chunk.containsModule</code> 已弃用</li>
+<li><code>Chunk.getModules</code> 已弃用</li>
+<li><code>Chunk.remove</code> 已弃用</li>
+<li><code>Chunk.moveModule</code> 已弃用</li>
+<li><code>Chunk.integrate</code> 已弃用</li>
+<li><code>Chunk.canBeIntegrated</code> 已弃用</li>
+<li><code>Chunk.isEmpty</code> 已弃用</li>
+<li><code>Chunk.modulesSize</code> 已弃用</li>
+<li><code>Chunk.size</code> 已弃用</li>
+<li><code>Chunk.integratedSize</code> 已弃用</li>
+<li><code>Chunk.getChunkModuleMaps</code> 已弃用</li>
+<li><code>Chunk.hasModuleInGraph</code> 已弃用</li>
+<li><code>Chunk.updateHash</code> 签名已变更</li>
+<li><code>Chunk.getChildIdsByOrders</code> 签名已变更（TODO: 考虑移至 <code>ChunkGraph</code>）</li>
+<li><code>Chunk.getChildIdsByOrdersMap</code> 签名已变更（TODO: 考虑移至 <code>ChunkGraph</code>）</li>
+<li>移除了 <code>Chunk.getChunkModuleMaps</code></li>
+<li>移除了 <code>Chunk.setModules</code></li>
+<li>移除了废弃的 Chunk 方法</li>
+<li>添加了 <code>ChunkGraph</code></li>
+<li>移除了 <code>ChunkGroup.setParents</code></li>
+<li>移除了 <code>ChunkGroup.containsModule</code></li>
+<li><code>ChunkGroup.remove</code> 不再断开该 Group 与 block 的连接</li>
+<li><code>ChunkGroup.compareTo</code> 签名已变更</li>
+<li><code>ChunkGroup.getChildrenByOrders</code> 签名已变更</li>
+<li><code>ChunkGroup</code> 的 index 和 index 改名为 pre/post order index<ul>
+<li>废弃了 old getter</li>
+</ul>
+</li>
+<li><code>ChunkTemplate.hooks.modules</code> 签名已变更</li>
+<li><code>ChunkTemplate.hooks.render</code> 签名已变更</li>
+<li><code>ChunkTemplate.updateHashForChunk</code> 签名已变更</li>
+<li>移除了 <code>Compilation.hooks.optimizeChunkOrder</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeModuleOrder</code></li>
+<li>移除了 <code>Compilation.hooks.advancedOptimizeModuleOrder</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeDependenciesBasic</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeDependenciesAdvanced</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeModulesBasic</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeModulesAdvanced</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeChunksBasic</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeChunksAdvanced</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeChunkModulesBasic</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeChunkModulesAdvanced</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeExtractedChunksBasic</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeExtractedChunks</code></li>
+<li>移除了 <code>Compilation.hooks.optimizeExtractedChunksAdvanced</code></li>
+<li>移除了 <code>Compilation.hooks.afterOptimizeExtractedChunks</code></li>
+<li>添加了 <code>Compilation.hooks.stillValidModule</code></li>
+<li>添加了 <code>Compilation.hooks.statsPreset</code></li>
+<li>添加了 <code>Compilation.hooks.statsNormalize</code></li>
+<li>添加了 <code>Compilation.hooks.statsFactory</code></li>
+<li>添加了 <code>Compilation.hooks.statsPrinter</code></li>
+<li><code>Compilation.fileDependencies</code>，<code>Compilation.contextDependencies</code> 以及 <code>Compilation.missingDependencies</code> 现在变为了 LazySets</li>
+<li>移除了 <code>Compilation.entries</code><ul>
+<li>迁移：使用 <code>Compilation.entryDependencies</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>Compilation._preparedEntrypoints</code></li>
+<li><code>dependencyTemplates</code> 现已改为 <code>DependencyTemplates</code> 的 class 类型，而不再是原始的 <code>Map</code></li>
+<li>移除了 <code>Compilation.fileTimestamps</code> 和 <code>contextTimestamps</code><ul>
+<li>迁移：使用 <code>Compilation.fileSystemInfo</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>Compilation.waitForBuildingFinished</code><ul>
+<li>迁移：使用新队列</li>
+</ul>
+</li>
+<li>移除了 <code>Compilation.addModuleDependencies</code></li>
+<li>移除了 <code>Compilation.prefetch</code></li>
+<li><code>Compilation.hooks.beforeHash</code> 会在创建模块 hash 值后被调用。<ul>
+<li>迁移：使用 <code>Compiliation.hooks.beforeModuleHash</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>Compilation.applyModuleIds</code></li>
+<li>移除了 <code>Compilation.applyChunkIds</code></li>
+<li>添加了 <code>Compiler.root</code>，用于指向根编译器<ul>
+<li>可用于缓存 WeakMaps 中的数据，而非静态作用域内的数据</li>
+</ul>
+</li>
+<li>添加了 <code>Compiler.hooks.afterDone</code></li>
+<li><code>Source.emitted</code> 不再由编译器设置<ul>
+<li>迁移：使用 <code>Compilation.emittedAssets</code> 代替</li>
+</ul>
+</li>
+<li>添加了 <code>Compiler/Compilation.compilerPath</code>：此为编译器在编译器树中唯一名称。（在根编译器范围内唯一）</li>
+<li><code>Module.needRebuild</code> 已弃用<ul>
+<li>迁移：使用 <code>Module.needBuild</code> 代替</li>
+</ul>
+</li>
+<li><code>Dependency.getReference</code> 签名已变更</li>
+<li><code>Dependency.getExports</code> 签名已变更</li>
+<li><code>Dependency.getWarnings</code> 签名已变更</li>
+<li><code>Dependency.getErrors</code> 签名已变更</li>
+<li><code>Dependency.updateHash</code> 签名已变更</li>
+<li>移除了 <code>Dependency.module</code></li>
+<li>添加了 <code>DependencyTemplate</code> 的基类</li>
+<li>移除了 <code>MultiEntryDependency</code></li>
+<li>添加了 <code>EntryDependency</code></li>
+<li>移除了 <code>EntryModuleNotFoundError</code></li>
+<li>移除了 <code>SingleEntryPlugin</code></li>
+<li>添加了 <code>EntryPlugin</code></li>
+<li>添加了 <code>Generator.getTypes</code></li>
+<li>添加了 <code>Generator.getSize</code></li>
+<li><code>Generator.generate</code> 签名已变更</li>
+<li>添加了 <code>HotModuleReplacementPlugin.getParserHooks</code></li>
+<li><code>Parser</code> 被移至 <code>JavascriptParser</code> 中</li>
+<li><code>ParserHelpers</code> 被移至 <code>JavascriptParserHelpers</code> 中</li>
+<li>移除了 <code>MainTemplate.hooks.moduleObj</code></li>
+<li>移除了 <code>MainTemplate.hooks.currentHash</code></li>
+<li>移除了 <code>MainTemplate.hooks.addModule</code></li>
+<li>移除了 <code>MainTemplate.hooks.requireEnsure</code></li>
+<li>移除了 <code>MainTemplate.hooks.globalHashPaths</code></li>
+<li>移除了 <code>MainTemplate.hooks.globalHash</code></li>
+<li>移除了 <code>MainTemplate.hooks.hotBootstrap</code></li>
+<li><code>MainTemplate.hooks</code> 部分签名已变更</li>
+<li><code>Module.hash</code> 已弃用</li>
+<li><code>Module.renderedHash</code> 已弃用</li>
+<li>移除了 <code>Module.reasons</code></li>
+<li><code>Module.id</code> 已弃用</li>
+<li><code>Module.index</code> 已弃用</li>
+<li><code>Module.index2</code> 已弃用</li>
+<li><code>Module.depth</code> 已弃用</li>
+<li><code>Module.issuer</code> 已弃用</li>
+<li>移除了 <code>Module.profile</code></li>
+<li>移除了 <code>Module.prefetched</code></li>
+<li>移除了 <code>Module.built</code></li>
+<li>移除了 <code>Module.used</code><ul>
+<li>迁移：使用 <code>Module.getUsedExports</code> 代替</li>
+</ul>
+</li>
+<li>Module.usedExports 已弃用<ul>
+<li>MIGRATION: 使用 <code>Module.getUsedExports</code> 代替</li>
+</ul>
+</li>
+<li><code>Module.optimizationBailout</code> 已弃用</li>
+<li>移除了 <code>Module.exportsArgument</code></li>
+<li><code>Module.optional</code> 已弃用</li>
+<li>移除了 <code>Module.disconnect</code></li>
+<li>移除了 <code>Module.unseal</code></li>
+<li>移除了 <code>Module.setChunks</code></li>
+<li><code>Module.addChunk</code> 已弃用</li>
+<li><code>Module.removeChunk</code> 已弃用</li>
+<li><code>Module.isInChunk</code> 已弃用</li>
+<li><code>Module.isEntryModule</code> 已弃用</li>
+<li><code>Module.getChunks</code> 已弃用</li>
+<li><code>Module.getNumberOfChunks</code> 已弃用</li>
+<li><code>Module.chunksIterable</code> 已弃用</li>
+<li>移除了 <code>Module.hasEqualsChunks</code></li>
+<li><code>Module.useSourceMap</code> 被移至 <code>NormalModule</code></li>
+<li>移除了 <code>Module.addReason</code></li>
+<li>移除了 <code>Module.removeReason</code></li>
+<li>移除了 <code>Module.rewriteChunkInReasons</code></li>
+<li>移除了 <code>Module.isUsed</code><ul>
+<li>迁移：使用 <code>isModuleUsed</code>，<code>isExportUsed</code> 和 <code>getUsedName</code> 代替</li>
+</ul>
+</li>
+<li><code>Module.updateHash</code> 签名已变更</li>
+<li>移除了 <code>Module.sortItems</code></li>
+<li>移除了 <code>Module.unbuild</code><ul>
+<li>迁移：使用 <code>invalidateBuild</code> 代替</li>
+</ul>
+</li>
+<li>添加了 <code>Module.getSourceTypes</code></li>
+<li>添加了 <code>Module.getRuntimeRequirements</code></li>
+<li><code>Module.size</code> 签名已变更</li>
+<li><code>ModuleFilenameHelpers.createFilename</code> 签名已变更</li>
+<li><code>ModuleProfile</code> 的 class 添加了许多数据</li>
+<li>移除了 <code>ModuleReason</code></li>
+<li><code>ModuleTemplate.hooks</code> 签名已变更</li>
+<li><code>ModuleTemplate.render</code> 签名已变更</li>
+<li>移除了 <code>Compiler.dependencies</code><ul>
+<li>迁移：使用 <code>MultiCompiler.setDependencies</code> 代替</li>
+</ul>
+</li>
+<li>移除了 <code>MultiModule</code></li>
+<li>移除了 <code>MultiModuleFactory</code></li>
+<li><code>NormalModuleFactory.fileDependencies</code>，<code>NormalModuleFactory.contextDependencies</code> 和 <code>NormalModuleFactory.missingDependencies</code> 现已使用 LazySets</li>
+<li><code>RuntimeTemplate</code> 方法现已使用 <code>runtimeRequirements</code> 的参数</li>
+<li>移除了 <code>serve</code> 属性</li>
+<li>移除了 <code>Stats.jsonToString</code></li>
+<li>移除了 <code>Stats.filterWarnings</code></li>
+<li>移除了 <code>Stats.getChildOptions</code></li>
+<li>移除了 <code>Stats</code> 的 helper 方法</li>
+<li><code>Stats.toJson</code> 签名已变更（参数二被移除）</li>
+<li>移除了 <code>ExternalModule.external</code></li>
+<li>移除了 <code>HarmonyInitDependency</code></li>
+<li><code>Dependency.getInitFragments</code> 已弃用<ul>
+<li>迁移：使用 <code>apply</code> <code>initFragements</code> 代替</li>
+</ul>
+</li>
+<li>DependencyReference 现将函数传递给模块，而非模块。</li>
+<li>移除了 <code>HarmonyImportSpecifierDependency.redirectedId</code><ul>
+<li>迁移：使用 <code>setId</code> 代替</li>
+</ul>
+</li>
+<li>acorn 5 -&gt; 7</li>
+<li>测试<ul>
+<li>HotTestCases 现可为多个目标运行，包括 <code>async-node</code> <code>node</code> <code>web</code> <code>webworker</code></li>
+<li>TestCases 现在可以用 <code>store: &quot;instant&quot;</code> 和 <code>store: &quot;pack&quot;</code> 来运行系统缓存。</li>
+<li>TestCases 现在也可以为指定的模块 id 运行。</li>
+</ul>
+</li>
+<li>工具添加了 import 的排序功能（在 CI 检查）</li>
+<li>当 chunk 的名称与 id 等价时，运行时的 chunk 名称映射不再包含入口</li>
+<li>将 <code>resolvedModuleId</code> <code>resolvedModuleIdentifier</code> 和 <code>resolvedModule</code> 添加到 Stats 的 reason 中，在完成作用域提升等优化之前，这些 reason 指向模块</li>
+<li>在 Stats toString 的输出中展示 <code>resolvedModule</code></li>
+<li>loader-runner 已升级：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlYnBhY2svbG9hZGVyLXJ1bm5lci9yZWxlYXNlcy90YWcvdjMuMC4w">https://github.com/webpack/loader-runner/releases/tag/v3.0.0<i class="fa fa-external-link-alt"></i></span></li>
+<li><code>Compilation</code> 中的 <code>file/context/missingDependencies</code> 因性能问题不再排序<ul>
+<li>不要依赖排序</li>
+</ul>
+</li>
+<li>webpack-sources 已升级：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dlYnBhY2svd2VicGFjay1zb3VyY2VzL3JlbGVhc2VzL3RhZy92Mi4wLjAtYmV0YS4w">https://github.com/webpack/webpack-sources/releases/tag/v2.0.0-beta.0<i class="fa fa-external-link-alt"></i></span></li>
+<li>删除了对 webpack-command 的支持</li>
+<li>使用 schema-utils@2 进行模式校验</li>
+<li><code>Compiler.assetEmitted</code> 改进了参数二，增加了更多信息</li>
+<li>BannerPlugin 省略了尾部的空白字符</li>
+<li>从 <code>LimitChunkCountPlugin</code> 中移除了 <code>minChunkSize</code> 选项</li>
+<li>将与 javascript 相关的文件重组到子目录中<ul>
+<li><code>webpack.JavascriptModulesPlugin</code> -&gt; <code>webpack.javascript.JavascriptModulesPlugin</code></li>
+</ul>
+</li>
+<li>添加了 <code>Logger.getChildLogger</code></li>
+<li>将 DllPlugin 中 entryOnly 选项的默认值变更为 true</li>
+<li>移除了特殊请求的简化逻辑，使用单一的相对路径作为可读模块的名称</li>
+<li>允许 webpack:// 将 SourceMaps 中的 url 改为相对于 webpack 根目录的路径</li>
+<li>添加了 API 用于生成和处理针对 webpack 配置的 CLI 参数</li>
+<li>当使用 System.js 作为 libraryTarget 时，在 System 中添加 <code>__system_context__</code> 作为上下文</li>
+<li>为 DefinePlugin 添加 bigint 的支持</li>
+<li>对基本环节添加 bigint 的支持，例如 maths</li>
+<li>移除在创建 hash 后修改编译 hash 的功能</li>
+<li>移除了 <code>HotModuleReplacementPlugin</code> 的 multiStep 模式</li>
+<li>当使用嵌套的对象或数组时，<code>emitAsset</code> 中的 <code>assetInfo</code> 将被合并</li>
+<li>当基于 <code>filename</code> 生成路径时，<code>[query]</code> 是一个有效占位符，如 asset</li>
+<li>添加了 <code>Compilation.deleteAsset</code>，用于正确删除 asset 和非公用的相关资源</li>
+<li>将 <code>require(&quot;webpack-sources&quot;)</code> 暴露为 <code>require(&quot;webpack&quot;).sources</code></li>
+<li>terser 5</li>
+<li>当 Webpack 作为句首时，Webpack 的 W 应该大写</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/release/webpack-5-0/" title="Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10)">http://yonghong.tech/release/webpack-5-0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          
+
+  <div class="followme">
+    <span>欢迎关注我的其它发布渠道</span>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+          <div class="post-tags">
+              <a href="/tags/release/" rel="tag"># release</a>
+              <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+              <a href="/tags/Frontend/" rel="tag"># Frontend</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/weekly-002/" rel="prev" title="技术爱好者周刊 第2期 | 2020年10月12日">
+                  <i class="fa fa-chevron-left"></i> 技术爱好者周刊 第2期 | 2020年10月12日
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备 18012168号-5 </span>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">905k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">13:43</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/motion.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script data-pjax>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.0/source/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script data-pjax>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.7.0/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/release/webpack-5-0/',]
+      });
+      });
+  </script>
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://yonghong-tech.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yonghong.tech/release/webpack-5-0/";
+    this.page.identifier = "release/webpack-5-0/";
+    this.page.title = "Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10)";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yonghong-tech.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : 'd2684d7d27e461a8c96de582d52590e6',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "release/webpack-5-0/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+    </div>
+</body>
+</html>
