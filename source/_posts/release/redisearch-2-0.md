@@ -1,5 +1,5 @@
 ---
-title: 【release】高性能全文搜索引擎 RediSearch 2.0 正式发布！
+title: 高性能全文搜索引擎 RediSearch 2.0 正式发布！
 tags:
 - release
 - RediSearch

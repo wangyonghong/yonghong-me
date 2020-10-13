@@ -1,5 +1,5 @@
 ---
-title: 【release】深度操作系统 20——崭新视界，创无止境
+title: 深度操作系统 20——崭新视界，创无止境
 tags:
 - release
 - deepin

@@ -1,5 +1,5 @@
 ---
-title: 【release】Vue 3 One Piece 正式发布！
+title: Vue 3 One Piece 正式发布！
 tags:
 - release
 - Vue

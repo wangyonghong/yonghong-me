@@ -1,5 +1,5 @@
 ---
-title: 【release】PostgresSQL 13 正式发布！
+title: PostgresSQL 13 正式发布！
 tags:
 - release
 - PostgresSQL

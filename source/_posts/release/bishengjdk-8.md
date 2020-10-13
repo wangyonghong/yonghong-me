@@ -1,5 +1,5 @@
 ---
-title: 【release】毕昇 JDK 8 开源了！
+title: 毕昇 JDK 8 开源了！
 tags:
 - release
 - JDK

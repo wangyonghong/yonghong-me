@@ -1,5 +1,5 @@
 ---
-title: 【release】JDK 15 正式发布！
+title: JDK 15 正式发布！
 tags:
 - release
 - JDK

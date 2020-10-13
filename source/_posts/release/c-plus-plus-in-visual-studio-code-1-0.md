@@ -1,5 +1,5 @@
 ---
-title: 【release】Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）!
+title: Visual Studio Code 的 C++ 扩展迎来首个正式版本（v1.0）!
 tags:
 - release
 - C++

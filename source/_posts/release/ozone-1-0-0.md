@@ -1,5 +1,5 @@
 ---
-title: 【release】腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布
+title: 腾讯大数据团队主导Apache社区新一代分布式存储系统Ozone 1.0.0发布
 tags:
 - release
 - Ozone

@@ -1,5 +1,5 @@
 ---
-title: 【release】Chaos Mesh® 1.0 GA，让混沌工程变得简单！
+title: Chaos Mesh® 1.0 GA，让混沌工程变得简单！
 tags:
 - release
 - Chaos Mesh
