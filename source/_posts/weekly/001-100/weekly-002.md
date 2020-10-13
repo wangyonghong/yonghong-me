@@ -27,6 +27,22 @@ updated: 2020-10-12 10:24:00
 
 ## 近期会议
 
+### [2020 F5金融科技趋势线上研讨会](http://www.f5chinanetworks.com/partner/wechat/datacenter/invite/activityDetails.asp?meetingid=76&trackingcode=f5community)
+
+报名链接：[2020 F5金融科技趋势线上研讨会](http://www.f5chinanetworks.com/partner/wechat/datacenter/invite/activityDetails.asp?meetingid=76&trackingcode=f5community)
+
+F5作为应用交付领域的领导者，在过去的几年中每年都会举办一次针对金融科技领域的线下研讨会，反响热烈。由于疫情原因，今年的研讨会将以线上的形式开展，我们将继续保持高品质的内容输出，为广大金融从业者奉献一场专为金融行业烹制的饕餮盛宴。
+
+本次研讨会将围绕助力金融行业数字化转型，银行4.0（开放式银行），大数据价值挖掘与安全，现代应用的敏捷发布与管理，分布式架构的最佳实践等热门话题展开分享和讨论。 届时，国有大行，全国股份制银行，各城商行，证券，基金，保险等数百名金融机构从业人员； F5合作伙伴腾讯云、天空卫士和DellEMC一线技术大咖； 以及来自金融科技界的专家们均会在云中相聚，共同在线分享金融科技创新成果及他们的最佳业务实践。
+
+
+  会议主题：2020 F5金融科技趋势线上研讨会
+
+  会议时间：10月16 - 10月17日（周五-周六）下午 1:30 - 6:00
+
+  会议形式：线上研讨会
+
+
 ### [IBM 数据与 AI 线上论坛](https://ibm.6connex.com/event/chinacenter/DAVF/login)
 
 报名链接：https://ibm.6connex.com/event/chinacenter/DAVF/login
