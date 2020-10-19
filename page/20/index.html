@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">641</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">642</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">641</span>
+          <span class="site-state-item-count">642</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -304,6 +304,153 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ss/" class="post-title-link" itemprop="url">【Linux 命令】ss</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:45:30 11:45:30" itemprop="dateModified" datetime="2020-09-25T11:45:30+08:00">2020-09-25 11:45:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/ss/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/ss/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ss命令</strong> 用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。</p>
+<p>当服务器的socket连接数量变得非常大时，无论是使用netstat命令还是直接<code>cat /proc/net/tcp</code>，执行速度都会很慢。可能你不会有切身的感受，但请相信我，当服务器维持的连接达到上万个的时候，使用netstat等于浪费 生命，而用ss才是节省时间。</p>
+<p>天下武功唯快不破。ss快的秘诀在于，它利用到了TCP协议栈中tcp_diag。tcp_diag是一个用于分析统计的模块，可以获得Linux 内核中第一手的信息，这就确保了ss的快捷高效。当然，如果你的系统中没有tcp_diag，ss也可以正常运行，只是效率会变得稍慢。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss [参数]</span><br><span class="line">ss [参数] [过滤]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-h, --help      帮助信息</span><br><span class="line">-V, --version   程序版本信息</span><br><span class="line">-n, --numeric   不解析服务名称</span><br><span class="line">-r, --resolve   解析主机名</span><br><span class="line">-a, --all       显示所有套接字（sockets）</span><br><span class="line">-l, --listening 显示监听状态的套接字（sockets）</span><br><span class="line">-o, --options   显示计时器信息</span><br><span class="line">-e, --extended  显示详细的套接字（sockets）信息</span><br><span class="line">-m, --memory    显示套接字（socket）的内存使用情况</span><br><span class="line">-p, --processes 显示使用套接字（socket）的进程</span><br><span class="line">-i, --info      显示 TCP内部信息</span><br><span class="line">-s, --summary   显示套接字（socket）使用概况</span><br><span class="line">-4, --ipv4      仅显示IPv4的套接字（sockets）</span><br><span class="line">-6, --ipv6      仅显示IPv6的套接字（sockets）</span><br><span class="line">-0, --packet    显示 PACKET 套接字（socket）</span><br><span class="line">-t, --tcp       仅显示 TCP套接字（sockets）</span><br><span class="line">-u, --udp       仅显示 UCP套接字（sockets）</span><br><span class="line">-d, --dccp      仅显示 DCCP套接字（sockets）</span><br><span class="line">-w, --raw       仅显示 RAW套接字（sockets）</span><br><span class="line">-x, --unix      仅显示 Unix套接字（sockets）</span><br><span class="line">-f, --family=FAMILY  显示 FAMILY类型的套接字（sockets），FAMILY可选，支持  unix, inet, inet6, link, netlink</span><br><span class="line">-A, --query=QUERY, --socket=QUERY</span><br><span class="line">      QUERY := &#123;all|inet|tcp|udp|raw|unix|packet|netlink&#125;[,QUERY]</span><br><span class="line">-D, --diag=FILE     将原始TCP套接字（sockets）信息转储到文件</span><br><span class="line"> -F, --filter=FILE  从文件中都去过滤器信息</span><br><span class="line">       FILTER := [ state TCP-STATE ] [ EXPRESSION ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ss -t -a    # 显示TCP连接</span><br><span class="line">ss -s       # 显示 Sockets 摘要</span><br><span class="line">ss -l       # 列出所有打开的网络连接端口</span><br><span class="line">ss -pl      # 查看进程使用的socket</span><br><span class="line">ss -lp | grep 3306  # 找出打开套接字/端口应用程序</span><br><span class="line">ss -u -a    显示所有UDP Sockets</span><br><span class="line">ss -o state established &#x27;( dport = :smtp or sport = :smtp )&#x27; # 显示所有状态为established的SMTP连接</span><br><span class="line">ss -o state established &#x27;( dport = :http or sport = :http )&#x27; # 显示所有状态为Established的HTTP连接</span><br><span class="line">ss -o state fin-wait-1 &#x27;( sport = :http or sport = :https )&#x27; dst 193.233.7/24  # 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss 和 netstat 效率对比</span></span><br><span class="line">time netstat -at</span><br><span class="line">time ss</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配远程地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss dst ADDRESS_PATTERN</span></span><br><span class="line">ss dst 192.168.1.5</span><br><span class="line">ss dst 192.168.119.113:http</span><br><span class="line">ss dst 192.168.119.113:smtp</span><br><span class="line">ss dst 192.168.119.113:443</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配本地地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss src ADDRESS_PATTERN</span></span><br><span class="line">ss src 192.168.119.103</span><br><span class="line">ss src 192.168.119.103:http</span><br><span class="line">ss src 192.168.119.103:80</span><br><span class="line">ss src 192.168.119.103:smtp</span><br><span class="line">ss src 192.168.119.103:25</span><br></pre></td></tr></table></figure>
+
+<p><strong>将本地或者远程端口和一个数比较</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ss dport OP PORT 远程端口和一个数比较；</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss sport OP PORT 本地端口和一个数比较</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> OP 可以代表以下任意一个:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;= or le : 小于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt;= or ge : 大于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> == or eq : 等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> != or ne : 不等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; or gt : 小于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; or lt : 大于端口号</span></span><br><span class="line">ss  sport = :http</span><br><span class="line">ss  dport = :http</span><br><span class="line">ss  dport \&gt; :1024</span><br><span class="line">ss  sport \&gt; :1024</span><br><span class="line">ss sport \&lt; :32000</span><br><span class="line">ss  sport eq :22</span><br><span class="line">ss  dport != :22</span><br><span class="line">ss  state connected sport = :http</span><br><span class="line">ss \( sport = :http or sport = :https \)</span><br><span class="line">ss -o state fin-wait-1 \( sport = :http or sport = :https \) dst 192.168.1/24</span><br></pre></td></tr></table></figure>
+
+<p><strong>用TCP 状态过滤Sockets</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ss -4 state closing</span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -4 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -6 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FILTER-NAME-HERE 可以代表以下任何一个：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> established、 syn-sent、 syn-recv、 fin-wait-1、 fin-wait-2、 time-wait、 closed、 close-wait、 last-ack、 listen、 closing、</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> all : 所有以上状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> connected : 除了listen and closed的所有状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> synchronized :所有已连接的状态除了syn-sent</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bucket : 显示状态为maintained as minisockets,如：time-wait和syn-recv.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> big : 和bucket相反.</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示ICP连接</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -t -a</span><br><span class="line">State       Recv-Q Send-Q                            Local Address:Port                                Peer Address:Port</span><br><span class="line">LISTEN      0      0                                             *:3306                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:http                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:ssh                                            *:*</span><br><span class="line">LISTEN      0      0                                     127.0.0.1:smtp                                           *:*</span><br><span class="line">ESTAB       0      0                                112.124.15.130:42071                              42.156.166.25:http</span><br><span class="line">ESTAB       0      0                                112.124.15.130:ssh                              121.229.196.235:33398</span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示 Sockets 摘要</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -s</span><br><span class="line">Total: 172 (kernel 189)</span><br><span class="line">TCP:   10 (estab 2, closed 4, orphaned 0, synrecv 0, timewait 0/0), ports 5</span><br><span class="line"></span><br><span class="line">Transport Total     ip        IPv6</span><br><span class="line">*         189       -         -</span><br><span class="line">RAW       0         0         0</span><br><span class="line">UDP       5         5         0</span><br><span class="line">TCP       6         6         0</span><br><span class="line">INET      11        11        0</span><br><span class="line">FRAG      0         0         0</span><br></pre></td></tr></table></figure>
+
+<p>列出当前的established, closed, orphaned and waiting TCP sockets</p>
+<p> <strong>列出所有打开的网络连接端口</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -l</span><br><span class="line">Recv-Q Send-Q                                 Local Address:Port                                     Peer Address:Port</span><br><span class="line">0      0                                                  *:3306                                                *:*</span><br><span class="line">0      0                                                  *:http                                                *:*</span><br><span class="line">0      0                                                  *:ssh                                                 *:*</span><br><span class="line">0      0                                          127.0.0.1:smtp                                                *:*</span><br></pre></td></tr></table></figure>
+
+<p> <strong>查看进程使用的socket</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl</span><br><span class="line">Recv-Q Send-Q                                          Local Address:Port                                              Peer Address:Port</span><br><span class="line">0      0                                                           *:3306                                                         *:*        users:((&quot;mysqld&quot;,1718,10))</span><br><span class="line">0      0                                                           *:http                                                         *:*        users:((&quot;nginx&quot;,13312,5),(&quot;nginx&quot;,13333,5))</span><br><span class="line">0      0                                                           *:ssh                                                          *:*        users:((&quot;sshd&quot;,1379,3))</span><br><span class="line">0      0                                                   127.0.0.1:smtp                                                         *:*        us</span><br></pre></td></tr></table></figure>
+
+<p> <strong>找出打开套接字/端口应用程序</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl | grep 3306</span><br><span class="line">0      0                            *:3306                          *:*        users:((&quot;mysqld&quot;,1718,10))</span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示所有UDP Sockets</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -u -a</span><br><span class="line">State       Recv-Q Send-Q                                     Local Address:Port                                         Peer Address:Port</span><br><span class="line">UNCONN      0      0                                                      *:syslog                                                  *:*</span><br><span class="line">UNCONN      0      0                                         112.124.15.130:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                            10.160.7.81:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                              127.0.0.1:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                                      *:ntp                                                     *:*</span><br></pre></td></tr></table></figure>
+
+<h4 id="出所有端口为-22（ssh）的连接"><a href="#出所有端口为-22（ssh）的连接" class="headerlink" title="出所有端口为 22（ssh）的连接"></a>出所有端口为 22（ssh）的连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ss state all sport = :ssh</span><br><span class="line"></span><br><span class="line">Netid State      Recv-Q Send-Q     Local Address:Port                      Peer Address:Port</span><br><span class="line">tcp   LISTEN     0      128                    *:ssh                                  *:*</span><br><span class="line">tcp   ESTAB      0      0          192.168.0.136:ssh                      192.168.0.102:46540</span><br><span class="line">tcp   LISTEN     0      128                   :::ssh                                 :::*</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1459,127 +1606,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/slocate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/slocate/" class="post-title-link" itemprop="url">【Linux 命令】slocate</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:40:30 11:40:30" itemprop="dateModified" datetime="2020-09-25T11:40:30+08:00">2020-09-25 11:40:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/slocate/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/slocate/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>585</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>命令查找文件或目录</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>slocate命令</strong> 是一个命令查找文件或目录。slocate本身具有一个数据库，里面存放了系统中文件与目录的相关信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slocate [-u][--help][--version][-d &lt;目录&gt;][查找的文件]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-d&lt;目录&gt;或--database=&lt;目录&gt; 　指定数据库所在的目录。</span><br><span class="line">-u 　更新slocate数据库。</span><br><span class="line">--help 　显示帮助。</span><br><span class="line">--version 　显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用指令”slocate”显示文件名中含有关键字”fdisk”的文件路径信息，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk关键字的文件的路径信息 </span></span></span><br></pre></td></tr></table></figure>
-
-<p>执行以上命令后，指令执行的输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk 关键字的文件的路径信息  </span></span></span><br><span class="line">/root/cfdisk        #搜索到的文件路径列表  </span><br><span class="line">/root/fdisk  </span><br><span class="line">/root/sfdisk  </span><br><span class="line">/usr/include/grub/ieee1275/ofdisk.h  </span><br><span class="line">/usr/share/doc/util-Linux/README.cfdisk  </span><br><span class="line">/usr/share/doc/util-Linux/README.fdisk.gz  </span><br><span class="line">/usr/share/doc/util-Linux/examples/sfdisk.examples.gz  </span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1638,14 +1664,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">905k</span>
+    <span title="站点总字数">908k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13:43</span>
+    <span title="站点阅读时长">13:45</span>
   </span>
 </div>
 <div class="busuanzi-count">

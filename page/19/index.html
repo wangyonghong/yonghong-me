@@ -143,7 +143,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">641</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">642</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -232,7 +232,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">641</span>
+          <span class="site-state-item-count">642</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -304,6 +304,219 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/strace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/strace/" class="post-title-link" itemprop="url">【Linux 命令】strace</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:50:30 11:50:30" itemprop="dateModified" datetime="2020-09-25T11:50:30+08:00">2020-09-25 11:50:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/strace/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/strace/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>跟踪系统调用和信号</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>strace命令</strong> 是一个集诊断、调试、统计与一体的工具，我们可以使用strace对应用的系统调用和信号传递的跟踪结果来对应用进行分析，以达到解决问题或者是了解应用工作过程的目的。当然strace与专业的调试工具比如说gdb之类的是没法相比的，因为它不是一个专业的调试器。</p>
+<p>strace的最简单的用法就是执行一个指定的命令，在指定的命令结束之后它也就退出了。在命令执行的过程中，strace会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">strace  [  -dffhiqrtttTvxx  ] [ -acolumn ] [ -eexpr ] ...</span><br><span class="line">    [ -ofile ] [-ppid ] ...  [ -sstrsize ] [ -uusername ]</span><br><span class="line">    [ -Evar=val ] ...  [ -Evar  ]...</span><br><span class="line">     [command [ arg ...  ] ]</span><br><span class="line"></span><br><span class="line">strace  -c  [ -eexpr ] ...  [ -Ooverhead ] [ -Ssortby ]</span><br><span class="line">    [ command [ arg...  ] ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">-c 统计每一系统调用的所执行的时间,次数和出错的次数等.</span><br><span class="line">-d 输出strace关于标准错误的调试信息.</span><br><span class="line">-f 跟踪由fork调用所产生的子进程.</span><br><span class="line">-ff 如果提供-o filename,则所有进程的跟踪结果输出到相应的filename.pid中,pid是各进程的进程号.</span><br><span class="line">-F 尝试跟踪vfork调用.在-f时,vfork不被跟踪.</span><br><span class="line">-h 输出简要的帮助信息.</span><br><span class="line">-i 输出系统调用的入口指针.</span><br><span class="line">-q 禁止输出关于脱离的消息.</span><br><span class="line">-r 打印出相对时间关于,,每一个系统调用.</span><br><span class="line">-t 在输出中的每一行前加上时间信息.</span><br><span class="line">-tt 在输出中的每一行前加上时间信息,微秒级.</span><br><span class="line">-ttt 微秒级输出,以秒了表示时间.</span><br><span class="line">-T 显示每一调用所耗的时间.</span><br><span class="line">-v 输出所有的系统调用.一些调用关于环境变量,状态,输入输出等调用由于使用频繁,默认不输出.</span><br><span class="line">-V 输出strace的版本信息.</span><br><span class="line">-x 以十六进制形式输出非标准字符串</span><br><span class="line">-xx 所有字符串以十六进制形式输出.</span><br><span class="line">-a column 设置返回值的输出位置.默认 为40.</span><br><span class="line">-e expr 指定一个表达式,用来控制如何跟踪.格式：[qualifier=][!]value1[,value2]...</span><br><span class="line">qualifier只能是 trace,abbrev,verbose,raw,signal,read,write其中之一.value是用来限定的符号或数字.默认的 qualifier是 trace.感叹号是否定符号.例如:-eopen等价于 -e trace=open,表示只跟踪open调用.而-etrace!=open 表示跟踪除了open以外的其他调用.有两个特殊的符号 all 和 none. 注意有些shell使用!来执行历史记录里的命令,所以要使用\\.</span><br><span class="line">-e trace=set 只跟踪指定的系统 调用.例如:-e trace=open,close,rean,write表示只跟踪这四个系统调用.默认的为set=all.</span><br><span class="line">-e trace=file 只跟踪有关文件操作的系统调用.</span><br><span class="line">-e trace=process 只跟踪有关进程控制的系统调用.</span><br><span class="line">-e trace=network 跟踪与网络有关的所有系统调用.</span><br><span class="line">-e strace=signal 跟踪所有与系统信号有关的 系统调用</span><br><span class="line">-e trace=ipc 跟踪所有与进程通讯有关的系统调用</span><br><span class="line">-e abbrev=set 设定strace输出的系统调用的结果集.-v 等与 abbrev=none.默认为abbrev=all.</span><br><span class="line">-e raw=set 将指定的系统调用的参数以十六进制显示.</span><br><span class="line">-e signal=set 指定跟踪的系统信号.默认为all.如 signal=!SIGIO(或者signal=!io),表示不跟踪SIGIO信号.</span><br><span class="line">-e read=set 输出从指定文件中读出 的数据.例如: -e read=3,5</span><br><span class="line">-e write=set 输出写入到指定文件中的数据.</span><br><span class="line">-o filename 将strace的输出写入文件filename</span><br><span class="line">-p pid 跟踪指定的进程pid.</span><br><span class="line">-s strsize 指定输出的字符串的最大长度.默认为32.文件名一直全部输出.</span><br><span class="line">-u username 以username的UID和GID执行被跟踪的命令</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>追踪系统调用</strong> </p>
+<p>现在我们做一个很简单的程序来演示strace的基本用法。这个程序的C语言代码如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> filename test.c</span></span><br><span class="line"><span class="meta">#</span><span class="bash">include &lt;stdio.h&gt;</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;a);</span><br><span class="line">    printf(&quot;%09d\n&quot;, a);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们用<code>gcc -o test test.c</code>编译一下，得到一个可执行的文件test。然后用strace调用执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace ./test</span><br></pre></td></tr></table></figure>
+
+<p>执行期间会要求你输入一个整数，我们输入99，最后得到如下的结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 直接执行test的结果</span><br><span class="line">oracle@orainst[orcl]:~ $./test</span><br><span class="line"></span><br><span class="line">// 执行的结果</span><br><span class="line">99</span><br><span class="line">000000099</span><br><span class="line"></span><br><span class="line">// 通过strace执行test的结果</span><br><span class="line">oracle@orainst[orcl]:~ $strace ./test</span><br><span class="line"></span><br><span class="line">// strace的trace结果</span><br><span class="line">execve(&quot;./test&quot;, [&quot;./test&quot;], [/* 41 vars */]) = 0</span><br><span class="line">uname(&#123;sys=&quot;Linux&quot;, node=&quot;orainst.desktop.mycompany.com&quot;, ...&#125;) = 0</span><br><span class="line">brk(0)                                  = 0x8078000</span><br><span class="line">fstat64(3, &#123;st_mode=S_IFREG|0644, st_size=65900, ...&#125;) = 0</span><br><span class="line">old_mmap(NULL, 65900, PROT_READ, MAP_PRIVATE, 3, 0) = 0xbf5ef000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(&quot;/lib/tls/libc.so.6&quot;, O_RDONLY)    = 3</span><br><span class="line">read(3, &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\200X\1&quot;..., 512) = 512</span><br><span class="line">fstat64(3, &#123;st_mode=S_IFREG|0755, st_size=1571692, ...&#125;) = 0</span><br><span class="line">old_mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5ee000</span><br><span class="line">old_mmap(NULL, 1275340, PROT_READ|PROT_EXEC, MAP_PRIVATE, 3, 0) = 0xa02000</span><br><span class="line">old_mmap(0xb34000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 3, 0x132000) = 0xb34000</span><br><span class="line">old_mmap(0xb37000, 9676, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0xb37000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">set_thread_area(&#123;entry_number:-1 -&gt; 6, base_addr:0xbf5ee740, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1&#125;) = 0</span><br><span class="line">munmap(0xbf5ef000, 65900)               = 0</span><br><span class="line">fstat64(0, &#123;st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...&#125;) = 0</span><br><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5ff000</span><br><span class="line">read(0, 99</span><br><span class="line">&quot;99\n&quot;, 1024)                   = 3</span><br><span class="line">fstat64(1, &#123;st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...&#125;) = 0</span><br><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5fe000</span><br><span class="line">write(1, &quot;000000099\n&quot;, 10000000099</span><br><span class="line">)             = 10</span><br><span class="line">munmap(0xbf5fe000, 4096)                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br></pre></td></tr></table></figure>
+
+<p>从trace结构可以看到，系统首先调用execve开始一个新的进行，接着进行些环境的初始化操作，最后停顿在”read(0,”上面，这也就是执行到了我们的scanf函数，等待我们输入数字呢，在输入完99之后，在调用write函数将格式化后的数值”000000099″输出到屏幕，最后调用exit_group退出进行，完成整个程序的执行过程。</p>
+<p> <strong>跟踪信号传递</strong> </p>
+<p>我们还是使用上面的那个test程序，来观察进程接收信号的情况。还是先<code>strace ./test</code>，等到等待输入的画面的时候不要输入任何东西，然后打开另外一个窗口，输入如下的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall test</span><br></pre></td></tr></table></figure>
+
+<p>这时候就能看到我们的程序推出了，最后的trace结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">oracle@orainst[orcl]:~</span><br><span class="line"><span class="meta">$</span><span class="bash">strace ./<span class="built_in">test</span></span></span><br><span class="line"></span><br><span class="line">execve(&quot;./test&quot;, [&quot;./test&quot;], [/* 41 vars */]) = 0</span><br><span class="line">uname(&#123;sys=&quot;Linux&quot;, node=&quot;orainst.desktop.mycompany.com&quot;, ...&#125;) = 0</span><br><span class="line">brk(0)                                  = 0x9ae2000</span><br><span class="line">old_mmap(NULL, 65900, PROT_READ, MAP_PRIVATE, 3, 0) = 0xbf5ef000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(&quot;/lib/tls/libc.so.6&quot;, O_RDONLY)    = 3</span><br><span class="line">read(3, &quot;\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\200X\1&quot;..., 512) = 512</span><br><span class="line">fstat64(3, &#123;st_mode=S_IFREG|0755, st_size=1571692, ...&#125;) = 0</span><br><span class="line">old_mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5ee000</span><br><span class="line">old_mmap(NULL, 1275340, PROT_READ|PROT_EXEC, MAP_PRIVATE, 3, 0) = 0x2e9000</span><br><span class="line">old_mmap(0x41b000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 3, 0x132000) = 0x41b000</span><br><span class="line">old_mmap(0x41e000, 9676, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x41e000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">set_thread_area(&#123;entry_number:-1 -&gt; 6, base_addr:0xbf5ee740, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1&#125;) = 0</span><br><span class="line">munmap(0xbf5ef000, 65900)               = 0</span><br><span class="line">fstat64(0, &#123;st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...&#125;) = 0</span><br><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5ff000</span><br><span class="line">read(0, 0xbf5ff000, 1024)               = ? ERESTARTSYS (To be restarted)</span><br><span class="line">--- SIGTERM (Terminated) @ 0 (0) ---</span><br><span class="line">+++ killed by SIGTERM +++</span><br></pre></td></tr></table></figure>
+
+<p>trace中很清楚的告诉你test进程”+++ killed by SIGTERM +++”。</p>
+<p> <strong>系统调用统计</strong> </p>
+<p>strace不光能追踪系统调用，通过使用参数-c，它还能将进程所有的系统调用做一个统计分析给你，下面就来看看strace的统计，这次我们执行带-c参数的strace：</p>
+<p>strace -c ./test</p>
+<p>最后能得到这样的trace结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oracle@orainst[orcl]:~</span><br><span class="line"><span class="meta">$</span><span class="bash">strace -c ./<span class="built_in">test</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">execve(&quot;./test&quot;, [&quot;./test&quot;], [/* 41 vars */]) = 0</span><br><span class="line"><span class="meta">%</span><span class="bash"> time     seconds  usecs/call     calls    errors syscall</span></span><br><span class="line">------ ----------- ----------- --------- --------- ----------------</span><br><span class="line"> 45.90    0.000140           5        27        25 open</span><br><span class="line"> 34.43    0.000105           4        24        21 stat64</span><br><span class="line">  7.54    0.000023           5         5           old_mmap</span><br><span class="line">  2.62    0.000008           8         1           munmap</span><br><span class="line">  1.97    0.000006           6         1           uname</span><br><span class="line">  1.97    0.000006           2         3           fstat64</span><br><span class="line">  1.64    0.000005           3         2         1 read</span><br><span class="line">  1.31    0.000004           2         2           close</span><br><span class="line">  0.98    0.000003           3         1           brk</span><br><span class="line">  0.98    0.000003           3         1           mmap2</span><br><span class="line">  0.66    0.000002           2         1           set_thread_area</span><br><span class="line">------ ----------- ----------- --------- --------- ----------------</span><br><span class="line">100.00    0.000305                    68        47 total</span><br></pre></td></tr></table></figure>
+
+<p>这里很清楚的告诉你调用了那些系统函数，调用次数多少，消耗了多少时间等等这些信息，这个对我们分析一个程序来说是非常有用的。</p>
+<h3 id="常用参数说明"><a href="#常用参数说明" class="headerlink" title="常用参数说明"></a>常用参数说明</h3><p>除了-c参数之外，strace还提供了其他有用的参数给我们，让我们能很方便的得到自己想要的信息，下面就对那些常用的参数一一做个介绍。</p>
+<p> <strong>重定向输出</strong> </p>
+<p>参数-o用在将strace的结果输出到文件中，如果不指定-o参数的话，默认的输出设备是STDERR，也就是说使用”-o filename”和” 2&gt;filename”的结果是一样的。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 这两个命令都是将strace结果输出到文件test.txt中</span></span><br><span class="line">strace -c -o test.txt ./test</span><br><span class="line">strace -c ./test  2&gt;test.txt</span><br></pre></td></tr></table></figure>
+
+<p> <strong>对系统调用进行计时</strong> </p>
+<p>strace可以使用参数-T将每个系统调用所花费的时间打印出来，每个调用的时间花销现在在调用行最右边的尖括号里面。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">oracle@orainst[orcl]:~</span><br><span class="line"><span class="meta">$</span><span class="bash">strace -T ./<span class="built_in">test</span></span></span><br><span class="line"></span><br><span class="line">// 这里只摘录部分结果</span><br><span class="line">read(0, 1</span><br><span class="line">&quot;1\n&quot;, 1024)                    = 2 &lt;2.673455&gt;</span><br><span class="line">fstat64(1, &#123;st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...&#125;) = 0 &lt;0.000014&gt;</span><br><span class="line">mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xbf5fe000 &lt;0.000017&gt;</span><br><span class="line">write(1, &quot;000000001\n&quot;, 10000000001</span><br><span class="line">)             = 10 &lt;0.000016&gt;</span><br><span class="line">munmap(0xbf5fe000, 4096)                = 0 &lt;0.000020&gt;</span><br><span class="line">exit_group(0)                           = ?</span><br></pre></td></tr></table></figure>
+
+<p> <strong>系统调用的时间</strong> </p>
+<p>这是一个很有用的功能，strace会将每次系统调用的发生时间记录下来，只要使用-t/tt/ttt三个参数就可以看到效果了，具体的例子可以自己去尝试。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>输出样式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-t</td>
+<td>10:33:04 exit_group(0)</td>
+<td>输出结果精确到秒</td>
+</tr>
+<tr>
+<td>-tt</td>
+<td>10:33:48.159682 exit_group(0)</td>
+<td>输出结果精确到微妙</td>
+</tr>
+<tr>
+<td>-ttt</td>
+<td>1262169244.788478 exit_group(0)</td>
+<td>精确到微妙，而且时间表示为unix时间戳</td>
+</tr>
+</tbody></table>
+<p> <strong>截断输出</strong> </p>
+<p>-s参数用于指定trace结果的每一行输出的字符串的长度，下面看看test程序中-s参数对结果有什么影响，现指定-s为20，然后在read的是是很我们输入一个超过20个字符的数字串</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strace -s 20 ./test</span><br><span class="line"></span><br><span class="line">read(0, 2222222222222222222222222      // 我们输入的2一共有25个</span><br><span class="line">&quot;22222222222222222222&quot;..., 1024) = 26  // 而我们看到的结果中2只有20个</span><br></pre></td></tr></table></figure>
+
+<p> <strong>trace一个现有的进程</strong> </p>
+<p>strace不光能自己初始化一个进程进行trace，还能追踪现有的进程，参数-p就是取这个作用的，用法也很简单，具体如下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -p pid</span><br></pre></td></tr></table></figure>
+
+<h3 id="综合例子"><a href="#综合例子" class="headerlink" title="综合例子"></a>综合例子</h3><p>说了那么多的功能和参数，现在我们来一个实用点的，就是研究下Oracle的lgwr进程，看看这个进程是不是像文档所说的那样没3s钟写一次log文件，考虑到lgwr写日志的触发条件比较多，我们需要找一个空闲的Oracle实例做这个实验。</p>
+<p>我们先要得到lgwr进程的pid，运行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep lgwr</span><br><span class="line"></span><br><span class="line">oracle    5912     1  0 Nov12 ?        00:14:56 ora_lgwr_orcl</span><br></pre></td></tr></table></figure>
+
+<p>得到lgwr的pid是5912，现在启动strace，然后将trace的几个输出到lgwr.txt文件中，执行下面的命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -tt -s 10 -o lgwr.txt -p 5912</span><br></pre></td></tr></table></figure>
+
+<p>过一会之后停止strace，然后查看结果。由于输出的结果比较多，为了方便我们只看Oracle写入log文件时用的pwrite函数的调用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep pwrite\(20 lgwr.txt</span><br></pre></td></tr></table></figure>
+
+<p>等等，为什么grep的时候用的是”pwrite(2″呢？，因为我知道我这个机器打开的当前的log文件的句柄编号都是2开始的。具体查找方法是先使用下面的语句找出当前活动的日志文件都有哪些：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select member, v$log.status from v$log, v$logfile</span><br><span class="line">where v$log.group#=v$logfile.group#;</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MEMBER                                             STATUS</span><br><span class="line">-------------------------------------------------- ----------------</span><br><span class="line">/db/databases/orcl/redo-01-a/redo-t01-g03-m1.log    INACTIVE</span><br><span class="line">/db/databases/orcl/redo-03-a/redo-t01-g03-m2.log    INACTIVE</span><br><span class="line">/db/databases/orcl/redo-02-a/redo-t01-g02-m1.log    CURRENT</span><br><span class="line">/db/databases/orcl/redo-04-a/redo-t01-g02-m2.log    CURRENT</span><br><span class="line">/db/databases/orcl/redo-01-a/redo-t01-g01-m1.log    INACTIVE</span><br><span class="line">/db/databases/orcl/redo-03-a/redo-t01-g01-m2.log    INACTIVE</span><br><span class="line">/db/databases/orcl/redo-02-a/redo-t01-g04-m1.log    INACTIVE</span><br><span class="line">/db/databases/orcl/redo-04-a/redo-t01-g04-m2.log    INACTIVE</span><br></pre></td></tr></table></figure>
+
+<p>然后到/proc中去找打开文件的句柄：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ll /proc/.5912/fd/</span><br></pre></td></tr></table></figure>
+
+<p>得到</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 18 -&gt; /db/databases/orcl/redo-01-a/redo-t01-g01-m1.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 19 -&gt; /db/databases/orcl/redo-03-a/redo-t01-g01-m2.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 20 -&gt; /db/databases/orcl/redo-02-a/redo-t01-g02-m1.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 21 -&gt; /db/databases/orcl/redo-04-a/redo-t01-g02-m2.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 22 -&gt; /db/databases/orcl/redo-01-a/redo-t01-g03-m1.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 23 -&gt; /db/databases/orcl/redo-03-a/redo-t01-g03-m2.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 24 -&gt; /db/databases/orcl/redo-02-a/redo-t01-g04-m1.log</span><br><span class="line">lrwx------    1 oracle   dba            64 Dec 30 10:55 25 -&gt; /db/databases/orcl/redo-04-a/redo-t01-g04-m2.log</span><br></pre></td></tr></table></figure>
+
+<p>现在能看到我机器当前日志文件的句柄分别是20和21。</p>
+<p>现在我们得到如下结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">11:13:55.603245 pwrite(20, &quot;\1\&quot;\0\0J!&quot;..., 1536, 4363264) = 1536</span><br><span class="line">11:13:55.603569 pwrite(21, &quot;\1\&quot;\0\0J!&quot;..., 1536, 4363264) = 1536</span><br><span class="line">11:13:55.606888 pwrite(20, &quot;\1\&quot;\0\0M!&quot;..., 1536, 4364800) = 1536</span><br><span class="line">11:13:55.607172 pwrite(21, &quot;\1\&quot;\0\0M!&quot;..., 1536, 4364800) = 1536</span><br><span class="line">11:13:55.607934 pwrite(20, &quot;\1\&quot;\0\0P!&quot;..., 1536, 4366336) = 1536</span><br><span class="line">11:13:55.608199 pwrite(21, &quot;\1\&quot;\0\0P!&quot;..., 1536, 4366336) = 1536</span><br><span class="line">11:13:55.610260 pwrite(20, &quot;\1\&quot;\0\0S!&quot;..., 1536, 4367872) = 1536</span><br><span class="line">11:13:55.610530 pwrite(21, &quot;\1\&quot;\0\0S!&quot;..., 1536, 4367872) = 1536</span><br><span class="line">11:14:00.602446 pwrite(20, &quot;\1\&quot;\0\0V!&quot;..., 1536, 4369408) = 1536</span><br><span class="line">11:14:00.602750 pwrite(21, &quot;\1\&quot;\0\0V!&quot;..., 1536, 4369408) = 1536</span><br><span class="line">11:14:00.606386 pwrite(20, &quot;\1\&quot;\0\0Y!&quot;..., 1536, 4370944) = 1536</span><br><span class="line">11:14:00.606676 pwrite(21, &quot;\1\&quot;\0\0Y!&quot;..., 1536, 4370944) = 1536</span><br><span class="line">11:14:00.607900 pwrite(20, &quot;\1\&quot;\0\0\\&quot;..., 1024, 4372480) = 1024</span><br><span class="line">11:14:00.608161 pwrite(21, &quot;\1\&quot;\0\0\\&quot;..., 1024, 4372480) = 1024</span><br><span class="line">11:14:00.608816 pwrite(20, &quot;\1\&quot;\0\0^!&quot;..., 1024, 4373504) = 1024</span><br><span class="line">11:14:00.609071 pwrite(21, &quot;\1\&quot;\0\0^!&quot;..., 1024, 4373504) = 1024</span><br><span class="line">11:14:00.611142 pwrite(20, &quot;\1\&quot;\0\0`!&quot;..., 1536, 4374528) = 1536</span><br><span class="line">11:14:00.611454 pwrite(21, &quot;\1\&quot;\0\0`!&quot;..., 1536, 4374528) = 1536</span><br><span class="line">11:14:05.602804 pwrite(20, &quot;\1\&quot;\0\0c!&quot;..., 1024, 4376064) = 1024</span><br><span class="line">11:14:05.603119 pwrite(21, &quot;\1\&quot;\0\0c!&quot;..., 1024, 4376064) = 1024</span><br><span class="line">11:14:05.607731 pwrite(20, &quot;\1\&quot;\0\0e!&quot;..., 1024, 4377088) = 1024</span><br><span class="line">11:14:05.608020 pwrite(21, &quot;\1\&quot;\0\0e!&quot;..., 1024, 4377088) = 1024</span><br><span class="line">11:14:05.608690 pwrite(20, &quot;\1\&quot;\0\0g!&quot;..., 1024, 4378112) = 1024</span><br><span class="line">11:14:05.608962 pwrite(21, &quot;\1\&quot;\0\0g!&quot;..., 1024, 4378112) = 1024</span><br><span class="line">11:14:05.611022 pwrite(20, &quot;\1\&quot;\0\0i!&quot;..., 1536, 4379136) = 1536</span><br><span class="line">11:14:05.611283 pwrite(21, &quot;\1\&quot;\0\0i!&quot;..., 1536, 4379136) = 1536</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -801,10 +1014,10 @@
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjeDZhOyYjMTA3OyYjMTE0OyYjMTAxOyYjeDc5OyYjeDQwOyYjNzM7JiN4NTM7JiN4NDk7JiN4MmU7JiM2OTsmI3g0NDsmIzg1Ow==">&#x6a;&#107;&#114;&#101;&#x79;&#x40;&#73;&#x53;&#x49;&#x2e;&#69;&#x44;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjeDZjOyYjMTExOyYjeDQwOyYjOTk7JiN4NzM7JiN4MmU7JiN4Njg7JiN4NzU7JiMxMTY7JiN4MmU7JiN4NjY7JiMxMDU7">&#121;&#x6c;&#111;&#x40;&#99;&#x73;&#x2e;&#x68;&#x75;&#116;&#x2e;&#x66;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjeDY5OyYjOTc7JiMxMTA7JiM5NzsmI3g0MDsmI3g0OTsmI3g1MzsmIzczOyYjNDY7JiN4NDU7JiN4NDQ7JiN4NTU7">&#x69;&#97;&#110;&#97;&#x40;&#x49;&#x53;&#73;&#46;&#x45;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjMTA3OyYjeDcyOyYjMTAxOyYjMTIxOyYjeDQwOyYjeDQ5OyYjODM7JiN4NDk7JiM0NjsmIzY5OyYjNjg7JiM4NTs=">&#106;&#107;&#x72;&#101;&#121;&#x40;&#x49;&#83;&#x49;&#46;&#69;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjeDc5OyYjeDZjOyYjMTExOyYjeDQwOyYjOTk7JiN4NzM7JiM0NjsmI3g2ODsmIzExNzsmIzExNjsmIzQ2OyYjMTAyOyYjMTA1Ow==">&#x79;&#x6c;&#111;&#x40;&#99;&#x73;&#46;&#x68;&#117;&#116;&#46;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjMTEwOyYjeDYxOyYjNjQ7JiN4NDk7JiM4MzsmI3g0OTsmIzQ2OyYjNjk7JiN4NDQ7JiN4NTU7">&#105;&#x61;&#110;&#x61;&#64;&#x49;&#83;&#x49;&#46;&#69;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiN4Nzk7JiMxMTI7JiMxMDQ7JiMxMDE7JiN4NzI7JiMxMTI7JiMxMTc7JiN4NmU7JiN4NmI7JiN4NzM7JiM2NDsmIzExNjsmIzExMTsmI3g2MTsmI3g2NDsmI3gyZTsmI3g2MzsmIzExMTsmIzEwOTs=">&#99;&#x79;&#112;&#104;&#101;&#x72;&#112;&#117;&#x6e;&#x6b;&#x73;&#64;&#116;&#111;&#x61;&#x64;&#x2e;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjMTIxOyYjeDcwOyYjeDY4OyYjeDY1OyYjeDcyOyYjMTEyOyYjeDc1OyYjeDZlOyYjMTA3OyYjMTE1OyYjNjQ7JiMxMTY7JiMxMTE7JiM5NzsmIzEwMDsmIzQ2OyYjOTk7JiN4NmY7JiMxMDk7">&#x63;&#121;&#x70;&#x68;&#x65;&#x72;&#112;&#x75;&#x6e;&#107;&#115;&#64;&#116;&#111;&#97;&#100;&#46;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -1431,153 +1644,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ss/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/ss/" class="post-title-link" itemprop="url">【Linux 命令】ss</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:45:30 11:45:30" itemprop="dateModified" datetime="2020-09-25T11:45:30+08:00">2020-09-25 11:45:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/ss/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/ss/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ss命令</strong> 用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。</p>
-<p>当服务器的socket连接数量变得非常大时，无论是使用netstat命令还是直接<code>cat /proc/net/tcp</code>，执行速度都会很慢。可能你不会有切身的感受，但请相信我，当服务器维持的连接达到上万个的时候，使用netstat等于浪费 生命，而用ss才是节省时间。</p>
-<p>天下武功唯快不破。ss快的秘诀在于，它利用到了TCP协议栈中tcp_diag。tcp_diag是一个用于分析统计的模块，可以获得Linux 内核中第一手的信息，这就确保了ss的快捷高效。当然，如果你的系统中没有tcp_diag，ss也可以正常运行，只是效率会变得稍慢。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss [参数]</span><br><span class="line">ss [参数] [过滤]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-h, --help      帮助信息</span><br><span class="line">-V, --version   程序版本信息</span><br><span class="line">-n, --numeric   不解析服务名称</span><br><span class="line">-r, --resolve   解析主机名</span><br><span class="line">-a, --all       显示所有套接字（sockets）</span><br><span class="line">-l, --listening 显示监听状态的套接字（sockets）</span><br><span class="line">-o, --options   显示计时器信息</span><br><span class="line">-e, --extended  显示详细的套接字（sockets）信息</span><br><span class="line">-m, --memory    显示套接字（socket）的内存使用情况</span><br><span class="line">-p, --processes 显示使用套接字（socket）的进程</span><br><span class="line">-i, --info      显示 TCP内部信息</span><br><span class="line">-s, --summary   显示套接字（socket）使用概况</span><br><span class="line">-4, --ipv4      仅显示IPv4的套接字（sockets）</span><br><span class="line">-6, --ipv6      仅显示IPv6的套接字（sockets）</span><br><span class="line">-0, --packet    显示 PACKET 套接字（socket）</span><br><span class="line">-t, --tcp       仅显示 TCP套接字（sockets）</span><br><span class="line">-u, --udp       仅显示 UCP套接字（sockets）</span><br><span class="line">-d, --dccp      仅显示 DCCP套接字（sockets）</span><br><span class="line">-w, --raw       仅显示 RAW套接字（sockets）</span><br><span class="line">-x, --unix      仅显示 Unix套接字（sockets）</span><br><span class="line">-f, --family=FAMILY  显示 FAMILY类型的套接字（sockets），FAMILY可选，支持  unix, inet, inet6, link, netlink</span><br><span class="line">-A, --query=QUERY, --socket=QUERY</span><br><span class="line">      QUERY := &#123;all|inet|tcp|udp|raw|unix|packet|netlink&#125;[,QUERY]</span><br><span class="line">-D, --diag=FILE     将原始TCP套接字（sockets）信息转储到文件</span><br><span class="line"> -F, --filter=FILE  从文件中都去过滤器信息</span><br><span class="line">       FILTER := [ state TCP-STATE ] [ EXPRESSION ]</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ss -t -a    # 显示TCP连接</span><br><span class="line">ss -s       # 显示 Sockets 摘要</span><br><span class="line">ss -l       # 列出所有打开的网络连接端口</span><br><span class="line">ss -pl      # 查看进程使用的socket</span><br><span class="line">ss -lp | grep 3306  # 找出打开套接字/端口应用程序</span><br><span class="line">ss -u -a    显示所有UDP Sockets</span><br><span class="line">ss -o state established &#x27;( dport = :smtp or sport = :smtp )&#x27; # 显示所有状态为established的SMTP连接</span><br><span class="line">ss -o state established &#x27;( dport = :http or sport = :http )&#x27; # 显示所有状态为Established的HTTP连接</span><br><span class="line">ss -o state fin-wait-1 &#x27;( sport = :http or sport = :https )&#x27; dst 193.233.7/24  # 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss 和 netstat 效率对比</span></span><br><span class="line">time netstat -at</span><br><span class="line">time ss</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配远程地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss dst ADDRESS_PATTERN</span></span><br><span class="line">ss dst 192.168.1.5</span><br><span class="line">ss dst 192.168.119.113:http</span><br><span class="line">ss dst 192.168.119.113:smtp</span><br><span class="line">ss dst 192.168.119.113:443</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配本地地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss src ADDRESS_PATTERN</span></span><br><span class="line">ss src 192.168.119.103</span><br><span class="line">ss src 192.168.119.103:http</span><br><span class="line">ss src 192.168.119.103:80</span><br><span class="line">ss src 192.168.119.103:smtp</span><br><span class="line">ss src 192.168.119.103:25</span><br></pre></td></tr></table></figure>
-
-<p><strong>将本地或者远程端口和一个数比较</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ss dport OP PORT 远程端口和一个数比较；</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss sport OP PORT 本地端口和一个数比较</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> OP 可以代表以下任意一个:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;= or le : 小于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt;= or ge : 大于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> == or eq : 等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> != or ne : 不等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; or gt : 小于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; or lt : 大于端口号</span></span><br><span class="line">ss  sport = :http</span><br><span class="line">ss  dport = :http</span><br><span class="line">ss  dport \&gt; :1024</span><br><span class="line">ss  sport \&gt; :1024</span><br><span class="line">ss sport \&lt; :32000</span><br><span class="line">ss  sport eq :22</span><br><span class="line">ss  dport != :22</span><br><span class="line">ss  state connected sport = :http</span><br><span class="line">ss \( sport = :http or sport = :https \)</span><br><span class="line">ss -o state fin-wait-1 \( sport = :http or sport = :https \) dst 192.168.1/24</span><br></pre></td></tr></table></figure>
-
-<p><strong>用TCP 状态过滤Sockets</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ss -4 state closing</span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -4 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -6 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FILTER-NAME-HERE 可以代表以下任何一个：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> established、 syn-sent、 syn-recv、 fin-wait-1、 fin-wait-2、 time-wait、 closed、 close-wait、 last-ack、 listen、 closing、</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> all : 所有以上状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> connected : 除了listen and closed的所有状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> synchronized :所有已连接的状态除了syn-sent</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bucket : 显示状态为maintained as minisockets,如：time-wait和syn-recv.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> big : 和bucket相反.</span></span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示ICP连接</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -t -a</span><br><span class="line">State       Recv-Q Send-Q                            Local Address:Port                                Peer Address:Port</span><br><span class="line">LISTEN      0      0                                             *:3306                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:http                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:ssh                                            *:*</span><br><span class="line">LISTEN      0      0                                     127.0.0.1:smtp                                           *:*</span><br><span class="line">ESTAB       0      0                                112.124.15.130:42071                              42.156.166.25:http</span><br><span class="line">ESTAB       0      0                                112.124.15.130:ssh                              121.229.196.235:33398</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示 Sockets 摘要</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -s</span><br><span class="line">Total: 172 (kernel 189)</span><br><span class="line">TCP:   10 (estab 2, closed 4, orphaned 0, synrecv 0, timewait 0/0), ports 5</span><br><span class="line"></span><br><span class="line">Transport Total     ip        IPv6</span><br><span class="line">*         189       -         -</span><br><span class="line">RAW       0         0         0</span><br><span class="line">UDP       5         5         0</span><br><span class="line">TCP       6         6         0</span><br><span class="line">INET      11        11        0</span><br><span class="line">FRAG      0         0         0</span><br></pre></td></tr></table></figure>
-
-<p>列出当前的established, closed, orphaned and waiting TCP sockets</p>
-<p> <strong>列出所有打开的网络连接端口</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -l</span><br><span class="line">Recv-Q Send-Q                                 Local Address:Port                                     Peer Address:Port</span><br><span class="line">0      0                                                  *:3306                                                *:*</span><br><span class="line">0      0                                                  *:http                                                *:*</span><br><span class="line">0      0                                                  *:ssh                                                 *:*</span><br><span class="line">0      0                                          127.0.0.1:smtp                                                *:*</span><br></pre></td></tr></table></figure>
-
-<p> <strong>查看进程使用的socket</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl</span><br><span class="line">Recv-Q Send-Q                                          Local Address:Port                                              Peer Address:Port</span><br><span class="line">0      0                                                           *:3306                                                         *:*        users:((&quot;mysqld&quot;,1718,10))</span><br><span class="line">0      0                                                           *:http                                                         *:*        users:((&quot;nginx&quot;,13312,5),(&quot;nginx&quot;,13333,5))</span><br><span class="line">0      0                                                           *:ssh                                                          *:*        users:((&quot;sshd&quot;,1379,3))</span><br><span class="line">0      0                                                   127.0.0.1:smtp                                                         *:*        us</span><br></pre></td></tr></table></figure>
-
-<p> <strong>找出打开套接字/端口应用程序</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl | grep 3306</span><br><span class="line">0      0                            *:3306                          *:*        users:((&quot;mysqld&quot;,1718,10))</span><br></pre></td></tr></table></figure>
-
-<p> <strong>显示所有UDP Sockets</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -u -a</span><br><span class="line">State       Recv-Q Send-Q                                     Local Address:Port                                         Peer Address:Port</span><br><span class="line">UNCONN      0      0                                                      *:syslog                                                  *:*</span><br><span class="line">UNCONN      0      0                                         112.124.15.130:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                            10.160.7.81:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                              127.0.0.1:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                                      *:ntp                                                     *:*</span><br></pre></td></tr></table></figure>
-
-<h4 id="出所有端口为-22（ssh）的连接"><a href="#出所有端口为-22（ssh）的连接" class="headerlink" title="出所有端口为 22（ssh）的连接"></a>出所有端口为 22（ssh）的连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ss state all sport = :ssh</span><br><span class="line"></span><br><span class="line">Netid State      Recv-Q Send-Q     Local Address:Port                      Peer Address:Port</span><br><span class="line">tcp   LISTEN     0      128                    *:ssh                                  *:*</span><br><span class="line">tcp   ESTAB      0      0          192.168.0.136:ssh                      192.168.0.102:46540</span><br><span class="line">tcp   LISTEN     0      128                   :::ssh                                 :::*</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1636,14 +1702,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">905k</span>
+    <span title="站点总字数">908k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13:43</span>
+    <span title="站点阅读时长">13:45</span>
   </span>
 </div>
 <div class="busuanzi-count">
