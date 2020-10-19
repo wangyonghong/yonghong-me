@@ -98,5 +98,5 @@ F5作为应用交付领域的领导者，在过去的几年中每年都会举办
 
 - [老司机 iOS 周报 #131 | 2020-10-12](https://github.com/SwiftOldDriver/iOS-Weekly/blob/master/Reports/2020/%23131-2020.10.12.md)
 
-- [R Weekly 2020-40 learnr tutorials, visual markdown editing, stat_layers](https://rweekly.org/2020-39.html)
+- [R Weekly 2020-40 learnr tutorials, visual markdown editing, stat_layers](https://rweekly.org/2020-40.html)
 
