@@ -1127,7 +1127,7 @@
 <li><a href="#%E5%AE%9E%E4%BE%8B">实例</a></li>
 </ul>
 </li>
-<li><a href="#%E7%A9%BA%E5%BD%93%E5%89%8D%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%84%E5%88%99%E5%92%8C%E8%AE%A1%E6%95%B0">空当前的所有规则和计数</a></li>
+<li><a href="#%E6%B8%85%E7%A9%BA%E5%BD%93%E5%89%8D%E7%9A%84%E6%89%80%E6%9C%89%E8%A7%84%E5%88%99%E5%92%8C%E8%AE%A1%E6%95%B0">清空当前的所有规则和计数</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E5%85%81%E8%AE%B8ssh%E7%AB%AF%E5%8F%A3%E8%BF%9E%E6%8E%A5">配置允许ssh端口连接</a></li>
 <li><a href="#%E5%85%81%E8%AE%B8%E6%9C%AC%E5%9C%B0%E5%9B%9E%E7%8E%AF%E5%9C%B0%E5%9D%80%E5%8F%AF%E4%BB%A5%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8">允许本地回环地址可以正常使用</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%9A%84%E8%A7%84%E5%88%99">设置默认的规则</a></li>
@@ -1262,7 +1262,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">                             ┏╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍┓</span><br><span class="line"> ┌───────────────┐           ┃    Network    ┃</span><br><span class="line"> │ table: filter │           ┗━━━━━━━┳━━━━━━━┛</span><br><span class="line"> │ chain: INPUT  │◀────┐             │</span><br><span class="line"> └───────┬───────┘     │             ▼</span><br><span class="line">         │             │   ┌───────────────────┐</span><br><span class="line">  ┌      ▼      ┐      │   │ table: nat        │</span><br><span class="line">  │local process│      │   │ chain: PREROUTING │</span><br><span class="line">  └             ┘      │   └─────────┬─────────┘</span><br><span class="line">         │             │             │</span><br><span class="line">         ▼             │             ▼              ┌─────────────────┐</span><br><span class="line">┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅    │     ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅      │table: nat       │</span><br><span class="line"> Routing decision      └───── outing decision ─────▶│chain: PREROUTING│</span><br><span class="line">┅┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅┅          ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅      └────────┬────────┘</span><br><span class="line">         │                                                   │</span><br><span class="line">         ▼                                                   │</span><br><span class="line"> ┌───────────────┐                                           │</span><br><span class="line"> │ table: nat    │           ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅               │</span><br><span class="line"> │ chain: OUTPUT │    ┌─────▶ outing decision ◀──────────────┘</span><br><span class="line"> └───────┬───────┘    │      ┅┅┅┅┅┅┅┅┳┅┅┅┅┅┅┅┅</span><br><span class="line">         │            │              │</span><br><span class="line">         ▼            │              ▼</span><br><span class="line"> ┌───────────────┐    │   ┌────────────────────┐</span><br><span class="line"> │ table: filter │    │   │ chain: POSTROUTING │</span><br><span class="line"> │ chain: OUTPUT ├────┘   └──────────┬─────────┘</span><br><span class="line"> └───────────────┘                   │</span><br><span class="line">                                     ▼</span><br><span class="line">                             ┏╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍┓</span><br><span class="line">                             ┃    Network    ┃</span><br><span class="line">                             ┗━━━━━━━━━━━━━━━┛</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="空当前的所有规则和计数"><a href="#空当前的所有规则和计数" class="headerlink" title="空当前的所有规则和计数"></a>空当前的所有规则和计数</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><h4 id="清空当前的所有规则和计数"><a href="#清空当前的所有规则和计数" class="headerlink" title="清空当前的所有规则和计数"></a>清空当前的所有规则和计数</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F  # 清空所有的防火墙规则</span><br><span class="line">iptables -X  # 删除用户自定义的空链</span><br><span class="line">iptables -Z  # 清空计数</span><br></pre></td></tr></table></figure>
 
 <h4 id="配置允许ssh端口连接"><a href="#配置允许ssh端口连接" class="headerlink" title="配置允许ssh端口连接"></a>配置允许ssh端口连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.1.0/24 -p tcp --dport 22 -j ACCEPT</span><br><span class="line"><span class="meta">#</span><span class="bash"> 22为你的ssh端口， -s 192.168.1.0/24表示允许这个网段的机器来连接，其它网段的ip地址是登陆不了你的机器的。 -j ACCEPT表示接受这样的请求</span></span><br></pre></td></tr></table></figure>
 
@@ -1976,14 +1976,14 @@ $ iperf -c <server address> -F <file-name></td>
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">908k</span>
+    <span title="站点总字数">909k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">13:45</span>
+    <span title="站点阅读时长">13:46</span>
   </span>
 </div>
 <div class="busuanzi-count">
