@@ -14,6 +14,14 @@ updated: 2020-11-02 10:24:00
 
 ## 近期会议
 
+### [2020 MongoDB 中国线上用户大会](https://www.mongodb.com/live-china-zh)
+
+会议时间：11 月 24 日 星期二
+
+报名链接：https://www.mongodb.com/live-china-zh
+
+线上参会，全天精彩享不停！MongoDB重磅嘉宾主题演讲、头部客户使用心得分享、干货满满的多个分会场、动手实操培训，MongoDB 只为助您轻松构建可扩展、高性能、现代化应用程序。
+
 ## 其他周报
 
 - [](https://github.com/ruanyf/weekly/blob/master/docs/issue-131.md)
