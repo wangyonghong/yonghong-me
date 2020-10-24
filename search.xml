@@ -10828,12 +10828,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjMTAwOyYjeDZkOyYjMTA1OyYjeDZlOyYjNjQ7JiMxMDY7JiN4NzM7JiMxMDA7JiMxMDU7JiMxMDM7JiN4MmU7JiM5OTsmIzExMTsmI3g2ZDs=">&#x61;&#100;&#x6d;&#105;&#x6e;&#64;&#106;&#x73;&#100;&#105;&#103;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjMTAwOyYjMTA5OyYjeDY5OyYjeDZlOyYjeDQwOyYjeDZhOyYjeDczOyYjMTAwOyYjeDY5OyYjeDY3OyYjNDY7JiM5OTsmI3g2ZjsmI3g2ZDs=">&#x61;&#100;&#109;&#x69;&#x6e;&#x40;&#x6a;&#x73;&#100;&#x69;&#x67;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjeDc1OyYjeDczOyYjMTAxOyYjeDcyOyYjNjQ7JiMxMDY7JiN4NzM7JiN4NjQ7JiMxMDU7JiMxMDM7JiM0NjsmIzk5OyYjMTExOyYjMTA5Ow==">&#x75;&#x73;&#101;&#x72;&#64;&#106;&#x73;&#x64;&#105;&#103;&#46;&#99;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjMTAxOyYjMTE0OyYjNjQ7JiMxMDY7JiMxMTU7JiN4NjQ7JiMxMDU7JiN4Njc7JiN4MmU7JiM5OTsmI3g2ZjsmIzEwOTs=">&#117;&#115;&#101;&#114;&#64;&#106;&#115;&#x64;&#105;&#x67;&#x2e;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -11159,34 +11159,6 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】mkfs</title>
-    <url>/linux-command/mkfs/</url>
-    <content><![CDATA[<p>用于在设备上创建Linux文件系统</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mkfs命令</strong> 用于在设备上（通常为硬盘）创建Linux文件系统。mkfs本身并不执行建立文件系统的工作，而是去调用相关的程序来执行。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkfs(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fs：指定建立文件系统时的参数；</span><br><span class="line">-t&lt;文件系统类型&gt;：指定要建立何种文件系统；</span><br><span class="line">-v：显示版本信息与详细的使用方法；</span><br><span class="line">-V：显示简要的使用方法；</span><br><span class="line">-c：在制做档案系统前，检查该partition是否有坏轨。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>文件系统：指定要创建的文件系统对应的设备文件名；</li>
-<li>块数：指定文件系统的磁盘块数。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>在<code>/dev/hda5</code>上建一个msdos的档案系统，同时检查是否有坏轨存在，并且将过程详细列出来：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkfs -V -t msdos -c /dev/hda5</span><br><span class="line"></span><br><span class="line">mkfs -t ext3 /dev/sda6     //将sda6分区格式化为ext3格式</span><br><span class="line">mkfs -t ext2 /dev/sda7     //将sda7分区格式化为ext2格式</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>mkfs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】mke2fs</title>
     <url>/linux-command/mke2fs/</url>
     <content><![CDATA[<p>创建磁盘分区上的“etc2/etc3”文件系统</p>
@@ -11212,6 +11184,34 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>mke2fs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】mkfs</title>
+    <url>/linux-command/mkfs/</url>
+    <content><![CDATA[<p>用于在设备上创建Linux文件系统</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>mkfs命令</strong> 用于在设备上（通常为硬盘）创建Linux文件系统。mkfs本身并不执行建立文件系统的工作，而是去调用相关的程序来执行。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkfs(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">fs：指定建立文件系统时的参数；</span><br><span class="line">-t&lt;文件系统类型&gt;：指定要建立何种文件系统；</span><br><span class="line">-v：显示版本信息与详细的使用方法；</span><br><span class="line">-V：显示简要的使用方法；</span><br><span class="line">-c：在制做档案系统前，检查该partition是否有坏轨。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>文件系统：指定要创建的文件系统对应的设备文件名；</li>
+<li>块数：指定文件系统的磁盘块数。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>在<code>/dev/hda5</code>上建一个msdos的档案系统，同时检查是否有坏轨存在，并且将过程详细列出来：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkfs -V -t msdos -c /dev/hda5</span><br><span class="line"></span><br><span class="line">mkfs -t ext3 /dev/sda6     //将sda6分区格式化为ext3格式</span><br><span class="line">mkfs -t ext2 /dev/sda7     //将sda7分区格式化为ext2格式</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>mkfs</tag>
       </tags>
   </entry>
   <entry>
@@ -16833,10 +16833,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjeDZiOyYjMTE0OyYjMTAxOyYjeDc5OyYjNjQ7JiM3MzsmI3g1MzsmIzczOyYjNDY7JiM2OTsmIzY4OyYjODU7">&#106;&#x6b;&#114;&#101;&#x79;&#64;&#73;&#x53;&#73;&#46;&#69;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjMTA4OyYjMTExOyYjNjQ7JiM5OTsmI3g3MzsmI3gyZTsmIzEwNDsmI3g3NTsmI3g3NDsmIzQ2OyYjMTAyOyYjMTA1Ow==">&#121;&#108;&#111;&#64;&#99;&#x73;&#x2e;&#104;&#x75;&#x74;&#46;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjOTc7JiN4NmU7JiN4NjE7JiM2NDsmI3g0OTsmIzgzOyYjNzM7JiM0NjsmI3g0NTsmIzY4OyYjODU7">&#105;&#97;&#x6e;&#x61;&#64;&#x49;&#83;&#73;&#46;&#x45;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjMTA3OyYjMTE0OyYjMTAxOyYjeDc5OyYjNjQ7JiM3MzsmIzgzOyYjNzM7JiM0NjsmIzY5OyYjeDQ0OyYjeDU1Ow==">&#106;&#107;&#114;&#101;&#x79;&#64;&#73;&#83;&#73;&#46;&#69;&#x44;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjMTIxOyYjMTA4OyYjMTExOyYjNjQ7JiM5OTsmIzExNTsmIzQ2OyYjeDY4OyYjMTE3OyYjMTE2OyYjeDJlOyYjMTAyOyYjMTA1Ow==">&#121;&#108;&#111;&#64;&#99;&#115;&#46;&#x68;&#117;&#116;&#x2e;&#102;&#105;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjeDY5OyYjeDYxOyYjeDZlOyYjOTc7JiM2NDsmIzczOyYjeDUzOyYjNzM7JiN4MmU7JiM2OTsmI3g0NDsmIzg1Ow==">&#x69;&#x61;&#x6e;&#97;&#64;&#73;&#x53;&#73;&#x2e;&#69;&#x44;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjeDc5OyYjMTEyOyYjMTA0OyYjeDY1OyYjMTE0OyYjeDcwOyYjMTE3OyYjeDZlOyYjMTA3OyYjMTE1OyYjeDQwOyYjMTE2OyYjMTExOyYjOTc7JiN4NjQ7JiN4MmU7JiN4NjM7JiMxMTE7JiN4NmQ7">&#x63;&#x79;&#112;&#104;&#x65;&#114;&#x70;&#117;&#x6e;&#107;&#115;&#x40;&#116;&#111;&#97;&#x64;&#x2e;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjeDYzOyYjeDc5OyYjeDcwOyYjeDY4OyYjMTAxOyYjeDcyOyYjMTEyOyYjMTE3OyYjeDZlOyYjMTA3OyYjeDczOyYjeDQwOyYjeDc0OyYjeDZmOyYjeDYxOyYjeDY0OyYjeDJlOyYjOTk7JiMxMTE7JiMxMDk7">&#x63;&#x79;&#x70;&#x68;&#101;&#x72;&#112;&#117;&#x6e;&#107;&#x73;&#x40;&#x74;&#x6f;&#x61;&#x64;&#x2e;&#99;&#111;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -24185,6 +24185,63 @@ one two three</code></pre>
         <tag>心理学</tag>
         <tag>九型人格</tag>
         <tag>读书笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微服务基础设施搭建必做的 4 件事</title>
+    <url>/2020/10/wei-fu-wu-ji-chu-she-shi-da-jian/</url>
+    <content><![CDATA[<h2 id="分布式系统中进程如何通信"><a href="#分布式系统中进程如何通信" class="headerlink" title="分布式系统中进程如何通信"></a>分布式系统中进程如何通信</h2><p>由传统的函数调用变成跨网络的进程间通信(RPC)，通信中间件需要屏蔽复杂性，需要关注以下4点</p>
+<ul>
+<li>公司的多语言诉求（多种语言需要要避开语言绑定的RPC框架）</li>
+<li>性能方面 序列化协议</li>
+<li>业务长期演进中通信框架替换成本</li>
+<li>考虑通信框架背后的微服务组件生态是否完整（配置管理，服务发现，断路器，负载均衡）</li>
+</ul>
+<p>RPC通讯框架的4个实践经验：</p>
+<ul>
+<li>公司作战需要规范（趁早规范化、标准化）</li>
+<li>具备服务异常保护机制（a.过载保护，节点，接口等，b.异常故障压制，弱化依赖，默认值，降级）</li>
+<li>健壮的集群间容错策略（a.流量容错，b.调用端对端服务节点状态感知）</li>
+<li>多样的调用方式支持多样的业务场景（异步，OneWay）</li>
+</ul>
+<a id="more"></a>
+<h2 id="服务集群中节点和流量如何管理"><a href="#服务集群中节点和流量如何管理" class="headerlink" title="服务集群中节点和流量如何管理"></a>服务集群中节点和流量如何管理</h2><p>问题一：单体应用中函数调用是基于内存中函数地址寻址，服务化后调用端如何找到对端节点？</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/10/24-16-48-IMG_0034-NbTskD.PNG" alt="服务注册中心原理图"></p>
+<p>问题二：服务端扩容，调用端如何发现新节点并进行负载均衡？</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/10/24-17-17-IMG_0035-DBxxWH.PNG" alt="服务扩容原理图"></p>
+<p>问题三：服务端个别节点宕机，如何自动使其失效避免调用端继续调用报错？</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/10/24-17-17-IMG_0036-78o40S.PNG" alt="异常节点摘除原理图"></p>
+<p>场景一：单节点业务异常时，需要快速禁用异常节点。<br>场景二：对于服务发布时灰度的节点，期望降低其流量比例。<br>场景三：业务在多地域部署时，期望支持同地域优先级等个性化的路由策略。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/10/24-17-17-IMG_0037-9Q0Knr.PNG" alt="路由策略原理图"></p>
+<p>技术选型</p>
+<ul>
+<li>经验一：系统要适当弱化对注册中心的依赖</li>
+<li>经验二：趁早减少不必要的数据交互，规划扩容方案</li>
+<li>经验三：有限保证可用性而非一致性（注册中心定位为AP系统而非CP系统）</li>
+</ul>
+<h2 id="系统复杂化后如何快速发现与定位异常"><a href="#系统复杂化后如何快速发现与定位异常" class="headerlink" title="系统复杂化后如何快速发现与定位异常"></a>系统复杂化后如何快速发现与定位异常</h2><p>分布式系统监控的三大利器：</p>
+<ul>
+<li>集中式的log日志系统</li>
+<li>metrics指标系统</li>
+<li>分布式链路追踪tracing</li>
+</ul>
+<p>推荐文章：Metrics, tracing, and logging</p>
+<h3 id="微服务拆分后团队组织如何变化"><a href="#微服务拆分后团队组织如何变化" class="headerlink" title="微服务拆分后团队组织如何变化"></a>微服务拆分后团队组织如何变化</h3><p>问题：按技术能力组织团队，协作效率低、不聚集导致专业度有限</p>
+<p>建议：</p>
+<ul>
+<li>按业务职能组织团队，聚集所属业务与产品</li>
+<li>规模到一定程度，建设独立的基础技术团队</li>
+</ul>
+<hr>
+<p>1024 程序员节快乐！</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>分布式</tag>
+        <tag>微服务</tag>
+        <tag>RPC</tag>
       </tags>
   </entry>
   <entry>
