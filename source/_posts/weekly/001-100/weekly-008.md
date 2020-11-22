@@ -14,6 +14,8 @@ updated: 2020-11-23 10:24:00
 ## 后端
 - [干货 | 携程 Cilium+BGP 云原生网络实践](https://mp.weixin.qq.com/s/vX30d4sAX2oETnNh3uZlEA)
 Cilium 是近两年最火的云原生网络方案之一。Cilium 的核心基于 eBPF，有两大亮点：基于 eBPF 的灵活、高性能网络，以及基于 eBPF 的 L3-L7 安全策略实现。携程 2019 年开始在生产环境使用 Cilium，本文将介绍 Cilium 在携程的落地情况，以及我们基于 Cilium 的、覆盖虚拟机、物理机和容器的云原生安全的一些探索。
+- [数据人的“大考”：AnalyticDB如何强力支撑双11？](https://mp.weixin.qq.com/s/fyndobsiw4E5y_lXkrTBxw)
+每年的双11都是云原生数据仓库AnalyticDB MySQL版（原分析型数据库MySQL版）的一块试金石。今年AnalyticDB除了在阿里数字经济体内进入更多核心交易链路，全力支撑双11以外，AnalyticDB全面拥抱云原生，构建极致弹性，大幅降低成本，释放技术红利，重磅发布了诸多全新企业级特性，让用户及时拥有极高性价比的云原生数据仓库。本文深度解析云原生数据仓库AnalyticDB面临的挑战和最新关键技术，分享双11护航背后的技术实践与经验。
 
 ## 前端
 - [双十一SSR优化实践：秒开率提升新高度](https://juejin.cn/post/6896288990765252616)
