@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">651</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">652</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -234,7 +234,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">651</span>
+          <span class="site-state-item-count">652</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -306,6 +306,144 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/parted/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/parted/" class="post-title-link" itemprop="url">【Linux 命令】parted</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 10:50:30 10:50:30" itemprop="dateModified" datetime="2020-09-25T10:50:30+08:00">2020-09-25 10:50:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/parted/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/parted/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>磁盘分区和分区大小调整工具</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>parted命令</strong> 是由GNU组织开发的一款功能强大的磁盘分区和分区大小调整工具，与fdisk不同，它支持调整分区的大小。作为一种设计用于Linux的工具，它没有构建成处理与fdisk关联的多种分区类型，但是，它可以处理最常见的分区格式，包括：ext2、ext3、fat16、fat32、NTFS、ReiserFS、JFS、XFS、UFS、HFS以及Linux交换分区。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-i：交互式模式；</span><br><span class="line">-s：脚本模式，不提示用户；</span><br><span class="line">-v：显示版本号。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>设备：指定要分区的硬盘所对应的设备文件；</li>
+<li>命令：要执行的parted命令。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>从串行技术出现以来，越来越多用户选择使用大容量的SATA硬盘创建磁盘阵列；特别是MD1000/MD3000，很轻易就突破2T的LUN，故在此给大家一些指引。</p>
+<p>红帽企业 Linux 4 Update 4供对大于 2 terabytes（TB）的磁盘设备的支持。</p>
+<p>请参考以下操作步骤：</p>
+<p>注：</p>
+<ul>
+<li>绿色代表你需要使用的命令。</li>
+<li>红色代表你需要注意到的输出信息，在后续需要使用。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line">Disk /dev/sda: 35.8 GB, 35862976512 bytes</span><br><span class="line">255 heads, 63 sectors/track, 4360 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14         144     1052257+  82  Linux swap</span><br><span class="line">/dev/sda3             145        4360    33865020   83  Linux</span><br><span class="line">Disk /dev/sdb: 2147 MB, 2147483648 bytes</span><br><span class="line">255 heads, 63 sectors/track, 261 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">Disk /dev/sdb doesn&#x27;t contain a valid partition table</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# parted /dev/sdb</span><br><span class="line">GNU Parted Copyright (C) 1998 - 2004 free Software Foundation, Inc.</span><br><span class="line">This program is free software, covered by the GNU General Public License.</span><br><span class="line">This program is distributed in the hope that it will be useful, but WITHOUT ANY</span><br><span class="line">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A</span><br><span class="line">PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span><br><span class="line">使用/dev/sdb</span><br><span class="line">(parted)mklabel gpt</span><br><span class="line">(parted)print</span><br><span class="line">/dev/sdb的磁盘几何结构：0.000-2048.000兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line">(parted)mkpart primary 0 2048  &lt;-----上面print显示的数字</span><br><span class="line">(parted)print</span><br><span class="line">/dev/sdb的磁盘几何结构：0.000-2048.000兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line">1          0.017   2047.983</span><br><span class="line">(parted)quit</span><br></pre></td></tr></table></figure>
+
+<p>如果必要，不要忘记更新<code>/etc/fstab</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# fdisk -l</span><br><span class="line">Disk /dev/sda: 35.8 GB, 35862976512 bytes</span><br><span class="line">255 heads, 63 sectors/track, 4360 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sda1   *           1          13      104391   83  Linux</span><br><span class="line">/dev/sda2              14         144     1052257+  82  Linux swap</span><br><span class="line">/dev/sda3             145        4360    33865020   83  Linux</span><br><span class="line">WARNING: GPT (GUID Partition Table) detected on &#x27;/dev/sdb&#x27;! The util fdisk doesn&#x27;t support GPT. Use GNU Parted.</span><br><span class="line"></span><br><span class="line">Disk /dev/sdb: 2147 MB, 2147483648 bytes</span><br><span class="line">255 heads, 63 sectors/track, 261 cylinders</span><br><span class="line">Units = cylinders of 16065 * 512 = 8225280 bytes</span><br><span class="line">   Device Boot      Start         End      Blocks   Id  System</span><br><span class="line">/dev/sdb1               1         262     2097151+  ee  EFI GPT</span><br><span class="line">Partition 1 has different physical/logical beginnings (non-Linux?):</span><br><span class="line">     phys=(0, 0, 1) logical=(0,0, 2)</span><br><span class="line">Partition 1 has different physical/logical endings:</span><br><span class="line">     phys=(1023, 254, 63) logical=(261, 21, 16)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mkfs.ext3 /dev/sdb1</span><br><span class="line">mke2fs 1.35 (28-Feb-2004)</span><br><span class="line">Filesystem label=</span><br><span class="line">OS type: Linux</span><br><span class="line">Block size=4096 (log=2)</span><br><span class="line">Fragment size=4096 (log=2)</span><br><span class="line">262144 inodes, 524279 blocks</span><br><span class="line">26213 blocks (5.00%) reserved for the super user</span><br><span class="line">First data block=0</span><br><span class="line">Maximum filesystem blocks=536870912</span><br><span class="line">16 block groups</span><br><span class="line">32768 blocks per group, 32768 fragments per group</span><br><span class="line">16384 inodes per group</span><br><span class="line">Superblock backups stored on blocks:</span><br><span class="line">        32768, 98304, 163840, 229376, 294912</span><br><span class="line">Writing inode tables: done</span><br><span class="line">Creating journal (8192 blocks): done</span><br><span class="line">Writing superblocks and filesystem accounting information: done</span><br><span class="line">This filesystem will be automatically checked every 28 mounts or</span><br><span class="line">180 days, whichever comes first.  Use tune2fs -c or -i to override.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mount /dev/sdb1 /mnt</span><br><span class="line">[root@localhost ~]# df -h</span><br><span class="line">Filesystem            容量  已用 可用 已用% 挂载点</span><br><span class="line">/dev/sda3              &lt;?xml:namespace prefix = st1 /&gt;32G  2.6G   28G   9% /</span><br><span class="line">/dev/sda1              99M   12M   82M  13% /boot</span><br><span class="line">none                  252M     0  252M   0% /dev/shm</span><br><span class="line">/dev/sdb1             2.0G   36M  1.9G   2% /mnt</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -1627,122 +1765,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/nmcli/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-
-    
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/nmcli/" class="post-title-link" itemprop="url">【Linux 命令】nmcli</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 10:45:30 10:45:30" itemprop="dateModified" datetime="2020-09-25T10:45:30+08:00">2020-09-25 10:45:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/nmcli/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/nmcli/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>954</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>地址配置工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>nmcli命令</strong> 是 NetworkManager client 网络管理客户端。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmcli [OPTIONS] OBJECT &#123; COMMAND | help &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS</span><br><span class="line">  -t[erse]                                  # terse output 简洁的输出</span><br><span class="line">  -p[retty]                                 # pretty output 漂亮的输出</span><br><span class="line">  -m[ode] tabular|multiline                 # output mode  输出模式</span><br><span class="line">  -f[ields] &lt;field1,field2,...&gt;|all|common  # specify fields to output 指定要输出的字段</span><br><span class="line">  -e[scape] yes|no                          # escape columns separators in values 在值中转义列分隔符</span><br><span class="line">  -n[ocheck]                                # 不要检查nmcli和NetworkManager版本</span><br><span class="line">  -a[sk]                                    # 要求缺少参数</span><br><span class="line">  -w[ait] &lt;seconds&gt;                         # 设置超时等待整理操作</span><br><span class="line">  -v[ersion]                                # 显示程序版本</span><br><span class="line">  -h[elp]                                   # 打印此帮助</span><br><span class="line"></span><br><span class="line">OBJECT</span><br><span class="line">  g[eneral]       NetworkManager的一般状态和操作</span><br><span class="line">  n[etworking]    整体组网控制</span><br><span class="line">  r[adio]         NetworkManager切换开关</span><br><span class="line">  c[onnection]    NetworkManager的连接</span><br><span class="line">  d[evice]        由NetworkManager管理的设备</span><br><span class="line">  a[gent]         NetworkManager秘密代理或polkit代理</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">nmcli connection show           # 查看当前连接状态</span><br><span class="line">nmcli connection reload         # 重启服务</span><br><span class="line">nmcli connection show -active   # 显示活动的连接</span><br><span class="line">nmcli connection show &quot;lan eth0&quot;# 显示指定一个网络连接配置</span><br><span class="line">nmcli device status             # 显示设备状态</span><br><span class="line">nmcli device show eno16777736   # 显示指定接口属性</span><br><span class="line">nmcli device show               # 显示全部接口属性</span><br><span class="line">nmcli con up static             # 启用static连接配置</span><br><span class="line">nmcli con up default            # 启用default连接配置 </span><br><span class="line">nmcli con add help              # 查看帮助</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1801,14 +1823,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">928k</span>
+    <span title="站点总字数">930k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:04</span>
+    <span title="站点阅读时长">14:05</span>
   </span>
 </div>
 <div class="busuanzi-count">
