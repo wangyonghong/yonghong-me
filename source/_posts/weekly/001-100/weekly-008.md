@@ -43,7 +43,7 @@ Apache Kylin是一个基于Hadoop大数据平台打造的开源OLAP引擎，它�
 - [双汇大数据方案选型：从棘手的InfluxDB+Redis到毫秒级查询的TDengine](https://www.taosdata.com/blog/2020/11/17/2028.html)
 双汇发展多个分厂的能源管控大数据系统主要采用两种技术栈：InfluxDB/Redis和Kafka/Redis/HBase/Flink，对于中小型研发团队来讲，无论是系统搭建，还是实施运维都非常棘手。经过对InfluxDB/Redis和TDengine大数据平台的功能和性能对比测试，最终将TDengine作为实施方案。
 
-## 近期会议
+## 近期会议公开课
 
 ### [2020 MongoDB 中国线上用户大会](https://www.mongodb.com/live-china-zh)
 
@@ -52,6 +52,48 @@ Apache Kylin是一个基于Hadoop大数据平台打造的开源OLAP引擎，它�
 报名链接：https://www.mongodb.com/live-china-zh
 
 线上参会，全天精彩享不停！MongoDB重磅嘉宾主题演讲、头部客户使用心得分享、干货满满的多个分会场、动手实操培训，MongoDB 只为助您轻松构建可扩展、高性能、现代化应用程序。
+
+### NGINX开源社区技术专题系列课程（安全专题）
+
+报名链接：https://www.nginx.org.cn/article/detail/336
+
+主题：使用ModSecurity/App Protect模块构建NGINX WAF
+
+时间：11月25日下午2-3点
+
+讲师：NGINX解决方案架构师邹俊
+
+
+企业需要迅速将服务和应用推向市场，而快速将代码发布到生产环境中的压力使得安全性很容易下滑。过度依赖诸如漏洞扫描器之类的自动化工具是危险的，因为它们不能捕捉到所有问题。将各种跨功能开发团队提供的代码结合起来，就不太清楚谁负责实施安全性。在生产环境中运行多个应用和应用版本会使应用程序的防护层出现裂缝。
+
+最终的结果是，对web应用防火墙（WAF）等安全工具的需求从未像现在这样迫切。这些安全工具通常与负载平衡代理集成，并部署在公司网络的边缘（或前门）以创建安全的外围环境。
+
+安全不再是CISO和SecOps团队的唯一领域。DevOps团队在接受、测试和部署作为CI/CD管道一部分的安全策略方面扮演着重要角色。NGINX App Protect将F5先进WAF技术的有效性与NGINX的灵活性和性能相结合。它本机运行在NGINX Plus上，以解决现代DevOps环境面临的安全挑战。
+
+通过本次公开课，您可以了解：
+- NGINX WAF使用场景
+- NGINX WAF vs NGINX App Protect
+- NGINX App Protect策略配置
+- KIC WAF策略配置
+
+## 会议公开课资料
+
+### 2020 Google 开发者大会 (Google Developer Summit)
+Google 开发者大会 (Google Developer Summit) 是谷歌面向开发者展示最新产品和平台的年度盛会。2020 Google 开发者大会于 11 月 16 日 至 21 日举行，这是谷歌首次以全线上大会的形式与中国开发者相聚。本次大会以“代码不止”为主题，全面介绍了产品更新以及一系列面向本地开发者的技术支持内容，旨在赋能开发者高效创新、持续不断地创造愉悦的产品体验。
+
+2020 Google 开发者大会 (Google Developer Summit) 全部视频 https://www.youtube.com/playlist?list=PLdcOMcDMrLrUmZuXRKtOlhDZGpsvQIXi7
+
+2020 Google 开发者大会 主题演讲 https://youtu.be/5zO60HNQkWQ
+
+2020 Google 开发者大会 技术演讲专场 Android、Google Play、ChromeOS https://youtu.be/N-x7tXYfOxE
+
+2020 Google 开发者大会 技术演讲专场 Flutter、Web、Material Design https://youtu.be/4VLQMySQh8Q
+
+2020 Google 开发者大会 技术演讲专场 TensorFlow、Google 女性开发者职业发展座谈会 https://youtu.be/Nu9zgUI5KTc
+
+2020 Google 开发者大会 技术演讲专场 Google Cloud、Google Assistant、游戏和移动应用、Firebase https://youtu.be/yr8Axaje0C4
+
+2020 Google 开发者大会 技术演讲专场 谷歌艺术与文化、ARCore by Google、WearOS by Google https://youtu.be/xqfpGAW8d_M
 
 ## 其他周报
 
