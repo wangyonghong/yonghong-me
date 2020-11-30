@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">653</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">655</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">653</span>
+          <span class="site-state-item-count">655</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,6 +308,269 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/blkid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/blkid/" class="post-title-link" itemprop="url">【Linux 命令】blkid</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:17:00 08:17:00" itemprop="dateModified" datetime="2020-09-25T08:17:00+08:00">2020-09-25 08:17:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/blkid/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/blkid/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>查看块设备的文件系统类型、LABEL、UUID等信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>在Linux下可以使用 <strong>blkid命令</strong> 对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">blkid -L | -U</span><br><span class="line">blkid [-c ] [-ghlLv] [-o] [-s ][-t ] -[w ] [ ...]</span><br><span class="line">blkid -p [-s ] [-O ] [-S ][-o] ...</span><br><span class="line">blkid -i [-s ] [-o] ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-c &lt;file&gt;   # 指定cache文件(default: /etc/blkid.tab, /dev/null = none)</span><br><span class="line">-d          # don&#x27;t encode non-printing characters</span><br><span class="line">-h          # 显示帮助信息</span><br><span class="line">-g          # garbage collect the blkid cache</span><br><span class="line">-o &lt;format&gt; # 指定输出格式</span><br><span class="line">-k          # list all known filesystems/RAIDs and exit</span><br><span class="line">-s &lt;tag&gt;    # 显示指定信息，默认显示所有信息</span><br><span class="line">-t &lt;token&gt;  # find device with a specific token (NAME=value pair)</span><br><span class="line">-l          # look up only first device with token specified by -t</span><br><span class="line">-L &lt;label&gt;  # convert LABEL to device name</span><br><span class="line">-U &lt;uuid&gt;   # convert UUID to device name</span><br><span class="line">-v          # 显示版本信息</span><br><span class="line">-w &lt;file&gt;   # write cache to different file (/dev/null = no write)</span><br><span class="line">&lt;dev&gt;       # specify device(s) to probe (default: all devices)</span><br><span class="line">Low-level probing options:</span><br><span class="line">-p          # low-level superblocks probing (bypass cache)</span><br><span class="line">-i          # gather information about I/O limits</span><br><span class="line">-S &lt;size&gt;   # overwrite device size</span><br><span class="line">-O &lt;offset&gt; # probe at the given offset</span><br><span class="line">-u &lt;list&gt;   # filter by &quot;usage&quot; (e.g. -u filesystem,raid)</span><br><span class="line">-n &lt;list&gt;   # filter by filesystem type (e.g. -n vfat,ext3)</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>1、列出当前系统中所有已挂载文件系统的类型：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid</span><br></pre></td></tr></table></figure>
+
+<p>2、显示指定设备 UUID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -s UUID /dev/sda5</span><br></pre></td></tr></table></figure>
+
+<p>3、显示所有设备 UUID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -s UUID</span><br></pre></td></tr></table></figure>
+
+<p>4、显示指定设备 LABEL：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -s LABEL /dev/sda5</span><br></pre></td></tr></table></figure>
+
+<p>5、显示所有设备 LABEL：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -s LABEL</span><br></pre></td></tr></table></figure>
+
+<p>6、显示所有设备文件系统：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -s TYPE</span><br></pre></td></tr></table></figure>
+
+<p>7、显示所有设备：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -o device</span><br></pre></td></tr></table></figure>
+
+<p>8、以列表方式查看详细信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo blkid -o list</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/bind/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/bind/" class="post-title-link" itemprop="url">【Linux 命令】bind</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:16:30 08:16:30" itemprop="dateModified" datetime="2020-09-25T08:16:30+08:00">2020-09-25 08:16:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/bind/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/bind/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>627</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示或设置键盘按键与其相关的功能</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>bind命令</strong> 用于显示和设置命令行的键盘序列绑定功能。通过这一命令，可以提高命令行中操作效率。您可以利用bind命令了解有哪些按键组合与其功能，也可以自行指定要用哪些按键组合。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-d：显示按键配置的内容；</span><br><span class="line">-f&lt;按键配置文件&gt;：载入指定的按键配置文件；</span><br><span class="line">-l：列出所有的功能；</span><br><span class="line">-m&lt;按键配置&gt;：指定按键配置；</span><br><span class="line">-q&lt;功能&gt;：显示指定功能的按键；</span><br><span class="line">-v：列出目前的按键配置与其功能。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind -x &#x27;&quot;\C-l&quot;:ls -l&#x27;    #直接按 CTRL+L 就列出目录</span><br></pre></td></tr></table></figure>
+
+<p>其中keyseq可以使用<code>showkey -a</code>命令来获取：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# showkey -a</span><br><span class="line"></span><br><span class="line">Press any keys - Ctrl-D will terminate this program</span><br><span class="line"></span><br><span class="line">^[[A     27 0033 0x1b  上</span><br><span class="line">         91 0133 0x5b</span><br><span class="line">         65 0101 0x41</span><br><span class="line">^[[B     27 0033 0x1b  下</span><br><span class="line">         91 0133 0x5b</span><br><span class="line">         66 0102 0x42</span><br><span class="line">^[[D     27 0033 0x1b  左</span><br><span class="line">         91 0133 0x5b</span><br><span class="line">         68 0104 0x44</span><br><span class="line">^[[C     27 0033 0x1b 右</span><br><span class="line">         91 0133 0x5b</span><br><span class="line">         67 0103 0x43</span><br><span class="line">         32 0040 0x20</span><br><span class="line">^M       13 0015 0x0d 字母M</span><br><span class="line">^C        3 0003 0x03 Ctrl-C</span><br><span class="line">^D        4 0004 0x04 Ctrl-D 退出</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -2013,247 +2276,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/atrm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/atrm/" class="post-title-link" itemprop="url">【Linux 命令】atrm</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:12:00 08:12:00" itemprop="dateModified" datetime="2020-09-25T08:12:00+08:00">2020-09-25 08:12:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/atrm/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/atrm/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>185</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>删除待执行任务队列中的指定任务</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>atrm命令</strong> 用于删除待执行任务队列中的指定任务。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atrm(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-V：显示版本号。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>任务号：指定待执行队列中要删除的任务。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>删除已经排队的任务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">atq        # 显示当前已经设置的任务</span><br><span class="line">2 Mon May 17 08:00:00 2010 a root</span><br><span class="line">1 Sat May 15 17:00:00 2010 a root</span><br><span class="line"></span><br><span class="line">atrm 2     # 删除任务2</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/atq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/atq/" class="post-title-link" itemprop="url">【Linux 命令】atq</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:11:30 08:11:30" itemprop="dateModified" datetime="2020-09-25T08:11:30+08:00">2020-09-25 08:11:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/atq/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/atq/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>209</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>列出当前用户的at任务列表</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>atq命令</strong> 显示系统中待执行的任务列表，也就是列出当前用户的at任务列表。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atq [-V] [-q 队列] [-v]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-V：显示版本号；</span><br><span class="line">-q：查询指定队列的任务。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">at now + 10 minutes</span><br><span class="line"><span class="meta">at&gt;</span><span class="bash"> <span class="built_in">echo</span> 1111</span></span><br><span class="line"><span class="meta">at&gt;</span><span class="bash"> &lt;eot&gt;</span></span><br><span class="line">job 3 at Fri Apr 26 12:56:00 2013</span><br><span class="line"></span><br><span class="line">atq</span><br><span class="line">3       Fri Apr 26 12:56:00 2013 a root</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -2312,14 +2334,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">935k</span>
+    <span title="站点总字数">939k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:10</span>
+    <span title="站点阅读时长">14:14</span>
   </span>
 </div>
 <div class="busuanzi-count">

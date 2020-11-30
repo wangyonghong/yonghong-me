@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">653</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">655</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">653</span>
+          <span class="site-state-item-count">655</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,6 +308,344 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ethtool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/ethtool/" class="post-title-link" itemprop="url">【Linux 命令】ethtool</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 09:07:00 09:07:00" itemprop="dateModified" datetime="2020-09-25T09:07:00+08:00">2020-09-25 09:07:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/ethtool/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/ethtool/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示或修改以太网卡的配置信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>ethtool命令用于获取以太网卡的配置信息，或者修改这些配置。这个命令比较复杂，功能特别多。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ethtool [ -a | -c | -g | -i | -d | -k | -r | -S |] ethX</span><br><span class="line">ethtool [-A] ethX [autoneg on|off] [rx on|off] [tx on|off]</span><br><span class="line">ethtool [-C] ethX [adaptive-rx on|off] [adaptive-tx on|off] [rx-usecs N] [rx-frames N] [rx-usecs-irq N] [rx-frames-irq N] [tx-usecs N] [tx-frames N] [tx-usecs-irq N] [tx-frames-irq N] [stats-block-usecs N][pkt-rate-low N][rx-usecs-low N] [rx-frames-low N] [tx-usecs-low N] [tx-frames-lowN] [pkt-rate-high N] [rx-usecs-high N] [rx-frames-high N] [tx-usecs-high N] [tx-frames-high N] [sample-interval N]</span><br><span class="line">ethtool [-G] ethX [rx N] [rx-mini N] [rx-jumbo N] [tx N]</span><br><span class="line">ethtool [-e] ethX [raw on|off] [offset N] [length N]</span><br><span class="line">ethtool [-E] ethX [magic N] [offset N] [value N]</span><br><span class="line">ethtool [-K] ethX [rx on|off] [tx on|off] [sg on|off] [tso on|off]</span><br><span class="line">ethtool [-p] ethX [N]</span><br><span class="line">ethtool [-t] ethX [offline|online]</span><br><span class="line">ethtool [-s] ethX [speed 10|100|1000] [duplex half|full] [autoneg on|off] [port tp|aui|bnc|mii] [phyad N] [xcvr internal|external]</span><br><span class="line">[wol p|u|m|b|a|g|s|d...] [sopass xx:yy:zz:aa:bb:cc] [msglvl N]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-a 查看网卡中 接收模块RX、发送模块TX和Autonegotiate模块的状态：启动on 或 停用off。</span><br><span class="line">-A 修改网卡中 接收模块RX、发送模块TX和Autonegotiate模块的状态：启动on 或 停用off。</span><br><span class="line">-c display the Coalesce information of the specified ethernet card。</span><br><span class="line">-C Change the Coalesce setting of the specified ethernet card。</span><br><span class="line">-g Display the rx/tx ring parameter information of the specified ethernet card。</span><br><span class="line">-G change the rx/tx ring setting of the specified ethernet card。</span><br><span class="line">-i 显示网卡驱动的信息，如驱动的名称、版本等。</span><br><span class="line">-d 显示register dump信息, 部分网卡驱动不支持该选项。</span><br><span class="line">-e 显示EEPROM dump信息，部分网卡驱动不支持该选项。</span><br><span class="line">-E 修改网卡EEPROM byte。</span><br><span class="line">-k 显示网卡Offload参数的状态：on 或 off，包括rx-checksumming、tx-checksumming等。</span><br><span class="line">-K 修改网卡Offload参数的状态。</span><br><span class="line">-p 用于区别不同ethX对应网卡的物理位置，常用的方法是使网卡port上的led不断的闪；N指示了网卡闪的持续时间，以秒为单位。</span><br><span class="line">-r 如果auto-negotiation模块的状态为on，则restarts auto-negotiation。</span><br><span class="line">-S 显示NIC- and driver-specific 的统计参数，如网卡接收/发送的字节数、接收/发送的广播包个数等。</span><br><span class="line">-t 让网卡执行自我检测，有两种模式：offline or online。</span><br><span class="line">-s 修改网卡的部分配置，包括网卡速度、单工/全双工模式、mac地址等。</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据来源"><a href="#数据来源" class="headerlink" title="数据来源"></a>数据来源</h3><p>Ethtool命令显示的信息来源于网卡驱动层，即TCP/ip协议的链路层。该命令在Linux内核中实现的逻辑层次为：</p>
+<p>最重要的结构体<code>struct ethtool_ops</code>，该结构体成员为用于显示或修改以太网卡配置的一系列函数指针，见下表中的第二列。</p>
+<p>网卡驱动负责实现（部分）这些函数，并将其封装入<code>ethtool_ops</code>结构体，为网络核心层提供统一的调用接口。因此，不同的网卡驱动会给应用层返回不同的信息。<code>Ethtool命令选项</code>、<code>struct ethtool_ops成员函数</code>、<code>Ethtool命令显示参数的来源</code>，三者间的对应关系如下表所示：</p>
+<table>
+<tbody>
+<tr>
+<th style="width: 100px;">命令选项</th>
+<th>struct ethtool_ops成员函数</th>
+<th>Ethtool命令显示参数的来源（以网卡驱动BNX2为例）</th></tr>
+<tr>
+<td>无 -s</td>
+<td>get_settingsget_wol get_msglevel get_link set_settings set_wol set_msglevel</td>
+<td>从网卡寄存器中获得网卡速度等信息，可配置。</td>
+</tr>
+<tr>
+<td>-a -A</td>
+<td>get_pauseparam set_pauseparam</td>
+<td>从网卡寄存器中获得Autonegotiate/RX/TX模块的状态：on oroff，可配置。</td>
+</tr>
+<tr>
+<td>-c -C</td>
+<td>get_coalesceset_coalesce</td>
+<td>从网卡寄存器中获得coalescing参数：TX/RX一个数据包后，推迟发生TX/RX中断的时间(us)/数据包个数。—减小该值可以提高网卡的响应时间。 当rx-usecs&rx-frames同时被设为0时，RX中断停止。 当tx-usecs&tx-frames同时被设为0时，TX中断停止。</td>
+</tr>
+<tr>
+<td>-g -G</td>
+<td>get_ringparam set_ringparam</td>
+<td>除当前TX/RX ring的值（从网卡寄存器中读取得到，可配置）外，其它为网卡bnx2自己固定的信息。</td>
+</tr>
+<tr>
+<td>-k -K</td>
+<td>get_rx_csumget_tx_csum get_sg get_tso set_rx_csum set_tx_csum set_sg set_tso</td>
+<td>显示信息从保存该状态的变量中读取得到，没有对应的寄存器。因此，TX/RX校验等模块一直处于on状态，实际上是无法修改的。</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>get_drvinfo[self_test_count, get_stats_coun,t get_regs_len, get_eeprom_len]</td>
+<td>网卡bnx2自己固定的信息，如：  
+——————————————————–  
+driver: bnx2 version: 1.4.30 firmware-version: 1.8.0.5 bus-info: 0000:09:00.0  
+——————————————————–</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>get_drvinfoget_regs</td>
+<td>不支持，即bnx2中没有实现函数get_regs。</td>
+</tr>
+<tr>
+<td>-e -E</td>
+<td>get_eepromset_eeprom</td>
+<td>不支持，即bnx2中没有实现函数get_eeprom。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>nway_reset</td>
+<td>配置网卡MII_BMCR寄存器，重启Auto negotiation模块。</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>phys_id</td>
+<td>配置网卡BNX2_EMAC_LED寄存器，实现LED闪功能。</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>self_test</td>
+<td>通过配置网卡寄存器，逐一测试网卡的硬件模块：registers，memory，loopback，Link stat，interrupt。</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>get_ethtool_stats</td>
+<td>显示信息来源于网卡驱动中的结构体变量stats_blk。（网卡通过DMA方式，将寄存器BNX2_HC_STATISTICS _ADDR_L和BNX2_HC_STATISTICS_ADDR_H中的数据实时地读取到结构体变量struct statistics_block *stats_blk中。） —显示的数据都是从网卡寄存器中统计得到的，各项的含义需查询网卡（芯片）手册。</td>
+</tr>
+</tbody>
+</table>
+
+<p>由上可见，ethtool命令用于显示/配置网卡硬件（寄存器）。  </p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看机器上网卡的速度：百兆还是千兆，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethool eth0</span><br></pre></td></tr></table></figure>
+
+<p>操作完毕后，输出信息中<code>Speed:</code>这一项就指示了网卡的速度。停止网卡的发送模块TX，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -A tx off eth0</span><br></pre></td></tr></table></figure>
+
+<p>操作完毕后，可输入<code>ethtool -a eth0</code>，查看tx模块是否已被停止。查看网卡eth0采用了何种驱动，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -i eth0</span><br></pre></td></tr></table></figure>
+
+<p>操作完毕后，显示 driver: bnx2；version: 1.4.30 等信息。关闭网卡对收到的数据包的校验功能，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -K eth0 rx off</span><br></pre></td></tr></table></figure>
+
+<p>操作完毕后，可输入<code>ethtool –k eth0</code>，查看校验功能是否已被停止。如果机器上安装了两块网卡，那么eth0对应着哪块网卡呢？输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -p eth0 10</span><br></pre></td></tr></table></figure>
+
+<p>操作完毕后，看哪块网卡的led灯在闪，eth0就对应着哪块网卡。查看网卡，在接收/发送数据时，有没有出错？请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool –S eth0</span><br></pre></td></tr></table></figure>
+
+<p>将千兆网卡的速度降为百兆，请输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ethtool -s eth0 speed 100</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/env/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/env/" class="post-title-link" itemprop="url">【Linux 命令】env</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 09:06:30 09:06:30" itemprop="dateModified" datetime="2020-09-25T09:06:30+08:00">2020-09-25 09:06:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/env/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/env/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示系统中已存在的环境变量</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>env命令</strong> 用于显示系统中已存在的环境变量，以及在定义的环境中执行指令。该命令只使用”-“作为参数选项时，隐藏了选项”-i”的功能。若没有设置任何选项和参数时，则直接显示当前的环境变量。</p>
+<p>如果使用env命令在新环境中执行指令时，会因为没有定义环境变量”PATH”而提示错误信息”such file or directory”。此时，用户可以重新定义一个新的”PATH”或者使用绝对路径。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-i：开始一个新的空的环境；</span><br><span class="line">-u&lt;变量名&gt;：从当前环境中删除指定的变量。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
+<li>  变量定义：定义在新的环境中变量，定义多个变量定义用空格隔开。格式为“变量名=值”；</li>
+<li>  指定：指定要执行的指令和参数。</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# env</span><br><span class="line">hostname=LinServ-1</span><br><span class="line">TERM=linux</span><br><span class="line">SHELL=/bin/bash</span><br><span class="line">HISTSIZE=1000</span><br><span class="line">SSH_CLIENT=192.168.2.111 2705 22</span><br><span class="line">SSH_TTY=/dev/pts/0</span><br><span class="line">USER=root</span><br><span class="line">LS_COLORS=no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:ex=01;32:*.cmd=01;32:*.exe=01;32:*.com=01;32:*.btm=01;32:*.bat=01;32:*.sh=01;32:*.csh=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tz=01;31:*.rpm=01;31:*.cpio=01;31:*.jpg=01;35:*.gif=01;35:*.bmp=01;35:*.xbm=01;35:*.xpm=01;35:*.png=01;35:*.tif=01;35:</span><br><span class="line">mail=/var/spool/mail/root</span><br><span class="line">PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</span><br><span class="line">INPUTRC=/etc/inputrc</span><br><span class="line">pwd=/root</span><br><span class="line">LANG=zh_CN.UTF-8</span><br><span class="line">SHLVL=1</span><br><span class="line">HOME=/root</span><br><span class="line">logname=root</span><br><span class="line">SSH_CONNECTION=192.168.2.111 2705 192.168.2.2 22</span><br><span class="line">LESSOPEN=|/usr/bin/lesspipe.sh %s</span><br><span class="line">G_BROKEN_FILENAMES=1</span><br><span class="line">_=/bin/env</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1423,282 +1761,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/echo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/echo/" class="post-title-link" itemprop="url">【Linux 命令】echo</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 09:02:00 09:02:00" itemprop="dateModified" datetime="2020-09-25T09:02:00+08:00">2020-09-25 09:02:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/echo/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/echo/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>782</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>输出指定的字符串或者变量</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>echo命令</strong> 用于在shell中打印shell变量的值，或者直接输出指定的字符串。linux的echo命令，在shell编程中极为常用, 在终端下打印变量value的时候也是常常用到的，因此有必要了解下echo的用法echo命令的功能是在显示器上显示一段文字，一般起到一个提示的作用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-e：激活转义字符。</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>-e</code>选项时，若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：</p>
-<ul>
-<li><code>\a</code> 发出警告声；</li>
-<li><code>\b</code> 删除前一个字符；</li>
-<li><code>\c</code> 不产生进一步输出 (\c 后面的字符不会输出)；</li>
-<li><code>\f</code> 换行但光标仍旧停留在原来的位置；</li>
-<li><code>\n</code> 换行且光标移至行首；</li>
-<li><code>\r</code> 光标移至行首，但不换行；</li>
-<li><code>\t</code> 插入tab；</li>
-<li><code>\v</code> 与\f相同；</li>
-<li><code>\\</code> 插入\字符；</li>
-<li><code>\nnn</code> 插入 <code>nnn</code>（八进制）所代表的ASCII字符；</li>
-</ul>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>变量：指定要打印的变量。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>用echo命令打印带有色彩的文字：</p>
-<p> <strong>文字色：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;31mThis is red text\e[0m&quot;</span><br><span class="line">This is red text</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>  <code>\e[1;31m</code> 将颜色设置为红色</li>
-<li>  <code>\e[0m</code> 将颜色重新置回</li>
-</ul>
-<p>颜色码：重置=0，黑色=30，红色=31，绿色=32，黄色=33，蓝色=34，洋红=35，青色=36，白色=37</p>
-<p> <strong>背景色</strong> ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\e[1;42mGreed Background\e[0m&quot;</span><br><span class="line">Greed Background</span><br></pre></td></tr></table></figure>
-
-<p>颜色码：重置=0，黑色=40，红色=41，绿色=42，黄色=43，蓝色=44，洋红=45，青色=46，白色=47</p>
-<p> <strong>文字闪动：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo -e &quot;\033[37;31;5mMySQL Server Stop...\033[39;49;0m&quot;</span><br></pre></td></tr></table></figure>
-
-<p>红色数字处还有其他数字参数：0 关闭所有属性、1 设置高亮度（加粗）、4 下划线、5 闪烁、7 反显、8 消隐</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/e2label/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/e2label/" class="post-title-link" itemprop="url">【Linux 命令】e2label</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 09:01:30 09:01:30" itemprop="dateModified" datetime="2020-09-25T09:01:30+08:00">2020-09-25 09:01:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/e2label/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/e2label/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>503</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>设置第二扩展文件系统的卷标</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>e2label命令</strong> 用来设置第二扩展文件系统的卷标。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e2label(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>  文件系统：指定文件系统所对应的设备文件名；</li>
-<li>  新卷标：为文件系统指定新卷标。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>许多用了多年Linux的人可能也没有用过e2label命令。但是这个命令相当有效。在介绍它之前,我们先看看<code>/etc/fstab文</code>件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">label=//ext3 defaults 1 1</span><br><span class="line">/dev/hda7 /usr ext3 defaults 1 1</span><br></pre></td></tr></table></figure>
-
-<p>第二行的意思很容易懂，就是把<code>/dev/hda7</code> mount到<code>/usr</code>上。第一行没有指明分区，意思是把label(卷标)为/ 的分区mount到/上。这样写的好处在于即使如果把硬盘从主板上的ide0(hda) 换到ide2(hdc)上，系统仍然可以自动挂载正确的分区。通常Linux安装的时候已经自动指定了卷标。如果是手动增加的新分区，可以用下边的命令为 其指定卷标：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e2label /dev/hdax /new</span><br><span class="line">mkdir /new</span><br></pre></td></tr></table></figure>
-
-<p>然后在<code>/etc/fstab</code>里加入：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label=/new  /new  ext3  defaults  1 1</span><br></pre></td></tr></table></figure>
-
-<p>下次重新起动机器的时候，就会把卷标为<code>/new</code>的分区挂接到<code>/new</code>上。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1757,14 +1819,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">935k</span>
+    <span title="站点总字数">939k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:10</span>
+    <span title="站点阅读时长">14:14</span>
   </span>
 </div>
 <div class="busuanzi-count">

