@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">652</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">653</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">652</span>
+          <span class="site-state-item-count">653</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,6 +308,145 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sysctl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/sysctl/" class="post-title-link" itemprop="url">【Linux 命令】sysctl</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:56:00 11:56:00" itemprop="dateModified" datetime="2020-09-25T11:56:00+08:00">2020-09-25 11:56:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/sysctl/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/sysctl/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>时动态地修改内核的运行参数</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sysctl命令</strong> 被用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录<code>/proc/sys</code>中。它包含一些TCP/ip堆栈和虚拟内存系统的高级选项， 这可以让有经验的管理员提高引人注目的系统性能。用sysctl可以读取设置超过五百个系统变量。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-n：打印值时不打印关键字；</span><br><span class="line">-e：忽略未知关键字错误；</span><br><span class="line">-N：仅打印名称；</span><br><span class="line">-w：当改变sysctl设置时使用此项；</span><br><span class="line">-p：从配置文件“/etc/sysctl.conf”加载内核参数设置；</span><br><span class="line">-a：打印当前所有可用的内核参数变量和值；</span><br><span class="line">-A：以表格方式打印当前所有可用的内核参数变量和值。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>变量=值：设置内核参数对应的变量值。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看所有可读变量：</p>
+<p>sysctl -a</p>
+<p>读一个指定的变量，例如<code>kern.maxproc</code>：</p>
+<p>sysctl kern.maxproc kern.maxproc: 1044</p>
+<p>要设置一个指定的变量，直接用<code>variable=value</code>这样的语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl kern.maxfiles=5000</span><br><span class="line">kern.maxfiles: 2088 -&gt; 5000</span><br></pre></td></tr></table></figure>
+
+<p>您可以使用sysctl修改系统变量，也可以通过编辑sysctl.conf文件来修改系统变量。sysctl.conf看起来很像rc.conf。它用<code>variable=value</code>的形式来设定值。指定的值在系统进入多用户模式之后被设定。并不是所有的变量都可以在这个模式下设定。</p>
+<p>sysctl变量的设置通常是字符串、数字或者布尔型。（布尔型用 1 来表示’yes’，用 0 来表示’no’）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w kernel.sysrq=0</span><br><span class="line">sysctl -w kernel.core_uses_pid=1</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_redirects=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_source_route=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.rp_filter=1</span><br><span class="line">sysctl -w net.ipv4.tcp_syncookies=1</span><br><span class="line">sysctl -w net.ipv4.tcp_max_syn_backlog=2048</span><br><span class="line">sysctl -w net.ipv4.tcp_fin_timeout=30</span><br><span class="line">sysctl -w net.ipv4.tcp_synack_retries=2</span><br><span class="line">sysctl -w net.ipv4.tcp_keepalive_time=3600</span><br><span class="line">sysctl -w net.ipv4.tcp_window_scaling=1</span><br><span class="line">sysctl -w net.ipv4.tcp_sack=1</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置sysctl"><a href="#配置sysctl" class="headerlink" title="配置sysctl"></a>配置sysctl</h3><p>编辑此文件：<code>/etc/sysctl.conf</code></p>
+<p>如果该文件为空，则输入以下内容，否则请根据情况自己做调整：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Controls <span class="built_in">source</span> route verification</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.rp_filter = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.rp_filter = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disables IP <span class="built_in">source</span> routing</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_source_route = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_source_route = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls the System Request debugging functionality of the kernel</span></span><br><span class="line">kernel.sysrq = 0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls whether core dumps will append the PID to the core filename.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Useful <span class="keyword">for</span> debugging multi-threaded applications.</span></span><br><span class="line">kernel.core_uses_pid = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase maximum amount of memory allocated to shm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only uncomment <span class="keyword">if</span> needed!</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> kernel.shmmax = 67108864</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disable ICMP Redirect Acceptance</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_redirects = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_redirects = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">enable</span> Log Spoofed Packets, Source Routed Packets, Redirect Packets</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.log_martians = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.log_martians = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_fin_timeout connection</span></span><br><span class="line">net.ipv4.tcp_fin_timeout = 25</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_keepalive_time connection</span></span><br><span class="line">net.ipv4.tcp_keepalive_time = 1200</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_window_scaling</span></span><br><span class="line">net.ipv4.tcp_window_scaling = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_sack</span></span><br><span class="line">net.ipv4.tcp_sack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tcp_fack should be on because of sack</span></span><br><span class="line">net.ipv4.tcp_fack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_timestamps</span></span><br><span class="line">net.ipv4.tcp_timestamps = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable TCP SYN Cookie Protection</span></span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable ignoring broadcasts request</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_broadcasts = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable bad error message Protection</span></span><br><span class="line">net.ipv4.icmp_ignore_bogus_error_responses = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> make more <span class="built_in">local</span> ports available</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.ip_local_port_range = 1024 65000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> TCP Re-Ordering value <span class="keyword">in</span> kernel to ‘5′</span></span><br><span class="line">net.ipv4.tcp_reordering = 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Lower syn retry rates</span></span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Set Max SYN Backlog to ‘2048′</span></span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 2048</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Various Settings</span></span><br><span class="line">net.core.netdev_max_backlog = 1024</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the maximum number of skb-heads to be cached</span></span><br><span class="line">net.core.hot_list_length = 256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the tcp-time-wait buckets pool size</span></span><br><span class="line">net.ipv4.tcp_max_tw_buckets = 360000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> This will increase the amount of memory available <span class="keyword">for</span> socket input/output queues</span></span><br><span class="line">net.core.rmem_default = 65535</span><br><span class="line">net.core.rmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_rmem = 4096 87380 8388608</span><br><span class="line">net.core.wmem_default = 65535</span><br><span class="line">net.core.wmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_wmem = 4096 65535 8388608</span><br><span class="line">net.ipv4.tcp_mem = 8388608 8388608 8388608</span><br><span class="line">net.core.optmem_max = 40960</span><br></pre></td></tr></table></figure>
+
+<p>如果希望屏蔽别人 ping 你的主机，则加入以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Disable ping requests</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_all = 1</span><br></pre></td></tr></table></figure>
+
+<p>编辑完成后，请执行以下命令使变动立即生效：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/sbin/sysctl -p</span><br><span class="line">/sbin/sysctl -w net.ipv4.route.flush=1</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1505,132 +1644,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/strings/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/strings/" class="post-title-link" itemprop="url">【Linux 命令】strings</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:51:00 11:51:00" itemprop="dateModified" datetime="2020-09-25T11:51:00+08:00">2020-09-25 11:51:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/strings/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/strings/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>616</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在对象文件或二进制文件中查找可打印的字符串</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>strings命令</strong> 在对象文件或二进制文件中查找可打印的字符串。字符串是4个或更多可打印字符的任意序列，以换行符或空字符结束。 strings命令对识别随机对象文件很有用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings [ -a ] [ - ] [ -o ] [ -t Format ] [ -n Number ] [ -Number ]  [file ... ]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-a --all：扫描整个文件而不是只扫描目标文件初始化和装载段</span><br><span class="line">-f –print-file-name：在显示字符串前先显示文件名</span><br><span class="line">-n –bytes=[number]：找到并且输出所有NUL终止符序列</span><br><span class="line">- ：设置显示的最少的字符数，默认是4个字符</span><br><span class="line">-t --radix=&#123;o,d,x&#125; ：输出字符的位置，基于八进制，十进制或者十六进制</span><br><span class="line">-o ：类似--radix=o</span><br><span class="line">-T --target= ：指定二进制文件格式</span><br><span class="line">-e --encoding=&#123;s,S,b,l,B,L&#125; ：选择字符大小和排列顺序:s = 7-bit, S = 8-bit, &#123;b,l&#125; = 16-bit, &#123;B,L&#125; = 32-bit</span><br><span class="line">@ ：读取中选项</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>列出ls中所有的ASCII文本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /bin/ls</span><br></pre></td></tr></table></figure>
-
-<p>列出ls中所有的ASCII文本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /bin/ls strings</span><br></pre></td></tr></table></figure>
-
-<p>查找ls中包含libc的字符串，不区分大小写：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /bin/ls | grep -i libc</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1689,14 +1702,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">931k</span>
+    <span title="站点总字数">935k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:07</span>
+    <span title="站点阅读时长">14:10</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -145,7 +145,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">652</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">653</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
@@ -235,7 +235,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">652</span>
+          <span class="site-state-item-count">653</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -308,6 +308,147 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/disown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/disown/" class="post-title-link" itemprop="url">【Linux 命令】disown</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:51:00 08:51:00" itemprop="dateModified" datetime="2020-09-25T08:51:00+08:00">2020-09-25 08:51:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/disown/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/disown/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从当前的shell中移除作业。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">disown [-h] [-ar] [jobspec ... | pid ...]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li><p>从当前shell的作业列表中移除全部作业。</p>
+</li>
+<li><p>从当前shell的作业列表中移除指定的一到多个作业。</p>
+</li>
+<li><p>从当前shell的作业列表中移除正在运行的作业。</p>
+</li>
+<li><p>标记作业，使得它们在当前shell退出后也不会结束。</p>
+</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-h    标记每个作业标识符，这些作业将不会在shell接收到sighup信号时接收到sighup信号。</span><br><span class="line">-a    移除所有的作业。</span><br><span class="line">-r    移除运行的作业。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>jobspec（可选）：要移除的作业标识符，可以是一到多个。</p>
+<p>pid（可选）：要移除的作业对应的进程ID，可以是一到多个。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非未开启作业控制或执行出现错误。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示。</span></span><br><span class="line">[user2@pc] ssh 192.168.1.4</span><br><span class="line">user2@192.168.1.4&#x27;s password:</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时按下ctrl+z使得交互停止。</span></span><br><span class="line">[1]+  Stopped                 ssh 192.168.1.4</span><br><span class="line"></span><br><span class="line">[user2@pc] ssh 192.168.1.7</span><br><span class="line">user2@192.168.1.7&#x27;s password:</span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时按下ctrl+z使得交互停止。</span></span><br><span class="line">[1]+  Stopped                 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line">[user2@pc] sleep 120 &amp;</span><br><span class="line">[3] 28986</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出作业及pid信息。</span></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line">[2]+ 28833 Stopped                 ssh 192.168.1.7</span><br><span class="line">[3]  28986 Running                 sleep 120 &amp;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除运行状态的作业。</span></span><br><span class="line">[user2@pc] disown -r</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line">[2]+ 28833 Stopped                 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;sleep 120&#x27;</span><br><span class="line">28986 sleep 120</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除指定的作业。</span></span><br><span class="line">[user2@pc] disown %2</span><br><span class="line">bash: warning: deleting stopped job 2 with process group 28833</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]- 28756 Stopped                 ssh 192.168.1.4</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;ssh 192.168.1.7&#x27;</span><br><span class="line">28833 ssh 192.168.1.7</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除全部作业。</span></span><br><span class="line">[user2@pc] disown -a</span><br><span class="line">bash: warning: deleting stopped job 1 with process group 28756</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意<span class="built_in">disown</span>只是移除作业，并没有停止。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;ssh 192.168.1.4&#x27;</span><br><span class="line">28756 ssh 192.168.1.4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 演示-h选项的作用。</span></span><br><span class="line">[user2@pc] sleep 90 &amp;</span><br><span class="line">[1] 109080</span><br><span class="line"></span><br><span class="line">[user2@pc] jobs -l</span><br><span class="line">[1]+ 109080 Running                 sleep 90 &amp;</span><br><span class="line"></span><br><span class="line">[user2@pc] disown -h %1</span><br><span class="line"></span><br><span class="line">[user2@pc] exit</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 此时前一个终端已经关闭，现在打开新终端查找该作业。</span></span><br><span class="line">[user2@pc] pgrep -a -u user2 -f &#x27;sleep 90&#x27;</span><br><span class="line">109080 sleep 90</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><code>bash</code>的作业控制命令包括<code>bg fg kill wait disown suspend</code>。</li>
+<li>该命令需要<code>set</code>选项<code>monitor</code>处于开启状态时才能执行；查看作业控制状态：输入<code>set -o</code>查看<code>monitor</code>行；执行<code>set -o monitor</code>或<code>set -m</code>开启该选项。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3liZXJjaXRpLmJpei9mYXEvdW5peC1saW51eC1kaXNvd24tY29tbWFuZC1leGFtcGxlcy11c2FnZS1zeW50YXgv">disown的用法<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1421,126 +1562,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dhclient/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/dhclient/" class="post-title-link" itemprop="url">【Linux 命令】dhclient</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:46:00 08:46:00" itemprop="dateModified" datetime="2020-09-25T08:46:00+08:00">2020-09-25 08:46:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/dhclient/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/dhclient/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>186</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>动态获取或释放IP地址</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dhclient命令</strong> 使用动态主机配置协议动态的配置网络接口的网络参数。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dhclient(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0：指定dhcp客户端监听的端口号；</span><br><span class="line">-d：总是以前台方式运行程序；</span><br><span class="line">-q：安静模式，不打印任何错误的提示信息；</span><br><span class="line">-r：释放ip地址。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>网络接口：操作的网络接口。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dhclient -r     #释放IP</span><br><span class="line">dhclient        #获取IP</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1599,14 +1620,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">931k</span>
+    <span title="站点总字数">935k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:07</span>
+    <span title="站点阅读时长">14:10</span>
   </span>
 </div>
 <div class="busuanzi-count">
