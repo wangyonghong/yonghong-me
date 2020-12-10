@@ -145,17 +145,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">656</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">657</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">704</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-开源">
@@ -235,20 +235,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">656</span>
+          <span class="site-state-item-count">657</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">704</span>
+        <span class="site-state-item-count">705</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,6 +308,141 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/chcon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/chcon/" class="post-title-link" itemprop="url">【Linux 命令】chcon</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:28:00 08:28:00" itemprop="dateModified" datetime="2020-09-25T08:28:00+08:00">2020-09-25 08:28:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/chcon/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/chcon/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>修改对象（文件）的安全上下文</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>chcon命令</strong> 是修改对象（文件）的安全上下文，比如：用户、角色、类型、安全级别。也就是将每个文件的安全环境变更至指定环境。使用<code>--reference</code>选项时，把指定文件的安全环境设置为与参考文件相同。chcon命令位于<code>/usr/bin/chcon</code>。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chcon [选项]... 环境 文件...</span><br><span class="line">chcon [选项]... [-u 用户] [-r 角色] [-l 范围] [-t 类型] 文件...</span><br><span class="line">chcon [选项]... --reference=参考文件 文件...</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-h, --no-dereference：影响符号连接而非引用的文件。</span><br><span class="line">    --reference=参考文件：使用指定参考文件的安全环境，而非指定值。</span><br><span class="line">-R, --recursive：递归处理所有的文件及子目录。</span><br><span class="line">-v, --verbose：为处理的所有文件显示诊断信息。</span><br><span class="line">-u, --user=用户：设置指定用户的目标安全环境。</span><br><span class="line">-r, --role=角色：设置指定角色的目标安全环境。</span><br><span class="line">-t, --type=类型：设置指定类型的目标安全环境。</span><br><span class="line">-l, --range=范围：设置指定范围的目标安全环境。</span><br></pre></td></tr></table></figure>
+
+<p>以下选项是在指定了<code>-R</code>选项时被用于设置如何穿越目录结构体系。如果您指定了多于一个选项，那么只有最后一个会生效。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-H：如果命令行参数是一个通到目录的符号链接，则遍历符号链接。</span><br><span class="line">-L：遍历每一个遇到的通到目录的符号链接。</span><br><span class="line">-P：不遍历任何符号链接（默认）。</span><br><span class="line">--help：显示此帮助信息并退出。</span><br><span class="line">--version：显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>如果你想把这个ftp共享给匿名用户的话，需要开启以下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -R -t public_content_t /var/ftp</span><br></pre></td></tr></table></figure>
+
+<p>如果你想让你设置的FTP目录可以上传文件的话，SELINUX需要设置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -t public_content_rw_t /var/ftp/incoming</span><br></pre></td></tr></table></figure>
+
+<p>允许用户HHTP访问其家目录，该设定限仅于用户的家目录主页：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setsebool -P httpd_enable_homedirs 1</span><br><span class="line">chcon -R -t httpd_sys_content_t ~user/public_html</span><br></pre></td></tr></table></figure>
+
+<p>如果你希望将samba目录共享给其他用户，你需要设置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -t samba_share_t /directory</span><br></pre></td></tr></table></figure>
+
+<p>共享rsync目录时：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -t public_content_t /directories</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1452,122 +1587,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/bzip2recover/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/bzip2recover/" class="post-title-link" itemprop="url">【Linux 命令】bzip2recover</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:23:00 08:23:00" itemprop="dateModified" datetime="2020-09-25T08:23:00+08:00">2020-09-25 08:23:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/bzip2recover/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/bzip2recover/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>197</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>恢复被破坏的.bz2压缩包中的文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>bzip2recover命令</strong> 可用于恢复被破坏的“.bz2”压缩包中的文件。</p>
-<p>bzip2是以区块的方式来压缩文件，每个区块视为独立的单位。因此，当某一区块损坏时，便可利用bzip2recover，试着将文件中的区块隔开来，以便解压缩正常的区块。通常只适用在压缩文件很大的情况。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bzip2recover(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要恢复数据的.bz2压缩包。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1626,14 +1645,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">941k</span>
+    <span title="站点总字数">952k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:15</span>
+    <span title="站点阅读时长">14:25</span>
   </span>
 </div>
 <div class="busuanzi-count">

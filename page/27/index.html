@@ -145,17 +145,17 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">656</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">657</span></a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">704</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">14</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-开源">
@@ -235,20 +235,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">656</span>
+          <span class="site-state-item-count">657</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">704</span>
+        <span class="site-state-item-count">705</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,6 +308,133 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/restorecon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/linux-command/restorecon/" class="post-title-link" itemprop="url">【Linux 命令】restorecon</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:18:00 11:18:00" itemprop="dateModified" datetime="2020-09-25T11:18:00+08:00">2020-09-25 11:18:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/linux-command/restorecon/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/restorecon/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>恢复文件的安全上下文</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>restorecon命令</strong> 用来恢复SELinux文件属性即恢复文件的安全上下文。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restorecon [-iFnrRv] [-e excludedir ] [-o filename ] [-f filename | pathname...]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-i：忽略不存在的文件。</span><br><span class="line">-f：infilename 文件 infilename 中记录要处理的文件。</span><br><span class="line">-e：directory 排除目录。</span><br><span class="line">-R/-r：递归处理目录。</span><br><span class="line">-n：不改变文件标签。</span><br><span class="line">-o/outfilename：保存文件列表到 outfilename，在文件不正确情况下。</span><br><span class="line">-v：将过程显示到屏幕上。</span><br><span class="line">-F：强制恢复文件安全语境。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>假设CentOS安装了apache，网页默认的主目录是<code>/var/www/html</code>，我们经常遇到这样的问题，在其他目录中创建了一个网页文件，然后用mv移动到网页默认目录<code>/var/www/html</code>中，但是在浏览器中却打不开这个文件，这很可能是因为这个文件的SELinux配置信息是继承原来那个目录的，与<code>/var/www/html</code>目录不同，使用mv移动的时候，这个SELinux配置信息也一起移动过来了，从而导致无法打开页面，具体请看下面的实例：</p>
+<p>使用CentOS举例,如果默认没有安装apache，确保网络连接，使用下面的命令安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@jsdig.com ~]# yum install httpd</span><br><span class="line"><span class="meta"> #</span><span class="bash"> 我们在root的家目录新建一个html文件 </span></span><br><span class="line">[root@jsdig.com ~]# pwd</span><br><span class="line">/root</span><br><span class="line"></span><br><span class="line">[root@jsdig.com ~]# vi index.html</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 随便输入一段文字，保存退出 </span></span><br><span class="line">welcome to www.jsdig.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将这个文件mv到网页默认目录下 </span></span><br><span class="line">[root@jsdig.com ~]# mv index.html /var/www/html/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这个时候我们使用firefox浏览器输入127.0.0.1/index.html发现打不开，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看一下SELinux的日志文件，发现了下面这一段报错信息，从这个报错信息不难看出，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进程httpd访问网页主目录中的index.html时被SELinux阻止，原因是因为，SELinux配置信息不正确,</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 正确的SELinux配置信息应该是scontext=后面的部分，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 而index.html文件的SELinux配置信息却是tcontext=后面的部分，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从tcontext=的第三段“admin_home_t”不难看出，这个文件的SELinux配置信息是root用户家目录的。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">type=AVC msg=audit(1378974214.610:465): avc:  denied  &#123; open &#125; for  pid=2359 comm=&quot;httpd&quot; path=&quot;/var/www/html/index.html&quot; dev=&quot;sda1&quot; ino=1317685 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:admin_home_t:s0 tclass=file</span><br></pre></td></tr></table></figure>
+
+<p>使用ls -Z也可以看出,文件和目录的SELinux信息不匹配</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@jsdig.com html]# ls -Z /var/www/html/</span><br><span class="line">.... unconfined_u:object_r:admin_home_t:s0 index.html</span><br><span class="line"></span><br><span class="line">[root@jsdig.com html]# ls -Zd /var/www/html/</span><br><span class="line">.... system_u:object_r:httpd_sys_content_t:s0 /var/www/html/</span><br></pre></td></tr></table></figure>
+
+<p>使用restorecon来恢复网页主目录中所有文件的SELinux配置信息(如果目标为一个目录，可以添加-R参数递归)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@jsdig.com html]# restorecon -R /var/www/html/</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -1533,178 +1660,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/read/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/linux-command/read/" class="post-title-link" itemprop="url">【Linux 命令】read</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:13:00 11:13:00" itemprop="dateModified" datetime="2020-09-25T11:13:00+08:00">2020-09-25 11:13:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/linux-command/read/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-command/read/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>从键盘读取变量值</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>read命令</strong> 从键盘读取变量的值，通常用在shell脚本中与用户进行交互的场合。该命令可以一次读取多个变量的值，变量和输入的值都需要使用空格隔开。在read命令后面，如果没有指定变量名，读取的数据将被自动赋值给特定的变量REPLY</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p：指定读取值时的提示符；</span><br><span class="line">-t：指定读取值时等待的时间（秒）。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>变量：指定读取值的变量名。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的列表给出了read命令的常用方式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read 1987name</span><br><span class="line">从标准输入读取输入并赋值给变量1987name。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read first last</span><br><span class="line">从标准输入读取输入到第一个空格或者回车，将输入的第一个单词放到变量first中，并将该行其他的输入放在变量last中。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read</span><br><span class="line">从标准输入读取一行并赋值给特定变量REPLY。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -a arrayname</span><br><span class="line">把单词清单读入arrayname的数组里。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -p &quot;text&quot;</span><br><span class="line">打印提示（text），等待输入，并将输入存储在REPLY中。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -r line</span><br><span class="line">允许输入包含反斜杠。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -t 3</span><br><span class="line">指定读取等待时间为3秒。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -n 2 var</span><br><span class="line">从输入中读取两个字符并存入变量var，不需要按回车读取。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read -d &quot;:&quot; var</span><br><span class="line">用定界符“:”结束输入行。</span><br></pre></td></tr></table></figure>
-
-<h2 id="read命令示例"><a href="#read命令示例" class="headerlink" title="read命令示例"></a>read命令示例</h2><p>从标准输入读取输入并赋值给变量1987name。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">read</span> 1987name        <span class="comment">#等待读取输入，直到回车后表示输入完毕，并将输入赋值给变量answer</span></span></span><br><span class="line">HelloWorld            #控制台输入Hello</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$1987name</span>       <span class="comment">#打印变量</span></span></span><br><span class="line">HelloWorld</span><br></pre></td></tr></table></figure>
-
-<p>等待一组输入，每个单词之间使用空格隔开，直到回车结束，并分别将单词依次赋值给这三个读入变量。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">read</span> one two three</span></span><br><span class="line">1 2 3                   #在控制台输入1 2 3，它们之间用空格隔开。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="string">&quot;one = <span class="variable">$one</span>, two = <span class="variable">$two</span>, three = <span class="variable">$three</span>&quot;</span></span></span><br><span class="line">one = 1, two = 2, three = 3</span><br></pre></td></tr></table></figure>
-
-<p>REPLY示例</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">read</span>                  <span class="comment">#等待控制台输入，并将结果赋值给特定内置变量REPLY。</span></span></span><br><span class="line">This is REPLY          #在控制台输入该行。 </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$REPLY</span>           <span class="comment">#打印输出特定内置变量REPLY，以确认是否被正确赋值。</span></span></span><br><span class="line"></span><br><span class="line">This is REPLY</span><br></pre></td></tr></table></figure>
-
-<p>-p选项示例</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">read</span> -p <span class="string">&quot;Enter your name: &quot;</span>            <span class="comment">#输出文本提示，同时等待输入，并将结果赋值给REPLY。</span></span></span><br><span class="line">Enter you name: stephen                 #在提示文本之后输入stephen</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$REPLY</span></span></span><br><span class="line">stephen</span><br></pre></td></tr></table></figure>
-
-<p>等待控制台输入，并将输入信息视为数组，赋值给数组变量friends，输入信息用空格隔开数组的每个元素。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">read</span> -a friends</span></span><br><span class="line">Tim Tom Helen</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="string">&quot;They are <span class="variable">$&#123;friends[0]&#125;</span>, <span class="variable">$&#123;friends[1]&#125;</span> and <span class="variable">$&#123;friends[2]&#125;</span>.&quot;</span></span></span><br><span class="line">They are Tim, Tom and Helen.</span><br></pre></td></tr></table></figure>
-
-<p> <strong>补充一个终端输入密码时候，不让密码显示出来的例子。</strong> </p>
-<p>方法1：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">read -p &quot;输入密码：&quot; -s pwd</span><br><span class="line">echo</span><br><span class="line">echo password read, is &quot;$pwd&quot;</span><br></pre></td></tr></table></figure>
-
-<p>方法2：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">stty -echo</span><br><span class="line">read -p &quot;输入密码：&quot; pwd</span><br><span class="line">stty echo</span><br><span class="line">echo</span><br><span class="line">echo 输入完毕。</span><br></pre></td></tr></table></figure>
-
-<p>其中，选项<code>-echo</code>禁止将输出发送到终端，而选项<code>echo</code>则允许发送输出。</p>
-<p>使用read命令从键盘读取变量值，并且将值赋给指定的变量，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read v1 v3          #读取变量值</span><br></pre></td></tr></table></figure>
-
-<p>执行上面的指令以后，要求键入两个数据，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linux c+            #输入数据</span><br></pre></td></tr></table></figure>
-
-<p>完成之后，可以使用echo命令将指定的变量值输出查看，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $v1 $v3       #输出变量的值</span><br></pre></td></tr></table></figure>
-
-<p>执行输出变量值的命令以后，将显示用户所输入的数据值，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Linux c+           #输出变量值</span><br></pre></td></tr></table></figure>
-
-<p>注意：使用echo命令输出变量值时，必须在变量名前添加符号<code>$</code>。否则，echo将直接输出变量名。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
 
   
   <nav class="pagination">
@@ -1763,14 +1718,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">941k</span>
+    <span title="站点总字数">952k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:15</span>
+    <span title="站点阅读时长">14:25</span>
   </span>
 </div>
 <div class="busuanzi-count">

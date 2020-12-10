@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+  <meta name="yandex-verification" content="bb13e36c670d98c2">
+  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","scheme":"Gemini","version":"8.0.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="视频来源：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1vf4y1B7tt 大背景25 岁的 JavaJava 的现状2020 年是 Java 诞生的第 25 个年头，Oracle 表示，目前 Java 仍然流行是流行的编程语言，广泛使用在企业中。目前全世界有超过 69% 的专职开发人员使用 Java，全世界有 510 亿台活动 Java 虚拟机（JVM）在部署中，目前 Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDK 15来袭，带你深入掌握 Java 15 新特性">
+<meta property="og:url" content="http://yonghong.tech/2020/12/jdk-15-new-feature/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="视频来源：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1vf4y1B7tt 大背景25 岁的 JavaJava 的现状2020 年是 Java 诞生的第 25 个年头，Oracle 表示，目前 Java 仍然流行是流行的编程语言，广泛使用在企业中。目前全世界有超过 69% 的专职开发人员使用 Java，全世界有 510 亿台活动 Java 虚拟机（JVM）在部署中，目前 Ja">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/12/10-09-20-lKGMjQBUu1XzDeP-96MbI6.jpg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/12/10-09-20-Oracle-Java-SE-%E6%94%AF%E6%8C%81%E8%B7%AF%E7%BA%BF%E5%9B%BE-Bwu1zb.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/12/10-09-20-graalvm-e6kACA.png">
+<meta property="article:published_time" content="2020-12-10T02:24:00.000Z">
+<meta property="article:modified_time" content="2020-12-10T02:24:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="JDK">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="15">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2020/12/10-09-20-lKGMjQBUu1XzDeP-96MbI6.jpg">
+
+
+<link rel="canonical" href="http://yonghong.tech/2020/12/jdk-15-new-feature/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<meta name="keywords" content="代码,产品,互联网,研发,程序员,学习,工作,技术,分享,永红,yonghong,Java,Kotlin,Python,Nginx,Springboot,Linux,MySQL,MongoDB,Redis">
+
+
+  <title>JDK 15来袭，带你深入掌握 Java 15 新特性 | 永红的互联网手记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">657</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
+
+  </li>
+        <li class="menu-item menu-item-开源">
+
+    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">大背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#25-%E5%B2%81%E7%9A%84-Java"><span class="nav-number">1.1.</span> <span class="nav-text">25 岁的 Java</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-%E7%9A%84%E7%8E%B0%E7%8A%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">Java 的现状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%BB%E8%A6%81%E6%96%B0%E7%89%B9%E6%80%A7"><span class="nav-number">1.1.2.</span> <span class="nav-text">历史版本的主要新特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%91%E6%9C%9F%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%8F%8A%E7%BB%B4%E6%8A%A4%E6%97%B6%E9%97%B4"><span class="nav-number">1.1.3.</span> <span class="nav-text">近期版本发布及维护时间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">1.2.</span> <span class="nav-text">名词解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%B5%E5%8C%96%E5%99%A8%E6%A8%A1%E5%9D%97%EF%BC%88Incubator-%E5%AD%B5%E5%8C%96%E7%89%88-%E5%AE%9E%E9%AA%8C%E7%89%88%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">孵化器模块（Incubator&#x2F;孵化版&#x2F;实验版）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E8%A7%88%E7%89%B9%E6%80%A7%EF%BC%88Preview-%E9%A2%84%E8%A7%88%E7%89%88%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">预览特性（Preview&#x2F;预览版）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7%E5%85%B3%E6%B3%A8%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">新特性关注点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">新特性概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-number">2.1.</span> <span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E5%87%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E4%BC%81%E4%B8%9A"><span class="nav-number">2.2.</span> <span class="nav-text">做出贡献的企业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="nav-number">2.3.</span> <span class="nav-text">开发工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E4%B8%BB%E8%8F%9C%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">新特性（主菜）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E5%AF%86%E5%B0%81%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">01-密封类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E9%9A%90%E8%97%8F%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text">02-隐藏类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-instanceof-%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="nav-number">3.3.</span> <span class="nav-text">03-instanceof 模式匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-ZGC-%E5%8A%9F%E8%83%BD%E8%BD%AC%E6%AD%A3"><span class="nav-number">3.4.</span> <span class="nav-text">04-ZGC 功能转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-%E6%96%87%E6%9C%AC%E5%9D%97%E5%8A%9F%E8%83%BD%E8%BD%AC%E6%AD%A3"><span class="nav-number">3.5.</span> <span class="nav-text">05-文本块功能转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-Records"><span class="nav-number">3.6.</span> <span class="nav-text">06-Records</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E9%85%8D%E8%8F%9C%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">新特性（配菜）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-EdDSA-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E7%AE%97%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">01-EdDSA 数字签名算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0-DatagramSocket-API"><span class="nav-number">4.2.</span> <span class="nav-text">02-重新实现 DatagramSocket API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E7%A6%81%E7%94%A8%E5%81%8F%E5%90%91%E9%94%81"><span class="nav-number">4.3.</span> <span class="nav-text">03-禁用偏向锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-Shenandoah-GC-%E8%BD%AC%E6%AD%A3"><span class="nav-number">4.4.</span> <span class="nav-text">04-Shenandoah GC 转正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E8%AE%BF%E9%97%AE-API"><span class="nav-number">4.5.</span> <span class="nav-text">05-外部存储器访问 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-%E7%A7%BB%E9%99%A4-Solaris-%E5%92%8C-SPARC-%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.6.</span> <span class="nav-text">06-移除 Solaris 和 SPARC 端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07-%E7%A7%BB%E9%99%A4-the-Nashorn-JS-%E5%BC%95%E6%93%8E"><span class="nav-number">4.7.</span> <span class="nav-text">07-移除 the Nashorn JS 引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08-%E5%BA%9F%E5%BC%83-RMI-%E6%BF%80%E6%B4%BB%E6%9C%BA%E5%88%B6"><span class="nav-number">4.8.</span> <span class="nav-text">08-废弃 RMI 激活机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88%E9%A5%AD%E5%90%8E%E7%94%9C%E7%82%B9%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">新特性（饭后甜点）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E6%B7%BB%E5%8A%A0%E9%A1%B9"><span class="nav-number">5.1.</span> <span class="nav-text">01-添加项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E7%A7%BB%E9%99%A4%E9%A1%B9-amp-%E5%BA%9F%E5%BC%83%E9%A1%B9"><span class="nav-number">5.2.</span> <span class="nav-text">02-移除项&amp;废弃项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E5%85%B6%E4%BB%96%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.3.</span> <span class="nav-text">03-其他事项</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">657</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">705</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20veW9uZ2hvbmczNjU=" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;yonghong365"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2020/12/jdk-15-new-feature/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JDK 15来袭，带你深入掌握 Java 15 新特性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-10 10:24:00 10:24:00" itemprop="dateCreated datePublished" datetime="2020-12-10T10:24:00+08:00">2020-12-10 10:24:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2020/12/jdk-15-new-feature/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/12/jdk-15-new-feature/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>视频来源：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMXZmNHkxQjd0dA==">https://www.bilibili.com/video/BV1vf4y1B7tt<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="大背景"><a href="#大背景" class="headerlink" title="大背景"></a>大背景</h2><h3 id="25-岁的-Java"><a href="#25-岁的-Java" class="headerlink" title="25 岁的 Java"></a>25 岁的 Java</h3><h4 id="Java-的现状"><a href="#Java-的现状" class="headerlink" title="Java 的现状"></a>Java 的现状</h4><p>2020 年是 Java 诞生的第 25 个年头，Oracle 表示，目前 Java 仍然流行是流行的编程语言，广泛使用在企业中。目前全世界有超过 69% 的专职开发人员使用 Java，全世界有 510 亿台活动 Java 虚拟机（JVM）在部署中，目前 Java 主要被用于分析、数据管理、大数据、DevOps、移动、持续开发工具和聊天机器人等服务。</p>
+<h4 id="历史版本的主要新特性"><a href="#历史版本的主要新特性" class="headerlink" title="历史版本的主要新特性"></a>历史版本的主要新特性</h4><p>在过去的这些年中，Java 在过去增强功能的推动下为用户提供了超过二十年的创新。例如：</p>
+<ul>
+<li>JDK 5：enum、泛型、自动装箱与拆箱、可变参数、增强循环等</li>
+<li>JDK 6：支持脚本语言、JDBC 4.0 API</li>
+<li>JDK 7：支持 try-with-resources、switch 语句块增加 String 支持、NIO 2.0 包</li>
+<li>JDK 8：lambda 表达式、Stream API、新的日期时间的 API、方法引用、构造器引用</li>
+<li>JDK 9：模块化系统、jshell</li>
+<li>JDK 10：局部变量的类型推断</li>
+<li>JDK 11：ZGC 的引入、Epsilon GC</li>
+<li>JDK 12：switch 表达式、Shenandoah GC、增强 G1</li>
+<li>JDK 13：switch 表达式引入 yield、文本块</li>
+<li>JDK 14：instanceof 模式识别、Records、弃用 Parallel Scavenge + Serial GC 组合、删除 CMS GC</li>
+</ul>
+<a id="more"></a>
+
+<h4 id="近期版本发布及维护时间"><a href="#近期版本发布及维护时间" class="headerlink" title="近期版本发布及维护时间"></a>近期版本发布及维护时间</h4><p>OpenJDK 发版本路线图：</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/12/10-09-20-lKGMjQBUu1XzDeP-96MbI6.jpg" alt="OpenJDK 发版本路线图"></p>
+<p>Oracle Java SE 支持路线图：<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhLXNlLXN1cHBvcnQtcm9hZG1hcC5odG1s">https://www.oracle.com/java/technologies/java-se-support-roadmap.html<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/12/10-09-20-Oracle-Java-SE-%E6%94%AF%E6%8C%81%E8%B7%AF%E7%BA%BF%E5%9B%BE-Bwu1zb.png" alt="Oracle Java SE 支持路线图"></p>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><p>因为是小步快跑、快速迭代，因此此处解释下这两个词：孵化器模块（Incubator）和预览特性（Preview）。</p>
+<h4 id="孵化器模块（Incubator-孵化版-实验版）"><a href="#孵化器模块（Incubator-孵化版-实验版）" class="headerlink" title="孵化器模块（Incubator/孵化版/实验版）"></a>孵化器模块（Incubator/孵化版/实验版）</h4><p>尚未确定的 API/工具，主要用于从 Java 社区收集使用反馈，稳定性无保障，后期有较大可能性移除。</p>
+<h4 id="预览特性（Preview-预览版）"><a href="#预览特性（Preview-预览版）" class="headerlink" title="预览特性（Preview/预览版）"></a>预览特性（Preview/预览版）</h4><p>规格已成型，实现已确定，但还未最终定稿。这些特性还是存在被移除的可能性，但一般来说最后都会被固定下来。</p>
+<h3 id="新特性关注点"><a href="#新特性关注点" class="headerlink" title="新特性关注点"></a>新特性关注点</h3><p>角度一：语法层面</p>
+<p>lambda 表达式、switch、自动装箱和拆箱、enum、接口中的静态方法、默认方法、私有方法</p>
+<p>角度二：API 层面</p>
+<p>Stream API、新的日期时间的 API、Optional、String、集合框架</p>
+<p>角度三：底层优化</p>
+<p>JVM 优化、元空间、GC、GC 的组合、GC 的参数、js 的执行引擎、集合底层实现等</p>
+<h2 id="新特性概述"><a href="#新特性概述" class="headerlink" title="新特性概述"></a>新特性概述</h2><h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><p>这次发布的主要功能有：</p>
+<p>Java 15 为用户提供了 14 项主要的增强/更改,包括一个孵化器模块、三个预览功能、两个不推荐使用的功能以及两个删除功能。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L3Byb2plY3RzL2pkay8xNS8=">https://openjdk.java.net/projects/jdk/15/<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>Features</strong></p>
+<ul>
+<li>339:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzM5">Edwards-Curve Digital Signature Algorithm (EdDSA)<i class="fa fa-external-link-alt"></i></span> </li>
+<li>360:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzYw">Sealed Classes (Preview)<i class="fa fa-external-link-alt"></i></span> </li>
+<li>371:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzcx">Hidden Classes<i class="fa fa-external-link-alt"></i></span>          </li>
+<li>372:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzcy">Remove the Nashorn JavaScript Engine<i class="fa fa-external-link-alt"></i></span> </li>
+<li>373:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzcz">Reimplement the Legacy DatagramSocket API<i class="fa fa-external-link-alt"></i></span> </li>
+<li>374:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzc0">Disable and Deprecate Biased Locking<i class="fa fa-external-link-alt"></i></span> </li>
+<li>375:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzc1">Pattern Matching for instanceof (Second Preview)<i class="fa fa-external-link-alt"></i></span> </li>
+<li>377:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzc3">ZGC: A Scalable Low-Latency Garbage Collector<i class="fa fa-external-link-alt"></i></span> </li>
+<li>378:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzc4">Text Blocks<i class="fa fa-external-link-alt"></i></span>             </li>
+<li>379:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzc5">Shenandoah: A Low-Pause-Time Garbage Collector<i class="fa fa-external-link-alt"></i></span> </li>
+<li>381:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzgx">Remove the Solaris and SPARC Ports<i class="fa fa-external-link-alt"></i></span> </li>
+<li>383:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzgz">Foreign-Memory Access API (Second Incubator)<i class="fa fa-external-link-alt"></i></span> </li>
+<li>384:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzg0">Records (Second Preview)<i class="fa fa-external-link-alt"></i></span> </li>
+<li>385:  <span class="exturl" data-url="aHR0cHM6Ly9vcGVuamRrLmphdmEubmV0L2plcHMvMzg1">Deprecate RMI Activation for Removal<i class="fa fa-external-link-alt"></i></span> </li>
+</ul>
+<p>对应中文特性：（JEP：JDK Enhancement Proposals，JDK 增强建议，也就是 JDK 的特性新增和改进提案。）</p>
+<ul>
+<li>JEP 339：EdDSA 数字签名算法</li>
+<li>JEP 360：密封类（预览）</li>
+<li>JEP 371：隐藏类</li>
+<li>JEP 372：删除 Nashorn JavaScript 引擎</li>
+<li>JEP 373：重新实现 Legacy DatagramSocket API</li>
+<li>JEP 374：禁用偏向锁</li>
+<li>JEP 375：instanceof 模式匹配（第二次预览）</li>
+<li>JEP 377：ZGC：一个可扩展的低延迟垃圾收集器</li>
+<li>JEP 378：文本块</li>
+<li>JEP 379：Shenandoah：低暂停时间垃圾收集器</li>
+<li>JEP 381：移除 Solaris 和 SPARC 端口</li>
+<li>JEP 383：外部存储器访问 API（第二个孵化版）</li>
+<li>JEP 384：Records（第二次预览）</li>
+<li>JEP 385：废弃 RMI 激活机制</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>JDK 15 整体来看新特性方面并不算很亮眼，它主要是对之前版本预览特性的功能做了确定，如文本块、ZGC 等，这么一来我们就可以放心大胆的使用了。</li>
+<li>你发任你发，我用 Java 8。</li>
+</ul>
+<h3 id="做出贡献的企业"><a href="#做出贡献的企业" class="headerlink" title="做出贡献的企业"></a>做出贡献的企业</h3><p>通过 Oracle 的官方博文中看到，虽然主力军 Oracle 干了 79.68% 的工作量，其次是开源巨头红帽。但还是有不少企业参与其中。国内企业贡献最多的居然是腾讯公司，被 Oracle 点名感谢。阿里巴巴和华为也做出了不可磨灭的贡献。Java 有中国科技力量的贡献能大大提升中国 IT 的硬实力。</p>
+<h3 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h3><p>支持 Java 15 的开发工具</p>
+<p>目前，官方博文说支持 Java 15 的工具，就下面这三款：</p>
+<ul>
+<li>JetBrains IDEA</li>
+<li>Apache NetBeans</li>
+<li>Eclipse Marketplace</li>
+</ul>
+<p>运行 JDK 15 需要 IDEA 2020.2 才能支持。（JDK 14 要求 2020.1）</p>
+<p>JDK 15 下载路径：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9qYXZhc2UvamRrMTUtYXJjaGl2ZS1kb3dubG9hZHMuaHRtbA==">https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>如果使用 IDEA 需要设置 Project Structure -&gt; Project -&gt; Project language level 为 15 （Preview …）</p>
+<p>如果使用 Gradle，还需配置 build.gradle</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启预览特性</span></span><br><span class="line">tasks.withType(JavaCompile) &#123;</span><br><span class="line">    <span class="keyword">options</span>.compilerArgs += <span class="string">&quot;--enable-preview&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="新特性（主菜）"><a href="#新特性（主菜）" class="headerlink" title="新特性（主菜）"></a>新特性（主菜）</h2><h3 id="01-密封类"><a href="#01-密封类" class="headerlink" title="01-密封类"></a>01-密封类</h3><p><strong>JEP 360: Sealed Classes(Preview) 密封的类和接口（预览）</strong></p>
+<p>通过密封的类和接口来增强 Java 编程语言，这是新的预览特性。</p>
+<p>用于限制超类的使用，密封的类和接口限制其它可能继承或实现它们的其他类或接口。</p>
+<p>这个特性的目标包括——允许类或接口的开发者来控制哪些代码负责实现，提供了比限制使用超类的访问修饰符声明方式更多的选择，并通过支持对模式的详尽分析而支持模式匹配的未来发展。</p>
+<p>在 Java 中，类层次结构通过继承实现代码的重用，父类的方法可以被许多子类继承。</p>
+<p>但是，类层次结构的目的并不总是重用代码。有时，其目的是对域中存在的各种可能性进行建模，例如图形库支持的形状类型或金融应用程序支持的贷款类型。当以这种方式使用类层次结构时，我们可能需要限制子类集从而来简化建模。</p>
+<p>具体使用：</p>
+<p>因为我们引入了 sealed class 或 interface。这些 class 或者 interface 只允许被指定的类或者 interface 进行拓展和实现。</p>
+<p>使用修饰符 sealed class 或 interface，这些 class 或者 interface 只允许被指定的类或者 interface 进行拓展和实现。</p>
+<p>使用修饰符 sealed，您可以将一个类声明为密封类。密封类使用 reserved 关键字 permits 列出可以直接拓展它的类。子类可以是最终的，非密封的或密封的。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> sealed <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="title">permits</span> <span class="title">Teacher</span>, <span class="title">Student</span>, <span class="title">Worker</span> </span>&#123; <span class="comment">// 人</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123; <span class="comment">// 教师</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sealed <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">extends</span> <span class="title">Person</span> <span class="title">permits</span> <span class="title">MiddleSchoolStudent</span>, <span class="title">GraduateStudent</span> </span>&#123; <span class="comment">// 学生</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">MiddleSchoolStudent</span> <span class="keyword">extends</span> <span class="title">Student</span> </span>&#123; <span class="comment">// 中学生</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">GraduateStudent</span> <span class="keyword">extends</span> <span class="title">Student</span> </span>&#123; <span class="comment">// 研究生</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">non-sealed <span class="class"><span class="keyword">class</span> <span class="title">Worker</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123; <span class="comment">// 工人</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RailWayWorker</span> <span class="keyword">extends</span> <span class="title">Worker</span> </span>&#123; <span class="comment">// 铁路工人</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-隐藏类"><a href="#02-隐藏类" class="headerlink" title="02-隐藏类"></a>02-隐藏类</h3><p><strong>JEP 371: Hidden Classes（隐藏类）</strong></p>
+<p>该提案通过启用标准 API 来定义<strong>无法发现</strong>且<strong>具有有限生命周期</strong>的隐藏类，从而提高 JVM 上所有语言的效率。JDK 内部和外部的框架将能够动态生成类，而这些类可以定义隐藏类。通常来说基于 JVM 的很多语言都有动态生成类的机制，这样可以提高语言的灵活性和效率。</p>
+<ul>
+<li>隐藏类天生为框架设计的，在运行时生成内部的 class。</li>
+<li>隐藏类只能通过反射访问，不能直接被其他类的字节码访问。</li>
+<li>隐藏类可以独立于其他类加载、卸载，这可以减少框架的内存占用。</li>
+</ul>
+<p><strong>Hidden Classes 是什么呢？</strong><br>Hidden Classes 就是不能直接被其他 class 的二进制代码使用的 class。Hidden Classes 主要被一些框架用来生成运行时类，但是这些类不是用来直接使用的，而是通过反射机制来调用。</p>
+<p>比如在 JDK 8 中引入的 lambda 表达式，JVM 并不会在编译的时候将 lambda 表达式转换成为专门的类，而是在运行时将相应的字节码动态生成相应的类对象。</p>
+<p>另外使用动态代理也可以为某些类生成新的动态类。</p>
+<p><strong>那么我们希望这些动态生成的类需要具有什么特性呢？</strong></p>
+<ul>
+<li><strong>不可发现性。</strong>因为我们是为某些静态的类动态生成的动态类，所以我们希望把这个动态生成的类看做是静态类的一部分。所以我们不希望除了该静态类之外的其他机制发现。</li>
+<li><strong>访问控制。</strong>我们希望在访问控制静态类的同时，也能控制到动态生成的类。</li>
+<li><strong>生命周期。</strong>动态生成类的生命周期一般都比较短，我们并不需要将其保存和静态类的生命周期一致。</li>
+</ul>
+<p><strong>API 的支持</strong><br>所以我们需要一些 API 来定义无法发现的且具有有限生命周期的隐藏类。这将提高所有基于 JVM 的语言实现的效率。比如：</p>
+<ul>
+<li>java.lang.reflect.Proxy 可以定义隐藏类作为实现代理接口的代理类。</li>
+<li>java.lang.invoke.StringConcatFactory 可以生成隐藏类来保存常量连接的方法。</li>
+<li>java.lang.invoke.LambdaMetaFactory 可以生成隐藏的 nestmate 类，以容纳访问封闭变量的 lambda 主体。</li>
+</ul>
+<p>普通类是通过调用 ClassLoader::defineClass 创建的，而隐藏来是通过调用 Lookup::defineHiddenClass 创建的。这使 JVM 从提供的字节中派生一个隐藏类，链接该隐藏类，并返回提供对隐藏类的反射访问的查找对象。调用程序可以通过返回的查找对象来获取隐藏类的 Class 对象。</p>
+<h3 id="03-instanceof-模式匹配"><a href="#03-instanceof-模式匹配" class="headerlink" title="03-instanceof 模式匹配"></a>03-instanceof 模式匹配</h3><p><strong>JEP 375: Pattern Matching for instanceof(Second Preview) instanceof 自动匹配模式</strong></p>
+<p>在 Java 14 中作为预览语言功能引入的 instanceof 模式匹配，在 Java 15 中处于第二次预览，而没有任何更改。</p>
+<p>模式匹配允许程序中的通用逻辑（主要是从对象中的条件提取组件）可以更简洁地表达，Haskell 和 C# 等语言已采用模式匹配来实现简洁和安全性。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InstanceofTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">            String str = (String) obj;</span><br><span class="line">            System.out.println(str.contains(<span class="string">&quot;Java&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Not String Type&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String str) &#123;</span><br><span class="line">            System.out.println(str.contains(<span class="string">&quot;Java&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Not String Type&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        test1(<span class="string">&quot;Hello, Java&quot;</span>);</span><br><span class="line">        test2(<span class="string">&quot;Hello, Java&quot;</span>);</span><br><span class="line">        test1(<span class="keyword">null</span>);</span><br><span class="line">        test2(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="04-ZGC-功能转正"><a href="#04-ZGC-功能转正" class="headerlink" title="04-ZGC 功能转正"></a>04-ZGC 功能转正</h3><p><strong>JEP 377: ZGC: A Scalable Low-Latency Garbage Collector(Production) ZGC 功能转正</strong></p>
+<p>ZGC 是 Java 11 引入的新的垃圾收集器（JDK 9 以后默认的垃圾收集器是 G1），经过了多个实验阶段，自此终于成为正式特性。</p>
+<p>自 2018 年以来，ZGC 已增加了许多改进，从并发类卸载、取消使用未使用的内存、对类数据共享的支持到改进的 NUMA 感知。此外，最大堆大小从 4 TB 增加到 16 TB。支持的平台包括 Linux、Windows 和 macOS。</p>
+<p>ZGC 是一个重新设计的并发的垃圾回收器，通过减少 GC 停顿时间来提高性能。</p>
+<p>但这并不是替换默认的 GC，默认的 GC 仍然还是 G1；之前需要通过 <code>-XX:+UnlockExperimentalVMOptions</code>, <code>-XX:+UseZGC</code> 来启用 ZGC，现在只需要 <code>-XX:+UseZGC</code> 就可以。相信不久的将来它必将成为默认的垃圾回收器。</p>
+<p>相关的参数有 ZAllocationSpikeTolerance、ZCollectionInterval、ZFragmentationLimit、ZMarkStackSpaceLimit、ZProactive、ZUncommit、ZUncommitDelay、ZAllocationStall、ZPageAllocation、ZPageCacheFlush、ZRelocationSet、ZRelocationSetGroup、ZUncommit。</p>
+<h3 id="05-文本块功能转正"><a href="#05-文本块功能转正" class="headerlink" title="05-文本块功能转正"></a>05-文本块功能转正</h3><p><strong>JEP 378: 文本块功能转正</strong></p>
+<p>Text Blocks 首次是在 JDK 13 中以预览功能出现的，然后在 JDK 14 中又预览了一次，终于在 JDK 15 中被确定下来，可以放心使用了。</p>
+<p>文本块是一种多行字符串文字，它避免了大多数转义序列的需要，以一种可预测的方式自动设置字符串的格式，并在需要时使开发人员可以控制格式，简化编写 Java 程序的任务。</p>
+<p>文本块建议的目标是提高 Java 程序中的字符串的可读性，这些字符串便是以非 Java 语言编写的代码。另一个目标是支持从字符串文本迁移，规定任何新构造都可以表达与字符串文本相同的字符串集，解释相同的转义序列，并且以与字符串文本相同的方式进行操作。OpenJDK 开发人员希望添加转义序列来管理显式空白和换行控件。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TextBlockTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String text = <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                The Sound of Silence</span></span><br><span class="line"><span class="string">                寂静之声</span></span><br><span class="line"><span class="string">                Hello darkness, my old friend</span></span><br><span class="line"><span class="string">                你好 黑暗 我的老朋友</span></span><br><span class="line"><span class="string">                I&#x27;ve come to talk with you again</span></span><br><span class="line"><span class="string">                我又来和你交谈</span></span><br><span class="line"><span class="string">                Because a vision softly creeping</span></span><br><span class="line"><span class="string">                因为有一种幻觉正向悄悄地向我袭来</span></span><br><span class="line"><span class="string">                Left its seeds while I was sleeping</span></span><br><span class="line"><span class="string">                在我熟睡的时候留下了它的种子</span></span><br><span class="line"><span class="string">                And the vision that was planted in my brain</span></span><br><span class="line"><span class="string">                这种幻觉在我的脑海里生根发芽</span></span><br><span class="line"><span class="string">                Still remains</span></span><br><span class="line"><span class="string">                缠绕着我</span></span><br><span class="line"><span class="string">                Within the sound of silence 取消换行 \</span></span><br><span class="line"><span class="string">                伴随着寂静的声音\s空格</span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span>;</span><br><span class="line">        System.out.println(text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="06-Records"><a href="#06-Records" class="headerlink" title="06-Records"></a>06-Records</h3><p><strong>JEP 384: Records Class（预览）</strong></p>
+<p>Records Class 也是第二次出现的预览功能，它在 JDK 14 中也出现过一次了，使用 Record 可以更方便的创建一个常量类，使用的前后代码对比如下。</p>
+<ul>
+<li>当你用 Record 声明一个类时，该类将自动拥有以下功能：<ul>
+<li>获取成员变量的简单方法，以上面的代码为例 name() 和 partner()。注意区分于我们平常 getter 的写法。</li>
+<li>一个 equals 方法的实现，执行比较时会比较该类的所有成员属性。</li>
+<li>重写 equals 当然要重写 hashCode。</li>
+<li>一个可以打印该类所有成员属性的 toString 方法。</li>
+<li>请注意只会有一个构造方法。</li>
+</ul>
+</li>
+</ul>
+<h2 id="新特性（配菜）"><a href="#新特性（配菜）" class="headerlink" title="新特性（配菜）"></a>新特性（配菜）</h2><h3 id="01-EdDSA-数字签名算法"><a href="#01-EdDSA-数字签名算法" class="headerlink" title="01-EdDSA 数字签名算法"></a>01-EdDSA 数字签名算法</h3><p><strong>JEP 339: Edwards-Curve Digital Signature Algorithm（EdDSA 数字签名算法）</strong></p>
+<p>这是一个新的功能。新加入基于 Edwards-Curve 数字签名算法（Edwards-Curve Digital Signature Algorithm）的加密签名，即爱德华兹曲线数字签名算法。</p>
+<p>与 JDK 中的现有签名方案相比，EdDSA 具有更高的安全性和性能，因此备受关注。它已经在 OpenSSL 和 BoringSSL 等加密库中得到支持，在区块链领域用的比较多。</p>
+<p>EdDSA 是一种现代的椭圆曲线方案，具有 JDK 中现有签名方案的优点。</p>
+<h3 id="02-重新实现-DatagramSocket-API"><a href="#02-重新实现-DatagramSocket-API" class="headerlink" title="02-重新实现 DatagramSocket API"></a>02-重新实现 DatagramSocket API</h3><p><strong>JEP 373: Reimplement the Legacy DatagramSocket API（重新实现 DatagramSocket API）</strong></p>
+<p>新的计划是 JEP 353 的后续，该方案重新实现了遗留的套接字 API。</p>
+<p>java.net.datagram.Socket 和 java.net.MulticastSocket 的当前实现可以追溯到 JDK 1.0，那时 IPv6 还在开发中。因此，当前的多播套接字实现尝试调和 IPv4 和 IPv6 难以维护的方式。</p>
+<ul>
+<li>通过替换 java.net.datagram 的基础实现，重新实现旧版 DatagramSocket API。</li>
+<li>更改 java.net.DatagramSocket 和 java.net.MulticastSocket 为更加简单、现代化的底层实现。提高了 JDK 的可维护性和稳定性。</li>
+</ul>
+<p>新的实现：</p>
+<ul>
+<li>易于调试和维护</li>
+<li>与 Project Loom 中正在探索的虚拟线程协同</li>
+</ul>
+<h3 id="03-禁用偏向锁"><a href="#03-禁用偏向锁" class="headerlink" title="03-禁用偏向锁"></a>03-禁用偏向锁</h3><p><strong>JEP 374: Disable and Deprecate Biased Locking 禁用偏向锁定</strong></p>
+<p>在默认情况下禁用偏向锁定，并弃用所有相关命令行选项。目标是确定是否需要继续支持偏置锁定的高维护成本的遗留同步优化，<strong>HotSpot 虚拟机使用该优化来减少非竞争锁定的开销</strong>。尽管某些 Java 应用程序在禁用偏向锁后可能会出现性能下降，但偏向锁的性能提高通常不像以前那么明显。</p>
+<h3 id="04-Shenandoah-GC-转正"><a href="#04-Shenandoah-GC-转正" class="headerlink" title="04-Shenandoah GC 转正"></a>04-Shenandoah GC 转正</h3><p>Shenandoah 垃圾回收算法终于从实验特性转变为产品特性，这是一个从 JDK 12 引入的回收算法，该算法通过与正在运行的 Java 线程同时进行疏散工作来减少 GC 暂停时间。Shenandoah 的暂停时间与堆大小无关，无论堆大小是 200 MB 还是 200 GB，都具有相同的一致暂停时间。</p>
+<p>怎么形容 Shenandoah GC 和 ZGC 的关系呢？异同点大概如下：</p>
+<ul>
+<li>相同点：性能几乎可以认为是相同的。</li>
+<li>不同的：ZGC 是 Oracle JDK 的，根正苗红。而 Shenandoah 只存在于 OpenJDK 中，因此使用时需要注意你的 JDK 版本。</li>
+</ul>
+<p>打开方式：使用 <code>-XX:+UseShenandoahGC</code> 命令行参数打开。</p>
+<h3 id="05-外部存储器访问-API"><a href="#05-外部存储器访问-API" class="headerlink" title="05-外部存储器访问 API"></a>05-外部存储器访问 API</h3><p><strong>JEP 383: Foreign-Memory Access API(Second Incubator) 外部存储器访问 API（孵化器版）</strong></p>
+<p>目的是引入一个 API，以允许 Java 程序安全、有效地访问 Java 堆之外的外部存储器。如本机、持久和托管堆。</p>
+<p>有许多 Java 程序是访问外部内存的，比如 Ignite 和 MapDB。该 API 将有助于避免与垃圾收集相关的成本以及与跨进程共享内存以及通过将文件映射到内存来序列化和反序列化内存内容相关的不可预测性。该 Java API 目前没有为访问外部存储内存提供令人满意的解决方案。但是在新的提议中，API 不应该破化 JVM 的安全性。</p>
+<p>Foreign-Memory Access API 在 JDK 14 被作为 Incubator API 引入，在 JDK 15 处于 Second Incubator，提供了改进。</p>
+<h3 id="06-移除-Solaris-和-SPARC-端口"><a href="#06-移除-Solaris-和-SPARC-端口" class="headerlink" title="06-移除 Solaris 和 SPARC 端口"></a>06-移除 Solaris 和 SPARC 端口</h3><p><strong>JEP 381: Remove the Solaris and SPARC Ports（移除 Solaris 和 SPARC 端口）</strong></p>
+<p>删除对 Solaris/SPARC、Solaris/x64 和 Linux/SPARC 端口的源代码和构建支持，在 JDK 14 中被标记为废弃，在 JDK 15 版本正式移除。</p>
+<p>许多正在开发的项目和功能（如 Valhalla、Loom 和 Panama）需要进行重大更改以适应 CPU 架构和操作系统特定代码。</p>
+<p>近年来，Solaris 和 SPARC 都已被 Linux 操作系统和英特尔处理器取代。放弃对 Solaris 和 SPARC 端口的支持将使 OpenJDK 社区的贡献者能够加速开发新功能，从而推动平台向前发展。</p>
+<h3 id="07-移除-the-Nashorn-JS-引擎"><a href="#07-移除-the-Nashorn-JS-引擎" class="headerlink" title="07-移除 the Nashorn JS 引擎"></a>07-移除 the Nashorn JS 引擎</h3><p><strong>JEP 372: Remove the Nashorn JavaScript Engine</strong></p>
+<p>Nashorn 是在 JDK 提出的脚本执行引擎，该功能是 2014 年 3 月发布的 JDK 8 的新特性。在 JDK 11 就已经把它标记为废弃了，JDK 15 完全移除。</p>
+<p>在 JDK 11 中取以代之的是 GraalVM。GraalVM 是一个运行时平台，它支持 Java 和其他基于 Java 字节码的语言，但也支持其他语言，如 JavaScript，Ruby，Python 或 LLVM。性能是 Nashorn 的 2 倍以上。</p>
+<p>JDK 15 移除了 Nashorn JavaScript Engine 及 jjs 命令行工具。具体就是 jdk.scripting.nashorn 及 jdk.scripting.nashorn.shell 这两个模块被移除了。</p>
+<p>补充：</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/12/10-09-20-graalvm-e6kACA.png" alt="Graal VM"></p>
+<p>Graal VM 在 HotSpot VM 基础上增强而成的跨语言全栈虚拟机，可以作为“任何语言”的运行平台使用。语言包括：Java、Scala、Groovy、Kotlin、C、C++、JavaScript、Ruby、Python、R等</p>
+<h3 id="08-废弃-RMI-激活机制"><a href="#08-废弃-RMI-激活机制" class="headerlink" title="08-废弃 RMI 激活机制"></a>08-废弃 RMI 激活机制</h3><p><strong>JEP: Deprecate RMI Activation for Removal</strong></p>
+<p>RMI Activation 被标记为 Deprecate，将会在未来的版本中删除。RMI 激活机制是 RMI 中一个过时的部分，自 Java 8 以来一直是可选的而非必选项。RMI 激活机制增加了持续的维护负担。RMI 的其他部分暂时不会被弃用。</p>
+<p>在 RMI 系统中，我们使用延迟激活。延迟激活将激活对象推迟到客户第一次使用（即第一次方法调用）之前。</p>
+<p>既然 RMI Activation 这么好用，为什么要废弃呢？</p>
+<p>因为对于现代应用程序来说，分布式系统大部分都是基于 Web 的，Web 服务器已经解决了穿越防火墙，过滤请求，身份验证和安全性的问题，并且也提供了很多延迟加载的技术。</p>
+<p>所以在现代应用程序中，RMI Activation 已经很少被使用到了。并且在各种开源代码库中，也基本上找不到 RMI Activation 的使用代码了。</p>
+<p>为了减少 RMI Activation 的维护成本，在 JDK 8 中，RMI Activation 被置为可选的。现在在 JDK 15，终于可以废弃了。</p>
+<h2 id="新特性（饭后甜点）"><a href="#新特性（饭后甜点）" class="headerlink" title="新特性（饭后甜点）"></a>新特性（饭后甜点）</h2><h3 id="01-添加项"><a href="#01-添加项" class="headerlink" title="01-添加项"></a>01-添加项</h3><ul>
+<li>升级了 Unicode，支持 Unicode 13</li>
+<li>给 CharSequence 新增了 isEmpty 方法</li>
+<li>JDK 15 对 TreeMap 提供了 putIfAbsent、computeIfAbsent、computeIfPresent、compute、merge 方法提供了 overriding 实现</li>
+<li>jcmd 的 GC.heap_dump 命令现在支持 gz 选项，以 dump 出 gzip 压缩版的 heap。压缩等级从 1（压缩快） 到 9（压缩慢），默认为1。</li>
+<li>jdk.net.ExtendedSocketOptions 新增 SO_INCOMING_NAPI_ID 选项</li>
+<li>新增 jdk.tls.client.SignatureSchemes 及 jdk.tls.server.SignatureSchemes 用于配置 TLS Signature Schemes</li>
+<li>支持 certificate_authorities</li>
+</ul>
+<h3 id="02-移除项-amp-废弃项"><a href="#02-移除项-amp-废弃项" class="headerlink" title="02-移除项&amp;废弃项"></a>02-移除项&amp;废弃项</h3><ul>
+<li>淘汰了 <code>-XX:UseAdaptiveGCBoundary</code></li>
+<li>废弃了 ForceNUMA 选项</li>
+<li>默认禁用了 Native SunEC Implementation</li>
+</ul>
+<h3 id="03-其他事项"><a href="#03-其他事项" class="headerlink" title="03-其他事项"></a>03-其他事项</h3><p>已知问题：</p>
+<ul>
+<li>HttpClient 现在没有覆盖在 SSLContext Default Parameters 中指定的 Protocols</li>
+</ul>
+<p>其他事项：</p>
+<ul>
+<li>当 DatagramPacket 没有设置 port 的时候，其 getPort 方法返回 0</li>
+<li>优化了默认 G1 Heap Region Size 的计算</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2020/12/jdk-15-new-feature/" title="JDK 15来袭，带你深入掌握 Java 15 新特性">http://yonghong.tech/2020/12/jdk-15-new-feature/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JDK/" rel="tag"># JDK</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/15/" rel="tag"># 15</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/weekly-010/" rel="prev" title="技术爱好者周刊 第10期 | 2020年12月07日">
+                  <i class="fa fa-chevron-left"></i> 技术爱好者周刊 第10期 | 2020年12月07日
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments" id="gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+  </div>
+  
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+  <div class="beian"><span class="exturl" data-url="aHR0cHM6Ly9iZWlhbi5taWl0Lmdvdi5jbg==">京ICP备 18012168号-5 </span>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">952k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">14:25</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.2/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.2/source/js/next-boot.js"></script>
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.0.2/source/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.2/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/2020/12/jdk-15-new-feature/',]
+      });
+      });
+  </script>
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://yonghong-tech.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yonghong.tech/2020/12/jdk-15-new-feature/";
+    this.page.identifier = "2020/12/jdk-15-new-feature/";
+    this.page.title = "JDK 15来袭，带你深入掌握 Java 15 新特性";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yonghong-tech.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : '08b387ccce541fba0f5d14c9353e79b5',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "2020/12/jdk-15-new-feature/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
