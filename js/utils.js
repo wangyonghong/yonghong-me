@@ -85,21 +85,29 @@ NexT.utils = {
       button.addEventListener('click', () => {
         const lines = element.querySelector('.code') || element.querySelector('code');
         const code = lines.innerText;
-        const ta = document.createElement('textarea');
-        ta.style.top = window.scrollY + 'px'; // Prevent page scrolling
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.readOnly = true;
-        ta.value = code;
-        document.body.append(ta);
-        ta.select();
-        ta.setSelectionRange(0, code.length);
-        ta.readOnly = false;
-        const result = document.execCommand('copy');
-        button.querySelector('i').className = result ? 'fa fa-check-circle fa-fw' : 'fa fa-times-circle fa-fw';
-        ta.blur(); // For iOS
-        button.blur();
-        document.body.removeChild(ta);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(code).then(() => {
+            button.querySelector('i').className = 'fa fa-check-circle fa-fw';
+          }, () => {
+            button.querySelector('i').className = 'fa fa-times-circle fa-fw';
+          });
+        } else {
+          const ta = document.createElement('textarea');
+          ta.style.top = window.scrollY + 'px'; // Prevent page scrolling
+          ta.style.position = 'absolute';
+          ta.style.opacity = '0';
+          ta.readOnly = true;
+          ta.value = code;
+          document.body.append(ta);
+          ta.select();
+          ta.setSelectionRange(0, code.length);
+          ta.readOnly = false;
+          const result = document.execCommand('copy');
+          button.querySelector('i').className = result ? 'fa fa-check-circle fa-fw' : 'fa fa-times-circle fa-fw';
+          ta.blur(); // For iOS
+          button.blur();
+          document.body.removeChild(ta);
+        }
       });
       element.addEventListener('mouseleave', () => {
         setTimeout(() => {
@@ -281,13 +289,6 @@ NexT.utils = {
     });
   },
 
-  supportsPDFs: function() {
-    const ua = navigator.userAgent;
-    const supportsPdfMimeType = typeof navigator.mimeTypes['application/pdf'] !== 'undefined';
-    const isIOS = /iphone|ipad|ipod/i.test(ua.toLowerCase());
-    return ua.includes('irefox') || (supportsPdfMimeType && !isIOS);
-  },
-
   getComputedStyle: function(element) {
     const clone = element.cloneNode(true);
     clone.style.position = 'absolute';
@@ -318,7 +319,7 @@ NexT.utils = {
 
   updateSidebarPosition: function() {
     NexT.utils.initSidebarDimension();
-    if (window.screen.width < 992 || CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') return;
+    if (window.innerWidth < 992 || CONFIG.scheme === 'Pisces' || CONFIG.scheme === 'Gemini') return;
     // Expand sidebar on post detail page by default, when post has a toc.
     const hasTOC = document.querySelector('.post-toc');
     let display = CONFIG.page.sidebar;
