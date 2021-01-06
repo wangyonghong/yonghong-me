@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -12,11 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/site.webmanifest">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
-  <meta name="yandex-verification" content="bb13e36c670d98c2">
-  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -27,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="MySQL核心应用开发规范总结起来有三点：表越窄越好，表越小越好，请求够高效，接下来详细解释一下这三点。 表越窄越好设计表字段的时候，选择的数据类型够用就行。  存储账号名（长度≤30）就没必要 varchar(255) Unix时间戳，可以使用无符号整型（INT UNSIGNED） IPv4地址，也可以使用无符号整型（INET_AOTN()和INET_NTOA()函数）  可以通过执行 show">
 <meta property="og:type" content="article">
@@ -61,6 +57,7 @@
 
 <title>MySQL核心应用开发规范 | 永红的互联网手记</title>
   
+
 
 
 
@@ -109,7 +106,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -137,31 +134,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">658</span></a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
-
-  </li>
-        <li class="menu-item menu-item-开源">
-
-    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">659</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">707</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -181,7 +158,7 @@
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -197,7 +174,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -217,12 +194,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%B6%8A%E7%AA%84%E8%B6%8A%E5%A5%BD"><span class="nav-number">1.</span> <span class="nav-text">表越窄越好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E8%B6%8A%E5%B0%8F%E8%B6%8A%E5%A5%BD"><span class="nav-number">2.</span> <span class="nav-text">表越小越好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%9F%E9%AB%98%E6%95%88"><span class="nav-number">3.</span> <span class="nav-text">请求够高效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%87%8D%E8%A6%81%E7%BB%86%E8%8A%82"><span class="nav-number">4.</span> <span class="nav-text">其他重要细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#schema%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">schema设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%93%E8%A1%A8%E5%AD%97%E6%AE%B5%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83"><span class="nav-number">4.2.</span> <span class="nav-text">库表字段设计规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E5%BC%80%E5%8F%91%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.3.</span> <span class="nav-text">SQL开发的建议</span></a></li></ol></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
       src="/images/logo.jpg">
@@ -234,20 +211,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">658</span>
+          <span class="site-state-item-count">659</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">705</span>
+        <span class="site-state-item-count">707</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -281,7 +258,7 @@
 
 
 
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -291,7 +268,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -446,13 +423,10 @@
 </ul>
 <p>有一个例子是t1表是utf8mb4编码（四个字节），t2是utf8编码（三个字节）</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t1`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`c1`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  <span class="string">`c2`</span> <span class="built_in">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c3`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c4`</span> <span class="built_in">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`int_col`</span> (<span class="string">`c1`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`char_col`</span> (<span class="string">`c2`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t2`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`c1`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  <span class="string">`c2`</span> <span class="built_in">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c3`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c4`</span> <span class="built_in">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`int_col`</span> (<span class="string">`c1`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`char_col`</span> (<span class="string">`c2`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br></pre></td></tr></table></figure>
-
 <p>当两个表做join时，select t1 后c2是4个字节的编码，带入t2后，无法使用索引。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc select * from t1 left join t2 on t1.c2 = t2.c2 where t1.id &gt; 500;</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">| id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref  | rows | filtered | Extra                                              |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">|  1 | SIMPLE      | t1    | NULL       | range | PRIMARY       | PRIMARY | 8       | NULL |    1 |   100.00 | Using where                                        |</span><br><span class="line">|  1 | SIMPLE      | t2    | NULL       | ALL   | NULL          | NULL    | NULL    | NULL |    1 |   100.00 | Using where; Using join buffer (Block Nested Loop) |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span>, <span class="number">1</span> <span class="keyword">warning</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
-
 <p>当把t2的编码也改成utf8mb4后，可以正常使用索引。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc select * from t1 left join t2 on t1.c2 = t2.c2 where t1.id &gt; 500;                                                                                           +----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span><br><span class="line">| id | select_type | table | partitions | type  | possible_keys | key      | key_len | ref        | rows | filtered | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | t1    | NULL       | range | PRIMARY       | PRIMARY  | 8       | NULL       |    1 |   100.00 | Using where |</span><br><span class="line">|  1 | SIMPLE      | t2    | NULL       | ref   | char_col      | char_col | 1082    | demo.t1.c2 |    1 |   100.00 | NULL        |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span>, <span class="number">1</span> <span class="keyword">warning</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
-
 <h3 id="库表字段设计规范"><a href="#库表字段设计规范" class="headerlink" title="库表字段设计规范"></a>库表字段设计规范</h3><p>1.每个表建议不要超过50个字段<br>2.优先选择utf8mb4字符集<br>3.严谨在数据库中明文存储用户的一些核心数据（密码，身份证号等，自己定义加密算法）<br>4.用好INT数据类型（UNSIGNED，金额用途——扩大N倍使用bigint）<br>5.遇到大对象数据类型（BLOB、TEXT）字段，尽量拆出去，再用主键做关联<br>6.字符类型尽可能使用varchar的数据类型（同长度更新）<br>7.日期数据数据建议采用datetime数据类型（datetime类型 0000-9999年，timestamp类型 1970-2038）</p>
 <h3 id="SQL开发的建议"><a href="#SQL开发的建议" class="headerlink" title="SQL开发的建议"></a>SQL开发的建议</h3><p>1.多表JOIN时，JOIN列的数据类型要一致<br>2.多表JOIN时，把过滤后结果集较小的表作为驱动表（或者使用 inner join 让优化器去做优化）<br>3.在查询的where条件中用上函数或表达式要用8.0版本<br>4.不要看到where条件中出现的列就直接创建索引<br>5.尽可能不要去执行select *操作<br>6.不要执行LIKE ‘%x%’<br>7.尽可能不要用 “!=” 条件<br>8.如果能确定返回结果数量的话最好加上 LIMIT N，优化器通常会再进一步优化，参考<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vOC4wL2VuL2xpbWl0LW9wdGltaXphdGlvbi5odG1s">LIMIT优化<i class="fa fa-external-link-alt"></i></span><br>9.优先使用UNION ALL，代替UNION<br>10.所有的SQL都要通过SQL审核系统检查，符合标准后才能上线</p>
 
@@ -571,22 +545,16 @@
         <div class="tab-content">
             <div class="tab-pane disqus" id="comment-disqus">
               
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
             </div>
             <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+              <div class="comments gitalk-container"></div>
             </div>
             <div class="tab-pane livere" id="comment-livere">
-              
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
-  </div>
-  
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
             </div>
         </div>
       </div>
@@ -622,8 +590,8 @@
   </div>
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -642,7 +610,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:27</span>
+    <span title="站点阅读时长">14:28</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -678,19 +646,9 @@
   <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/next-boot.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
   <script>
   if (CONFIG.page.isPost) {
     wpac_init = window.wpac_init || [];
@@ -711,14 +669,14 @@
     })();
   }
   </script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/local-search.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.4/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -733,7 +691,6 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 
 
 
@@ -785,7 +742,7 @@ if (document.querySelectorAll('.mermaid').length) {
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments('#gitalk-container', () => {
+NexT.utils.loadComments('.gitalk-container', () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
@@ -797,7 +754,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
         language: '',
       distractionFreeMode: true
     });
-    gitalk.render('gitalk-container');
+    gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
 });
 </script>

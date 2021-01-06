@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -12,11 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/site.webmanifest">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
-  <meta name="yandex-verification" content="bb13e36c670d98c2">
-  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -27,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="异步文件系统监控机制 补充说明Inotify 一种强大的、细粒度的、异步文件系统监控机制，它满足各种各样的文件监控需要，可以监控文件系统的访问属性、读写属性、权限属性、删除创建、移动等操作，也就是可以监控文件发生的一切变化。。  inotify-tools 是一个C库和一组命令行的工作提供Linux下inotify的简单接口。inotify-tools安装后会得到inotifywait和inoti">
 <meta property="og:type" content="article">
@@ -63,6 +59,7 @@
 
 <title>【Linux 命令】inotifywait | 永红的互联网手记</title>
   
+
 
 
 
@@ -111,7 +108,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -139,31 +136,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">658</span></a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
-
-  </li>
-        <li class="menu-item menu-item-开源">
-
-    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">659</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">707</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -183,7 +160,7 @@
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -199,7 +176,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -219,12 +196,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85inotify-tools"><span class="nav-number">1.1.</span> <span class="nav-text">安装inotify-tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotify%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">inotify相关参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotifywait%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">inotifywait命令使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inotifywait%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">inotifywait命令参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E7%9B%91%E5%90%AC%E7%9A%84%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.5.</span> <span class="nav-text">可监听的事件</span></a></li></ol></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
       src="/images/logo.jpg">
@@ -236,20 +213,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">658</span>
+          <span class="site-state-item-count">659</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">705</span>
+        <span class="site-state-item-count">707</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,7 +260,7 @@
 
 
 
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -293,7 +270,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -421,13 +398,11 @@
 <p>使用<code>uname -r</code>命令检查Linux内核，如果低于2.6.13，就需要重新编译内核加入inotify的支持。</p>
 <p>使用<code>ll /proc/sys/fs/inotify</code>命令，是否有以下三条信息输出，如果没有表示不支持。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ll /proc/sys/fs/inotify</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_queued_events</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_user_instances</span><br><span class="line">-rw-r--r-- 1 root root 0 Jan  4 15:41 max_user_watches</span><br></pre></td></tr></table></figure>
-
 <h3 id="安装inotify-tools"><a href="#安装inotify-tools" class="headerlink" title="安装inotify-tools"></a>安装inotify-tools</h3><ul>
 <li>  inotify-tools项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xz">https://github.com/rvoicilas/inotify-tools<i class="fa fa-external-link-alt"></i></span></li>
 <li>  inotify-tools下载地址：<span class="exturl" data-url="aHR0cDovL2dpdGh1Yi5jb20vZG93bmxvYWRzL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xzL2lub3RpZnktdG9vbHMtMy4xNC50YXIuZ3o=">http://github.com/downloads/rvoicilas/inotify-tools/inotify-tools-3.14.tar.gz<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">CentOS release 5.8/64位：</span></span><br><span class="line">tar zxvf inotify-tools-3.14.tar.gz</span><br><span class="line">cd inotify-tools-3.14</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
 <p>其他Linux发行版安装方法可以参见：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J2b2ljaWxhcy9pbm90aWZ5LXRvb2xzL3dpa2kjd2lraS1nZXR0aW5n">https://github.com/rvoicilas/inotify-tools/wiki#wiki-getting<i class="fa fa-external-link-alt"></i></span></p>
 <h3 id="inotify相关参数"><a href="#inotify相关参数" class="headerlink" title="inotify相关参数"></a>inotify相关参数</h3><p>inotify定义了下列的接口参数，可以用来限制inotify消耗kernel memory的大小。由于这些参数都是内存参数，因此，可以根据应用需求，实时的调节其大小：</p>
 <ul>
@@ -437,14 +412,10 @@
 </ul>
 <p>根据以上在32位或者64位系统都可以执行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 104857600 &gt; /proc/sys/fs/inotify/max_user_watches</span><br><span class="line">echo &#x27;echo 104857600 &gt; /proc/sys/fs/inotify/max_user_watches&#x27; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
-
 <p>如果遇到以下错误：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">inotifywait: error while loading shared libraries: libinotifytools.so.0: cannot open shared object file: No such file or directory </span><br></pre></td></tr></table></figure>
-
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> **解决方法：** </span><br><span class="line">32位系统：ln -s /usr/local/lib/libinotifytools.so.0 /usr/lib/libinotifytools.so.0</span><br><span class="line">64位系统：ln -s /usr/local/lib/libinotifytools.so.0 /usr/lib64/libinotifytools.so.0</span><br></pre></td></tr></table></figure>
-
 <h3 id="inotifywait命令使用"><a href="#inotifywait命令使用" class="headerlink" title="inotifywait命令使用"></a>inotifywait命令使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash">filename watchdir.sh</span></span><br><span class="line">path=$1</span><br><span class="line">/usr/local/bin/inotifywait -mrq --timefmt &#x27;%d/%m/%y/%H:%M&#x27; --format &#x27;%T %w %f&#x27; -e modify,delete,create,attrib $path</span><br><span class="line"></span><br><span class="line">执行输出：</span><br><span class="line">./watchdir.sh /data/wsdata/tools/</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swx</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swx</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:34 /data/wsdata/tools/ .j.jsp.swp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ 4913</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ j.jsp~</span><br><span class="line">04/01/13/16:35 /data/wsdata/tools/ .j.jsp.swp</span><br></pre></td></tr></table></figure>
-
 <h3 id="inotifywait命令参数"><a href="#inotifywait命令参数" class="headerlink" title="inotifywait命令参数"></a>inotifywait命令参数</h3><ul>
 <li><code>-m</code>是要持续监视变化。</li>
 <li><code>-r</code>使用递归形式监视目录。</li>
@@ -611,22 +582,16 @@
         <div class="tab-content">
             <div class="tab-pane disqus" id="comment-disqus">
               
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
             </div>
             <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+              <div class="comments gitalk-container"></div>
             </div>
             <div class="tab-pane livere" id="comment-livere">
-              
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
-  </div>
-  
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
             </div>
         </div>
       </div>
@@ -662,8 +627,8 @@
   </div>
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -682,7 +647,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:27</span>
+    <span title="站点阅读时长">14:28</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -718,19 +683,9 @@
   <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/next-boot.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
   <script>
   if (CONFIG.page.isPost) {
     wpac_init = window.wpac_init || [];
@@ -751,14 +706,14 @@
     })();
   }
   </script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/local-search.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.4/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -773,7 +728,6 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 
 
 
@@ -825,7 +779,7 @@ if (document.querySelectorAll('.mermaid').length) {
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments('#gitalk-container', () => {
+NexT.utils.loadComments('.gitalk-container', () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
@@ -837,7 +791,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
         language: '',
       distractionFreeMode: true
     });
-    gitalk.render('gitalk-container');
+    gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
 });
 </script>

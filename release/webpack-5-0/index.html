@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -12,11 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
   <link rel="manifest" href="/images/site.webmanifest">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
   <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
-  <meta name="yandex-verification" content="bb13e36c670d98c2">
-  <meta name="baidu-site-verification" content="code-mDlCdb61pU">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -27,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="webpack 4 于 2018 年 2 月发布。从那时起，我们在没有重大更新的情况下，推出了很多功能。我们知道，人们不喜欢带有突破性的重大变化。尤其是 webpack，人们通常一年只接触两次，剩下的时间就 “只管用”了。但是，在不做突破性改动的情况下推出功能也是有成本的：我们不能做重大的 API 或架构改进。 所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。">
 <meta property="og:type" content="article">
@@ -63,6 +59,7 @@
 
 <title>Webpack 5 发布了，可能升级失败，但请多给些尝试的机会！ (2020-10-10) | 永红的互联网手记</title>
   
+
 
 
 
@@ -111,7 +108,7 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
+    <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -139,31 +136,11 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">658</span></a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">705</span></a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">15</span></a>
-
-  </li>
-        <li class="menu-item menu-item-开源">
-
-    <a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a>
-
-  </li>
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">659</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">707</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -183,7 +160,7 @@
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -199,7 +176,7 @@
 </div>
         
   
-  <div class="toggle sidebar-toggle">
+  <div class="toggle sidebar-toggle" role="button">
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
     <span class="toggle-line"></span>
@@ -219,12 +196,12 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">疑问解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E5%8F%91%E5%B8%83%E6%84%8F%E5%91%B3%E7%9D%80%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">那么发布意味着什么呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%98%AF%E5%8D%87%E7%BA%A7%E7%9A%84%E6%97%B6%E5%80%99%E5%91%A2%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">那么什么时候是升级的时候呢？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%9E%E5%8A%A9%E6%83%85%E5%86%B5"><span class="nav-number">2.</span> <span class="nav-text">赞助情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%96%B9%E5%90%91"><span class="nav-number">3.</span> <span class="nav-text">整体方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E6%8C%87%E5%8D%97"><span class="nav-number">4.</span> <span class="nav-text">迁移指南</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4-%E5%8A%9F%E8%83%BD%E6%B8%85%E9%99%A4"><span class="nav-number">5.</span> <span class="nav-text">重大变更: 功能清除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%90%86%E5%BC%83%E7%94%A8%E7%9A%84%E8%83%BD%E5%8A%9B"><span class="nav-number">5.1.</span> <span class="nav-text">清理弃用的能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%9F%E5%BC%83%E4%BB%A3%E7%A0%81"><span class="nav-number">5.2.</span> <span class="nav-text">废弃代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E5%BA%9F%E5%BC%83"><span class="nav-number">5.3.</span> <span class="nav-text">语法废弃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%86%8D%E4%B8%BA-Node-js-%E6%A8%A1%E5%9D%97-%E8%87%AA%E5%8A%A8%E5%BC%95%E7%94%A8-Polyfills"><span class="nav-number">5.4.</span> <span class="nav-text">不再为 Node.js 模块 自动引用 Polyfills</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E9%95%BF%E6%9C%9F%E7%BC%93%E5%AD%98"><span class="nav-number">6.</span> <span class="nav-text">重大变更：长期缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E5%AE%9A%E7%9A%84-Chunk%E3%80%81%E6%A8%A1%E5%9D%97-ID-%E5%92%8C%E5%AF%BC%E5%87%BA%E5%90%8D%E7%A7%B0"><span class="nav-number">6.1.</span> <span class="nav-text">确定的 Chunk、模块 ID 和导出名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%86%85%E5%AE%B9%E5%93%88%E5%B8%8C"><span class="nav-number">6.2.</span> <span class="nav-text">真正的内容哈希</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E5%BC%80%E5%8F%91%E6%94%AF%E6%8C%81"><span class="nav-number">7.</span> <span class="nav-text">重大变更：开发支持</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E4%BB%A3%E7%A0%81%E5%9D%97-ID"><span class="nav-number">7.1.</span> <span class="nav-text">命名代码块 ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E8%81%94%E9%82%A6"><span class="nav-number">7.2.</span> <span class="nav-text">模块联邦</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%94%AF%E6%8C%81%E5%B4%AD%E6%96%B0%E7%9A%84-Web-%E5%B9%B3%E5%8F%B0%E7%89%B9%E6%80%A7"><span class="nav-number">8.</span> <span class="nav-text">重大变更：支持崭新的 Web 平台特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-%E6%A8%A1%E5%9D%97"><span class="nav-number">8.1.</span> <span class="nav-text">JSON 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#import-meta"><span class="nav-number">8.2.</span> <span class="nav-text">import.meta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E6%A8%A1%E5%9D%97"><span class="nav-number">8.3.</span> <span class="nav-text">资源模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%94%9F-Worker-%E6%94%AF%E6%8C%81"><span class="nav-number">8.4.</span> <span class="nav-text">原生 Worker 支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URIs"><span class="nav-number">8.5.</span> <span class="nav-text">URIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">8.6.</span> <span class="nav-text">异步模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E8%B5%84%E6%BA%90"><span class="nav-number">8.7.</span> <span class="nav-text">外部资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%94%AF%E6%8C%81%E5%85%A8%E6%96%B0%E7%9A%84-Node-js-%E7%94%9F%E6%80%81%E7%89%B9%E6%80%A7"><span class="nav-number">9.</span> <span class="nav-text">重大变更：支持全新的 Node.js 生态特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">9.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C"><span class="nav-number">10.</span> <span class="nav-text">重大变更：开发体验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%8F%E8%BF%87%E4%BC%98%E5%8C%96%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9B%AE%E6%A0%87-target"><span class="nav-number">10.1.</span> <span class="nav-text">经过优化的构建目标(target)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stats"><span class="nav-number">10.2.</span> <span class="nav-text">Stats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%BA%A6"><span class="nav-number">10.3.</span> <span class="nav-text">进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%94%AF%E4%B8%80%E5%91%BD%E5%90%8D"><span class="nav-number">10.4.</span> <span class="nav-text">自动添加唯一命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%B7%BB%E5%8A%A0%E5%85%AC%E5%85%B1%E8%B7%AF%E5%BE%84"><span class="nav-number">10.5.</span> <span class="nav-text">自动添加公共路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Typescript-%E7%B1%BB%E5%9E%8B"><span class="nav-number">10.6.</span> <span class="nav-text">Typescript 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4-%E6%9E%84%E5%BB%BA%E4%BC%98%E5%8C%96"><span class="nav-number">11.</span> <span class="nav-text">重大变更: 构建优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E7%9A%84-tree-shaking"><span class="nav-number">11.1.</span> <span class="nav-text">嵌套的 tree-shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E9%83%A8%E6%A8%A1%E5%9D%97-tree-shaking"><span class="nav-number">11.2.</span> <span class="nav-text">内部模块 tree-shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJs-Tree-Shaking"><span class="nav-number">11.3.</span> <span class="nav-text">CommonJs Tree Shaking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%88%86%E6%9E%90"><span class="nav-number">11.4.</span> <span class="nav-text">副作用分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E8%BF%90%E8%A1%8C%E6%97%B6%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">11.5.</span> <span class="nav-text">每个运行时的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%90%88%E5%B9%B6"><span class="nav-number">11.6.</span> <span class="nav-text">模块合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8-Tree-Shaking-%E6%94%B9%E8%BF%9B"><span class="nav-number">11.7.</span> <span class="nav-text">通用 Tree Shaking 改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E4%B8%8E%E7%94%9F%E4%BA%A7%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">11.8.</span> <span class="nav-text">开发与生产的一致性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="nav-number">11.9.</span> <span class="nav-text">改进代码生成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9B-target-%E9%85%8D%E7%BD%AE"><span class="nav-number">11.10.</span> <span class="nav-text">改进 target 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E6%8B%86%E5%88%86%E4%B8%8E%E6%A8%A1%E5%9D%97%E5%A4%A7%E5%B0%8F"><span class="nav-number">11.11.</span> <span class="nav-text">代码块拆分与模块大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">12.</span> <span class="nav-text">重大变更：性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%81%E4%B9%85%E7%BC%93%E5%AD%98"><span class="nav-number">12.1.</span> <span class="nav-text">持久缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E9%97%B2%E7%BD%AE%E5%92%8C%E5%85%B3%E9%97%AD"><span class="nav-number">12.2.</span> <span class="nav-text">编译器闲置和关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90"><span class="nav-number">12.3.</span> <span class="nav-text">文件生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E9%95%BF%E6%9C%9F%E6%9C%AA%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">13.</span> <span class="nav-text">重大变更：长期未解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E6%96%87%E4%BB%B6%E7%9B%AE%E6%A0%87%E7%9A%84%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2"><span class="nav-number">13.1.</span> <span class="nav-text">单一文件目标的代码分割</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E4%BA%86%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">13.2.</span> <span class="nav-text">更新了解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89-JS-%E7%9A%84%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">13.3.</span> <span class="nav-text">没有 JS 的代码块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%8F%98%E6%9B%B4%EF%BC%9A%E6%9C%AA%E6%9D%A5%E8%AE%A1%E5%88%92"><span class="nav-number">14.</span> <span class="nav-text">重大变更：未来计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%89%B9%E6%80%A7"><span class="nav-number">14.1.</span> <span class="nav-text">实验特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F-Node-js-%E7%89%88%E6%9C%AC"><span class="nav-number">14.2.</span> <span class="nav-text">最小 Node.js 版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%8F%98%E6%9B%B4"><span class="nav-number">15.</span> <span class="nav-text">配置变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%98%E5%8C%96"><span class="nav-number">15.1.</span> <span class="nav-text">结构的变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC%E5%8F%98%E6%9B%B4"><span class="nav-number">15.2.</span> <span class="nav-text">默认值变更</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%9B%B8%E5%85%B3%E5%8F%98%E6%9B%B4"><span class="nav-number">16.</span> <span class="nav-text">加载器相关变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this-getOptions"><span class="nav-number">16.1.</span> <span class="nav-text">this.getOptions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-exec"><span class="nav-number">16.2.</span> <span class="nav-text">this.exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-getResolve"><span class="nav-number">16.3.</span> <span class="nav-text">this.getResolve</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%A7%E5%86%85%E9%83%A8%E5%8F%98%E6%9B%B4"><span class="nav-number">17.</span> <span class="nav-text">重大内部变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%9A%84%E6%8F%92%E4%BB%B6%E8%BF%90%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">17.1.</span> <span class="nav-text">新的插件运行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A8%A1%E5%9D%97"><span class="nav-number">17.2.</span> <span class="nav-text">运行时模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">17.3.</span> <span class="nav-text">序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E4%BA%8E%E7%BC%93%E5%AD%98%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">17.4.</span> <span class="nav-text">用于缓存的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%BB%E7%BB%93%E9%92%A9%E5%AD%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">17.5.</span> <span class="nav-text">冻结钩子对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tapable-%E6%8F%92%E4%BB%B6%E5%8D%87%E7%BA%A7"><span class="nav-number">17.6.</span> <span class="nav-text">Tapable 插件升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stage-%E9%92%A9%E5%AD%90"><span class="nav-number">17.7.</span> <span class="nav-text">Stage 钩子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-Chunk-ModuleTemplate-%E5%BA%9F%E5%BC%83"><span class="nav-number">17.8.</span> <span class="nav-text">Main&#x2F;Chunk&#x2F;ModuleTemplate 废弃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="nav-number">17.9.</span> <span class="nav-text">入口文件描述符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E5%90%8D"><span class="nav-number">17.9.1.</span> <span class="nav-text">入口文件输出文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E4%BE%9D%E8%B5%96"><span class="nav-number">17.9.2.</span> <span class="nav-text">入口文件依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E7%B1%BB%E5%BA%93"><span class="nav-number">17.9.3.</span> <span class="nav-text">入口文件类库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E8%BF%90%E8%A1%8C%E6%97%B6"><span class="nav-number">17.9.4.</span> <span class="nav-text">入口文件运行时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6%E4%BB%A3%E7%A0%81%E5%9D%97%E5%8A%A0%E8%BD%BD"><span class="nav-number">17.9.5.</span> <span class="nav-text">入口文件代码块加载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E4%B8%8E-ID"><span class="nav-number">17.10.</span> <span class="nav-text">排序与 ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E6%95%B0%E7%BB%84%E5%88%B0%E9%9B%86%E5%90%88-Set"><span class="nav-number">17.11.</span> <span class="nav-text">从数组到集合(Set)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Compilation-fileSystemInfo"><span class="nav-number">17.12.</span> <span class="nav-text">Compilation.fileSystemInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filesystems"><span class="nav-number">17.13.</span> <span class="nav-text">Filesystems</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%83%AD%E6%9B%BF%E6%8D%A2"><span class="nav-number">17.14.</span> <span class="nav-text">模块热替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E9%98%9F%E5%88%97"><span class="nav-number">17.15.</span> <span class="nav-text">工作队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logging"><span class="nav-number">17.16.</span> <span class="nav-text">Logging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%92%8C-chunk-%E5%9B%BE"><span class="nav-number">17.17.</span> <span class="nav-text">模块和 chunk 图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Init-Fragments"><span class="nav-number">17.18.</span> <span class="nav-text">Init Fragments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97-Source-Types"><span class="nav-number">17.19.</span> <span class="nav-text">模块 Source Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stats-%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">17.20.</span> <span class="nav-text">Stats 的插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E6%96%B0%E7%9A%84%E7%9B%91%E5%90%AC"><span class="nav-number">17.21.</span> <span class="nav-text">全新的监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SizeOnlySource-after-emit"><span class="nav-number">17.22.</span> <span class="nav-text">SizeOnlySource after emit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Emitting-assets-multiple-times"><span class="nav-number">17.23.</span> <span class="nav-text">Emitting assets multiple times</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ExportsInfo"><span class="nav-number">17.24.</span> <span class="nav-text">ExportsInfo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5"><span class="nav-number">17.25.</span> <span class="nav-text">代码生成阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E5%8F%82%E8%80%83"><span class="nav-number">17.26.</span> <span class="nav-text">依赖关系参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Presentational-Dependencies"><span class="nav-number">17.27.</span> <span class="nav-text">Presentational Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%83%E7%94%A8-loaders"><span class="nav-number">17.28.</span> <span class="nav-text">弃用 loaders</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%B0%8F%E6%94%B9%E5%8A%A8"><span class="nav-number">18.</span> <span class="nav-text">微小改动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%BE%AE%E5%B0%8F%E6%94%B9%E5%8A%A8"><span class="nav-number">19.</span> <span class="nav-text">其他微小改动</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
       src="/images/logo.jpg">
@@ -236,20 +213,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">658</span>
+          <span class="site-state-item-count">659</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">705</span>
+        <span class="site-state-item-count">707</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,7 +260,7 @@
 
 
 
-        </section>
+        </div>
       </div>
     </div>
   </aside>
@@ -293,7 +270,7 @@
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -531,7 +508,6 @@
 <p>剖析模式也得到了升级，将显示嵌套进度消息的时间。<br>这使得它更容易弄清楚，当插件导致了性能问题。</p>
 <p>新增加的 <code>percentBy</code> -选项告知 <code>ProgressPlugin</code> 如何计算进度百分比。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> webpack.ProgressPlugin(&#123; <span class="attr">percentBy</span>: <span class="string">&#x27;entries&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
-
 <p>为了使进度百分比更准确，<code>ProgressPlugin</code> 会缓存最后已知的总模块数，并在下一次构建时重新使用这个值。第一次构建将预热缓存，但后续构建将使用并更新这个值。</p>
 <h3 id="自动添加唯一命名"><a href="#自动添加唯一命名" class="headerlink" title="自动添加唯一命名"></a>自动添加唯一命名</h3><p>在 webpack 4 中，多个 webpack 运行时可能会在同一个 HTML 页面上发生冲突，因为它们使用同一个全局变量进行代码块加载。为了解决这个问题，需要为 <code>output.jsonpFunction</code> 配置提供一个自定义的名称。</p>
 <p>Webpack 5 确实会从 <code>package.json</code> <code>name</code> 中自动推断出一个唯一的构建名称，并将其作为 <code>output.uniqueName</code> 的默认值。</p>
@@ -542,12 +518,10 @@
 <p>迁移：删除<code>@types/webpack</code>。当名称不同时更新引用。</p>
 <h2 id="重大变更-构建优化"><a href="#重大变更-构建优化" class="headerlink" title="重大变更: 构建优化"></a>重大变更: 构建优化</h2><h3 id="嵌套的-tree-shaking"><a href="#嵌套的-tree-shaking" class="headerlink" title="嵌套的 tree-shaking"></a>嵌套的 tree-shaking</h3><p>webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inner.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">as</span> inner <span class="keyword">from</span> <span class="string">&#x27;./inner&#x27;</span>;</span><br><span class="line"><span class="comment">// 或 import * as inner from &#x27;./inner&#x27;; export &#123; inner &#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// user.js</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="built_in">module</span> <span class="keyword">from</span> <span class="string">&#x27;./module&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.inner.a);</span><br></pre></td></tr></table></figure>
-
 <p>在这个例子中，可以在生产模式下删除导出的<code>b</code>。</p>
 <h3 id="内部模块-tree-shaking"><a href="#内部模块-tree-shaking" class="headerlink" title="内部模块 tree-shaking"></a>内部模块 tree-shaking</h3><p>webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 <code>optimization.innerGraph</code>，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。</p>
 <p>在这样的模块中：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; something &#125; <span class="keyword">from</span> <span class="string">&#x27;./something&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">usingSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> something;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> usingSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>内部依赖图算法会找出 <code>something</code> 只有在使用 <code>test</code> 导出时才会使用。这允许将更多的出口标记为未使用，并从代码包中省略更多的代码。</p>
 <p>当设置<code>&quot;sideEffects&quot;: false</code>时，可以省略更多的模块。在这个例子中，当 <code>test</code> 导出未被使用时，<code>./something</code> 将被省略。</p>
 <p>要获得未使用的导出信息，需要使用 <code>optimization.unusedExports</code>。要删除无副作用的模块，需要使用<code>optimization.sideEffects</code>。</p>
@@ -632,12 +606,10 @@
 <h3 id="代码块拆分与模块大小"><a href="#代码块拆分与模块大小" class="headerlink" title="代码块拆分与模块大小"></a>代码块拆分与模块大小</h3><p>现在模块的尺寸比单一的数字更好的表达方式。现在有不同类型的大小。</p>
 <p>SplitChunksPlugin 现在知道如何处理这些不同的大小，并将它们用于 <code>minSize</code> 和 <code>maxSize</code>。<br>默认情况下，只有 <code>javascript</code> 大小被处理，但你现在可以传递多个值来管理它们：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      minSize: &#123;</span><br><span class="line">        javascript: <span class="number">30000</span>,</span><br><span class="line">        webassembly: <span class="number">50000</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>你仍然可以使用一个数字来表示大小。在这种情况下，webpack 会自动使用默认的大小类型。</p>
 <p><code>mini-css-extract-plugin</code> 使用 <code>css/mini-extra</code> 作为大小类型，并将此大小类型自动添加到默认类型中。</p>
 <h2 id="重大变更：性能优化"><a href="#重大变更：性能优化" class="headerlink" title="重大变更：性能优化"></a>重大变更：性能优化</h2><h3 id="持久缓存"><a href="#持久缓存" class="headerlink" title="持久缓存"></a>持久缓存</h3><p>现在有一个文件系统缓存。它是可选的，可以通过以下配置启用：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  cache: &#123;</span><br><span class="line">    <span class="comment">// 1. 将缓存类型设置为文件系统</span></span><br><span class="line">    type: <span class="string">&#x27;filesystem&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    buildDependencies: &#123;</span><br><span class="line">      <span class="comment">// 2. 将你的 config 添加为 buildDependency，以便在改变 config 时获得缓存无效</span></span><br><span class="line">      config: [__filename],</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 3. 如果你有其他的东西被构建依赖，你可以在这里添加它们</span></span><br><span class="line">      <span class="comment">// 注意，webpack、加载器和所有从你的配置中引用的模块都会被自动添加</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>重要说明：</p>
 <p>默认情况下，webpack 假定 webpack 所在的 <code>node_modules</code> 目录只被包管理器修改。对 <code>node_modules</code> 来说，哈希值和时间戳会被跳过。<br>出于性能考虑，只使用包名和版本。<br>只要不指定<code>resolve.symlinks: false</code>，Symlinks(即<code>npm/yarn link</code>)就没有问题(无论如何都要避免)。<br>不要直接编辑 <code>node_modules</code> 中的文件，除非你用 <code>snapshot.managedPaths: []</code>以剔除该优化。<br>当使用 Yarn PnP 时，webpack 假设 yarn 缓存是不可改变的（通常是这样）。<br>你可以使用 <code>snapshot.immutablePaths: []</code> 来退出这个优化。</p>
 <p>缓存将默认存储在 <code>node_modules/.cache/webpack</code>（当使用 node_modules 时）或 <code>.yarn/.cache/webpack</code>（当使用 Yarn PnP 时）中。<br>当所有的插件都正确处理缓存时，你可能永远都不需要手动删除它。</p>
@@ -903,24 +875,18 @@
 <p>迁移：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。</p>
 <h3 id="入口文件描述符"><a href="#入口文件描述符" class="headerlink" title="入口文件描述符"></a>入口文件描述符</h3><p>如果传递一个对象作为入口文件，其值可能是一个字符串、字符串数组或描述符：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    catalog: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./catalog.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>描述符语法可用于向入口文件传递附加选项。</p>
 <h4 id="入口文件输出文件名"><a href="#入口文件输出文件名" class="headerlink" title="入口文件输出文件名"></a>入口文件输出文件名</h4><p>默认情况下，入口文件代码块的输出文件名是从<code>output.filename</code>中提取的，<br>但你可以为特定入口文件指定一个自定义的输出文件名：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    about: &#123; <span class="attr">import</span>: <span class="string">&#x27;./about.js&#x27;</span>, <span class="attr">filename</span>: <span class="string">&#x27;pages/[name][ext]&#x27;</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h4 id="入口文件依赖"><a href="#入口文件依赖" class="headerlink" title="入口文件依赖"></a>入口文件依赖</h4><p>默认情况下，每个入口文件代码块都存储了它所使用的所有模块。使用 <code>dependOn</code>-选项，<br>你可以将模块从一个入口文件代码块共享到另一个：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123; <span class="attr">import</span>: <span class="string">&#x27;./app.js&#x27;</span>, <span class="attr">dependOn</span>: <span class="string">&#x27;react-vendors&#x27;</span> &#125;,</span><br><span class="line">    <span class="string">&#x27;react-vendors&#x27;</span>: [<span class="string">&#x27;react&#x27;</span>, <span class="string">&#x27;react-dom&#x27;</span>, <span class="string">&#x27;prop-types&#x27;</span>],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>app 代码块 将不包含 <code>react-vendors</code> 所拥有的模块。</p>
 <h4 id="入口文件类库"><a href="#入口文件类库" class="headerlink" title="入口文件类库"></a>入口文件类库</h4><p>入口文件描述符允许为每个入口文件传递不同的 <code>library</code> 选项。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    commonjs: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./lib.js&#x27;</span>,</span><br><span class="line">      library: &#123;</span><br><span class="line">        type: <span class="string">&#x27;commonjs-module&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    amd: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./lib.js&#x27;</span>,</span><br><span class="line">      library: &#123;</span><br><span class="line">        type: <span class="string">&#x27;amd&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h4 id="入口文件运行时"><a href="#入口文件运行时" class="headerlink" title="入口文件运行时"></a>入口文件运行时</h4><p>入口文件描述符允许为每个入口文件指定一个 <code>运行时代码</code>。<br>当指定时，将创建一个以该名称命名的代码块，其中仅包含该条目的运行时代码。<br>当多个条目指定相同的<code>运行时代码</code>时，该块将包含所有这些入口文件的共同运行时代码。<br>这意味着它们可以在同一个 HTML 页面中一起使用。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./app.js&#x27;</span>,</span><br><span class="line">      runtime: <span class="string">&#x27;app-runtime&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h4 id="入口文件代码块加载"><a href="#入口文件代码块加载" class="headerlink" title="入口文件代码块加载"></a>入口文件代码块加载</h4><p>入口文件描述符允许为每个入口文件指定一个 <code>chunkLoading</code>。<br>这个入口文件的运行时代码将使用这个来加载代码块。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./app.js&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    worker: &#123;</span><br><span class="line">      <span class="keyword">import</span>: <span class="string">&#x27;./worker.js&#x27;</span>,</span><br><span class="line">      chunkLoading: <span class="string">&#x27;importScripts&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <h3 id="排序与-ID"><a href="#排序与-ID" class="headerlink" title="排序与 ID"></a>排序与 ID</h3><p>webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。</p>
 <p>优化模块和代码块顺序的钩子已经被移除。</p>
 <p>迁移：在编译阶段，你不能再依赖模块和代码块的顺序了。</p>
@@ -1020,69 +986,86 @@
 <li><p><a target="_blank" rel="noopener" href="https://github.com/webpack-contrib/null-loader"><code>null-loader</code></a></p>
 <p>已被弃用。使用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      xyz$: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 <p>或者使用绝对路径</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      [path.resolve(__dirname, <span class="string">&#x27;....&#x27;</span>)]: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="微小改动"><a href="#微小改动" class="headerlink" title="微小改动"></a>微小改动</h2><ul>
-<li><code>Compiler.name</code>：当生成带有绝对路径的编译器名称时，请确保名称使用 <code>|</code> 或 <code>!</code> 分隔。<ul>
+<h2 id="微小改动"><a href="#微小改动" class="headerlink" title="微小改动"></a>微小改动</h2></li>
+<li><p><code>Compiler.name</code>：当生成带有绝对路径的编译器名称时，请确保名称使用 <code>|</code> 或 <code>!</code> 分隔。</p>
+<ul>
 <li>使用空格作为分隔符的做法现已不再适用。（路径可以保护空格）</li>
 <li>温馨提示：在 Stats 中输出时 <code>|</code> 会被替换为空格。</li>
 </ul>
 </li>
-<li><code>SystemPlugin</code> 现已被默认禁用。<ul>
+<li><p><code>SystemPlugin</code> 现已被默认禁用。</p>
+<ul>
 <li>迁移：应避免使用它，因为此规范已被删除。你可以使用 <code>Rule.parser.system: true</code> 来重新启用它。</li>
 </ul>
 </li>
-<li><code>ModuleConcatenationPlugin</code>：<code>DependencyVariables</code> 已被移除，将不再阻止连接。<ul>
+<li><p><code>ModuleConcatenationPlugin</code>：<code>DependencyVariables</code> 已被移除，将不再阻止连接。</p>
+<ul>
 <li>这意味着它现在可以在 <code>module</code>，<code>global</code>，<code>process</code> 或 ProvidePlugin 的情况下进行连接。</li>
 </ul>
 </li>
-<li>移除了 <code>Stats.presetToOptions</code><ul>
+<li><p>移除了 <code>Stats.presetToOptions</code></p>
+<ul>
 <li>迁移：使用 <code>compilation.createStatsOptions</code> 代替</li>
 </ul>
 </li>
-<li>移除了 <code>SingleEntryPlugin</code> 和 <code>SingleEntryDependency</code><ul>
+<li><p>移除了 <code>SingleEntryPlugin</code> 和 <code>SingleEntryDependency</code></p>
+<ul>
 <li>迁移：使用 <code>EntryPlugin</code> 和 <code>EntryDependency</code> 代替</li>
 </ul>
 </li>
-<li>chunk 现在可以有多个入口</li>
-<li>移除了 <code>ExtendedAPIPlugin</code><ul>
+<li><p>chunk 现在可以有多个入口</p>
+</li>
+<li><p>移除了 <code>ExtendedAPIPlugin</code></p>
+<ul>
 <li>迁移：不再需要此插件，在必要时，你可以使用 <code>__webpack_hash__</code> 和 <code>__webpack_chunkname__</code> 注入运行时代码。</li>
 </ul>
 </li>
-<li><code>ProgressPlugin</code> 不再为 <code>reportProgress</code> 使用 tapable 上下文。<ul>
+<li><p><code>ProgressPlugin</code> 不再为 <code>reportProgress</code> 使用 tapable 上下文。</p>
+<ul>
 <li>迁移：使用 <code>ProgressPlugin.getReporter(compiler)</code> 代替</li>
 </ul>
 </li>
-<li>现已对 <code>.mjs</code> 文件重新启用 <code>ProvidePlugin</code></li>
-<li><code>Stats</code> json 中的 <code>errors</code> 和 <code>warnings</code> 不再是字符串类型，而是包含必要信息的对象，这些信息会被分割为熟悉。<ul>
+<li><p>现已对 <code>.mjs</code> 文件重新启用 <code>ProvidePlugin</code></p>
+</li>
+<li><p><code>Stats</code> json 中的 <code>errors</code> 和 <code>warnings</code> 不再是字符串类型，而是包含必要信息的对象，这些信息会被分割为熟悉。</p>
+<ul>
 <li>迁移：查阅具体属性信息，如 <code>message</code> 字段</li>
 </ul>
 </li>
-<li>移除了 <code>Compilation.hooks.normalModuleLoader</code><ul>
+<li><p>移除了 <code>Compilation.hooks.normalModuleLoader</code></p>
+<ul>
 <li>迁移：使用 <code>NormalModule.getCompilationHooks(compilation).loader</code> 代替</li>
 </ul>
 </li>
-<li>将 <code>NormalModuleFactory</code> 中的 hook 从 waterfall 改为 bailing，修改并对 waterfall 函数的 hook 进行了重命名操作。</li>
-<li>移除了 <code>compilationParams.compilationDependencies</code><ul>
+<li><p>将 <code>NormalModuleFactory</code> 中的 hook 从 waterfall 改为 bailing，修改并对 waterfall 函数的 hook 进行了重命名操作。</p>
+</li>
+<li><p>移除了 <code>compilationParams.compilationDependencies</code></p>
+<ul>
 <li>插件可以在编译中使用 <code>compilation.file/context/missingDependencies</code> 添加依赖关系</li>
 <li>Compat 层将 <code>compilationDependencies.add</code> 委托给 <code>fileDependencies.add</code>。</li>
 </ul>
 </li>
-<li><code>stats.assetsByChunkName[x]</code> 始终为一个数组</li>
-<li>增加了 <code>__webpack_get_script_filename__</code> 函数用于获取 script 文件的文件名。</li>
-<li>在 package.json 中 <code>&quot;sideEffects&quot;</code> 将使用 <code>glob-to-regex</code> 来代替 <code>micromatch</code> 处理。<ul>
+<li><p><code>stats.assetsByChunkName[x]</code> 始终为一个数组</p>
+</li>
+<li><p>增加了 <code>__webpack_get_script_filename__</code> 函数用于获取 script 文件的文件名。</p>
+</li>
+<li><p>在 package.json 中 <code>&quot;sideEffects&quot;</code> 将使用 <code>glob-to-regex</code> 来代替 <code>micromatch</code> 处理。</p>
+<ul>
 <li>这可能会改变边缘案例的语义。</li>
 </ul>
 </li>
-<li>从 <code>IgnorePlugin</code> 中移除了 <code>checkContext</code></li>
-<li>全新的 <code>__webpack_exports_info__</code> API 允许导出使用自省。</li>
-<li>SourceMapDevToolPlugin 现已适用于非 chunk 资源。</li>
-<li>当引用的 env 变量缺失且没有降级数据时，EnvironmentPlugin 目前会展示一个错。</li>
-<li>从 schema 中移除 <code>serve</code> 熟悉。</li>
+<li><p>从 <code>IgnorePlugin</code> 中移除了 <code>checkContext</code></p>
+</li>
+<li><p>全新的 <code>__webpack_exports_info__</code> API 允许导出使用自省。</p>
+</li>
+<li><p>SourceMapDevToolPlugin 现已适用于非 chunk 资源。</p>
+</li>
+<li><p>当引用的 env 变量缺失且没有降级数据时，EnvironmentPlugin 目前会展示一个错。</p>
+</li>
+<li><p>从 schema 中移除 <code>serve</code> 熟悉。</p>
+</li>
 </ul>
 <h2 id="其他微小改动"><a href="#其他微小改动" class="headerlink" title="其他微小改动"></a>其他微小改动</h2><ul>
 <li>移除 build 目录，用运行时代替 build</li>
@@ -1453,22 +1436,16 @@
         <div class="tab-content">
             <div class="tab-pane disqus" id="comment-disqus">
               
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
   </div>
   
             </div>
             <div class="tab-pane gitalk" id="comment-gitalk">
-              <div class="comments" id="gitalk-container"></div>
+              <div class="comments gitalk-container"></div>
             </div>
             <div class="tab-pane livere" id="comment-livere">
-              
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
-  </div>
-  
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
             </div>
         </div>
       </div>
@@ -1504,8 +1481,8 @@
   </div>
 
 <div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1524,7 +1501,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">14:27</span>
+    <span title="站点阅读时长">14:28</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -1560,19 +1537,9 @@
   <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/next-boot.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/next-boot.js"></script>
 
   
-  <script>
-    (function(){
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
-
   <script>
   if (CONFIG.page.isPost) {
     wpac_init = window.wpac_init || [];
@@ -1593,14 +1560,14 @@
     })();
   }
   </script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.1.0/source/js/local-search.js"></script>
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/local-search.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.3/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.4/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -1615,7 +1582,6 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
 
 
 
@@ -1667,7 +1633,7 @@ if (document.querySelectorAll('.mermaid').length) {
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
-NexT.utils.loadComments('#gitalk-container', () => {
+NexT.utils.loadComments('.gitalk-container', () => {
   NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
@@ -1679,7 +1645,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
         language: '',
       distractionFreeMode: true
     });
-    gitalk.render('gitalk-container');
+    gitalk.render(document.querySelector('.gitalk-container'));
   }, window.Gitalk);
 });
 </script>
