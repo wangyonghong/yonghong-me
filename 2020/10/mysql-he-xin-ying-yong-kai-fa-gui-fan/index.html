@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -18,12 +18,12 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="MySQL核心应用开发规范总结起来有三点：表越窄越好，表越小越好，请求够高效，接下来详细解释一下这三点。 表越窄越好设计表字段的时候，选择的数据类型够用就行。  存储账号名（长度≤30）就没必要 varchar(255) Unix时间戳，可以使用无符号整型（INT UNSIGNED） IPv4地址，也可以使用无符号整型（INET_AOTN()和INET_NTOA()函数）  可以通过执行 show">
 <meta property="og:type" content="article">
@@ -135,9 +135,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">660</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">710</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">16</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">661</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">711</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">17</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -211,20 +211,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">660</span>
+          <span class="site-state-item-count">661</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">710</span>
+        <span class="site-state-item-count">711</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -390,7 +390,7 @@
 <li>Avg_row_length 值超过100字节</li>
 <li>Data_free 值大于0说明表存在碎片</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="表越小越好"><a href="#表越小越好" class="headerlink" title="表越小越好"></a>表越小越好</h2><p>真正“好”的架构：</p>
 <ul>
 <li>让我们线上的业务表，它的数据量尽可能小</li>
@@ -409,24 +409,29 @@
 </ul>
 <h2 id="其他重要细节"><a href="#其他重要细节" class="headerlink" title="其他重要细节"></a>其他重要细节</h2><h3 id="schema设计原则"><a href="#schema设计原则" class="headerlink" title="schema设计原则"></a>schema设计原则</h3><p>1.尽量小的原则<br>2.禁止使用外键——增加行锁<br>3.自增INT/BIGINT主键（InnoDB引擎表如果使用char或者uuid作为主键，会导致数据存储的顺序离散随机，影响性能）<br>4.字符集和库表的设计要一致，MySQL实例，database，table，column，存储过程，event，都要保持一致<br>5.MySQL尽量高效的建议</p>
 <ul>
-<li>单表<ul>
+<li><p>单表</p>
+<ul>
 <li>①单表的数据量尽量不要超过5000万</li>
 <li>②单表的物理大小尽量不要超过20G</li>
 <li>③索引的数量不要超过5个</li>
 </ul>
 </li>
-<li>实例<ul>
+<li><p>实例</p>
+<ul>
 <li>①总的大小不要超过500G</li>
 <li>②总表数量不要超过5000个（包含分区）</li>
 </ul>
+<p>有一个例子是t1表是utf8mb4编码（四个字节），t2是utf8编码（三个字节）</p>
 </li>
 </ul>
-<p>有一个例子是t1表是utf8mb4编码（四个字节），t2是utf8编码（三个字节）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t1`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`c1`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  <span class="string">`c2`</span> <span class="built_in">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c3`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c4`</span> <span class="built_in">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`int_col`</span> (<span class="string">`c1`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`char_col`</span> (<span class="string">`c2`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t2`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`c1`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  <span class="string">`c2`</span> <span class="built_in">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c3`</span> <span class="built_in">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="string">`c4`</span> <span class="built_in">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`int_col`</span> (<span class="string">`c1`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`char_col`</span> (<span class="string">`c2`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8mb4;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t1` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `c1` <span class="type">int</span>(<span class="number">10</span>) unsigned <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  `c2` <span class="type">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  `c3` <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  `c4` <span class="type">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY(`id`),</span><br><span class="line">  KEY `int_col` (`c1`),</span><br><span class="line">  KEY `char_col` (`c2`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t2` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `c1` <span class="type">int</span>(<span class="number">10</span>) unsigned <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  `c2` <span class="type">varchar</span>(<span class="number">270</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  `c3` <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  `c4` <span class="type">varchar</span>(<span class="number">40</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY(`id`),</span><br><span class="line">  KEY `int_col` (`c1`),</span><br><span class="line">  KEY `char_col` (`c2`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br></pre></td></tr></table></figure>
+
 <p>当两个表做join时，select t1 后c2是4个字节的编码，带入t2后，无法使用索引。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc select * from t1 left join t2 on t1.c2 = t2.c2 where t1.id &gt; 500;</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">| id | select_type | table | partitions | type  | possible_keys | key     | key_len | ref  | rows | filtered | Extra                                              |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">|  1 | SIMPLE      | t1    | NULL       | range | PRIMARY       | PRIMARY | 8       | NULL |    1 |   100.00 | Using where                                        |</span><br><span class="line">|  1 | SIMPLE      | t2    | NULL       | ALL   | NULL          | NULL    | NULL    | NULL |    1 |   100.00 | Using where; Using join buffer (Block Nested Loop) |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span>, <span class="number">1</span> <span class="keyword">warning</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">desc</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">left</span> <span class="keyword">join</span> t2 <span class="keyword">on</span> t1.c2 <span class="operator">=</span> t2.c2 <span class="keyword">where</span> t1.id <span class="operator">&gt;</span> <span class="number">500</span>;</span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> select_type <span class="operator">|</span> <span class="keyword">table</span> <span class="operator">|</span> partitions <span class="operator">|</span> type  <span class="operator">|</span> possible_keys <span class="operator">|</span> key     <span class="operator">|</span> key_len <span class="operator">|</span> <span class="keyword">ref</span>  <span class="operator">|</span> <span class="keyword">rows</span> <span class="operator">|</span> filtered <span class="operator">|</span> Extra                                              <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> t1    <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">range</span> <span class="operator">|</span> <span class="keyword">PRIMARY</span>       <span class="operator">|</span> <span class="keyword">PRIMARY</span> <span class="operator">|</span> <span class="number">8</span>       <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">Using</span> <span class="keyword">where</span>                                        <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> t2    <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">ALL</span>   <span class="operator">|</span> <span class="keyword">NULL</span>          <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> <span class="keyword">NULL</span>    <span class="operator">|</span> <span class="keyword">NULL</span> <span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">Using</span> <span class="keyword">where</span>; <span class="keyword">Using</span> <span class="keyword">join</span> buffer (Block Nested Loop) <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+---------+---------+------+------+----------+----------------------------------------------------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span>, <span class="number">1</span> warning (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+
 <p>当把t2的编码也改成utf8mb4后，可以正常使用索引。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; desc select * from t1 left join t2 on t1.c2 = t2.c2 where t1.id &gt; 500;                                                                                           +----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span><br><span class="line">| id | select_type | table | partitions | type  | possible_keys | key      | key_len | ref        | rows | filtered | Extra       |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line">|  1 | SIMPLE      | t1    | NULL       | range | PRIMARY       | PRIMARY  | 8       | NULL       |    1 |   100.00 | Using where |</span><br><span class="line">|  1 | SIMPLE      | t2    | NULL       | ref   | char_col      | char_col | 1082    | demo.t1.c2 |    1 |   100.00 | NULL        |</span><br><span class="line">+<span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line">2 rows in <span class="keyword">set</span>, <span class="number">1</span> <span class="keyword">warning</span> (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">desc</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">left</span> <span class="keyword">join</span> t2 <span class="keyword">on</span> t1.c2 <span class="operator">=</span> t2.c2 <span class="keyword">where</span> t1.id <span class="operator">&gt;</span> <span class="number">500</span>;                                                                                           <span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line"><span class="operator">|</span> id <span class="operator">|</span> select_type <span class="operator">|</span> <span class="keyword">table</span> <span class="operator">|</span> partitions <span class="operator">|</span> type  <span class="operator">|</span> possible_keys <span class="operator">|</span> key      <span class="operator">|</span> key_len <span class="operator">|</span> <span class="keyword">ref</span>        <span class="operator">|</span> <span class="keyword">rows</span> <span class="operator">|</span> filtered <span class="operator">|</span> Extra       <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> t1    <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">range</span> <span class="operator">|</span> <span class="keyword">PRIMARY</span>       <span class="operator">|</span> <span class="keyword">PRIMARY</span>  <span class="operator">|</span> <span class="number">8</span>       <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">Using</span> <span class="keyword">where</span> <span class="operator">|</span></span><br><span class="line"><span class="operator">|</span>  <span class="number">1</span> <span class="operator">|</span> SIMPLE      <span class="operator">|</span> t2    <span class="operator">|</span> <span class="keyword">NULL</span>       <span class="operator">|</span> <span class="keyword">ref</span>   <span class="operator">|</span> char_col      <span class="operator">|</span> char_col <span class="operator">|</span> <span class="number">1082</span>    <span class="operator">|</span> demo.t1.c2 <span class="operator">|</span>    <span class="number">1</span> <span class="operator">|</span>   <span class="number">100.00</span> <span class="operator">|</span> <span class="keyword">NULL</span>        <span class="operator">|</span></span><br><span class="line"><span class="operator">+</span><span class="comment">----+-------------+-------+------------+-------+---------------+----------+---------+------------+------+----------+-------------+</span></span><br><span class="line"><span class="number">2</span> <span class="keyword">rows</span> <span class="keyword">in</span> <span class="keyword">set</span>, <span class="number">1</span> warning (<span class="number">0.01</span> sec)</span><br></pre></td></tr></table></figure>
+
 <h3 id="库表字段设计规范"><a href="#库表字段设计规范" class="headerlink" title="库表字段设计规范"></a>库表字段设计规范</h3><p>1.每个表建议不要超过50个字段<br>2.优先选择utf8mb4字符集<br>3.严谨在数据库中明文存储用户的一些核心数据（密码，身份证号等，自己定义加密算法）<br>4.用好INT数据类型（UNSIGNED，金额用途——扩大N倍使用bigint）<br>5.遇到大对象数据类型（BLOB、TEXT）字段，尽量拆出去，再用主键做关联<br>6.字符类型尽可能使用varchar的数据类型（同长度更新）<br>7.日期数据数据建议采用datetime数据类型（datetime类型 0000-9999年，timestamp类型 1970-2038）</p>
 <h3 id="SQL开发的建议"><a href="#SQL开发的建议" class="headerlink" title="SQL开发的建议"></a>SQL开发的建议</h3><p>1.多表JOIN时，JOIN列的数据类型要一致<br>2.多表JOIN时，把过滤后结果集较小的表作为驱动表（或者使用 inner join 让优化器去做优化）<br>3.在查询的where条件中用上函数或表达式要用8.0版本<br>4.不要看到where条件中出现的列就直接创建索引<br>5.尽可能不要去执行select *操作<br>6.不要执行LIKE ‘%x%’<br>7.尽可能不要用 “!=” 条件<br>8.如果能确定返回结果数量的话最好加上 LIMIT N，优化器通常会再进一步优化，参考<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2RvYy9yZWZtYW4vOC4wL2VuL2xpbWl0LW9wdGltaXphdGlvbi5odG1s">LIMIT优化<i class="fa fa-external-link-alt"></i></span><br>9.优先使用UNION ALL，代替UNION<br>10.所有的SQL都要通过SQL审核系统检查，符合标准后才能上线</p>
 
@@ -603,7 +608,7 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">961k</span>
+    <span title="站点总字数">962k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
@@ -641,12 +646,12 @@
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/next-boot.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script>
 
   
   <script>
@@ -669,14 +674,14 @@
     })();
   }
   </script>
-<script src="//cdn.jsdelivr.net/npm/hexo-theme-next@8.2.0/source/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8.8.4/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.0/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -697,7 +702,7 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
 
-  <script src="//cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
   <script>
       window.addEventListener('load', () => {
       quicklink.listen({
@@ -739,11 +744,11 @@ if (document.querySelectorAll('.mermaid').length) {
   });
 </script>
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
 
 <script>
 NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
       clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
