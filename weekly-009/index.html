@@ -23,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="技术爱好者周刊，每周一发布，欢迎提issue贡献内容。  后端 Mysql 索引精讲本文主要讲述常见索引类型(实现层面)、索引种类(应用层面)、聚簇索引与非聚簇索引、覆盖索引、最佳索引使用策略。 京东到家MySQL容器化，为何首选Docker而非K8S？本文根据詹乡泉老师在〖deeplus直播第250期〗线上分享演讲内容整理而成。（文末有获取本期PPT&amp;回放的方式，不要错过），分享视频：">
 <meta property="og:type" content="article">
@@ -642,7 +642,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/next-boot.min.js"></script>
 
   
   <script>
@@ -665,14 +665,14 @@
     })();
   }
   </script>
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/local-search.min.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.0/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -693,7 +693,7 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
 
-  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
   <script>
       window.addEventListener('load', () => {
       quicklink.listen({
@@ -735,11 +735,11 @@ if (document.querySelectorAll('.mermaid').length) {
   });
 </script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
 <script>
 NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
       clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
@@ -747,6 +747,7 @@ NexT.utils.loadComments('.gitalk-container', () => {
       owner       : 'wangyonghong',
       admin       : ['wangyonghong'],
       id          : '6d975361c35f4fe4844a3675daf66783',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
         language: '',
       distractionFreeMode: true
     });

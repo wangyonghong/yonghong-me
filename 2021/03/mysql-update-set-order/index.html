@@ -23,7 +23,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="绝大多数数据库，在执行 update 语句时，update t set a &#x3D; b, b &#x3D; a 便可实现 a、b 列值互换，赋值表达式右侧的值取的都是原始值。MySQL 则是例外，其单表更新是自左到右依次完成，即先完成 a &#x3D; b，然后在完成 b &#x3D; a (此时 a &#x3D; b），所以执行结果变成 a、b 列都是 b，然后多表更新则又不尊从该更新法则。 这个问题源于业务中一次对券有效期进行延期的操作">
 <meta property="og:type" content="article">
@@ -420,9 +420,7 @@
 <p>其实这种更新方式也没有必要，如果券延期后还是过期的，那么其实也可以不更新券的有效期，那么 SQL 就变成了下面这样的。先过滤出延期后是生效状态的券，在进行更新。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE coupon </span><br><span class="line"><span class="keyword">SET</span> end_time <span class="operator">=</span> DATE_ADD(end_time, <span class="type">INTERVAL</span> <span class="number">35</span> <span class="keyword">DAY</span>), </span><br><span class="line">status <span class="operator">=</span> <span class="string">&#x27;生效中&#x27;</span>, </span><br><span class="line">gmt_modify <span class="operator">=</span> NOW() </span><br><span class="line"><span class="keyword">WHERE</span> ... </span><br><span class="line"><span class="keyword">AND</span> DATE_ADD(end_time, <span class="type">INTERVAL</span> <span class="number">35</span> <span class="keyword">DAY</span>) <span class="operator">&gt;</span> NOW() ;</span><br></pre></td></tr></table></figure>
 
-<h2 id="MySQL-官方文档原文"><a href="#MySQL-官方文档原文" class="headerlink" title="MySQL 官方文档原文"></a>MySQL 官方文档原文</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE t1 <span class="keyword">SET</span> col1 <span class="operator">=</span> col1 <span class="operator">+</span> <span class="number">1</span>, col2 <span class="operator">=</span> col1;</span><br></pre></td></tr></table></figure>
-
-<p>If you access a column from the table to be updated in an expression, <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/update.html"><code>UPDATE</code></a> uses the current value of the column. For example, the following statement sets <code>col1</code> to one more than its current value:</p>
+<h2 id="MySQL-官方文档原文"><a href="#MySQL-官方文档原文" class="headerlink" title="MySQL 官方文档原文"></a>MySQL 官方文档原文</h2><p>If you access a column from the table to be updated in an expression, <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/update.html"><code>UPDATE</code></a> uses the current value of the column. For example, the following statement sets <code>col1</code> to one more than its current value:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE t1 <span class="keyword">SET</span> col1 <span class="operator">=</span> col1 <span class="operator">+</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
 <p>The second assignment in the following statement sets <code>col2</code> to the current (updated) <code>col1</code> value, not the original <code>col1</code> value. The result is that <code>col1</code> and <code>col2</code> have the same value. This behavior differs from standard SQL.</p>
@@ -649,7 +647,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/utils.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/next-boot.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/next-boot.min.js"></script>
 
   
   <script>
@@ -672,14 +670,14 @@
     })();
   }
   </script>
-<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.1/source/js/local-search.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/local-search.min.js"></script>
 
 
 
 
 <script>
 if (document.querySelectorAll('.mermaid').length) {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.0/dist/mermaid.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js', () => {
     mermaid.init({
       theme    : 'forest',
       logLevel : 3,
@@ -700,7 +698,7 @@ if (document.querySelectorAll('.mermaid').length) {
 
   
 
-  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
   <script>
       window.addEventListener('load', () => {
       quicklink.listen({
@@ -742,11 +740,11 @@ if (document.querySelectorAll('.mermaid').length) {
   });
 </script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
 <script>
 NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
     var gitalk = new Gitalk({
       clientID    : '0e42a09d2799751b9ba7',
       clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
@@ -754,6 +752,7 @@ NexT.utils.loadComments('.gitalk-container', () => {
       owner       : 'wangyonghong',
       admin       : ['wangyonghong'],
       id          : '57ebc459e0515a9836e3a11837693c3d',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
         language: '',
       distractionFreeMode: true
     });
