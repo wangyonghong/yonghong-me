@@ -140,10 +140,6 @@ AND DATE_ADD(end_time, INTERVAL 35 DAY) > NOW() ;
 
 ## MySQL 官方文档原文
 
-```sql
-UPDATE t1 SET col1 = col1 + 1, col2 = col1;
-```
-
 If you access a column from the table to be updated in an expression, [`UPDATE`](https://dev.mysql.com/doc/refman/8.0/en/update.html) uses the current value of the column. For example, the following statement sets `col1` to one more than its current value:
 
 ```sql
