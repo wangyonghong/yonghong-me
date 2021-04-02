@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="JVM 基础知识 Java 是一种面向对象、静态类型、编译执行， 有 VM&#x2F;GC 和运行时、跨平台的高级语言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 进阶 - JVM 核心技术">
+<meta property="og:url" content="http://yonghong.tech/java-advance/01-jvm/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="JVM 基础知识 Java 是一种面向对象、静态类型、编译执行， 有 VM&#x2F;GC 和运行时、跨平台的高级语言。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-19-40-%E6%BA%90%E7%A0%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%B9%B3%E5%8F%B0-R6Uzxy.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-05-%E4%BB%8E%E5%8A%A9%E8%AE%B0%E7%AC%A6%E5%88%B0%E4%BA%8C%E8%BF%9B%E5%88%B6-1rl8Dp.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-09-01-%E7%AE%97%E6%95%B0%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2-D45qpJ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-18-01-%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%847%E4%B8%AA%E6%AD%A5%E9%AA%A4-r3r8RQ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-23-01-3%E4%B8%AA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8-pnd3RO.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-26-01-%E6%8B%93%E5%B1%95%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%BA%94%E7%94%A8%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8-PRIfeU.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-39-01-JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-OjY1mD.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-41-01-JVM%E5%86%85%E5%AD%98%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-eSeqP8.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-44-01-JVM%E6%A0%88%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-Z8QlQS.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-45-01-JVM%E5%A0%86%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-0TRoeN.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-46-01-jconsole%E5%86%85%E5%AD%98-KNrKkU.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84-3aWMrH.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-Java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B-K1uNvD.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B-G12dzM.jpg">
+<meta property="article:published_time" content="2021-04-03T01:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-03T01:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="Java进阶">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/04/02-19-40-%E6%BA%90%E7%A0%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%B9%B3%E5%8F%B0-R6Uzxy.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/java-advance/01-jvm/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<meta name="keywords" content="代码,产品,互联网,研发,程序员,学习,工作,技术,分享,永红,yonghong,Java,Kotlin,Python,Nginx,Springboot,Linux,MySQL,MongoDB,Redis">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Java 进阶 - JVM 核心技术 | 永红的互联网手记</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">664</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">715</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">JVM 基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8A%80%E6%9C%AF"><span class="nav-number">2.</span> <span class="nav-text">Java 字节码技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%97%E8%8A%82%E7%A0%81%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">什么是字节码？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javac-%E4%B8%8E-javap"><span class="nav-number">2.2.</span> <span class="nav-text">javac 与 javap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E7%9A%84%E8%BF%90%E8%A1%8C%E6%97%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">字节码的运行时结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%8A%A9%E8%AE%B0%E7%AC%A6%E5%88%B0%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="nav-number">2.4.</span> <span class="nav-text">从助记符到二进制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E5%88%99%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">2.5.</span> <span class="nav-text">四则运行的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">算数操作与类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">2.7.</span> <span class="nav-text">一个完整的循环控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E6%8C%87%E4%BB%A4"><span class="nav-number">2.8.</span> <span class="nav-text">方法调用的指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">JVM类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.1.</span> <span class="nav-text">类的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA"><span class="nav-number">3.2.</span> <span class="nav-text">类的加载时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E4%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%88%E5%8F%AF%E8%83%BD%E4%BC%9A%E5%8A%A0%E8%BD%BD%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">不会初始化（可能会加载）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">三种类加载器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8%E7%89%B9%E7%82%B9"><span class="nav-number">3.5.</span> <span class="nav-text">加载器特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%BD%93%E5%89%8D-ClassLoader-%E5%8A%A0%E8%BD%BD%E4%BA%86%E5%93%AA%E4%BA%9B-Jar-%EF%BC%9F"><span class="nav-number">3.6.</span> <span class="nav-text">显示当前 ClassLoader 加载了哪些 Jar ？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-ClassLoader"><span class="nav-number">3.7.</span> <span class="nav-text">自定义 ClassLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E7%B1%BB%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">3.8.</span> <span class="nav-text">添加类的几种方式？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">JVM 内存模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">JVM 内存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-%E5%86%85%E5%AD%98%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="nav-number">4.2.</span> <span class="nav-text">JVM 内存整体结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-%E6%A0%88%E5%86%85%E5%AD%98%E6%9C%BA%E6%9E%84"><span class="nav-number">4.3.</span> <span class="nav-text">JVM 栈内存机构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-%E5%A0%86%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">4.4.</span> <span class="nav-text">JVM 堆内存结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-%E4%B8%8E%E5%86%85%E5%AD%98%E8%A1%8C%E4%B8%BA"><span class="nav-number">4.5.</span> <span class="nav-text">CPU 与内存行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.6.</span> <span class="nav-text">Java对象模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.7.</span> <span class="nav-text">Java内存模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">JVM 启动参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC1%E8%AF%BE%E4%BD%9C%E4%B8%9A%E5%AE%9E%E8%B7%B5"><span class="nav-number">6.</span> <span class="nav-text">第1课作业实践</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">664</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">715</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20veW9uZ2hvbmczNjU=" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;yonghong365"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/01-jvm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 进阶 - JVM 核心技术
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-03 09:00:00 09:00:00" itemprop="dateCreated datePublished" datetime="2021-04-03T09:00:00+08:00">2021-04-03 09:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/java-advance/01-jvm/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="java-advance/01-jvm/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>22k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>20 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="JVM-基础知识"><a href="#JVM-基础知识" class="headerlink" title="JVM 基础知识"></a>JVM 基础知识</h2><ul>
+<li>Java 是一种面向对象、静态类型、编译执行， 有 VM/GC 和运行时、跨平台的高级语言。</li>
+</ul>
+<span id="more"></span>
+
+<p><img src="https://up-img.yonghong.tech/pic/2021/04/02-19-40-%E6%BA%90%E7%A0%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%B9%B3%E5%8F%B0-R6Uzxy.png" alt="源码跨平台和二进制跨平台"></p>
+<ul>
+<li>Java、C++、Rust 的区别<ul>
+<li>C/C++ 完全相信而且惯着程序员，让大家自行管理内存，可以编写很自由的代码，但一 不小心就会造成内存泄漏等问题，导致程序崩溃。</li>
+<li>Java/Golang 完全不相信程序员，但也惯着程序员。所有的内存生命周期都由 JVM 运行 时统一管理。 在绝大部分场景下，你可以非常自由的写代码，而且不用关心内存到底是 什么情况。 内存使用有问题的时候，我们可以通过 JVM 来进行信息相关的分析诊断和 调整。 这也是本课程的目标。</li>
+<li>Rust 语言选择既不相信程序员，也不惯着程序员。 让你在写代码的时候，必须清楚明白 的用 Rust 的规则管理好你的变量，好让机器能明白高效地分析和管理内存。 但是这样 会导致代码不利于人的理解，写代码很不自由，学习成本也很高。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java-字节码技术"><a href="#Java-字节码技术" class="headerlink" title="Java 字节码技术"></a>Java 字节码技术</h2><h3 id="什么是字节码？"><a href="#什么是字节码？" class="headerlink" title="什么是字节码？"></a>什么是字节码？</h3><p>Java bytecode 由单字节（byte）的指令组成，理论上最多支持 256 个操作码（opcode）。 实际上 Java 只使用了200左右的操作码，还有一些操作码则保留给调试操作。详情见：<a href="https://yonghong.tech/2021/01/jvm-instruction-set/">JVM 指令集对照表</a></p>
+<p>根据指令的性质，主要分为四个大类：</p>
+<ol>
+<li>栈操作指令，包括与局部变量交互的指令</li>
+<li>程序流程控制指令</li>
+<li>对象操作指令，包括方法调用指令</li>
+<li>算术运算以及类型转换指令</li>
+</ol>
+<p>举个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloByteCode</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        HelloByteCode obj = <span class="keyword">new</span> HelloByteCode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javac -g HelloByteCode.java</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> javap -c -v HelloByteCode</span></span><br><span class="line">Classfile /Users/yonghong/Coding/code-lab/gtu-java/week01/HelloByteCode.class</span><br><span class="line">  Last modified 2021-1-7; size 415 bytes</span><br><span class="line">  MD5 checksum 44dd68d97fffda0bd16a524fb32b983a</span><br><span class="line">  Compiled from &quot;HelloByteCode.java&quot;</span><br><span class="line">public class HelloByteCode</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52   // 52 对应 Java 8</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:        // 常量池</span><br><span class="line"><span class="meta">   #</span><span class="bash">1 = Methodref          <span class="comment">#4.#19         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">2 = Class              <span class="comment">#20            // HelloByteCode</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">3 = Methodref          <span class="comment">#2.#19         // HelloByteCode.&quot;&lt;init&gt;&quot;:()V</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">4 = Class              <span class="comment">#21            // java/lang/Object</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">5 = Utf8               &lt;init&gt;</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">6 = Utf8               ()V</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">7 = Utf8               Code</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">8 = Utf8               LineNumberTable</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">9 = Utf8               LocalVariableTable</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">10 = Utf8               this</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">11 = Utf8               LHelloByteCode;</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">12 = Utf8               main</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">13 = Utf8               ([Ljava/lang/String;)V</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">14 = Utf8               args</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">15 = Utf8               [Ljava/lang/String;</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">16 = Utf8               obj</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">17 = Utf8               SourceFile</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">18 = Utf8               HelloByteCode.java</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">19 = NameAndType        <span class="comment">#5:#6          // &quot;&lt;init&gt;&quot;:()V</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash">20 = Utf8               HelloByteCode</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">21 = Utf8               java/lang/Object</span></span><br><span class="line">&#123;</span><br><span class="line">  public HelloByteCode();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 1: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   LHelloByteCode;</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    descriptor: ([Ljava/lang/String;)V</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=2, locals=2, args_size=1</span><br><span class="line">         0: new           #2                  // class HelloByteCode</span><br><span class="line">         3: dup</span><br><span class="line">         4: invokespecial #3                  // Method &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         7: astore_1</span><br><span class="line">         8: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 3: 0   // new 指令在源码的第 3 行</span><br><span class="line">        line 4: 8   // return 指令在源码的第 4 行</span><br><span class="line">      LocalVariableTable:   // 本地变量表</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">      // 起作用的行  生效范围  槽数  变量名称  变量类型签名</span><br><span class="line">            0       9     0  args   [Ljava/lang/String;</span><br><span class="line">            8       1     1   obj   LHelloByteCode;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;HelloByteCode.java&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="javac-与-javap"><a href="#javac-与-javap" class="headerlink" title="javac 与 javap"></a>javac 与 javap</h3><p>javac 的用法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javac -<span class="built_in">help</span></span></span><br><span class="line">用法: javac &lt;options&gt; &lt;source files&gt;</span><br><span class="line">其中, 可能的选项包括:</span><br><span class="line">  -g                         生成所有调试信息</span><br><span class="line">  -g:none                    不生成任何调试信息</span><br><span class="line">  -g:&#123;lines,vars,source&#125;     只生成某些调试信息</span><br><span class="line">  -nowarn                    不生成任何警告</span><br><span class="line">  -verbose                   输出有关编译器正在执行的操作的消息</span><br><span class="line">  -deprecation               输出使用已过时的 API 的源位置</span><br><span class="line">  -classpath &lt;路径&gt;            指定查找用户类文件和注释处理程序的位置</span><br><span class="line">  -cp &lt;路径&gt;                   指定查找用户类文件和注释处理程序的位置</span><br><span class="line">  -sourcepath &lt;路径&gt;           指定查找输入源文件的位置</span><br><span class="line">  -bootclasspath &lt;路径&gt;        覆盖引导类文件的位置</span><br><span class="line">  -extdirs &lt;目录&gt;              覆盖所安装扩展的位置</span><br><span class="line">  -endorseddirs &lt;目录&gt;         覆盖签名的标准路径的位置</span><br><span class="line">  -proc:&#123;none,only&#125;          控制是否执行注释处理和/或编译。</span><br><span class="line">  -processor &lt;class1&gt;[,&lt;class2&gt;,&lt;class3&gt;...] 要运行的注释处理程序的名称; 绕过默认的搜索进程</span><br><span class="line">  -processorpath &lt;路径&gt;        指定查找注释处理程序的位置</span><br><span class="line">  -parameters                生成元数据以用于方法参数的反射</span><br><span class="line">  -d &lt;目录&gt;                    指定放置生成的类文件的位置</span><br><span class="line">  -s &lt;目录&gt;                    指定放置生成的源文件的位置</span><br><span class="line">  -h &lt;目录&gt;                    指定放置生成的本机标头文件的位置</span><br><span class="line">  -implicit:&#123;none,class&#125;     指定是否为隐式引用文件生成类文件</span><br><span class="line">  -encoding &lt;编码&gt;             指定源文件使用的字符编码</span><br><span class="line">  -source &lt;发行版&gt;              提供与指定发行版的源兼容性</span><br><span class="line">  -target &lt;发行版&gt;              生成特定 VM 版本的类文件</span><br><span class="line">  -profile &lt;配置文件&gt;            请确保使用的 API 在指定的配置文件中可用</span><br><span class="line">  -version                   版本信息</span><br><span class="line">  -help                      输出标准选项的提要</span><br><span class="line">  -A关键字[=值]                  传递给注释处理程序的选项</span><br><span class="line">  -X                         输出非标准选项的提要</span><br><span class="line">  -J&lt;标记&gt;                     直接将 &lt;标记&gt; 传递给运行时系统</span><br><span class="line">  -Werror                    出现警告时终止编译</span><br><span class="line">  @&lt;文件名&gt;                     从文件读取选项和文件名</span><br></pre></td></tr></table></figure>
+
+<p>javap 的用法</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javap -<span class="built_in">help</span></span></span><br><span class="line">用法: javap &lt;options&gt; &lt;classes&gt;</span><br><span class="line">其中, 可能的选项包括:</span><br><span class="line">  -help  --help  -?        输出此用法消息</span><br><span class="line">  -version                 版本信息</span><br><span class="line">  -v  -verbose             输出附加信息</span><br><span class="line">  -l                       输出行号和本地变量表</span><br><span class="line">  -public                  仅显示公共类和成员</span><br><span class="line">  -protected               显示受保护的/公共类和成员</span><br><span class="line">  -package                 显示程序包/受保护的/公共类</span><br><span class="line">                           和成员 (默认)</span><br><span class="line">  -p  -private             显示所有类和成员</span><br><span class="line">  -c                       对代码进行反汇编</span><br><span class="line">  -s                       输出内部类型签名</span><br><span class="line">  -sysinfo                 显示正在处理的类的</span><br><span class="line">                           系统信息 (路径, 大小, 日期, MD5 散列)</span><br><span class="line">  -constants               显示最终常量</span><br><span class="line">  -classpath &lt;path&gt;        指定查找用户类文件的位置</span><br><span class="line">  -cp &lt;path&gt;               指定查找用户类文件的位置</span><br><span class="line">  -bootclasspath &lt;path&gt;    覆盖引导类文件的位置</span><br></pre></td></tr></table></figure>
+
+<h3 id="字节码的运行时结构"><a href="#字节码的运行时结构" class="headerlink" title="字节码的运行时结构"></a>字节码的运行时结构</h3><p>JVM 是一台基于栈的计算机器。</p>
+<p>每个线程都有一个独属于自己的线程栈（JVM Stack），用于存储 栈帧（Frame）。 每一次方法调用，JVM 都会自动创建一个栈帧。栈帧由操作数栈，局部变量数组以及一个 Class 引用组成。Class 引用指向当前方法在运行时常量池中对应的 Class。</p>
+<h3 id="从助记符到二进制"><a href="#从助记符到二进制" class="headerlink" title="从助记符到二进制"></a>从助记符到二进制</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-05-%E4%BB%8E%E5%8A%A9%E8%AE%B0%E7%AC%A6%E5%88%B0%E4%BA%8C%E8%BF%9B%E5%88%B6-1rl8Dp.png" alt="从助记符到二进制"></p>
+<h3 id="四则运行的例子"><a href="#四则运行的例子" class="headerlink" title="四则运行的例子"></a>四则运行的例子</h3><p>MovingAverage.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MovingAverage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> sum = <span class="number">0.0D</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">submit</span><span class="params">(<span class="keyword">double</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count++;</span><br><span class="line">        <span class="keyword">this</span>.sum += value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getAvg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> == <span class="keyword">this</span>.count) &#123;</span><br><span class="line">            <span class="keyword">return</span> sum;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.sum / <span class="keyword">this</span>.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LocalVaribleTest.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocalVaribleTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MovingAverage ma = <span class="keyword">new</span> MovingAverage();</span><br><span class="line">        <span class="keyword">int</span> num1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> num2 = <span class="number">2</span>;</span><br><span class="line">        ma.submit(num1);</span><br><span class="line">        ma.submit(num2);</span><br><span class="line">        <span class="keyword">double</span> avg = ma.getAvg();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javap -c MovingAverage</span></span><br><span class="line">Compiled from &quot;MovingAverage.java&quot;</span><br><span class="line">public class MovingAverage &#123;</span><br><span class="line">  public MovingAverage();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       4: aload_0</span><br><span class="line">       5: iconst_0</span><br><span class="line">       6: putfield      #2                  // Field count:I</span><br><span class="line">       9: aload_0</span><br><span class="line">      10: dconst_0</span><br><span class="line">      11: putfield      #3                  // Field sum:D</span><br><span class="line">      14: return</span><br><span class="line"></span><br><span class="line">  public void submit(double);</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: dup</span><br><span class="line">       2: getfield      #2                  // Field count:I</span><br><span class="line">       5: iconst_1</span><br><span class="line">       6: iadd</span><br><span class="line">       7: putfield      #2                  // Field count:I</span><br><span class="line">      10: aload_0</span><br><span class="line">      11: dup</span><br><span class="line">      12: getfield      #3                  // Field sum:D</span><br><span class="line">      15: dload_1</span><br><span class="line">      16: dadd</span><br><span class="line">      17: putfield      #3                  // Field sum:D</span><br><span class="line">      20: return</span><br><span class="line"></span><br><span class="line">  public double getAvg();</span><br><span class="line">    Code:</span><br><span class="line">       0: iconst_0</span><br><span class="line">       1: aload_0</span><br><span class="line">       2: getfield      #2                  // Field count:I</span><br><span class="line">       5: if_icmpne     13</span><br><span class="line">       8: aload_0</span><br><span class="line">       9: getfield      #3                  // Field sum:D</span><br><span class="line">      12: dreturn</span><br><span class="line">      13: aload_0</span><br><span class="line">      14: getfield      #3                  // Field sum:D</span><br><span class="line">      17: aload_0</span><br><span class="line">      18: getfield      #2                  // Field count:I</span><br><span class="line">      21: i2d</span><br><span class="line">      22: ddiv</span><br><span class="line">      23: dreturn</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> javap -c LocalVaribleTest</span></span><br><span class="line">Compiled from &quot;LocalVaribleTest.java&quot;</span><br><span class="line">public class LocalVaribleTest &#123;</span><br><span class="line">  public LocalVaribleTest();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       4: return</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           #2                  // class MovingAverage</span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial #3                  // Method MovingAverage.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       7: astore_1</span><br><span class="line">       8: iconst_1</span><br><span class="line">       9: istore_2</span><br><span class="line">      10: iconst_2</span><br><span class="line">      11: istore_3</span><br><span class="line">      12: aload_1</span><br><span class="line">      13: iload_2</span><br><span class="line">      14: i2d   // int 转成 double 隐式转换</span><br><span class="line">      15: invokevirtual #4                  // Method MovingAverage.submit:(D)V</span><br><span class="line">      18: aload_1</span><br><span class="line">      19: iload_3</span><br><span class="line">      20: i2d</span><br><span class="line">      21: invokevirtual #4                  // Method MovingAverage.submit:(D)V</span><br><span class="line">      24: aload_1</span><br><span class="line">      25: invokevirtual #5                  // Method MovingAverage.getAvg:()D</span><br><span class="line">      28: dstore        4</span><br><span class="line">      30: return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="算数操作与类型转换"><a href="#算数操作与类型转换" class="headerlink" title="算数操作与类型转换"></a>算数操作与类型转换</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-09-01-%E7%AE%97%E6%95%B0%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2-D45qpJ.png" alt="算数操作与类型转换"></p>
+<h3 id="一个完整的循环控制"><a href="#一个完整的循环控制" class="headerlink" title="一个完整的循环控制"></a>一个完整的循环控制</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForLoopTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span>[] nums = &#123;<span class="number">1</span>, <span class="number">6</span>, <span class="number">8</span>&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MovingAverage ma = <span class="keyword">new</span> MovingAverage();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">            ma.submit(num);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">double</span> avg = ma.getAvg();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javap -c ForLoopTest</span></span><br><span class="line">Compiled from &quot;ForLoopTest.java&quot;</span><br><span class="line">public class ForLoopTest &#123;</span><br><span class="line">  public ForLoopTest();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       4: return</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       0: new           #2                  // class MovingAverage</span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial #3                  // Method MovingAverage.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       7: astore_1</span><br><span class="line">       8: getstatic     #4                  // Field nums:[I</span><br><span class="line">      11: astore_2</span><br><span class="line">      12: aload_2</span><br><span class="line">      13: arraylength</span><br><span class="line">      14: istore_3</span><br><span class="line">      15: iconst_0                // 初始化变量 0</span><br><span class="line">      16: istore        4         // 存储到本地变量表 4 槽位</span><br><span class="line">      18: iload         4         // 加载 4 槽位 到操作数栈</span><br><span class="line">      20: iload_3                 // 加载 int 3 到操作数栈</span><br><span class="line">      21: if_icmpge     43        // 比较，如果大于等于跳转到 43 行指令</span><br><span class="line">      24: aload_2</span><br><span class="line">      25: iload         4</span><br><span class="line">      27: iaload</span><br><span class="line">      28: istore        5</span><br><span class="line">      30: aload_1</span><br><span class="line">      31: iload         5</span><br><span class="line">      33: i2d</span><br><span class="line">      34: invokevirtual #5                  // Method MovingAverage.submit:(D)V</span><br><span class="line">      37: iinc          4, 1      // 4 槽位上加 1</span><br><span class="line">      40: goto          18        // goto 18 行指令</span><br><span class="line">      43: aload_1</span><br><span class="line">      44: invokevirtual #6                  // Method MovingAverage.getAvg:()D</span><br><span class="line">      47: dstore_2</span><br><span class="line">      48: return</span><br><span class="line"></span><br><span class="line">  static &#123;&#125;;</span><br><span class="line">    Code:</span><br><span class="line">       0: iconst_3</span><br><span class="line">       1: newarray       int</span><br><span class="line">       3: dup</span><br><span class="line">       4: iconst_0</span><br><span class="line">       5: iconst_1</span><br><span class="line">       6: iastore</span><br><span class="line">       7: dup</span><br><span class="line">       8: iconst_1</span><br><span class="line">       9: bipush        6</span><br><span class="line">      11: iastore</span><br><span class="line">      12: dup</span><br><span class="line">      13: iconst_2</span><br><span class="line">      14: bipush        8</span><br><span class="line">      16: iastore</span><br><span class="line">      17: putstatic     #4                  // Field nums:[I</span><br><span class="line">      20: return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法调用的指令"><a href="#方法调用的指令" class="headerlink" title="方法调用的指令"></a>方法调用的指令</h3><ul>
+<li>invokestatic，顾名思义，这个指令用于调用某个类的静态方法，这是方法调用指令中最快的一个。</li>
+<li>invokespecial, 用来调用构造函数，但也可以用于调用同一个类中的 private 方法, 以及可见的超类方法。</li>
+<li>invokevirtual，如果是具体类型的目标对象，invokevirtual 用于调用公共，受保护和 package 级的私有方法。</li>
+<li>invokeinterface，当通过接口引用来调用方法时，将会编译为 invokeinterface 指令。</li>
+<li>invokedynamic，JDK7 新增加的指令，是实现“动态类型语言”（Dynamically Typed Language）支持而进行的升级改进，同时也是 JDK8 以后支持 lambda 表达式的实现基础。</li>
+</ul>
+<h2 id="JVM类加载器"><a href="#JVM类加载器" class="headerlink" title="JVM类加载器"></a>JVM类加载器</h2><h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-18-01-%E7%B1%BB%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%847%E4%B8%AA%E6%AD%A5%E9%AA%A4-r3r8RQ.png" alt="类生命周期的7个步骤"></p>
+<ol>
+<li>加载（Loading）：找Class文件</li>
+<li>验证（Verification）：验证格式、依赖</li>
+<li>准备（Preparation）：静态字段、方法表</li>
+<li>解析（Resolution）：符号解析为引用</li>
+<li>初始化（Initialization）：构造器、静态变量赋值、静态代码块</li>
+<li>使用（Using）</li>
+<li>卸载（Unloading）</li>
+</ol>
+<h3 id="类的加载时机"><a href="#类的加载时机" class="headerlink" title="类的加载时机"></a>类的加载时机</h3><ol>
+<li>当虚拟机启动时，初始化用户指定的主类，就是启动执行的main方法所在的类；</li>
+<li>当遇到用一新建目标类实例的new指令时，初始化new指令的目标类，就是new一个类的时候要初始化；</li>
+<li>当遇到调用静态方法的指令时，初始化该静态方法所在的类；</li>
+<li>当遇到访问静态字段的指令时，初始化该静态字段所在的类；</li>
+<li>子类的初始化会触发父类的初始化；</li>
+<li>如果一个接口定义了default方法，那么直接实现或者间接实现该接口的类初始化，会触发该接口的初始化；</li>
+<li>使用反射API对某个类型进行反射调用时，初始化这个类，其实跟前面一样，反射调用要么是已经有实例了，要么是静态方法，都需要初始化；</li>
+<li>当初次调用MethodHandle实例时，初始化该MethodHandle指向的方法所在的类；</li>
+</ol>
+<h3 id="不会初始化（可能会加载）"><a href="#不会初始化（可能会加载）" class="headerlink" title="不会初始化（可能会加载）"></a>不会初始化（可能会加载）</h3><ol>
+<li>通过子类引用父类的静态字段，只会触发父类的初始化，而不会触发子类的初始化；</li>
+<li>定义对象数组，不会触发该类的初始化；</li>
+<li>常量在编译期间会存入调用类的常量池中，本质上并没有直接引用定义常量的类，不会触发定义常量所在的类；</li>
+<li>通过类名获取Class对象，不会触发类的初始化，Hello.class不会让Hello类初始化；</li>
+<li>通过Class.forName加载指定类时，如果指定参数initialize为false时，也不会触发类初始化，其实这个参数是告诉虚拟机，是否要对类进行初始化，Class.forName(“jvm.Hello”) 默认会加载Hello类；</li>
+<li>通过ClassLoader默认的loadClass方法，也不会触发初始化动作（加载了，但是不会初始化）；</li>
+</ol>
+<h3 id="三种类加载器"><a href="#三种类加载器" class="headerlink" title="三种类加载器"></a>三种类加载器</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-23-01-3%E4%B8%AA%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8-pnd3RO.png" alt="3个类加载器"></p>
+<ol>
+<li>启动类加载器（BootstrapClassLoader）</li>
+<li>拓展类加载器（ExtClassLoader）</li>
+<li>应用类加载器（AppClassLoader）</li>
+</ol>
+<p>类加载器可以通过getParent获取父加载器，这并不是继承关系，如果直接继承ClassLoader自己实现一个类加载器，且不指定父加载器，他的父加载器就是AppClassLoader</p>
+<p>任何parent为null的加载器，其父加载器为 BootstrapClassLoader</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-26-01-%E6%8B%93%E5%B1%95%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%92%8C%E5%BA%94%E7%94%A8%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8-PRIfeU.png" alt="拓展类加载器和应用类加载器"></p>
+<h3 id="加载器特点"><a href="#加载器特点" class="headerlink" title="加载器特点"></a>加载器特点</h3><p>1.双亲委托</p>
+<p>当某个特定的类加载器在接收到加载类的请求时，首先将该加载任务发送给父加载器，若父加载器仍有父亲，则继续向上追溯，直到最高级。如果最高级父加载器能够加载到该类，则成功返回，否则由其子加载器进行加载。以此类推，如果到最后一个子加载器还不能成功加载，则抛出一个异常。作用：可以保证java核心库或第三方库的安全（防止低一级加载器加载的类覆盖高级加载器加载的类）</p>
+<p>默认的类加载器是 AppClassLoader，当需要加载一个类的时候，我先去自己的上一级的类加载器ExtClassLoader中找找，有没有这个类，如果有直接拿来用。同样的，如果ExtClassLoader中也没有这个类，那我继续向上去BootstrapClassLoader中找，如果有直接拿来用。所以上一级已经加载了这个类，那么我这一级就不需要再加载了。</p>
+<p>2.负责依赖</p>
+<p>如果一个类依赖了其他的类，那么就需要先加载依赖的类。</p>
+<p>3.缓存加载</p>
+<p>类加载之后，就把它缓存起来，后续从缓存中获取</p>
+<h3 id="显示当前-ClassLoader-加载了哪些-Jar-？"><a href="#显示当前-ClassLoader-加载了哪些-Jar-？" class="headerlink" title="显示当前 ClassLoader 加载了哪些 Jar ？"></a>显示当前 ClassLoader 加载了哪些 Jar ？</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLClassLoader;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JvmClassLoaderPrintPath</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 启动类加载器</span></span><br><span class="line">        URL[] urls = sun.misc.Launcher.getBootstrapClassPath().getURLs();</span><br><span class="line">        System.out.println(<span class="string">&quot;启动类加载器&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (URL url : urls) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot; ===&gt; &quot;</span> + url.toExternalForm());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 拓展类加载器</span></span><br><span class="line">        printClassLoader(<span class="string">&quot;拓展类加载器&quot;</span>, JvmClassLoaderPrintPath.class.getClassLoader().getParent());</span><br><span class="line">        <span class="comment">// 应用类加载器</span></span><br><span class="line">        printClassLoader(<span class="string">&quot;应用类加载器&quot;</span>, JvmClassLoaderPrintPath.class.getClassLoader());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printClassLoader</span><span class="params">(String name, ClassLoader classLoader)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (classLoader != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot; ClassLoader -&gt; &quot;</span> + classLoader.toString());</span><br><span class="line">            printUrlForClassLoader(classLoader);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(name + <span class="string">&quot; ClassLoader -&gt; null&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printUrlForClassLoader</span><span class="params">(ClassLoader classLoader)</span> </span>&#123;</span><br><span class="line">        Object ucp = insightField(classLoader, <span class="string">&quot;ucp&quot;</span>);</span><br><span class="line">        Object path = insightField(ucp, <span class="string">&quot;path&quot;</span>);</span><br><span class="line">        ArrayList ps = (ArrayList) path;</span><br><span class="line">        <span class="keyword">for</span> (Object p : ps) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot; ===&gt; &quot;</span> + p.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Object <span class="title">insightField</span><span class="params">(Object obj, String fName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Field f = <span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> URLClassLoader) &#123;</span><br><span class="line">                f = URLClassLoader.class.getDeclaredField(fName);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                f = obj.getClass().getDeclaredField(fName);</span><br><span class="line">            &#125;</span><br><span class="line">            f.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">return</span> f.get(obj);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">启动类加载器</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/resources.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/rt.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/sunrsasign.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/jsse.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/jce.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/charsets.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/jfr.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/classes</span><br><span class="line">拓展类加载器 ClassLoader -&gt; sun.misc.Launcher$ExtClassLoader@6d06d69c</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/sunec.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/nashorn.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/cldrdata.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/dnsns.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/localedata.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/sunjce_provider.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/sunpkcs11.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/jaccess.jar</span><br><span class="line"> ===&gt; file:/Users/yq/.sdkman/candidates/java/8.0.275.hs-adpt/jre/lib/ext/zipfs.jar</span><br><span class="line"> ===&gt; file:/System/Library/Java/Extensions/MRJToolkit.jar</span><br><span class="line">应用类加载器 ClassLoader -&gt; sun.misc.Launcher$AppClassLoader@659e0bfd</span><br><span class="line"> ===&gt; file:/Users/yq/code/wangyonghong/code-lab/gtu-java/out/production/gtu-java/</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义-ClassLoader"><a href="#自定义-ClassLoader" class="headerlink" title="自定义 ClassLoader"></a>自定义 ClassLoader</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello, classLoader!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过以下方法拿到 base64</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> javac Hello.java</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> base64 Hello.class</span> </span><br><span class="line">yv66vgAAADQAHAoABgAOCQAPABAIABEKABIAEwcAFAcAFQEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAVoZWxsbwEAClNvdXJjZUZpbGUBAApIZWxsby5qYXZhDAAHAAgHABYMABcAGAEAE0hlbGxvLCBjbGFzc0xvYWRlciEHABkMABoAGwEABUhlbGxvAQAQamF2YS9sYW5nL09iamVjdAEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsBABNqYXZhL2lvL1ByaW50U3RyZWFtAQAHcHJpbnRsbgEAFShMamF2YS9sYW5nL1N0cmluZzspVgAhAAUABgAAAAAAAgABAAcACAABAAkAAAAdAAEAAQAAAAUqtwABsQAAAAEACgAAAAYAAQAAAAQAAQALAAgAAQAJAAAAJQACAAEAAAAJsgACEgO2AASxAAAAAQAKAAAACgACAAAABgAIAAcAAQAMAAAAAgAN</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过以下方法可以自定义ClassLoader</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yonghongwang#163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2021/4/2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> HelloClassLoader().findClass(<span class="string">&quot;Hello&quot;</span>).newInstance();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">        String helloBase64 = <span class="string">&quot;yv66vgAAADQAHAoABgAOCQAPABAIABEKABIAEwcAFAcAFQEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAVoZWxsbwEAClNvdXJjZUZpbGUBAApIZWxsby5qYXZhDAAHAAgHABYMABcAGAEAE0hlbGxvLCBjbGFzc0xvYWRlciEHABkMABoAGwEABUhlbGxvAQAQamF2YS9sYW5nL09iamVjdAEAEGphdmEvbGFuZy9TeXN0ZW0BAANvdXQBABVMamF2YS9pby9QcmludFN0cmVhbTsBABNqYXZhL2lvL1ByaW50U3RyZWFtAQAHcHJpbnRsbgEAFShMamF2YS9sYW5nL1N0cmluZzspVgAhAAUABgAAAAAAAgABAAcACAABAAkAAAAdAAEAAQAAAAUqtwABsQAAAAEACgAAAAYAAQAAAAQAAQALAAgAAQAJAAAAJQACAAEAAAAJsgACEgO2AASxAAAAAQAKAAAACgACAAAABgAIAAcAAQAMAAAAAgAN&quot;</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] bytes = decode(helloBase64);</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, bytes, <span class="number">0</span>, bytes.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] decode(String base64) &#123;</span><br><span class="line">        <span class="keyword">return</span> Base64.getDecoder().decode(base64);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加类的几种方式？"><a href="#添加类的几种方式？" class="headerlink" title="添加类的几种方式？"></a>添加类的几种方式？</h3><ol>
+<li>放到 JDK 的 lib/ext 下，或者 -Djava.ext.dirs=path</li>
+<li>java -cp/classpath 或者 class 文件放到当前路径</li>
+<li>自定义 ClassLoader 加载</li>
+<li>拿到当前执行类的 ClassLoader，反射调用 addUrl 方法添加 Jar 或路径（JDK 9 之后平级了，可以使用 <code>Class.forName(&quot;xxx&quot;, new URLClassLoader(&quot;path&quot;));</code>）</li>
+</ol>
+<h2 id="JVM-内存模型"><a href="#JVM-内存模型" class="headerlink" title="JVM 内存模型"></a>JVM 内存模型</h2><h3 id="JVM-内存结构"><a href="#JVM-内存结构" class="headerlink" title="JVM 内存结构"></a>JVM 内存结构</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-39-01-JVM%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-OjY1mD.png" alt="JVM内存结构"></p>
+<ul>
+<li>每个线程只能访问自己的线程栈。</li>
+<li>每个线程都不能访问（看不见）其他线程的局部变量。</li>
+<li>所有原生类型的局部变量都存储在线程栈中，因此对其他线程是不可见的。</li>
+<li>线程可以将一个原生变量值的副本传给另一个线程，但不能共享原生局部变量本身。</li>
+<li>堆内存中包含了 Java 代码中创建的所有对象，不管是哪个线程创建的。其中也涵盖了包装类型（例如，Byte，Integer，Long等）。</li>
+<li>不管是创建一个对象并将其值赋值给局部变量，还是赋值给另一个对象的成员变量，创建的对象都会被保存到堆内存中。</li>
+</ul>
+<hr>
+<ul>
+<li>如果是原生数据类型的局部变量，那么它的内容就全部保留在线程栈上。 </li>
+<li>如果是对象引用，则栈中的局部变量槽位中保存着对象的引用地址，而实际的对象内容保存在堆中。</li>
+<li>对象的成员变量与对象本身一起存储在堆上，不管成员变量的类型是原生数据类型，还是对象引用。</li>
+<li>类的静态变量则和类定义一样都保存在堆中。</li>
+</ul>
+<hr>
+<ul>
+<li>总结一下：方法中使用的原生数据类型和对象引用地址在栈上存储；对象、对象成员与类定义、静态变量在堆上。</li>
+<li>堆内存又称为“共享堆”，堆中的所有对象，可以被所有线程访问，只要他们能拿到对象的引用地址。</li>
+<li>如果一个线程可以访问某个对象时，也就可以访问该对象的成员变量。</li>
+<li>如果两个线程同时调用某个对象的同一方法，则它们都可以访问到这个对象的成员变量，但每个线程的局部变量副本是独立的。</li>
+</ul>
+<h3 id="JVM-内存整体结构"><a href="#JVM-内存整体结构" class="headerlink" title="JVM 内存整体结构"></a>JVM 内存整体结构</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-41-01-JVM%E5%86%85%E5%AD%98%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84-eSeqP8.png" alt="JVM内存整体结构"></p>
+<ul>
+<li>每启动一个线程，JVM就会在栈空间栈分配对应的线程栈，比如 1MB 空间（-Xss1m） </li>
+<li>线程栈也叫做 Java 方法栈。如果使用了 JNI 方法，则会分配一个单独的本地方法栈（Native Stack） </li>
+<li>线程执行过程中，一般会有多个方法组成调用栈（Stack Trace），比如 A 调用 B，B 调用 C 。每执行到一个方法，就会创建对应的栈帧（Frame）。</li>
+</ul>
+<h3 id="JVM-栈内存机构"><a href="#JVM-栈内存机构" class="headerlink" title="JVM 栈内存机构"></a>JVM 栈内存机构</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-44-01-JVM%E6%A0%88%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-Z8QlQS.png" alt="JVM栈内存结构"></p>
+<ul>
+<li>栈帧是一个逻辑上的概念，具体的大小在一个方法编写完成后基本上就能确定。 </li>
+<li>比如返回值，需要有一个空间存放吧，每个局部变量都需要对应的地址空间，此外还有给指令使用的操作数栈，以及 Class 指针（标识这个栈帧对应的是哪个类的方法，指向非堆里面的 Class 对象）。</li>
+</ul>
+<h3 id="JVM-堆内存结构"><a href="#JVM-堆内存结构" class="headerlink" title="JVM 堆内存结构"></a>JVM 堆内存结构</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-45-01-JVM%E5%A0%86%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84-0TRoeN.png" alt="JVM堆内存结构"></p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-46-01-jconsole%E5%86%85%E5%AD%98-KNrKkU.png" alt="jconsole内存"></p>
+<ul>
+<li>堆内存是所有线程共用的内存空间，JVM 将 Heap 内存分为年轻代（Young generation）和老年代（Old generation，也叫 Tenured）两部分。</li>
+<li>年轻代还划分为3个内存池，伊甸园区（Eden space）和存活区（Survivor space），在大部分GC算法中有两个存活区（S0，S1），在我们可以观察到的任何时刻，S0和S1总有一个是空的，但一般很小，也浪费不了多少空间。</li>
+<li>Non-Heap本质上还是Heap，只是一般不归GC管理，里面划分为3个内存区池。</li>
+<li>Metaspace 以前叫持久代（永久代，Permanent generation），Java 换了个名字叫 Metaspace</li>
+<li>CCS Compressed Class Space，存放 class 信息的，和 Metaspace 有交叉</li>
+<li>Code Cache，存放 JIT 编译器编译后的本地机器代码。</li>
+</ul>
+<h3 id="CPU-与内存行为"><a href="#CPU-与内存行为" class="headerlink" title="CPU 与内存行为"></a>CPU 与内存行为</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E6%9E%B6%E6%9E%84-3aWMrH.png" alt="计算机硬件架构"></p>
+<ul>
+<li>CPU 乱序执行</li>
+<li>volatile 关键字</li>
+<li>原子性操作</li>
+<li>内存屏障</li>
+</ul>
+<h3 id="Java对象模型"><a href="#Java对象模型" class="headerlink" title="Java对象模型"></a>Java对象模型</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-Java%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B-K1uNvD.png" alt="Java对象模型"></p>
+<h3 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/02-20-47-01-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B-G12dzM.jpg" alt="Java内存模型"></p>
+<p>JMM 规范对应的是 JSR-133 Java Memory Model and Thread Specification 《Java 语言规范》 $17.4 Memory Model 章节</p>
+<p>JMM 规范明确定义了不同的线程之间通过哪些方式，在什么时候可以看见其他线程保存到共享变量中的值；以及在必要时，如何对共享变量的访问进行同步。这样的好处是屏蔽各种硬件平台的操作系统之间的内存访问差异，实现了Java并发程序真正的跨平台。</p>
+<ul>
+<li>所有的对象（包括内部的实例成员变量），static 变量，以及数组，都必须存放到堆内存中。</li>
+<li>局部变量，方法的形参/入参，异常处理语句的入参不允许在线程之间共享，所以不受内存模型的影响。</li>
+<li>多个线程同时对一个变量访问时【读取/写入】，这时候只要有某个线程执行的是写操作，那么这种现象称之为“冲突”。</li>
+<li>可以被其他线程影响或感知的操作，称为线程间的交互行为，可分为：读取、写入、同步操作、外部操作等等。其中同步操作包括：对 volatile 变量的读写，对管程（monitor）的锁定与解锁，线程的起始操作与结尾操作，线程启动和结束等等。外部操作则是指对线程执行环境之外的操作，比如停止其他线程等等。</li>
+<li>JMM 规范的是线程间的交互操作，而不管线程内部对局部变量进行的操作。</li>
+</ul>
+<h2 id="JVM-启动参数"><a href="#JVM-启动参数" class="headerlink" title="JVM 启动参数"></a>JVM 启动参数</h2><ul>
+<li>以 - 开头为标准参数，所有的 JVM 都要实现这些参数，并且向后兼容。例，<code>-server</code></li>
+<li>-D 设置系统属性。例，<code>-Dfile.encoding=UTF-8</code></li>
+<li>以 -X 开头为非标准参数，基本都是传给 JVM 的，默认 JVM 实现这些参数的功能，但是并不保证所有 JVM 实现都满足，且不保证向后兼容。可以使用 <code>java -X</code> 命令来查看当前 JVM 支持的非标准参数。例，<code>-Xmx8g</code></li>
+<li>以 -XX: 开头为非稳定参数，专门用于控制 JVM 的行为，跟具体的 JVM 实现有关，随时可能会在下个版本取消。<ul>
+<li>-XX: +-Flags 形式，+-是对布尔值进行开关。例，<code>-XX:+UseG1GC</code></li>
+<li>-XX: key=value 形式，指定某个选项的值。例，<code>-XX:MaxPermSize=256m</code></li>
+</ul>
+</li>
+</ul>
+<p>1.系统属性参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-Dfile.encoding=UTF-<span class="number">8</span></span><br><span class="line">-Duser.timezone=GMT+08</span><br><span class="line">-Dmaven.test.skip=<span class="keyword">true</span></span><br><span class="line">-Dio.netty.eventLoopThreads=<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 还可以这样</span></span><br><span class="line">System.setProperty(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;A100&quot;</span>);</span><br><span class="line">String a = System.getProperty(<span class="string">&quot;a&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>2.运行模式参数</p>
+<ul>
+<li>-server: 设置 JVM 使用 server 模式，特点是启动速度比较慢，但运行时性能和内存管理效率很高，适用于生产环境。在具有 64 位能力的 JDK 环境下将默认启用该模式，而忽略 -client 参数。</li>
+<li>-client: JDK1.7 之前在32位的 x86 机器上的默认值是 -client 选项。设置 JVM 使用 client 模式，特点是启动速度比较快，但运行时性能和内存管理效率不高，通常用于客户端应用程序或者 PC 应用开发和调试。此外，我们知道 JVM 加载字节码后，可以解释执行，也可以编译成本地代码再执行，所以可以配置 JVM 对字节码的处理模式。</li>
+<li>-Xint: 在解释模式(interpreted mode)下运行，-Xint 标记会强制 JVM 解释执行所有的字节码，这当然会降低运行速度，通常低10倍或更多。</li>
+<li>-Xcomp: -Xcomp 参数与 -Xint 正好相反，JVM 在第一次使用时会把所有的字节码编译成本地代码，从而带来最大程度的优化。【注意预热】</li>
+<li>-Xmixed: -Xmixed 是混合模式，将解释模式和编译模式进行混合使用，有 JVM 自己决定，这是 JVM 的默认模式，也是推荐模式。 我们使用 java -version 可以看到 mixed mode 等信息。</li>
+</ul>
+<p>3.堆内存设置参数</p>
+<ul>
+<li>-Xmx, 指定最大堆内存。 如 -Xmx4g. 这只是限制了 Heap 部分的最大值为4g。这个内存不包括栈内存，也不包括堆外使用的内存。</li>
+<li>-Xms, 指定堆内存空间的初始大小。 如 -Xms4g。 而且指定的内存大小，并不是操作系统实际分配的初始值，而是GC先规划好，用到才分配。专用服务器上需要保持 –Xms 和 –Xmx 一致，否则应用刚启动可能就有好几个 FullGC。 当两者配置不一致时，堆内存扩容可能会导致性能抖动。</li>
+<li>-Xmn, 等价于 -XX:NewSize，使用 G1 垃圾收集器 不应该 设置该选项，在其他的某些业务场景下可以设置。官方建议设置为 -Xmx 的 1/2 ~ 1/4.</li>
+<li>-XX:MaxPermSize=size, 这是 JDK1.7 之前使用的。Java8 默认允许的 Meta空间无限大，此参数无效。</li>
+<li>-XX:MaxMetaspaceSize=size, Java8 默认不限制 Meta 空间, 一般不允许设置该选项。</li>
+<li>-XX:MaxDirectMemorySize=size，系统可以使用的最大堆外内存，这个参数跟 -Dsun.nio.MaxDirectMemorySize 效果相同。</li>
+<li>-Xss, 设置每个线程栈的字节数，影响栈的深度。 例如 -Xss1m 指定线程栈为 1MB，与-XX:ThreadStackSize=1m 等价</li>
+</ul>
+<ol>
+<li>如果什么都不配置会如何?</li>
+<li>Xmx 是否与 Xms 设置相等?</li>
+<li>Xmx 设置为机器内存的什么比例合适?</li>
+<li>作业: 画一下 Xmx、Xms、Xmn、Meta、DirectMemory、Xss 这些内存参数的关系</li>
+</ol>
+<p>4.GC设置参数</p>
+<ul>
+<li>-XX:+UseG1GC:使用 G1 垃圾回收器 </li>
+<li>-XX:+UseConcMarkSweepGC:使用 CMS 垃圾回收器 </li>
+<li>-XX:+UseSerialGC:使用串行垃圾回收器 </li>
+<li>-XX:+UseParallelGC:使用并行垃圾回收器</li>
+<li>-XX:+UnlockExperimentalVMOptions -XX:+UseZGC // Java 11+</li>
+<li>-XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC // Java 12+</li>
+</ul>
+<p>各个 JVM 版本的默认 GC 是什么?</p>
+<p>5.分析诊断参数</p>
+<ul>
+<li>-XX:+-HeapDumpOnOutOfMemoryError 选项, 当 OutOfMemoryError 产生，即内存溢出(堆内存或持久代)时，自动 Dump 堆内存。<ul>
+<li>示例用法: java -XX:+HeapDumpOnOutOfMemoryError -Xmx256m ConsumeHeap</li>
+</ul>
+</li>
+<li>-XX:HeapDumpPath 选项, 与 HeapDumpOnOutOfMemoryError 搭配使用, 指定内存溢出时 Dump 文件的目 录。如果没有指定则默认为启动 Java 程序的工作目录。<ul>
+<li>示例用法: java -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/usr/local/ ConsumeHeap </li>
+<li>自动 Dump 的 hprof 文件会存储到 /usr/local/ 目录下</li>
+</ul>
+</li>
+<li>-XX:OnError 选项, 发生致命错误时(fatal error)执行的脚本。<ul>
+<li>例如, 写一个脚本来记录出错时间, 执行一些命令, 或者 curl 一下某个在线报警的 url. 示例用法:java -XX:OnError=”gdb - %p” MyApp</li>
+<li>可以发现有一个 %p 的格式化字符串，表示进程 PID。</li>
+</ul>
+</li>
+<li>-XX:OnOutOfMemoryError 选项, 抛出 OutOfMemoryError 错误时执行的脚本。 </li>
+<li>-XX:ErrorFile=filename 选项, 致命错误的日志文件名,绝对路径或者相对路径。</li>
+<li>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1506，远程调试</li>
+</ul>
+<p>6.JavaAgent参数</p>
+<p>Agent 是 JVM 中的一项黑科技, 可以通过无侵入方式来做很多事情，比如注入 AOP 代码，执行统计等等，权限非常大。这里简单介绍一下配置选项，详细功能需要专门来讲。</p>
+<p>设置 agent 的语法如下:</p>
+<ul>
+<li>-agentlib:libname[=options] 启用 native 方式的 agent, 参考 LD_LIBRARY_PATH 路径。</li>
+<li>-agentpath:pathname[=options] 启用 native 方式的 agent。</li>
+<li>-javaagent:jarpath[=options] 启用外部的 agent 库, 比如 pinpoint.jar 等等。</li>
+<li>-Xnoagent 则是禁用所有 agent。 以下示例开启 CPU 使用时间抽样分析:<ul>
+<li>JAVA_OPTS=”-agentlib:hprof=cpu=samples,file=cpu.samples.log”</li>
+</ul>
+</li>
+</ul>
+<h2 id="第1课作业实践"><a href="#第1课作业实践" class="headerlink" title="第1课作业实践"></a>第1课作业实践</h2><p>1(可选)、自己写一个简单的 Hello.java，里面需要涉及基本类型，四则运行，if 和for，然后自己分析一下对应的字节码，有问题群里讨论。</p>
+<p>2(必做)、自定义一个 Classloader，加载一个 Hello.xlass 文件，执行 hello 方法， 此文件内容是一个 Hello.class 文件所有字节(x=255-x)处理后的文件。文件群里提供。</p>
+<p>题解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.net.URLDecoder;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.FileChannel;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yonghongwang#163.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassloader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; helloClass = <span class="keyword">new</span> MyClassloader().findClass(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        Method helloMethod = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            helloMethod = helloClass.getMethod(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            helloMethod.invoke(helloClass.newInstance());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) &#123;</span><br><span class="line">        String path = <span class="keyword">this</span>.getClass().getResource(<span class="string">&quot;Hello.xlass&quot;</span>).getPath();</span><br><span class="line">        File file;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file = <span class="keyword">new</span> File(URLDecoder.decode(path, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] bytes;</span><br><span class="line">        <span class="keyword">if</span> (file.isFile() &amp;&amp; file.exists()) &#123;</span><br><span class="line">            <span class="keyword">try</span> (FileChannel channel = <span class="keyword">new</span> FileInputStream(file).getChannel()) &#123;</span><br><span class="line">                ByteBuffer byteBuffer = ByteBuffer.allocate((<span class="keyword">int</span>) channel.size());</span><br><span class="line">                channel.read(byteBuffer);</span><br><span class="line">                bytes = byteBuffer.array();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, decode(bytes), <span class="number">0</span>, bytes.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * replace each byte with x-&gt;255-x</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] decode(<span class="keyword">byte</span>[] bytes) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bytes.length; i++) &#123;</span><br><span class="line"><span class="comment">//            bytes[i] = (byte) (255 - bytes[i]);</span></span><br><span class="line">            bytes[i] = (<span class="keyword">byte</span>) ~bytes[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bytes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3(必做)、画一张图，展示 Xmx、Xms、Xmn、Metaspache、DirectMemory、Xss 这些内存参数的关系。</p>
+<p>4(可选)、检查一下自己维护的业务系统的 JVM 参数配置，用 jstat 和 jstack、jmap 查看一下详情，并且自己独立分析一下大概情况，思考有没有不合理的地方，如何改进。</p>
+<p>注意:</p>
+<ul>
+<li>1、对于线上有流量的系统，慎重使用jmap命令。</li>
+<li>2、如果没有线上系统，可以自己 run 一个 web/java 项目。或者直接查看idea进程。</li>
+</ul>
+<p>课堂重点知识笔记和答疑链接，请在群里找或者向班主任索要。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/java-advance/01-jvm/" title="Java 进阶 - JVM 核心技术">http://yonghong.tech/java-advance/01-jvm/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag"># Java进阶</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/macos-command/scutil/" rel="prev" title="【macOS 命令】scutil">
+                  <i class="fa fa-chevron-left"></i> 【macOS 命令】scutil
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">988k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">14:58</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/next-boot.min.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/local-search.min.js"></script>
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/java-advance/01-jvm/',]
+      });
+      });
+  </script>
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://yonghong-tech.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yonghong.tech/java-advance/01-jvm/";
+    this.page.identifier = "java-advance/01-jvm/";
+    this.page.title = "Java 进阶 - JVM 核心技术";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yonghong-tech.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : '9664a2628a6b6e273db48449f21fb4f8',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "java-advance/01-jvm/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
