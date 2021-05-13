@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Java 生态圈Java 是目前应用最为广泛的软件开发平台之一。随着 Java 以及 Java 社区的不断壮大，Java 也早已不再是简简单单的一门计算机语言了，它更是一个平台、一种文化、一个社区。  作为一个平台：Java 虚拟机扮演着举足轻重的作用。 Groovy、Scala、JRuby、Kotlin 等都是 Java 平台的一部分。   作为一种文化：Java 几乎成为了开源的代名词 第三方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 进阶 01 —— 5 分钟回顾一下 Java 基础知识">
+<meta property="og:url" content="http://yonghong.tech/java-advance/01-jvm-basic/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="Java 生态圈Java 是目前应用最为广泛的软件开发平台之一。随着 Java 以及 Java 社区的不断壮大，Java 也早已不再是简简单单的一门计算机语言了，它更是一个平台、一种文化、一个社区。  作为一个平台：Java 虚拟机扮演着举足轻重的作用。 Groovy、Scala、JRuby、Kotlin 等都是 Java 平台的一部分。   作为一种文化：Java 几乎成为了开源的代名词 第三方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/03-19-34-orUTHy-CAZ1Zb.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/04/02-19-40-%E6%BA%90%E7%A0%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%B9%B3%E5%8F%B0-R6Uzxy.png">
+<meta property="article:published_time" content="2021-05-14T13:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-14T13:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="Java进阶">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/04/03-19-34-orUTHy-CAZ1Zb.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/java-advance/01-jvm-basic/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<meta name="keywords" content="代码,产品,互联网,研发,程序员,学习,工作,技术,分享,永红,yonghong,Java,Kotlin,Python,Nginx,Springboot,Linux,MySQL,MongoDB,Redis">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Java 进阶 01 —— 5 分钟回顾一下 Java 基础知识 | 永红的互联网手记</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">665</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">720</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E7%94%9F%E6%80%81%E5%9C%88"><span class="nav-number">1.</span> <span class="nav-text">Java 生态圈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">Java 跨平台的语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%A7%84%E8%8C%83"><span class="nav-number">2.1.</span> <span class="nav-text">Java 虚拟机规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-%E8%B7%A8%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B9%B3%E5%8F%B0"><span class="nav-number">2.2.</span> <span class="nav-text">JVM 跨语言的平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%AF%AD%E8%A8%80%E6%B7%B7%E5%90%88%E7%BC%96%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">多语言混合编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E6%9E%B6%E6%9E%84"><span class="nav-number">2.4.</span> <span class="nav-text">两种架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BE%E4%BE%8B"><span class="nav-number">2.4.1.</span> <span class="nav-text">举例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">3.</span> <span class="nav-text">JVM 的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E5%90%AF%E5%8A%A8"><span class="nav-number">3.1.</span> <span class="nav-text">虚拟机的启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E6%89%A7%E8%A1%8C"><span class="nav-number">3.2.</span> <span class="nav-text">虚拟机的执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E9%80%80%E5%87%BA"><span class="nav-number">3.3.</span> <span class="nav-text">虚拟机的退出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM-%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">JVM 发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sun-Classic-VM"><span class="nav-number">4.1.</span> <span class="nav-text">Sun Classic VM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exact-VM"><span class="nav-number">4.2.</span> <span class="nav-text">Exact VM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HotSpot"><span class="nav-number">4.3.</span> <span class="nav-text">HotSpot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BEA-%E7%9A%84-JRockit"><span class="nav-number">4.4.</span> <span class="nav-text">BEA 的 JRockit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IBM-%E7%9A%84-J9"><span class="nav-number">4.5.</span> <span class="nav-text">IBM 的 J9</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">665</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">720</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b25naG9uZzM2NQ==" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;yonghong365"><i class="fab fa-twitter fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3lvbmdob25nMzY1" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yonghong365"><i class="fab fa-facebook fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20veW9uZ2hvbmczNjU=" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;yonghong365"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/01-jvm-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 进阶 01 —— 5 分钟回顾一下 Java 基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-14 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-05-14T21:00:00+08:00">2021-05-14 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/java-advance/01-jvm-basic/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="java-advance/01-jvm-basic/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Java-生态圈"><a href="#Java-生态圈" class="headerlink" title="Java 生态圈"></a>Java 生态圈</h2><p>Java 是目前应用最为广泛的软件开发平台之一。随着 Java 以及 Java 社区的不断壮大，Java 也早已不再是简简单单的一门计算机语言了，它更是一个平台、一种文化、一个社区。</p>
+<ul>
+<li>作为一个平台：Java 虚拟机扮演着举足轻重的作用。<ul>
+<li>Groovy、Scala、JRuby、Kotlin 等都是 Java 平台的一部分。</li>
+</ul>
+</li>
+<li>作为一种文化：Java 几乎成为了开源的代名词<ul>
+<li>第三方开源软件和框架，如，Tomcat、Struts、MyBatis、Spring 等</li>
+<li>就连 JDK 和 JVM 自身也有不少开源的实现，如 OpenJDK、Harmony</li>
+</ul>
+</li>
+<li>作为一个社区，Java 拥有全世界最多的技术拥护者和开源社区的支持，有数不清的论坛和资料。从桌面应用软件、嵌入式开发到企业级应用、后台服务器、中间件，都可以看到 Java 的身影。其应用形式之复杂、参与人数之众也令人咋舌。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="Java-跨平台的语言"><a href="#Java-跨平台的语言" class="headerlink" title="Java 跨平台的语言"></a>Java 跨平台的语言</h2><h3 id="Java-虚拟机规范"><a href="#Java-虚拟机规范" class="headerlink" title="Java 虚拟机规范"></a>Java 虚拟机规范</h3><p>The Java Virtual Machine is the cornerstone of the Java platform. <strong>It is the component of the technology responsible for its hardware- and operating system-independence</strong>, the small size of its compiled code, and its ability to protect users from malicious programs.</p>
+<p>The Java Virtual Machine is an abstract computing machine. Like a real computing machine, it has an instruction set and manipulates various memory areas at run time. It is reasonably common to implement a programming language using a virtual machine; the best-known virtual machine may be the P-Code machine of UCSD Pascal.</p>
+<h3 id="JVM-跨语言的平台"><a href="#JVM-跨语言的平台" class="headerlink" title="JVM 跨语言的平台"></a>JVM 跨语言的平台</h3><p>随着 Java 7 的正式发布，Java 虚拟机的设计者们通过 JSR-292 规范基本实现在 Java 虚拟机平台上运行非 Java 语言编写的程序。</p>
+<p>Java 虚拟机根本不关心运行在其内部的程序到底是使用何种编程语言编写的，它只关心“字节码”文件。也就是说，Java 虚拟机拥有语言无关性，并不会单纯地与 Java 语言“终身绑定”，只要其他编程语言的编译结果满足并包含 Java 虚拟机的内部指令集，符号表以及其他的辅助信息，他就是一个有效的字节码文件，就能够被虚拟机所识别并装载运行。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/04/03-19-34-orUTHy-CAZ1Zb.png" alt="Java 跨平台的语言"></p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/04/02-19-40-%E6%BA%90%E7%A0%81%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%B7%A8%E5%B9%B3%E5%8F%B0-R6Uzxy.png" alt="源码跨平台和二进制跨平台"></p>
+<ul>
+<li>Java、C++、Rust 的区别<ul>
+<li>C/C++ 完全相信而且惯着程序员，让大家自行管理内存，可以编写很自由的代码，但一 不小心就会造成内存泄漏等问题，导致程序崩溃。</li>
+<li>Java/Golang 完全不相信程序员，但也惯着程序员。所有的内存生命周期都由 JVM 运行 时统一管理。 在绝大部分场景下，你可以非常自由的写代码，而且不用关心内存到底是 什么情况。 内存使用有问题的时候，我们可以通过 JVM 来进行信息相关的分析诊断和 调整。 这也是本课程的目标。</li>
+<li>Rust 语言选择既不相信程序员，也不惯着程序员。 让你在写代码的时候，必须清楚明白 的用 Rust 的规则管理好你的变量，好让机器能明白高效地分析和管理内存。 但是这样 会导致代码不利于人的理解，写代码很不自由，学习成本也很高。</li>
+</ul>
+</li>
+</ul>
+<h3 id="多语言混合编程"><a href="#多语言混合编程" class="headerlink" title="多语言混合编程"></a>多语言混合编程</h3><p>Java 平台上的多语言混合编程正在成为主流，通过特定领域的语言去解决特定领域的问题是当前软件开发应对日趋复杂的项目需求的一个方向。</p>
+<p>试想一下，在一个项目之中，并行处理使用 Clojure 语言编写，展示层使用 JRuby/Rails，中间层则是 Java，每个应用层都将使用不同的编程语言来完成，而且，接口对每一层开发者都是透明的，各种语言之间的交互不存在任何困难，就像使用自己语言的原生 API 一样方便，因为他们最终都运行在一个虚拟机之上。</p>
+<p>对于这些运行在虚拟机之上、Java 语言之外的语言，来自系统级的、底层的支持正在迅速增强，以 JSR-292 为核心的一系列项目和功能改进（如，Davinci Machine 项目、Nashorn 引擎、InvokeDynamic 指令、java.lang.invoke 包等），推动 Java 虚拟机从 Java 语言的虚拟机向多语言虚拟机发展。</p>
+<h3 id="两种架构"><a href="#两种架构" class="headerlink" title="两种架构"></a>两种架构</h3><p>Java 编译器输入的指令流基本上是一种基于栈的指令集架构，另外一种指令集架构则是基于寄存器的指令集架构。</p>
+<p>具体来说两种架构之间的区别：</p>
+<ul>
+<li>基于栈式架构的特点<ul>
+<li>设计和实现更简单，适用于资源受限的系统；</li>
+<li>避开了寄存器的分配难题：使用零地址指令方式分配；</li>
+<li>指令流中的指令大部分是零地址指令，其执行过程依赖于操作数。指令集更小，编译器容易实现；</li>
+<li>不需要硬件支持，可移植性更好，更好实现跨平台。</li>
+</ul>
+</li>
+<li>基于寄存器架构的特点<ul>
+<li>典型的应用是 x86 的二进制指令集：比如传统的 PC 以及 Android 的 Davlik 虚拟机；</li>
+<li>指令集架构则完全依赖硬件，可移植性差；</li>
+<li>性能优秀和执行更高效；</li>
+<li>花费更少的指令去完成一项操作；</li>
+<li>在大部分情况下，基于寄存器架构的指令集往往都是一地址指令、二地址指令和三地址指令为主，而基于栈式架构的指令集却是以零地址指令为主。</li>
+</ul>
+</li>
+</ul>
+<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>同样执行 2+3 这种逻辑操作，其指令分别如下：</p>
+<p>基于栈的计算流程（以 Java 虚拟机为例）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">iconst_2 <span class="comment">// 常量 2 入栈</span></span><br><span class="line">istore_1</span><br><span class="line">iconst_3 <span class="comment">// 常量 3 入栈</span></span><br><span class="line">istore_2</span><br><span class="line">iload_1</span><br><span class="line">iload_2</span><br><span class="line">iadd     <span class="comment">// 常量 2、3 出栈，执行相加</span></span><br><span class="line">istore_0 <span class="comment">// 结果 5 入栈</span></span><br></pre></td></tr></table></figure>
+
+<p>而基于寄存器的计算流程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov eax,<span class="number">2</span>  <span class="comment">// 将 eax 寄存器的值设置为 2</span></span><br><span class="line">mov eax,<span class="number">3</span>  <span class="comment">// 使 eax 寄存器的值加 3</span></span><br></pre></td></tr></table></figure>
+
+<p>代码演示一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackStruTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] a)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">2</span> + <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">cd chapter_01</span><br><span class="line">javac StackStruTest.java</span><br><span class="line">javap -v StackStruTest</span><br><span class="line">Classfile /Users/yonghong/Coding/jvm/song/chapter_01/StackStruTest.class</span><br><span class="line">  Last modified 2020-11-17; size 277 bytes</span><br><span class="line">  MD5 checksum 9a7da6f68b8101238c5ab826d90154c5</span><br><span class="line">  Compiled from &quot;StackStruTest.java&quot;</span><br><span class="line">public class StackStruTest</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line"><span class="meta">   #</span><span class="bash">1 = Methodref          <span class="comment">#3.#12         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">2 = Class              <span class="comment">#13            // StackStruTest</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">3 = Class              <span class="comment">#14            // java/lang/Object</span></span></span><br><span class="line"><span class="meta">   #</span><span class="bash">4 = Utf8               &lt;init&gt;</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">5 = Utf8               ()V</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">6 = Utf8               Code</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">7 = Utf8               LineNumberTable</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">8 = Utf8               main</span></span><br><span class="line"><span class="meta">   #</span><span class="bash">9 = Utf8               ([Ljava/lang/String;)V</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">10 = Utf8               SourceFile</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">11 = Utf8               StackStruTest.java</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">12 = NameAndType        <span class="comment">#4:#5          // &quot;&lt;init&gt;&quot;:()V</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash">13 = Utf8               StackStruTest</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">14 = Utf8               java/lang/Object</span></span><br><span class="line">&#123;</span><br><span class="line">  public StackStruTest();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 2: 0</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]);</span><br><span class="line">    descriptor: ([Ljava/lang/String;)V</span><br><span class="line">    flags: ACC_PUBLIC, ACC_STATIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=2, args_size=1</span><br><span class="line">         0: iconst_5 // 直接返回了 5</span><br><span class="line">         1: istore_1</span><br><span class="line">         2: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 4: 0</span><br><span class="line">        line 5: 2</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;StackStruTest.java&quot;</span><br></pre></td></tr></table></figure>
+
+<p>由于跨平台的设计，Java 的指令都是根据栈来设计的。不同平台 CPU 架构不同，所以不能设计为基于寄存器的。优点是跨平台、指令集小，编译器容易实现；缺点是性能下降，实现同样的功能需要更多的指令。</p>
+<p>时至今日，尽管嵌入式平台已经不是 Java 程序的主流运行平台了（准确来说是 HotSpot 虚拟机的宿主环境已经不局限于嵌入式平台了），那么为什么不将架构更换为基于寄存器的架构呢？</p>
+<p>答：基于栈式架构的虚拟机跨平台、指令集小，编译器容易实现，在非资源受限的场景中也是可以使用的。</p>
+<h2 id="JVM-的生命周期"><a href="#JVM-的生命周期" class="headerlink" title="JVM 的生命周期"></a>JVM 的生命周期</h2><h3 id="虚拟机的启动"><a href="#虚拟机的启动" class="headerlink" title="虚拟机的启动"></a>虚拟机的启动</h3><p>Java 虚拟机的启动时通过引导类加载器（bootstrap class loader）创建一个初始类（initial class）来完成的，这个类是由虚拟机的具体实现指定的。</p>
+<h3 id="虚拟机的执行"><a href="#虚拟机的执行" class="headerlink" title="虚拟机的执行"></a>虚拟机的执行</h3><ul>
+<li>一个运行中的 Java 虚拟机有着一个清晰的任务：执行 Java 程序；</li>
+<li>程序开始执行时他才运行，程序结束时他就停止；</li>
+<li>执行一个所谓的 Java 程序的时候，真真正正在执行的是一个叫做 Java 虚拟机的进程。</li>
+</ul>
+<h3 id="虚拟机的退出"><a href="#虚拟机的退出" class="headerlink" title="虚拟机的退出"></a>虚拟机的退出</h3><p>有如下的几种情况：</p>
+<ul>
+<li>程序正常执行结束；</li>
+<li>程序在执行过程中遇到了异常或错误而异常终止；</li>
+<li>由于操作系统出现错误而导致 Java 虚拟机进程终止；</li>
+<li>某线程调用 Runtime 类或 System 类的 exit 方法，或 Runtime 类的 halt 方法，并且 Java 安全管理器也允许这次 exit 或者 halt 操作；</li>
+<li>除此之外，JNI（Java Native Interface）规范中描述了用 JNI Invocation API 来加载或卸载 Java 虚拟机时 Java 虚拟机的退出情况。</li>
+</ul>
+<h2 id="JVM-发展历程"><a href="#JVM-发展历程" class="headerlink" title="JVM 发展历程"></a>JVM 发展历程</h2><h3 id="Sun-Classic-VM"><a href="#Sun-Classic-VM" class="headerlink" title="Sun Classic VM"></a>Sun Classic VM</h3><ul>
+<li>早在 1996 年 Java 1.0 版本的时候，Sun 公司发布了一款名为 Sun Classic VM 的 Java 虚拟机，它同时也是世界上第一款商用 Java 虚拟机，JDK 1.4 时完全被淘汰。</li>
+<li>这款虚拟机内部只提供解释器。</li>
+<li>如果使用 JIT 编译器，就需要进行外挂。但是一旦使用了 JIT 编译器，JIT 就会接管虚拟机的执行系统。解释器就不再工作。解释器和编译器不能配合工作。</li>
+<li>现在 HotSpot 内置了此虚拟机。</li>
+</ul>
+<h3 id="Exact-VM"><a href="#Exact-VM" class="headerlink" title="Exact VM"></a>Exact VM</h3><ul>
+<li>为了解决上一个虚拟机问题，JDK 1.2 时，Sun 提供了此虚拟机；</li>
+<li>Exact Memory Management: 准确式内存管理；<ul>
+<li>也可以叫 Non-Conservative/Accurate Memory Management</li>
+<li>虚拟机可以知道内存中某个位置的数据具体是什么类型</li>
+</ul>
+</li>
+<li>具备现代高性能虚拟机的雏形<ul>
+<li>热点探测</li>
+<li>编译器与解释器混合工作模式</li>
+</ul>
+</li>
+<li>只在 Solaris 平台短暂使用，其他平台上还是 Classic VM<ul>
+<li>英雄气短，终被 HotSpot 虚拟机替换</li>
+</ul>
+</li>
+</ul>
+<h3 id="HotSpot"><a href="#HotSpot" class="headerlink" title="HotSpot"></a>HotSpot</h3><ul>
+<li>HotSpot 历史<ul>
+<li>最初由一家名为 Longview Technologies 的小公司设计</li>
+<li>1997 年，此公司被 Sun 收购；2009 年，Sun 公司被 Oracle 收购</li>
+<li>JDK 1.3 时，HotSpot VM 成为默认虚拟机</li>
+</ul>
+</li>
+<li>目前 HotSpot 占有绝对的市场地位，称霸武林<ul>
+<li>现在使用比较多的 JDK 8、JDK 11中默认的虚拟机是 HotSpot</li>
+<li>Sun/Oracle JDk 和 OpenJDK 的默认虚拟机</li>
+</ul>
+</li>
+<li>从服务端、桌面端、嵌入式都有应用</li>
+<li>名称中的 HotSpot 指的就是它的热点代码探测技术<ul>
+<li>通过计数器找到最具编译价值代码，触发即时编译或栈上替换</li>
+<li>通过编译器与解释器协同工作，在最优的程序响应时间与最佳执行性能中取得平衡</li>
+</ul>
+</li>
+</ul>
+<h3 id="BEA-的-JRockit"><a href="#BEA-的-JRockit" class="headerlink" title="BEA 的 JRockit"></a>BEA 的 JRockit</h3><ul>
+<li>专注于服务器应用<ul>
+<li>它可以不太关注程序启动速度，因此 JRockit 内部不包含解释器实现，全部代码都是靠即时编译器编译后执行</li>
+</ul>
+</li>
+<li>大量的行业基准测试显示，JRockit JVM 是世界上最快的 JVM。<ul>
+<li>使用 JRockit 产品，客户已经体验带了显著的性能提高（一些超过了 70%）和硬件成本的减少（达50%）。</li>
+</ul>
+</li>
+<li>优势：全面的 Java 运行时解决方案组合<ul>
+<li>JRockit 面向延迟敏感型应用的解决方案 JRockit Real Time 提供以毫秒或微秒级的 JVM 响应时间，适合财务，军事指挥，电信网络的需要。</li>
+<li>MissionControl 服务套件，它是一组以极低的开销来监控、管理和分析生产环境中的应用程序的工具。</li>
+</ul>
+</li>
+<li>2008年，BEA 被 Oracle 收购</li>
+</ul>
+<h3 id="IBM-的-J9"><a href="#IBM-的-J9" class="headerlink" title="IBM 的 J9"></a>IBM 的 J9</h3><ul>
+<li>全称：IBM Technology for Java Virtual Machine，简称 IT4J，内部代号 J9</li>
+<li>市场定位与 HotSpot 接近，服务端、桌面应用、嵌入式等多用途 VM</li>
+<li>广泛应用于 IBM 的各种 Java 产品</li>
+<li>目前，有影响力的三大商用虚拟机之一，也号称是世界上最快的虚拟机。</li>
+<li>2017左右，IBM 发布了开源 J9 VM，命名为 OpenJ9，交给 Eclipse 基金会管理，也称为 Eclipse OpenJ9</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+      <div>
+        <img src="/images/paypal.png" alt="王永红(Micheal Wang) PayPal">
+        <span>PayPal</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/java-advance/01-jvm-basic/" title="Java 进阶 01 —— 5 分钟回顾一下 Java 基础知识">http://yonghong.tech/java-advance/01-jvm-basic/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="https://twitter.com/yonghong365">
+          <span class="icon">
+            <i class="fab fa-twitter"></i>
+          </span>
+
+          <span class="label">Twitter</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag"># Java进阶</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+  <div class="post-widgets">
+    <div class="wp_rating">
+      <div id="wpac-rating"></div>
+    </div>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/release/jdk-16/" rel="prev" title="JDK 16 正式发布！">
+                  <i class="fa fa-chevron-left"></i> JDK 16 正式发布！
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+        </div>
+      </div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">975k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">14:46</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f6aa34fc43297b3" async="async"></script>
+  </div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/next-boot.min.js"></script>
+
+  
+  <script>
+  if (CONFIG.page.isPost) {
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id    : 27385,
+      el    : 'wpac-rating',
+      color : '#fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.2.2/source/js/local-search.min.js"></script>
+
+
+
+
+<script>
+if (document.querySelectorAll('.mermaid').length) {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/mermaid@8.9.1/dist/mermaid.min.js', () => {
+    mermaid.init({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    }, '.mermaid');
+  }, window.mermaid);
+}
+</script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink.listen({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://yonghong.tech/java-advance/01-jvm-basic/',]
+      });
+      });
+  </script>
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://yonghong-tech.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://yonghong.tech/java-advance/01-jvm-basic/";
+    this.page.identifier = "java-advance/01-jvm-basic/";
+    this.page.title = "Java 进阶 01 —— 5 分钟回顾一下 Java 基础知识";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yonghong-tech.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0e42a09d2799751b9ba7',
+      clientSecret: '3e04e5109cf9e3cc34d68deb668842c9c5139846',
+      repo        : 'gitalk',
+      owner       : 'wangyonghong',
+      admin       : ['wangyonghong'],
+      id          : '747dbda49ddc43e0bafa872f824017c7',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+NexT.utils.loadComments('#lv-container', () => {
+  window.livereOptions = {
+    refer: "java-advance/01-jvm-basic/"
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
