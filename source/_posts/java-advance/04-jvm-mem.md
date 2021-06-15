@@ -1,5 +1,5 @@
 ---
-title: Java 进阶 04 - JVM 内存模型：堆和栈是什么？
+title: Java 进阶 04 —— JVM 内存模型：堆和栈是什么？
 tags:
 - Java进阶
 - JVM
