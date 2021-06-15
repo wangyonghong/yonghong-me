@@ -92,7 +92,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">668</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">670</span></a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">720</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
@@ -167,7 +167,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">668</span>
+          <span class="site-state-item-count">670</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -237,6 +237,286 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/05-jvm-args-tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-advance/05-jvm-args-tools/" class="post-title-link" itemprop="url">Java 进阶 05 —— JVM 相关工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-11 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-06-11T21:00:00+08:00">2021-06-11 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="JVM-命令行工具"><a href="#JVM-命令行工具" class="headerlink" title="JVM 命令行工具"></a>JVM 命令行工具</h2><table>
+<thead>
+<tr>
+<th align="center">工具</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">java</td>
+<td>Java 应用的启动程序</td>
+</tr>
+<tr>
+<td align="center">javac</td>
+<td>JDK 内置的编译工具</td>
+</tr>
+<tr>
+<td align="center">javap</td>
+<td>反编译 class 文件的工具</td>
+</tr>
+<tr>
+<td align="center">javadoc</td>
+<td>根据 Java 代码和标准注释,自动生成相关的API说明文档</td>
+</tr>
+<tr>
+<td align="center">javah</td>
+<td>JNI 开发时, 根据 java 代码生成需要的 .h文件。</td>
+</tr>
+<tr>
+<td align="center">extcheck</td>
+<td>检查某个 jar 文件和运行时扩展 jar 有没有版本冲突，很少使用</td>
+</tr>
+<tr>
+<td align="center">jdb</td>
+<td>Java Debugger ; 可以调试本地和远端程序, 属于 JPDA 中的一个 demo 实现, 供其他调试器参考。开发时很使用</td>
+</tr>
+<tr>
+<td align="center">jdeps</td>
+<td>探测 class 或 jar 包需要的依赖</td>
+</tr>
+<tr>
+<td align="center">jar</td>
+<td>打包工具，可以将文件和目录打包成为 .jar 文件；.jar 文件本质上就是 zip 文件, 只是后缀不同。使用时按顺序对应好选项和参数即可。</td>
+</tr>
+<tr>
+<td align="center">keytool</td>
+<td>安全证书和密钥的管理工具; （支持生成、导入、导出等操作）</td>
+</tr>
+<tr>
+<td align="center">jarsigner</td>
+<td>JAR 文件签名和验证工具</td>
+</tr>
+<tr>
+<td align="center">policytool</td>
+<td>实际上这是一款图形界面工具, 管理本机的 Java 安全策略</td>
+</tr>
+<tr>
+<td align="center">jps/jinfo</td>
+<td>查看 java 进程</td>
+</tr>
+<tr>
+<td align="center"><strong>jstat</strong></td>
+<td>查看 JVM 内部 gc 相关信息</td>
+</tr>
+<tr>
+<td align="center"><strong>jmap</strong></td>
+<td>查看 heap 或类占用空间统计</td>
+</tr>
+<tr>
+<td align="center"><strong>jstack</strong></td>
+<td>查看线程信息</td>
+</tr>
+<tr>
+<td align="center">jcmd</td>
+<td>执行 JVM 相关分析命令（整合命令）</td>
+</tr>
+<tr>
+<td align="center">jrunscript/jjs</td>
+<td>执行 js 命令</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-advance/05-jvm-args-tools/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/reading-notes/001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/reading-notes/001/" class="post-title-link" itemprop="url">读书笔记（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-31 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-05-31T21:00:00+08:00">2021-05-31 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="《秒赞》林桂枝"><a href="#《秒赞》林桂枝" class="headerlink" title="《秒赞》林桂枝"></a>《秒赞》林桂枝</h2><p>1.你的样子里，有你走过的路，读过的书，看过的风景。</p>
+<p>2.想当垃圾吃垃圾，想当辣椒吃辣椒，想当什么自己要想好吃什么。</p>
+<ul>
+<li>创建“好东西”文件夹，在里面放好的设计与照片、出色的演讲、有见地的文章、有趣的事物。</li>
+<li>准备一个“好东西”本子，随时记录有趣的对话和文字，补充新词汇，不断丰富自己的储备。</li>
+<li>将自己认为“有感觉”的词汇记下来，接着将这些词汇分给不同的人和不同的事物，想想这些词该给谁，与什么东西结合最有意思。</li>
+<li>读完一本书，写个简短的读书心得；看完一部电影，记录自己的感受。有时间多写，忙的话写几行字也可以。</li>
+<li>你记录的点点滴滴将会成为你个人的宝贵资产，你的缪斯女神，更是让你工作顺利、表现优秀的利器。</li>
+</ul>
+<p>3.人能想象到的一切都是真实的。——毕加索</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/reading-notes/001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/04-jvm-mem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -250,7 +530,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/java-advance/04-jvm-mem/" class="post-title-link" itemprop="url">Java 进阶 04 - JVM 内存模型：堆和栈是什么？</a>
+          <a href="/java-advance/04-jvm-mem/" class="post-title-link" itemprop="url">Java 进阶 04 —— JVM 内存模型：堆和栈是什么？</a>
         </h2>
 
         <div class="post-meta-container">
@@ -347,7 +627,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/java-advance/03-jvm-classloader/" class="post-title-link" itemprop="url">Java 进阶 03 - 类加载器和双亲委派到底是什么？</a>
+          <a href="/java-advance/03-jvm-classloader/" class="post-title-link" itemprop="url">Java 进阶 03 —— 类加载器和双亲委派到底是什么？</a>
         </h2>
 
         <div class="post-meta-container">
@@ -447,7 +727,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/java-advance/02-jvm-bytecode/" class="post-title-link" itemprop="url">Java 进阶 02 - 是时候了解一下 Java 字节码了</a>
+          <a href="/java-advance/02-jvm-bytecode/" class="post-title-link" itemprop="url">Java 进阶 02 —— 是时候了解一下 Java 字节码了</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1059,205 +1339,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/01/jvm-instruction-set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/jvm-instruction-set/" class="post-title-link" itemprop="url">JVM 指令集对照表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-07 10:24:00 10:24:00" itemprop="dateCreated datePublished" datetime="2021-01-07T10:24:00+08:00">2021-01-07 10:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>6.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 Java Virtual Machine Specification 中，有对 JVM 指令集的详细描述，可以打开链接查看：</p>
-<ul>
-<li>Java 11：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3NwZWNzL2p2bXMvc2UxMS9odG1sL2p2bXMtNi5odG1s">https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html<i class="fa fa-external-link-alt"></i></span></li>
-<li>Java 8：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3NwZWNzL2p2bXMvc2U4L2h0bWwvanZtcy02Lmh0bWw=">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>也有人整理了一个对照表，记录在下面</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/jvm-instruction-set/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/01/mercurial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/mercurial/" class="post-title-link" itemprop="url">hg clone 与 Mercurial</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-06 22:24:00 22:24:00" itemprop="dateCreated datePublished" datetime="2021-01-06T22:24:00+08:00">2021-01-06 22:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>856</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Mercurial是跨平台的分布式版本控制软件，主要由Python语言实现，但也包含用C语言实现的二进制比较工具。Mercurial一开始的主要运行平台是Linux，现在Mercurial已经移植到Windows、Mac OS X和大多数的类Unix系统中。Mercurial主要由命令行程序组成，现在也有了图形用户界面。对Mercurial的所有操作都由用不同的关键字作为参数调用程序“hg”来实现，Hg是参考水银的化学符号而取的名字。</p>
-<p>Mercurial的主要设计目标包括高性能、可扩展性、分散性、完全分布式合作开发、能同时高效地处理纯文本和二进制文件，以及分支和合并功能，以此同时保持系统的简洁性[1]。Mercurial也包括一个集成的Web界面。</p>
-<p>Mercurial的创建者和主要开发人员是Matt Mackal。其源代码采用GNU通用公共许可证第二版为授权，确保了Mercurial是一个自由软件。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/mercurial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/67/">67</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1290,7 +1371,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">15:10</span>
+    <span title="站点阅读时长">15:15</span>
   </span>
 </div>
 <div class="busuanzi-count">

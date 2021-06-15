@@ -6,7 +6,7 @@
   <link href="http://yonghong.tech/atom.xml" rel="self"/>
   
   <link href="http://yonghong.tech/"/>
-  <updated>2021-05-16T13:00:00.000Z</updated>
+  <updated>2021-06-11T13:00:00.000Z</updated>
   <id>http://yonghong.tech/</id>
   
   <author>
@@ -17,7 +17,139 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java 进阶 04 - JVM 内存模型：堆和栈是什么？</title>
+    <title>Java 进阶 05 —— JVM 相关工具</title>
+    <link href="http://yonghong.tech/java-advance/05-jvm-args-tools/"/>
+    <id>http://yonghong.tech/java-advance/05-jvm-args-tools/</id>
+    <published>2021-06-11T13:00:00.000Z</published>
+    <updated>2021-06-11T13:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="JVM-命令行工具"><a href="#JVM-命令行工具" class="headerlink" title="JVM 命令行工具"></a>JVM 命令行工具</h2><table><thead><tr><th align="center">工具</th><th>简介</th></tr></thead><tbody><tr><td align="center">java</td><td>Java 应用的启动程序</td></tr><tr><td align="center">javac</td><td>JDK 内置的编译工具</td></tr><tr><td align="center">javap</td><td>反编译 class 文件的工具</td></tr><tr><td align="center">javadoc</td><td>根据 Java 代码和标准注释,自动生成相关的API说明文档</td></tr><tr><td align="center">javah</td><td>JNI 开发时, 根据 java 代码生成需要的 .h文件。</td></tr><tr><td align="center">extcheck</td><td>检查某个 jar 文件和运行时扩展 jar 有没有版本冲突，很少使用</td></tr><tr><td align="center">jdb</td><td>Java Debugger ; 可以调试本地和远端程序, 属于 JPDA 中的一个 demo 实现, 供其他调试器参考。开发时很使用</td></tr><tr><td align="center">jdeps</td><td>探测 class 或 jar 包需要的依赖</td></tr><tr><td align="center">jar</td><td>打包工具，可以将文件和目录打包成为 .jar 文件；.jar 文件本质上就是 zip 文件, 只是后缀不同。使用时按顺序对应好选项和参数即可。</td></tr><tr><td align="center">keytool</td><td>安全证书和密钥的管理工具; （支持生成、导入、导出等操作）</td></tr><tr><td align="center">jarsigner</td><td>JAR 文件签名和验证工具</td></tr><tr><td align="center">policytool</td><td>实际上这是一款图形界面工具, 管理本机的 Java 安全策略</td></tr><tr><td align="center">jps/jinfo</td><td>查看 java 进程</td></tr><tr><td align="center"><strong>jstat</strong></td><td>查看 JVM 内部 gc 相关信息</td></tr><tr><td align="center"><strong>jmap</strong></td><td>查看 heap 或类占用空间统计</td></tr><tr><td align="center"><strong>jstack</strong></td><td>查看线程信息</td></tr><tr><td align="center">jcmd</td><td>执行 JVM 相关分析命令（整合命令）</td></tr><tr><td align="center">jrunscript/jjs</td><td>执行 js 命令</td></tr></tbody></table><span id="more"></span><h3 id="常用命令实例"><a href="#常用命令实例" class="headerlink" title="常用命令实例"></a>常用命令实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">jps -l</span><br><span class="line">jps -mlv </span><br><span class="line"><span class="meta">#</span><span class="bash"> -l 列出 Java 进程</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -m 列出传递给 main 方法的参数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v 列出传递给 JVM 的参数</span></span><br><span class="line"></span><br><span class="line">jinfo pid</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 参考：https://blog.csdn.net/maosijunzi/article/details/46049117</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> jstat   内存信息</span></span><br><span class="line">jstat -gc pid 1000 1000 # 每1000ms打印1次，打印1000次</span><br><span class="line">S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT</span><br><span class="line">4352.0 4352.0 4352.0  0.0   34944.0  10175.9   198132.0   152461.3  142132.0 134139.5 19624.0 16988.2     26    0.201   0      0.000    0.201</span><br><span class="line">4352.0 4352.0 4352.0  0.0   34944.0  10175.9   198132.0   152461.3  142132.0 134139.5 19624.0 16988.2     26    0.201   0      0.000    0.201</span><br><span class="line">4352.0 4352.0 4352.0  0.0   34944.0  10175.9   198132.0   152461.3  142132.0 134139.5 19624.0 16988.2     26    0.201   0      0.000    0.201</span><br><span class="line"><span class="meta">#</span><span class="bash"> S0C：第一个幸存区的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> S1C：第二个幸存区的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> S0U：第一个幸存区的使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> S1U：第二个幸存区的使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> EC：伊甸园区的大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> EU：伊甸园区的使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> OC：老年代大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> OU：老年代使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> MC：方法区大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> MU：方法区使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> CCSC：压缩类空间大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> CCSU：压缩类空间使用大小</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> YGC：年轻代垃圾回收次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> YGCT：年轻代垃圾回收消耗时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FGC：老年代垃圾回收次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FGCT：老年代垃圾回收消耗时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GCT：垃圾回收消耗总时间</span></span><br><span class="line"></span><br><span class="line">jstat -gcutil pid 1000 1000</span><br><span class="line">  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT</span><br><span class="line">  0.00  79.37  72.86  78.50  94.45  86.65     27    0.207     0    0.000    0.207</span><br><span class="line">  0.00  79.37  72.86  78.50  94.45  86.65     27    0.207     0    0.000    0.207</span><br><span class="line">  0.00  79.37  72.86  78.50  94.45  86.65     27    0.207     0    0.000    0.207</span><br><span class="line"><span class="meta">#</span><span class="bash"> S0：幸存1区当前使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> S1：幸存2区当前使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> E：伊甸园区使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> O：老年代使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> M：元数据区使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> CCS：压缩使用比例</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> YGC：年轻代垃圾回收次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FGC：老年代垃圾回收次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FGCT：老年代垃圾回收消耗时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GCT：垃圾回收消耗总时间</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 只看 Young 或 Old 区</span></span><br><span class="line">jstat -gcnew pid</span><br><span class="line">jstat -gcold pid</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> jmap    对象信息</span></span><br><span class="line">jmap -heap pid      # 堆内存</span><br><span class="line">jmap -histo pid     # 直方图</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> jstack  线程信息</span></span><br><span class="line">jstack -l pid       # 将线程相关的 locks 信息一起输 出，比如持有的锁，等待的锁。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> jcmd 综合了前面的几个命令</span></span><br><span class="line">jcmd pid VM.version</span><br><span class="line">jcmd pid VM.flags</span><br><span class="line">jcmd pid VM.command_line</span><br><span class="line">jcmd pid VM.system_properties</span><br><span class="line">jcmd pid Thread.print</span><br><span class="line">jcmd pid GC.class_histogram</span><br><span class="line">jcmd pid GC.heap_info</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 当curl命令用</span></span><br><span class="line">jrunscript -e &quot;cat(&#x27;http://www.baidu.com&#x27;)&quot; </span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行js脚本片段</span></span><br><span class="line">jrunscript -e &quot;print(&#x27;hello,kk.jvm&#x27;+1)&quot; </span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行js文件</span> </span><br><span class="line">jrunscript -l js -f /XXX/XXX/test.js</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="JVM-图形化工具"><a href="#JVM-图形化工具" class="headerlink" title="JVM 图形化工具"></a>JVM 图形化工具</h2><h3 id="jconsole"><a href="#jconsole" class="headerlink" title="jconsole"></a>jconsole</h3><p>JDK 自带工具</p><p><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-11-jconsole-mem-MJI7ul.png" alt="jconsole-内存"><br><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-12-jconsole-thread-b0RSWW.png" alt="jconsole-线程"><br><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-12-jconsole-guide-KgMCzE.png" alt="jconsole-概览"></p><h3 id="jvisualvm"><a href="#jvisualvm" class="headerlink" title="jvisualvm"></a>jvisualvm</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-15-jvisualvm-guide-JU8yC7.png" alt="jvisualvm"></p><h3 id="VisualGC"><a href="#VisualGC" class="headerlink" title="VisualGC"></a>VisualGC</h3><p><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-16-VisualGC-poZ5Sm.png" alt="VisualGC"></p><h3 id="jmc"><a href="#jmc" class="headerlink" title="jmc"></a>jmc</h3><p>需要安装 Oracle JDK。</p><p><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-16-jmc-yNni2V.png" alt="jmc"><br><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-16-jmc-1-5ultLq.png" alt="jmc-1"><br><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-16-jmc-2-gKxxpd.png" alt="jmc-2"><br><img src="https://up-img.yonghong.tech/pic/2021/04/03-17-16-jmc-3-GleUio.png" alt="jmc-3"></p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;JVM-命令行工具&quot;&gt;&lt;a href=&quot;#JVM-命令行工具&quot; class=&quot;headerlink&quot; title=&quot;JVM 命令行工具&quot;&gt;&lt;/a&gt;JVM 命令行工具&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;center&quot;&gt;工具&lt;/th&gt;
+&lt;th&gt;简介&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;java&lt;/td&gt;
+&lt;td&gt;Java 应用的启动程序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;javac&lt;/td&gt;
+&lt;td&gt;JDK 内置的编译工具&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;javap&lt;/td&gt;
+&lt;td&gt;反编译 class 文件的工具&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;javadoc&lt;/td&gt;
+&lt;td&gt;根据 Java 代码和标准注释,自动生成相关的API说明文档&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;javah&lt;/td&gt;
+&lt;td&gt;JNI 开发时, 根据 java 代码生成需要的 .h文件。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;extcheck&lt;/td&gt;
+&lt;td&gt;检查某个 jar 文件和运行时扩展 jar 有没有版本冲突，很少使用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jdb&lt;/td&gt;
+&lt;td&gt;Java Debugger ; 可以调试本地和远端程序, 属于 JPDA 中的一个 demo 实现, 供其他调试器参考。开发时很使用&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jdeps&lt;/td&gt;
+&lt;td&gt;探测 class 或 jar 包需要的依赖&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jar&lt;/td&gt;
+&lt;td&gt;打包工具，可以将文件和目录打包成为 .jar 文件；.jar 文件本质上就是 zip 文件, 只是后缀不同。使用时按顺序对应好选项和参数即可。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;keytool&lt;/td&gt;
+&lt;td&gt;安全证书和密钥的管理工具; （支持生成、导入、导出等操作）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jarsigner&lt;/td&gt;
+&lt;td&gt;JAR 文件签名和验证工具&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;policytool&lt;/td&gt;
+&lt;td&gt;实际上这是一款图形界面工具, 管理本机的 Java 安全策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jps/jinfo&lt;/td&gt;
+&lt;td&gt;查看 java 进程&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;strong&gt;jstat&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看 JVM 内部 gc 相关信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;strong&gt;jmap&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看 heap 或类占用空间统计&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;&lt;strong&gt;jstack&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;查看线程信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jcmd&lt;/td&gt;
+&lt;td&gt;执行 JVM 相关分析命令（整合命令）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&quot;center&quot;&gt;jrunscript/jjs&lt;/td&gt;
+&lt;td&gt;执行 js 命令&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="Java进阶" scheme="http://yonghong.tech/categories/Java%E8%BF%9B%E9%98%B6/"/>
+    
+    
+    <category term="Java进阶" scheme="http://yonghong.tech/tags/Java%E8%BF%9B%E9%98%B6/"/>
+    
+    <category term="JVM" scheme="http://yonghong.tech/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读书笔记（一）</title>
+    <link href="http://yonghong.tech/reading-notes/001/"/>
+    <id>http://yonghong.tech/reading-notes/001/</id>
+    <published>2021-05-31T13:00:00.000Z</published>
+    <updated>2021-05-31T13:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="《秒赞》林桂枝"><a href="#《秒赞》林桂枝" class="headerlink" title="《秒赞》林桂枝"></a>《秒赞》林桂枝</h2><p>1.你的样子里，有你走过的路，读过的书，看过的风景。</p><p>2.想当垃圾吃垃圾，想当辣椒吃辣椒，想当什么自己要想好吃什么。</p><ul><li>创建“好东西”文件夹，在里面放好的设计与照片、出色的演讲、有见地的文章、有趣的事物。</li><li>准备一个“好东西”本子，随时记录有趣的对话和文字，补充新词汇，不断丰富自己的储备。</li><li>将自己认为“有感觉”的词汇记下来，接着将这些词汇分给不同的人和不同的事物，想想这些词该给谁，与什么东西结合最有意思。</li><li>读完一本书，写个简短的读书心得；看完一部电影，记录自己的感受。有时间多写，忙的话写几行字也可以。</li><li>你记录的点点滴滴将会成为你个人的宝贵资产，你的缪斯女神，更是让你工作顺利、表现优秀的利器。</li></ul><p>3.人能想象到的一切都是真实的。——毕加索</p><span id="more"></span><hr><h2 id="《财务自由之路-I》博多·舍费尔"><a href="#《财务自由之路-I》博多·舍费尔" class="headerlink" title="《财务自由之路 I》博多·舍费尔"></a>《财务自由之路 I》博多·舍费尔</h2><p>1.我将生活简化为5个领域：健康、财务、关系、情感和人生意义。5个领域都同等重要。</p><p>2.为什么人们想在短期内变得富有？因为他们想获得足够的能为他们服务的金钱。因为他们想拥有一台赚钱机器，而非穷其一生当一台赚钱机器。因为他们想拥有足够的资金，以过上一种收支平衡的生活。</p><p>3.你的事业建立在你最大的爱好之上。用你的爱好来赚钱。花点时间分析一下，你真正感兴趣的是什么、你的才能在哪方面，之后你才有可能从事一份自己既感兴趣又能赚钱的工作。</p><p>4.责任这个单词在英语中叫作“responsibility”，在这个单词中隐藏着另外两个单词“response”（回应）和“ability”（技巧）。因此，责任这一词用英语来解释就是：有技巧地进行回应。以争吵应对争执，以冲突应对挑衅，绝非最佳的问题解决方式。</p><p>5.如果提的问题是“谁来负责任”，那我们就是在寻找借口。当我们说“你负有责任”时，将事情引向积极方向的机会就消失了。而且，这个关于责任的问题还会将我们一直引向过去。正确的提问应该是：“在当时谁应该对此负责？”但你现在不能拓宽你当时的可控领域，所以需要将精力运用在当下。我们提出的问题也应该以当下为中心：我们现在能做些什么？</p><p>6.日记本是空白的书籍，是你可以自己写作的书籍，专属于你个人。每个人都应该每天写自己的成功日记，记录下当天所有的成功事件：你获得的每一次夸奖和每一次认可，无论是你遵守纪律，完成一项任务，还是你使某人快乐。…… 随着时间的推移，你还需要一本思想日记本（记录你的所有创意）、一本关系日记本（记录所有使你快乐的关系）、一本知识日记本（记录你从自己犯过的错误中学到的所有东西，使你以后不会再重蹈覆辙），以及其他内容的日记本……</p><p>7.去为你的劣势找到解决方案，去为你的优势找一个教练吧！</p><p>8.你在未来5年当中可以休息一整年。在一整年的时间里，你可以做想做的任何事，并有能力支付这一年的所有账单。你可以去旅行，做使你快乐但平时又没有足够时间来做的事情。</p><p>9.一致性不是绝对的美德。如果我今天的观点与昨天不同，是不是就因为改变自身方向而没有一致性了呢？我的确与自己的过去不相一致了，但于真理而言，我是保持一致了……一致性在于按照认知去追随真理。</p><p>10.借口是我们讲给自己听的谎言。我们应该自己对自己越来越诚实，承担越来越多的责任。</p><p>11.全世界最富有的投资者沃伦·巴菲特说过：“毕竟，只有当潮水退去时，你才知道谁在裸泳。”</p><p>12.恐惧永远不应该左右你的决定。因为世界上不存在失败。是的，你没有看错：世界上不存在失败。美国脱口秀大师奥普拉·温弗瑞曾经说过：“我不相信失败。因为如果你享受了过程中的乐趣，那这就不是失败。”</p><p>13.“如果你不经常犯错，表明你冒的风险不够，没有付出最大的努力。”</p><hr><h2 id="《财务自由之路-II》博多·舍费尔"><a href="#《财务自由之路-II》博多·舍费尔" class="headerlink" title="《财务自由之路 II》博多·舍费尔"></a>《财务自由之路 II》博多·舍费尔</h2><p>1.正如爱因斯坦（Einstein）所言，我相信“每个孩子都可能是天才”。我们中的每个人，您和我至少在某方面有着特殊的天赋，而我们应该把这些天赋发挥到极致。</p><p>2.对于大多数人来说，薪水其实是给自己的赔偿费。</p><p>3.当您成功时，生活的大门为您敞开。虽然在通向胜利的道路上，您将会常常看到地狱，然而生活就是如此。但是，如果您坚持梦想，就不会被打倒。您将得到想得到的一切，还有很多很多其他的东西。<br>——弗莱明思（J.Flemmings）</p><p>4.一幢房子是一种负债，而非投资。并且，他希望我首先进行投资。他的原则是：“当您攒够一定数量的资金之后，再购置房产。而且，房子的价值不应超出年净收入的4倍，并且您每月分期付款不应超过月收入的25%。”</p><p>5.许多人仅仅从经济角度来考虑他们的主要事业。他们遵循这样的信条：“什么能赚钱，什么就是我的主要事业。”依我看，这是个完全错误的开端。</p><hr><h2 id="《权力》杰弗瑞·菲佛"><a href="#《权力》杰弗瑞·菲佛" class="headerlink" title="《权力》杰弗瑞·菲佛"></a>《权力》杰弗瑞·菲佛</h2><p>1.处在一个权力小、地位低的职位上可能会危害你的健康，相反，拥有权力及相应的控制权则会延长你的寿命。</p><p>2.你要克服自己这个障碍，克服对自我形象的过分关注，或者是特别在意别人对你的看法。无论如何，其他人不会特别关心或惦记你，他们关注的主要是他们自己。如果你不去尝试获得影响力，你也许能够维护良好的形象，但却无法登上权力的顶峰。</p><p>3.雇员的薪酬与他们的年龄和在组织中任期长短的关系，强于薪酬与工作绩效的关系。</p><p>4.掌权者自我感觉良好，最好的方法之一就是恭维他们。</p><p>5.为你的成功负责的人，是你的上司，是有权力提升你或者阻止你在组织中晋升的人。而且不管你的位置在哪里，总会有人在你上面。所以你的工作就是，确保那些有影响力的人有强烈的愿望让你获得成功。这可能需要你做好工作，但也可能需要确保掌权者知道你的工作做得很好，确保他们记得你，对你的评价很高，因为你能让他们自我感觉良好。业绩和职场政治技巧结合在一起，才能帮助你获得晋升。只靠业绩本身是不够的，在某些情况下，业绩甚至可能是无关痛痒的。</p><p>6.一些人晋升到很高的位置并成就了惊人的事业，他们与其他人的不同之处有两点：意愿和技能。意愿是使人愿意承担巨大挑战的驱动力，技能则是把雄心转换为成就的能力。意愿体现在个人素质中，就是雄心、精力和专注。而有助于获得权力的4项技能，则分别是自知之明和反省心态、散发自信的信心和能力、理解他人并懂得换位思考以及化解冲突的能力。在对以上每个特质进行说明之后，我将讨论另一个特质：智力。智力和权力有些关系，但我认为它被严重高估了。</p><p>7.如果你对你的工作值多少回报没有自信，对你想要的东西也不自信，你就不愿意要求或者推动别人，因此，相较于那些比你活跃的人而言，你获得的金钱或影响力就比较少。</p><p>8.引人注意可以帮助你获得你需要的位置和权力。你应该为你想要的东西提出请求，并且在为自己构建权力之路时，不要太在乎别人怎么看你。但是，要获得和行使权力，就需要资源来奖励你的朋友和惩罚你的敌人，需要信息和门路来促进你在组织中的升迁。</p><p>9.事实上人们常犯的一个严重错误是，他们以为在目前的职位上无法建立权力基础和掌握资源，以为需要在更高的职位上才能这样做。其实，如果你把权力基础打好，那么攀升到更高的职位就会变得更简单容易一些，而且你在任何时候都可以这样做，永远都不会太早或太迟。</p><p>10.领导的实质就是：让拥有不同能力和视角的人或部门协作，共同完成一项任务或达成一桩交易。</p><p>11.领导力的秘诀就是要扮演角色，要装模作样，要在这门舞台艺术上富于技巧。</p><p>12.与表达悲伤、内疚或自责的人相比，表达愤怒的人通常被视为更加强大。</p><p>13.领导力的秘诀就是要扮演角色，要装模作样，要在这门舞台艺术上富于技巧。</p><p>14.我们选择了我们行事和说话的方式，这些决定对于获取和保持权力而言非常重要。</p><p>15.“权力之中有20%是被赋予的，有80%是自己获取的。”</p><p>16.一旦人们对某个人形成了印象，他们就不会承认任何与他们最初想法不一致的信息。</p><p>17.行为动力机制倾向于巩固人们的初步印象和声望，并倾向于让这些印象成真，即使它们一开始并不是真的。</p><p>18.这里的建议不是让你在任何一个单一的地方留下良好的印象，而是建议你找到一个可以让你树立辉煌声望的环境，也就是建议你不断尝试不同的环境，直到你成功地发现了这样一个环境为止。</p><p>19.由于人们来自不同的背景，面临的激励机制不同，获得的信息不同，所以他们所看到的世界也各不相同。因此在组织中，分歧是不可避免的。令人遗憾的是，许多人都会尝试避免冲突，他们认为分歧令人不快，因此他们避免让不同的意见浮出水面，也避免与对手进行艰难的交谈。</p><p>20.如果你处在一个权力相当大的位置上，而你觉得自己变得越来越疲倦时，那你还不如离开这个位置。</p><p>21.人们包括公司都容易落入能力陷阱。他们曾以某种方式做某些事，并获得了成功。</p><p>22.有些人以为自己不喜欢或者不可能喜欢玩权力游戏。但他们根本就没有尝试过，又如何知道自己会不喜欢呢？</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;《秒赞》林桂枝&quot;&gt;&lt;a href=&quot;#《秒赞》林桂枝&quot; class=&quot;headerlink&quot; title=&quot;《秒赞》林桂枝&quot;&gt;&lt;/a&gt;《秒赞》林桂枝&lt;/h2&gt;&lt;p&gt;1.你的样子里，有你走过的路，读过的书，看过的风景。&lt;/p&gt;
+&lt;p&gt;2.想当垃圾吃垃圾，想当辣椒吃辣椒，想当什么自己要想好吃什么。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建“好东西”文件夹，在里面放好的设计与照片、出色的演讲、有见地的文章、有趣的事物。&lt;/li&gt;
+&lt;li&gt;准备一个“好东西”本子，随时记录有趣的对话和文字，补充新词汇，不断丰富自己的储备。&lt;/li&gt;
+&lt;li&gt;将自己认为“有感觉”的词汇记下来，接着将这些词汇分给不同的人和不同的事物，想想这些词该给谁，与什么东西结合最有意思。&lt;/li&gt;
+&lt;li&gt;读完一本书，写个简短的读书心得；看完一部电影，记录自己的感受。有时间多写，忙的话写几行字也可以。&lt;/li&gt;
+&lt;li&gt;你记录的点点滴滴将会成为你个人的宝贵资产，你的缪斯女神，更是让你工作顺利、表现优秀的利器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3.人能想象到的一切都是真实的。——毕加索&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="读书笔记" scheme="http://yonghong.tech/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="读书笔记" scheme="http://yonghong.tech/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 进阶 04 —— JVM 内存模型：堆和栈是什么？</title>
     <link href="http://yonghong.tech/java-advance/04-jvm-mem/"/>
     <id>http://yonghong.tech/java-advance/04-jvm-mem/</id>
     <published>2021-05-16T13:00:00.000Z</published>
@@ -41,7 +173,7 @@
   </entry>
   
   <entry>
-    <title>Java 进阶 03 - 类加载器和双亲委派到底是什么？</title>
+    <title>Java 进阶 03 —— 类加载器和双亲委派到底是什么？</title>
     <link href="http://yonghong.tech/java-advance/03-jvm-classloader/"/>
     <id>http://yonghong.tech/java-advance/03-jvm-classloader/</id>
     <published>2021-05-15T13:00:00.000Z</published>
@@ -68,7 +200,7 @@
   </entry>
   
   <entry>
-    <title>Java 进阶 02 - 是时候了解一下 Java 字节码了</title>
+    <title>Java 进阶 02 —— 是时候了解一下 Java 字节码了</title>
     <link href="http://yonghong.tech/java-advance/02-jvm-bytecode/"/>
     <id>http://yonghong.tech/java-advance/02-jvm-bytecode/</id>
     <published>2021-05-14T14:00:00.000Z</published>
@@ -571,64 +703,6 @@
 &lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvVHlsNmRTYjdtSEJ1cXFONld2RXVhdw==&quot;&gt;一例 Go 编译器代码优化 bug 定位和修复解析&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;本文中介绍了 Go 编译器的整体编译流程脉络和一个编译优化错误导致数据越界访问的 bug，并分析了对这个 bug 的排查和修复过程，希望能够借此让大家对 Go 编译器有更多的了解，在遇到类似问题时有排查思路。&lt;/li&gt;
 &lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvZkoyMnk3TVF2a2NOSmtpQW5Nd2NVZw==&quot;&gt;服务注册中心 | 记一次Consul故障分析与优化&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;在微服务体系中，服务注册中心是最基础的组件，它的稳定性会直接影响整个服务体系的稳定性。本文主要介绍了爱奇艺微服务平台基于Consul的服务注册中心建设方式，与内部容器平台、API网关的集成情况，并重点记录了Consul遇到的一次故障，分析解决的过程，以及针对这次故障从架构上的优化调整措施。Consul 是近几年比较流行的服务发现工具，用于实现分布式系统的服务发现与配置。与其它分布式服务注册与发现的方案相比Consul 的方案更“一站式”，使用起来也较 为简单。他的主要应用场景为：服务发现、服务隔离、服务配置。&lt;/li&gt;
 &lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="技术爱好者周刊" scheme="http://yonghong.tech/categories/%E6%8A%80%E6%9C%AF%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/"/>
-    
-    
-    <category term="技术爱好者周刊" scheme="http://yonghong.tech/tags/%E6%8A%80%E6%9C%AF%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>技术爱好者周刊 第6期 | 2020年11月09日</title>
-    <link href="http://yonghong.tech/weekly-006/"/>
-    <id>http://yonghong.tech/weekly-006/</id>
-    <published>2020-11-09T02:24:00.000Z</published>
-    <updated>2020-11-09T02:24:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>技术爱好者周刊，每周一发布，欢迎提<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZS9pc3N1ZXM=">issue<i class="fa fa-external-link-alt"></i></span>贡献内容。</p></blockquote><h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAzNzc2MzQ1Mg==">程序员都应该知道的URI，一文帮你全面了解<i class="fa fa-external-link-alt"></i></span><br>URI 是每个程序员都应该了解的概念，同时相关联的还有 URL, URN 等概念簇。了解这些概念，可以帮助我们更好地窥探万维网(WWW)的设计，同时也能帮我们在工作中有效解决跟 URI 相关概念的问题，更加理解 encode,decode 工作原理，更好地助力网络编程！</li><li><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODkxNTgyMTYyNzk4MTE2ODcx">5G时代|淘宝直播高画质低延时技术探索<i class="fa fa-external-link-alt"></i></span><br>5G将对视频分辨率和清晰度提出越来越高的要求。淘宝作为一个数亿级用户的短视频与直播平台，业务多样，两端用户分布广，设备和网络情况复杂，给多媒体内容存储和分发带来巨大挑战。在内容生产过程中把控好质量和成本，在内容分发和消费过程中确保用户体验，是当前面临的主要问题。为了解决这个问题，我们有两个优化目标，一是在画质不变的前提下降码率，二是在码率不变的前提下提升画面质量。</li><li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvMlBSWF92VmhpM1N5Z3JaeWRCZkc2dw==">干货 | 携程Elasticsearch数据同步实践<i class="fa fa-external-link-alt"></i></span><br>Elasticsearch是最近几年非常热门的分布式搜索和数据分析引擎，携程内部不仅使用ES实现了大规模的日志平台，也广泛使用ES实现了各个业务场景的搜索、推荐等功能。本文聚焦在业务搜索的场景分享了我们在做数据同步方面的思考和实践，希望能对大家有所启发。</li></ul><span id="more"></span><h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1laXR1YW4uY29tLzIwMjAvMTEvMDUvbmF0aXZlLXdlYi1wcmF0aWNlLWluLW1laXR1YW4uaHRtbA==">积木Sketch插件进阶开发指南<i class="fa fa-external-link-alt"></i></span><br>积木插件原本只是外卖提升UI/RD协作效率的一次尝试，最初的目标仅是UI一致性，但是现在已经作为全面提升产研效率的媒介，承载了越来越多的功能。 </li></ul><h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAzNzY5Njc2NA==">优秀 ！华为是这样使用Git rebase的<i class="fa fa-external-link-alt"></i></span><br>理论上来说，只要能合理管理项目分支，这几个命令已经足以应付所有的日常开发工作。但是如果我们偶尔看一下自己的git graph，我的天呐，为什么会这么乱。鉴于分支管理的混乱（或者根本就没有进行过分支管理），我们经常遇到一些意想不到的问题，因此需要使用很多面生的git命令来解决我们的问题，比如说本文讲到的git rebase。</li><li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmF1dGhpbmcuY24vYmxvZy9kZXRhaWwvODc=">你真的会使用搜索引擎吗？<i class="fa fa-external-link-alt"></i></span><br>相信很多人平时打开网页，想要搜索东西的时候，都会直接选择输入关键词，于是得到一大堆种类不一的搜索结果，在茫茫页面中苦苦寻找自己需要的信息。这种不经思考的搜索方式，不仅增加了搜索信息的时间成本，还往往找不到正确的信息。那么，正确的搜索方式是什么呢？本文结合了作者多年的搜索经验和实践，包教包会，让你从只会简单搜索关键词的小白瞬间成长为掌握多种搜索技巧的高手，下面便开始学习吧</li></ul><h2 id="近期会议"><a href="#近期会议" class="headerlink" title="近期会议"></a>近期会议</h2><h3 id="2020-MongoDB-中国线上用户大会"><a href="#2020-MongoDB-中国线上用户大会" class="headerlink" title="2020 MongoDB 中国线上用户大会"></a><span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vbGl2ZS1jaGluYS16aA==">2020 MongoDB 中国线上用户大会<i class="fa fa-external-link-alt"></i></span></h3><p>会议时间：11 月 24 日 星期二</p><p>报名链接：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vbGl2ZS1jaGluYS16aA==">https://www.mongodb.com/live-china-zh<i class="fa fa-external-link-alt"></i></span></p><p>线上参会，全天精彩享不停！MongoDB重磅嘉宾主题演讲、头部客户使用心得分享、干货满满的多个分会场、动手实操培训，MongoDB 只为助您轻松构建可扩展、高性能、现代化应用程序。</p><h2 id="其他周报"><a href="#其他周报" class="headerlink" title="其他周报"></a>其他周报</h2><ul><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J1YW55Zi93ZWVrbHkvYmxvYi9tYXN0ZXIvZG9jcy9pc3N1ZS0xMzIubWQ=">科技爱好者周刊（第 132 期）：快能力和慢能力<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BvbGFyaXMxMTE5L2dvbGFuZ3dlZWtseS9ibG9iL21hc3Rlci9kb2NzL2lzc3VlLTA2OC5tZA==">Go语言爱好者周刊：第 68 期<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plbmFueS93ZWVrbHkvYmxvYi9tYXN0ZXIvc29mdHdhcmUvMjAyMC8xMTAyLm1k">2020.11.02 - If not SPAs, What?<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N3aWZ0T2xkRHJpdmVyL2lPUy1XZWVrbHkvYmxvYi9tYXN0ZXIvUmVwb3J0cy8yMDIwLyUyMzEzMS0yMDIwLjExLjA5Lm1k">老司机 iOS 周报 #135 | 2020-11-09<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9yd2Vla2x5Lm9yZy8yMDIwLTQ0Lmh0bWw=">R Weekly 2020-44 {emphatic}, American political data, data science teaching<i class="fa fa-external-link-alt"></i></span></p></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;技术爱好者周刊，每周一发布，欢迎提&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZS9pc3N1ZXM=&quot;&gt;issue&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;贡献内容。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;后端&quot;&gt;&lt;a href=&quot;#后端&quot; class=&quot;headerlink&quot; title=&quot;后端&quot;&gt;&lt;/a&gt;后端&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAzNzc2MzQ1Mg==&quot;&gt;程序员都应该知道的URI，一文帮你全面了解&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;URI 是每个程序员都应该了解的概念，同时相关联的还有 URL, URN 等概念簇。了解这些概念，可以帮助我们更好地窥探万维网(WWW)的设计，同时也能帮我们在工作中有效解决跟 URI 相关概念的问题，更加理解 encode,decode 工作原理，更好地助力网络编程！&lt;/li&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82ODkxNTgyMTYyNzk4MTE2ODcx&quot;&gt;5G时代|淘宝直播高画质低延时技术探索&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;5G将对视频分辨率和清晰度提出越来越高的要求。淘宝作为一个数亿级用户的短视频与直播平台，业务多样，两端用户分布广，设备和网络情况复杂，给多媒体内容存储和分发带来巨大挑战。在内容生产过程中把控好质量和成本，在内容分发和消费过程中确保用户体验，是当前面临的主要问题。为了解决这个问题，我们有两个优化目标，一是在画质不变的前提下降码率，二是在码率不变的前提下提升画面质量。&lt;/li&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvMlBSWF92VmhpM1N5Z3JaeWRCZkc2dw==&quot;&gt;干货 | 携程Elasticsearch数据同步实践&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;Elasticsearch是最近几年非常热门的分布式搜索和数据分析引擎，携程内部不仅使用ES实现了大规模的日志平台，也广泛使用ES实现了各个业务场景的搜索、推荐等功能。本文聚焦在业务搜索的场景分享了我们在做数据同步方面的思考和实践，希望能对大家有所启发。&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="技术爱好者周刊" scheme="http://yonghong.tech/categories/%E6%8A%80%E6%9C%AF%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/"/>
-    
-    
-    <category term="技术爱好者周刊" scheme="http://yonghong.tech/tags/%E6%8A%80%E6%9C%AF%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>技术爱好者周刊 第5期 | 2020年11月02日</title>
-    <link href="http://yonghong.tech/weekly-005/"/>
-    <id>http://yonghong.tech/weekly-005/</id>
-    <published>2020-11-02T02:24:00.000Z</published>
-    <updated>2020-11-02T02:24:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>技术爱好者周刊，每周一发布，欢迎提<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZS9pc3N1ZXM=">issue<i class="fa fa-external-link-alt"></i></span>贡献内容。</p></blockquote><h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAzNzY2MjA0Ng==">你不知道的JMM底层原理<i class="fa fa-external-link-alt"></i></span><br>在多线程并发的世界里synchronized、volatile、JMM是我们绕不过去的技术坎，而重排序、可见性、内存屏障又有时候搞得你一脸懵逼。有道是知其然知其所以然，了解了底层的原理性问题，不论是日常写BUG还是面试都是必备神器了。</li></ul><h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><ul><li><span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1laXR1YW4uY29tLzIwMjAvMTAvMzAvbmF0aXZlLXdlYi1wcmF0aWNlLWluLW1laXR1YW4uaHRtbA==">Native地图与Web融合技术的应用与实践<i class="fa fa-external-link-alt"></i></span><br>本文将WebView与Native地图组件叠加到一起，实现了用户手势事件智能分发的机制，解决了WebView与Native地图在同一页面内布局困难的问题。</li><li><span class="exturl" data-url="aHR0cHM6Ly90ZWNoLmlwYWxmaXNoLmNvbS9ibG9nLzIwMjAvMTAvMjYvcG9zZWlkb24v">波塞冬：伴鱼运营活动前端配置化实践<i class="fa fa-external-link-alt"></i></span><br>波塞冬，是伴鱼活动运营解决方案的总称，包含活动规则体系、h5 可视化开发平台等，名称来源于古希腊神话，波塞冬是海洋和所有水系的管理者，寓意为 palfish 发展提供超能力。</li><li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvOExFclpXSjBGMFZzWjdXZ2pDYi1WZw==">干货 | 深入浅出Apple响应式框架Combine<i class="fa fa-external-link-alt"></i></span><br>Combine.framework 是Apple在2019 WWDC 上基于Swift推出的函数响应框架（Functional Reactive Programming）,支持Apple全平台的操作系统（iOS13+，macOS 10.15+等）。函数式响应框架无论在哪个平台早已流行泛滥，开源的Rx更是实现了各种语言的响应式编程框架。Apple在这个时候推出响应式框架，无疑是对自己护城河的进一步巩固。事实上SwiftUI的数据驱动就是依赖Combine。本文将深入浅出地介绍Combine的基本概念和原理，然后通过具体demo详细阐述其在实际编码中的应用。<span id="more"></span></li></ul><h2 id="近期会议"><a href="#近期会议" class="headerlink" title="近期会议"></a>近期会议</h2><h3 id="2020-MongoDB-中国线上用户大会"><a href="#2020-MongoDB-中国线上用户大会" class="headerlink" title="2020 MongoDB 中国线上用户大会"></a><span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vbGl2ZS1jaGluYS16aA==">2020 MongoDB 中国线上用户大会<i class="fa fa-external-link-alt"></i></span></h3><p>会议时间：11 月 24 日 星期二</p><p>报名链接：<span class="exturl" data-url="aHR0cHM6Ly93d3cubW9uZ29kYi5jb20vbGl2ZS1jaGluYS16aA==">https://www.mongodb.com/live-china-zh<i class="fa fa-external-link-alt"></i></span></p><p>线上参会，全天精彩享不停！MongoDB重磅嘉宾主题演讲、头部客户使用心得分享、干货满满的多个分会场、动手实操培训，MongoDB 只为助您轻松构建可扩展、高性能、现代化应用程序。</p><h2 id="其他周报"><a href="#其他周报" class="headerlink" title="其他周报"></a>其他周报</h2><ul><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3J1YW55Zi93ZWVrbHkvYmxvYi9tYXN0ZXIvZG9jcy9pc3N1ZS0xMzEubWQ=">科技爱好者周刊（第 131 期）：你的头脑是二值逻辑，还是三值逻辑？<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BvbGFyaXMxMTE5L2dvbGFuZ3dlZWtseS9ibG9iL21hc3Rlci9kb2NzL2lzc3VlLTA2Ny5tZA==">Go语言爱好者周刊：第 67 期<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3plbmFueS93ZWVrbHkvYmxvYi9tYXN0ZXIvc29mdHdhcmUvMjAyMC8xMDI2Lm1k">2020.10.26 - The Tyranny of Metrics<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1N3aWZ0T2xkRHJpdmVyL2lPUy1XZWVrbHkvYmxvYi9tYXN0ZXIvUmVwb3J0cy8yMDIwLyUyMzEzNC0yMDIwLjExLjAyLm1k">老司机 iOS 周报 #134 | 2020-11-02<i class="fa fa-external-link-alt"></i></span></p></li><li><p><span class="exturl" data-url="aHR0cHM6Ly9yd2Vla2x5Lm9yZy8yMDIwLTQzLmh0bWw=">R Weekly 2020-43 Rolling averages with {slider}, mapping as art, and mapping flooding impacts.<i class="fa fa-external-link-alt"></i></span></p></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;技术爱好者周刊，每周一发布，欢迎提&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZS9pc3N1ZXM=&quot;&gt;issue&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;贡献内容。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;后端&quot;&gt;&lt;a href=&quot;#后端&quot; class=&quot;headerlink&quot; title=&quot;后端&quot;&gt;&lt;/a&gt;后端&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAzNzY2MjA0Ng==&quot;&gt;你不知道的JMM底层原理&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;在多线程并发的世界里synchronized、volatile、JMM是我们绕不过去的技术坎，而重排序、可见性、内存屏障又有时候搞得你一脸懵逼。有道是知其然知其所以然，了解了底层的原理性问题，不论是日常写BUG还是面试都是必备神器了。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;前端&quot;&gt;&lt;a href=&quot;#前端&quot; class=&quot;headerlink&quot; title=&quot;前端&quot;&gt;&lt;/a&gt;前端&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly90ZWNoLm1laXR1YW4uY29tLzIwMjAvMTAvMzAvbmF0aXZlLXdlYi1wcmF0aWNlLWluLW1laXR1YW4uaHRtbA==&quot;&gt;Native地图与Web融合技术的应用与实践&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;本文将WebView与Native地图组件叠加到一起，实现了用户手势事件智能分发的机制，解决了WebView与Native地图在同一页面内布局困难的问题。&lt;/li&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly90ZWNoLmlwYWxmaXNoLmNvbS9ibG9nLzIwMjAvMTAvMjYvcG9zZWlkb24v&quot;&gt;波塞冬：伴鱼运营活动前端配置化实践&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;波塞冬，是伴鱼活动运营解决方案的总称，包含活动规则体系、h5 可视化开发平台等，名称来源于古希腊神话，波塞冬是海洋和所有水系的管理者，寓意为 palfish 发展提供超能力。&lt;/li&gt;
-&lt;li&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvOExFclpXSjBGMFZzWjdXZ2pDYi1WZw==&quot;&gt;干货 | 深入浅出Apple响应式框架Combine&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;Combine.framework 是Apple在2019 WWDC 上基于Swift推出的函数响应框架（Functional Reactive Programming）,支持Apple全平台的操作系统（iOS13+，macOS 10.15+等）。函数式响应框架无论在哪个平台早已流行泛滥，开源的Rx更是实现了各种语言的响应式编程框架。Apple在这个时候推出响应式框架，无疑是对自己护城河的进一步巩固。事实上SwiftUI的数据驱动就是依赖Combine。本文将深入浅出地介绍Combine的基本概念和原理，然后通过具体demo详细阐述其在实际编码中的应用。</summary>
     
     
     
