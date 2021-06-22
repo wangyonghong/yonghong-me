@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;yonghong.tech&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12,&quot;width&quot;:360},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:true,&quot;lazyload&quot;:false,&quot;pangu&quot;:true,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:true,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="为什么会有 GC本质上是内存资源的有限性，因此需要大家共享使用，手工申请，手动释放。 垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。 关于垃圾收集有三个经典问题：  哪些内存需要回收？ 什么时候回收？ 如何回收？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 进阶 06 —— JVM 垃圾回收算法">
+<meta property="og:url" content="http://yonghong.tech/java-advance/06-jvm-gc-algo/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="为什么会有 GC本质上是内存资源的有限性，因此需要大家共享使用，手工申请，手动释放。 垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。 关于垃圾收集有三个经典问题：  哪些内存需要回收？ 什么时候回收？ 如何回收？">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-18T13:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-18T13:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="Java进阶">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yonghong.tech/java-advance/06-jvm-gc-algo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;yonghong.tech&#x2F;java-advance&#x2F;06-jvm-gc-algo&#x2F;&quot;,&quot;path&quot;:&quot;java-advance&#x2F;06-jvm-gc-algo&#x2F;&quot;,&quot;title&quot;:&quot;Java 进阶 06 —— JVM 垃圾回收算法&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Java 进阶 06 —— JVM 垃圾回收算法 | 永红的互联网手记</title><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/config.min.js"></script>
+<meta name="keywords" content="代码,产品,互联网,研发,程序员,学习,工作,技术,分享,永红,yonghong,Java,Kotlin,Python,Nginx,Springboot,Linux,MySQL,MongoDB,Redis">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">671</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">720</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89-GC"><span class="nav-number">1.</span> <span class="nav-text">为什么会有 GC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%88Garbage%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">什么是垃圾（Garbage）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">3.</span> <span class="nav-text">为什么需要垃圾回收</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">4.</span> <span class="nav-text">早期垃圾回收</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">Java 垃圾回收机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9B%B8%E5%85%B3%E7%AE%97%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">垃圾回收相关算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%A0%87%E8%AE%B0%E9%98%B6%E6%AE%B5"><span class="nav-number">6.1.</span> <span class="nav-text">垃圾标记阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.1.</span> <span class="nav-text">方式一：引用计数算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">6.1.2.</span> <span class="nav-text">方式二：可达性分析算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GC-Roots"><span class="nav-number">6.1.2.1.</span> <span class="nav-text">GC Roots</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84-finalization-%E6%9C%BA%E5%88%B6"><span class="nav-number">6.1.2.2.</span> <span class="nav-text">对象的 finalization 机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%AD%98%E8%BF%98%E6%98%AF%E6%AD%BB%E4%BA%A1%EF%BC%9F"><span class="nav-number">6.1.2.3.</span> <span class="nav-text">生存还是死亡？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%BF%87%E7%A8%8B"><span class="nav-number">6.1.2.4.</span> <span class="nav-text">具体过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAT-%E4%B8%8E-JProfiler-%E7%9A%84-GC-Roots-%E6%BA%AF%E6%BA%90"><span class="nav-number">6.1.2.5.</span> <span class="nav-text">MAT 与 JProfiler 的 GC Roots 溯源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96-dump-%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.2.6.</span> <span class="nav-text">获取 dump 文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%B8%85%E9%99%A4%E9%98%B6%E6%AE%B5"><span class="nav-number">6.2.</span> <span class="nav-text">垃圾清除阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95%EF%BC%88Mark-Sweep%EF%BC%89"><span class="nav-number">6.2.1.</span> <span class="nav-text">标记-清除算法（Mark-Sweep）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">执行过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95%EF%BC%88Copying%EF%BC%89"><span class="nav-number">6.2.2.</span> <span class="nav-text">复制算法（Copying）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF-1"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">核心思想</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%EF%BC%88Mark-Compact%EF%BC%89"><span class="nav-number">6.2.3.</span> <span class="nav-text">标记-压缩算法（Mark-Compact）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF-2"><span class="nav-number">6.2.3.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B-1"><span class="nav-number">6.2.3.2.</span> <span class="nav-text">执行过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93-1"><span class="nav-number">6.2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-number">6.3.</span> <span class="nav-text">分代收集算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%E3%80%81%E5%88%86%E5%8C%BA%E7%AE%97%E6%B3%95"><span class="nav-number">6.4.</span> <span class="nav-text">增量收集算法、分区算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E9%87%8F%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%EF%BC%88Incremental-Collecting%EF%BC%89"><span class="nav-number">6.4.1.</span> <span class="nav-text">增量收集算法（Incremental Collecting）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E7%AE%97%E6%B3%95"><span class="nav-number">6.4.2.</span> <span class="nav-text">分区算法</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">671</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">720</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/06-jvm-gc-algo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 进阶 06 —— JVM 垃圾回收算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-18 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-06-18T21:00:00+08:00">2021-06-18 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="为什么会有-GC"><a href="#为什么会有-GC" class="headerlink" title="为什么会有 GC"></a>为什么会有 GC</h1><p>本质上是内存资源的有限性，因此需要大家共享使用，手工申请，手动释放。</p>
+<p>垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。</p>
+<p>关于垃圾收集有三个经典问题：</p>
+<ul>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>如何回收？</li>
+</ul>
+<span id="more"></span>
+
+<p>垃圾收集机制是 Java 语言的招牌能力，极大地提高了开发效率。如今，垃圾收集几乎成为现代语言的标配，即使经过如此长时间的发展，Java 的垃圾收集机制仍然在不断的演进中，不同大小的设备、不同特征的应用场景，对垃圾收集提出了新的挑战，这当然也是面试的热点。</p>
+<p>面试题：</p>
+<ul>
+<li>垃圾回收器，各自优缺点，CMS、G1</li>
+<li>GC 算法有哪些，目前的 JDK 版本采用什么回收算法</li>
+<li>GC 两种判定方法</li>
+<li>分代回收</li>
+<li>垃圾收集策略和算法</li>
+<li>平时如何搭配使用垃圾回收器</li>
+<li>什么情况触发垃圾回收</li>
+<li>System.gc() runtime.gc()</li>
+<li>Java  GC 机制，GC Roots 有哪些</li>
+<li>CMS 回收停顿了几次，为什么？</li>
+</ul>
+<h1 id="什么是垃圾（Garbage）"><a href="#什么是垃圾（Garbage）" class="headerlink" title="什么是垃圾（Garbage）"></a>什么是垃圾（Garbage）</h1><p>垃圾是指在运行程序中没有任何指针指向的对象，这个对象就是需要被回收的垃圾。An object is considered garbage when it  can no longer be  reached from any pointer in the running program .</p>
+<p>如果不及时对内存中的垃圾进行清理，那么，这些垃圾对象所占用的内存空间会一直保留到应用程序结束，被保留的空间无法被其他对象使用。甚至可能导致内存溢出。</p>
+<h1 id="为什么需要垃圾回收"><a href="#为什么需要垃圾回收" class="headerlink" title="为什么需要垃圾回收"></a>为什么需要垃圾回收</h1><p>对于高级语言来说，一个基本认知是如果不进行垃圾回收，内存迟早都会被消耗完，因为不断地分配内存空间而不进行回收，就好像不停的生产而从来不打扫一样。</p>
+<p>除了释放没用的对象，垃圾回收也可以清除内存里的记录碎片。碎片整理将所占用的堆内存移到堆的一端，以便 JVM 将整理出的内存分配给新的对象。</p>
+<p>随着应用程序所应对的业务越来越庞大、复杂，用户越来越多，没有 GC 就不能保证应用程序的正常进行。而经常造成 STW 的 GC 又跟不上实际的需求，所以才会不断地尝试对 GC 进行优化。</p>
+<h1 id="早期垃圾回收"><a href="#早期垃圾回收" class="headerlink" title="早期垃圾回收"></a>早期垃圾回收</h1><p>在早期的 C/C++ 时代，垃圾回收基本上是手工进行的。开发人员可以使用 new 关键字进行内存申请，并使用 delete 关键字进行内存释放。比如以下代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MibBridge *pBridge = <span class="keyword">new</span> cmBaseGroupBridge();</span><br><span class="line"><span class="comment">// 如果注册失败，使用 delete 关键字释放该对象所占用内存区域</span></span><br><span class="line"><span class="keyword">if</span> (pBridg-&gt;Register(kDestroy) != NO_ERROR) &#123;</span><br><span class="line">    <span class="keyword">delete</span> pBridge;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式可以灵活控制内存释放的时间，但是会给开发人员带来频繁申请和释放内存的管理负担。倘若有一处内存区间由于程序员编码的问题忘记被回收，那么就会产生内存泄露，垃圾对象永远无法被清除，随着系统运行时间的不断增长，垃圾对象所耗内存可能持续上升，直到出现内存溢出并造成应用程序崩溃。</p>
+<p>有了垃圾回收机制后，上述代码块极有可能变成这样：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MibBridge *pBridge = <span class="keyword">new</span> cmBaseGroupBridge();</span><br><span class="line">pBridg-&gt;Register(kDestroy);</span><br></pre></td></tr></table></figure>
+
+<p>现在，除了 Java 以外，C#、Python、Ruby 等语言都使用了自动垃圾回收的思想，也是未来发展趋势。可以说，这种自动化的内存分配和垃圾回收的方式已经成为现代开发语言必备的标准。</p>
+<h1 id="Java-垃圾回收机制"><a href="#Java-垃圾回收机制" class="headerlink" title="Java 垃圾回收机制"></a>Java 垃圾回收机制</h1><p>自动内存管理，无需开发人员手动参与内存的分配与回收，这样降低了内存泄漏和内存溢出的风险。</p>
+<ul>
+<li>没有垃圾回收器，java 也会和 cpp 一样，各种悬垂指针，野指针，泄露问题让你头疼不已。</li>
+</ul>
+<p>自动内存管理机制，将程序员从繁重的内存管理中释放出来，可以更专注地专心于业务开发。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlLzgvZG9jcy90ZWNobm90ZXMvZ3VpZGVzL3ZtL2djdHVuaW5nL3RvYy5odG1s">Oracle 官网关于垃圾回收的介绍<i class="fa fa-external-link-alt"></i></span></p>
+<p>担忧：</p>
+<p>对于 Java 开发人员而言，自动内存管理就像是一个黑匣子，如果过度依赖于”自动“，那么这将会是一场灾难，最严重的就会弱化 Java 开发人员在程序出现内存溢出时定位问题和解决问题的能力。</p>
+<p>此时，了解 JVM 的自动内存分配和内存回收原理就显得非常重要，只有在真正了解 JVM 是如何管理内存后，我们才能够在遇见 OOM 时，快速地根据错误异常日志定位问题和解决问题。</p>
+<p>当需要排查各种内存溢出、内存泄漏问题时，当垃圾收集册很难过为系统达到更高并发量的瓶颈时，我们就必须对这些”自动化“的技术是是必要的监控和调优。</p>
+<p>垃圾回收器可以对年轻代回收，也可以对老年代回收，甚至全堆和方法区的回收。</p>
+<hr>
+<ul>
+<li>其中，Java 堆是垃圾收集器的工作重点</li>
+</ul>
+<p>从次数上讲：</p>
+<ul>
+<li>频繁收集年轻代</li>
+<li>较少收集老年代</li>
+<li>基本不动方法区/永久代/元空间</li>
+</ul>
+<h1 id="垃圾回收相关算法"><a href="#垃圾回收相关算法" class="headerlink" title="垃圾回收相关算法"></a>垃圾回收相关算法</h1><h2 id="垃圾标记阶段"><a href="#垃圾标记阶段" class="headerlink" title="垃圾标记阶段"></a>垃圾标记阶段</h2><p>在堆里存放着几乎所有的 Java 对象实例，在 GC 执行垃圾回收之前，首先<strong>需要区分出内存中哪些是存活的对象，哪些是已经死亡的对象</strong>。只有被标记为已经死亡的对象，GC 才会在执行垃圾回收时，释放掉其所占有的内存空间，因此这个过程我们称为<strong>垃圾标记阶段</strong>。</p>
+<p>那么在 JVM 中究竟是如何标记一个死亡对象呢？简单来说，当一个对象已经不再被任何的存活对象继续引用时，就可以宣判为已经死亡。</p>
+<p>判断对象存活一般有两种方式：<strong>引用计数法</strong>和<strong>可达性分析算法</strong>。</p>
+<h3 id="方式一：引用计数算法"><a href="#方式一：引用计数算法" class="headerlink" title="方式一：引用计数算法"></a>方式一：引用计数算法</h3><p>引用计数算法（Reference Counting）比较简单，对每个对象保存一个整型的<strong>引用计数器属性用于记录对象被引用的情况</strong>。</p>
+<p>对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1；当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，即表示对象 A 不可能再被使用，可进行回收。</p>
+<p>优点：<strong>实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong>。</p>
+<p>缺点：</p>
+<ul>
+<li>它需要单独的字段存储计数器，这样的做法增加了<strong>存储空间的开销</strong>。</li>
+<li>每次赋值都需要更新计数器，伴随着加法和减法操作，这增加了<strong>时间开销</strong>。</li>
+<li>引用计数器有一个严重的问题，即<strong>无法处理循环引用</strong>的情况。这是一条致命的缺陷，导致在 Java 的垃圾回收器中没有使用这类算法。</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>引用计数算法，是很多语言的资源回收选择，例如因人工智能而更加火热的 Python，它更是同时支持引用计数和垃圾收集机制。</p>
+<p>具体哪种最优是要看场景的，业界有大规模实践中仅保留引用计数机制，以提高吞吐量的尝试。</p>
+<p>Java 并没有选择引用计数，是因为其存在一个基本的难题，也就是很难处理循环引用关系。</p>
+<p>Python 如何解决循环引用？</p>
+<ul>
+<li>手动解除：很好理解，就是在合适的时机，解除引用关系。</li>
+<li>使用弱引用 weakref，weakref 是 Python 提供的标准库，旨在解决循环引用。</li>
+</ul>
+<h3 id="方式二：可达性分析算法"><a href="#方式二：可达性分析算法" class="headerlink" title="方式二：可达性分析算法"></a>方式二：可达性分析算法</h3><p>可达性分析算法又叫做跟搜索算法，或者是追踪性垃圾收集。</p>
+<p>相对于引用计数法而言，可达性分析算法不仅同样具备实现简单和执行高效等特点，更重要的是该算法可以有效地解决在引用计数算法中循环引用的问题，防止内存泄漏的发生。</p>
+<p>相较于引用计数算法，这里的可达性分析就是 Java、C# 选择的。这种类型的垃圾收集器通常也叫做<strong>追踪性垃圾收集器（Tracing Garbage Collector）</strong>。</p>
+<p>所谓 ”GC Roots“ 根集合就是一组必须活跃的引用。</p>
+<p>基本思路：</p>
+<ul>
+<li>可达性分析算法是以根对象集合（GC Roots）为起始点，按照从上至下的方式<strong>搜索被根对象集合所连接的目标对象是否可达</strong>。</li>
+<li>使用可达性分析算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索走过的路径称为<strong>引用链（Reference Chain）</strong></li>
+<li>如果目标对象没有任何引用链相连，则是不可达的，就意味着该对象已经死亡，可以标记为垃圾对象</li>
+<li>在可达性分析算法中，只有能够被根对象集合直接或间接连接的对象才是存活对象</li>
+</ul>
+<p>这个算法目前较为常用。</p>
+<h4 id="GC-Roots"><a href="#GC-Roots" class="headerlink" title="GC Roots"></a>GC Roots</h4><p>在 Java 语言中，GC Roots 包括以下几类元素：</p>
+<ul>
+<li>虚拟机栈中引用的对象<ul>
+<li>比如，各个线程被调用的方法中使用到的参数、局部变量等。</li>
+</ul>
+</li>
+<li>本地方法栈内 JNI（通常说的本地方法）引用的对象</li>
+<li>方法区中类静态属性引用的对象<ul>
+<li>比如：Java 类的引用类型静态变量</li>
+</ul>
+</li>
+<li>方法区中常量引用的对象<ul>
+<li>比如：字符串常量池里的引用</li>
+</ul>
+</li>
+<li>所有被同步锁 synchronized 持有的对象</li>
+<li>Java 虚拟机内部的引用<ul>
+<li>基本数据类型对应的 Class 对象，一些常驻的异常对象（如：NullPointerException、OutOfMemoryError），系统类加载器。</li>
+</ul>
+</li>
+<li>反映 Java 虚拟机内部情况的 JMXBean、JVMTI 中注册的回调、本地代码缓存等。</li>
+</ul>
+<p>除了这些固定的 GC Roots 集合以外，根据用户所选用的垃圾收集器以及当前回收的内存区域不同，还可以有其他对象 临时性 地加入，共同构成完整 GC Roots 集合。比如，分代收集和局部回收（Partial GC）</p>
+<ul>
+<li>如果只针对 Java 堆中的某一块区域进行垃圾回收（比如：典型的只针对新生代），必须考虑到内存区域是虚拟机自己的实现细节，更不是孤立封闭的，这个区域的对象完全有可能被其他区域的对象所引用，这时候就需要一并将关联的区域对象也加入 GC Roots 集合中去考虑，才能保证可达性分析的准确性。</li>
+</ul>
+<p><strong>小技巧：</strong>由于 Root 采用栈方式存放变量和指针，所以如果一个指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那它就是一个 Root。</p>
+<p><strong>注意：</strong>如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能够保障一致性的快照中进行。这点不满足的话分析结果的准确性就无法保证。</p>
+<p>这点也是导致 GC 时进行必须 ”Stop The World“ 的一个重要原因。</p>
+<ul>
+<li>即使是号称（几乎）不会发生停顿的 CMS 收集器中，<strong>枚举根节点时也是必须要停顿的</strong>。</li>
+</ul>
+<h4 id="对象的-finalization-机制"><a href="#对象的-finalization-机制" class="headerlink" title="对象的 finalization 机制"></a>对象的 finalization 机制</h4><p>Java 语言提供了对象终止（finalization）机制来允许开发人员提供对象被销毁之前的自定义处理逻辑。</p>
+<p>当垃圾回收器发现没有引用指向一个对象，即：垃圾回收此对象之前，总会先调用这个对象的 finalize() 方法。</p>
+<p> finalize() 方法允许在子类中被重写，用于在对象被回收时进行资源释放。通常在这个方法中进行一些资源释放和清理的工作，比如关闭文件、套接字和数据库连接等。</p>
+<p>永远不要主动调用对象的 finalize() 方法，应该交给垃圾回收机制调用。理由包括以下 3 点：</p>
+<ul>
+<li><p>在 finalize() 时可能会导致对象复活。</p>
+</li>
+<li><p>finalize() 方法执行时间是没有保障的，它完全由 GC 线程决定，极端情况下，若不发生 GC，则  finalize() 方法将没有执行机会。</p>
+</li>
+<li><p>一个糟糕的  finalize() 会严重影响 GC 性能</p>
+</li>
+</ul>
+<p>从功能上来说， finalize() 方法与 C++ 中的析构函数比较相似，但是 Java 采用的是基于垃圾回收器的自动内存管理机制，所以  finalize() 方法在本质上不同于 C++ 中的析构函数。</p>
+<p>由于  finalize() 方法的存在，虚拟机中的对象一般处于三种可能的状态。</p>
+<h4 id="生存还是死亡？"><a href="#生存还是死亡？" class="headerlink" title="生存还是死亡？"></a>生存还是死亡？</h4><p>如果所有的根节点都无法访问到某个对象，说明对象已经不再使用了。一般来说，此对象需要被回收。但事实上，也并非是 ”非死不可“ 的，这时候它们暂时处于 ”缓刑“ 阶段。一个无法触及的对象有可能在某一个条件下 ”复活“，如果这样，那么对它的回收就是不合理的，为此，定义虚拟机中的对象可能的三种状态。如下：</p>
+<ul>
+<li>可触及的：从根节点开始，可以到达这个对象。</li>
+<li>可复活的：对象的所有引用都被释放，但是对象有可能在  finalize() 中复活。</li>
+<li>不可触及的：对象的 finalize() 方法被调用，并且没有复活，那么就会进入不可触及状态。不可触及的对象不可能被复活，因为  finalize() 方法只会被调用一次。</li>
+</ul>
+<p>以上 3 种状态中，是由于 finalize() 方法的存在进行的区分。只有在对象不可触及时才可以被回收。</p>
+<h4 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h4><p>判定一个对象 objA 是否可回收，至少要经历两次标记过程：</p>
+<ul>
+<li>如果对象 objA 到 GC Roots 没有引用链，则进行第一次标记</li>
+<li>进行筛选，判断此对象是否有必要执行  finalize() 方法<ul>
+<li>如果对象 objA 没有重写 finalize() 方法，或者 finalize() 方法已经被虚拟机调用过，则虚拟机视为 ”没有必要执行“，objA 被判定为不可触及的。</li>
+<li>如果对象 objA 重写了 finalize() 方法，且还未执行过，那么 objA 会被插入到 F-Queue 队列中，由一个虚拟机自动创建的、低优先级的 Finalizer 线程触发其 finalize() 方法执行。</li>
+<li>finalize() 方法是对象逃脱死亡的最后机会，稍后 GC 会对 F-Queue 队列中的对象进行第二次标记。如果 objA 在 finalize() 方法中与引用链上的任何一个对象建立了联系，那么在第二次标记时，objA 会被移出 ”即将回收“ 集合。之后，对象会再次出现没有引用存在的情况。在这个情况下，finalize() 方法不会被再次调用，对象会直接变成不可触及的状态，也就是说，一个对象的 finalize() 方法只会被调用一次。</li>
+</ul>
+</li>
+</ul>
+<h4 id="MAT-与-JProfiler-的-GC-Roots-溯源"><a href="#MAT-与-JProfiler-的-GC-Roots-溯源" class="headerlink" title="MAT 与 JProfiler 的 GC Roots 溯源"></a>MAT 与 JProfiler 的 GC Roots 溯源</h4><p>MAT 是 Memory Analyzer 的简称，它是一款功能强大的 Java 堆内存分析器，用于查找内存泄露以及查看内存消耗情况。</p>
+<p>MAT 是基于 Eclipse 开发的，是一款免费的性能分析工具。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZWNsaXBzZS5vcmcvbWF0Lw==">https://www.eclipse.org/mat/<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="获取-dump-文件"><a href="#获取-dump-文件" class="headerlink" title="获取 dump 文件"></a>获取 dump 文件</h4><ul>
+<li>命令行使用 jmap<ul>
+<li>jps</li>
+<li>jmap -dump:format=b,live,file=test1.bin 14036</li>
+</ul>
+</li>
+<li>使用 JVisualVM 导出<ul>
+<li>捕获的 heap dump 文件是一个临时文件，关闭 JVisualVM 后自动删除，若要保留，需要将其另存为文件。</li>
+<li>可以通过以下方式捕获 heap dump<ul>
+<li>在左侧 Application 子窗口中右击相应的应用程序，选择 Heap Dump</li>
+<li>在 Monitor 子标签页中点击 Heap Dump 按钮</li>
+</ul>
+</li>
+<li>本地应用程序的 Heap Dumps 作为应用程序标签页的一个子标签页打开。同时，Heap Dump 在左侧 Application 栏中对应一个含有时间戳的节点，右击这个节点选择 Save As 即可将 Heap Dump 文件保存到本地。</li>
+</ul>
+</li>
+</ul>
+<h2 id="垃圾清除阶段"><a href="#垃圾清除阶段" class="headerlink" title="垃圾清除阶段"></a>垃圾清除阶段</h2><p>当成功区分出内存中存活对象和死亡对象后，GC 接下来的任务就是执行垃圾回收，释放掉无用对象所占用的内存空间，以便有足够的可用内存空间为新对象分配内存。</p>
+<p>目前在 JVM 比较常见的三种垃圾收集算法是 标记-清除算法（Mark-Sweep）、复制算法（Copying）、标记-压缩算法（Mark-Compact）</p>
+<h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>标记-清除算法（Mark-Sweep）是一种非常基础和常见的垃圾收集算法，该算法被 J.McCarthy 等人在 1960 年提出并应用于 List 语言。</p>
+<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p>当堆中的有效内存空间（available memory）被耗尽的时候，就会停止整个程序（也被称为 Stop The World），然后进行两项工作，第一项是标记，第二项则是清除。</p>
+<ul>
+<li>标记：Collector 从引用根节点开始遍历，标记所有被引用的对象。一般是在对象的 Header 中记录为可达对象。</li>
+<li>清除：Collector 对对堆内存从头到尾进行线性的遍历，如果发现某个对象在其 Header 中没有标记为可达对象，则将其回收。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>效率不算高</li>
+<li>在进行 GC 的时候，需要停止整个应用程序，导致用户体验差</li>
+<li>这种方式清理出来的空闲内存空间是不连续的，产生内存碎片。需要维护一个空闲列表</li>
+</ul>
+<p>注意：何为清除？</p>
+<p>这里所谓的清除并不是真的置空，而是把需要清除的对象地址保存在空闲的地址列表里。下次有新对象需要加载时，判断垃圾的位置空间是否够，如果够，就存放。</p>
+<h3 id="复制算法（Copying）"><a href="#复制算法（Copying）" class="headerlink" title="复制算法（Copying）"></a>复制算法（Copying）</h3><h4 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h4><p>为了解决标记-清除算法在垃圾收集效率方面的缺陷，M.L.Minsky 于1963 年发表了著名的论文，”使用双存储区的 Lisp 语言垃圾收集器 （A Lisp Garbage Collector Algorithm Using Serial Secondary Storage）“。M.L.Minsky 本人成功地引入到了 Lisp 语言的一个实现版本中。</p>
+<h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p>将活着的内存空间分为两块，每次只是用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中的所有对象，交换两个内存的角色，最后完成垃圾回收。</p>
+<p>优点</p>
+<ul>
+<li><p>没有标记和清除过程，实现简单，运行高效</p>
+</li>
+<li><p>复制过去以后保证空间的连续性，不会出现”碎片问题“</p>
+</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li><p>此算法的缺点也是很明显的，就是需要两倍的内存空间。</p>
+</li>
+<li><p>对于 G1 这种分拆成为大量 region 的GC，复制而不是移动，意味着 GC 需要维护 region 之间对象引用关系，不管是内存占用或者时间开销也不小</p>
+</li>
+</ul>
+<p>特别的：</p>
+<ul>
+<li>如果系统中的垃圾对象很多，复制短发需要复制的存活对象数量并不会太大，或者说非常低。</li>
+</ul>
+<p>应用场景：</p>
+<p>在新生代，对应常规应用的垃圾回收，一次通常可以回收 70% - 99% 的内存空间，回收性价比很高。所以现在的商业虚拟机都是用这种收集算法回收新生代。</p>
+<h3 id="标记-压缩算法（Mark-Compact）"><a href="#标记-压缩算法（Mark-Compact）" class="headerlink" title="标记-压缩算法（Mark-Compact）"></a>标记-压缩算法（Mark-Compact）</h3><h4 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h4><p>复制算法的高效性，是建立在存活对象少、垃圾对象多的前提下的。这种情况在新生代经常发生，但是在老年代，更常见的情况是大部分对象都是存活对象。如果依然使用复制算法，由于存活对象较多，复制的成本也将很高。因此，基于老年代垃圾回收的特性，需要使用其他的算法。</p>
+<p>标记-清除算法的确可以应用在老年代中，但是该算法不仅执行效率低下，而且在执行完内存回收后还会产生内存碎片，所以 JVM 的设计者需要在此基础上进行改进。标记-压缩（Mark-Compact）算法也由此诞生。</p>
+<p>1970 年前后，G.L.Steele、C.J.Chene 和 D.S.Wise 等研究者发布标记-压缩算法。在许多现代的垃圾回收器中，人们都是用了标记-压缩算法或其改进版本。</p>
+<h4 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h4><p>第一阶段和标记清除算法一样，从根节点开始标记所有被引用对象。</p>
+<p>第二阶段将所有的存活对象压缩到内存的一端，按顺序排放。</p>
+<p>之后清理边界外所有的空间。</p>
+<p>标记-压缩算法的最终效果等同于标记-清除算法执行完成后，再进行一次内存碎片整理，因此，也可以把它称为 标记-清除-压缩（Mark-Sweep-Compact） 算法。</p>
+<p>二者本质差异在于标记-清除算法是一种非移动式的回收算法，标记-压缩是移动式的。是否移动回收后的存活对象是一项优缺点并存的风险决策。</p>
+<p>可以看到，标记的存活对象将会被整理，按照内存地址依次排列，而未被标记的内存会被清理掉。如此一来，当我们需要给新对象分配内存时，JVM 只需要持有一个内存的起始地址即可，这比维护一个空闲列表显然少了许多开销。</p>
+<p><strong>指针碰撞（Bump the Pointer）</strong></p>
+<p>如果内存空间以规整和有序的方式分布，即已用和未用的内存都各自一边，彼此之间维系着一个记录下一次分配起始点的标记指针，当为新对象分配内存时，只需要通过修改指针的偏移量将新对象分配在第一个空闲内存位置上，这种分配方式就叫做指针碰撞。</p>
+<p><strong>优点</strong></p>
+<p>消除了标记-清除算法当中，内存区域分散的缺点，我们需要给新对象分配内存时，JVM 只需要持有一个内存的起始地址即可。</p>
+<p>消除了复制算法当中，内存减半的高额代价</p>
+<p><strong>缺点</strong></p>
+<p>从效率上来说，标记-整理算法要低于复制算法。</p>
+<p>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。</p>
+<p>移动的过程中，需要全程暂停用户应用程序。即：STW</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Mark-Sweep</th>
+<th>Mark-Compact</th>
+<th>Copying</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>速度</td>
+<td>中等</td>
+<td>最慢</td>
+<td>最快</td>
+</tr>
+<tr>
+<td>空间开销</td>
+<td>少（但会堆积碎片）</td>
+<td>少（不堆积碎片）</td>
+<td>通常需要活对象的 2 倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td>移动对象</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<p>效率上来说，复制算法是当之无愧的老大，但是却浪费了太多内存。</p>
+<p>而为了尽量兼顾上面提到的三个指标，标记-整理算法相对来说更平滑一些，但是效率上不尽如人意，它比复制算法多了一个标记阶段，比标记-清除算法多了一个整理内存的阶段。</p>
+<p><strong>难道就没有一种最优算法吗？</strong></p>
+<p>没有最好的算法，只有最合适的算法。</p>
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>前面所有这些算法中，并没有一种算法可以完全替代其他算法，它们都具有自己独特的优势和缺点。分代收集算法应运而生。</p>
+<p>分代收集算法，是基于这样一个事实：不同的对象的生命周期是不一样的。因此，<strong>不同生命周期的对象可以采取不同的收集方式，以便提高回收效率</strong>。一般是把 Java 堆分为新生代和老年代，这样就可以根据各个年龄代的特点使用不同的回收算法，以提高垃圾回收的效率。</p>
+<p>在 Java 程序运行过程中，会产生大量的对象，其中有些对象是与业务信息相关，比如 HTTP 请求中的 Session 对象、线程、Socket 连接，这类对象跟业务直接挂钩，因此生命周期比较长。但是还有一些对象，主要是程序运行过程中生成的临时变量，这些对象生命周期会比较短，比如：String 对象，由于其不变性，系统会产生大量的这些对象，有些对象甚至只用一次即可回收。</p>
+<p>目前几乎所有的 GC 都是采用分代收集（Generational Collecting）算法执行垃圾回收的。</p>
+<p>在 HotSpot 中，基于分代的概念，GC 所使用的内存回收算法必须结合年轻代和老年代各自的特点。</p>
+<ul>
+<li>年轻代（Young Gen）<ul>
+<li>年轻代的特点：区域相对老年代较小，对象生命周期短、存活率低，回收频繁。</li>
+<li>这种情况复制算法的回收整理，速度是最快的。复制算法的效率只和当前存活对象大小有关，因此很适用于年轻代的回收。而复制算法内存利用率不高的问题，通过 HotSpot 中的两个 Survivor 的设计得到缓解</li>
+</ul>
+</li>
+<li>老年代（Tenured Gen）<ul>
+<li>老年代特点：区域较大，对象生命周期长、存活率高，回收不及年轻代频繁。</li>
+<li>这种情况存在大量存活率高的对象，复制算法明显变得不合适。一般是由标记-清除或是标记-清除与标记-整理的混合实现。<ul>
+<li>Mark 阶段的开销与存活对象的数量成正比。</li>
+<li>Sweep 阶段的开销与所管理区域大小成正比。</li>
+<li>Compact 阶段的开销与存活对象的数据成正比。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>以 HotSpot 中的 CMS 回收器为例，CMS 是基于 Mark-Sweep 实现的，对于对象的回收率很高。而对于碎片问题，CMS 采用基于 Mark-Compact 算法的 Serial Old 回收器作为补偿：当内存回收不佳（碎片导致的 Concurrent Mode Failure 时），将采用 Serial Old 执行 Full GC 以达到对老年代内存的整理。</strong></p>
+<p>分代的思想被现有的虚拟机广泛使用。几乎所有的垃圾回收器都区分新生代和老年代。</p>
+<h2 id="增量收集算法、分区算法"><a href="#增量收集算法、分区算法" class="headerlink" title="增量收集算法、分区算法"></a>增量收集算法、分区算法</h2><h3 id="增量收集算法（Incremental-Collecting）"><a href="#增量收集算法（Incremental-Collecting）" class="headerlink" title="增量收集算法（Incremental Collecting）"></a>增量收集算法（Incremental Collecting）</h3><p>上述现有的算法，在垃圾回收过程中，应用软件将处于一种 STW 的状态。在 STW 状态下，应用程序所有的线程都会挂起，暂停一切正常的工作，等待垃圾回收的完成。如果垃圾回收时间过长，应用程序会被挂起很久，<strong>将严重影响用户体验或者系统的稳定性</strong>。为了解决这个问题，即对实时垃圾收集算法的研究直接导致了增量收集（Incremental Collecting）算法的诞生。</p>
+<p>基本思想：如果一次性将所有的垃圾进行处理，需要造成系统长时间的停顿，那么就可以让垃圾收集线程和应用程序线程交替执行。每次，<strong>垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程。依次反复，直到垃圾收集完成</strong>。</p>
+<p>总的来说，增量收集算法的基础仍然是传统的标记-清除和复制算法。<strong>增量收集算法通过对线程间冲突的妥善处理，允许垃圾收集线程以分阶段方式完成标记、清理或复制工作。</strong></p>
+<p>缺点：使用这种方式，由于在垃圾回收过程中，间断性地还执行了应用程序代码，所以能减少系统的停顿时间。但是，因为<strong>线程切换和上下文转换</strong>的消耗，会使得垃圾回收的总体成本上升，<strong>造成系统吞吐量的下降</strong>。</p>
+<h3 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h3><p>一般来说，在相同条件下，堆空间越大，一次 GC 时所需要的时间就越长，有关 GC 产生的停顿也越长。为了更好的控制 GC 产生的停顿时间，将一块大的内存区域分割成多个小块，根据目标的停顿时间，每次合理地回收若干个小区间，而不是整个堆空间，从而减少一次 GC 所产生的停顿。</p>
+<p>分代算法将按照对象的生命周期长短划分成两个部分，分区算法将整个堆空间划分成连续的不同小区间 region。每一个小区间都独立使用，独立回收。这种算法的好处是可以控制一次回收多少个小区间。</p>
+<p>总结：注意，这些只是基本的算法思路，实际 GC 实现过程要复杂的多，目前还在发展中的前沿 GC 都是复合算法，并且并行和并发兼备。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/java-advance/06-jvm-gc-algo/" title="Java 进阶 06 —— JVM 垃圾回收算法">http://yonghong.tech/java-advance/06-jvm-gc-algo/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag"># Java进阶</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/java-advance/05-jvm-args-tools/" rel="prev" title="Java 进阶 05 —— JVM 相关工具">
+                  <i class="fa fa-chevron-left"></i> Java 进阶 05 —— JVM 相关工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+        </div>
+      </div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/comments.min.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">15:24</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/search/local-search.min.js"></script>
+
+
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{&quot;enable&quot;:true,&quot;theme&quot;:&quot;forest&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mermaid@8.9.3&#x2F;dist&#x2F;mermaid.min.js&quot;}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/tags/mermaid.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{&quot;enable&quot;:true,&quot;home&quot;:true,&quot;archive&quot;:true,&quot;delay&quot;:true,&quot;timeout&quot;:3000,&quot;priority&quot;:true,&quot;ignores&quot;:null,&quot;url&quot;:&quot;http:&#x2F;&#x2F;yonghong.tech&#x2F;java-advance&#x2F;06-jvm-gc-algo&#x2F;&quot;}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;yonghong-tech&quot;,&quot;count&quot;:false,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;wangyonghong&quot;,&quot;repo&quot;:&quot;gitalk&quot;,&quot;client_id&quot;:&quot;0e42a09d2799751b9ba7&quot;,&quot;client_secret&quot;:&quot;3e04e5109cf9e3cc34d68deb668842c9c5139846&quot;,&quot;admin_user&quot;:&quot;wangyonghong&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;path_md5&quot;:&quot;cd8c78ea037767cbc3cd77fa574a6490&quot;}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/livere.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>

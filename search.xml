@@ -11585,12 +11585,12 @@ $ iperf -c <server address> -F <file-name></td>
 <p> <strong>使用文件进行邮件发送</strong> </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com by file&quot; admin@jsdig.com &lt; mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjMTA5OyYjeDY5OyYjeDZlOyYjNjQ7JiN4NmE7JiMxMTU7JiMxMDA7JiN4Njk7JiN4Njc7JiN4MmU7JiM5OTsmIzExMTsmI3g2ZDs=">&#x61;&#x64;&#109;&#x69;&#x6e;&#64;&#x6a;&#115;&#100;&#x69;&#x67;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
+<p>使用上面的命令后，我们就可以把mail.txt文件的内容作为邮件的内容发送给<span class="exturl" data-url="bWFpbHRvOiYjeDYxOyYjeDY0OyYjMTA5OyYjeDY5OyYjMTEwOyYjeDQwOyYjMTA2OyYjeDczOyYjMTAwOyYjMTA1OyYjMTAzOyYjeDJlOyYjOTk7JiMxMTE7JiN4NmQ7">&#x61;&#x64;&#109;&#x69;&#110;&#x40;&#106;&#x73;&#100;&#105;&#103;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>了。</p>
 <p>使用上述三种方式都可以给外部邮箱进行邮件发送，但因为前面2中都是直接在shell中敲入邮件内容，因此无法输入中文，即使我们使用粘贴的方式输入了中文，那么收到的邮件也是乱码的。但第3种方式，我们可以在window下编辑好邮件内容后，放到linux下，再进行发送，这样就可以正常发送中文了。不过目前邮件的中文标题暂时没有找到解决办法。</p>
 <p>因为mail程序本身就是调用sendmail来进行邮件发送的，因此我们可以在mail命令中使用sendmail的参数进行配置，比如我想使用特定的发件人发送邮件，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mail -s &quot;Hello from jsdig.com with sender&quot; admin@jsdig.com -- -f user@jsdig.com&lt;mail.txt</span><br></pre></td></tr></table></figure>
 
-<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjeDczOyYjeDY1OyYjeDcyOyYjNjQ7JiMxMDY7JiN4NzM7JiN4NjQ7JiN4Njk7JiN4Njc7JiM0NjsmI3g2MzsmI3g2ZjsmI3g2ZDs=">&#117;&#x73;&#x65;&#x72;&#64;&#106;&#x73;&#x64;&#x69;&#x67;&#46;&#x63;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
+<p>上面的命令中，我们使用了– -f <span class="exturl" data-url="bWFpbHRvOiYjMTE3OyYjMTE1OyYjMTAxOyYjeDcyOyYjeDQwOyYjeDZhOyYjMTE1OyYjMTAwOyYjMTA1OyYjMTAzOyYjNDY7JiM5OTsmIzExMTsmIzEwOTs=">&#117;&#115;&#101;&#x72;&#x40;&#x6a;&#115;&#100;&#105;&#103;&#46;&#99;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>这样的参数，这是sendmail的选项，其中-f表示邮件的发送人邮件地址。</p>
 <p>很多情况下，我们也需要使用邮件来发送附件，在linux下使用mail命令发送附件也很简单，不过首先需要安装uuencode软件包，这个程序是对二进制文件进行编码使其适合通过邮件进行发送，在CentOS上安装该软件包如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install sharutils</span><br></pre></td></tr></table></figure>
 
@@ -14025,27 +14025,6 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
-    <title>【Linux 命令】pr</title>
-    <url>/linux-command/pr/</url>
-    <content><![CDATA[<p>将文本文件转换成适合打印的格式</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pr命令</strong> 用来将文本文件转换成适合打印的格式，它可以把较大的文件分割成多个页面进行打印，并为每个页面添加标题。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pr(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-h&lt;标题&gt;：为页指定标题；</span><br><span class="line">-l&lt;行数&gt;：指定每页的行数。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换格式的文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>pr</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【Linux 命令】printf</title>
     <url>/linux-command/printf/</url>
     <content><![CDATA[<p>格式化并输出结果。</p>
@@ -14132,6 +14111,27 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>protoize</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Linux 命令】pr</title>
+    <url>/linux-command/pr/</url>
+    <content><![CDATA[<p>将文本文件转换成适合打印的格式</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pr命令</strong> 用来将文本文件转换成适合打印的格式，它可以把较大的文件分割成多个页面进行打印，并为每个页面添加标题。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pr(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-h&lt;标题&gt;：为页指定标题；</span><br><span class="line">-l&lt;行数&gt;：指定每页的行数。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换格式的文件。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>pr</tag>
       </tags>
   </entry>
   <entry>
@@ -17592,10 +17592,10 @@ $ iperf -c <server address> -F <file-name></td>
 <p>（LCTT 译注：DNS 协议中的 WKS 记录类型意即“众所周知的业务描述”，是类似于 A、MX 这样的 DNS 记录类型，用于描述某个 IP 所提供的服务，目前鲜见使用。参见： <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vY2QvRTE5NjgzLTAxLzgwNi00MDc3L2Ruc2ludHJvLTE1NC9pbmRleC5odG1s">https://docs.oracle.com/cd/E19683-01/806-4077/dnsintro-154/index.html<i class="fa fa-external-link-alt"></i></span> 。）</p>
 <p>第二天，我就收到了 Joyce 发来的邮件：</p>
 <blockquote>
-<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjMTA3OyYjMTE0OyYjeDY1OyYjMTIxOyYjNjQ7JiN4NDk7JiN4NTM7JiM3MzsmIzQ2OyYjeDQ1OyYjNjg7JiN4NTU7">&#106;&#107;&#114;&#x65;&#121;&#64;&#x49;&#x53;&#73;&#46;&#x45;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjeDc5OyYjMTA4OyYjeDZmOyYjeDQwOyYjeDYzOyYjeDczOyYjNDY7JiMxMDQ7JiMxMTc7JiN4NzQ7JiN4MmU7JiMxMDI7JiN4Njk7">&#x79;&#108;&#x6f;&#x40;&#x63;&#x73;&#46;&#104;&#117;&#x74;&#x2e;&#102;&#x69;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjMTEwOyYjeDYxOyYjeDQwOyYjeDQ5OyYjODM7JiM3MzsmIzQ2OyYjeDQ1OyYjNjg7JiN4NTU7">&#105;&#x61;&#110;&#x61;&#x40;&#x49;&#83;&#73;&#46;&#x45;&#68;&#x55;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
+<p>Date: Mon, 10 Jul 1995 15:35:33 -0700<br>From: <span class="exturl" data-url="bWFpbHRvOiYjMTA2OyYjeDZiOyYjMTE0OyYjeDY1OyYjeDc5OyYjeDQwOyYjeDQ5OyYjODM7JiN4NDk7JiM0NjsmI3g0NTsmIzY4OyYjODU7">&#106;&#x6b;&#114;&#x65;&#x79;&#x40;&#x49;&#83;&#x49;&#46;&#x45;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>To: <span class="exturl" data-url="bWFpbHRvOiYjeDc5OyYjMTA4OyYjMTExOyYjeDQwOyYjOTk7JiMxMTU7JiM0NjsmI3g2ODsmI3g3NTsmI3g3NDsmI3gyZTsmI3g2NjsmI3g2OTs=">&#x79;&#108;&#111;&#x40;&#99;&#115;&#46;&#x68;&#x75;&#x74;&#x2e;&#x66;&#x69;<i class="fa fa-external-link-alt"></i></span><br>Subject: 回复：请求取得一个端口号<br>Cc: <span class="exturl" data-url="bWFpbHRvOiYjMTA1OyYjeDYxOyYjeDZlOyYjeDYxOyYjNjQ7JiN4NDk7JiN4NTM7JiN4NDk7JiN4MmU7JiM2OTsmIzY4OyYjODU7">&#105;&#x61;&#x6e;&#x61;&#64;&#x49;&#x53;&#x49;&#x2e;&#69;&#68;&#85;<i class="fa fa-external-link-alt"></i></span><br>Tatu,<br>我们将端口号 22 分配给 ssh 服务了，你目前是该服务的主要联系人。<br>Joyce  </p>
 </blockquote>
 <p>这就搞定了！SSH 的端口正式使用 22！！！</p>
-<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiMxMjE7JiN4NzA7JiMxMDQ7JiMxMDE7JiMxMTQ7JiMxMTI7JiMxMTc7JiMxMTA7JiMxMDc7JiN4NzM7JiN4NDA7JiMxMTY7JiN4NmY7JiM5NzsmI3g2NDsmI3gyZTsmI3g2MzsmI3g2ZjsmI3g2ZDs=">&#99;&#121;&#x70;&#104;&#101;&#114;&#112;&#117;&#110;&#107;&#x73;&#x40;&#116;&#x6f;&#97;&#x64;&#x2e;&#x63;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
+<p>1995 年 7 月 12 日上午 2 点 21 分，我给我在赫尔辛基理工大学的测试者们宣布了 SSH 的最后 beta 版本。当日下午 5 点 23 分，我给测试者们宣布了 ssh-1.0.0 版本。1995 年 7 月 12 日，下午 5 点 51 分，我将一份 SSH（安全终端）的宣告发给了 <span class="exturl" data-url="bWFpbHRvOiYjOTk7JiN4Nzk7JiN4NzA7JiN4Njg7JiMxMDE7JiN4NzI7JiMxMTI7JiN4NzU7JiMxMTA7JiMxMDc7JiMxMTU7JiM2NDsmI3g3NDsmIzExMTsmIzk3OyYjMTAwOyYjeDJlOyYjOTk7JiN4NmY7JiMxMDk7">&#99;&#x79;&#x70;&#x68;&#101;&#x72;&#112;&#x75;&#110;&#107;&#115;&#64;&#x74;&#111;&#97;&#100;&#x2e;&#99;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span> 的邮件列表，此外我还将其发给了一些新闻组、邮件列表和一些在因特网上讨论相关话题的人们。</p>
 <h4 id="如何更改-SSH-服务的端口号"><a href="#如何更改-SSH-服务的端口号" class="headerlink" title="如何更改 SSH 服务的端口号"></a>如何更改 SSH 服务的端口号</h4><p>SSH 服务器是默认运行在 22 号端口上的。然而，由于某些原因需要，它也可以运行在别的端口上。比如为了方便测试使用，又比如在同一个宿主机上运行多个不同的配置。当然，极少情况下，不使用 root 权限运行它也可以，比如某些必须运行在非特权的端口的情况（端口号大于等于 1024）。</p>
 <p>端口号可以在配置文件 /etc/ssh/sshd_config 中将 Port 22 更改。也可以使用 -p  选项运行 sshd。SSH 客户端和 sftp 程序也可以使用 -p  选项。</p>
 <h4 id="配置-SSH-协议穿越防火墙"><a href="#配置-SSH-协议穿越防火墙" class="headerlink" title="配置 SSH 协议穿越防火墙"></a>配置 SSH 协议穿越防火墙</h4><p>SSH 是少数通常被许可穿越防火墙的协议之一。通常的做法是不限制出站的 SSH 连接，尤其常见于一些较小的或者比较技术型的组织中，而入站的 SSH 连接通常会限制到一台或者是少数几台服务器上。</p>
@@ -18721,6 +18721,101 @@ $ iperf -c <server address> -F <file-name></td>
       </tags>
   </entry>
   <entry>
+    <title>【Linux 命令】tftp</title>
+    <url>/linux-command/tftp/</url>
+    <content><![CDATA[<p>在本机和tftp服务器之间使用TFTP协议传输文件</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>tftp命令</strong> 用在本机和tftp服务器之间使用TFTP协议传输文件。</p>
+<p>TFTP是用来下载远程文件的最简单网络协议，它其于UDP协议而实现。嵌入式linux的tftp开发环境包括两个方面：一是linux服务器端的tftp-server支持，二是嵌入式目标系统的tftp-client支持。因为u-boot本身内置支持tftp-client，所以嵌入式目标系统端就不用配置了。下面就详细介绍一下linux服务器端tftp-server的配置。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp(选项)(参数)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c：指定与tftp服务器连接成功后，立即要执行的指令；</span><br><span class="line">-m：指定文件传输模式。可以是ASCII或者Binary；</span><br><span class="line">-v：显示指令详细执行过程；</span><br><span class="line">-V：显示指令版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>主机：指定tftp要联机的tftp服务器的ip地址或主机名。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>1、安装tftp服务器</strong> </p>
+<p>需要安装xinetd、tftp和tftp-server 3个软件</p>
+<p>如果能上网，通过yum安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install xinetd</span><br><span class="line">yum install tftp</span><br><span class="line">yum install tftp-server</span><br></pre></td></tr></table></figure>
+
+<p>如果不能上网，可以直接安装提供的rpm包：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh xinetd-2.3.14-18.fc9.i386.rpm</span><br><span class="line">rpm -ivh tftp-0.48-3.fc9.i386.rpm</span><br><span class="line">rpm -ivh tftp-server-0.48-3.fc9.i386.rpm</span><br></pre></td></tr></table></figure>
+
+<p> <strong>2、配置tftp服务器</strong> </p>
+<p>修改/etc/xinetd.d/tftp文件，将其中的disable=yes改为disable=no。主要是设置TFTP服务器的根目录，开启服务。修改后的文件如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service tftp</span><br><span class="line">&#123;</span><br><span class="line">       socket_type           =dgram</span><br><span class="line">       protocol              =udp</span><br><span class="line">       wait                  =yes</span><br><span class="line">       user                  =root</span><br><span class="line">       server                =/usr/sbin/in.tftpd</span><br><span class="line">       server_args           =-s  /home/mike/tftpboot -c</span><br><span class="line">       disable               =no</span><br><span class="line">       per_source            =11</span><br><span class="line">       cps                   =100 2</span><br><span class="line">       flags                 =IPv4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：修改项<code>server_args= -s &lt;path&gt; -c</code>，其中<path>处可以改为你的tftp-server的根目录，参数-s指定chroot，-c指定了可以创建文件。</p>
+<p> <strong>3、启动tftp服务器并关闭防火墙</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/init.d/iptables stop        # 关闭防火墙</span><br><span class="line">sudo /sbin/service xinetd start</span><br><span class="line">或</span><br><span class="line">service xinetd restart</span><br><span class="line">/etc/init.d/xinetd start</span><br></pre></td></tr></table></figure>
+
+<p>看到启动[OK]就可以了</p>
+<p>4、查看tftp服务是否开启</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -a | grep tftp</span><br></pre></td></tr></table></figure>
+
+<p>显示结果为<code>udp 0 0 *:tftp *:*</code>表明服务已经开启，就表明tftp配置成功了。</p>
+<p> <strong>5、tftp使用</strong> </p>
+<p>复制一个文件到tftp服务器目录，然后在主机启动tftp软件，进行简单测试。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp 192.168.1.2</span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">get &lt;download file&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">put &lt;upload file&gt;</span></span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">q</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>6、tftp命令用法如下</strong> </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp your-ip-address</span><br></pre></td></tr></table></figure>
+
+<p>进入TFTP操作：</p>
+<ul>
+<li><p>  connect：连接到远程tftp服务器</p>
+</li>
+<li><p>  mode：文件传输模式</p>
+</li>
+<li><p>  put：上传文件</p>
+</li>
+<li><p>  get：下载文件</p>
+</li>
+<li><p>  quit：退出</p>
+</li>
+<li><p>  verbose：显示详细的处理信息</p>
+</li>
+<li><p>  tarce：显示包路径</p>
+</li>
+<li><p>  status：显示当前状态信息</p>
+</li>
+<li><p>  binary：二进制传输模式</p>
+</li>
+<li><p>  ascii：ascii 传送模式</p>
+</li>
+<li><p>  rexmt：设置包传输的超时时间</p>
+</li>
+<li><p>  timeout：设置重传的超时时间</p>
+</li>
+<li><p>  help：帮助信息</p>
+</li>
+<li><p>  ? ：帮助信息</p>
+</li>
+<li><p>*7、如果老是出现“AVC Denial, click icon to view”的错误，并不能传输文件，需要作如下修改** </p>
+</li>
+</ul>
+<p>修改<code>/etc/sysconfig/selinux</code>,将SELINUX设定为disable，使用命令<code>setenforce 0</code>让selinux配置文件生效。</p>
+<p> <strong>8、Busybox中tftp命令的用法</strong> </p>
+<p>命令格式为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp [option] ... host [port]</span><br></pre></td></tr></table></figure>
+
+<p>如果要下载或上传文件的话是一定要用这些option的。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-g 表示下载文件 (get)</span><br><span class="line">-p 表示上传文件 (put)</span><br><span class="line">-l 表示本地文件名 (local file)</span><br><span class="line">-r 表示远程主机的文件名 (remote file)</span><br></pre></td></tr></table></figure>
+
+<p>例如，要从远程主机192.168.1.2上下载 embedexpert，则应输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp -g -r embedexpert 192.168.1.2</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
+      <categories>
+        <category>Linux 命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Linux Command</tag>
+        <tag>Linux 命令</tag>
+        <tag>tftp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【Linux 命令】time</title>
     <url>/linux-command/time/</url>
     <content><![CDATA[<p>统计给定命令所花费的总时间</p>
@@ -19262,101 +19357,6 @@ $ iperf -c <server address> -F <file-name></td>
         <tag>Linux Command</tag>
         <tag>Linux 命令</tag>
         <tag>touch</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Linux 命令】tftp</title>
-    <url>/linux-command/tftp/</url>
-    <content><![CDATA[<p>在本机和tftp服务器之间使用TFTP协议传输文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>tftp命令</strong> 用在本机和tftp服务器之间使用TFTP协议传输文件。</p>
-<p>TFTP是用来下载远程文件的最简单网络协议，它其于UDP协议而实现。嵌入式linux的tftp开发环境包括两个方面：一是linux服务器端的tftp-server支持，二是嵌入式目标系统的tftp-client支持。因为u-boot本身内置支持tftp-client，所以嵌入式目标系统端就不用配置了。下面就详细介绍一下linux服务器端tftp-server的配置。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-c：指定与tftp服务器连接成功后，立即要执行的指令；</span><br><span class="line">-m：指定文件传输模式。可以是ASCII或者Binary；</span><br><span class="line">-v：显示指令详细执行过程；</span><br><span class="line">-V：显示指令版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>主机：指定tftp要联机的tftp服务器的ip地址或主机名。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>1、安装tftp服务器</strong> </p>
-<p>需要安装xinetd、tftp和tftp-server 3个软件</p>
-<p>如果能上网，通过yum安装：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install xinetd</span><br><span class="line">yum install tftp</span><br><span class="line">yum install tftp-server</span><br></pre></td></tr></table></figure>
-
-<p>如果不能上网，可以直接安装提供的rpm包：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -ivh xinetd-2.3.14-18.fc9.i386.rpm</span><br><span class="line">rpm -ivh tftp-0.48-3.fc9.i386.rpm</span><br><span class="line">rpm -ivh tftp-server-0.48-3.fc9.i386.rpm</span><br></pre></td></tr></table></figure>
-
-<p> <strong>2、配置tftp服务器</strong> </p>
-<p>修改/etc/xinetd.d/tftp文件，将其中的disable=yes改为disable=no。主要是设置TFTP服务器的根目录，开启服务。修改后的文件如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service tftp</span><br><span class="line">&#123;</span><br><span class="line">       socket_type           =dgram</span><br><span class="line">       protocol              =udp</span><br><span class="line">       wait                  =yes</span><br><span class="line">       user                  =root</span><br><span class="line">       server                =/usr/sbin/in.tftpd</span><br><span class="line">       server_args           =-s  /home/mike/tftpboot -c</span><br><span class="line">       disable               =no</span><br><span class="line">       per_source            =11</span><br><span class="line">       cps                   =100 2</span><br><span class="line">       flags                 =IPv4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>说明：修改项<code>server_args= -s &lt;path&gt; -c</code>，其中<path>处可以改为你的tftp-server的根目录，参数-s指定chroot，-c指定了可以创建文件。</p>
-<p> <strong>3、启动tftp服务器并关闭防火墙</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/init.d/iptables stop        # 关闭防火墙</span><br><span class="line">sudo /sbin/service xinetd start</span><br><span class="line">或</span><br><span class="line">service xinetd restart</span><br><span class="line">/etc/init.d/xinetd start</span><br></pre></td></tr></table></figure>
-
-<p>看到启动[OK]就可以了</p>
-<p>4、查看tftp服务是否开启</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -a | grep tftp</span><br></pre></td></tr></table></figure>
-
-<p>显示结果为<code>udp 0 0 *:tftp *:*</code>表明服务已经开启，就表明tftp配置成功了。</p>
-<p> <strong>5、tftp使用</strong> </p>
-<p>复制一个文件到tftp服务器目录，然后在主机启动tftp软件，进行简单测试。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp 192.168.1.2</span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">get &lt;download file&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">put &lt;upload file&gt;</span></span><br><span class="line"><span class="meta">tftp&gt;</span><span class="bash">q</span></span><br></pre></td></tr></table></figure>
-
-<p> <strong>6、tftp命令用法如下</strong> </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp your-ip-address</span><br></pre></td></tr></table></figure>
-
-<p>进入TFTP操作：</p>
-<ul>
-<li><p>  connect：连接到远程tftp服务器</p>
-</li>
-<li><p>  mode：文件传输模式</p>
-</li>
-<li><p>  put：上传文件</p>
-</li>
-<li><p>  get：下载文件</p>
-</li>
-<li><p>  quit：退出</p>
-</li>
-<li><p>  verbose：显示详细的处理信息</p>
-</li>
-<li><p>  tarce：显示包路径</p>
-</li>
-<li><p>  status：显示当前状态信息</p>
-</li>
-<li><p>  binary：二进制传输模式</p>
-</li>
-<li><p>  ascii：ascii 传送模式</p>
-</li>
-<li><p>  rexmt：设置包传输的超时时间</p>
-</li>
-<li><p>  timeout：设置重传的超时时间</p>
-</li>
-<li><p>  help：帮助信息</p>
-</li>
-<li><p>  ? ：帮助信息</p>
-</li>
-<li><p>*7、如果老是出现“AVC Denial, click icon to view”的错误，并不能传输文件，需要作如下修改** </p>
-</li>
-</ul>
-<p>修改<code>/etc/sysconfig/selinux</code>,将SELINUX设定为disable，使用命令<code>setenforce 0</code>让selinux配置文件生效。</p>
-<p> <strong>8、Busybox中tftp命令的用法</strong> </p>
-<p>命令格式为：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp [option] ... host [port]</span><br></pre></td></tr></table></figure>
-
-<p>如果要下载或上传文件的话是一定要用这些option的。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">-g 表示下载文件 (get)</span><br><span class="line">-p 表示上传文件 (put)</span><br><span class="line">-l 表示本地文件名 (local file)</span><br><span class="line">-r 表示远程主机的文件名 (remote file)</span><br></pre></td></tr></table></figure>
-
-<p>例如，要从远程主机192.168.1.2上下载 embedexpert，则应输入以下命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tftp -g -r embedexpert 192.168.1.2</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->]]></content>
-      <categories>
-        <category>Linux 命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Linux Command</tag>
-        <tag>Linux 命令</tag>
-        <tag>tftp</tag>
       </tags>
   </entry>
   <entry>
@@ -26454,6 +26454,40 @@ one two three
       </tags>
   </entry>
   <entry>
+    <title>如何在macOS根目录创建文件夹</title>
+    <url>/2021/02/create-folder-in-macos-root/</url>
+    <content><![CDATA[<p>在短短的两个月里，已经遇到了 2 次这个问题，第 1 次是 macOS@Catalina 版本，第 2 次是升级后的 macOS@Big Sur 版本，在这里记录一下解决办法。</p>
+<h2 id="macOS-Catalina-版本"><a href="#macOS-Catalina-版本" class="headerlink" title="macOS@Catalina 版本"></a>macOS@Catalina 版本</h2><p>重启系统进入恢复模式，关闭 SIP，重启后命令行执行下面这行代码，再创建文件夹就能成功了。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mount -uw /</span><br></pre></td></tr></table></figure>
+
+<h2 id="macOS-Big-Sur-版本"><a href="#macOS-Big-Sur-版本" class="headerlink" title="macOS@Big Sur 版本"></a>macOS@Big Sur 版本</h2><p>重启系统进入恢复模式，关闭 SIP（不确定有没有这个步骤，如果有人尝试可以评论一下），接下来稍稍麻烦一点，修改 /etc/synthetic.conf 文件</p>
+<span id="more"></span>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/synthetic.conf</span><br></pre></td></tr></table></figure>
+
+<p>输入如下内容，data 换成你要创建的文件夹，后面是映射目录，注意，中间是 Tab，不是空格</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">data    /private/data</span><br></pre></td></tr></table></figure>
+
+<p>重启系统后，系统根目录出现了对应的文件夹，这个文件夹是一个软链接，链接到了前面写的映射目录中。</p>
+<p>如图，我在我电脑根目录下创建了一个 home 文件夹的软链接，实际存储在 /private/home 这个文件夹中。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/02/27-12-28-%E6%88%AA%E5%B1%8F2021-02-26%20%E4%B8%8B%E5%8D%888.41.34-ovojux.png" alt="根目录下的home文件夹"></p>
+<p>这是我的 /etc/synthetic.conf 文件内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  ~ cat /etc/synthetic.conf</span><br><span class="line">home	/private/home</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9uZXdzbi5uZXQvc2F5L21hYy1iaWctc3VyLXJvb3QtcmVhZG9ubHkuaHRtbA==">Mac升级到big sur之后，根目录无法写入文件如何解决？<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC81NTA2Ng==">macOS 开启或关闭 SIP<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmFwcGxlLmNvbS96aC1jbi9IVDIwMTMxNA==">关于基于 Intel 的 Mac 电脑上的 macOS 恢复功能<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>macOS</category>
+      </categories>
+      <tags>
+        <tag>macOS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL update 语句 set 顺序</title>
     <url>/2021/03/mysql-update-set-order/</url>
     <content><![CDATA[<p>绝大多数数据库，在执行 update 语句时，update t set a = b, b = a 便可实现 a、b 列值互换，赋值表达式右侧的值取的都是原始值。MySQL 则是例外，其单表更新是自左到右依次完成，即先完成 a = b，然后在完成 b = a (此时 a = b），所以执行结果变成 a、b 列都是 b，然后多表更新则又不尊从该更新法则。</p>
@@ -27341,40 +27375,6 @@ one two three
       </tags>
   </entry>
   <entry>
-    <title>如何在macOS根目录创建文件夹</title>
-    <url>/2021/02/create-folder-in-macos-root/</url>
-    <content><![CDATA[<p>在短短的两个月里，已经遇到了 2 次这个问题，第 1 次是 macOS@Catalina 版本，第 2 次是升级后的 macOS@Big Sur 版本，在这里记录一下解决办法。</p>
-<h2 id="macOS-Catalina-版本"><a href="#macOS-Catalina-版本" class="headerlink" title="macOS@Catalina 版本"></a>macOS@Catalina 版本</h2><p>重启系统进入恢复模式，关闭 SIP，重启后命令行执行下面这行代码，再创建文件夹就能成功了。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo mount -uw /</span><br></pre></td></tr></table></figure>
-
-<h2 id="macOS-Big-Sur-版本"><a href="#macOS-Big-Sur-版本" class="headerlink" title="macOS@Big Sur 版本"></a>macOS@Big Sur 版本</h2><p>重启系统进入恢复模式，关闭 SIP（不确定有没有这个步骤，如果有人尝试可以评论一下），接下来稍稍麻烦一点，修改 /etc/synthetic.conf 文件</p>
-<span id="more"></span>
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/synthetic.conf</span><br></pre></td></tr></table></figure>
-
-<p>输入如下内容，data 换成你要创建的文件夹，后面是映射目录，注意，中间是 Tab，不是空格</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">data    /private/data</span><br></pre></td></tr></table></figure>
-
-<p>重启系统后，系统根目录出现了对应的文件夹，这个文件夹是一个软链接，链接到了前面写的映射目录中。</p>
-<p>如图，我在我电脑根目录下创建了一个 home 文件夹的软链接，实际存储在 /private/home 这个文件夹中。</p>
-<p><img src="https://up-img.yonghong.tech/pic/2021/02/27-12-28-%E6%88%AA%E5%B1%8F2021-02-26%20%E4%B8%8B%E5%8D%888.41.34-ovojux.png" alt="根目录下的home文件夹"></p>
-<p>这是我的 /etc/synthetic.conf 文件内容：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  ~ cat /etc/synthetic.conf</span><br><span class="line">home	/private/home</span><br></pre></td></tr></table></figure>
-
-<h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9uZXdzbi5uZXQvc2F5L21hYy1iaWctc3VyLXJvb3QtcmVhZG9ubHkuaHRtbA==">Mac升级到big sur之后，根目录无法写入文件如何解决？<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zc3BhaS5jb20vcG9zdC81NTA2Ng==">macOS 开启或关闭 SIP<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zdXBwb3J0LmFwcGxlLmNvbS96aC1jbi9IVDIwMTMxNA==">关于基于 Intel 的 Mac 电脑上的 macOS 恢复功能<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>macOS</category>
-      </categories>
-      <tags>
-        <tag>macOS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Java 进阶 03 —— 类加载器和双亲委派到底是什么？</title>
     <url>/java-advance/03-jvm-classloader/</url>
     <content><![CDATA[<h2 id="类加载子系统作用"><a href="#类加载子系统作用" class="headerlink" title="类加载子系统作用"></a>类加载子系统作用</h2><ul>
@@ -27594,6 +27594,310 @@ one two three
 <h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>自定义一个 Classloader，加载一个 Hello.xlass 文件，执行 hello 方法， 此文件内容是一个 Hello.class 文件所有字节(x=255-x)处理后的文件。</p>
 <p>题解</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.net.URLDecoder;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.FileChannel;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> yonghongwang#163.com</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClassloader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Class&lt;?&gt; helloClass = <span class="keyword">new</span> MyClassloader().findClass(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        Method helloMethod = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            helloMethod = helloClass.getMethod(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            helloMethod.invoke(helloClass.newInstance());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) &#123;</span><br><span class="line">        String path = <span class="keyword">this</span>.getClass().getResource(<span class="string">&quot;Hello.xlass&quot;</span>).getPath();</span><br><span class="line">        File file;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file = <span class="keyword">new</span> File(URLDecoder.decode(path, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">byte</span>[] bytes;</span><br><span class="line">        <span class="keyword">if</span> (file.isFile() &amp;&amp; file.exists()) &#123;</span><br><span class="line">            <span class="keyword">try</span> (FileChannel channel = <span class="keyword">new</span> FileInputStream(file).getChannel()) &#123;</span><br><span class="line">                ByteBuffer byteBuffer = ByteBuffer.allocate((<span class="keyword">int</span>) channel.size());</span><br><span class="line">                channel.read(byteBuffer);</span><br><span class="line">                bytes = byteBuffer.array();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;failed to find path: &quot;</span> + path);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> defineClass(name, decode(bytes), <span class="number">0</span>, bytes.length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * replace each byte with x-&gt;255-x</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] decode(<span class="keyword">byte</span>[] bytes) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bytes.length; i++) &#123;</span><br><span class="line"><span class="comment">//            bytes[i] = (byte) (255 - bytes[i]);</span></span><br><span class="line">            bytes[i] = (<span class="keyword">byte</span>) ~bytes[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> bytes;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Java进阶</category>
+      </categories>
+      <tags>
+        <tag>Java进阶</tag>
+        <tag>JVM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java 进阶 06 —— JVM 垃圾回收算法</title>
+    <url>/java-advance/06-jvm-gc-algo/</url>
+    <content><![CDATA[<h1 id="为什么会有-GC"><a href="#为什么会有-GC" class="headerlink" title="为什么会有 GC"></a>为什么会有 GC</h1><p>本质上是内存资源的有限性，因此需要大家共享使用，手工申请，手动释放。</p>
+<p>垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。</p>
+<p>关于垃圾收集有三个经典问题：</p>
+<ul>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>如何回收？</li>
+</ul>
+<span id="more"></span>
+
+<p>垃圾收集机制是 Java 语言的招牌能力，极大地提高了开发效率。如今，垃圾收集几乎成为现代语言的标配，即使经过如此长时间的发展，Java 的垃圾收集机制仍然在不断的演进中，不同大小的设备、不同特征的应用场景，对垃圾收集提出了新的挑战，这当然也是面试的热点。</p>
+<p>面试题：</p>
+<ul>
+<li>垃圾回收器，各自优缺点，CMS、G1</li>
+<li>GC 算法有哪些，目前的 JDK 版本采用什么回收算法</li>
+<li>GC 两种判定方法</li>
+<li>分代回收</li>
+<li>垃圾收集策略和算法</li>
+<li>平时如何搭配使用垃圾回收器</li>
+<li>什么情况触发垃圾回收</li>
+<li>System.gc() runtime.gc()</li>
+<li>Java  GC 机制，GC Roots 有哪些</li>
+<li>CMS 回收停顿了几次，为什么？</li>
+</ul>
+<h1 id="什么是垃圾（Garbage）"><a href="#什么是垃圾（Garbage）" class="headerlink" title="什么是垃圾（Garbage）"></a>什么是垃圾（Garbage）</h1><p>垃圾是指在运行程序中没有任何指针指向的对象，这个对象就是需要被回收的垃圾。An object is considered garbage when it  can no longer be  reached from any pointer in the running program .</p>
+<p>如果不及时对内存中的垃圾进行清理，那么，这些垃圾对象所占用的内存空间会一直保留到应用程序结束，被保留的空间无法被其他对象使用。甚至可能导致内存溢出。</p>
+<h1 id="为什么需要垃圾回收"><a href="#为什么需要垃圾回收" class="headerlink" title="为什么需要垃圾回收"></a>为什么需要垃圾回收</h1><p>对于高级语言来说，一个基本认知是如果不进行垃圾回收，内存迟早都会被消耗完，因为不断地分配内存空间而不进行回收，就好像不停的生产而从来不打扫一样。</p>
+<p>除了释放没用的对象，垃圾回收也可以清除内存里的记录碎片。碎片整理将所占用的堆内存移到堆的一端，以便 JVM 将整理出的内存分配给新的对象。</p>
+<p>随着应用程序所应对的业务越来越庞大、复杂，用户越来越多，没有 GC 就不能保证应用程序的正常进行。而经常造成 STW 的 GC 又跟不上实际的需求，所以才会不断地尝试对 GC 进行优化。</p>
+<h1 id="早期垃圾回收"><a href="#早期垃圾回收" class="headerlink" title="早期垃圾回收"></a>早期垃圾回收</h1><p>在早期的 C/C++ 时代，垃圾回收基本上是手工进行的。开发人员可以使用 new 关键字进行内存申请，并使用 delete 关键字进行内存释放。比如以下代码</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">MibBridge *pBridge = <span class="keyword">new</span> cmBaseGroupBridge();</span><br><span class="line"><span class="comment">// 如果注册失败，使用 delete 关键字释放该对象所占用内存区域</span></span><br><span class="line"><span class="keyword">if</span> (pBridg-&gt;Register(kDestroy) != NO_ERROR) &#123;</span><br><span class="line">    <span class="keyword">delete</span> pBridge;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式可以灵活控制内存释放的时间，但是会给开发人员带来频繁申请和释放内存的管理负担。倘若有一处内存区间由于程序员编码的问题忘记被回收，那么就会产生内存泄露，垃圾对象永远无法被清除，随着系统运行时间的不断增长，垃圾对象所耗内存可能持续上升，直到出现内存溢出并造成应用程序崩溃。</p>
+<p>有了垃圾回收机制后，上述代码块极有可能变成这样：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">MibBridge *pBridge = <span class="keyword">new</span> cmBaseGroupBridge();</span><br><span class="line">pBridg-&gt;Register(kDestroy);</span><br></pre></td></tr></table></figure>
+
+<p>现在，除了 Java 以外，C#、Python、Ruby 等语言都使用了自动垃圾回收的思想，也是未来发展趋势。可以说，这种自动化的内存分配和垃圾回收的方式已经成为现代开发语言必备的标准。</p>
+<h1 id="Java-垃圾回收机制"><a href="#Java-垃圾回收机制" class="headerlink" title="Java 垃圾回收机制"></a>Java 垃圾回收机制</h1><p>自动内存管理，无需开发人员手动参与内存的分配与回收，这样降低了内存泄漏和内存溢出的风险。</p>
+<ul>
+<li>没有垃圾回收器，java 也会和 cpp 一样，各种悬垂指针，野指针，泄露问题让你头疼不已。</li>
+</ul>
+<p>自动内存管理机制，将程序员从繁重的内存管理中释放出来，可以更专注地专心于业务开发。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlLzgvZG9jcy90ZWNobm90ZXMvZ3VpZGVzL3ZtL2djdHVuaW5nL3RvYy5odG1s">Oracle 官网关于垃圾回收的介绍<i class="fa fa-external-link-alt"></i></span></p>
+<p>担忧：</p>
+<p>对于 Java 开发人员而言，自动内存管理就像是一个黑匣子，如果过度依赖于”自动“，那么这将会是一场灾难，最严重的就会弱化 Java 开发人员在程序出现内存溢出时定位问题和解决问题的能力。</p>
+<p>此时，了解 JVM 的自动内存分配和内存回收原理就显得非常重要，只有在真正了解 JVM 是如何管理内存后，我们才能够在遇见 OOM 时，快速地根据错误异常日志定位问题和解决问题。</p>
+<p>当需要排查各种内存溢出、内存泄漏问题时，当垃圾收集册很难过为系统达到更高并发量的瓶颈时，我们就必须对这些”自动化“的技术是是必要的监控和调优。</p>
+<p>垃圾回收器可以对年轻代回收，也可以对老年代回收，甚至全堆和方法区的回收。</p>
+<hr>
+<ul>
+<li>其中，Java 堆是垃圾收集器的工作重点</li>
+</ul>
+<p>从次数上讲：</p>
+<ul>
+<li>频繁收集年轻代</li>
+<li>较少收集老年代</li>
+<li>基本不动方法区/永久代/元空间</li>
+</ul>
+<h1 id="垃圾回收相关算法"><a href="#垃圾回收相关算法" class="headerlink" title="垃圾回收相关算法"></a>垃圾回收相关算法</h1><h2 id="垃圾标记阶段"><a href="#垃圾标记阶段" class="headerlink" title="垃圾标记阶段"></a>垃圾标记阶段</h2><p>在堆里存放着几乎所有的 Java 对象实例，在 GC 执行垃圾回收之前，首先<strong>需要区分出内存中哪些是存活的对象，哪些是已经死亡的对象</strong>。只有被标记为已经死亡的对象，GC 才会在执行垃圾回收时，释放掉其所占有的内存空间，因此这个过程我们称为<strong>垃圾标记阶段</strong>。</p>
+<p>那么在 JVM 中究竟是如何标记一个死亡对象呢？简单来说，当一个对象已经不再被任何的存活对象继续引用时，就可以宣判为已经死亡。</p>
+<p>判断对象存活一般有两种方式：<strong>引用计数法</strong>和<strong>可达性分析算法</strong>。</p>
+<h3 id="方式一：引用计数算法"><a href="#方式一：引用计数算法" class="headerlink" title="方式一：引用计数算法"></a>方式一：引用计数算法</h3><p>引用计数算法（Reference Counting）比较简单，对每个对象保存一个整型的<strong>引用计数器属性用于记录对象被引用的情况</strong>。</p>
+<p>对于一个对象 A，只要有任何一个对象引用了 A，则 A 的引用计数器就加 1；当引用失效时，引用计数器就减 1。只要对象 A 的引用计数器的值为 0，即表示对象 A 不可能再被使用，可进行回收。</p>
+<p>优点：<strong>实现简单，垃圾对象便于辨识；判定效率高，回收没有延迟性</strong>。</p>
+<p>缺点：</p>
+<ul>
+<li>它需要单独的字段存储计数器，这样的做法增加了<strong>存储空间的开销</strong>。</li>
+<li>每次赋值都需要更新计数器，伴随着加法和减法操作，这增加了<strong>时间开销</strong>。</li>
+<li>引用计数器有一个严重的问题，即<strong>无法处理循环引用</strong>的情况。这是一条致命的缺陷，导致在 Java 的垃圾回收器中没有使用这类算法。</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>引用计数算法，是很多语言的资源回收选择，例如因人工智能而更加火热的 Python，它更是同时支持引用计数和垃圾收集机制。</p>
+<p>具体哪种最优是要看场景的，业界有大规模实践中仅保留引用计数机制，以提高吞吐量的尝试。</p>
+<p>Java 并没有选择引用计数，是因为其存在一个基本的难题，也就是很难处理循环引用关系。</p>
+<p>Python 如何解决循环引用？</p>
+<ul>
+<li>手动解除：很好理解，就是在合适的时机，解除引用关系。</li>
+<li>使用弱引用 weakref，weakref 是 Python 提供的标准库，旨在解决循环引用。</li>
+</ul>
+<h3 id="方式二：可达性分析算法"><a href="#方式二：可达性分析算法" class="headerlink" title="方式二：可达性分析算法"></a>方式二：可达性分析算法</h3><p>可达性分析算法又叫做跟搜索算法，或者是追踪性垃圾收集。</p>
+<p>相对于引用计数法而言，可达性分析算法不仅同样具备实现简单和执行高效等特点，更重要的是该算法可以有效地解决在引用计数算法中循环引用的问题，防止内存泄漏的发生。</p>
+<p>相较于引用计数算法，这里的可达性分析就是 Java、C# 选择的。这种类型的垃圾收集器通常也叫做<strong>追踪性垃圾收集器（Tracing Garbage Collector）</strong>。</p>
+<p>所谓 ”GC Roots“ 根集合就是一组必须活跃的引用。</p>
+<p>基本思路：</p>
+<ul>
+<li>可达性分析算法是以根对象集合（GC Roots）为起始点，按照从上至下的方式<strong>搜索被根对象集合所连接的目标对象是否可达</strong>。</li>
+<li>使用可达性分析算法后，内存中的存活对象都会被根对象集合直接或间接连接着，搜索走过的路径称为<strong>引用链（Reference Chain）</strong></li>
+<li>如果目标对象没有任何引用链相连，则是不可达的，就意味着该对象已经死亡，可以标记为垃圾对象</li>
+<li>在可达性分析算法中，只有能够被根对象集合直接或间接连接的对象才是存活对象</li>
+</ul>
+<p>这个算法目前较为常用。</p>
+<h4 id="GC-Roots"><a href="#GC-Roots" class="headerlink" title="GC Roots"></a>GC Roots</h4><p>在 Java 语言中，GC Roots 包括以下几类元素：</p>
+<ul>
+<li>虚拟机栈中引用的对象<ul>
+<li>比如，各个线程被调用的方法中使用到的参数、局部变量等。</li>
+</ul>
+</li>
+<li>本地方法栈内 JNI（通常说的本地方法）引用的对象</li>
+<li>方法区中类静态属性引用的对象<ul>
+<li>比如：Java 类的引用类型静态变量</li>
+</ul>
+</li>
+<li>方法区中常量引用的对象<ul>
+<li>比如：字符串常量池里的引用</li>
+</ul>
+</li>
+<li>所有被同步锁 synchronized 持有的对象</li>
+<li>Java 虚拟机内部的引用<ul>
+<li>基本数据类型对应的 Class 对象，一些常驻的异常对象（如：NullPointerException、OutOfMemoryError），系统类加载器。</li>
+</ul>
+</li>
+<li>反映 Java 虚拟机内部情况的 JMXBean、JVMTI 中注册的回调、本地代码缓存等。</li>
+</ul>
+<p>除了这些固定的 GC Roots 集合以外，根据用户所选用的垃圾收集器以及当前回收的内存区域不同，还可以有其他对象 临时性 地加入，共同构成完整 GC Roots 集合。比如，分代收集和局部回收（Partial GC）</p>
+<ul>
+<li>如果只针对 Java 堆中的某一块区域进行垃圾回收（比如：典型的只针对新生代），必须考虑到内存区域是虚拟机自己的实现细节，更不是孤立封闭的，这个区域的对象完全有可能被其他区域的对象所引用，这时候就需要一并将关联的区域对象也加入 GC Roots 集合中去考虑，才能保证可达性分析的准确性。</li>
+</ul>
+<p><strong>小技巧：</strong>由于 Root 采用栈方式存放变量和指针，所以如果一个指针，它保存了堆内存里面的对象，但是自己又不存放在堆内存里面，那它就是一个 Root。</p>
+<p><strong>注意：</strong>如果要使用可达性分析算法来判断内存是否可回收，那么分析工作必须在一个能够保障一致性的快照中进行。这点不满足的话分析结果的准确性就无法保证。</p>
+<p>这点也是导致 GC 时进行必须 ”Stop The World“ 的一个重要原因。</p>
+<ul>
+<li>即使是号称（几乎）不会发生停顿的 CMS 收集器中，<strong>枚举根节点时也是必须要停顿的</strong>。</li>
+</ul>
+<h4 id="对象的-finalization-机制"><a href="#对象的-finalization-机制" class="headerlink" title="对象的 finalization 机制"></a>对象的 finalization 机制</h4><p>Java 语言提供了对象终止（finalization）机制来允许开发人员提供对象被销毁之前的自定义处理逻辑。</p>
+<p>当垃圾回收器发现没有引用指向一个对象，即：垃圾回收此对象之前，总会先调用这个对象的 finalize() 方法。</p>
+<p> finalize() 方法允许在子类中被重写，用于在对象被回收时进行资源释放。通常在这个方法中进行一些资源释放和清理的工作，比如关闭文件、套接字和数据库连接等。</p>
+<p>永远不要主动调用对象的 finalize() 方法，应该交给垃圾回收机制调用。理由包括以下 3 点：</p>
+<ul>
+<li><p>在 finalize() 时可能会导致对象复活。</p>
+</li>
+<li><p>finalize() 方法执行时间是没有保障的，它完全由 GC 线程决定，极端情况下，若不发生 GC，则  finalize() 方法将没有执行机会。</p>
+</li>
+<li><p>一个糟糕的  finalize() 会严重影响 GC 性能</p>
+</li>
+</ul>
+<p>从功能上来说， finalize() 方法与 C++ 中的析构函数比较相似，但是 Java 采用的是基于垃圾回收器的自动内存管理机制，所以  finalize() 方法在本质上不同于 C++ 中的析构函数。</p>
+<p>由于  finalize() 方法的存在，虚拟机中的对象一般处于三种可能的状态。</p>
+<h4 id="生存还是死亡？"><a href="#生存还是死亡？" class="headerlink" title="生存还是死亡？"></a>生存还是死亡？</h4><p>如果所有的根节点都无法访问到某个对象，说明对象已经不再使用了。一般来说，此对象需要被回收。但事实上，也并非是 ”非死不可“ 的，这时候它们暂时处于 ”缓刑“ 阶段。一个无法触及的对象有可能在某一个条件下 ”复活“，如果这样，那么对它的回收就是不合理的，为此，定义虚拟机中的对象可能的三种状态。如下：</p>
+<ul>
+<li>可触及的：从根节点开始，可以到达这个对象。</li>
+<li>可复活的：对象的所有引用都被释放，但是对象有可能在  finalize() 中复活。</li>
+<li>不可触及的：对象的 finalize() 方法被调用，并且没有复活，那么就会进入不可触及状态。不可触及的对象不可能被复活，因为  finalize() 方法只会被调用一次。</li>
+</ul>
+<p>以上 3 种状态中，是由于 finalize() 方法的存在进行的区分。只有在对象不可触及时才可以被回收。</p>
+<h4 id="具体过程"><a href="#具体过程" class="headerlink" title="具体过程"></a>具体过程</h4><p>判定一个对象 objA 是否可回收，至少要经历两次标记过程：</p>
+<ul>
+<li>如果对象 objA 到 GC Roots 没有引用链，则进行第一次标记</li>
+<li>进行筛选，判断此对象是否有必要执行  finalize() 方法<ul>
+<li>如果对象 objA 没有重写 finalize() 方法，或者 finalize() 方法已经被虚拟机调用过，则虚拟机视为 ”没有必要执行“，objA 被判定为不可触及的。</li>
+<li>如果对象 objA 重写了 finalize() 方法，且还未执行过，那么 objA 会被插入到 F-Queue 队列中，由一个虚拟机自动创建的、低优先级的 Finalizer 线程触发其 finalize() 方法执行。</li>
+<li>finalize() 方法是对象逃脱死亡的最后机会，稍后 GC 会对 F-Queue 队列中的对象进行第二次标记。如果 objA 在 finalize() 方法中与引用链上的任何一个对象建立了联系，那么在第二次标记时，objA 会被移出 ”即将回收“ 集合。之后，对象会再次出现没有引用存在的情况。在这个情况下，finalize() 方法不会被再次调用，对象会直接变成不可触及的状态，也就是说，一个对象的 finalize() 方法只会被调用一次。</li>
+</ul>
+</li>
+</ul>
+<h4 id="MAT-与-JProfiler-的-GC-Roots-溯源"><a href="#MAT-与-JProfiler-的-GC-Roots-溯源" class="headerlink" title="MAT 与 JProfiler 的 GC Roots 溯源"></a>MAT 与 JProfiler 的 GC Roots 溯源</h4><p>MAT 是 Memory Analyzer 的简称，它是一款功能强大的 Java 堆内存分析器，用于查找内存泄露以及查看内存消耗情况。</p>
+<p>MAT 是基于 Eclipse 开发的，是一款免费的性能分析工具。</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZWNsaXBzZS5vcmcvbWF0Lw==">https://www.eclipse.org/mat/<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="获取-dump-文件"><a href="#获取-dump-文件" class="headerlink" title="获取 dump 文件"></a>获取 dump 文件</h4><ul>
+<li>命令行使用 jmap<ul>
+<li>jps</li>
+<li>jmap -dump:format=b,live,file=test1.bin 14036</li>
+</ul>
+</li>
+<li>使用 JVisualVM 导出<ul>
+<li>捕获的 heap dump 文件是一个临时文件，关闭 JVisualVM 后自动删除，若要保留，需要将其另存为文件。</li>
+<li>可以通过以下方式捕获 heap dump<ul>
+<li>在左侧 Application 子窗口中右击相应的应用程序，选择 Heap Dump</li>
+<li>在 Monitor 子标签页中点击 Heap Dump 按钮</li>
+</ul>
+</li>
+<li>本地应用程序的 Heap Dumps 作为应用程序标签页的一个子标签页打开。同时，Heap Dump 在左侧 Application 栏中对应一个含有时间戳的节点，右击这个节点选择 Save As 即可将 Heap Dump 文件保存到本地。</li>
+</ul>
+</li>
+</ul>
+<h2 id="垃圾清除阶段"><a href="#垃圾清除阶段" class="headerlink" title="垃圾清除阶段"></a>垃圾清除阶段</h2><p>当成功区分出内存中存活对象和死亡对象后，GC 接下来的任务就是执行垃圾回收，释放掉无用对象所占用的内存空间，以便有足够的可用内存空间为新对象分配内存。</p>
+<p>目前在 JVM 比较常见的三种垃圾收集算法是 标记-清除算法（Mark-Sweep）、复制算法（Copying）、标记-压缩算法（Mark-Compact）</p>
+<h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>标记-清除算法（Mark-Sweep）是一种非常基础和常见的垃圾收集算法，该算法被 J.McCarthy 等人在 1960 年提出并应用于 List 语言。</p>
+<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p>当堆中的有效内存空间（available memory）被耗尽的时候，就会停止整个程序（也被称为 Stop The World），然后进行两项工作，第一项是标记，第二项则是清除。</p>
+<ul>
+<li>标记：Collector 从引用根节点开始遍历，标记所有被引用的对象。一般是在对象的 Header 中记录为可达对象。</li>
+<li>清除：Collector 对对堆内存从头到尾进行线性的遍历，如果发现某个对象在其 Header 中没有标记为可达对象，则将其回收。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>效率不算高</li>
+<li>在进行 GC 的时候，需要停止整个应用程序，导致用户体验差</li>
+<li>这种方式清理出来的空闲内存空间是不连续的，产生内存碎片。需要维护一个空闲列表</li>
+</ul>
+<p>注意：何为清除？</p>
+<p>这里所谓的清除并不是真的置空，而是把需要清除的对象地址保存在空闲的地址列表里。下次有新对象需要加载时，判断垃圾的位置空间是否够，如果够，就存放。</p>
+<h3 id="复制算法（Copying）"><a href="#复制算法（Copying）" class="headerlink" title="复制算法（Copying）"></a>复制算法（Copying）</h3><h4 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h4><p>为了解决标记-清除算法在垃圾收集效率方面的缺陷，M.L.Minsky 于1963 年发表了著名的论文，”使用双存储区的 Lisp 语言垃圾收集器 （A Lisp Garbage Collector Algorithm Using Serial Secondary Storage）“。M.L.Minsky 本人成功地引入到了 Lisp 语言的一个实现版本中。</p>
+<h4 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h4><p>将活着的内存空间分为两块，每次只是用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中的所有对象，交换两个内存的角色，最后完成垃圾回收。</p>
+<p>优点</p>
+<ul>
+<li><p>没有标记和清除过程，实现简单，运行高效</p>
+</li>
+<li><p>复制过去以后保证空间的连续性，不会出现”碎片问题“</p>
+</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li><p>此算法的缺点也是很明显的，就是需要两倍的内存空间。</p>
+</li>
+<li><p>对于 G1 这种分拆成为大量 region 的GC，复制而不是移动，意味着 GC 需要维护 region 之间对象引用关系，不管是内存占用或者时间开销也不小</p>
+</li>
+</ul>
+<p>特别的：</p>
+<ul>
+<li>如果系统中的垃圾对象很多，复制短发需要复制的存活对象数量并不会太大，或者说非常低。</li>
+</ul>
+<p>应用场景：</p>
+<p>在新生代，对应常规应用的垃圾回收，一次通常可以回收 70% - 99% 的内存空间，回收性价比很高。所以现在的商业虚拟机都是用这种收集算法回收新生代。</p>
+<h3 id="标记-压缩算法（Mark-Compact）"><a href="#标记-压缩算法（Mark-Compact）" class="headerlink" title="标记-压缩算法（Mark-Compact）"></a>标记-压缩算法（Mark-Compact）</h3><h4 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h4><p>复制算法的高效性，是建立在存活对象少、垃圾对象多的前提下的。这种情况在新生代经常发生，但是在老年代，更常见的情况是大部分对象都是存活对象。如果依然使用复制算法，由于存活对象较多，复制的成本也将很高。因此，基于老年代垃圾回收的特性，需要使用其他的算法。</p>
+<p>标记-清除算法的确可以应用在老年代中，但是该算法不仅执行效率低下，而且在执行完内存回收后还会产生内存碎片，所以 JVM 的设计者需要在此基础上进行改进。标记-压缩（Mark-Compact）算法也由此诞生。</p>
+<p>1970 年前后，G.L.Steele、C.J.Chene 和 D.S.Wise 等研究者发布标记-压缩算法。在许多现代的垃圾回收器中，人们都是用了标记-压缩算法或其改进版本。</p>
+<h4 id="执行过程-1"><a href="#执行过程-1" class="headerlink" title="执行过程"></a>执行过程</h4><p>第一阶段和标记清除算法一样，从根节点开始标记所有被引用对象。</p>
+<p>第二阶段将所有的存活对象压缩到内存的一端，按顺序排放。</p>
+<p>之后清理边界外所有的空间。</p>
+<p>标记-压缩算法的最终效果等同于标记-清除算法执行完成后，再进行一次内存碎片整理，因此，也可以把它称为 标记-清除-压缩（Mark-Sweep-Compact） 算法。</p>
+<p>二者本质差异在于标记-清除算法是一种非移动式的回收算法，标记-压缩是移动式的。是否移动回收后的存活对象是一项优缺点并存的风险决策。</p>
+<p>可以看到，标记的存活对象将会被整理，按照内存地址依次排列，而未被标记的内存会被清理掉。如此一来，当我们需要给新对象分配内存时，JVM 只需要持有一个内存的起始地址即可，这比维护一个空闲列表显然少了许多开销。</p>
+<p><strong>指针碰撞（Bump the Pointer）</strong></p>
+<p>如果内存空间以规整和有序的方式分布，即已用和未用的内存都各自一边，彼此之间维系着一个记录下一次分配起始点的标记指针，当为新对象分配内存时，只需要通过修改指针的偏移量将新对象分配在第一个空闲内存位置上，这种分配方式就叫做指针碰撞。</p>
+<p><strong>优点</strong></p>
+<p>消除了标记-清除算法当中，内存区域分散的缺点，我们需要给新对象分配内存时，JVM 只需要持有一个内存的起始地址即可。</p>
+<p>消除了复制算法当中，内存减半的高额代价</p>
+<p><strong>缺点</strong></p>
+<p>从效率上来说，标记-整理算法要低于复制算法。</p>
+<p>移动对象的同时，如果对象被其他对象引用，则还需要调整引用的地址。</p>
+<p>移动的过程中，需要全程暂停用户应用程序。即：STW</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>Mark-Sweep</th>
+<th>Mark-Compact</th>
+<th>Copying</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>速度</td>
+<td>中等</td>
+<td>最慢</td>
+<td>最快</td>
+</tr>
+<tr>
+<td>空间开销</td>
+<td>少（但会堆积碎片）</td>
+<td>少（不堆积碎片）</td>
+<td>通常需要活对象的 2 倍大小（不堆积碎片）</td>
+</tr>
+<tr>
+<td>移动对象</td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+</tr>
+</tbody></table>
+<p>效率上来说，复制算法是当之无愧的老大，但是却浪费了太多内存。</p>
+<p>而为了尽量兼顾上面提到的三个指标，标记-整理算法相对来说更平滑一些，但是效率上不尽如人意，它比复制算法多了一个标记阶段，比标记-清除算法多了一个整理内存的阶段。</p>
+<p><strong>难道就没有一种最优算法吗？</strong></p>
+<p>没有最好的算法，只有最合适的算法。</p>
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>前面所有这些算法中，并没有一种算法可以完全替代其他算法，它们都具有自己独特的优势和缺点。分代收集算法应运而生。</p>
+<p>分代收集算法，是基于这样一个事实：不同的对象的生命周期是不一样的。因此，<strong>不同生命周期的对象可以采取不同的收集方式，以便提高回收效率</strong>。一般是把 Java 堆分为新生代和老年代，这样就可以根据各个年龄代的特点使用不同的回收算法，以提高垃圾回收的效率。</p>
+<p>在 Java 程序运行过程中，会产生大量的对象，其中有些对象是与业务信息相关，比如 HTTP 请求中的 Session 对象、线程、Socket 连接，这类对象跟业务直接挂钩，因此生命周期比较长。但是还有一些对象，主要是程序运行过程中生成的临时变量，这些对象生命周期会比较短，比如：String 对象，由于其不变性，系统会产生大量的这些对象，有些对象甚至只用一次即可回收。</p>
+<p>目前几乎所有的 GC 都是采用分代收集（Generational Collecting）算法执行垃圾回收的。</p>
+<p>在 HotSpot 中，基于分代的概念，GC 所使用的内存回收算法必须结合年轻代和老年代各自的特点。</p>
+<ul>
+<li>年轻代（Young Gen）<ul>
+<li>年轻代的特点：区域相对老年代较小，对象生命周期短、存活率低，回收频繁。</li>
+<li>这种情况复制算法的回收整理，速度是最快的。复制算法的效率只和当前存活对象大小有关，因此很适用于年轻代的回收。而复制算法内存利用率不高的问题，通过 HotSpot 中的两个 Survivor 的设计得到缓解</li>
+</ul>
+</li>
+<li>老年代（Tenured Gen）<ul>
+<li>老年代特点：区域较大，对象生命周期长、存活率高，回收不及年轻代频繁。</li>
+<li>这种情况存在大量存活率高的对象，复制算法明显变得不合适。一般是由标记-清除或是标记-清除与标记-整理的混合实现。<ul>
+<li>Mark 阶段的开销与存活对象的数量成正比。</li>
+<li>Sweep 阶段的开销与所管理区域大小成正比。</li>
+<li>Compact 阶段的开销与存活对象的数据成正比。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>以 HotSpot 中的 CMS 回收器为例，CMS 是基于 Mark-Sweep 实现的，对于对象的回收率很高。而对于碎片问题，CMS 采用基于 Mark-Compact 算法的 Serial Old 回收器作为补偿：当内存回收不佳（碎片导致的 Concurrent Mode Failure 时），将采用 Serial Old 执行 Full GC 以达到对老年代内存的整理。</strong></p>
+<p>分代的思想被现有的虚拟机广泛使用。几乎所有的垃圾回收器都区分新生代和老年代。</p>
+<h2 id="增量收集算法、分区算法"><a href="#增量收集算法、分区算法" class="headerlink" title="增量收集算法、分区算法"></a>增量收集算法、分区算法</h2><h3 id="增量收集算法（Incremental-Collecting）"><a href="#增量收集算法（Incremental-Collecting）" class="headerlink" title="增量收集算法（Incremental Collecting）"></a>增量收集算法（Incremental Collecting）</h3><p>上述现有的算法，在垃圾回收过程中，应用软件将处于一种 STW 的状态。在 STW 状态下，应用程序所有的线程都会挂起，暂停一切正常的工作，等待垃圾回收的完成。如果垃圾回收时间过长，应用程序会被挂起很久，<strong>将严重影响用户体验或者系统的稳定性</strong>。为了解决这个问题，即对实时垃圾收集算法的研究直接导致了增量收集（Incremental Collecting）算法的诞生。</p>
+<p>基本思想：如果一次性将所有的垃圾进行处理，需要造成系统长时间的停顿，那么就可以让垃圾收集线程和应用程序线程交替执行。每次，<strong>垃圾收集线程只收集一小片区域的内存空间，接着切换到应用程序线程。依次反复，直到垃圾收集完成</strong>。</p>
+<p>总的来说，增量收集算法的基础仍然是传统的标记-清除和复制算法。<strong>增量收集算法通过对线程间冲突的妥善处理，允许垃圾收集线程以分阶段方式完成标记、清理或复制工作。</strong></p>
+<p>缺点：使用这种方式，由于在垃圾回收过程中，间断性地还执行了应用程序代码，所以能减少系统的停顿时间。但是，因为<strong>线程切换和上下文转换</strong>的消耗，会使得垃圾回收的总体成本上升，<strong>造成系统吞吐量的下降</strong>。</p>
+<h3 id="分区算法"><a href="#分区算法" class="headerlink" title="分区算法"></a>分区算法</h3><p>一般来说，在相同条件下，堆空间越大，一次 GC 时所需要的时间就越长，有关 GC 产生的停顿也越长。为了更好的控制 GC 产生的停顿时间，将一块大的内存区域分割成多个小块，根据目标的停顿时间，每次合理地回收若干个小区间，而不是整个堆空间，从而减少一次 GC 所产生的停顿。</p>
+<p>分代算法将按照对象的生命周期长短划分成两个部分，分区算法将整个堆空间划分成连续的不同小区间 region。每一个小区间都独立使用，独立回收。这种算法的好处是可以控制一次回收多少个小区间。</p>
+<p>总结：注意，这些只是基本的算法思路，实际 GC 实现过程要复杂的多，目前还在发展中的前沿 GC 都是复合算法，并且并行和并发兼备。</p>
 ]]></content>
       <categories>
         <category>Java进阶</category>
