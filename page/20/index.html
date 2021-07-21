@@ -91,7 +91,7 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">671</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">673</span></a></li>
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">720</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
@@ -166,7 +166,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">671</span>
+          <span class="site-state-item-count">673</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -227,6 +227,294 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/tcpreplay/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/tcpreplay/" class="post-title-link" itemprop="url">【Linux 命令】tcpreplay</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 12:01:00 12:01:00" itemprop="dateModified" datetime="2020-09-25T12:01:00+08:00">2020-09-25 12:01:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将PCAP包重新发送，用于性能或者功能测试</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>简单的说， <strong>tcpreplay</strong> 是一种pcap包的重放工具，它可以将用ethreal、wireshark工具抓下来的包原样或经过任意修改后重放回去。它允许你对报文做任意的修改（主要是指对2层、3层、4层报文头），指定重放报文的速度等，这样tcpreplay就可以用来复现抓包的情景以定位bug，以极快的速度重放从而实现压力测试。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-A &quot;&lt;args&gt;&quot; 在使用 tcpdump 风格打印输出信息时，同时再调用tcpdump中的参数， 默认已经带有“-n,-l”，所以一般看到的都是ip地址，而没有主机名的打印，注意这个是在tcpreplay使用了-v参数时才能使用，不带-v不会报错，但是没有实际意义。格式：-vA “nnt”表示以tcpdump风格输出报文信息，并且不打印时间戳、主机名、端口服务名称。注意不要使用-c参数来指定打印的数据报文的个数，这样发送出去的报文也会变少。</span><br><span class="line">-c &lt;cachefile&gt; 双网卡回放报文必选参数，后面紧跟cache文件名，该文件为tcpprep根据对应的pcap文件构造出来。 </span><br><span class="line">-D 把应用层的数据，使用dump mode写入到指定文件中去，和-w、-W 参数一起使用。 </span><br><span class="line">-e &lt;ip1:ip2&gt; 指定端点的ip，即把发送报文的和接收的报文的ip都修改称对应的参数值中指定的ip，但是这样发送的出的报文不会区分client和server。。 </span><br><span class="line">-f &lt;configfile&gt; 指定配置文件。</span><br><span class="line">-F 在发送报文时，自动纠正错误的校验和。对测试DUT的校验和检验。</span><br><span class="line">-h 显示帮助文件。 </span><br><span class="line">-i &lt;nic&gt; 双网卡回放报文必选参数，指定主接口。</span><br><span class="line">-I &lt;mac&gt; 重写主网卡发送出报文的目的MAC地址。 </span><br><span class="line">-j &lt;nic&gt; 双网卡回放报文必选参数，指定从接口。</span><br><span class="line">-J &lt;mac&gt; 重写从网卡发送出报文的目的MAC地址。 </span><br><span class="line">-k &lt;mac&gt; 重写主网卡发送报文的源MAC地址。 </span><br><span class="line">-K &lt;mac&gt; 重写从网卡发送报文的源MAC地址。</span><br><span class="line">-l &lt;loop&gt; 指定循环的次数。</span><br><span class="line">-L &lt;limit&gt; 指定最大的发包数量。可以在确认连接的调试时使用。 </span><br><span class="line">-m &lt;multiple&gt; 指定一个倍数值，就是必默认发送速率要快多少倍的速率发送报文。 加大发送的速率后，对于DUT可能意味着有更多的并发连接和连接数，特别是对于BT报文的重放， 因为连接的超时是固定的，如果速率增大的话， 留在session表中的连接数量增大，还可以通过修改连接的超时时间来达到该目的。</span><br><span class="line">-M 表示不发送“火星”的ip报文，man文件中的定义是 0/8、172/8、 255/8。</span><br><span class="line">-n 在使用-S参数，不对混杂模式进行侦听。</span><br><span class="line">-N &lt;CIDR1:CIDR2,...&gt; 通过伪造的NAT，重写IP地址。这个参数应该有很重要的应用，目前没有测试使用。</span><br><span class="line">-O 没有测试使用。</span><br><span class="line">-p &lt;packetrate&gt; 指定每秒发送报文的个数，指定该参数，其它速率相关的参数被忽略，最后的打印信息不会有速率和每秒发送报文的统计。</span><br><span class="line">-P 表示在输出信息中打印PID的信息，用于单用户或单帐户模式下暂停和重启程序。</span><br><span class="line">-r &lt;rate&gt; 指定发送的速率。目前-m/-r/-p这3个参数的相互关系。</span><br><span class="line">-R 让网卡极限速度发数据包。 </span><br><span class="line">-t &lt;mtu&gt; 指定MTU，标准的10/100M网卡的默认值是1500。 </span><br><span class="line">-T Truncate packets &gt; 截去报文中MTU大于标准值的部分再发送出去，默认是不发送，skip掉。</span><br><span class="line">-v 每发送一个报文都以 tcpdump 的风格打印出对应的信息。</span><br><span class="line">-V 查看版本号。</span><br><span class="line">-w &lt;file&gt; 将主网卡发送的报文写入一个文件中，参数后紧跟文件名。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> **1、重放在客户端 ftp 连接的报文 ** </p>
+<p>a、在客户端使用 ethereal 抓包，存为 ftp.pcap 文件。</p>
+<p>b、 将 ftp.pcap 文件进行 tcpprep 操作，制作 cache 文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpprep -an client -i ftp.pcap -o ftp.cache –v </span><br></pre></td></tr></table></figure>
+
+<p>c、 将 DUT 设备的两个接口和 PC 的两个接口使用网线连接，使用 tcpreplay 重 放报文。注意防火墙的配置为网桥（透明）模式。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpreplay -c ftp.cache -i eth0 -j eth1 ftp.pcap -R –v </span><br></pre></td></tr></table></figure>
+
+<p>-R 参数表示全速发送，-v 显示打印信息。 </p>
+<p> **2、重放在客户端 BT 连接的报文 ** </p>
+<p>a、在实验室 BT 下载一些台湾的娱乐节目和热门的大片，使用 ethereal 抓包， 存为 bt.pcap 文件。注意 pcap 文件大小的控制，对 pc 的内存要求比较高，我保 存了一个 600 多 M 的 pcap 文件用了 40 多分钟，大家有需要可以直接从实验室 copy。 </p>
+<p>b、将 bt.pcap 文件进行 tcpprep 操作，制作 cache 文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpprep -an client -i bt.pcap -o bt.cache -C &quot;100M BT Packet&quot; –v</span><br></pre></td></tr></table></figure>
+
+<p>制作 cache 文件，在 cache 文件中写入“100M BT Packet”的注释。 </p>
+<p>c、使用 tcpreplay 重放报文。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpreplay -c bt.cache -i eth0 -j eth1 bt.pcap -v –R </span><br></pre></td></tr></table></figure>
+
+<p> **3、重放 tftp 服务器上抓到的报文 ** </p>
+<p>a、在 tftp 服务器上使用 ethereal 抓包，存为 tftp.pcap 文件。 </p>
+<p>b、将 pcap 文件进行 tcpprep 的操作，制作 cache 文件。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpprep -an server -i tftp.pcap -o tftp.cache –v </span><br></pre></td></tr></table></figure>
+
+<p>注意：我在测试的时候犯了一个错误，使用 DUT 的 tftp 升级来做实验，同时穿 过 DUT 重放报文，结果在网卡发送报文的后，DUT 的 mac 地址做了的回应，导致 交互过程没有穿过 DUT，这个问题比较搞笑，上午弄了半天才发现原因，开始还 以为 udp 的连接不能重放。 </p>
+<p>c、使用 tcpreplay 重放报文。 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@A ~]# tcpreplay -c tftp.cache -i eth0 -j eth1 tftp.pcap –v</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/tcpdump/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/tcpdump/" class="post-title-link" itemprop="url">【Linux 命令】tcpdump</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 12:00:30 12:00:30" itemprop="dateModified" datetime="2020-09-25T12:00:30+08:00">2020-09-25 12:00:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一款sniffer工具，是Linux上的抓包工具，嗅探器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>tcpdump命令</strong> 是一款抓包，嗅探器工具，它可以打印所有经过网络接口的数据包的头信息，也可以使用<code>-w</code>选项将数据包保存到文件中，方便以后分析。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">-a：尝试将网络和广播地址转换成名称；</span><br><span class="line">-c&lt;数据包数目&gt;：收到指定的数据包数目后，就停止进行倾倒操作；</span><br><span class="line">-d：把编译过的数据包编码转换成可阅读的格式，并倾倒到标准输出；</span><br><span class="line">-dd：把编译过的数据包编码转换成C语言的格式，并倾倒到标准输出；</span><br><span class="line">-ddd：把编译过的数据包编码转换成十进制数字的格式，并倾倒到标准输出；</span><br><span class="line">-e：在每列倾倒资料上显示连接层级的文件头；</span><br><span class="line">-f：用数字显示网际网络地址；</span><br><span class="line">-F&lt;表达文件&gt;：指定内含表达方式的文件；</span><br><span class="line">-i&lt;网络界面&gt;：使用指定的网络截面送出数据包；</span><br><span class="line">-l：使用标准输出列的缓冲区；</span><br><span class="line">-n：不把主机的网络地址转换成名字；</span><br><span class="line">-N：不列出域名；</span><br><span class="line">-O：不将数据包编码最佳化；</span><br><span class="line">-p：不让网络界面进入混杂模式；</span><br><span class="line">-q ：快速输出，仅列出少数的传输协议信息；</span><br><span class="line">-r&lt;数据包文件&gt;：从指定的文件读取数据包数据；</span><br><span class="line">-s&lt;数据包大小&gt;：设置每个数据包的大小；</span><br><span class="line">-S：用绝对而非相对数值列出TCP关联数；</span><br><span class="line">-t：在每列倾倒资料上不显示时间戳记；</span><br><span class="line">-tt： 在每列倾倒资料上显示未经格式化的时间戳记；</span><br><span class="line">-T&lt;数据包类型&gt;：强制将表达方式所指定的数据包转译成设置的数据包类型；</span><br><span class="line">-v：详细显示指令执行过程；</span><br><span class="line">-vv：更详细显示指令执行过程；</span><br><span class="line">-x：用十六进制字码列出数据包资料；</span><br><span class="line">-w&lt;数据包文件&gt;：把数据包数据写入指定的文件。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>直接启动tcpdump将监视第一个网络接口上所有流过的数据包</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump</span><br></pre></td></tr></table></figure>
+
+<p> <strong>监视指定网络接口的数据包</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth1</span><br></pre></td></tr></table></figure>
+
+<p>如果不指定网卡，默认tcpdump只会监视第一个网络接口，一般是eth0，下面的例子都没有指定网络接口。</p>
+<p> <strong>监视指定主机的数据包</strong> </p>
+<p>打印所有进入或离开sundown的数据包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump host sundown</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定ip,例如截获所有210.27.48.1 的主机收到的和发出的所有的数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump host 210.27.48.1</span><br></pre></td></tr></table></figure>
+
+<p>打印helios 与 hot 或者与 ace 之间通信的数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump host helios and \( hot or ace \)</span><br></pre></td></tr></table></figure>
+
+<p>截获主机210.27.48.1 和主机210.27.48.2 或210.27.48.3的通信</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump host 210.27.48.1 and \ (210.27.48.2 or 210.27.48.3 \)</span><br></pre></td></tr></table></figure>
+
+<p>打印ace与任何其他主机之间通信的IP 数据包, 但不包括与helios之间的数据包.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump ip host ace and not helios</span><br></pre></td></tr></table></figure>
+
+<p>如果想要获取主机210.27.48.1除了和主机210.27.48.2之外所有主机通信的ip包，使用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump ip host 210.27.48.1 and ! 210.27.48.2</span><br></pre></td></tr></table></figure>
+
+<p>抓取eth0网卡上的包，使用:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i eth0</span><br></pre></td></tr></table></figure>
+
+<p>截获主机hostname发送的所有数据</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 src host hostname</span><br></pre></td></tr></table></figure>
+
+<p>监视所有送到主机hostname的数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 dst host hostname</span><br></pre></td></tr></table></figure>
+
+<p> <strong>监视指定主机和端口的数据包</strong> </p>
+<p>如果想要获取主机210.27.48.1接收或发出的telnet包，使用如下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump tcp port 23 and host 210.27.48.1</span><br></pre></td></tr></table></figure>
+
+<p>对本机的udp 123 端口进行监视 123 为ntp的服务端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump udp port 123</span><br></pre></td></tr></table></figure>
+
+<p> <strong>监视指定网络的数据包</strong> </p>
+<p>打印本地主机与Berkeley网络上的主机之间的所有通信数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump net ucb-ether</span><br></pre></td></tr></table></figure>
+
+<p>ucb-ether此处可理解为“Berkeley网络”的网络地址，此表达式最原始的含义可表达为：打印网络地址为ucb-ether的所有数据包</p>
+<p>打印所有通过网关snup的ftp数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump &#x27;gateway snup and (port ftp or ftp-data)&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>注意：表达式被单引号括起来了，这可以防止shell对其中的括号进行错误解析</p>
+<p>打印所有源地址或目标地址是本地主机的IP数据包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump ip and not net localnet</span><br></pre></td></tr></table></figure>
+
+<p>如果本地网络通过网关连到了另一网络，则另一网络并不能算作本地网络。</p>
+<p>抓取80端口的HTTP报文，以文本形式展示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tcpdump -i any port 80 -A</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1257,239 +1545,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sysctl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/sysctl/" class="post-title-link" itemprop="url">【Linux 命令】sysctl</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:56:00 11:56:00" itemprop="dateModified" datetime="2020-09-25T11:56:00+08:00">2020-09-25 11:56:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>时动态地修改内核的运行参数</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sysctl命令</strong> 被用于在内核运行时动态地修改内核的运行参数，可用的内核参数在目录<code>/proc/sys</code>中。它包含一些TCP/ip堆栈和虚拟内存系统的高级选项， 这可以让有经验的管理员提高引人注目的系统性能。用sysctl可以读取设置超过五百个系统变量。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sysctl(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-n：打印值时不打印关键字；</span><br><span class="line">-e：忽略未知关键字错误；</span><br><span class="line">-N：仅打印名称；</span><br><span class="line">-w：当改变sysctl设置时使用此项；</span><br><span class="line">-p：从配置文件“/etc/sysctl.conf”加载内核参数设置；</span><br><span class="line">-a：打印当前所有可用的内核参数变量和值；</span><br><span class="line">-A：以表格方式打印当前所有可用的内核参数变量和值。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>变量=值：设置内核参数对应的变量值。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>查看所有可读变量：</p>
-<p>sysctl -a</p>
-<p>读一个指定的变量，例如<code>kern.maxproc</code>：</p>
-<p>sysctl kern.maxproc kern.maxproc: 1044</p>
-<p>要设置一个指定的变量，直接用<code>variable=value</code>这样的语法：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sysctl kern.maxfiles=5000</span><br><span class="line">kern.maxfiles: 2088 -&gt; 5000</span><br></pre></td></tr></table></figure>
-
-<p>您可以使用sysctl修改系统变量，也可以通过编辑sysctl.conf文件来修改系统变量。sysctl.conf看起来很像rc.conf。它用<code>variable=value</code>的形式来设定值。指定的值在系统进入多用户模式之后被设定。并不是所有的变量都可以在这个模式下设定。</p>
-<p>sysctl变量的设置通常是字符串、数字或者布尔型。（布尔型用 1 来表示’yes’，用 0 来表示’no’）。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sysctl -w kernel.sysrq=0</span><br><span class="line">sysctl -w kernel.core_uses_pid=1</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_redirects=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.accept_source_route=0</span><br><span class="line">sysctl -w net.ipv4.conf.default.rp_filter=1</span><br><span class="line">sysctl -w net.ipv4.tcp_syncookies=1</span><br><span class="line">sysctl -w net.ipv4.tcp_max_syn_backlog=2048</span><br><span class="line">sysctl -w net.ipv4.tcp_fin_timeout=30</span><br><span class="line">sysctl -w net.ipv4.tcp_synack_retries=2</span><br><span class="line">sysctl -w net.ipv4.tcp_keepalive_time=3600</span><br><span class="line">sysctl -w net.ipv4.tcp_window_scaling=1</span><br><span class="line">sysctl -w net.ipv4.tcp_sack=1</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置sysctl"><a href="#配置sysctl" class="headerlink" title="配置sysctl"></a>配置sysctl</h3><p>编辑此文件：<code>/etc/sysctl.conf</code></p>
-<p>如果该文件为空，则输入以下内容，否则请根据情况自己做调整：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Controls <span class="built_in">source</span> route verification</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.rp_filter = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.rp_filter = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.rp_filter = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disables IP <span class="built_in">source</span> routing</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_source_route = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_source_route = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_source_route = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls the System Request debugging functionality of the kernel</span></span><br><span class="line">kernel.sysrq = 0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Controls whether core dumps will append the PID to the core filename.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Useful <span class="keyword">for</span> debugging multi-threaded applications.</span></span><br><span class="line">kernel.core_uses_pid = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase maximum amount of memory allocated to shm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Only uncomment <span class="keyword">if</span> needed!</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> kernel.shmmax = 67108864</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Disable ICMP Redirect Acceptance</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.accept_redirects = 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.accept_redirects = 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.accept_redirects = 0</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">enable</span> Log Spoofed Packets, Source Routed Packets, Redirect Packets</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Default should work <span class="keyword">for</span> all interfaces</span></span><br><span class="line">net.ipv4.conf.default.log_martians = 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.all.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.lo.log_martians = 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.conf.eth0.log_martians = 1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_fin_timeout connection</span></span><br><span class="line">net.ipv4.tcp_fin_timeout = 25</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Decrease the time default value <span class="keyword">for</span> tcp_keepalive_time connection</span></span><br><span class="line">net.ipv4.tcp_keepalive_time = 1200</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_window_scaling</span></span><br><span class="line">net.ipv4.tcp_window_scaling = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_sack</span></span><br><span class="line">net.ipv4.tcp_sack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> tcp_fack should be on because of sack</span></span><br><span class="line">net.ipv4.tcp_fack = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Turn on the tcp_timestamps</span></span><br><span class="line">net.ipv4.tcp_timestamps = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable TCP SYN Cookie Protection</span></span><br><span class="line">net.ipv4.tcp_syncookies = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable ignoring broadcasts request</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_broadcasts = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Enable bad error message Protection</span></span><br><span class="line">net.ipv4.icmp_ignore_bogus_error_responses = 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> make more <span class="built_in">local</span> ports available</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> net.ipv4.ip_local_port_range = 1024 65000</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">set</span> TCP Re-Ordering value <span class="keyword">in</span> kernel to ‘5′</span></span><br><span class="line">net.ipv4.tcp_reordering = 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Lower syn retry rates</span></span><br><span class="line">net.ipv4.tcp_synack_retries = 2</span><br><span class="line">net.ipv4.tcp_syn_retries = 3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Set Max SYN Backlog to ‘2048′</span></span><br><span class="line">net.ipv4.tcp_max_syn_backlog = 2048</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Various Settings</span></span><br><span class="line">net.core.netdev_max_backlog = 1024</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the maximum number of skb-heads to be cached</span></span><br><span class="line">net.core.hot_list_length = 256</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Increase the tcp-time-wait buckets pool size</span></span><br><span class="line">net.ipv4.tcp_max_tw_buckets = 360000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> This will increase the amount of memory available <span class="keyword">for</span> socket input/output queues</span></span><br><span class="line">net.core.rmem_default = 65535</span><br><span class="line">net.core.rmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_rmem = 4096 87380 8388608</span><br><span class="line">net.core.wmem_default = 65535</span><br><span class="line">net.core.wmem_max = 8388608</span><br><span class="line">net.ipv4.tcp_wmem = 4096 65535 8388608</span><br><span class="line">net.ipv4.tcp_mem = 8388608 8388608 8388608</span><br><span class="line">net.core.optmem_max = 40960</span><br></pre></td></tr></table></figure>
-
-<p>如果希望屏蔽别人 ping 你的主机，则加入以下代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Disable ping requests</span></span><br><span class="line">net.ipv4.icmp_echo_ignore_all = 1</span><br></pre></td></tr></table></figure>
-
-<p>编辑完成后，请执行以下命令使变动立即生效：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/sbin/sysctl -p</span><br><span class="line">/sbin/sysctl -w net.ipv4.route.flush=1</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sync/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="王永红(Micheal Wang)">
-      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="永红的互联网手记">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/sync/" class="post-title-link" itemprop="url">【Linux 命令】sync</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:55:30 11:55:30" itemprop="dateModified" datetime="2020-09-25T11:55:30+08:00">2020-09-25 11:55:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>600</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用于强制被改变的内容立刻写入磁盘</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sync命令</strong> 用于强制被改变的内容立刻写入磁盘，更新超块信息。</p>
-<p>在Linux/Unix系统中，在文件或数据处理过程中一般先放到内存缓冲区中，等到适当的时候再写入磁盘，以提高系统的运行效率。sync命令则可用来强制将内存缓冲区中的数据立即写入磁盘中。用户通常不需执行sync命令，系统会自动执行update或bdflush操作，将缓冲区的数据写 入磁盘。只有在update或bdflush无法执行或用户需要非正常关机时，才需手动执行sync命令。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sync(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--help：显示帮助；</span><br><span class="line"> --version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="buffer与cache"><a href="#buffer与cache" class="headerlink" title="buffer与cache"></a>buffer与cache</h3><ul>
-<li>  buffer：为了解决写磁盘的效率</li>
-<li>  cache：为了解决读磁盘的效率</li>
-</ul>
-<p>linux系统为了提高读写磁盘的效率，会先将数据放在一块buffer中。在写磁盘时并不是立即将数据写到磁盘中，而是先写入这块buffer中了。此时如果重启系统，就可能造成数据丢失。</p>
-<p>sync命令用来flush文件系统buffer，这样数据才会真正的写到磁盘中，并且buffer才能够释放出来，flush就是用来清空buffer。sync命令会强制将数据写入磁盘中，并释放该数据对应的buffer，所以常常会在写磁盘后输入sync命令来将数据真正的写入磁盘。</p>
-<p>如果不去手动的输入sync命令来真正的去写磁盘，linux系统也会周期性的去sync数据。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/68/">68</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1522,7 +1577,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">15:24</span>
+    <span title="站点阅读时长">15:50</span>
   </span>
 </div>
 <div class="busuanzi-count">

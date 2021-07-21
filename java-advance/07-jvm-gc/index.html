@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;yonghong.tech&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.4.0&quot;,&quot;exturl&quot;:true,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12,&quot;width&quot;:360},&quot;copycode&quot;:true,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:true,&quot;mediumzoom&quot;:true,&quot;lazyload&quot;:false,&quot;pangu&quot;:true,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:&quot;disqus&quot;,&quot;storage&quot;:true,&quot;lazyload&quot;:true,&quot;nav&quot;:null,&quot;activeClass&quot;:&quot;disqus&quot;},&quot;motion&quot;:{&quot;enable&quot;:false,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:false}}</script>
+<meta name="description" content="System.gc() 的理解在默认情况下，通过 System.gc() 或者 Runtime.getRuntime().gc() 的调用，会显示触发 Full GC，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。 然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 进阶 07 —— JVM 垃圾回收相关概念">
+<meta property="og:url" content="http://yonghong.tech/java-advance/07-jvm-gc/index.html">
+<meta property="og:site_name" content="永红的互联网手记">
+<meta property="og:description" content="System.gc() 的理解在默认情况下，通过 System.gc() 或者 Runtime.getRuntime().gc() 的调用，会显示触发 Full GC，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。 然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-25T13:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-25T13:00:00.000Z">
+<meta property="article:author" content="王永红(Micheal Wang)">
+<meta property="article:tag" content="Java进阶">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yonghong.tech/java-advance/07-jvm-gc/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;yonghong.tech&#x2F;java-advance&#x2F;07-jvm-gc&#x2F;&quot;,&quot;path&quot;:&quot;java-advance&#x2F;07-jvm-gc&#x2F;&quot;,&quot;title&quot;:&quot;Java 进阶 07 —— JVM 垃圾回收相关概念&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Java 进阶 07 —— JVM 垃圾回收相关概念 | 永红的互联网手记</title><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/config.min.js"></script>
+<meta name="keywords" content="代码,产品,互联网,研发,程序员,学习,工作,技术,分享,永红,yonghong,Java,Kotlin,Python,Nginx,Springboot,Linux,MySQL,MongoDB,Redis">
+
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="永红的互联网手记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">永红的互联网手记</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我相信好代码和好产品改变世界！</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">673</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">720</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">20</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-gc-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">System.gc() 的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E4%B8%8E%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">2.</span> <span class="nav-text">内存溢出与内存泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA"><span class="nav-number">2.1.</span> <span class="nav-text">内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2"><span class="nav-number">2.2.</span> <span class="nav-text">内存泄露</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stop-The-World"><span class="nav-number">3.</span> <span class="nav-text">Stop The World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">垃圾回收的并行与并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%EF%BC%88Concurrent%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">并发（Concurrent）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%EF%BC%88Parallel%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">并行（Parallel）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91-vs-%E5%B9%B6%E8%A1%8C"><span class="nav-number">4.3.</span> <span class="nav-text">并发 vs 并行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E5%B9%B6%E8%A1%8C"><span class="nav-number">4.4.</span> <span class="nav-text">垃圾回收的并发与并行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%82%B9%E4%B8%8E%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F"><span class="nav-number">5.</span> <span class="nav-text">安全点与安全区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%82%B9%EF%BC%88Safe-Point%EF%BC%89"><span class="nav-number">5.1.</span> <span class="nav-text">安全点（Safe Point）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F%EF%BC%88Safe-Region%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">安全区域（Safe Region）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">再谈引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%BA%E5%BC%95%E7%94%A8%EF%BC%88%E4%B8%8D%E5%9B%9E%E6%94%B6%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">再谈引用：强引用（不回收）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E8%BD%AF%E5%BC%95%E7%94%A8%EF%BC%88%E5%86%85%E5%AD%98%E4%B8%8D%E8%B6%B3%E5%8D%B3%E5%9B%9E%E6%94%B6%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">再谈引用：软引用（内存不足即回收）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E5%BC%B1%E5%BC%95%E7%94%A8%EF%BC%88%E5%8F%91%E7%8E%B0%E5%8D%B3%E5%9B%9E%E6%94%B6%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">再谈引用：弱引用（发现即回收）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E8%99%9A%E5%BC%95%E7%94%A8%EF%BC%88%E5%AF%B9%E8%B1%A1%E5%9B%9E%E6%94%B6%E8%B7%9F%E8%B8%AA%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">再谈引用：虚引用（对象回收跟踪）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8%EF%BC%9A%E7%BB%88%E7%BB%93%E5%99%A8%E5%BC%95%E7%94%A8"><span class="nav-number">11.</span> <span class="nav-text">再谈引用：终结器引用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王永红(Micheal Wang)"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">王永红(Micheal Wang)</p>
+  <div class="site-description" itemprop="description">记录自己学习和工作的点点滴滴，分享技术，分享感悟。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">673</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">720</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/07-jvm-gc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="王永红(Micheal Wang)">
+      <meta itemprop="description" content="记录自己学习和工作的点点滴滴，分享技术，分享感悟。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="永红的互联网手记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 进阶 07 —— JVM 垃圾回收相关概念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-25 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-06-25T21:00:00+08:00">2021-06-25 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="System-gc-的理解"><a href="#System-gc-的理解" class="headerlink" title="System.gc() 的理解"></a>System.gc() 的理解</h2><p>在默认情况下，通过 System.gc() 或者 Runtime.getRuntime().gc() 的调用，<strong>会显示触发 Full GC</strong>，同时对老年代和新生代进行回收，尝试释放被丢弃对象占用的内存。</p>
+<p>然而 System.gc() 调用附带一个免责声明，无法保证对垃圾收集器的调用。</p>
+<span id="more"></span>
+
+<p>JVM 实现者可以通过 System.gc() 调用来决定 JVM 的 GC 行为。而一般情况下，垃圾回收应该是自动进行的，无须手动触发，否则就太过于麻烦了。在一些特殊情况下，如我们正在编写一个性能基准，我们可以在运行之间调用 System.gc()。</p>
+<p>例子1：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SystemGCTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> SystemGCTest();</span><br><span class="line">        System.gc(); <span class="comment">// 提醒 JVM 的垃圾回收器执行 GC</span></span><br><span class="line"></span><br><span class="line">        System.runFinalization(); <span class="comment">// 强制调用未被使用对象的 finalize 方法</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">        System.out.println(<span class="string">&quot;调用了重写的 finalize 方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子2</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LocalVarGCTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>]; <span class="comment">// 10M</span></span><br><span class="line">        System.gc(); <span class="comment">// 不能回收</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>]; <span class="comment">// 10M</span></span><br><span class="line">        buffer = <span class="keyword">null</span>;</span><br><span class="line">        System.gc(); <span class="comment">// 可以回收</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>]; <span class="comment">// 10M</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.gc(); <span class="comment">// 不能回收，局部变量表中仍然有引用</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun4</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span> * <span class="number">1024</span> * <span class="number">1024</span>]; <span class="comment">// 10M</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> value = <span class="number">10</span>;</span><br><span class="line">        System.gc(); <span class="comment">// 可以回收，局部变量表中 value 和 buffer 使用同一个 Slot</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        fun1();</span><br><span class="line">        System.gc(); <span class="comment">// 可以回收</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LocalVarGCTest local = <span class="keyword">new</span> LocalVarGCTest();</span><br><span class="line">        local.fun5();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="内存溢出与内存泄露"><a href="#内存溢出与内存泄露" class="headerlink" title="内存溢出与内存泄露"></a>内存溢出与内存泄露</h2><h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出相对于内存泄露来说，尽管更容易理解，但是同样的，内存溢出也是引发程序崩溃的罪魁祸首之一。</p>
+<p>由于 GC 一直在发展，所以一般情况下，除非应用程序占用的内存增长速度非常快，造成垃圾回收已经跟不上内存消耗的速度，否则不太容易出现 OOM 的情况。</p>
+<p>大多数情况下，GC 会进行各种年龄段的垃圾回收，实在不行了就放大招，来一次独占式的 Full GC 操作，这时候会回收大量的内存，供应用程序继续使用。</p>
+<p>Java Doc 中对 OutOfMemoryError 的解释是，<strong>没有空闲内存，并且垃圾收集器也无法提供更多内存。</strong></p>
+<p>1.首先说没有空闲内存的情况：说明 Java 虚拟机的堆内存不够。原因有二：</p>
+<ul>
+<li><p>Java 虚拟机的堆内存设置不够</p>
+<p>比如：可能存在内存泄露问题：也很有可能就是堆的大小不合理，比如我们要处理比较可观的数据量，但是没有显示指定 JVM 堆大小或者指定数值偏小。我们可以通过 -Xms、-Xmx 来调整。</p>
+</li>
+<li><p>代码中创建了大量大对象，并且长时间不能被垃圾收集器收集（存在引用）</p>
+<p>对于老版本的 Oracle JDK，因为永久代的大小时有限的，并且 JVM 对永久代垃圾回收（如，常量池回收、卸载不再需要的类型）非常不积极，所以当我们不断添加新类型的时候，永久代出现 OOM 也非常多见，尤其是在运行时存在大量动态类型生成的场合；类似 intern 字符串缓存占用太多空间，也会导致 OOM 问题。对应的异常信息，会标记出来和永久代相关：”java.lang.OutOfMemoryError: PermGen Space”</p>
+<p>随着元数据区的引入，方法区内存已经不再那么窘迫，所以相应的 OOM 有所改观，出现 OOM 异常的信息则变成了 “java.lang.OutOfMemoryError: Metaspace”。直接内存不足，也会导致 OOM。</p>
+</li>
+</ul>
+<p>2.垃圾收集器无法提供更多内存，这里面隐含着一层意思是，在抛出 OOM 之前，通常垃圾收集器会被触发，尽其所能去清理出空间。</p>
+<ul>
+<li>例如：在引用机制分析中，涉及到 JVM 会去尝试回收软引用指向的对象等。</li>
+<li>在 java.nio.BITs.reserveMemory() 方法中，我们能清楚地看到，System.gc() 会被调用，以清理空间。</li>
+</ul>
+<p>当然，也不是在任何情况下垃圾收集器都会被触发的。</p>
+<ul>
+<li>比如，我们去分配一个超大对象。类似一个超大数组超过堆的最大值，JVM 可以判断出垃圾收集并不能解决这个问题，所以直接抛出 OOM。</li>
+</ul>
+<h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>内存泄露也称作 存储渗漏。严格来说，<strong>只有对象不会再被程序用到了，但是 GC 又不能回收他们的情况，才叫内存泄露</strong>。</p>
+<p>但实际情况很多时候一些不太好的实践（或疏忽）会导致对对象的生命周期变得很长甚至导致 OOM，也可以叫做宽泛意义上的内存泄露。</p>
+<p>尽管内存泄露并不会立刻引起程序崩溃，但是一旦发生内存泄露，程序中的可用内存就会被逐步蚕食，直至耗尽所有内存，最终出现 OOM 异常，导致程序崩溃。</p>
+<p>注意，这里的存储空间并不是指物理内存，而是指虚拟内存大小，这个虚拟内存大小决定于磁盘交换区设定的大小。</p>
+<p>举例：</p>
+<p>1.单例模式</p>
+<p>单例的生命周期和应用程序是一样长的，所以单例程序中，如果持有对外部对象的引用的话，那么这个外部对象是不能被回收的，则会导致内存泄露的产生。</p>
+<p>2.一些提供 close 的资源未关闭导致内存泄露</p>
+<p>数据库连接（dataSource.getConnection()），网络连接（socket）和 io 连接必须手动 close，否则是不能被回收的。</p>
+<h2 id="Stop-The-World"><a href="#Stop-The-World" class="headerlink" title="Stop The World"></a>Stop The World</h2><p>Stop The World，简称 STW，指的是 GC 事件发生过程中，会产生应用程序的停顿。停顿产生时整个应用程序线程都会被暂停，没有任何响应，有点像卡死的感觉，这个停顿称为 STW。</p>
+<ul>
+<li>可达性分析算法中枚举根节点（GC Roots）会导致所有 Java 执行线程停顿。<ul>
+<li>分析工作必须在一个能确保一致性的快照中进行</li>
+<li>一致性指整个分析期间整个执行系统看起来像被冻结在某个时间点上</li>
+<li>如果出现分析过程中对象引用关系还在不断变化，则分析结果的准确性无法保证。=</li>
+</ul>
+</li>
+</ul>
+<p>被 STW 中断的应用程序线程会在完成 GC 之后恢复，频繁中断会让用户感觉像是网速不快造成电影卡带一样，所以我们需要减少 STW 的发生。</p>
+<p>STW 事件和采用哪款 GC 无关，所有的 GC 都有这个事件。</p>
+<p>哪怕是 G1 也不能完全避免 STW 情况发生，只能说垃圾回收器越来越优秀，回收效率越来越高，尽可能得缩短了暂停时间。</p>
+<p>STW 是 JVM 在后台自动发起和自动完成的。在用户不可见的情况下，把用户正常的工作线程全部停掉。</p>
+<p>开发中不要用 System.gc()；会导致 STW 的发生。</p>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopTheWorldTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        WorkThread workThread = <span class="keyword">new</span> WorkThread();</span><br><span class="line">        PrintThread printThread = <span class="keyword">new</span> PrintThread();</span><br><span class="line">        workThread.start();</span><br><span class="line">        printThread.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        List&lt;<span class="keyword">byte</span>[]&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) &#123;</span><br><span class="line">                    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1000</span>];</span><br><span class="line">                    list.add(buffer);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (list.size() &gt; <span class="number">10000</span>) &#123;</span><br><span class="line">                    list.clear();</span><br><span class="line">                    System.gc(); <span class="comment">// 触发 Full GC，引发 STW</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                    <span class="keyword">long</span> t = System.currentTimeMillis() - startTime;</span><br><span class="line">                    System.out.println(t / <span class="number">1000</span> + <span class="string">&quot;.&quot;</span> + t % <span class="number">1000</span>);</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="垃圾回收的并行与并发"><a href="#垃圾回收的并行与并发" class="headerlink" title="垃圾回收的并行与并发"></a>垃圾回收的并行与并发</h2><h3 id="并发（Concurrent）"><a href="#并发（Concurrent）" class="headerlink" title="并发（Concurrent）"></a>并发（Concurrent）</h3><p>在操作系统中，是指一个时间段中有几个程序都处于已启动运行到运行完毕之间，且这几个程序都是在同一个处理器上运行。</p>
+<p>并发不是真正意义上的“同时进行”，只是 CPU 把一个时间段划分成几个时间片段（时间区间），然后在这几个时间区间之间来回切换，由于 CPU 处理的速度非常快，只要时间间隔处理得当，即可让用户感觉是多个应用程序同时在进行。</p>
+<h3 id="并行（Parallel）"><a href="#并行（Parallel）" class="headerlink" title="并行（Parallel）"></a>并行（Parallel）</h3><p>当系统有一个以上 CPU 时，当一个 CPU 执行一个进程时，另一个 CPU 可以执行另一个进程，两个进行互不抢占 CPU 资源，可以同时进行，我们称之为并行。</p>
+<p>其实决定并行的因素不是 CPU 的数量，而是 CPU 的核心数量，比如一个 CPU 多个核也可以并行。</p>
+<p>适合科学计算，后台处理等弱交互场景。</p>
+<h3 id="并发-vs-并行"><a href="#并发-vs-并行" class="headerlink" title="并发 vs 并行"></a>并发 vs 并行</h3><p>并发，指的是多个事情，在同一时间段内同时发生了。</p>
+<p>并行，指的是多个事情，在同一时间点上同时发生了。</p>
+<p>并发的多个任务之间是互相抢占资源的，</p>
+<p>并行的多个任务之间是不互相抢占资源的。</p>
+<p>只有在多 CPU 或者一个 CPU 多核的情况中，才会发生并行。</p>
+<p>否则，看似同时发生的事情，其实都是并发执行的，</p>
+<h3 id="垃圾回收的并发与并行"><a href="#垃圾回收的并发与并行" class="headerlink" title="垃圾回收的并发与并行"></a>垃圾回收的并发与并行</h3><p>并发和并行，在谈论垃圾收集器的上下午语境中，它们可以解释如下：</p>
+<ul>
+<li>并行：只多条垃圾收集线程并行工作，但此时用户线程仍处于等待状态。<ul>
+<li>如 ParNew、Parallel Scavenge、Parallel Old</li>
+</ul>
+</li>
+<li>串行<ul>
+<li>相较于并行的概念，单线程执行。</li>
+<li>如果内存不够，则程序暂停，启动 JVM 垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</li>
+</ul>
+</li>
+<li>并发：指用户线程与垃圾收集线程同时执行（但不一定是并行的，可能会交替执行），垃圾回收线程在执行时不会停顿用户程序的运行。<ul>
+<li>用户程序在继续运行，而垃圾收集程序线程运行于另一个 CPU 上。</li>
+<li>如：CMS、G1</li>
+</ul>
+</li>
+</ul>
+<h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点（Safe-Point）"><a href="#安全点（Safe-Point）" class="headerlink" title="安全点（Safe Point）"></a>安全点（Safe Point）</h3><p>程序执行时并非在所有的地方都可以停顿下来开始 GC，只有在特定位置才能停顿下来开始 GC，这些位置称为 安全点（Safe Point）。</p>
+<p>Safe Point 的选择很重要，<strong>如果太少可能导致 GC 等待的时间太长，如果太频繁可能导致运行时的性能问题</strong>。大部分指令的执行时间都非常短暂，通常会根据 “是否具有让程序长时间执行的特性” 为标准。比如：选择一些执行时间较长的指令作为 Safe Point，如<strong>方法调用、循环跳转和异常跳转</strong>等。</p>
+<p>如何在 GC 发生时，检查所有线程都跑到最近的安全点停顿下来呢？</p>
+<ul>
+<li><p>抢占式中断：（目前没有虚拟机采用了）</p>
+<p>首先中断所有线程，如果还有线程不在安全点，就恢复线程，让线程跑到安全点。</p>
+</li>
+<li><p>主动式中断：</p>
+<p>设置一个中断标志，各个线程运行到 Safe Point 的时候主动轮询到这个标志，如果中断标志为真，则将自己进行中断挂起。</p>
+</li>
+</ul>
+<h3 id="安全区域（Safe-Region）"><a href="#安全区域（Safe-Region）" class="headerlink" title="安全区域（Safe Region）"></a>安全区域（Safe Region）</h3><p>Safe Point 机制保证了程序执行时，在不太长的时间内就会遇到可进入 GC 的 Safe Point。但是，程序 “不执行” 的时候呢？例如线程处于 Sleep 状态或 Blocked 状态，这个时候线程无法响应 JVM 的中断请求，“走” 到安全点去中断挂起，JVM 也不太可能等待线程被唤醒。对于这种情况，就需要安全区域（Safe Region）来解决。</p>
+<p><strong>安全区域是指在一段代码片段中，对象的引用关系不会发生变化，在这个区域中的任何位置开始 GC 都是安全的。</strong>我们也可以把 Safe Region 看做是拓展了的 Safe Point。</p>
+<p>实际执行时：</p>
+<ul>
+<li>当线程运行到 Safe Region 的代码时，首先标识已经进入了 Safe Region，如果这段时间内发生 GC，JVM 会忽略标识为 Safe Region 状态的线程。</li>
+<li>当线程离开 Safe Region 时，会检查 JVM 是否已经完成 GC，如果完成了，则继续运行，否则线程必须等待直到收到可以安全离开 Safe Region 的信号为止。</li>
+</ul>
+<hr>
+<h2 id="再谈引用"><a href="#再谈引用" class="headerlink" title="再谈引用"></a>再谈引用</h2><p>我们希望能描述这样一类对象：当内存空间还足够时，则能保留在内存中；如果内存空间在进行垃圾收集后还是很紧张，则可以抛弃这些对象。</p>
+<p>【既偏门又非常高频的面试题】强引用、软引用、弱引用、虚引用有什么区别？具体使用场景是什么？</p>
+<p>在 JDK 1.2 版本后，Java 对引用的概念进行了扩充，将引用分为强引用（Strong Reference）、软引用（Soft Reference）、弱引用（Weak Preference）和虚引用（Phantom Reference）4 种，这 4 种引用强度依次逐渐减弱。</p>
+<p>除强引用外，其他 3 种引用均可以在 java.lang.ref 包中找到它们的身影。如下图，显示了这 3 种引用类型对应的类，开发人员可以在应用程序中直接使用它们。</p>
+<p>Reference 子类中只有终结器引用是包内可见的，其他 3 种类型均为 public，可以在应用程序中直接使用。</p>
+<ul>
+<li>强引用：最传统的引用的定义，是指在程序代码之中普遍存在的引用赋值，即类似 “Object obj = new Object()” 这种引用关系。<strong>无论任何情况下，只要强引用关系还在，垃圾收集器就永远不会回收掉被引用的对象。</strong></li>
+<li>软引用：在系统将要发生内存溢出之前，将会把这些对象列入回收范围之中进行第二次回收。如果这次回收后还没有足够的内存，才会抛出内存溢出异常。</li>
+<li>弱引用：被弱引用关联的对象只能生存到下一次垃圾收集之前。当垃圾收集器工作时，无论内存空间是否足够，都会回收掉被弱引用关联的对象。</li>
+<li>虚引用：一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来获得一个对象的实例。<strong>为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。</strong></li>
+</ul>
+<h2 id="再谈引用：强引用（不回收）"><a href="#再谈引用：强引用（不回收）" class="headerlink" title="再谈引用：强引用（不回收）"></a>再谈引用：强引用（不回收）</h2><p>在 Java 程序中，最常见的引用类型是强引用（普通对象99%以上都是强引用），也就是我们最常见的普通对象引用，也就是默认的引用类型。</p>
+<p>当在 Java 语言中使用 new 操作符创建一个新的对象，并将其赋值给一个变量的时候，这个变量就成为指向该对象的一个强引用。</p>
+<p>强引用的对象是可触及的，垃圾回收器就永远不会回收掉被引用的对象。</p>
+<p>对于一个普通的对象，如果没有其他的引用关系，只要超过了引用的作用域或者显式地将相应（强）引用赋值为 null，就是可以当做垃圾被收集了，当然具体回收时机还是要看垃圾收集策略。</p>
+<p>相对的，软引用、弱引用和虚引用的对象是软可触及、弱可触及的，在一定条件下，都是可以被回收的。所以，强引用时造成 Java 内存泄露的主要原因之一。</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer(<span class="string">&quot;强引用&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>强引用具备以下特点：</p>
+<ul>
+<li>强引用可以直接访问目标对象。</li>
+<li>强引用所指向的对象在任何时候都不会被系统回收，虚拟机宁愿抛出 OOM 异常，也不会回收强引用所指向对象。</li>
+<li>强引用可能导致内存泄露。</li>
+</ul>
+<h2 id="再谈引用：软引用（内存不足即回收）"><a href="#再谈引用：软引用（内存不足即回收）" class="headerlink" title="再谈引用：软引用（内存不足即回收）"></a>再谈引用：软引用（内存不足即回收）</h2><p>软引用是用来描述一些还有用，但是非必需的对象。只要被软引用关联着的对象，在系统将要发生内存溢出异常前会把这些对象列进回收范围之中进行第二次回收，如果这次回收还没有足够的内存，才会抛出内存溢出异常。</p>
+<p>软引用通常用来实现内存敏感的缓存。比如：高速缓存（如，MyBatis 的缓存）就有用到软引用。如果还有空闲内存，就可以暂时保留缓存，当内存不足时清理掉，这样就能保证了使用缓存的同时，不会耗尽内存。</p>
+<p>垃圾回收器在某个时刻决定回收软可达的对象的时候，会清理软引用，并可选地把引用存放到一个引用队列（Reference Queue）。</p>
+<p>类似弱引用，只不过 Java 虚拟机会尽量让软引用的存活时间长一些，迫不得已才清理。</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object(); <span class="comment">// 声明强引用</span></span><br><span class="line">SoftReference&lt;Object&gt; sr = <span class="keyword">new</span> SoftReference&lt;&gt;(obj);</span><br><span class="line">obj = <span class="keyword">null</span>; <span class="comment">// 销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="再谈引用：弱引用（发现即回收）"><a href="#再谈引用：弱引用（发现即回收）" class="headerlink" title="再谈引用：弱引用（发现即回收）"></a>再谈引用：弱引用（发现即回收）</h2><p>弱引用也是用来描述那些非必需对象，<strong>只</strong>被弱引用关联的对象<strong>只能生存到下一次垃圾收集发生为止</strong>。在系统 GC 时，只要发现弱引用，不管系统堆空间使用是否充足，都会回收掉只被弱引用关联的对象。</p>
+<p>但是，由于垃圾回收器的线程通常优先级低，因此，并不一定能很快地发现持有弱引用的对象。在这种情况下，弱引用对象可以存在较长的时间。</p>
+<p>弱引用和软引用一样，在构造弱引用同时，也可以指定一个引用队列，当弱引用对象被回收时，就会加入指定的引用队列，通过这个队列可以跟踪对象的回收情况。</p>
+<p><strong>软引用、弱引用都非常适合来保存那些可有可无的缓存数据。</strong>如果这么做，当系统内存不足时，这些缓存数据就会被回收，不会导致内存溢出。而当内存资源充足时，这些缓存数据又可以存在相当长的时间，从而起到加速系统的作用。</p>
+<p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object(); <span class="comment">// 声明强引用</span></span><br><span class="line">WeakReference&lt;Object&gt; wr = <span class="keyword">new</span> WeakReference&lt;&gt;(obj);</span><br><span class="line">obj = <span class="keyword">null</span>; <span class="comment">// 销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+<p>弱引用对象与软引用对象最大的不同就在于，当 GC 在进行回收时，需要通过算法检查是够回收软引用对象，而对于弱引用，GC 总是进行回收。弱引用对象更容易、更快被 GC 回收。</p>
+<p>面试题：开发中使用过 WeakHashMap 吗？</p>
+<p>图片缓存等。</p>
+<h2 id="再谈引用：虚引用（对象回收跟踪）"><a href="#再谈引用：虚引用（对象回收跟踪）" class="headerlink" title="再谈引用：虚引用（对象回收跟踪）"></a>再谈引用：虚引用（对象回收跟踪）</h2><p>也称为 “幽灵引用” 或者 “幻影引用”，是所有引用类型中最弱的一个。</p>
+<p>一个对象是否有虚引用的存在，完全不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它和没有引用几乎是一样的，随时都可能被垃圾回收器回收。</p>
+<p>它不能单独使用，也无法通过虚引用来获取被引用的对象。当试图通过虚引用的 get() 方法取得对象时，总是 null。</p>
+<p>为一个对象设置虚引用关联的唯一目的在于跟踪垃圾回收过程。比如：能在这个对象被收集器回收时收到一个系统通知。</p>
+<p>虚引用必须和引用队列一起使用。虚引用在创建时必须提供一个引用队列作为参数。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会回收对象后，将这个虚引用加入引用队列，以通知应用程序对象回收情况。</p>
+<p>由于虚引用可以跟踪对象的回收时间，因此，也可以将一些资源释放操作放置在虚引用中执行和记录。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object(); <span class="comment">// 声明强引用</span></span><br><span class="line">ReferenceQueue phantomQueue = <span class="keyword">new</span> ReferenceQueue();</span><br><span class="line">PhantomReference&lt;Object&gt; pr = <span class="keyword">new</span> PhantomReference&lt;&gt;(obj, phantomQueue);</span><br><span class="line">obj = <span class="keyword">null</span>; <span class="comment">// 销毁强引用</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="再谈引用：终结器引用"><a href="#再谈引用：终结器引用" class="headerlink" title="再谈引用：终结器引用"></a>再谈引用：终结器引用</h2><p>它用于实现对象的 finalize 方法，也可以称为终结器引用。</p>
+<p>无需手动编码，其内部配合引用队列使用。</p>
+<p>在 GC 时，终结器引用入队。由 Finalizer 线程通过终结器引用找到被引用对象并调用它的 finalize 方法，第二次 GC 时才能回收被引用对象。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="王永红(Micheal Wang) 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="王永红(Micheal Wang) 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>王永红(Micheal Wang)
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/java-advance/07-jvm-gc/" title="Java 进阶 07 —— JVM 垃圾回收相关概念">http://yonghong.tech/java-advance/07-jvm-gc/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java%E8%BF%9B%E9%98%B6/" rel="tag"># Java进阶</a>
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/java-advance/06-jvm-gc-algo/" rel="prev" title="Java 进阶 06 —— JVM 垃圾回收算法">
+                  <i class="fa fa-chevron-left"></i> Java 进阶 06 —— JVM 垃圾回收算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/java-advance/08-jvm-gc/" rel="next" title="Java 进阶 08 —— JVM 垃圾回收器">
+                  Java 进阶 08 —— JVM 垃圾回收器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+        </div>
+      </div><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/comments.min.js"></script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">15:50</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/search/local-search.min.js"></script>
+
+
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{&quot;enable&quot;:true,&quot;theme&quot;:&quot;forest&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mermaid@8.9.3&#x2F;dist&#x2F;mermaid.min.js&quot;}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/tags/mermaid.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.1.0/dist/quicklink.umd.js"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{&quot;enable&quot;:true,&quot;home&quot;:true,&quot;archive&quot;:true,&quot;delay&quot;:true,&quot;timeout&quot;:3000,&quot;priority&quot;:true,&quot;ignores&quot;:null,&quot;url&quot;:&quot;http:&#x2F;&#x2F;yonghong.tech&#x2F;java-advance&#x2F;07-jvm-gc&#x2F;&quot;}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{&quot;enable&quot;:true,&quot;shortname&quot;:&quot;yonghong-tech&quot;,&quot;count&quot;:false,&quot;i18n&quot;:{&quot;disqus&quot;:&quot;disqus&quot;}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;wangyonghong&quot;,&quot;repo&quot;:&quot;gitalk&quot;,&quot;client_id&quot;:&quot;0e42a09d2799751b9ba7&quot;,&quot;client_secret&quot;:&quot;3e04e5109cf9e3cc34d68deb668842c9c5139846&quot;,&quot;admin_user&quot;:&quot;wangyonghong&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.herokuapp.com&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;path_md5&quot;:&quot;3fa6afd3becf78d66983ad9866b813f7&quot;}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.4.0/source/js/third-party/comments/livere.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
