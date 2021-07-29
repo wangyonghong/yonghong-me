@@ -1,11 +1,9 @@
 ---
 title: 看看大厂是如何用云原生解决千万视频会议难题的
 tags:
-- MySQL
-- UPDATE
-- 数据库
+- 云原生
 categories:
-- MySQL
+- 云原生
 date: 2021-07-09 22:24:00
 updated: 2021-07-09 22:24:00
 ---
