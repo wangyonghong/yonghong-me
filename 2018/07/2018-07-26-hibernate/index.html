@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="1.实体类的编写规则推荐使用包装类 1 实体类（称为 持久化类） 有类和数据库表进行对应关系，不需要直接操作数据库表，操作实体类对象就可以了，这个类称为实体类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate 原理及实战（二）">
+<meta property="og:url" content="http://yonghong.tech/2018/07/2018-07-26-hibernate/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="1.实体类的编写规则推荐使用包装类 1 实体类（称为 持久化类） 有类和数据库表进行对应关系，不需要直接操作数据库表，操作实体类对象就可以了，这个类称为实体类">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-17-11-cache-m9VJIj.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-17-10-auto-update-BufMmO.png">
+<meta property="article:published_time" content="2018-07-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-07-25T16:00:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Hibernate">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/07/29-17-11-cache-m9VJIj.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/2018/07/2018-07-26-hibernate/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/2018/07/2018-07-26-hibernate/","path":"2018/07/2018-07-26-hibernate/","title":"Hibernate 原理及实战（二）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hibernate 原理及实战（二） | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%9E%E4%BD%93%E7%B1%BB%E7%9A%84%E7%BC%96%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">1.实体类的编写规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%B8%BB%E9%94%AE%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">2.主键生成策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AF%B9%E5%AE%9E%E4%BD%93%E7%B1%BB%E7%9A%84-CRUD-%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">3..对实体类的 CRUD 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E6%B7%BB%E5%8A%A0%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.添加操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E6%A0%B9%E6%8D%AE-id-%E8%BF%9B%E8%A1%8C%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.根据 id 进行查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.修改操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">3.4.</span> <span class="nav-text">3.4.删除操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%9E%E4%BD%93%E7%B1%BB%E5%AF%B9%E8%B1%A1%E7%8A%B6%E6%80%81%E4%BB%8B%E7%BB%8D%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">4.实体类对象状态介绍（了解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Hibernate-%E7%9A%84%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">5.</span> <span class="nav-text">5.Hibernate 的一级缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-Hibernate%E6%8F%90%E4%BE%9B%E4%B8%A4%E7%A7%8D%E7%BC%93%E5%AD%98"><span class="nav-number">5.1.</span> <span class="nav-text">5.1.Hibernate提供两种缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-%E9%AA%8C%E8%AF%81%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E5%AD%98%E5%9C%A8"><span class="nav-number">5.2.</span> <span class="nav-text">5.2.验证一级缓存的存在</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="nav-number">5.3.</span> <span class="nav-text">5.3.一级缓存的执行过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-%E7%89%B9%E6%80%A7-%E6%8C%81%E4%B9%85%E6%80%81%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">5.4.</span> <span class="nav-text">5.4.特性(持久态自动更新数据库)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%BA%8B%E5%8A%A1%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%86%99%E6%B3%95"><span class="nav-number">6.</span> <span class="nav-text">6.事务代码规范写法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E4%BA%8B%E5%8A%A1%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">6.1.</span> <span class="nav-text">6.1.事务相关概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-Hibernate-%E4%BA%8B%E5%8A%A1%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%86%99%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">6.2.Hibernate 事务代码规范写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-Hibernate-%E7%BB%91%E5%AE%9Asession"><span class="nav-number">6.3.</span> <span class="nav-text">6.3.Hibernate 绑定session</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Hibernate-API-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">7.</span> <span class="nav-text">7.Hibernate API 的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-Query-%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.1.</span> <span class="nav-text">7.1.Query 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-Criteria-%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.2.</span> <span class="nav-text">7.2.Criteria 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-SQLquery-%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.3.</span> <span class="nav-text">7.3.SQLquery 对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2018/07/2018-07-26-hibernate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hibernate 原理及实战（二）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-26 00:00:00 00:00:00" itemprop="dateCreated datePublished" datetime="2018-07-26T00:00:00+08:00">2018-07-26 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hibernate/" itemprop="url" rel="index"><span itemprop="name">Hibernate</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="1-实体类的编写规则"><a href="#1-实体类的编写规则" class="headerlink" title="1.实体类的编写规则"></a>1.实体类的编写规则</h3><p>推荐使用包装类</p>
+<p>1 实体类（称为 持久化类）</p>
+<p>有类和数据库表进行对应关系，不需要直接操作数据库表，操作实体类对象就可以了，这个类称为实体类</p>
+<span id="more"></span>
+
+<p>2 实体类编写规则<br>（1）实体类属性私有的<br>（2）私有属性有公开的get和set方法<br>（3）有公开无参构造方法<br>（4）要求实体类里面有一个属性和表里面主键对应<br>（5）建议：不要使用final修饰<br>（6）建议：要使用基本数据类型对应包装类  </p>
+<p>3 为什么使用包装类</p>
+<p>（1）使用包装类之后更准确表示数据</p>
+<p>（2）</p>
+<table>
+<thead>
+<tr>
+<th>基本数据类型</th>
+<th>对应包装类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>char</td>
+<td>Character</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>float</td>
+<td>Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td>Double</td>
+</tr>
+<tr>
+<td>short</td>
+<td>Short</td>
+</tr>
+<tr>
+<td>long</td>
+<td>Long</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>Byte</td>
+</tr>
+</tbody></table>
+<p>（3）举例说明</p>
+<ul>
+<li>比如表示学生分数 int score = 5;  表示学生得了0分int score = 0;</li>
+<li><ul>
+<li>表示学生没有参加考试int score = -1;</li>
+</ul>
+</li>
+<li>使用包装类 Integer score = 5;   学生得了0分Integer score = 0;</li>
+<li><ul>
+<li>表示学生没有参加考试Integer score = null;</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-主键生成策略"><a href="#2-主键生成策略" class="headerlink" title="2.主键生成策略"></a>2.主键生成策略</h3><p>1、Hibernate要求在一个实体中必须要有一个属性作为唯一值，这个唯一值一般都对应表中的主键。</p>
+<p>2、主键分类</p>
+<p>自然主键:把具有业务含义的字段作为主键，称之为自然主键。</p>
+<p>代理主键:把不具有业务含义的字段作为主键，称之为代理主键。</p>
+<p>3、主键的常见生成策略有七种
+　　　　
+　　</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>increment</td>
+<td>用于long、short或int类型的，由Hibernate自动由递增的方式生成唯一标识符，每次增长1.只有当没有其他线程向同一张表中插入数据时使用。不能在集群情况下使用，适用于代理主键。</td>
+</tr>
+<tr>
+<td>identity</td>
+<td>采用底层数据库提供的本身提供的主键生成标识符，前提是数据库必须支持自增长的数据类型。在DB2、mysql、MS SQL SERVER、Sybase和HypersonicSQL数据库中可以使用该策略，该策略要求在数据库中把主键定义为自增长，适用于代理主键。</td>
+</tr>
+<tr>
+<td>sequence</td>
+<td>Hibernate根据底层数据库序列生成标识符。条件是数据库要支持序列，Oracle数据库可以使用该策略适用于代理主键。</td>
+</tr>
+<tr>
+<td>hilo</td>
+<td>通过hi/lo 算法实现的主键生成机制，需要额外的数据库表保存主键生成历史状态。</td>
+</tr>
+<tr>
+<td>native</td>
+<td>根据底层数据库对自动生成表示符的能力来自动选择identity、sequence和hilo三种生成器中的一种。适合跨数据库平台开发，适用于代理主键。</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>Hibernate采用128位的UUID来生成字符，使用16进制表示，使用该策略时主键必须定义为String类型，由于其所占的空间较多，使用较少，适用于代理主键。</td>
+</tr>
+<tr>
+<td>assigned</td>
+<td>由Java程序负责生成标识符，如果在配置文件中不配置<generator></generator>标签，则默认为该策略，适用于自然主键。</td>
+</tr>
+</tbody></table>
+<p>1 在映射配置文件中，配置实体类唯一属性值和表主键对应，class属性中有值，这个值表示生成策略，使用 native</p>
+<p>2 使用最多的native，</p>
+<p>（1）根据使用的数据库类型，自动选择使用的值</p>
+<p>（2）实体类属性类型int类型（包装类）</p>
+<p>3 经常使用值 uuid</p>
+<p>如果使用uuid值时候，实体类属性类型不能是int类型，是String类型</p>
+<h3 id="3-对实体类的-CRUD-操作"><a href="#3-对实体类的-CRUD-操作" class="headerlink" title="3..对实体类的 CRUD 操作"></a>3..对实体类的 CRUD 操作</h3><h4 id="3-1-添加操作"><a href="#3-1-添加操作" class="headerlink" title="3.1.添加操作"></a>3.1.添加操作</h4><p>前面写过了，不再重复</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Teacher teacher = <span class="keyword">new</span> Teacher();</span><br><span class="line">teacher.setName(<span class="string">&quot;赵三三&quot;</span>);</span><br><span class="line">teacher.setSex(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">teacher.setAddress(<span class="string">&quot;北京市海淀区&quot;</span>);</span><br><span class="line">teacher.setPassword(<span class="string">&quot;654321&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-根据-id-进行查询"><a href="#3-2-根据-id-进行查询" class="headerlink" title="3.2.根据 id 进行查询"></a>3.2.根据 id 进行查询</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1.调用工具类得到 sessionFactory</span></span><br><span class="line">    SessionFactory sessionFactory = HibernateUtils.getSessionFactory();</span><br><span class="line">    <span class="comment">// 2.获取 Session</span></span><br><span class="line">    Session session = sessionFactory.openSession();</span><br><span class="line">    <span class="comment">// 3.开启事务</span></span><br><span class="line">    Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.根据 id 查询</span></span><br><span class="line">    <span class="comment">// 调用 session 里面的 get</span></span><br><span class="line">    <span class="comment">// 第一个参数：实体类的 class</span></span><br><span class="line">    <span class="comment">// 第二个参数：id 值</span></span><br><span class="line">    Student student = session.get(Student.class, <span class="number">1</span>);</span><br><span class="line">    System.out.println(student);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5.提交事务</span></span><br><span class="line">    transaction.commit();</span><br><span class="line">    <span class="comment">// 6.关闭资源</span></span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-修改操作"><a href="#3-3-修改操作" class="headerlink" title="3.3.修改操作"></a>3.3.修改操作</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testUpdate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1.调用工具类得到 sessionFactory</span></span><br><span class="line">    SessionFactory sessionFactory = HibernateUtils.getSessionFactory();</span><br><span class="line">    <span class="comment">// 2.获取 Session</span></span><br><span class="line">    Session session = sessionFactory.openSession();</span><br><span class="line">    <span class="comment">// 3.开启事务</span></span><br><span class="line">    Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.修改操作</span></span><br><span class="line">    <span class="comment">// 修改 id = 1 记录的 name 的值</span></span><br><span class="line">    <span class="comment">// 先查</span></span><br><span class="line">    Student student = session.get(Student.class, <span class="number">1</span>);</span><br><span class="line">    System.out.println(student);</span><br><span class="line">    <span class="comment">// 再改</span></span><br><span class="line">    student.setName(<span class="string">&quot;哈哈&quot;</span>);</span><br><span class="line">    <span class="comment">// 调用 session 里的 update 方法修改(save 也可以)</span></span><br><span class="line">    session.update(student);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5.提交事务</span></span><br><span class="line">    transaction.commit();</span><br><span class="line">    <span class="comment">// 6.关闭资源</span></span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-4-删除操作"><a href="#3-4-删除操作" class="headerlink" title="3.4.删除操作"></a>3.4.删除操作</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 1.调用工具类得到 sessionFactory</span></span><br><span class="line">    SessionFactory sessionFactory = HibernateUtils.getSessionFactory();</span><br><span class="line">    <span class="comment">// 2.获取 Session</span></span><br><span class="line">    Session session = sessionFactory.openSession();</span><br><span class="line">    <span class="comment">// 3.开启事务</span></span><br><span class="line">    Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 4.删除操作</span></span><br><span class="line">    <span class="comment">// 第一种方式，根据 ID 查询出对象(建议)</span></span><br><span class="line"><span class="comment">//        Student student = session.get(Student.class, 4);</span></span><br><span class="line"><span class="comment">//        session.delete(student);</span></span><br><span class="line">    <span class="comment">// 第二种方法</span></span><br><span class="line">    Student student = <span class="keyword">new</span> Student();</span><br><span class="line">    student.setId(<span class="number">4</span>);</span><br><span class="line">    session.delete(student);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5.提交事务</span></span><br><span class="line">    transaction.commit();</span><br><span class="line">    <span class="comment">// 6.关闭资源</span></span><br><span class="line">    session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-实体类对象状态介绍（了解）"><a href="#4-实体类对象状态介绍（了解）" class="headerlink" title="4.实体类对象状态介绍（了解）"></a>4.实体类对象状态介绍（了解）</h3><p>1 实体类对象有三种状态</p>
+<p>（0）区分状态的方式<br>实体类对象里面是否id值<br>实体类对象是否与session有关联  </p>
+<p>（1）瞬时态：没有id值，与session没有关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Teacher teacher = <span class="keyword">new</span> Teacher();</span><br><span class="line">teacher.setName(<span class="string">&quot;赵三三&quot;</span>);</span><br><span class="line">teacher.setSex(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">teacher.setAddress(<span class="string">&quot;北京市海淀区&quot;</span>);</span><br><span class="line">teacher.setPassword(<span class="string">&quot;654321&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>（2）持久态：有id值，与session有关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student student = session.get(Student.class, <span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>（3）托管态：有id值，与session没有关系</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student student = <span class="keyword">new</span> Student();</span><br><span class="line">student.setId(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>2 状态直接的转换  </p>
+<p>（1）瞬时态 转换 持久态 ： 调用save方法实现<br>（2）托管态 转换 持久态 ： 调用update方法实现  </p>
+<p>3 saveOrUpdate() 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 瞬时态，添加操作</span></span><br><span class="line">Student student = <span class="keyword">new</span> Student();</span><br><span class="line">student.setName(<span class="string">&quot;Jack&quot;</span>);</span><br><span class="line">student.setSex(<span class="string">&quot;男&quot;</span>);</span><br><span class="line">student.setAddress(<span class="string">&quot;河北唐山&quot;</span>);</span><br><span class="line">student.setPassword(<span class="string">&quot;hhhhhhh&quot;</span>);</span><br><span class="line"></span><br><span class="line">session.saveOrUpdate(student);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实体类对象是托管态，做修改</span></span><br><span class="line">Student student = <span class="keyword">new</span> Student();</span><br><span class="line">student.setId(<span class="number">5</span>);</span><br><span class="line">student.setName(<span class="string">&quot;Marry&quot;</span>);</span><br><span class="line">student.setSex(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">student.setAddress(<span class="string">&quot;爱尔兰&quot;</span>);</span><br><span class="line">student.setPassword(<span class="string">&quot;gggg&quot;</span>);</span><br><span class="line"></span><br><span class="line">session.saveOrUpdate(student);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 持久态，执行更新操作</span></span><br><span class="line">Student student = session.get(Student.class, <span class="number">5</span>);</span><br><span class="line">student.setName(<span class="string">&quot;李雷&quot;</span>);</span><br><span class="line"></span><br><span class="line">session.saveOrUpdate(student);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Hibernate-的一级缓存"><a href="#5-Hibernate-的一级缓存" class="headerlink" title="5.Hibernate 的一级缓存"></a>5.Hibernate 的一级缓存</h3><h4 id="5-1-Hibernate提供两种缓存"><a href="#5-1-Hibernate提供两种缓存" class="headerlink" title="5.1.Hibernate提供两种缓存"></a>5.1.Hibernate提供两种缓存</h4><p>第一种 一级缓存</p>
+<p>（1）一级缓存特点：</p>
+<ul>
+<li>特点1： 一级缓存在hibernate操作中默认打开的，直接使用</li>
+<li>特点2： 一级缓存使用范围，是session范围，在session创建和session关闭的范围中使用一级缓存，session关闭一级缓存没有了</li>
+<li>特点3： 一级<strong>缓存中缓存持久态数据</strong></li>
+</ul>
+<p>第二种 二级缓存（不用，替代技术 redis）</p>
+<ul>
+<li>不是默认开启，需要配置</li>
+<li>使用范围，SessionFactory</li>
+</ul>
+<h4 id="5-2-验证一级缓存的存在"><a href="#5-2-验证一级缓存的存在" class="headerlink" title="5.2.验证一级缓存的存在"></a>5.2.验证一级缓存的存在</h4><p>1.验证方式<br>(1)根据 id = 1 查询，返回对象<br>(2)再次根据 id = 1 查询，返回对象（不会查询数据库）</p>
+<h4 id="5-3-一级缓存的执行过程"><a href="#5-3-一级缓存的执行过程" class="headerlink" title="5.3.一级缓存的执行过程"></a>5.3.一级缓存的执行过程</h4><p><img src="https://up-img.yonghong.tech/pic/2021/07/29-17-11-cache-m9VJIj.png" alt="cache"></p>
+<h4 id="5-4-特性-持久态自动更新数据库"><a href="#5-4-特性-持久态自动更新数据库" class="headerlink" title="5.4.特性(持久态自动更新数据库)"></a>5.4.特性(持久态自动更新数据库)</h4><p>不执行 session.update(user) 也可以更新。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/07/29-17-10-auto-update-BufMmO.png" alt="auto-update"></p>
+<h3 id="6-事务代码规范写法"><a href="#6-事务代码规范写法" class="headerlink" title="6.事务代码规范写法"></a>6.事务代码规范写法</h3><h4 id="6-1-事务相关概念"><a href="#6-1-事务相关概念" class="headerlink" title="6.1.事务相关概念"></a>6.1.事务相关概念</h4><p>事务特性</p>
+<p>原子性，一致性，隔离性，持久性</p>
+<p>脏读<br>不可重复读<br>虚读</p>
+<p>设置事务隔离级别</p>
+<p>MySQL 默认的隔离级别 repeatable read</p>
+<p>Hibernate 事务隔离级别</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.connection.isolation&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="6-2-Hibernate-事务代码规范写法"><a href="#6-2-Hibernate-事务代码规范写法" class="headerlink" title="6.2.Hibernate 事务代码规范写法"></a>6.2.Hibernate 事务代码规范写法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 开启事务</span></span><br><span class="line">    <span class="comment">// 提交事务</span></span><br><span class="line">&#125; <span class="keyword">catch</span> () &#123;</span><br><span class="line">    <span class="comment">// 回滚事务</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 关闭操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTx</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SessionFactory sessionFactory = <span class="keyword">null</span>;</span><br><span class="line">    Session session = <span class="keyword">null</span>;</span><br><span class="line">    Transaction transaction = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        <span class="comment">// 1.调用工具类得到 sessionFactory</span></span><br><span class="line">        sessionFactory = HibernateUtils.getSessionFactory();</span><br><span class="line">        <span class="comment">// 2.获取 Session</span></span><br><span class="line">        session = sessionFactory.openSession();</span><br><span class="line">        <span class="comment">// 3.开启事务</span></span><br><span class="line">        transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 实体类对象是托管态，做修改</span></span><br><span class="line">        Student student = <span class="keyword">new</span> Student();</span><br><span class="line">        student.setId(<span class="number">5</span>);</span><br><span class="line">        student.setName(<span class="string">&quot;Marry&quot;</span>);</span><br><span class="line">        student.setSex(<span class="string">&quot;女&quot;</span>);</span><br><span class="line">        student.setAddress(<span class="string">&quot;爱尔兰&quot;</span>);</span><br><span class="line">        student.setPassword(<span class="string">&quot;gggg&quot;</span>);</span><br><span class="line"></span><br><span class="line">        session.saveOrUpdate(student);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">        transaction.commit();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        transaction.rollback();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 关闭操作</span></span><br><span class="line">        session.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3-Hibernate-绑定session"><a href="#6-3-Hibernate-绑定session" class="headerlink" title="6.3.Hibernate 绑定session"></a>6.3.Hibernate 绑定session</h4><p>（1）在hibernate核心配置文件中，配置打开与本地线程绑定的session</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.current_session_context_class&quot;</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<p>（2）调用sessionFactory里面的方法得到与本地线程绑定的session</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Session <span class="title">getSessionObject</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sessionFactory.getCurrentSession();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Session session = getSessionObject();</span><br></pre></td></tr></table></figure>
+
+<p>（3）不需要手动关闭 session</p>
+<h3 id="7-Hibernate-API-的使用"><a href="#7-Hibernate-API-的使用" class="headerlink" title="7.Hibernate API 的使用"></a>7.Hibernate API 的使用</h3><h4 id="7-1-Query-对象"><a href="#7-1-Query-对象" class="headerlink" title="7.1.Query 对象"></a>7.1.Query 对象</h4><p>1 写 HQL 语句：Hibernate Query Language，hibernate提供查询语言，和普通sql很相似</p>
+<ul>
+<li>（1）区别： <ul>
+<li>使用普通sql操作表和字段。</li>
+<li>使用hql <strong>操作实体类和属性</strong></li>
+</ul>
+</li>
+<li>（2）查询所有语句： from 实体类名称</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 Query 对象</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTx</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    SessionFactory sessionFactory = <span class="keyword">null</span>;</span><br><span class="line">    Session session = <span class="keyword">null</span>;</span><br><span class="line">    Transaction transaction = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 开启事务</span></span><br><span class="line">        <span class="comment">// 1.调用工具类得到 sessionFactory</span></span><br><span class="line">        sessionFactory = HibernateUtils.getSessionFactory();</span><br><span class="line">        <span class="comment">// 2.获取 Session</span></span><br><span class="line">        session = sessionFactory.openSession();</span><br><span class="line">        <span class="comment">// 3.开启事务</span></span><br><span class="line">        transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建一个 Query 对象</span></span><br><span class="line">        <span class="comment">// 方法里面写 HQL 语句</span></span><br><span class="line">        Query query = session.createQuery(<span class="string">&quot;from Student&quot;</span>);</span><br><span class="line">        <span class="comment">// 调用 Query 对象里面的方法得到结果</span></span><br><span class="line">        List&lt;Student&gt; list = query.list();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(Student student : list) &#123;</span><br><span class="line">            System.out.println(student);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 提交事务</span></span><br><span class="line">        transaction.commit();</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        transaction.rollback();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 关闭操作</span></span><br><span class="line">        session.close();</span><br><span class="line">        sessionFactory.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="7-2-Criteria-对象"><a href="#7-2-Criteria-对象" class="headerlink" title="7.2.Criteria 对象"></a>7.2.Criteria 对象</h4><p>1 使用这种方式，不需要写任何语句，都是调用方法实现</p>
+<p>2 具体实现</p>
+<ul>
+<li>第一步 创建critica对象</li>
+<li>第二步 调用critica对象里面的方法得到结果</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建 criteria 对象</span></span><br><span class="line">Criteria criteria = session.createCriteria(Student.class);</span><br><span class="line">List&lt;Student&gt; list = criteria.list();</span><br><span class="line"><span class="keyword">for</span>(Student student : list) &#123;</span><br><span class="line">    System.out.println(student);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="7-3-SQLquery-对象"><a href="#7-3-SQLquery-对象" class="headerlink" title="7.3.SQLquery 对象"></a>7.3.SQLquery 对象</h4><p>1 这种方式可以使用普通sql实现</p>
+<p>2 实现步骤</p>
+<ul>
+<li>第一步 创建对象</li>
+<li>第二步 调用方法得到结果</li>
+</ul>
+<p>返回 list 集合每部分是数组形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQLQuery sqlQuery = session.createSQLQuery(<span class="string">&quot;select * from h_student&quot;</span>);</span><br><span class="line">List&lt;Object[]&gt; list = sqlQuery.list();</span><br><span class="line"><span class="keyword">for</span>(Object[] objects : list) &#123;</span><br><span class="line">    System.out.println(Arrays.toString(objects));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回 list 集合每部分是对象形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQLQuery sqlQuery = session.createSQLQuery(<span class="string">&quot;select * from h_student&quot;</span>);</span><br><span class="line">sqlQuery.addEntity(Student.class);</span><br><span class="line">List&lt;Student&gt; list = sqlQuery.list();</span><br><span class="line"><span class="keyword">for</span>(Student student : list) &#123;</span><br><span class="line">    System.out.println(student);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><span class="exturl" data-url="aHR0cDovL3d3dy5jbmJsb2dzLmNvbS9qYWNrMTk5NS9wLzY5MzcyMzUuaHRtbA==">Hibernate实体类编写规则和主键策略<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81YWExNDgxMjZmYjlhMDI4ZDQ0NDJhNDY=">Hibernate【缓存】知识要点<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cDovL3dpa2kuamlrZXh1ZXl1YW4uY29tL3Byb2plY3QvaGliZXJuYXRlL2NhY2hpbmcuaHRtbA==">缓存-极客学院<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cDovL3RyYWN5bGlodWkuZ2l0aHViLmlvLzIwMTUvMDcvMjAvSGliZXJuYXRlJUVGJUJDJTlBJUU3JUJDJTkzJUU1JUFEJTk4JUU2JTlDJUJBJUU1JTg4JUI2JUU3JTlBJTg0JUU1JUFEJUE2JUU0JUI5JUEwLw==">Hibernate：缓存机制的学习<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2018/07/2018-07-26-hibernate/" title="Hibernate 原理及实战（二）">http://yonghong.tech/2018/07/2018-07-26-hibernate/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/2018-07-25-hibernate/" rel="prev" title="Hibernate 原理及实战（一）">
+                  <i class="fa fa-chevron-left"></i> Hibernate 原理及实战（一）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/07/2018-07-28-hibernate/" rel="next" title="Hibernate 原理及实战（三）">
+                  Hibernate 原理及实战（三） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">19:52</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/2018/07/2018-07-26-hibernate/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"0be7c0160ae8d9ae7abf792b5c884fbd"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>

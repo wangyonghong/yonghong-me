@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="Gaurav Oberoi 是 SurveyMonkey 的（前）联合创始人，曾于 Amazon、Xmarks 先后从事工程师、产品经理等职位，在西雅图和硅谷有十余年的工作经验。   在这篇文章中他分享了他对于产品文档的看法，以及他撰写产品文档的常用流程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="产品文档撰写指南">
+<meta property="og:url" content="http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="Gaurav Oberoi 是 SurveyMonkey 的（前）联合创始人，曾于 Amazon、Xmarks 先后从事工程师、产品经理等职位，在西雅图和硅谷有十余年的工作经验。   在这篇文章中他分享了他对于产品文档的看法，以及他撰写产品文档的常用流程。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-12-1-7fobHy.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-12-2-F0icOA.png">
+<meta property="article:published_time" content="2018-02-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-02-20T16:00:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="产品文档">
+<meta property="article:tag" content="文档指南">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-12-1-7fobHy.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/","path":"2018/02/2018-02-21-on-writing-product-specs/","title":"产品文档撰写指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>产品文档撰写指南 | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%99%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">如何写产品文档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A6%96%E5%85%88%EF%BC%8C%E4%B8%BE%E4%B8%AA%E4%BE%8B%E5%AD%90%E3%80%82"><span class="nav-number">1.1.</span> <span class="nav-text">首先，举个例子。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%92%B0%E5%86%99%E6%8C%87%E5%8D%97"><span class="nav-number">1.2.</span> <span class="nav-text">文档撰写指南</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3%EF%BC%9F"><span class="nav-number">1.2.1.</span> <span class="nav-text">为什么要写产品文档？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3%E4%B8%AD%E5%BA%94%E5%BD%93%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9%EF%BC%9F"><span class="nav-number">1.2.2.</span> <span class="nav-text">产品文档中应当包含哪些内容？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%86%99%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3%EF%BC%9F"><span class="nav-number">1.2.3.</span> <span class="nav-text">如何写产品文档？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%87%BA%E9%AB%98%E6%95%88%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3%E7%9A%84%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7"><span class="nav-number">1.2.4.</span> <span class="nav-text">写出高效产品文档的进阶技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B4%E5%A5%BD%E7%9A%84%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91%EF%BC%88Agile-Scrum%EF%BC%89%E5%91%A2%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">说好的敏捷开发（Agile&#x2F;Scrum）呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%AF%B9%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3%E6%80%8E%E4%B9%88%E7%9C%8B%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">你对技术文档怎么看？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-number">1.6.</span> <span class="nav-text">备注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A5%E6%BA%90"><span class="nav-number">1.7.</span> <span class="nav-text">来源</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          产品文档撰写指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-21 00:00:00 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-21T00:00:00+08:00">2018-02-21 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%96%87%E6%A1%A3%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">文档指南</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><span class="exturl" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL2luL2dvYmVyb2kv">Gaurav Oberoi<i class="fa fa-external-link-alt"></i></span> 是 SurveyMonkey 的（前）联合创始人，曾于 Amazon、Xmarks 先后从事工程师、产品经理等职位，在西雅图和硅谷有十余年的工作经验。  </p>
+<p>在这篇文章中他分享了他对于产品文档的看法，以及他撰写产品文档的常用流程。</p>
+<span id="more"></span>
+
+<p><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-12-1-7fobHy.png"></p>
+<blockquote>
+<p>能写出六页结构清晰的备忘录的人，不可能没有清晰的思维。——杰夫·贝索斯，亚马逊</p>
+</blockquote>
+<h1 id="如何写产品文档"><a href="#如何写产品文档" class="headerlink" title="如何写产品文档"></a>如何写产品文档</h1><p>很多人听到「产品文档」这四个字就像吞了苍蝇一样，人们通常会认为这意味着又要花几周写一个根本没人看的文档。如果一个团队总被产品文档这种事情拖累，怎么可能「敏捷」得起来，怎么可能高效地产出代码？  </p>
+<p>我在过去十几年创造了多个数百万人使用的软件产品之后，越发认为这种观点是完全错误的。根据我的经验：  </p>
+<blockquote>
+<p>高效的产品文档是创造伟大产品的过程中所不可或缺的重要组成部分。撰写产品文档可以强制所有人从项目初始就理性思考，频繁沟通，明确权责——所有的这些都会带来更好的软件质量，更低的进度风险，以及更少的时间浪费。在这篇文章中，我会通过一个案例来分享一些普适的建议，这些建议会对大中型（超过二百人的）公司中的产品经理们非常有帮助。</p>
+</blockquote>
+<h2 id="首先，举个例子。"><a href="#首先，举个例子。" class="headerlink" title="首先，举个例子。"></a>首先，举个例子。</h2><p><strong>假设你在这里工作：</strong>  </p>
+<p>一家从事<strong>在线旅游预订服务</strong>（就像 Hotels 或者 Airbnb 但是规模更小一些）的公司。目前这家公司的支付转化率偏低，所以这个季度大家打算尝试通过<strong>在支付环节加入在线客服</strong>的方案来提升转化。 </p>
+<p><strong>你的工单/用户故事/路线图是：</strong>  </p>
+<p><strong>通过在支付环节增加在线客服来尝试提高支付转化率。</strong></p>
+<p>支付转化率目前仅有 18％，而业内平均转化率有 30％。我们打算测试下在支付时展示在线客服聊天窗口是否可以提高这个转化率。用户运营团队已经同意了提供 1 人月的客服人力支持。  </p>
+<p><strong>在你没有产品文档时，你会这样做：</strong>  </p>
+<p>比方说，你觉得行动起来总是最重要的，因此直接开始动手：  </p>
+<ol>
+<li>在迭代计划会上，你和团队讨论了这个需求。</li>
+<li>然后你挑选了一个靠谱的第三方客服供应商（例如 SnapEngage ）。</li>
+<li>提交一个工单来让工程师添加一些 Javascript 代码。</li>
+<li>和支持团队开个会，确定他们都准备好了</li>
+</ol>
+<p>搞定了！这么简单的事情怎么能要我们写产品文档呢？如果你是在一个小型创业团队，你也确实并不需要——因为产品改动相对小，涉及到的人也相对更少。 </p>
+<p>但如果你是在一个更大的组织之中，或者产品更加成熟/复杂，就会陆续出现下列这些问题，并且相比写文档，这些问题会需要更多时间来处理。例如： </p>
+<ul>
+<li>工程师把工单标记完成了，但是一验收测试，就发现这个功能完全没有考虑移动端的适配。</li>
+<li>「唉呀！你忘了提醒大家手机端的使用才是核心场景。」</li>
+<li> 用户运营经理打算开展一个漫长的评审流程，以确定最合适的聊天服务商。</li>
+<li> 「啊……需要定一个会议，向大家解释下这次上线只是一个灰度测试。」</li>
+<li> 发布一小时后，客服报告说他们收到了西班牙语的在线聊天请求。</li>
+<li> 「啥？要追加一个紧急发布，把这个测试限定在英语用户中。」</li>
+<li> 一个设计师花了几天，为聊天窗口滑入屏幕的交互绘制了一个完美的动画。</li>
+<li> 「用户体验过度优化，你是否对整个团队统一了「这次只是一个测试」的预期？」</li>
+<li> 一周的测试完成之后，数据分析师发现无法产出你要的报告，因为相关的必要指标并没有埋点。</li>
+<li> 「史诗级的失败。从头再来吧。」</li>
+</ul>
+<p>如果这是一个相对简单的项目，即使没有产品文档可能也不至于陷入这样的灾难之中。但是在简单的项目中你仍然有可能会因为没有文档浪费许多时间和机会成本。  </p>
+<p><strong>如果你写了一篇文档：</strong>  </p>
+<p>为了便于说明，我准备了两个示例文档：一篇思路笔记，和一篇完整的产品文档示例——这样可以完整介绍产品文档的撰写流程。  </p>
+<p>请在继续阅读文章之前，花几分钟读一下这两篇示例文档吧。</p>
+<ul>
+<li>阅读 <a href="/2018/02/21/product-example-notes/">示例思路笔记</a> （阅读时间 2 分钟）</li>
+<li>这是一个根据你已知的信息和想要解答的问题所梳理成的列表。这会是你需要做的第一件事情，大约需要一个小时来完成这个文档。这个文档会成为你和团队中其他人的一个沟通基础。</li>
+<li>阅读 <a href="/2018/02/21/product-example-spec/">示例产品文档</a> （阅读时间 6 分钟）</li>
+<li>只有和团队一起评审了你的假设和创意之后（无论是在专门召集的会议上，喝咖啡时，或者桌上足球的休息时间），你才应该真正开始写产品文档。如果已经完成了沟通和评审，整个文档应该花费你 1-3 个小时的时间。</li>
+</ul>
+<p>啊哈！有了文档之后是不是就感觉踏实多了？写文档看起来是额外的工作成本，但是其实并不是，高效的文档可以帮助你和你的团队节约时间投入，并且在交付上线时会更有信心。  </p>
+<p><span id="ihaveread"></span></p>
+<hr>
+<p><strong>等等！——你已经读完示例文档了么？请务必先读完它再继续阅读下面的文章。</strong>  </p>
+<hr>
+<p><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-12-2-F0icOA.png"></p>
+<blockquote>
+<p>与工程师进行书面沟通是更好的（相对于口头沟通），因为书面沟通避免了歧义，更恒久，也更容易明确权责。</p>
+</blockquote>
+<h2 id="文档撰写指南"><a href="#文档撰写指南" class="headerlink" title="文档撰写指南"></a>文档撰写指南</h2><p>我通过示例文档诠释了这篇文章中所讲述的思考，在继续阅读全文之前，请务必确认你已经阅读了 示例产品文档。  </p>
+<h3 id="为什么要写产品文档？"><a href="#为什么要写产品文档？" class="headerlink" title="为什么要写产品文档？"></a>为什么要写产品文档？</h3><blockquote>
+<p>为了以更高的质量、更快的速度和更佳的预判来交付正确的产品。  </p>
+</blockquote>
+<p>是的，就是这样。那么，产品文档将如何帮助你做到这一切呢？Ben Horowitz 分享了上图中这个看法，我的示例文档也是一个很好的例证。明确一下要点：</p>
+<p><strong>1. 从一开始就理性思考</strong><br>在团队开始付出更高成本去设计软件架构、实施代码开发、完善界面设计、测试软件质量之前，写文档可以迫使你提前思考每一个细节。这将会提高你决策的质量，降低意外事件发生的概率。  </p>
+<p><strong>2. 高效沟通</strong><br>你常常需要和不同的利益相关方（支持团队，工程团队，设计团队，财务团队，管理层等等）沟通你的方案。产品文档可以帮助你事半功倍地完成沟通，避免口头沟通中产生的歧义，团队中的所有人可以更好地理解你的意图，并且更有的放矢地做出答复。  </p>
+<p><strong>3. 明确权责</strong>  </p>
+<p>明确项目目标的评价标准，公开承诺奖惩激励机制：利益相关方可以知晓如果最后一刻变更需求会意味着什么，工程师们也会在预估工期时再三斟酌。</p>
+<h3 id="产品文档中应当包含哪些内容？"><a href="#产品文档中应当包含哪些内容？" class="headerlink" title="产品文档中应当包含哪些内容？"></a>产品文档中应当包含哪些内容？</h3><p>产品文档应该明确沟通要做一个「什么」产品，以及「为什么」要这么做。用来说明清楚一个产品的表达方式很多，但最核心的，一定要说清楚这五件事情：  </p>
+<p><strong>1. 问题</strong><br>描绘你此次打算解决的问题。更重要的是，解释为什么要去解决这个问题。描述要尽可能地具体，并且提供相关的数据指标。  </p>
+<p><strong>2. 可衡量的目标</strong><br>明确承诺交付和成果，明确哪些事情超出了此项目的范畴。每一个目标，都应该可以明确衡量「是否达到目标」。  </p>
+<p><strong>3. 需求背景</strong><br>提供你的观众理解当前问题以及接受你的提议所需的所有背景信息。包括但不限于假设、用例、数据指标等信息。  </p>
+<p><strong>4. 解决方案详情</strong><br>你的提议应该有充足的细节，易于团队成员消化理解及执行——可以把这部分内容想象成对人脑进行编程和执行。 </p>
+<p><strong>5. 时间轴</strong><br>列出你的团队共同认可的截止日期和其他重要时间点。这部分内容开始的时候可能会比较模糊，但是在最后一次文档评审之前应当完全敲定。</p>
+<p>你可以使用我的示例文档做你的文档模板，按照你的想法增/删/改任何章节。只要你能够清晰并且条理清楚地表述上面提到的这五点信息，文档形式并不重要。  </p>
+<h3 id="如何写产品文档？"><a href="#如何写产品文档？" class="headerlink" title="如何写产品文档？"></a>如何写产品文档？</h3><p>接下来我会介绍我撰写和评审文档的常规流程。根据项目大小，利益相关方的数量不同等情况，流程细节可能会有所变化，但是大体的流程是确定的。</p>
+<p><strong>1. 快速完成一个草稿（1-2 个小时）</strong><br>关闭电子邮件和聊天工具。泡杯茶，坐在椅子上开始思考，然后逐一把你所了解的信息列成清单（见上文中的 示例思路笔记 ）。  </p>
+<p><strong>2. 安排几个 30 分钟的一对一会议 （1-4 个小时）</strong><br>这个步骤的目的是过一遍文档中的细节，优化你的方案，并且获得更多人的支持。尽可能控制这些会议的规模，人越少越好（理想状态下都应该是一对一会议）。在本文的示例中，我会和客服部门的负责人，一个财务人员和一个工程师分别安排一次会议。  </p>
+<p><strong>3. 撰写和编辑文档 （0.5-3 天）</strong><br>此时，你应该对能做，并且应该做什么有了一个明确的想法，但是大脑中塞满了大量的细节等待着梳理清楚。于是接下来需要将所有这些细节都整理出来，并且逐一梳理斟酌。在完成第一版文档之后，需要继续大篇幅编辑修改，通常最终的文档可以在你的第一版草稿的基础上压缩 30%-50% 的长度，简洁和清晰的文档就意味着更加容易阅读。大部分文档都可以在半天到一天的时间里完成，不过实际上也会有一些文档需要两三天才能写完。  </p>
+<p><strong>4. 群发文档并且安排一个 1 小时的评审会议（15 分钟）</strong><br>将文档群发给项目的所有利益相关方，并且抄送给其他可能对文档感兴趣的团队（例如你所在的产品团队，整个支持团队等）。跟进这些关键人员是否接受了会议邀请：将会执行这件事情的人，和所有对这件事情有通过/否决权力的人。  </p>
+<p><strong>5. 评审文档（1小时）</strong><br>在开始会议之前，询问是否有参会者没有详细阅读你的文档。通常都会有一两个人中枪，在这种情况下可以说：「没问题，我们先用 10 分钟一起来看一下文档。已经读过文档的人可以利用这个时间先放松休息一下」。这次会议上你需要获得利益相关方的同意，并且获得执行方（工程师、支持团队等）的知晓、认可以及人力支持。你可能需要开多次评审会议，并且根据评审会议上沟通的信息不断修改文档。  </p>
+<p><strong>6. 通过评审后，及时同步信息和建立工单 （1-2 小时）</strong><br>会后同步信息的电子邮件需要包含更新后的产品文档链接，和此项目相关的工单链接（例如「在页面上添加 JavaScript 代码」，「完成数据分析报告」，「测试 Staging 环境」，「和支持团队预演流程」，等等）。一般接下来将会有一位工程师完成技术文档，不过并不总是这样（文中的示例项目就不需要这一步）。  </p>
+<h3 id="写出高效产品文档的进阶技巧"><a href="#写出高效产品文档的进阶技巧" class="headerlink" title="写出高效产品文档的进阶技巧"></a>写出高效产品文档的进阶技巧</h3><p><strong>1. 尽量简短</strong><br>没有比这更重要的文档写作建议了。简洁意味着清晰的思路和沟通，也意味着你的文档更加易于阅读和理解——这一点至关重要。</p>
+<p><strong>2. 使用平白的语言和简单的格式</strong><br>使用简短而不是花哨的语句，使用列表和加粗强调可以使文章更一目了然，以放松有趣的方式写作而不是一板一眼，如果你有得体的幽默感就再好不过了。</p>
+<p><strong>3. 为开发团队预留时间</strong><br>通过评审并且达成一致通过的文档才是完善的文档。如果你希望在未来的某一个迭代 Sprint 中开发此项目，就应该提前两到三周开始这个产品文档写作流程。</p>
+<p><strong>4. 像工程师一样思考</strong><br>在项目得以进入开发之时，常常会发现大量未预料到的边缘情况——但这种情形其实可以避免。如果你认真考虑过项目进入开发的所有必要条件，你就可以提前发现这些问题（例如，是否在移动设备中可以使用在线聊天功能？）。</p>
+<p><strong>5. 确保每一个人都跟上了你的节奏</strong><br>当我组织产品评审时，会议室里的大部分人都已经大致了解我要讲的内容——因为我已经提前在讨论会和日常聊天中沟通过这个事情了。既然大家都已经清楚了「做什么」和「为什么要做」的问题，文档评审会上我们只要关注实施细节就好了。</p>
+<p><strong>6. 在图表中下功夫</strong><br>流程图、线框图等图表可以通过易于理解的方式提供很大的信息量，同时也需要消耗非常多的时间来制作这些图表。</p>
+<p><strong>7. 在思考和写文档上花 0.5-3 天时间</strong><br>具体时间根据项目大小而定。花费在写文档上的时间越长，所带来的边际收益就会递减。特别需要指出的是，没有人能够读的下去超过 5-6 页的文档。</p>
+<p><strong>8. 指明方向，明晰愿景</strong><br>你不仅仅是在定义一个功能，也是在解释「为什么我们要做这件事情」以及「我们的目标是什么」，在文档中指出这个项目将会对更高层面的规划造成什么影响，以及接下来会发生什么。</p>
+<p><strong>9. 确保你的观众阅读了文档</strong><br>如果你的文档又臭又长，或者从来不分享给对应的人，那你还不如不写文档。务必确保你的文档被对应的人阅读了，我上面关于评审开始时留时间给大家读文档的建议值得大家参考。</p>
+<p><strong>10. 获取真诚的反馈</strong><br>你的文档是否是在赘述人尽皆知的事情？或者是文档缺乏足够的细节？是否在后续实施中发现了太多的边缘情况？又或者，是否在制定计划和文档评审上耗费了太多的时间？你应该和你的团队时刻保持沟通。</p>
+<h2 id="说好的敏捷开发（Agile-Scrum）呢？"><a href="#说好的敏捷开发（Agile-Scrum）呢？" class="headerlink" title="说好的敏捷开发（Agile/Scrum）呢？"></a>说好的敏捷开发（Agile/Scrum）呢？</h2><p>我知道会有争议，但是产品文档和<span class="exturl" data-url="aHR0cDovL2FnaWxlbWFuaWZlc3RvLm9yZy9wcmluY2lwbGVzLmh0bWw=">敏捷宣言的原则<i class="fa fa-external-link-alt"></i></span>（<span class="exturl" data-url="aHR0cDovL2FnaWxlbWFuaWZlc3RvLm9yZy9pc28vemhjaHMvbWFuaWZlc3RvLmh0bWw=">中文版<i class="fa fa-external-link-alt"></i></span>）没有丝毫冲突，并且在类似于 Scrum 这样的敏捷方法上得到了充分发挥——毕竟，用户故事（Story）许多时候需要详尽的描述，文档可以增加沟通中的清晰度和可传播性，为什么非要刻板地认为仅仅使用口头沟通和使用白板才算是敏捷开发呢？「产品文档会导致发布变慢，过度规划，通常会浪费时间」的想法完全是无稽之谈。我工作过的多个世界级团队遵循着一些敏捷原则（例如两周一个迭代周期），每天（甚至更频繁地）发布代码，并且以发布产品（而不是文档或者会议）作为衡量成功的标准——也都仍然认为文档是他们打造成功软件的一个关键部分。</p>
+<h2 id="你对技术文档怎么看？"><a href="#你对技术文档怎么看？" class="headerlink" title="你对技术文档怎么看？"></a>你对技术文档怎么看？</h2><p>我是一个技术文档的支持者。产品文档通常关注「做什么」 ，而技术文档更多关注在「如何做」 。这两种文档为研发流程中的不同环节带来同样的清晰视角，并且都使得工程师（和他们的用户）身心愉悦。未来如果大家有兴趣的话我可能会写一篇关于技术文档的文章。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>感谢你读到这里。如果你认为这篇文章有用，请分享给其他人——特别是你的产品/工程团队。如果你想看更多的产品经理内容（例如：规划产品路线图），或者想了解其他人如何使用产品文档， 请用两分钟填写这个小调查（英文） 。</p>
+<p>我会在未来的文章中分享调查结果中有意思的信息。</p>
+<p>以上，祝写文档愉快！</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ol>
+<li>感谢<span class="exturl" data-url="aHR0cDovL3d3dy5qb2Vsb25zb2Z0d2FyZS5jb20vQWJvdXRNZS5odG1s">周思博<i class="fa fa-external-link-alt"></i></span>（Joel Spolsky） （微软早期 PM，曾参与创办 Stack Overflow，Trello，FogBugz 等产品，《软件随想录》作者）的「文档是对人脑的编程」的比喻。早在2000年，他写了4 篇<span class="exturl" data-url="aHR0cDovL3d3dy5qb2Vsb25zb2Z0d2FyZS5jb20vYXJ0aWNsZXMvZm9nMDAwMDAwMDAzNi5odG1s">关于文档的系列文章<i class="fa fa-external-link-alt"></i></span>（英文） ，这对我的 PM 道路产生了巨大的影响，强烈推荐。</li>
+<li>在顶部的引文中，贝索斯所说的笔记是指为高层管理会议使用的，介绍新业务/产品创意的备忘录。这实际上不算是产品文档，但是两者并不是完全不一样。贝索斯在会议开始的时候会组织所有人默读文件——这激发了我在文档评审时做同样的事情。<span class="exturl" data-url="aHR0cDovL2ZvcnR1bmUuY29tLzIwMTIvMTEvMTYvYW1hem9ucy1qZWZmLWJlem9zLXRoZS11bHRpbWF0ZS1kaXNydXB0ZXIv">来源<i class="fa fa-external-link-alt"></i></span></li>
+<li>感谢 iDoneThis 博客这篇<span class="exturl" data-url="aHR0cDovL2Jsb2cuaWRvbmV0aGlzLmNvbS9tYW5hZ2Vycy13cml0ZS8=">关于写作的价值的文章<i class="fa fa-external-link-alt"></i></span>（英文）。这是贝索斯和 Horowitz 的引言的来源。</li>
+</ol>
+<p>感谢 Vikram Oberoi 。</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9nb2Jlcm9pLmNvbS9vbi13cml0aW5nLXByb2R1Y3Qtc3BlY3MtNWNhNjk3Yjk5MmZk">On Writing Product Specs<i class="fa fa-external-link-alt"></i></span></p>
+<p>翻译链接：<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzI3ODE2OTIyL2Fuc3dlci8xMzE5NDA0MTI=">国外的产品经理是如何写需求文档的？ - 刘涵宇的回答 - 知乎<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/" title="产品文档撰写指南">http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%A7%E5%93%81%E6%96%87%E6%A1%A3/" rel="tag"># 产品文档</a>
+              <a href="/tags/%E6%96%87%E6%A1%A3%E6%8C%87%E5%8D%97/" rel="tag"># 文档指南</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/02/2018-02-20-ab-ba/" rel="prev" title="交换两个变量的值，不使用第三个变量的几种方法">
+                  <i class="fa fa-chevron-left"></i> 交换两个变量的值，不使用第三个变量的几种方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/2018-02-21-product-example-spec/" rel="next" title="示例产品文档">
+                  示例产品文档 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">19:52</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/2018/02/2018-02-21-on-writing-product-specs/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"ff108507154e6dad5e23522b1ce3f07a"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>

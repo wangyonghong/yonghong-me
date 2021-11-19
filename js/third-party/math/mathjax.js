@@ -6,7 +6,7 @@ document.addEventListener('page:loaded', () => {
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
       tex: {
-        inlineMath: {'[+]': [['$', '$']]},
+        inlineMath: { '[+]': [['$', '$']] },
         tags      : CONFIG.mathjax.tags
       },
       options: {
@@ -31,6 +31,6 @@ document.addEventListener('page:loaded', () => {
     MathJax.startup.document.state(0);
     MathJax.typesetClear();
     MathJax.texReset();
-    MathJax.typeset();
+    MathJax.typesetPromise();
   }
 });

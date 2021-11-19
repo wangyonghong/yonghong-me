@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="本节教程讲解了如何在物理机和虚拟机上安装 Kali Linux 系统，以及解决一些常见的问题  多图预警！多图预警！多图预警！ 重要的话说三遍！！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali Linux 实战教程（一） —— 安装 Kali Linux">
+<meta property="og:url" content="http://yonghong.tech/2018/03/2018-03-01-kali-001/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="本节教程讲解了如何在物理机和虚拟机上安装 Kali Linux 系统，以及解决一些常见的问题  多图预警！多图预警！多图预警！ 重要的话说三遍！！！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-17-download-z7YS26.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_5-L1DaLT.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_6-GVLDig.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_7-gFUUIh.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_8-9V8S0q.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_10-Bb2CXG.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_11-L2bEYy.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_12-vFo6cp.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_13-wMTZwI.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_14-5MrsQy.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_15-CzXUQ5.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_16-v61HZ8.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_17-gwDC2r.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_18-3NcmiN.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_19-skl3Lv.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_20-bzqygK.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_21-0uRjZh.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_22-HfORYZ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_23-Ssniat.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_24-2t5GCO.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_25-mJYenm.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_26-iEZtJM.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_27-8vGQ5b.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-37-pic_28-YU6ElX.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_29-ynmiRn.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_30-knxnmD.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_31-sKjtcv.jpeg">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_1-8RQ38Y.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_2-DYo9Ei.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_3-oMgwsB.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_4-Jizt2o.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_23-8OAZ3V.png">
+<meta property="article:published_time" content="2018-02-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-02-28T16:00:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="Kali">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/07/29-16-17-download-z7YS26.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/2018/03/2018-03-01-kali-001/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/2018/03/2018-03-01-kali-001/","path":"2018/03/2018-03-01-kali-001/","title":"Kali Linux 实战教程（一） —— 安装 Kali Linux"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kali Linux 实战教程（一） —— 安装 Kali Linux | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85%E5%88%B0%E7%A1%AC%E7%9B%98"><span class="nav-number">1.</span> <span class="nav-text">1.安装到硬盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%94%B5%E8%84%91%E9%85%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">对电脑配置要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B6%E4%BD%9C%E5%AE%89%E8%A3%85%E7%9B%98"><span class="nav-number">1.3.</span> <span class="nav-text">制作安装盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.4.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85%E5%88%B0%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">2.安装到虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-VMware-Workstation-%E4%B8%8A%E5%AE%89%E8%A3%85-Kali"><span class="nav-number">2.1.</span> <span class="nav-text">在 VMware Workstation 上安装 Kali</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-VMware-Tools"><span class="nav-number">2.2.</span> <span class="nav-text">安装 VMware Tools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-Parallel-Desktop-%E4%B8%8A%E5%AE%89%E8%A3%85-Kali"><span class="nav-number">2.3.</span> <span class="nav-text">在 Parallel Desktop 上安装 Kali</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Parallel-Tools"><span class="nav-number">2.4.</span> <span class="nav-text">安装 Parallel Tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9B%B4%E6%94%B9%E6%9B%B4%E6%96%B0%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">3.更改更新源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%9B%B4%E6%96%B0%E8%BD%AF%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">4.更新软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%89%E8%A3%85%E5%A5%BD%E4%BA%86%E4%B8%BA%E4%BB%80%E4%B9%88%E6%97%A0%E6%B3%95%E8%BF%9B%E5%85%A5%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2%EF%BC%88%E7%81%B0%E5%B1%8F%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">5.安装好了为什么无法进入登录页面（灰屏）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2018/03/2018-03-01-kali-001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kali Linux 实战教程（一） —— 安装 Kali Linux
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-03-01 00:00:00 00:00:00" itemprop="dateCreated datePublished" datetime="2018-03-01T00:00:00+08:00">2018-03-01 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Kali/" itemprop="url" rel="index"><span itemprop="name">Kali</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本节教程讲解了如何在物理机和虚拟机上安装 Kali Linux 系统，以及解决一些常见的问题</p>
+<blockquote>
+<p><strong>多图预警！多图预警！多图预警！</strong> 重要的话说三遍！！！</p>
+</blockquote>
+<span id="more"></span>
+
+<p>如今 Linux 的安装过程已经非常“傻瓜”化，只需要轻点几下鼠标，就能够完成整个系统的安装。Kali Linux 操作系统的安装也非常简单。本节将分别介绍安装 Kali Linux 至硬盘、USB 驱动器、树莓派、VMware Workstation 和 VMWare Tods 的详细过程。</p>
+<h2 id="1-安装到硬盘"><a href="#1-安装到硬盘" class="headerlink" title="1.安装到硬盘"></a>1.安装到硬盘</h2><p>安装到硬盘是最基本的操作之一。该工作的实现可以让用户不使用 DVD，而正常的运行 Kali Linux。在安装这个全新的操作系统之前，需要做一些准备工作。例如，从哪里得到 Linux？对电脑配置有什么要求？……下面将逐一列出这些要求。</p>
+<h3 id="对电脑配置要求"><a href="#对电脑配置要求" class="headerlink" title="对电脑配置要求"></a>对电脑配置要求</h3><p>Kali Linux 安装的磁盘空间的最小值是 8GB。为了便于使用，这里推荐至少 25GB 去保存附加程序和文件。<br>内存最好为 512MB 以上。</p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>Kali Linux的下载地址 <span class="exturl" data-url="aHR0cDovL3d3dy5rYWxpLm9yZy9kb3dubG9hZHMv">http://www.kali.org/downloads/<i class="fa fa-external-link-alt"></i></span> ，也可以去国内的镜像源站点去下载。官方下载界面如图所示。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-17-download-z7YS26.png" alt="download"></p>
+<p>该官方网站提供了 32 位和 64 位各种 ISO 文件。本教程以 <strong>Kali Linux 64 bit 2018.1</strong> 为例来讲解安装和使用。下载完 ISO 文件后，将该映像文件刻录到一张 DVD 光盘或者 U 盘上。接下来就可以着手将 Kali Linux 安装至硬盘中了。</p>
+<h3 id="制作安装盘"><a href="#制作安装盘" class="headerlink" title="制作安装盘"></a>制作安装盘</h3><p>这里介绍如何在 macOS 系统中刻录一个 Kali Linux 安装 U 盘。</p>
+<p>1.首先将 iso 文件装换为 img 镜像文件，macOS 会自动加 dmg 后缀名，不影响</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdiutil convert -format UDRW -o 目标文件夹/kali.img 源文件目录/kali-linux-2018.1-amd64.iso</span><br></pre></td></tr></table></figure>
+
+<p>2.找到U盘盘符</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil list</span><br></pre></td></tr></table></figure>
+
+<p>3.卸载U盘</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diskutil unmountDisk /dev/disk2</span><br></pre></td></tr></table></figure>
+<p><code>/dev/disk2</code> 是U盘盘符，有可能是 <code>disk2</code> 或 <code>disk3</code></p>
+<p>4.写入镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dd if=目录/kali.img.dmg of=/dev/rdisk2 bs=1m</span><br></pre></td></tr></table></figure>
+
+<p>将转换好的img镜像写入U盘</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>这里为了方便使用了虚拟机安装时的截图，实际与物理机安装是相同的</p>
+<ol>
+<li><p>插入安装 U 盘，选择 U 盘启动，出现如下画面，选择 Graphical Install（图形化安装）<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_5-L1DaLT.png" alt="start"></p>
+</li>
+<li><p>选择语言，我建议选择 English，因为 Linux 系统目录中出现中文是一个比较麻烦的事情，所以我建议选择英文，对以后的深入研究也做一个铺垫<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_6-GVLDig.png" alt="language"></p>
+</li>
+<li><p>location 随便选就行，如果有强迫症非要选 China，那么在 other-&gt;Asia-&gt;China<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_7-gFUUIh.png" alt="location"></p>
+</li>
+<li><p>语言编码，英语 UTF-8<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-19-pic_8-9V8S0q.png" alt="utf-8"></p>
+</li>
+<li><p>键盘默认<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_10-Bb2CXG.png" alt="keboard"></p>
+</li>
+<li><p>该界面用来设置系统的主机名，这里使用默认的主机名Kali（用户也可以输入自己系统的名字）。这里的名字会显示在命令行中 ，如 <code>root@monster:</code> 当然这个在之后也可以自己改<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_11-L2bEYy.png" alt="host"></p>
+</li>
+<li><p>该界面用来设置计算机所使用的域名。如果当前计算机没有连接到网络的话，可以不用填写域名，直接单击“继续”按钮。<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-28-pic_12-vFo6cp.png" alt="domain"></p>
+</li>
+</ol>
+<ol>
+<li><p>设置 root 用户密码<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_13-wMTZwI.png" alt="passwd"></p>
+</li>
+<li><p>该界面供用户选择分区。这里选择“use entire disk（使用整个磁盘）”，然后单击“继续”按钮，<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_14-5MrsQy.png" alt="disk"></p>
+</li>
+<li><p> 该界面用来选择要分区的磁盘。该系统中只有一块磁盘，所以这里使用默认磁盘就可以了。如果是 U 盘安装应该会显示硬盘和 U 盘两个，注意不要选错<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_15-CzXUQ5.png" alt="disk"></p>
+</li>
+<li><p> 该界面要求选择分区方案，默认提供了三种方案。这里选择“All files in one partition(recommended for new users)（将所有文件放在同一个分区中（推荐新手使用））”<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_16-v61HZ8.png" alt="partition"></p>
+</li>
+<li><p> 在该界选择“Finish partitoning and write changes to disk（分区设定结束并将修改写入磁盘）”，然后单击“继续”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-29-pic_17-gwDC2r.png" alt="confirm"></p>
+</li>
+<li><p> 在该界面选择“是”复选框，然后单击“继续”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_18-3NcmiN.png" alt="confirm"></p>
+</li>
+<li><p> 现在就开始安装系统了。在安装过程中需要设置一些信息，如设置网络镜像，如图1.15所示。如果安装Kali Linux系统的计算机没有连接到网络的话，在该界面选择“否”复选框，然后单击“继续”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_19-skl3Lv.png" alt="netmirror"></p>
+</li>
+<li><p> 将GRUB启动引导器安装到主引导记录（MBR）上吗？在该界面选择“是”复选框，然后单击“继续”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-30-pic_20-bzqygK.png" alt="mbr"></p>
+</li>
+<li><p> 选择/dev/sda<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_21-0uRjZh.png" alt="mbr"></p>
+</li>
+<li><p> 安装完成，拔掉 u 盘，重启。有些电脑在关机或者是重启的时候会卡住不动，直接重启即可，以后我们会解决这个问题。<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_22-HfORYZ.png" alt="finish"></p>
+</li>
+</ol>
+<h2 id="2-安装到虚拟机"><a href="#2-安装到虚拟机" class="headerlink" title="2.安装到虚拟机"></a>2.安装到虚拟机</h2><p>接下来简单说说如何安装在虚拟机上，主要是两个软件，一个是常常用在 Windows 上的 VMware Workstation，一个是常常用在 macOS 上的 Parallel Desktop。</p>
+<h3 id="在-VMware-Workstation-上安装-Kali"><a href="#在-VMware-Workstation-上安装-Kali" class="headerlink" title="在 VMware Workstation 上安装 Kali"></a>在 VMware Workstation 上安装 Kali</h3><p>VMware Workstation是一款功能强大的桌面虚拟计算机软件。它允许用户在单一的桌面上同时运行不同的操作系统。用户在其中可以进行开发、测试和部署新的应用程序。</p>
+<p>废话少说，我们开始</p>
+<ol>
+<li><p>启动VMware Workstation，将显示如图所示<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-31-pic_23-Ssniat.jpeg" alt="start"></p>
+</li>
+<li><p>在该界面单击“创建新的虚拟机”图标<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_24-2t5GCO.jpeg" alt="新建虚拟机向导"></p>
+</li>
+<li><p>该界面选择安装虚拟机的类型，包括“典型”和“自定义”两种。这里推荐使用“典型”的方式，然后单击“下一步”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_25-mJYenm.jpeg" alt="安装客户机操作系统"></p>
+</li>
+<li><p>该界面用来选择如何安装客户机操作系统。这里选择“稍后安装操作系统”，然后单击“下一步”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_26-iEZtJM.jpeg" alt="选择客户机操作系统"></p>
+</li>
+<li><p>在该界面选择要安装的操作系统和版本。这里选择Linux操作系统，版本为其他Linux 2.6.X内核，然后单击“下一步”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-32-pic_27-8vGQ5b.jpeg" alt="命名虚拟机"></p>
+</li>
+<li><p>在该界面为虚拟机创建一个名称，并设置虚拟机的安装位置。设置完成后，单击“下一步”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-37-pic_28-YU6ElX.jpeg" alt="指定磁盘容量"></p>
+</li>
+<li><p>在该界面设置磁盘的容量。如果有足够大的磁盘时，建议设置的磁盘容量大点，避免造成磁盘容量不足。这里设置为50GB  </p>
+</li>
+<li><p>该界面显示了所创建虚拟机的详细信息，此时就可以创建操作系统了。然后单击“完成”按钮<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_29-ynmiRn.jpeg" alt="创建虚拟机"></p>
+</li>
+<li><p>该界面显示了新创建的虚拟机的详细信息。现在准备安装Kali Linux。在安装Kali Linux之前需要设置一些信息，在VMware Workstation窗口中单击“编辑虚拟机设置”<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_30-knxnmD.jpeg" alt="编辑虚拟机设置"></p>
+</li>
+<li><p> 在该界面选择“CD/DVD（IDE）”选项，接着在右侧选择“使用ISO映像文件”复选框，单击“浏览”按钮，选择Kali Linux的映像文件。然后单击“确定”按钮  </p>
+</li>
+<li><p> 选择“开启此虚拟机”命令  </p>
+</li>
+<li><p> 接下来的安装过与实体机相同  </p>
+</li>
+</ol>
+<h3 id="安装-VMware-Tools"><a href="#安装-VMware-Tools" class="headerlink" title="安装 VMware Tools"></a>安装 VMware Tools</h3><p>VMware Tools 是 VMware 虚拟机中自带的一种增强工具。它是 VMware 提供的增强虚拟显卡和硬盘性能，以及同步虚拟机与主机时钟的驱动程序。只有在 VMware 虚拟机中安装好 VMware Tools 工具后，才能实现主机与虚拟机之间的文件共享，同时可支持自由拖曳的功能，鼠标也可在虚拟机与主机之间自由移动（不用再按Ctrl +Alt组合键）。本小节将介绍 VMware Tools 程序的安装。</p>
+<p>1.在 VMware Workstation 菜单栏中，依次选择 “虚拟机”-&gt;“安装VMware Tools…” 命令<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-38-pic_31-sKjtcv.jpeg" alt="编辑虚拟机设置"></p>
+<p>2.挂载VMware Tools安装程序到/mnt/cdrom/目录。执行命令如下  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# mkdir /mnt/cdrom/               #创建挂载点</span><br><span class="line">root@kali:~# mount /dev/cdrom /mnt/cdrom/ #挂载安装程序</span><br><span class="line">mount: block device /dev/sr0 is write-protected, mounting read-only</span><br></pre></td></tr></table></figure>
+
+<p>看到以上的输出信息，表示VMware Tools安装程序挂载成功了。  </p>
+<p>3.切换到挂载位置，解压安装程序VMwareTools。执行命令如下  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# cd /mnt/cdrom/                          #切换目录</span><br><span class="line">root@kali:/mnt/cdrom# ls                          查看当前目录下的文件</span><br><span class="line">manifest.txt VMwareTools-9.6.1-1378637.tar.gz vmware-tools-upgrader-64</span><br><span class="line">run_upgrader.sh vmware-tools-upgrader-32</span><br><span class="line">root@kali:/mnt/cdrom# tar zxvf VMwareTools-9.6.1-1378637.tar.gz -C / #解压VMwareTools安装程序</span><br></pre></td></tr></table></figure>
+
+<p>执行以上命令后，VMware Tools程序将被解压到/目录中，并生成一个名为vmware-tools-distrib文件夹  </p>
+<p>4.切换到VMware Tools的目录，并运行安装程序。执行命令如下  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:/mnt/cdrom# cd /vmware-tools-distrib/      #切换目录</span><br><span class="line">root@kali:/vmware-tools-distrib# ./vmware-install.pl #运行安装程序</span><br></pre></td></tr></table></figure>
+
+<p>执行以上命令后，会出现一些问题。这时按下“回车”键，接受默认值。   </p>
+<p>5.重新启动计算机，这样就安装好了  </p>
+<h3 id="在-Parallel-Desktop-上安装-Kali"><a href="#在-Parallel-Desktop-上安装-Kali" class="headerlink" title="在 Parallel Desktop 上安装 Kali"></a>在 Parallel Desktop 上安装 Kali</h3><ol>
+<li><p>打开 Parallel Desktop，新建一个虚拟机 Create New<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_1-8RQ38Y.png" alt="start"></p>
+</li>
+<li><p>选择安装镜像，PD 会自动检测到安装的系统<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_2-DYo9Ei.png" alt="镜像"></p>
+</li>
+<li><p>填写虚拟机名称保存位置，勾选在安装前进行自定义设置（Customize settings before installation）<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_3-oMgwsB.png" alt="勾选自定义设置"></p>
+</li>
+<li><p>在安全选项中，设置与 macOS 隔离 isolate Linux from Mac，为的是尽量与实体机相像，减少干扰。<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_4-Jizt2o.png" alt="设置"></p>
+</li>
+<li><p>后面的工作和实体机安装一样了</p>
+</li>
+</ol>
+<h3 id="安装-Parallel-Tools"><a href="#安装-Parallel-Tools" class="headerlink" title="安装 Parallel Tools"></a>安装 Parallel Tools</h3><p>Parallel Tools 是和 VMware Tools 类似的工具。</p>
+<p>首先要先更新一下系统，这部分请看 <a href="#update">第 3 部分 和 第 4 部分</a> ，很重要，很可能这里会出现问题。</p>
+<p>安装 Parallel Tools 还可能会出现一点小问题，点击右上角的小三角，Install Parallel Tools。<br><img src="https://up-img.yonghong.tech/pic/2021/07/29-16-39-pic_23-8OAZ3V.png" alt="paralleltool"></p>
+<p>这样加载的 cdrom 权限不够可以把 cdrom 的文件复制到本地修改权限才可以完成</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umount /media/chrom0</span><br><span class="line">mount -o exec /media/cdrom0</span><br><span class="line">cd /media/cdrom/ &amp;&amp; ./install-gui</span><br></pre></td></tr></table></figure>
+
+<p>如果这样还不能成功的话，就把 cdrom 中的内容复制出来。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/Desktop/tem/</span><br><span class="line">cp /media/cdrom0 /tem/</span><br><span class="line">chmod -R 777 ~/Desktop/tem/</span><br><span class="line">cd ~/Desktop/tem</span><br><span class="line">./install-gui</span><br></pre></td></tr></table></figure>
+
+<p>这样按照要求一步一步进行就可以了。</p>
+<hr>
+<p><span id="update"></span></p>
+<h2 id="3-更改更新源"><a href="#3-更改更新源" class="headerlink" title="3.更改更新源"></a>3.更改更新源</h2><p>国内的更新源有很多，比如下面的几个更新源</p>
+<p><span class="exturl" data-url="aHR0cDovL21pcnJvcnMudXN0Yy5lZHUuY24v">科大开源镜像站<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLmFsaXl1bi5jb20v">Alibaba Open Source Mirror Site<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLjE2My5jb20v">网易开源镜像站<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9taXJyb3JzLnR1bmEudHNpbmdodWEuZWR1LmNuLw==">清华大学开源软件镜像站<i class="fa fa-external-link-alt"></i></span>   </p>
+<p>因为我在学校，所以我选择了<span class="exturl" data-url="aHR0cDovL21pcnJvcnMudXN0Yy5lZHUuY24v">科大开源镜像站<i class="fa fa-external-link-alt"></i></span></p>
+<p>配置镜像源的方法看 <span class="exturl" data-url="aHR0cDovL21pcnJvcnMudXN0Yy5lZHUuY24vaGVscC9rYWxpLmh0bWw=">Kali Linux 源使用帮助<i class="fa fa-external-link-alt"></i></span></p>
+<p>编辑 <code>/etc/apt/sources.list</code> 文件, 在文件最前面添加以下条目：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">deb</span> http<span class="variable">s:</span>//mirrors.ustc.edu.<span class="keyword">cn</span>/kali kali-rolling main non-free contrib</span><br><span class="line"><span class="keyword">deb</span>-src http<span class="variable">s:</span>//mirrors.ustc.edu.<span class="keyword">cn</span>/kali kali-rolling main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p>更改完 <code>sources.list</code> 文件后请运行 <code>sudo apt-get update</code> 更新索引以生效。</p>
+<h2 id="4-更新软件"><a href="#4-更新软件" class="headerlink" title="4.更新软件"></a>4.更新软件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt clean &amp;&amp; apt update -y &amp;&amp; apt upgrade -y &amp;&amp; apt dist-upgrade -y </span><br></pre></td></tr></table></figure>
+
+<h2 id="5-安装好了为什么无法进入登录页面（灰屏）"><a href="#5-安装好了为什么无法进入登录页面（灰屏）" class="headerlink" title="5.安装好了为什么无法进入登录页面（灰屏）"></a>5.安装好了为什么无法进入登录页面（灰屏）</h2><p>这个问题是针对实体机上安装的 Kali 出现的情况，实际上不是没有安装好，灰屏的原因是因为系统检测出了两块屏幕（原因还不清楚：如果有人知道请在下面评论），恰好登录页面不是你用的这个屏幕。</p>
+<p>那么就不影响登录，登录要求输入两个内容，一个是用户名，一个是密码。因此输入 <code>root</code> 后按下 回车键 后输入密码，再次 回车键 就 OK 了。之后可以在系统中进行设置，设置为一个屏幕，这个也只是此用户的范围，再次重启时还会遇到问题。等以后解决了再回来改此文。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><span class="exturl" data-url="aHR0cHM6Ly93aXphcmRmb3JjZWwuZ2l0Ym9va3MuaW8vZGF4dWViYS1rYWxpLWxpbnV4LXR1dG9yaWFsLw==">大学霸Kali Linux 安全渗透教程<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2ltcGxlX3RoZV9iZXN0L2FydGljbGUvZGV0YWlscy81MDc1NDYxNg==">Parallels Desktop 11 安装 Kali 2.0 Parallels tools<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2018/03/2018-03-01-kali-001/" title="Kali Linux 实战教程（一） —— 安装 Kali Linux">http://yonghong.tech/2018/03/2018-03-01-kali-001/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Kali/" rel="tag"># Kali</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/02/2018-02-26-https/" rel="prev" title="关于 https">
+                  <i class="fa fa-chevron-left"></i> 关于 https
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/2018-03-02-kali-002/" rel="next" title="Kali Linux 实战教程（二） —— 安装办公软件">
+                  Kali Linux 实战教程（二） —— 安装办公软件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">19:52</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/2018/03/2018-03-01-kali-001/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"74137b455f2fcabd76735708fcf21aab"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="Android Runtime (ART) 是 Android 上的应用和部分系统服务使用的托管式运行时。ART 及其前身 Dalvik 最初是专为 Android 项目打造的。作为运行时的 ART 可执行 Dalvik 可执行文件并遵循 Dex 字节码规范。 ART 和 Dalvik 是运行 Dex 字节码的兼容运行时，因此针对 Dalvik 开发的应用也能在 ART 环境中运作。不过，Dalv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Runtime (ART) 和 Dalvik">
+<meta property="og:url" content="http://yonghong.tech/2021/07/android-runtime-dalvik/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="Android Runtime (ART) 是 Android 上的应用和部分系统服务使用的托管式运行时。ART 及其前身 Dalvik 最初是专为 Android 项目打造的。作为运行时的 ART 可执行 Dalvik 可执行文件并遵循 Dex 字节码规范。 ART 和 Dalvik 是运行 Dex 字节码的兼容运行时，因此针对 Dalvik 开发的应用也能在 ART 环境中运作。不过，Dalv">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-arch-3Fcld1.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-profile-comp-RifrTY.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-daemon-NoNjuF.png">
+<meta property="og:image" content="https://source.android.com/devices/tech/dalvik/images/jit-workflow.png?hl=zh-cn">
+<meta property="article:published_time" content="2021-07-29T12:00:00.000Z">
+<meta property="article:modified_time" content="2021-07-29T12:00:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="ART">
+<meta property="article:tag" content="Dalvik">
+<meta property="article:tag" content="运行时">
+<meta property="article:tag" content="虚拟机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-arch-3Fcld1.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/2021/07/android-runtime-dalvik/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/2021/07/android-runtime-dalvik/","path":"2021/07/android-runtime-dalvik/","title":"Android Runtime (ART) 和 Dalvik"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android Runtime (ART) 和 Dalvik | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ART-%E5%8A%9F%E8%83%BD"><span class="nav-number">1.</span> <span class="nav-text">ART 功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%85%88-AOT-%E7%BC%96%E8%AF%91"><span class="nav-number">1.1.</span> <span class="nav-text">预先 (AOT) 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%96%B9%E9%9D%A2%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">垃圾回收方面的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%92%8C%E8%B0%83%E8%AF%95%E6%96%B9%E9%9D%A2%E7%9A%84%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">开发和调试方面的优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E9%87%87%E6%A0%B7%E5%88%86%E6%9E%90%E5%99%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">支持采样分析器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E6%9B%B4%E5%A4%9A%E8%B0%83%E8%AF%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.3.2.</span> <span class="nav-text">支持更多调试功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E4%BA%86%E5%BC%82%E5%B8%B8%E5%92%8C%E5%B4%A9%E6%BA%83%E6%8A%A5%E5%91%8A%E4%B8%AD%E7%9A%84%E8%AF%8A%E6%96%AD%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.3.</span> <span class="nav-text">优化了异常和崩溃报告中的诊断详细信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-8-0-%E4%B8%AD%E7%9A%84-ART-%E5%8A%9F%E8%83%BD%E6%94%B9%E8%BF%9B"><span class="nav-number">2.</span> <span class="nav-text">Android 8.0 中的 ART 功能改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%8E%8B%E7%BC%A9%E5%BC%8F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">并发压缩式垃圾回收器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">循环优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90"><span class="nav-number">2.3.</span> <span class="nav-text">类层次结构分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#oat-%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%86%85%E5%B5%8C%E7%BC%93%E5%AD%98"><span class="nav-number">2.4.</span> <span class="nav-text">.oat 文件中的内嵌缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dexlayout"><span class="nav-number">2.5.</span> <span class="nav-text">Dexlayout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dex-%E7%BC%93%E5%AD%98%E7%A7%BB%E9%99%A4"><span class="nav-number">2.6.</span> <span class="nav-text">Dex 缓存移除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8%E6%80%A7%E8%83%BD"><span class="nav-number">2.7.</span> <span class="nav-text">解释器性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E4%BA%86%E8%A7%A3%E5%86%85%E5%B5%8C"><span class="nav-number">2.8.</span> <span class="nav-text">详细了解内嵌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%96%B9%E9%9D%A2%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">2.9.</span> <span class="nav-text">同步方面的改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E5%BF%AB%E9%80%9F%E7%9A%84%E5%8E%9F%E7%94%9F%E6%96%B9%E6%B3%95"><span class="nav-number">2.10.</span> <span class="nav-text">更快速的原生方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95-ART-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">3.</span> <span class="nav-text">调试 ART 垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ART-GC-%E6%A6%82%E8%A7%88"><span class="nav-number">3.1.</span> <span class="nav-text">ART GC 概览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC-%E9%AA%8C%E8%AF%81%E5%92%8C%E6%80%A7%E8%83%BD%E9%80%89%E9%A1%B9"><span class="nav-number">3.2.</span> <span class="nav-text">GC 验证和性能选项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9-GC-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.1.</span> <span class="nav-text">更改 GC 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E5%A0%86"><span class="nav-number">3.2.2.</span> <span class="nav-text">验证堆</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">3.3.</span> <span class="nav-text">性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5"><span class="nav-number">3.3.1.</span> <span class="nav-text">回收策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-SIGQUIT-%E8%8E%B7%E5%8F%96-GC-%E6%80%A7%E8%83%BD%E4%BF%A1%E6%81%AF"><span class="nav-number">3.3.2.</span> <span class="nav-text">使用 SIGQUIT 获取 GC 性能信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%9E%90-GC-%E6%AD%A3%E7%A1%AE%E6%80%A7%E9%97%AE%E9%A2%98%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="nav-number">3.4.</span> <span class="nav-text">分析 GC 正确性问题的工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CheckJNI"><span class="nav-number">3.4.1.</span> <span class="nav-text">CheckJNI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A0%E6%95%88%E6%A0%B9%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.4.2.</span> <span class="nav-text">无效根示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%9F%E5%9D%8F%E7%9A%84%E5%AF%B9%E8%B1%A1%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.4.3.</span> <span class="nav-text">损坏的对象示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-ART-%E5%8D%B3%E6%97%B6-JIT-%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">实现 ART 即时 (JIT) 编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JIT-%E6%9E%B6%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">JIT 架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JIT-%E7%BC%96%E8%AF%91"><span class="nav-number">4.2.</span> <span class="nav-text">JIT 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JIT-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">4.3.</span> <span class="nav-text">JIT 工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF-JIT-%E6%97%A5%E5%BF%97%E8%AE%B0%E5%BD%95"><span class="nav-number">4.4.</span> <span class="nav-text">开启 JIT 日志记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E7%94%A8-JIT"><span class="nav-number">4.5.</span> <span class="nav-text">停用 JIT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%BC%96%E8%AF%91"><span class="nav-number">4.6.</span> <span class="nav-text">强制编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E9%99%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE"><span class="nav-number">4.7.</span> <span class="nav-text">清除配置文件数据</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/07/android-runtime-dalvik/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android Runtime (ART) 和 Dalvik
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-29 20:00:00 20:00:00" itemprop="dateCreated datePublished" datetime="2021-07-29T20:00:00+08:00">2021-07-29 20:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Android Runtime (ART) 是 Android 上的应用和部分系统服务使用的托管式运行时。ART 及其前身 Dalvik 最初是专为 Android 项目打造的。作为运行时的 ART 可执行 Dalvik 可执行文件并遵循 Dex 字节码规范。</p>
+<p>ART 和 Dalvik 是运行 Dex 字节码的兼容运行时，因此针对 Dalvik 开发的应用也能在 ART 环境中运作。不过，Dalvik 采用的一些技术并不适用于 ART。有关最重要问题的信息，请参阅<span class="exturl" data-url="aHR0cDovL2RldmVsb3Blci5hbmRyb2lkLmNvbS9ndWlkZS9wcmFjdGljZXMvdmVyaWZ5aW5nLWFwcHMtYXJ0Lmh0bWw/aGw9emgtY24=">在 Android Runtime (ART) 上验证应用行为<i class="fa fa-external-link-alt"></i></span>。</p>
+<span id="more"></span>
+
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5jb20vZGV2aWNlcy90ZWNoL2RhbHZpaz9obD16aC1jbg==">https://source.android.com/devices/tech/dalvik?hl=zh-cn<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ART-功能"><a href="#ART-功能" class="headerlink" title="ART 功能"></a>ART 功能</h2><p>以下是 ART 实现的一些主要功能。</p>
+<h3 id="预先-AOT-编译"><a href="#预先-AOT-编译" class="headerlink" title="预先 (AOT) 编译"></a>预先 (AOT) 编译</h3><p>ART 引入了预先编译机制，可提高应用的性能。ART 还具有比 Dalvik 更严格的安装时验证。</p>
+<p>在安装时，ART 使用设备自带的 <strong>dex2oat</strong> 工具来编译应用。此实用工具接受 <span class="exturl" data-url="aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5jb20vZGV2aWNlcy90ZWNoL2RhbHZpay9kZXgtZm9ybWF0P2hsPXpoLWNu">DEX<i class="fa fa-external-link-alt"></i></span> 文件作为输入，并为目标设备生成经过编译的应用可执行文件。该工具应能够顺利编译所有有效的 DEX 文件。但是，一些后处理工具会生成无效文件，Dalvik 可以接受这些文件，但 ART 无法编译这些文件。如需了解详情，请参阅<span class="exturl" data-url="aHR0cDovL2RldmVsb3Blci5hbmRyb2lkLmNvbS9ndWlkZS9wcmFjdGljZXMvdmVyaWZ5aW5nLWFwcHMtYXJ0Lmh0bWw/aGw9emgtY24jR0NfTWlncmF0aW9u">处理垃圾回收问题<i class="fa fa-external-link-alt"></i></span>。</p>
+<h3 id="垃圾回收方面的优化"><a href="#垃圾回收方面的优化" class="headerlink" title="垃圾回收方面的优化"></a>垃圾回收方面的优化</h3><p>垃圾回收 (GC) 会耗费大量资源，这可能有损于应用性能，导致显示不稳定、界面响应速度缓慢以及其他问题。ART 通过以下几种方式对垃圾回收做了优化：</p>
+<ul>
+<li>大多采用并发设计，具有一次 GC 暂停</li>
+<li>并发复制，可减少后台内存使用和碎片</li>
+<li>GC 暂停的时间不受堆大小影响</li>
+<li>在清理最近分配的短时对象这种特殊情况中，回收器的总 GC 时间更短</li>
+<li>优化了垃圾回收的工效，能够更加及时地进行并行垃圾回收，这使得 <a target="_blank" rel="noopener" href="http://developer.android.com/tools/debugging/debugging-memory.html?hl=zh-cn#LogMessages"><code>GC_FOR_ALLOC</code></a> 事件在典型用例中极为罕见</li>
+</ul>
+<h3 id="开发和调试方面的优化"><a href="#开发和调试方面的优化" class="headerlink" title="开发和调试方面的优化"></a>开发和调试方面的优化</h3><p>ART 提供了大量功能来优化应用开发和调试。</p>
+<h4 id="支持采样分析器"><a href="#支持采样分析器" class="headerlink" title="支持采样分析器"></a>支持采样分析器</h4><p>一直以来，开发者都使用 <span class="exturl" data-url="aHR0cDovL2RldmVsb3Blci5hbmRyb2lkLmNvbS90b29scy9oZWxwL3RyYWNldmlldy5odG1sP2hsPXpoLWNu">Traceview<i class="fa fa-external-link-alt"></i></span> 工具（用于跟踪应用执行情况）作为分析器。虽然 Traceview 可提供有用的信息，但每次方法调用产生的开销会导致 Dalvik 分析结果出现偏差，而且使用该工具明显会影响运行时性能。</p>
+<p>ART 添加了对没有这些限制的专用采样分析器的支持，因而可更准确地了解应用执行情况，而不会明显减慢速度。KitKat 版本为 Dalvik 的 Traceview 添加了采样支持。</p>
+<h4 id="支持更多调试功能"><a href="#支持更多调试功能" class="headerlink" title="支持更多调试功能"></a>支持更多调试功能</h4><p>ART 支持许多新的调试选项，特别是与监控和垃圾回收相关的功能。例如，您可以：</p>
+<ul>
+<li>查看堆栈跟踪中保留了哪些锁，然后跳转到持有锁的线程。</li>
+<li>询问指定类的当前活动的实例数、请求查看实例，以及查看使对象保持有效状态的参考。</li>
+<li>过滤特定实例的事件（如断点）。</li>
+<li>查看方法退出（使用“method-exit”事件）时返回的值。</li>
+<li>设置字段观察点，以在访问和/或修改特定字段时暂停程序执行。</li>
+</ul>
+<h4 id="优化了异常和崩溃报告中的诊断详细信息"><a href="#优化了异常和崩溃报告中的诊断详细信息" class="headerlink" title="优化了异常和崩溃报告中的诊断详细信息"></a>优化了异常和崩溃报告中的诊断详细信息</h4><p>当发生运行时异常时，ART 会为您提供尽可能多的上下文和详细信息。ART 会提供 <code>java.lang.ClassCastException</code>、<code>java.lang.ClassNotFoundException</code> 和 <code>java.lang.NullPointerException</code> 的更多异常详细信息。（较高版本的 Dalvik 会提供 <code>java.lang.ArrayIndexOutOfBoundsException</code> 和 <code>java.lang.ArrayStoreException</code> 的更多异常详细信息，这些信息现在包括数组大小和越界偏移量；ART 也提供这类信息。）</p>
+<p>例如，<code>java.lang.NullPointerException</code> 现在会显示有关应用尝试处理 null 指针时所执行操作的信息，例如应用尝试写入的字段或尝试调用的方法。一些典型示例如下：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NullPointerException: Attempt <span class="keyword">to</span> <span class="keyword">write</span> <span class="keyword">to</span> field <span class="string">&#x27;int</span></span><br><span class="line"><span class="string">android.accessibilityservice.AccessibilityServiceInfo.flags&#x27;</span> <span class="keyword">on</span> a null object</span><br><span class="line"><span class="keyword">reference</span></span><br><span class="line">java.lang.NullPointerException: Attempt <span class="keyword">to</span> invoke <span class="keyword">virtual</span> <span class="function"><span class="keyword">method</span></span></span><br><span class="line"><span class="function">&#x27;<span class="title">java</span>.<span class="title">lang</span>.<span class="title">String</span> <span class="title">java</span>.<span class="title">lang</span>.<span class="title">Object</span>.<span class="title">toString</span><span class="params">()</span>&#x27; <span class="title">on</span> <span class="title">a</span> <span class="title">null</span> <span class="title">object</span> <span class="title">reference</span></span></span><br></pre></td></tr></table></figure>
+
+<p>ART 还通过纳入 Java 和原生堆栈信息，在应用原生代码崩溃报告中提供更实用的上下文信息。</p>
+<h2 id="Android-8-0-中的-ART-功能改进"><a href="#Android-8-0-中的-ART-功能改进" class="headerlink" title="Android 8.0 中的 ART 功能改进"></a>Android 8.0 中的 ART 功能改进</h2><p>在 Android 8.0 版本中，Android Runtime (ART) 有了极大改进。下面的列表总结了设备制造商可以在 ART 中获得的增强功能。</p>
+<h3 id="并发压缩式垃圾回收器"><a href="#并发压缩式垃圾回收器" class="headerlink" title="并发压缩式垃圾回收器"></a>并发压缩式垃圾回收器</h3><p>正如 Google 在 Google I/O 大会上所宣布的那样，ART 在 Android 8.0 中提供了新的并发压缩式垃圾回收器 (GC)。该回收器会在每次执行 GC 时以及应用正在运行时对堆进行压缩，且仅在处理线程根时短暂停顿一次。该回收器具有以下优势：</p>
+<ul>
+<li>GC 始终会对堆进行压缩：堆的大小平均比 Android 7.0 中的小 32%。</li>
+<li>得益于压缩，系统现可实现线程局部碰撞指针对象分配：分配速度比 Android 7.0 中的快 70%。</li>
+<li>H2 基准的停顿次数比 Android 7.0 GC 的少 85%。</li>
+<li>停顿次数不再随堆的大小而变化，应用在使用较大的堆时也无需担心造成卡顿。</li>
+<li>GC 实现细节 - 读取屏障：<ul>
+<li>读取屏障是在读取每个对象字段时所做的少量工作。</li>
+<li>它们在编译器中经过了优化，但可能会减慢某些用例的速度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="循环优化"><a href="#循环优化" class="headerlink" title="循环优化"></a>循环优化</h3><p>在 Android 8.0 版本中，ART 采取了多种循环优化措施，具体如下：</p>
+<ul>
+<li>消除边界检查<ul>
+<li>静态：在编译时证明范围位于边界内</li>
+<li>动态：运行时测试确保循环始终位于边界内（否则不进行优化）</li>
+</ul>
+</li>
+<li>消除归纳变量<ul>
+<li>移除无用归纳</li>
+<li>用封闭式表达式替换仅在循环后使用的归纳</li>
+</ul>
+</li>
+<li>消除循环主体内的无用代码，移除整个死循环</li>
+<li>强度降低</li>
+<li>循环转换：逆转、交换、拆分、展开、单模等</li>
+<li>SIMDization（也称为矢量化）</li>
+</ul>
+<p>循环优化器位于 ART 编译器中一个独立的优化环节中。大多数循环优化与其他方面的优化和简化类似。采用比平时更复杂的方式进行一些重写 CFG 的优化时会面临挑战，因为大多数 CFG 实用工具（请参阅 nodes.h）都侧重于构建而不是重写 CFG。</p>
+<h3 id="类层次结构分析"><a href="#类层次结构分析" class="headerlink" title="类层次结构分析"></a>类层次结构分析</h3><p>在 Android 8.0 中，ART 会使用类层次结构分析 (CHA)，这是一种编译器优化，可根据对类层次结构的分析结果，将虚拟调用去虚拟化为直接调用。虚拟调用代价高昂，因为它们围绕 vtable 查找来实现，且会占用几个依赖负载。另外，虚拟调用也不能内嵌。</p>
+<p>以下是对相关增强功能的总结：</p>
+<ul>
+<li>动态单一实现方法状态更新 - 在类关联时间结束时，如果 vtable 已被填充，ART 会按条目对超类的 vtable 进行比较。</li>
+<li>编译器优化 - 编译器会利用某种方法的单一实现信息。如果方法 A.foo 设置了单一实现标记，则编译器会将虚拟调用去虚拟化为直接调用，并借此进一步尝试内嵌直接调用。</li>
+<li>已编译代码无效 - 另外，在类关联时间结束时，如果单一实现信息已更新，且方法 A.foo 之前拥有单一实现，但该状态现已变为无效，则依赖方法 A.foo 拥有单一实现这一假设的所有已编译代码都需要变为无效代码。</li>
+<li>去优化 - 对于堆栈上已编译的有效代码，系统会启动去优化功能，以强制使已编译无效代码进入解释器模式，从而确保正确性。系统会采用结合了同步和异步去优化的全新去优化机制。</li>
+</ul>
+<h3 id="oat-文件中的内嵌缓存"><a href="#oat-文件中的内嵌缓存" class="headerlink" title=".oat 文件中的内嵌缓存"></a>.oat 文件中的内嵌缓存</h3><p>ART 现在采用内嵌缓存，并对有足够数据可用的调用站点进行优化。内嵌缓存功能会将额外的运行时信息记录到配置文件中，并利用这类信息将动态优化添加到预先编译中。</p>
+<h3 id="Dexlayout"><a href="#Dexlayout" class="headerlink" title="Dexlayout"></a>Dexlayout</h3><p>Dexlayout 是在 Android 8.0 中引入的一个库，用于分析 dex 文件，并根据配置文件对其进行重新排序。Dexlayout 旨在使用运行时配置信息，在设备的空闲维护编译期间对 dex 文件的各个部分进行重新排序。通过将经常一起访问的部分 dex 文件集中在一起，程序可以因改进文件位置而拥有更好的内存访问模式，从而节省 RAM 并缩短启动时间。</p>
+<p>由于配置文件信息目前仅在运行应用后可用，因此系统会在空闲维护期间将 dexlayout 集成到 dex2oat 的设备编译中。</p>
+<h3 id="Dex-缓存移除"><a href="#Dex-缓存移除" class="headerlink" title="Dex 缓存移除"></a>Dex 缓存移除</h3><p>在 Android 7.0 及更低版本中，DexCache 对象拥有四个大型数组，与 DexFile 中特定元素的数量成正比，即：</p>
+<ul>
+<li>字符串（每个 DexFile::StringId 一个引用），</li>
+<li>类型（每个 DexFile::TypeId 一个引用），</li>
+<li>方法（每个 DexFile::MethodId 一个原生指针），</li>
+<li>字段（每个 DexFile::FieldId 一个原生指针）。</li>
+</ul>
+<p>这些数组用于快速检索我们以前解析的对象。在 Android 8.0 中，除方法数组外，所有数组都已移除。</p>
+<h3 id="解释器性能"><a href="#解释器性能" class="headerlink" title="解释器性能"></a>解释器性能</h3><p>在 Android 7.0 版本中，通过引入 mterp（一种解释器，具有以汇编语言编写的核心提取/解码/解释机制），解释器性能得以显著提升。Mterp 模仿了快速 Dalvik 解释器，并支持 arm、arm64、x86、x86_64、mips 和 mips64。对于计算代码而言，ART 的 Mterp 大致相当于 Dalvik 的快速解释器。不过，有时候，它的速度可能会显著变慢，甚至急剧变慢：</p>
+<ol>
+<li>调用性能。</li>
+<li>字符串操作和 Dalvik 中其他被视为内嵌函数的高频用户方法。</li>
+<li>堆栈内存使用量较高。</li>
+</ol>
+<p>Android 8.0 解决了这些问题。</p>
+<h3 id="详细了解内嵌"><a href="#详细了解内嵌" class="headerlink" title="详细了解内嵌"></a>详细了解内嵌</h3><p>从 Android 6.0 开始，ART 可以内嵌同一个 dex 文件中的任何调用，但只能内嵌来自其他 dex 文件的叶方法。此项限制具有以下两个原因：</p>
+<ol>
+<li>从其他 dex 文件进行内嵌要求使用该 dex 文件的 dex 缓存，这与同一个 dex 文件内嵌（只需重复使用调用方的 dex 缓存）有所不同。已编译代码中需要具有 dex 缓存，以便执行一系列指令，例如静态调用、字符串加载或类加载。</li>
+<li>堆栈映射只对当前 dex 文件中的方法索引进行编码。</li>
+</ol>
+<p>为了应对这些限制，Android 8.0 做出了以下改进：</p>
+<ol>
+<li>从已编译代码中移除 dex 缓存访问（另请参阅“Dex 缓存移除”部分）</li>
+<li>扩展堆栈映射编码。</li>
+</ol>
+<h3 id="同步方面的改进"><a href="#同步方面的改进" class="headerlink" title="同步方面的改进"></a>同步方面的改进</h3><p>ART 团队调整了 MonitorEnter/MonitorExit 代码路径，并减少了我们对 ARMv8 上传统内存屏障的依赖，尽可能将其替换为较新的（获取/释放）指令。</p>
+<h3 id="更快速的原生方法"><a href="#更快速的原生方法" class="headerlink" title="更快速的原生方法"></a>更快速的原生方法</h3><p>使用 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/libcore/+/master/dalvik/src/main/java/dalvik/annotation/optimization/FastNative.java"><code>@FastNative</code></a> 和 <a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/libcore/+/master/dalvik/src/main/java/dalvik/annotation/optimization/CriticalNative.java"><code>@CriticalNative</code></a> 注解可以更快速地对 Java 原生接口 (JNI) 进行原生调用。这些内置的 ART 运行时优化可以加快 JNI 转换速度，并取代了现已弃用的 !bang JNI 标记。这些注解对非原生方法没有任何影响，并且仅适用于 <code>bootclasspath</code> 上的平台 Java 语言代码（无 Play 商店更新）。</p>
+<p><code>@FastNative</code> 注解支持非静态方法。如果某种方法将 <code>jobject</code> 作为参数或返回值进行访问，请使用此注解。</p>
+<p>利用 <code>@CriticalNative</code> 注解，可更快速地运行原生方法，但存在以下限制：</p>
+<ul>
+<li>方法必须是静态方法 - 没有参数、返回值或隐式 <code>this</code> 的对象。</li>
+<li>仅将基元类型传递给原生方法。</li>
+<li>原生方法在其函数定义中不使用 <code>JNIEnv</code> 和 <code>jclass</code> 参数。</li>
+<li>方法必须使用 <code>RegisterNatives</code> 进行注册，而不是依靠动态 JNI 链接。</li>
+</ul>
+<p><code>@FastNative</code> 和 <code>@CriticalNative</code> 注解在执行原生方法时会停用垃圾回收。不要与长时间运行的方法一起使用，包括通常很快但一般不受限制的方法。</p>
+<p>停顿垃圾回收可能会导致死锁。如果锁尚未得到本地释放（即尚未返回受管理代码），请勿在原生快速调用期间获取锁。此要求不适用于常规的 JNI 调用，因为 ART 将正执行的原生代码视为已暂停的状态。</p>
+<p><code>@FastNative</code> 可以使原生方法的性能提升高达 3 倍，而 <code>@CriticalNative</code> 可以使原生方法的性能提升高达 5 倍。例如，在 Nexus 6P 设备上测量的 JNI 转换如下：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Java 原生接口 (JNI) 调用</th>
+<th align="left">执行时间（以纳秒计）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">常规 JNI</td>
+<td align="left">115</td>
+</tr>
+<tr>
+<td align="left">!bang JNI</td>
+<td align="left">60</td>
+</tr>
+<tr>
+<td align="left"><code>@FastNative</code></td>
+<td align="left">35</td>
+</tr>
+<tr>
+<td align="left"><code>@CriticalNative</code></td>
+<td align="left">25</td>
+</tr>
+</tbody></table>
+<h2 id="调试-ART-垃圾回收"><a href="#调试-ART-垃圾回收" class="headerlink" title="调试 ART 垃圾回收"></a>调试 ART 垃圾回收</h2><p>本页介绍了如何调试 Android 运行时 (ART) 垃圾回收 (GC) 的正确性和性能问题。此外，还说明了如何使用 GC 验证选项、确定应对 GC 验证失败的解决方案，以及衡量并解决 GC 性能问题。</p>
+<p>如需使用 ART，请参阅此 <span class="exturl" data-url="aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5jb20vZGV2aWNlcy90ZWNoL2RhbHZpaz9obD16aC1jbg==">ART 和 Dalvik<i class="fa fa-external-link-alt"></i></span> 部分中介绍的内容，以及 <span class="exturl" data-url="aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5jb20vZGV2aWNlcy90ZWNoL2RhbHZpay9kZXgtZm9ybWF0P2hsPXpoLWNu">Dalvik 可执行文件格式<i class="fa fa-external-link-alt"></i></span>。如需获得验证应用行为方面的其他帮助，请参阅<span class="exturl" data-url="aHR0cDovL2RldmVsb3Blci5hbmRyb2lkLmNvbS9ndWlkZS9wcmFjdGljZXMvdmVyaWZ5aW5nLWFwcHMtYXJ0P2hsPXpoLWNu">在 Android Runtime (ART) 上验证应用行为<i class="fa fa-external-link-alt"></i></span>。</p>
+<h3 id="ART-GC-概览"><a href="#ART-GC-概览" class="headerlink" title="ART GC 概览"></a>ART GC 概览</h3><p>ART 有多个不同的 GC 方案，涉及运行不同的垃圾回收器。从 Android 8 (Oreo) 开始，默认方案是并发复制 (CC)。另一个 GC 方案是并发标记清除 (CMS)。</p>
+<p>并发复制 GC 的一些主要特性包括：</p>
+<ul>
+<li>CC 支持使用名为“RegionTLAB”的触碰指针分配器。此分配器可以向每个应用线程分配一个线程本地分配缓冲区 (TLAB)，这样，应用线程只需触碰“栈顶”指针，而无需任何同步操作，即可从其 TLAB 中将对象分配出去。</li>
+<li>CC 通过在不暂停应用线程的情况下并发复制对象来执行堆碎片整理。这是在读取屏障的帮助下实现的，读取屏障会拦截来自堆的引用读取，无需应用开发者进行任何干预。</li>
+<li>GC 只有一次很短的暂停，对于堆大小而言，该次暂停在时间上是一个常量。</li>
+<li>在 Android 10 及更高版本中，CC 会扩展为分代 GC。它支持轻松回收存留期较短的对象，这类对象通常很快便会无法访问。这有助于提高 GC 吞吐量，并显著延迟执行全堆 GC 的需要。</li>
+</ul>
+<p>ART 仍然支持的另一个 GC 方案是 CMS。此 GC 方案还支持压缩，但不是以并发方式。在应用进入后台之前，它会避免执行压缩，应用进入后台后，它会暂停应用线程以执行压缩。如果对象分配因碎片而失败，也必须执行压缩操作。在这种情况下，应用可能会在一段时间内没有响应。</p>
+<p>由于 CMS 很少进行压缩，因此空闲对象可能会不连续。CMS 使用一个名为 RosAlloc 的基于空闲列表的分配器。与 RegionTLAB 相比，该分配器的分配成本较高。最后，由于内部碎片，Java 堆的 CMS 内存用量可能会高于 CC 内存用量。</p>
+<h3 id="GC-验证和性能选项"><a href="#GC-验证和性能选项" class="headerlink" title="GC 验证和性能选项"></a>GC 验证和性能选项</h3><h4 id="更改-GC-类型"><a href="#更改-GC-类型" class="headerlink" title="更改 GC 类型"></a>更改 GC 类型</h4><p>原始设备制造商 (OEM) 可以更改 GC 类型。如需进行更改，需要在构建时设置 <code>ART_USE_READ_BARRIER</code> 环境变量。默认值为 true，这会启用 CC 回收器，因为该回收器使用读取屏障。对于 CMS，此变量应明确设置为 false。</p>
+<p>默认情况下，在 Android 10 及更高版本中，CC 回收器在分代模式下运行。如需停用分代模式，可以使用 <code>-Xgc:nogenerational_cc</code> 命令行参数。或者，也可以按如下方式设置系统属性：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">adb</span> shell setprop dalvik.vm.gc<span class="keyword">type</span> nogenerational_cc</span><br></pre></td></tr></table></figure>
+
+<p>CMS 回收器始终在分代模式下运行。</p>
+<h4 id="验证堆"><a href="#验证堆" class="headerlink" title="验证堆"></a>验证堆</h4><p>堆验证可能是调试 GC 相关错误或堆损坏的最有用的 GC 选项。启用堆验证会使 GC 在垃圾回收过程中在几个点检查堆的正确性。堆验证的选项与更改 GC 类型的相同。启用后，堆验证流程会验证根，并确保可访问对象仅引用了其他可访问对象。您可以通过传入以下 <code>-Xgc</code> 值来启用 GC 验证：</p>
+<ul>
+<li>启用后，<code>[no]preverify</code> 将在启动 GC 之前执行堆验证。</li>
+<li>启用后，<code>[no]presweepingverify</code> 将在开始垃圾回收器清除过程之前执行堆验证。</li>
+<li>启用后，<code>[no]postverify</code> 将在 GC 完成清除之后执行堆验证。</li>
+<li><code>[no]preverify_rosalloc</code>、<code>[no]postsweepingverify_rosalloc</code> 和 <code>[no]postverify_rosalloc</code> 是附加 GC 选项，仅验证 RosAlloc 内部记录的状态。因此，它们仅适用于使用 RosAlloc 分配器的 CMS 回收器。验证的主要内容是，魔法值是否与预期常量匹配，以及可用内存块是否已全部在 <code>free_page_runs_</code> 映射中注册。</li>
+</ul>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>衡量 GC 性能的工具主要有两个：GC 时序转储和 Systrace。Systrace 还有一个高级版本，称为 Perfetto。如需衡量 GC 性能问题，直观的方法是使用 Systrace 和 Perfetto 确定哪些 GC 会导致长时间暂停或抢占应用线程。尽管 ART GC 经过多年发展已得到显著改进，但不良更改器行为（例如过度分配）仍会导致性能问题</p>
+<h4 id="回收策略"><a href="#回收策略" class="headerlink" title="回收策略"></a>回收策略</h4><p>CC GC 通过运行新生代 GC 或全堆 GC 来回收垃圾。理想情况下，新生代 GC 的运行频率更高。GC 会一直执行新生代 CC 回收，直到刚结束的回收周期的吞吐量（计算公式是：释放的字节数除以 GC 持续秒数）小于全堆 CC 回收的平均吞吐量。发生这种情况时，将为下一次并发 GC 选择全堆 CC（而不是新生代 CC）。全堆回收完成后，下一次 GC 将切换回新生代 CC。新生代 CC 在完成后不会调整堆占用空间限制，这是此策略发挥作用的一个关键因素。这使得新生代 CC 运行得越来越频繁，直到吞吐量低于全堆 CC，最终导致堆增大。</p>
+<h4 id="使用-SIGQUIT-获取-GC-性能信息"><a href="#使用-SIGQUIT-获取-GC-性能信息" class="headerlink" title="使用 SIGQUIT 获取 GC 性能信息"></a>使用 SIGQUIT 获取 GC 性能信息</h4><p>如需获得应用的 GC 性能时序，请将 <code>SIGQUIT</code> 发送到已在运行的应用，或者在启动命令行程序时将 <code>-XX:DumpGCPerformanceOnShutdown</code> 传递给 <code>dalvikvm</code>。当应用获得 ANR 请求信号 (<code>SIGQUIT</code>) 时，会转储与其锁定、线程堆栈和 GC 性能相关的信息。</p>
+<p>如需获得 GC 时序转储，请使用以下命令：</p>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell <span class="keyword">kill</span> -<span class="keyword">S</span> <span class="keyword">QUIT</span> PID</span><br></pre></td></tr></table></figure>
+
+<p>这会在 <code>/data/anr/</code> 中创建一个文件（名称中会包含日期和时间，例如 anr_2020-07-13-19-23-39-817）。此文件包含一些 ANR 转储信息以及 GC 时序。您可以通过搜索“Dumping cumulative Gc timings”（转储累计 GC 时序）来确定 GC 时序。这些时序会显示一些需要关注的内容，包括每个 GC 类型的阶段和暂停时间的直方图信息。暂停信息通常比较重要。例如：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">young</span> concurrent copying paused:	Sum: <span class="number">5</span>.<span class="number">491</span>ms <span class="number">99</span>% C.I. <span class="number">1</span>.<span class="number">464</span>ms-<span class="number">2</span>.<span class="number">133</span>ms Avg: <span class="number">1</span>.<span class="number">830</span>ms Max: <span class="number">2</span>.<span class="number">133</span>ms</span><br></pre></td></tr></table></figure>
+
+<p>本示例中显示平均暂停时间为 1.83 毫秒，该值应该足够低，在大多数应用中不会导致丢帧，因此您不必担心。</p>
+<p>需要关注的另一个方面是挂起时间，挂起时间测量在 GC 要求某个线程挂起后，该线程到达挂起点所需的时间。此时间包含在 GC 暂停时间中，所以对于确定长时间暂停是由 GC 缓慢还是线程挂起缓慢造成的很有用。以下是 Nexus 5 上的正常挂起时间示例：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">suspend</span> <span class="literal">all</span> histogram:	Sum: <span class="number">1</span>.<span class="number">513</span>ms <span class="number">99</span>% C.I. <span class="number">3</span>us-<span class="number">546</span>.<span class="number">560</span>us Avg: <span class="number">47</span>.<span class="number">281</span>us Max: <span class="number">601</span>us</span><br></pre></td></tr></table></figure>
+
+<p>还有其他一些需要关注的方面，包括总耗时和 GC 吞吐量。示例：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Total</span> time spent in GC: <span class="number">502</span>.<span class="number">251</span>ms</span><br><span class="line"><span class="attribute">Mean</span> GC size throughput: <span class="number">92</span>MB/s</span><br><span class="line"><span class="attribute">Mean</span> GC object throughput: <span class="number">1</span>.<span class="number">54702</span>e+<span class="number">06</span> objects/s</span><br></pre></td></tr></table></figure>
+
+<p>以下示例说明了如何转储已在运行的应用的 GC 时序：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">adb</span> shell kill -s QUIT PID</span><br><span class="line"><span class="attribute">adb</span> pull /data/anr/anr_<span class="number">2020</span>-<span class="number">07</span>-<span class="number">13</span>-<span class="number">19</span>-<span class="number">23</span>-<span class="number">39</span>-<span class="number">817</span></span><br></pre></td></tr></table></figure>
+
+<p>此时，GC 时序在 <code>anr_2020-07-13-19-23-39-817</code> 中。以下是 Google 地图的输出示例：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">Start</span> <span class="variable">Dumping</span> <span class="variable">histograms</span> <span class="variable">for</span> <span class="number">2195</span> <span class="variable">iterations</span> <span class="variable">for</span> <span class="variable">concurrent</span> <span class="variable">copying</span></span><br><span class="line"><span class="variable">MarkingPhase</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">258.127</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">58.854</span><span class="variable">ms</span><span class="operator">-</span><span class="number">352.575</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">117.651</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">641.940</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ScanCardsForSpace</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">85.966</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">15.121</span><span class="variable">ms</span><span class="operator">-</span><span class="number">112.080</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">39.164</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">662.555</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ScanImmuneSpaces</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">79.066</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">7.614</span><span class="variable">ms</span><span class="operator">-</span><span class="number">57.658</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">18.014</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">546.276</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ProcessMarkStack</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">49.308</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">6.439</span><span class="variable">ms</span><span class="operator">-</span><span class="number">81.640</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">22.464</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">638.448</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ClearFromSpace</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">35.068</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">6.522</span><span class="variable">ms</span><span class="operator">-</span><span class="number">40.040</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">15.976</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">633.665</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">SweepSystemWeaks</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">14.209</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">3.224</span><span class="variable">ms</span><span class="operator">-</span><span class="number">15.210</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">6.473</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">201.738</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">CaptureThreadRootsForMarking</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">11.067</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.835</span><span class="variable">ms</span><span class="operator">-</span><span class="number">13.902</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">5.044</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">25.565</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">VisitConcurrentRoots</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">8.588</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1.260</span><span class="variable">ms</span><span class="operator">-</span><span class="number">8.547</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.956</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">231.593</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ProcessReferences</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">7.868</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.002</span><span class="variable">ms</span><span class="operator">-</span><span class="number">8.336</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.792</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">17.376</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">EnqueueFinalizerReferences</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.976</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.691</span><span class="variable">ms</span><span class="operator">-</span><span class="number">8.005</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.811</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">16.540</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">GrayAllDirtyImmuneObjects</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.721</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.622</span><span class="variable">ms</span><span class="operator">-</span><span class="number">6.702</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.695</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">14.893</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">SweepLargeObjects</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.202</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.032</span><span class="variable">ms</span><span class="operator">-</span><span class="number">6.388</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.458</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">549.851</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">FlipOtherThreads</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">2.265</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.487</span><span class="variable">ms</span><span class="operator">-</span><span class="number">3.702</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.031</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">6.327</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">VisitNonThreadRoots</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">1.883</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">45</span><span class="variable">us</span><span class="operator">-</span><span class="number">3207.333</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">429.210</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">27524</span><span class="variable">us</span></span><br><span class="line"><span class="variable">InitializePhase</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">1.624</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">231.171</span><span class="variable">us</span><span class="operator">-</span><span class="number">2751.250</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">740.220</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">6961</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ForwardSoftReferences</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">1.071</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">215.113</span><span class="variable">us</span><span class="operator">-</span><span class="number">2175.625</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">488.362</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">7441</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ReclaimPhase</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">490.854</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">32.029</span><span class="variable">us</span><span class="operator">-</span><span class="number">6373.807</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">223.623</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">362851</span><span class="variable">us</span></span><br><span class="line"><span class="variable">EmptyRBMarkBitStack</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">479.736</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">11</span><span class="variable">us</span><span class="operator">-</span><span class="number">3202.500</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">218.558</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">13652</span><span class="variable">us</span></span><br><span class="line"><span class="variable">CopyingPhase</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">399.163</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">24</span><span class="variable">us</span><span class="operator">-</span><span class="number">4602.500</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">181.851</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">22865</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ThreadListFlip</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">295.609</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">15</span><span class="variable">us</span><span class="operator">-</span><span class="number">2134.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">134.673</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">13578</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ResumeRunnableThreads</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">238.329</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">5</span><span class="variable">us</span><span class="operator">-</span><span class="number">2351.250</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">108.578</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">10539</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ResumeOtherThreads</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">207.915</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1.072</span><span class="variable">us</span><span class="operator">-</span><span class="number">3602.499</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">94.722</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">14179</span><span class="variable">us</span></span><br><span class="line"><span class="variable">RecordFree</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">188.009</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">64</span><span class="variable">us</span><span class="operator">-</span><span class="number">312.812</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">85.653</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">2709</span><span class="variable">us</span></span><br><span class="line"><span class="variable">MarkZygoteLargeObjects</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">133.301</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">12</span><span class="variable">us</span><span class="operator">-</span><span class="number">734.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">60.729</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">10169</span><span class="variable">us</span></span><br><span class="line"><span class="variable">MarkStackAsLive</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">127.554</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">13</span><span class="variable">us</span><span class="operator">-</span><span class="number">417.083</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">58.111</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">1728</span><span class="variable">us</span></span><br><span class="line"><span class="variable">FlipThreadRoots</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">126.119</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1.028</span><span class="variable">us</span><span class="operator">-</span><span class="number">3202.499</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">57.457</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">11412</span><span class="variable">us</span></span><br><span class="line"><span class="variable">SweepAllocSpace</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">117.761</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">24</span><span class="variable">us</span><span class="operator">-</span><span class="number">400.624</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">53.649</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">1541</span><span class="variable">us</span></span><br><span class="line"><span class="variable">SwapBitmaps</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">56.301</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">10</span><span class="variable">us</span><span class="operator">-</span><span class="number">125.312</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">25.649</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">1475</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">GrayAllNewlyDirtyImmuneObjects</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">33.047</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">9</span><span class="variable">us</span><span class="operator">-</span><span class="number">49.931</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">15.055</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">72</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">SetFromSpace</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">11.651</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">2</span><span class="variable">us</span><span class="operator">-</span><span class="number">49.772</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">5.307</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">71</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">FlipCallback</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">7.693</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">2</span><span class="variable">us</span><span class="operator">-</span><span class="number">32</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">3.504</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">32</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">ClearCards</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">6.371</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">250</span><span class="variable">ns</span><span class="operator">-</span><span class="number">49753</span><span class="variable">ns</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">207</span><span class="variable">ns</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">188000</span><span class="variable">ns</span></span><br><span class="line"><span class="variable">Sweep</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">5.793</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1</span><span class="variable">us</span><span class="operator">-</span><span class="number">49.818</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">2.639</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">93</span><span class="variable">us</span></span><br><span class="line"><span class="variable">UnBindBitmaps</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">5.255</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1</span><span class="variable">us</span><span class="operator">-</span><span class="number">31</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">2.394</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">31</span><span class="variable">us</span></span><br><span class="line"><span class="variable">Done</span> <span class="variable">Dumping</span> <span class="variable">histograms</span></span><br><span class="line"><span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">paused</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">315.249</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">49</span><span class="variable">us</span><span class="operator">-</span><span class="number">1378.125</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">143.621</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">7722</span><span class="variable">us</span></span><br><span class="line"><span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">freed</span><span class="operator">-</span><span class="variable">bytes</span><span class="operator">:</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">34</span><span class="variable">MB</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">54</span><span class="variable">MB</span> <span class="built_in">Min</span><span class="operator">:</span> <span class="number">2062</span><span class="variable">KB</span></span><br><span class="line"><span class="variable">Freed</span><span class="operator">-</span><span class="variable">bytes</span> <span class="variable">histogram</span><span class="operator">:</span> <span class="number">0</span><span class="operator">:</span><span class="number">4</span><span class="operator">,</span><span class="number">5120</span><span class="operator">:</span><span class="number">5</span><span class="operator">,</span><span class="number">10240</span><span class="operator">:</span><span class="number">19</span><span class="operator">,</span><span class="number">15360</span><span class="operator">:</span><span class="number">69</span><span class="operator">,</span><span class="number">20480</span><span class="operator">:</span><span class="number">167</span><span class="operator">,</span><span class="number">25600</span><span class="operator">:</span><span class="number">364</span><span class="operator">,</span><span class="number">30720</span><span class="operator">:</span><span class="number">529</span><span class="operator">,</span><span class="number">35840</span><span class="operator">:</span><span class="number">405</span><span class="operator">,</span><span class="number">40960</span><span class="operator">:</span><span class="number">284</span><span class="operator">,</span><span class="number">46080</span><span class="operator">:</span><span class="number">311</span><span class="operator">,</span><span class="number">51200</span><span class="operator">:</span><span class="number">38</span></span><br><span class="line"><span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">total</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">569.947</span><span class="variable">s</span> <span class="variable">mean</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">259.657</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">freed</span><span class="operator">:</span> <span class="number">1453160493</span> <span class="variable">objects</span> <span class="variable">with</span> <span class="variable">total</span> <span class="variable">size</span> <span class="number">74</span><span class="variable">GB</span></span><br><span class="line"><span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">throughput</span><span class="operator">:</span> <span class="number">2.54964</span><span class="variable">e</span><span class="operator">+</span><span class="number">06</span><span class="operator">/</span><span class="variable">s</span> <span class="operator">/</span> <span class="number">134</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span>  <span class="variable">per</span> <span class="variable">cpu</span><span class="operator">-</span><span class="variable">time</span><span class="operator">:</span> <span class="number">157655668</span><span class="operator">/</span><span class="variable">s</span> <span class="operator">/</span> <span class="number">150</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span></span><br><span class="line"><span class="variable">Average</span> <span class="variable">major</span> <span class="variable">GC</span> <span class="variable">reclaim</span> <span class="variable">bytes</span> <span class="variable">ratio</span> <span class="number">0.486928</span> <span class="variable">over</span> <span class="number">2195</span> <span class="variable">GC</span> <span class="variable">cycles</span></span><br><span class="line"><span class="variable">Average</span> <span class="variable">major</span> <span class="variable">GC</span> <span class="variable">copied</span> <span class="variable">live</span> <span class="variable">bytes</span> <span class="variable">ratio</span> <span class="number">0.0894662</span> <span class="variable">over</span> <span class="number">2199</span> <span class="variable">major</span> <span class="variable">GCs</span></span><br><span class="line"><span class="variable">Cumulative</span> <span class="variable">bytes</span> <span class="variable">moved</span> <span class="number">6586367960</span></span><br><span class="line"><span class="variable">Cumulative</span> <span class="variable">objects</span> <span class="variable">moved</span> <span class="number">127490240</span></span><br><span class="line"><span class="variable">Peak</span> <span class="variable">regions</span> <span class="variable">allocated</span> <span class="number">376</span> <span class="punctuation">(</span><span class="number">94</span><span class="variable">MB</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">2048</span> <span class="punctuation">(</span><span class="number">512</span><span class="variable">MB</span><span class="punctuation">)</span></span><br><span class="line"><span class="variable">Start</span> <span class="variable">Dumping</span> <span class="variable">histograms</span> <span class="variable">for</span> <span class="number">685</span> <span class="variable">iterations</span> <span class="variable">for</span> <span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span></span><br><span class="line"><span class="variable">ScanCardsForSpace</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">26.288</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">8.617</span><span class="variable">ms</span><span class="operator">-</span><span class="number">77.759</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">38.377</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">432.991</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ProcessMarkStack</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">21.829</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">2.116</span><span class="variable">ms</span><span class="operator">-</span><span class="number">71.119</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">31.868</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">98.679</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ClearFromSpace</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">19.420</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">5.480</span><span class="variable">ms</span><span class="operator">-</span><span class="number">50.293</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">28.351</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">507.330</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ScanImmuneSpaces</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">9.968</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">8.155</span><span class="variable">ms</span><span class="operator">-</span><span class="number">30.639</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">14.552</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">46.676</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">SweepSystemWeaks</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">6.741</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">3.655</span><span class="variable">ms</span><span class="operator">-</span><span class="number">14.715</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">9.841</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">22.142</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">GrayAllDirtyImmuneObjects</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">4.466</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.584</span><span class="variable">ms</span><span class="operator">-</span><span class="number">14.315</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">6.519</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">24.355</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">FlipOtherThreads</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.672</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.631</span><span class="variable">ms</span><span class="operator">-</span><span class="number">16.630</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">5.361</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">18.513</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">ProcessReferences</span><span class="operator">:</span>      <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">2.806</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.001</span><span class="variable">ms</span><span class="operator">-</span><span class="number">9.459</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">2.048</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">11.951</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">EnqueueFinalizerReferences</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">1.857</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.424</span><span class="variable">ms</span><span class="operator">-</span><span class="number">8.609</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">2.711</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">24.063</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">VisitConcurrentRoots</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">1.094</span><span class="variable">s</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1.306</span><span class="variable">ms</span><span class="operator">-</span><span class="number">5.357</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.598</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">6.831</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">SweepArray</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">711.032</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.022</span><span class="variable">ms</span><span class="operator">-</span><span class="number">3.502</span><span class="variable">ms</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">1.038</span><span class="variable">ms</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">7.307</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">InitializePhase</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">667.346</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">303</span><span class="variable">us</span><span class="operator">-</span><span class="number">2643.749</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">974.227</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">3199</span><span class="variable">us</span></span><br><span class="line"><span class="variable">VisitNonThreadRoots</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">388.145</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">103.911</span><span class="variable">us</span><span class="operator">-</span><span class="number">1385.833</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">566.635</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">5374</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ThreadListFlip</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">202.730</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">18</span><span class="variable">us</span><span class="operator">-</span><span class="number">2414.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">295.956</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">6780</span><span class="variable">us</span></span><br><span class="line"><span class="variable">EmptyRBMarkBitStack</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">132.934</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">8</span><span class="variable">us</span><span class="operator">-</span><span class="number">1757.499</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">194.064</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">8495</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ResumeRunnableThreads</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">109.593</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">6</span><span class="variable">us</span><span class="operator">-</span><span class="number">4719.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">159.989</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">11106</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ResumeOtherThreads</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">86.733</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">3</span><span class="variable">us</span><span class="operator">-</span><span class="number">4114.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">126.617</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">19332</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ForwardSoftReferences</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">69.686</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">14</span><span class="variable">us</span><span class="operator">-</span><span class="number">2014.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">101.731</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">4723</span><span class="variable">us</span></span><br><span class="line"><span class="variable">RecordFree</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">58.889</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">0.500</span><span class="variable">us</span><span class="operator">-</span><span class="number">185.833</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">42.984</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">769</span><span class="variable">us</span></span><br><span class="line"><span class="variable">FlipThreadRoots</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">58.540</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1.034</span><span class="variable">us</span><span class="operator">-</span><span class="number">4314.999</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">85.459</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">10224</span><span class="variable">us</span></span><br><span class="line"><span class="variable">CopyingPhase</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">52.227</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">26</span><span class="variable">us</span><span class="operator">-</span><span class="number">728.749</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">76.243</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">2060</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ReclaimPhase</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">37.207</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">7</span><span class="variable">us</span><span class="operator">-</span><span class="number">2322.499</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">54.316</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">3826</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">GrayAllNewlyDirtyImmuneObjects</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">23.859</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">11</span><span class="variable">us</span><span class="operator">-</span><span class="number">98.917</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">34.830</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">128</span><span class="variable">us</span></span><br><span class="line"><span class="variable">FreeList</span><span class="operator">:</span>       <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">20.376</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">2</span><span class="variable">us</span><span class="operator">-</span><span class="number">188.875</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">29.573</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">998</span><span class="variable">us</span></span><br><span class="line"><span class="variable">MarkZygoteLargeObjects</span><span class="operator">:</span> <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">18.970</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">4</span><span class="variable">us</span><span class="operator">-</span><span class="number">115.749</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">27.693</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">122</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">SetFromSpace</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">12.331</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">3</span><span class="variable">us</span><span class="operator">-</span><span class="number">94.226</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">18.001</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">109</span><span class="variable">us</span></span><br><span class="line"><span class="variable">SwapBitmaps</span><span class="operator">:</span>    <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">11.761</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">5</span><span class="variable">us</span><span class="operator">-</span><span class="number">49.968</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">17.169</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">67</span><span class="variable">us</span></span><br><span class="line"><span class="variable">ResetStack</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">4.317</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1</span><span class="variable">us</span><span class="operator">-</span><span class="number">64.374</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">6.302</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">190</span><span class="variable">us</span></span><br><span class="line"><span class="variable">UnBindBitmaps</span><span class="operator">:</span>  <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.803</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">4</span><span class="variable">us</span><span class="operator">-</span><span class="number">49.822</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">5.551</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">70</span><span class="variable">us</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">ClearCards</span><span class="operator">:</span>     <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.336</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">250</span><span class="variable">ns</span><span class="operator">-</span><span class="number">7000</span><span class="variable">ns</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">347</span><span class="variable">ns</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">7000</span><span class="variable">ns</span></span><br><span class="line"><span class="punctuation">(</span><span class="variable">Paused</span><span class="punctuation">)</span><span class="variable">FlipCallback</span><span class="operator">:</span>   <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">3.082</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">1</span><span class="variable">us</span><span class="operator">-</span><span class="number">30</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">4.499</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">30</span><span class="variable">us</span></span><br><span class="line"><span class="variable">Done</span> <span class="variable">Dumping</span> <span class="variable">histograms</span></span><br><span class="line"><span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">paused</span><span class="operator">:</span>        <span class="built_in">Sum</span><span class="operator">:</span> <span class="number">229.314</span><span class="variable">ms</span> <span class="number">99</span><span class="operator">%</span> <span class="built_in">C</span><span class="operator">.</span><span class="built_in">I</span><span class="operator">.</span> <span class="number">37</span><span class="variable">us</span><span class="operator">-</span><span class="number">2287.499</span><span class="variable">us</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">334.764</span><span class="variable">us</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">6850</span><span class="variable">us</span></span><br><span class="line"><span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">freed</span><span class="operator">-</span><span class="variable">bytes</span><span class="operator">:</span> <span class="variable">Avg</span><span class="operator">:</span> <span class="number">44</span><span class="variable">MB</span> <span class="built_in">Max</span><span class="operator">:</span> <span class="number">50</span><span class="variable">MB</span> <span class="built_in">Min</span><span class="operator">:</span> <span class="number">9132</span><span class="variable">KB</span></span><br><span class="line"><span class="variable">Freed</span><span class="operator">-</span><span class="variable">bytes</span> <span class="variable">histogram</span><span class="operator">:</span> <span class="number">5120</span><span class="operator">:</span><span class="number">1</span><span class="operator">,</span><span class="number">15360</span><span class="operator">:</span><span class="number">1</span><span class="operator">,</span><span class="number">20480</span><span class="operator">:</span><span class="number">6</span><span class="operator">,</span><span class="number">25600</span><span class="operator">:</span><span class="number">1</span><span class="operator">,</span><span class="number">30720</span><span class="operator">:</span><span class="number">1</span><span class="operator">,</span><span class="number">35840</span><span class="operator">:</span><span class="number">9</span><span class="operator">,</span><span class="number">40960</span><span class="operator">:</span><span class="number">235</span><span class="operator">,</span><span class="number">46080</span><span class="operator">:</span><span class="number">427</span><span class="operator">,</span><span class="number">51200</span><span class="operator">:</span><span class="number">4</span></span><br><span class="line"><span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">total</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">100.823</span><span class="variable">s</span> <span class="variable">mean</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">147.187</span><span class="variable">ms</span></span><br><span class="line"><span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">freed</span><span class="operator">:</span> <span class="number">519927309</span> <span class="variable">objects</span> <span class="variable">with</span> <span class="variable">total</span> <span class="variable">size</span> <span class="number">30</span><span class="variable">GB</span></span><br><span class="line"><span class="variable">young</span> <span class="variable">concurrent</span> <span class="variable">copying</span> <span class="variable">throughput</span><span class="operator">:</span> <span class="number">5.15683</span><span class="variable">e</span><span class="operator">+</span><span class="number">06</span><span class="operator">/</span><span class="variable">s</span> <span class="operator">/</span> <span class="number">304</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span>  <span class="variable">per</span> <span class="variable">cpu</span><span class="operator">-</span><span class="variable">time</span><span class="operator">:</span> <span class="number">333152554</span><span class="operator">/</span><span class="variable">s</span> <span class="operator">/</span> <span class="number">317</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span></span><br><span class="line"><span class="variable">Average</span> <span class="variable">minor</span> <span class="variable">GC</span> <span class="variable">reclaim</span> <span class="variable">bytes</span> <span class="variable">ratio</span> <span class="number">0.52381</span> <span class="variable">over</span> <span class="number">685</span> <span class="variable">GC</span> <span class="variable">cycles</span></span><br><span class="line"><span class="variable">Average</span> <span class="variable">minor</span> <span class="variable">GC</span> <span class="variable">copied</span> <span class="variable">live</span> <span class="variable">bytes</span> <span class="variable">ratio</span> <span class="number">0.0512109</span> <span class="variable">over</span> <span class="number">685</span> <span class="variable">minor</span> <span class="variable">GCs</span></span><br><span class="line"><span class="variable">Cumulative</span> <span class="variable">bytes</span> <span class="variable">moved</span> <span class="number">1542000944</span></span><br><span class="line"><span class="variable">Cumulative</span> <span class="variable">objects</span> <span class="variable">moved</span> <span class="number">28393168</span></span><br><span class="line"><span class="variable">Peak</span> <span class="variable">regions</span> <span class="variable">allocated</span> <span class="number">376</span> <span class="punctuation">(</span><span class="number">94</span><span class="variable">MB</span><span class="punctuation">)</span> <span class="operator">/</span> <span class="number">2048</span> <span class="punctuation">(</span><span class="number">512</span><span class="variable">MB</span><span class="punctuation">)</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">time</span> <span class="variable">spent</span> <span class="variable">in</span> <span class="variable">GC</span><span class="operator">:</span> <span class="number">670.771</span><span class="variable">s</span></span><br><span class="line"><span class="built_in">Mean</span> <span class="variable">GC</span> <span class="variable">size</span> <span class="variable">throughput</span><span class="operator">:</span> <span class="number">159</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span> <span class="variable">per</span> <span class="variable">cpu</span><span class="operator">-</span><span class="variable">time</span><span class="operator">:</span> <span class="number">177</span><span class="variable">MB</span><span class="operator">/</span><span class="variable">s</span></span><br><span class="line"><span class="built_in">Mean</span> <span class="variable">GC</span> <span class="variable">object</span> <span class="variable">throughput</span><span class="operator">:</span> <span class="number">2.94152</span><span class="variable">e</span><span class="operator">+</span><span class="number">06</span> <span class="variable">objects</span><span class="operator">/</span><span class="variable">s</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">number</span> <span class="variable">of</span> <span class="variable">allocations</span> <span class="number">1974199562</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">bytes</span> <span class="variable">allocated</span> <span class="number">104</span><span class="variable">GB</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">bytes</span> <span class="variable">freed</span> <span class="number">104</span><span class="variable">GB</span></span><br><span class="line"><span class="variable">Free</span> <span class="variable">memory</span> <span class="number">10</span><span class="variable">MB</span></span><br><span class="line"><span class="variable">Free</span> <span class="variable">memory</span> <span class="variable">until</span> <span class="variable">GC</span> <span class="number">10</span><span class="variable">MB</span></span><br><span class="line"><span class="variable">Free</span> <span class="variable">memory</span> <span class="variable">until</span> <span class="variable">OOME</span> <span class="number">442</span><span class="variable">MB</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">memory</span> <span class="number">80</span><span class="variable">MB</span></span><br><span class="line"><span class="built_in">Max</span> <span class="variable">memory</span> <span class="number">512</span><span class="variable">MB</span></span><br><span class="line"><span class="variable">Zygote</span> <span class="variable">space</span> <span class="variable">size</span> <span class="number">2780</span><span class="variable">KB</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">mutator</span> <span class="variable">paused</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">544.563</span><span class="variable">ms</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">time</span> <span class="variable">waiting</span> <span class="variable">for</span> <span class="variable">GC</span> <span class="variable">to</span> <span class="variable">complete</span><span class="operator">:</span> <span class="number">117.494</span><span class="variable">ms</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">GC</span> <span class="variable">count</span><span class="operator">:</span> <span class="number">2880</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">GC</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">670.771</span><span class="variable">s</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">blocking</span> <span class="variable">GC</span> <span class="variable">count</span><span class="operator">:</span> <span class="number">1</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">blocking</span> <span class="variable">GC</span> <span class="variable">time</span><span class="operator">:</span> <span class="number">86.373</span><span class="variable">ms</span></span><br><span class="line"><span class="built_in">Histogram</span> <span class="variable">of</span> <span class="variable">GC</span> <span class="variable">count</span> <span class="variable">per</span> <span class="number">10000</span> <span class="variable">ms</span><span class="operator">:</span> <span class="number">0</span><span class="operator">:</span><span class="number">259879</span><span class="operator">,</span><span class="number">1</span><span class="operator">:</span><span class="number">2828</span><span class="operator">,</span><span class="number">2</span><span class="operator">:</span><span class="number">24</span><span class="operator">,</span><span class="number">3</span><span class="operator">:</span><span class="number">1</span></span><br><span class="line"><span class="built_in">Histogram</span> <span class="variable">of</span> <span class="variable">blocking</span> <span class="variable">GC</span> <span class="variable">count</span> <span class="variable">per</span> <span class="number">10000</span> <span class="variable">ms</span><span class="operator">:</span> <span class="number">0</span><span class="operator">:</span><span class="number">262731</span><span class="operator">,</span><span class="number">1</span><span class="operator">:</span><span class="number">1</span></span><br><span class="line"><span class="variable">Native</span> <span class="variable">bytes</span> <span class="variable">total</span><span class="operator">:</span> <span class="number">30599192</span> <span class="variable">registered</span><span class="operator">:</span> <span class="number">8947416</span></span><br><span class="line"><span class="built_in">Total</span> <span class="variable">native</span> <span class="variable">bytes</span> <span class="variable">at</span> <span class="variable">last</span> <span class="variable">GC</span><span class="operator">:</span> <span class="number">30344912</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分析-GC-正确性问题的工具"><a href="#分析-GC-正确性问题的工具" class="headerlink" title="分析 GC 正确性问题的工具"></a>分析 GC 正确性问题的工具</h3><p>造成 ART 内部崩溃的原因多种多样。读取或写入对象字段时发生崩溃可能表明堆损坏。如果 GC 在运行时崩溃，也可能是由堆损坏造成的。造成堆损坏的最常见原因是应用代码不正确。好在有一些工具可用来调试与 GC 和堆相关的崩溃问题，这些工具包括上面指定的堆验证选项和 CheckJNI。</p>
+<h4 id="CheckJNI"><a href="#CheckJNI" class="headerlink" title="CheckJNI"></a>CheckJNI</h4><p>CheckJNI 是一种添加 JNI 检查来验证应用行为的模式；出于性能方面的原因，默认情况下不启用此类检查。此类检查将捕获一些可能会导致堆损坏的错误，如使用无效/过时的局部和全局引用。如需启用 CheckJNI，请使用以下命令：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span><span class="bash"> setprop dalvik.vm.checkjni <span class="literal">true</span></span></span><br></pre></td></tr></table></figure>
+
+<p>CheckJNI 的 forcecopy 模式对于检测超出数组区域末端的写入很有用。启用后，forcecopy 会促使数组访问 JNI 函数返回带有红色区域的副本。红色区域是返回的指针末端/始端的一个区域，该区域具有一个特殊值，该值在数组释放时得到验证。如果红色区域中的值与预期值不匹配，表明发生了缓冲区溢出或欠载。这会导致 CheckJNI 中止。如需启用 forcecopy 模式，请使用以下命令：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell </span>setprop dalvik.vm.<span class="keyword">jniopts </span>forcecopy</span><br></pre></td></tr></table></figure>
+
+<p>举例来说，当写入超出从 <code>GetPrimitiveArrayCritical</code> 获取的数组的末端时，这就是 CheckJNI 应捕获的一个错误。此操作可能会损坏 Java 堆。如果写入发生在 CheckJNI 红色区域内，则在调用相应的 <code>ReleasePrimitiveArrayCritical</code> 时，CheckJNI 会捕获该问题。否则，写入会损坏 Java 堆中的某个随机对象，并且可能会导致将来发生 GC 崩溃。如果损坏的内存是引用字段，则 GC 可能会捕获错误并输出错误消息“Tried to mark <ptr> not contained by any spaces”。</p>
+<p>当 GC 尝试标记一个对象但无法找到其空间时，就会发生此错误。此检查失败后，GC 会遍历根，并尝试查看无效的对象是否为根。结果共有两个选项：对象为根或非根。</p>
+<h4 id="无效根示例"><a href="#无效根示例" class="headerlink" title="无效根示例"></a>无效根示例</h4><p>如果对象为无效根，则会输出一些有用的信息：<code>art E 5955 5955 art/runtime/gc/collector/mark_sweep.cc:383] Tried to mark 0x2 not contained by any spaces</code></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">art E  <span class="number">5955</span>  <span class="number">5955</span> art/runtime/gc/collector/mark_sweep.cc:<span class="number">384</span>] Attempting see if</span><br><span class="line">it&#x27;s a bad root</span><br><span class="line">art E  <span class="number">5955</span>  <span class="number">5955</span> art/runtime/gc/collector/mark_sweep.cc:485] Found invalid</span><br><span class="line">root: 0x2</span><br><span class="line">art E  <span class="number">5955</span>  <span class="number">5955</span> art/runtime/gc/collector/mark_sweep.cc:486]</span><br><span class="line">Type=RootJavaFrame thread_id=1 location=Visiting method &#x27;java.lang.Object</span><br><span class="line">com.google.gwt.corp.collections.JavaReadableJsArray.get(int)&#x27; at dex PC 0x<span class="number">0002</span></span><br><span class="line">(native PC 0xf<span class="number">1960</span>9d9) vreg=1</span><br></pre></td></tr></table></figure>
+
+<p>在本示例中，<code>com.google.gwt.corp.collections.JavaReadableJsArray.get</code> 内的 <code>vreg=1</code> 应该包含一个堆引用，但却包含了一个地址为 <code>0x2</code> 的无效指针。这是一个无效根。如需调试此问题，请在 oat 文件上使用 <code>oatdump</code>，并查看具有无效根的方法。在本示例中，结果证明错误在于 x86 后端的编译器错误。修复该错误的变更列表如下：<span class="exturl" data-url="aHR0cHM6Ly9hbmRyb2lkLXJldmlldy5nb29nbGVzb3VyY2UuY29tLyMvYy8xMzM5MzIv">https://android-review.googlesource.com/#/c/133932/<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="损坏的对象示例"><a href="#损坏的对象示例" class="headerlink" title="损坏的对象示例"></a>损坏的对象示例</h4><p>如果对象不是根，则输出类似于以下内容：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">01</span>-<span class="number">15</span> <span class="number">12</span>:<span class="number">38</span>:<span class="number">00</span>.<span class="number">196</span>  <span class="number">1217</span>  <span class="number">1238</span> E art     : Attempting see if it&#x27;s a bad root</span><br><span class="line"><span class="attribute">01</span>-<span class="number">15</span> <span class="number">12</span>:<span class="number">38</span>:<span class="number">00</span>.<span class="number">196</span>  <span class="number">1217</span>  <span class="number">1238</span> F art     :</span><br><span class="line"><span class="attribute">art</span>/runtime/gc/collector/mark_sweep.cc:<span class="number">381</span>] Can&#x27;t mark invalid object</span><br></pre></td></tr></table></figure>
+
+<p>如果堆损坏不是无效根，将很难调试。此错误消息表明堆中至少有一个对象指向无效对象。</p>
+<h2 id="实现-ART-即时-JIT-编译器"><a href="#实现-ART-即时-JIT-编译器" class="headerlink" title="实现 ART 即时 (JIT) 编译器"></a>实现 ART 即时 (JIT) 编译器</h2><p>Android Runtime (ART) 包含一个具备代码分析功能的即时 (JIT) 编译器，该编译器可以在 Android 应用运行时持续提高其性能。JIT 编译器对 Android 运行组件当前的预先 (AOT) 编译器进行了补充，可以提升运行时性能，节省存储空间，加快应用和系统更新速度。相较于 AOT 编译器，JIT 编译器的优势也更为明显，因为在应用自动更新期间或在无线下载 (OTA) 更新期间重新编译应用时，它不会拖慢系统速度。</p>
+<p>尽管 JIT 和 AOT 使用相同的编译器，它们所进行的一系列优化也较为相似，但它们生成的代码可能会有所不同。JIT 会利用运行时类型信息，可以更高效地进行内联，并可让堆栈替换 (OSR) 编译成为可能，而这一切都会使其生成的代码略有不同。</p>
+<h3 id="JIT-架构"><a href="#JIT-架构" class="headerlink" title="JIT 架构"></a>JIT 架构</h3><p><img src="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-arch-3Fcld1.png" alt="JIT 架构"></p>
+<p><strong>图 1.</strong> JIT 架构。</p>
+<h3 id="JIT-编译"><a href="#JIT-编译" class="headerlink" title="JIT 编译"></a>JIT 编译</h3><p>JIT 编译涉及以下活动：</p>
+<p><img src="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-profile-comp-RifrTY.png" alt="配置文件指导的编译"></p>
+<p><strong>图 2.</strong> 配置文件引导的编译。</p>
+<ol>
+<li><p>用户运行应用，此举随后触发 ART 加载<code>.dex</code>文件。</p>
+<ul>
+<li>如果有 <code>.oat</code> 文件（即 <code>.dex</code> 文件的 AOT 二进制文件），ART 会直接使用该文件。虽然 <code>.oat</code> 文件会定期生成，但文件中不一定会包含经过编译的代码（即 AOT 二进制文件）。</li>
+<li>如果 <code>.oat</code> 文件不含经过编译的代码，ART 会通过 JIT 和解释器执行 <code>.dex</code> 文件。</li>
+</ul>
+</li>
+<li><p>针对任何未根据 <code>speed</code> 编译过滤器编译的应用启用 JIT（也就是说，要尽可能多地编译应用中的代码）。</p>
+</li>
+<li><p>将 JIT 配置文件数据转储到只有该应用可以访问的系统目录下的文件中。</p>
+</li>
+<li><p>AOT 编译 (<code>dex2oat</code>) 守护程序通过解析该文件来推进其编译。</p>
+<p> <img src="https://up-img.yonghong.tech/pic/2021/07/29-20-44-jit-daemon-NoNjuF.png" alt="JIT 守护程序"><strong>图 3.</strong> JIT 守护程序活动。</p>
+</li>
+</ol>
+<p>举例来说，Google Play 服务就是一种由其他应用使用的类似于共享库的服务。</p>
+<h3 id="JIT-工作流程"><a href="#JIT-工作流程" class="headerlink" title="JIT 工作流程"></a>JIT 工作流程</h3><p><img src="https://source.android.com/devices/tech/dalvik/images/jit-workflow.png?hl=zh-cn" alt="JIT 架构"></p>
+<p><strong>图 4.</strong> JIT 数据流。</p>
+<ul>
+<li><p>分析信息会存储在代码缓存中，并会在内存紧张时作为垃圾被回收。</p>
+<ul>
+<li>无法保证在应用处于后台运行状态时所捕获的快照能够包含完整的数据（即 JIT 编译的所有内容）。</li>
+<li>该过程不会尝试确保记录所有内容（因为这会影响运行时性能）。</li>
+</ul>
+</li>
+<li><p>方法可能有三种不同的状态：</p>
+<ul>
+<li><p>已经过解释（dex 代码）</p>
+</li>
+<li><p>已经过 JIT 编译</p>
+</li>
+<li><p>已经过 AOT 编译</p>
+<p>如果同时存在 JIT 和 AOT 代码（例如，由于反复进行逆优化），经过 JIT 编译的代码将是首选代码。</p>
+</li>
+</ul>
+</li>
+<li><p>在不影响前台应用性能的情况下运行 JIT 所需的内存取决于相关应用。大型应用比小型应用需要更多内存。一般来说，大型应用所需的内存稳定维持在 4 MB 左右。</p>
+</li>
+</ul>
+<h3 id="开启-JIT-日志记录"><a href="#开启-JIT-日志记录" class="headerlink" title="开启 JIT 日志记录"></a>开启 JIT 日志记录</h3><p>要开启 JIT 日志记录，请运行以下命令：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb <span class="keyword">shell</span> <span class="keyword">stop</span></span><br><span class="line">adb <span class="keyword">shell</span> setprop dalvik.<span class="keyword">vm</span>.extra-opts -<span class="keyword">verbose</span>:jit</span><br><span class="line">adb <span class="keyword">shell</span> start</span><br></pre></td></tr></table></figure>
+
+<h3 id="停用-JIT"><a href="#停用-JIT" class="headerlink" title="停用 JIT"></a>停用 JIT</h3><p>要停用 JIT，请运行以下命令：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb <span class="built_in">shell</span> <span class="built_in">stop</span></span><br><span class="line">adb <span class="built_in">shell</span> setprop dalvik.vm.usejit <span class="literal">false</span></span><br><span class="line">adb <span class="built_in">shell</span> <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="强制编译"><a href="#强制编译" class="headerlink" title="强制编译"></a>强制编译</h3><p>要强制编译，请运行以下命令：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> <span class="title">compile</span></span><br></pre></td></tr></table></figure>
+
+<p>强制编译特定软件包的常见用例：</p>
+<ul>
+<li><p>基于配置文件：</p>
+  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> <span class="title">compile -m speed-profile -f my-<span class="keyword">package</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全面：</p>
+  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> <span class="title">compile -m speed -f my-<span class="keyword">package</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>强制编译所有软件包的常见用例：</p>
+<ul>
+<li><p>基于配置文件：</p>
+  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> <span class="title">compile -m speed-profile -f -a</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全面：</p>
+  <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> <span class="title">compile -m speed -f -a</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="清除配置文件数据"><a href="#清除配置文件数据" class="headerlink" title="清除配置文件数据"></a>清除配置文件数据</h3><p>要清除配置文件数据并移除经过编译的代码，请运行以下命令：</p>
+<ul>
+<li><p>针对一个软件包：</p>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cmd <span class="keyword">package</span> compile --<span class="keyword">reset</span> <span class="keyword">my</span>-<span class="keyword">package</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>针对所有软件包：</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="built_in">shell</span> cmd package compile <span class="comment">--reset -a</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2021/07/android-runtime-dalvik/" title="Android Runtime (ART) 和 Dalvik">http://yonghong.tech/2021/07/android-runtime-dalvik/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/ART/" rel="tag"># ART</a>
+              <a href="/tags/Dalvik/" rel="tag"># Dalvik</a>
+              <a href="/tags/%E8%BF%90%E8%A1%8C%E6%97%B6/" rel="tag"># 运行时</a>
+              <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/cloud-native-for-videoconferencing/" rel="prev" title="看看大厂是如何用云原生解决千万视频会议难题的">
+                  <i class="fa fa-chevron-left"></i> 看看大厂是如何用云原生解决千万视频会议难题的
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/android-widget/" rel="next" title="Android 常用组件">
+                  Android 常用组件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">19:52</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/2021/07/android-runtime-dalvik/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"d4841416abc95822c90453d66296e8ef"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>

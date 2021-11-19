@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="Spring Data JPA 是什么JPA （The Java Persistence API）是用于访问，持久化和管理 Java 对象&#x2F;类与关系型数据库之间的数据交互的 Java 规范。  注意，JPA 只是一个标准，只定义了一系列接口，而没有具体的实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Data JPA 全面解析">
+<meta property="og:url" content="http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="Spring Data JPA 是什么JPA （The Java Persistence API）是用于访问，持久化和管理 Java 对象&#x2F;类与关系型数据库之间的数据交互的 Java 规范。  注意，JPA 只是一个标准，只定义了一系列接口，而没有具体的实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-10-29T16:00:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="spring-data-jpa">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/","path":"2018/10/2018-10-30-springboot-jpa/","title":"Spring Data JPA 全面解析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring Data JPA 全面解析 | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Data-JPA-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.</span> <span class="nav-text">Spring Data JPA 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-Spring-Data-JPA"><span class="nav-number">2.</span> <span class="nav-text">配置 Spring Data JPA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%86%99%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">开始写代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%A6%82%E4%BD%95%E6%B3%A8%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">数据如何注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.</span> <span class="nav-text">基本查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E5%85%88%E7%94%9F%E6%88%90"><span class="nav-number">6.1.</span> <span class="nav-text">预先生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2"><span class="nav-number">6.2.</span> <span class="nav-text">自定义简单查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E6%9F%A5%E8%AF%A2"><span class="nav-number">7.</span> <span class="nav-text">复杂查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="nav-number">7.1.</span> <span class="nav-text">分页查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89SQL%E6%9F%A5%E8%AF%A2"><span class="nav-number">7.2.</span> <span class="nav-text">自定义SQL查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="nav-number">7.3.</span> <span class="nav-text">多表查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%92%8C-mybatis-%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">8.</span> <span class="nav-text">和 mybatis 的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">8.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">8.2.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ORM"><span class="nav-number">8.3.</span> <span class="nav-text">ORM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">8.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">9.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring Data JPA 全面解析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-10-30 00:00:00 00:00:00" itemprop="dateCreated datePublished" datetime="2018-10-30T00:00:00+08:00">2018-10-30 00:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>13k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Spring-Data-JPA-是什么"><a href="#Spring-Data-JPA-是什么" class="headerlink" title="Spring Data JPA 是什么"></a>Spring Data JPA 是什么</h3><p>JPA （The Java Persistence API）是用于访问，持久化和管理 Java 对象/类与关系型数据库之间的数据交互的 Java 规范。</p>
+<blockquote>
+<p>注意，JPA 只是一个标准，只定义了一系列接口，而没有具体的实现。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>很多企业级框架提供了对 JPA 的实现，如 Spring 。因此 Spring 本身与 JPA 无关，只是提供了对 JPA 的支持，因此在 Spring 中你也会看到很多注解都是属于 javax.persistence 包的。</p>
+<p>JPA 的出现主要是为了简化现有的持久化开发工作和整合 ORM 技术，结束现在 Hibernate，TopLink，JDO 等 ORM 框架各自为营的局面。值得注意的是，JPA 是在充分吸收了现有 Hibernate，TopLink，JDO 等ORM框架的基础上发展而来的，具有易于使用，伸缩性强等优点。从目前的开发社区的反应上看，JPA 受到了极大的支持和赞扬，其中就包括了 Spring 与 EJB3.0 的开发团队。</p>
+<p>Spring Data JPA 是 Spring 基于 ORM 框架、JPA 规范的基础上封装的一套 JPA 应用框架，底层使用了 Hibernate 的 JPA 技术实现，可使开发者用极简的代码即可实现对数据的访问和操作。它提供了包括增删改查等在内的常用功能，且易于扩展！学习并使用 Spring Data JPA 可以极大提高开发效率！</p>
+<blockquote>
+<p>spring data jpa 让我们解脱了 DAO 层的操作，基本上所有 CRUD 都可以依赖于它来实现</p>
+</blockquote>
+<h3 id="配置-Spring-Data-JPA"><a href="#配置-Spring-Data-JPA" class="headerlink" title="配置 Spring Data JPA"></a>配置 Spring Data JPA</h3><p>Maven - pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么这里不指定版本号呢？</p>
+<ul>
+<li>因为 spring boot 的 pom 依赖了 parent，部分 jar 包的版本已在 parent 中指定，故不建议显示指定</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0.6.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span> /&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>继续配置 application.yml</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.jdbc.Driver</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost/sell?characterEncoding=utf-8&amp;useSSL=false</span></span><br><span class="line">  <span class="attr">jpa:</span></span><br><span class="line">    <span class="attr">show-sql:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>或者是 application.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.datasource.url</span>=jdbc:mysql://localhost/sell?characterEncoding=utf-<span class="number">8</span>&amp;useSSL=<span class="literal">false</span></span><br><span class="line"><span class="attr">spring.datasource.username</span>=root</span><br><span class="line"><span class="attr">spring.datasource.password</span>=<span class="number">123456</span></span><br><span class="line"><span class="attr">spring.datasource.driver-class-name</span>=com.mysql.jdbc.Driver</span><br><span class="line"><span class="attr">spring.jpa.show-sql</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>配置就这么简单，下面简单介绍下 spring.jpa.properties.hibernate.hbm2ddl.auto 有几种配置：</p>
+<ul>
+<li>create：每次加载Hibernate时都会删除上一次生成的表（包括数据），然后重新生成新表，即使两次没有任何修改也会这样执行。适用于每次执行单测前清空数据库的场景。</li>
+<li>create-drop：每次加载Hibernate时都会生成表，但当SessionFactory关闭时，所生成的表将自动删除。</li>
+<li>update：最常用的属性值，第一次加载Hibernate时创建数据表（前提是需要先有数据库），以后加载Hibernate时不会删除上一次生成的表，会根据实体更新，只新增字段，不会删除字段（即使实体中已经删除）。</li>
+<li>validate：每次加载Hibernate时都会验证数据表结构，只会和已经存在的数据表进行比较，根据model修改表结构，但不会创建新表。</li>
+</ul>
+<p>不配置此项，表示禁用自动建表功能</p>
+<h3 id="开始写代码"><a href="#开始写代码" class="headerlink" title="开始写代码"></a>开始写代码</h3><p>实体类 ProductCategory.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.dataobject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.persistence.Entity;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.GeneratedValue;</span><br><span class="line"><span class="keyword">import</span> javax.persistence.Id;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用 <span class="doctag">@Entity</span> 注解表示这是一个实体类，与数据库相对应</span></span><br><span class="line"><span class="comment"> * 数据库中的表格对应的是 user</span></span><br><span class="line"><span class="comment"> * 如果数据库中的表名和类名不对应，应该加上 <span class="doctag">@Table</span> 注解</span></span><br><span class="line"><span class="comment"> * 例：<span class="doctag">@Table</span>(name = &quot;s_user&quot;)</span></span><br><span class="line"><span class="comment"> * 注解 <span class="doctag">@Data</span> 是 Lombok 实现的一个简化的写法来代替 Getter 和 Setter 方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** id 注解 <span class="doctag">@Id</span> 表示主键，注解 <span class="doctag">@GeneratedValue</span> 表示自增类型 */</span></span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> id;</span><br><span class="line">    <span class="meta">@Column(nullable = false, unique = true)</span></span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="meta">@Column(nullable = false)</span></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="meta">@Column(nullable = false)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注：Entity中不映射成列的字段得加@Transient 注解，不加注解也会映射成列</p>
+</blockquote>
+<p>声明 UserRepository接口，继承JpaRepository，默认支持简单的 CRUD 操作，非常方便</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.example.demo.dataobject.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.jpa.repository.JpaRepository;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">User</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">User <span class="title">findByUserName</span><span class="params">(String userName)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试代码 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 注解 <span class="doctag">@Slf</span>4j 也是 Lombok 提供的简单写法来代替 Logger 的复杂写法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserTest</span> <span class="keyword">extends</span> <span class="title">ApplicationTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">userTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUserName(<span class="string">&quot;0xl2oot&quot;</span>);</span><br><span class="line">        user.setAge(<span class="number">30</span>);</span><br><span class="line">        user.setPassword(<span class="string">&quot;aaabbb&quot;</span>);</span><br><span class="line">        userRepository.save(user);</span><br><span class="line">        User item = userRepository.findByUserName(<span class="string">&quot;0xl2oot&quot;</span>);</span><br><span class="line">        log.info(JsonUtils.toJson(item));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试运行，成功</p>
+<p>注：<span class="exturl" data-url="aHR0cHM6Ly9ub3Rlcy4weGwyb290LmNuL3NwcmluZ2Jvb3QvMjAxOC8xMC8zMC9jb3VsZC1ub3QtaW5pdGlhbGl6ZS1wcm94eS1uby1zZXNzaW9uLmh0bWw=">加 @Transactional 注解的原因<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>很多人会有疑问，直接声明接口不需要具体实现就能完成数据库的操作？下面就简单介绍下 spring data jpa 的实现原理。</p>
+<p>对单测进行debug，可以发现userRepository被注入了一个动态代理，被代理的类是JpaRepository的一个实现SimpleJpaRespositry</p>
+<p>继续往下debug,在进到findByUserName方法的时候，发现被上文提到的JdkDynamicAopProxy捕获，然后经过一系列的方法拦截，最终进到QueryExecutorMethodInterceptor.doInvoke中。这个拦截器主要做的事情就是判断方法类型，然后执行对应的操作.<br>我们的findByUserName属于自定义查询，于是就进入了查询策略对应的execute方法。在执行execute时，会先选取对应的JpaQueryExecution，调用AbtractJpaQuery.getExecution()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> JpaQueryExecution <span class="title">getExecution</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (method.isStreamQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> StreamExecution();</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method.isProcedureQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ProcedureExecution();</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method.isCollectionQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CollectionExecution();</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method.isSliceQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SlicedExecution(method.getParameters());</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method.isPageQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PagedExecution(method.getParameters());</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (method.isModifyingQuery()) &#123;</span><br><span class="line">    <span class="keyword">return</span> method.getClearAutomatically() ? <span class="keyword">new</span> ModifyingExecution(method, em) : <span class="keyword">new</span> ModifyingExecution(method, <span class="keyword">null</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SingleEntityExecution();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上述代码所示，根据method变量实例化时的查询设置方式，实例化不同的JpaQueryExecution子类实例去运行。我们的findByUserName最终落入了SingleEntityExecution —— 返回单个实例的 Execution。继续跟踪execute方法，发现底层使用了 hibernate 的 CriteriaQueryImpl 完成了sql的拼装，这里就不做赘述了。</p>
+<p>再来看看这类的method。在 spring-data-jpa 中，JpaQueryMethod就是Repository接口中带有@Query注解方法的全部信息，包括注解，类名，实参等的存储类，所以Repository接口有多少个@Query注解方法，就会包含多少个JpaQueryMethod实例被加入监听序列。实际运行时，一个RepositoryQuery实例持有一个JpaQueryMethod实例，JpaQueryMethod又持有一个Method实例。</p>
+<p>再来看看RepositoryQuery，在QueryExecutorMethodInterceptor中维护了一个Map&lt;Method, RepositoryQuery&gt; queries。RepositoryQuery的直接抽象子类是AbstractJpaQuery，可以看到，一个RepositoryQuery实例持有一个JpaQueryMethod实例，JpaQueryMethod又持有一个Method实例，所以RepositoryQuery实例的用途很明显，一个RepositoryQuery代表了Repository接口中的一个方法，根据方法头上注解不同的形态，将每个Repository接口中的方法分别映射成相对应的RepositoryQuery实例。</p>
+<p>下面我们就来看看spring-data-jpa对RepositoryQuery实例的具体分类： </p>
+<p>1.SimpleJpaQuery<br>方法头上@Query注解的nativeQuery属性缺省值为false，也就是使用JPQL，此时会创建SimpleJpaQuery实例，并通过两个StringQuery类实例分别持有query jpql语句和根据query jpql计算拼接出来的countQuery jpql语句；</p>
+<p>2.NativeJpaQuery<br>方法头上@Query注解的nativeQuery属性如果显式的设置为nativeQuery=true，也就是使用原生SQL，此时就会创建NativeJpaQuery实例；</p>
+<p>3.PartTreeJpaQuery<br>方法头上未进行@Query注解，将使用spring-data-jpa独创的方法名识别的方式进行sql语句拼接，此时在spring-data-jpa内部就会创建一个PartTreeJpaQuery实例；</p>
+<p>4.NamedQuery<br>使用javax.persistence.NamedQuery注解访问数据库的形式，此时在spring-data-jpa内部就会根据此注解选择创建一个NamedQuery实例；</p>
+<p>5.StoredProcedureJpaQuery<br>顾名思义，在Repository接口的方法头上使用org.springframework.data.jpa.repository.query.Procedure注解，也就是调用存储过程的方式访问数据库，此时在spring-data-jpa内部就会根据@Procedure注解而选择创建一个StoredProcedureJpaQuery实例。</p>
+<p>那么问题来了，sql 拼接的时候怎么知道是根据userName进行查询呢？是取自方法名中的 byUsername 还是方法参数 userName 呢？ spring 具体是在什么时候知道查询参数的呢 ？</p>
+<h3 id="数据如何注入"><a href="#数据如何注入" class="headerlink" title="数据如何注入"></a>数据如何注入</h3><p>spring 在启动的时候会实例化一个 Repositories，它会去扫描所有的 class，然后找出由我们定义的、继承自org.springframework.data.repository.Repositor的接口，然后遍历这些接口，针对每个接口依次创建如下几个实例:</p>
+<ol>
+<li>SimpleJpaRespositry —— 用来进行默认的 DAO 操作，是所有 Repository 的默认实现</li>
+<li>JpaRepositoryFactoryBean —— 装配 bean，装载了动态代理 Proxy，会以对应的 DAO 的 beanName 为 key 注册到DefaultListableBeanFactory中，在需要被注入的时候从这个 bean 中取出对应的动态代理 Proxy 注入给 DAO</li>
+<li>JdkDynamicAopProxy —— 动态代理对应的InvocationHandler，负责拦截 DAO 接口的所有的方法调用，然后做相应处理，比如findByUsername被调用的时候会先经过这个类的 invoke 方法</li>
+</ol>
+<p>在JpaRepositoryFactoryBean.getRepository()方法被调用的过程中，还是在实例化QueryExecutorMethodInterceptor这个拦截器的时候，spring 会去为我们的方法创建一个PartTreeJpaQuery，在它的构造方法中同时会实例化一个PartTree对象。PartTree定义了一系列的正则表达式，全部用于截取方法名，通过方法名来分解查询的条件，排序方式，查询结果等等，这个分解的步骤是在进程启动时加载 Bean 的过程中进行的，当执行查询的时候直接取方法对应的PartTree用来进行 sql 的拼装，然后进行 DB 的查询，返回结果。</p>
+<p>到此为止，我们整个JpaRepository接口相关的链路就算走通啦，简单的总结如下：<br>spring 会在启动的时候扫描所有继承自 Repository 接口的 DAO 接口，然后为其实例化一个动态代理，同时根据它的方法名、参数等为其装配一系列DB操作组件，在需要注入的时候为对应的接口注入这个动态代理，在 DAO 方法被调用的时会走这个动态代理，然后经过一系列的方法拦截路由到最终的 DB 操作执行器 JpaQueryExecution，然后拼装 sql，执行相关操作，返回结果。</p>
+<h3 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h3><p>基本查询分为两种，一种是 spring data 默认已经实现（只要继承<code>JpaRepository</code>），一种是根据查询的方法来自动解析成 SQL。</p>
+<h4 id="预先生成"><a href="#预先生成" class="headerlink" title="预先生成"></a>预先生成</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> UserRepository <span class="keyword">extends</span> JpaRepository&lt;User, <span class="keyword">Long</span>&gt; &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> testBaseQuery() <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    User user=<span class="keyword">new</span> User();</span><br><span class="line">    userRepository.<span class="keyword">findAll</span>();</span><br><span class="line">    userRepository.findOne(<span class="number">1</span>l);</span><br><span class="line">    userRepository.save(user);</span><br><span class="line">    userRepository.<span class="keyword">delete</span>(user);</span><br><span class="line">    userRepository.<span class="keyword">count</span>();</span><br><span class="line">    userRepository.exists(<span class="number">1</span>l);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义简单查询"><a href="#自定义简单查询" class="headerlink" title="自定义简单查询"></a>自定义简单查询</h4><p>自定义的简单查询就是根据方法名来自动生成SQL，主要的语法是<code>findXXBy,readAXXBy,queryXXBy,countXXBy, getXXBy</code>后面跟属性名称，举几个例子：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">User</span> <span class="title">findByUserName</span>(<span class="keyword">String</span> userName);</span><br><span class="line"></span><br><span class="line"><span class="keyword">User</span> <span class="title">findByUserNameOrEmail</span>(<span class="keyword">String</span> username, <span class="keyword">String</span> email);</span><br><span class="line"></span><br><span class="line">Long deleteById(Long id);</span><br><span class="line"></span><br><span class="line">Long countByUserName(<span class="keyword">String</span> userName);</span><br><span class="line"></span><br><span class="line">List<span class="tag">&lt;User&gt;</span> findByEmailLike(<span class="keyword">String</span> email);</span><br><span class="line"></span><br><span class="line"><span class="keyword">User</span> <span class="title">findByUserNameIgnoreCase</span>(<span class="keyword">String</span> userName);</span><br><span class="line"></span><br><span class="line">List<span class="tag">&lt;User&gt;</span> findByUserNameOrderByEmailDesc(<span class="keyword">String</span> email);</span><br></pre></td></tr></table></figure>
+
+<p>具体的关键字，使用方法和生产成 SQL 如下表所示</p>
+<table>
+<thead>
+<tr>
+<th>Keyword</th>
+<th>Sample</th>
+<th>JPQL snippet</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>And</td>
+<td>findByLastnameAndFirstname</td>
+<td>… where x.lastname = ?1 and x.firstname = ?2</td>
+</tr>
+<tr>
+<td>Or</td>
+<td>findByLastnameOrFirstname</td>
+<td>… where x.lastname = ?1 or x.firstname = ?2</td>
+</tr>
+<tr>
+<td>Is,Equals</td>
+<td>findByFirstnameIs,findByFirstnameEquals</td>
+<td>… where x.firstname = ?1</td>
+</tr>
+<tr>
+<td>Between</td>
+<td>findByStartDateBetween</td>
+<td>… where x.startDate between ?1 and ?2</td>
+</tr>
+<tr>
+<td>LessThan</td>
+<td>findByAgeLessThan</td>
+<td>… where x.age &lt; ?1</td>
+</tr>
+<tr>
+<td>LessThanEqual</td>
+<td>findByAgeLessThanEqual</td>
+<td>… where x.age ⇐ ?1</td>
+</tr>
+<tr>
+<td>GreaterThan</td>
+<td>findByAgeGreaterThan</td>
+<td>… where x.age &gt; ?1</td>
+</tr>
+<tr>
+<td>GreaterThanEqual</td>
+<td>findByAgeGreaterThanEqual</td>
+<td>… where x.age &gt;= ?1</td>
+</tr>
+<tr>
+<td>After</td>
+<td>findByStartDateAfter</td>
+<td>… where x.startDate &gt; ?1</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>findByStartDateBefore</td>
+<td>… where x.startDate &lt; ?1</td>
+</tr>
+<tr>
+<td>IsNull</td>
+<td>findByAgeIsNull</td>
+<td>… where x.age is null</td>
+</tr>
+<tr>
+<td>IsNotNull,NotNull</td>
+<td>findByAge(Is)NotNull</td>
+<td>… where x.age not null</td>
+</tr>
+<tr>
+<td>Like</td>
+<td>findByFirstnameLike</td>
+<td>… where x.firstname like ?1</td>
+</tr>
+<tr>
+<td>NotLike</td>
+<td>findByFirstnameNotLike</td>
+<td>… where x.firstname not like ?1</td>
+</tr>
+<tr>
+<td>StartingWith</td>
+<td>findByFirstnameStartingWith</td>
+<td>… where x.firstname like ?1 (parameter bound with appended %)</td>
+</tr>
+<tr>
+<td>EndingWith</td>
+<td>findByFirstnameEndingWith</td>
+<td>… where x.firstname like ?1 (parameter bound with prepended %)</td>
+</tr>
+<tr>
+<td>Containing</td>
+<td>findByFirstnameContaining</td>
+<td>… where x.firstname like ?1 (parameter bound wrapped in %)</td>
+</tr>
+<tr>
+<td>OrderBy</td>
+<td>findByAgeOrderByLastnameDesc</td>
+<td>… where x.age = ?1 order by x.lastname desc</td>
+</tr>
+<tr>
+<td>Not</td>
+<td>findByLastnameNot</td>
+<td>… where x.lastname &lt;&gt; ?1</td>
+</tr>
+<tr>
+<td>In</td>
+<td>findByAgeIn(Collection<age> ages)</age></td>
+<td>… where x.age in ?1</td>
+</tr>
+<tr>
+<td>NotIn</td>
+<td>findByAgeNotIn(Collection<age> age)</age></td>
+<td>… where x.age not in ?1</td>
+</tr>
+<tr>
+<td>TRUE</td>
+<td>findByActiveTrue()</td>
+<td>… where x.active = true</td>
+</tr>
+<tr>
+<td>FALSE</td>
+<td>findByActiveFalse()</td>
+<td>… where x.active = false</td>
+</tr>
+<tr>
+<td>IgnoreCase</td>
+<td>findByFirstnameIgnoreCase</td>
+<td>… where UPPER(x.firstame) = UPPER(?1)</td>
+</tr>
+</tbody></table>
+<h3 id="复杂查询"><a href="#复杂查询" class="headerlink" title="复杂查询"></a>复杂查询</h3><p>在实际的开发中我们需要用到分页、删选、连表等查询的时候就需要特殊的方法或者自定义 SQL</p>
+<h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><p>分页查询在实际使用中非常普遍了，spring data jpa已经帮我们实现了分页的功能，在查询的方法中，需要传入参数<code>Pageable</code><br>，当查询中有多个参数的时候<code>Pageable</code>建议做为最后一个参数传入。<code>Pageable</code>是 spring 封装的分页实现类，使用的时候需要传入页数、每页条数和排序规则</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Page&lt;User&gt; find<span class="constructor">ALL(Pageable <span class="params">pageable</span>)</span>;</span><br><span class="line"></span><br><span class="line">Page&lt;User&gt; find<span class="constructor">ByUserName(String <span class="params">userName</span>,Pageable <span class="params">pageable</span>)</span>;</span><br><span class="line">@Test</span><br><span class="line">public void test<span class="constructor">PageQuery()</span> throws Exception &#123;</span><br><span class="line">    <span class="built_in">int</span> page=<span class="number">1</span>,size=<span class="number">10</span>;</span><br><span class="line">    Sort sort = <span class="keyword">new</span> <span class="constructor">Sort(Direction.DESC, <span class="string">&quot;id&quot;</span>)</span>;</span><br><span class="line">    Pageable pageable = <span class="keyword">new</span> <span class="constructor">PageRequest(<span class="params">page</span>, <span class="params">size</span>, <span class="params">sort</span>)</span>;</span><br><span class="line">    userRepository.find<span class="constructor">ALL(<span class="params">pageable</span>)</span>;</span><br><span class="line">    userRepository.find<span class="constructor">ByUserName(<span class="string">&quot;testName&quot;</span>, <span class="params">pageable</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有时候我们只需要查询前N个元素，或者支取前一个实体。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">User find<span class="constructor">FirstByOrderByLastnameAsc()</span>;</span><br><span class="line"></span><br><span class="line">User find<span class="constructor">TopByOrderByAgeDesc()</span>;</span><br><span class="line"></span><br><span class="line">Page&lt;User&gt; query<span class="constructor">First10ByLastname(String <span class="params">lastname</span>, Pageable <span class="params">pageable</span>)</span>;</span><br><span class="line"></span><br><span class="line">List&lt;User&gt; find<span class="constructor">First10ByLastname(String <span class="params">lastname</span>, Sort <span class="params">sort</span>)</span>;</span><br><span class="line"></span><br><span class="line">List&lt;User&gt; find<span class="constructor">Top10ByLastname(String <span class="params">lastname</span>, Pageable <span class="params">pageable</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义SQL查询"><a href="#自定义SQL查询" class="headerlink" title="自定义SQL查询"></a>自定义SQL查询</h4><p>其实 Spring data 大部分的 SQL 都可以根据方法名定义的方式来实现，但是由于某些原因我们想使用自定义的 SQL 来查询，spring data 也是完美支持的；在 SQL 的查询方法上面使用 @Query 注解，如涉及到删除和修改在需要加上 @Modifying 。也可以根据需要添加 @Transactional 对事物的支持，查询超时的设置等</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@Modifying</span></span><br><span class="line"><span class="variable">@Query</span>(<span class="string">&quot;update User u set u.userName = ?1 where c.id = ?2&quot;</span>)</span><br><span class="line">int modifyByIdAndUserId(String  userName, Long id);</span><br><span class="line"></span><br><span class="line"><span class="variable">@Transactional</span></span><br><span class="line"><span class="variable">@Modifying</span></span><br><span class="line"><span class="variable">@Query</span>(<span class="string">&quot;delete from User where id = ?1&quot;</span>)</span><br><span class="line">void deleteByUserId(Long id);</span><br><span class="line"></span><br><span class="line"><span class="variable">@Transactional</span>(timeout = <span class="number">10</span>)</span><br><span class="line"><span class="variable">@Query</span>(<span class="string">&quot;select u from User u where u.emailAddress = ?1&quot;</span>)</span><br><span class="line">User findByEmailAddress(String emailAddress);</span><br></pre></td></tr></table></figure>
+
+<h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>多表查询在 spring data jpa 中有两种实现方式，第一种是利用 hibernate 的级联查询来实现，第二种是创建一个结果集的接口来接收连表查询后的结果，这里介绍第二种方式。</p>
+<p>首先需要定义一个结果集的接口类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HotelSummary</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function">City <span class="title">getCity</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">getName</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Double <span class="title">getAverageRating</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">default</span> Integer <span class="title">getAverageRatingRounded</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getAverageRating() == <span class="keyword">null</span> ? <span class="keyword">null</span> : (<span class="keyword">int</span>) Math.round(getAverageRating());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询的方法返回类型设置为新创建的接口</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Query(&quot;<span class="keyword">select</span> h.city <span class="keyword">as</span> city, h.name <span class="keyword">as</span> name, <span class="built_in">avg</span>(r.rating) <span class="keyword">as</span> averageRating <span class="keyword">from</span> Hotel h <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> h.reviews r <span class="keyword">where</span> h.city = ?<span class="number">1</span> <span class="keyword">group</span> <span class="keyword">by</span> h<span class="string">&quot;)</span></span><br><span class="line"><span class="string">Page&lt;HotelSummary&gt; findByCity(City city, Pageable pageable);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Query(&quot;</span><span class="keyword">select</span> h.name <span class="keyword">as</span> name, <span class="built_in">avg</span>(r.rating) <span class="keyword">as</span> averageRating <span class="keyword">from</span> Hotel h <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> h.reviews r <span class="keyword">group</span> <span class="keyword">by</span> h<span class="string">&quot;)</span></span><br><span class="line"><span class="string">Page&lt;HotelSummary&gt; findByCity(Pageable pageable);</span></span><br><span class="line"><span class="string">Page&lt;HotelSummary&gt; hotels = this.hotelRepository.findByCity(new PageRequest(0, 10, Direction.ASC, &quot;</span>name<span class="string">&quot;));</span></span><br><span class="line"><span class="string">for(HotelSummary summay:hotels)&#123;</span></span><br><span class="line"><span class="string">    System.out.println(&quot;</span>Name<span class="string">&quot; +summay.getName());</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在运行中 Spring 会给接口（<code>HotelSummary</code>）自动生产一个代理类来接收返回的结果，代码会使用 getXX 的形式来获取</p>
+<h3 id="和-mybatis-的比较"><a href="#和-mybatis-的比较" class="headerlink" title="和 mybatis 的比较"></a>和 mybatis 的比较</h3><p>spring data jpa 底层采用 hibernate 做为 ORM 框架，所以 spring data jpa 和 mybatis 的比较其实就是 hibernate 和 mybatis 的比较。下面从几个方面来对比下两者</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>从基本概念和框架目标上看，两个框架差别还是很大的。hibernate 是一个自动化更强、更高级的框架，毕竟在java代码层面上，省去了绝大部分 sql 编写，取而代之的是用面向对象的方式操作关系型数据库的数据。而 MyBatis 则是一个能够灵活编写 sql 语句，并将 sql 的入参和查询结果映射成 POJOs 的一个持久层框架。所以，从表面上看，hibernate 能方便、自动化更强，而 MyBatis 在 Sql 语句编写方面则更灵活自由。</p>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><p>正如上面介绍的， Hibernate 比 MyBatis 抽象封装的程度更高，理论上单个语句之心的性能会低一点（所有的框架都是一样，排除算法上的差异，越是底层，执行效率越高）。</p>
+<p>但 Hibernate 会设置缓存，对于重复查询有一定的优化，而且从编码效率来说，Hibernate 的编码效果肯定是会高一点的。所以，从整体的角度来看性能的话，其实两者不能完全说谁胜谁劣。</p>
+<h4 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h4><p>Hibernate 是完备的 ORM 框架，是符合 JPA 规范的， MyBatis 没有按照JPA那套规范实现。目前 Spring 以及 Spring Boot 官方都没有针对 MyBatis 有具体的支持，但对 Hibernate 的集成一直是有的。但这并不是说 mybatis 和 spring 无法集成，MyBatis 官方社区自身也是有 对 Spring，Spring boot 集成做支持的，所以在技术上，两者都不存在问题。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>总结下 mybatis 的优点：</p>
+<ul>
+<li>简单易学</li>
+<li>灵活，MyBatis不会对应用程序或者数据库的现有设计强加任何影响。 注解或者使用 SQL 写在 XML 里，便于统一管理和优化。通过 SQL 基本上可以实现我们不使用数据访问框架可以实现的所有功能，或许更多。</li>
+<li>解除 SQL 与程序代码的耦合，SQL 和代码的分离，提高了可维护性。</li>
+<li>提供映射标签，支持对象与数据库的 ORM 字段关系映射。</li>
+<li>提供对象关系映射标签，支持对象关系组建维护。</li>
+<li>提供XML标签，支持编写动态SQL。</li>
+</ul>
+<p>hibernate 的优点：<br>JPA 的宗旨是为 POJO 提供持久化标准规范，实现使用的 Hibernate，Hibernate 是一个全自动的持久层框架，并且提供了面向对象的 SQL 支持，不需要编写复杂的 SQL 语句，直接操作 Java 对象即可，从而大大降低了代码量，让即使不懂 SQL 的开发人员，也使程序员更加专注于业务逻辑的实现。对于关联查询，也仅仅是使用一些注解即可完成一些复杂的 SQL功能。</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnNwcmluZy5pby9zcHJpbmctZGF0YS9qcGEvZG9jcy8yLjEuMi5SRUxFQVNFL2FwaS9vcmcvc3ByaW5nZnJhbWV3b3JrL2RhdGEvanBhL3JlcG9zaXRvcnkvSnBhUmVwb3NpdG9yeS5odG1s">org.springframework.data.jpa.repository<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zZWdtZW50ZmF1bHQuY29tL2EvMTE5MDAwMDAxNTA0NzI5MA==">【spring boot 系列】spring data jpa 全面解析（实践 + 源码分析）<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/" title="Spring Data JPA 全面解析">http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/spring-data-jpa/" rel="tag"># spring-data-jpa</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/10/2018-10-29-logging-framework/" rel="prev" title="日志框架的使用——如何选择日志框架">
+                  <i class="fa fa-chevron-left"></i> 日志框架的使用——如何选择日志框架
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/10/2018-10-31-maven/" rel="next" title="Maven 的一些概念和参考">
+                  Maven 的一些概念和参考 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.3m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">19:52</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/2018/10/2018-10-30-springboot-jpa/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"1a156585ed8baffaa7278dab60a112e6"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
