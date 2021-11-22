@@ -1,5 +1,12 @@
 ---
 title: macOS 装机清单
+tags:
+- macOS
+- 技巧
+categories:
+- 技巧
+date: 2021-11-15 22:24:00
+updated: 2021-11-15 22:24:00
 ---
 
 ### 输入法

@@ -1,5 +1,13 @@
 ---
 title: Android Studio 技巧
+tags:
+- Android Studio
+- Android
+- 技巧
+categories:
+- 技巧
+date: 2021-11-18 22:24:00
+updated: 2021-11-18 22:24:00
 ---
 
 ### Local Changes 标签页
