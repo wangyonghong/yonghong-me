@@ -88,9 +88,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">763</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">866</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">57</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">767</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">872</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">58</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">763</span>
+          <span class="site-state-item-count">767</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">866</span>
+        <span class="site-state-item-count">872</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,458 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ssh-copy-id/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/ssh-copy-id/" class="post-title-link" itemprop="url">【Linux 命令】ssh-copy-id</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:47:00 11:47:00" itemprop="dateModified" datetime="2020-09-25T11:47:00+08:00">2020-09-25 11:47:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>302</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>把本地的ssh公钥文件安装到远程主机对应的账户下</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ssh-copy-id命令</strong> 可以把本地主机的公钥复制到远程主机的authorized_keys文件上，ssh-copy-id命令也会给远程主机的用户主目录（home）和<code>~/.ssh</code>, 和<code>~/.ssh/authorized_keys</code>设置合适的权限。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id [-i [identity_file]] [user@]machine</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-i：指定公钥文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>1、把本地的ssh公钥文件安装到远程主机对应的账户下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id user@server</span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub user@server</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ssh-agent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/ssh-agent/" class="post-title-link" itemprop="url">【Linux 命令】ssh-agent</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:46:30 11:46:30" itemprop="dateModified" datetime="2020-09-25T11:46:30+08:00">2020-09-25 11:46:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>555</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ssh密钥管理器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ssh-agent命令</strong> 是一种控制用来保存公钥身份验证所使用的私钥的程序。ssh-agent在X会话或登录会话之初启动，所有其他窗口或程序则以客户端程序的身份启动并加入到ssh-agent程序中。通过使用环境变量，可定位代理并在登录到其他使用ssh机器上时使用代理自动进行身份验证。</p>
+<p>其实ssh-agent就是一个密钥管理器，运行ssh-agent以后，使用ssh-add将私钥交给ssh-agent保管，其他程序需要身份验证的时候可以将验证申请交给ssh-agent来完成整个认证过程。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent [-c | -s] [-d] [-a bind_address] [-t life] [command [arg ...]]</span><br><span class="line">ssh-agent [-c | -s] -k</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a bind_address：bind the agent to the UNIX-domain socket bind_address.</span><br><span class="line">-c：生成C-shell风格的命令输出。</span><br><span class="line">-d：调试模式。</span><br><span class="line">-k：把ssh-agent进程杀掉。</span><br><span class="line">-s：生成Bourne shell 风格的命令输出。</span><br><span class="line">-t life：设置默认值添加到代理人的身份最大寿命。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>运行ssh-agent：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent</span><br></pre></td></tr></table></figure>
+
+<p>运行ssh-agent，它会打印出来它使用的环境和变量。</p>
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ssh-add/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/ssh-add/" class="post-title-link" itemprop="url">【Linux 命令】ssh-add</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:46:00 11:46:00" itemprop="dateModified" datetime="2020-09-25T11:46:00+08:00">2020-09-25 11:46:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>498</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>把专用密钥添加到ssh-agent的高速缓存中</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ssh-add命令</strong> 是把专用密钥添加到ssh-agent的高速缓存中。该命令位置在<code>/usr/bin/ssh-add</code>。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-add [-cDdLlXx] [-t life] [file ...]</span><br><span class="line">ssh-add -s pkcs11</span><br><span class="line">ssh-add -e pkcs11</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-D：删除ssh-agent中的所有密钥.</span><br><span class="line">-d：从ssh-agent中的删除密钥</span><br><span class="line">-e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙。</span><br><span class="line">-s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙。</span><br><span class="line">-L：显示ssh-agent中的公钥</span><br><span class="line">-l：显示ssh-agent中的密钥</span><br><span class="line">-t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥</span><br><span class="line">-X：对ssh-agent进行解锁</span><br><span class="line">-x：对ssh-agent进行加锁</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>1、把专用密钥添加到 ssh-agent 的高速缓存中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/id_dsa</span><br></pre></td></tr></table></figure>
+
+<p>2、从ssh-agent中删除密钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -d ~/.ssh/id_xxx.pub</span><br></pre></td></tr></table></figure>
+
+<p>3、查看ssh-agent中的密钥：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-add -l</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/ss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/ss/" class="post-title-link" itemprop="url">【Linux 命令】ss</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:45:30 11:45:30" itemprop="dateModified" datetime="2020-09-25T11:45:30+08:00">2020-09-25 11:45:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>ss命令</strong> 用来显示处于活动状态的套接字信息。ss命令可以用来获取socket统计信息，它可以显示和netstat类似的内容。但ss的优势在于它能够显示更多更详细的有关TCP和连接状态的信息，而且比netstat更快速更高效。</p>
+<p>当服务器的socket连接数量变得非常大时，无论是使用netstat命令还是直接<code>cat /proc/net/tcp</code>，执行速度都会很慢。可能你不会有切身的感受，但请相信我，当服务器维持的连接达到上万个的时候，使用netstat等于浪费 生命，而用ss才是节省时间。</p>
+<p>天下武功唯快不破。ss快的秘诀在于，它利用到了TCP协议栈中tcp_diag。tcp_diag是一个用于分析统计的模块，可以获得Linux 内核中第一手的信息，这就确保了ss的快捷高效。当然，如果你的系统中没有tcp_diag，ss也可以正常运行，只是效率会变得稍慢。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ss [参数]</span><br><span class="line">ss [参数] [过滤]</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">-h, --help      帮助信息</span><br><span class="line">-V, --version   程序版本信息</span><br><span class="line">-n, --numeric   不解析服务名称</span><br><span class="line">-r, --resolve   解析主机名</span><br><span class="line">-a, --all       显示所有套接字（sockets）</span><br><span class="line">-l, --listening 显示监听状态的套接字（sockets）</span><br><span class="line">-o, --options   显示计时器信息</span><br><span class="line">-e, --extended  显示详细的套接字（sockets）信息</span><br><span class="line">-m, --memory    显示套接字（socket）的内存使用情况</span><br><span class="line">-p, --processes 显示使用套接字（socket）的进程</span><br><span class="line">-i, --info      显示 TCP内部信息</span><br><span class="line">-s, --summary   显示套接字（socket）使用概况</span><br><span class="line">-4, --ipv4      仅显示IPv4的套接字（sockets）</span><br><span class="line">-6, --ipv6      仅显示IPv6的套接字（sockets）</span><br><span class="line">-0, --packet    显示 PACKET 套接字（socket）</span><br><span class="line">-t, --tcp       仅显示 TCP套接字（sockets）</span><br><span class="line">-u, --udp       仅显示 UCP套接字（sockets）</span><br><span class="line">-d, --dccp      仅显示 DCCP套接字（sockets）</span><br><span class="line">-w, --raw       仅显示 RAW套接字（sockets）</span><br><span class="line">-x, --unix      仅显示 Unix套接字（sockets）</span><br><span class="line">-f, --family=FAMILY  显示 FAMILY类型的套接字（sockets），FAMILY可选，支持  unix, inet, inet6, link, netlink</span><br><span class="line">-A, --query=QUERY, --socket=QUERY</span><br><span class="line">      QUERY := &#123;all|inet|tcp|udp|raw|unix|packet|netlink&#125;[,QUERY]</span><br><span class="line">-D, --diag=FILE     将原始TCP套接字（sockets）信息转储到文件</span><br><span class="line"> -F, --filter=FILE  从文件中都去过滤器信息</span><br><span class="line">       FILTER := [ state TCP-STATE ] [ EXPRESSION ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">ss -t -a    # 显示TCP连接</span><br><span class="line">ss -s       # 显示 Sockets 摘要</span><br><span class="line">ss -l       # 列出所有打开的网络连接端口</span><br><span class="line">ss -pl      # 查看进程使用的socket</span><br><span class="line">ss -lp | grep 3306  # 找出打开套接字/端口应用程序</span><br><span class="line">ss -u -a    显示所有UDP Sockets</span><br><span class="line">ss -o state established &#x27;( dport = :smtp or sport = :smtp )&#x27; # 显示所有状态为established的SMTP连接</span><br><span class="line">ss -o state established &#x27;( dport = :http or sport = :http )&#x27; # 显示所有状态为Established的HTTP连接</span><br><span class="line">ss -o state fin-wait-1 &#x27;( sport = :http or sport = :https )&#x27; dst 193.233.7/24  # 列举出处于 FIN-WAIT-1状态的源端口为 80或者 443，目标网络为 193.233.7/24所有 tcp套接字</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss 和 netstat 效率对比</span></span><br><span class="line">time netstat -at</span><br><span class="line">time ss</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配远程地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss dst ADDRESS_PATTERN</span></span><br><span class="line">ss dst 192.168.1.5</span><br><span class="line">ss dst 192.168.119.113:http</span><br><span class="line">ss dst 192.168.119.113:smtp</span><br><span class="line">ss dst 192.168.119.113:443</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配本地地址和端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss src ADDRESS_PATTERN</span></span><br><span class="line">ss src 192.168.119.103</span><br><span class="line">ss src 192.168.119.103:http</span><br><span class="line">ss src 192.168.119.103:80</span><br><span class="line">ss src 192.168.119.103:smtp</span><br><span class="line">ss src 192.168.119.103:25</span><br></pre></td></tr></table></figure>
+
+<p><strong>将本地或者远程端口和一个数比较</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ss dport OP PORT 远程端口和一个数比较；</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss sport OP PORT 本地端口和一个数比较</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> OP 可以代表以下任意一个:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;= or le : 小于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt;= or ge : 大于或等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> == or eq : 等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> != or ne : 不等于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; or gt : 小于端口号</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; or lt : 大于端口号</span></span><br><span class="line">ss  sport = :http</span><br><span class="line">ss  dport = :http</span><br><span class="line">ss  dport \&gt; :1024</span><br><span class="line">ss  sport \&gt; :1024</span><br><span class="line">ss sport \&lt; :32000</span><br><span class="line">ss  sport eq :22</span><br><span class="line">ss  dport != :22</span><br><span class="line">ss  state connected sport = :http</span><br><span class="line">ss \( sport = :http or sport = :https \)</span><br><span class="line">ss -o state fin-wait-1 \( sport = :http or sport = :https \) dst 192.168.1/24</span><br></pre></td></tr></table></figure>
+
+<p><strong>用TCP 状态过滤Sockets</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ss -4 state closing</span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -4 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ss -6 state FILTER-NAME-HERE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> FILTER-NAME-HERE 可以代表以下任何一个：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> established、 syn-sent、 syn-recv、 fin-wait-1、 fin-wait-2、 time-wait、 closed、 close-wait、 last-ack、 listen、 closing、</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> all : 所有以上状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> connected : 除了listen and closed的所有状态</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> synchronized :所有已连接的状态除了syn-sent</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bucket : 显示状态为maintained as minisockets,如：time-wait和syn-recv.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> big : 和bucket相反.</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示ICP连接</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -t -a</span><br><span class="line">State       Recv-Q Send-Q                            Local Address:Port                                Peer Address:Port</span><br><span class="line">LISTEN      0      0                                             *:3306                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:http                                           *:*</span><br><span class="line">LISTEN      0      0                                             *:ssh                                            *:*</span><br><span class="line">LISTEN      0      0                                     127.0.0.1:smtp                                           *:*</span><br><span class="line">ESTAB       0      0                                112.124.15.130:42071                              42.156.166.25:http</span><br><span class="line">ESTAB       0      0                                112.124.15.130:ssh                              121.229.196.235:33398</span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示 Sockets 摘要</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -s</span><br><span class="line">Total: 172 (kernel 189)</span><br><span class="line">TCP:   10 (estab 2, closed 4, orphaned 0, synrecv 0, timewait 0/0), ports 5</span><br><span class="line"></span><br><span class="line">Transport Total     ip        IPv6</span><br><span class="line">*         189       -         -</span><br><span class="line">RAW       0         0         0</span><br><span class="line">UDP       5         5         0</span><br><span class="line">TCP       6         6         0</span><br><span class="line">INET      11        11        0</span><br><span class="line">FRAG      0         0         0</span><br></pre></td></tr></table></figure>
+
+<p>列出当前的established, closed, orphaned and waiting TCP sockets</p>
+<p> <strong>列出所有打开的网络连接端口</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -l</span><br><span class="line">Recv-Q Send-Q                                 Local Address:Port                                     Peer Address:Port</span><br><span class="line">0      0                                                  *:3306                                                *:*</span><br><span class="line">0      0                                                  *:http                                                *:*</span><br><span class="line">0      0                                                  *:ssh                                                 *:*</span><br><span class="line">0      0                                          127.0.0.1:smtp                                                *:*</span><br></pre></td></tr></table></figure>
+
+<p> <strong>查看进程使用的socket</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl</span><br><span class="line">Recv-Q Send-Q                                          Local Address:Port                                              Peer Address:Port</span><br><span class="line">0      0                                                           *:3306                                                         *:*        users:((&quot;mysqld&quot;,1718,10))</span><br><span class="line">0      0                                                           *:http                                                         *:*        users:((&quot;nginx&quot;,13312,5),(&quot;nginx&quot;,13333,5))</span><br><span class="line">0      0                                                           *:ssh                                                          *:*        users:((&quot;sshd&quot;,1379,3))</span><br><span class="line">0      0                                                   127.0.0.1:smtp                                                         *:*        us</span><br></pre></td></tr></table></figure>
+
+<p> <strong>找出打开套接字/端口应用程序</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -pl | grep 3306</span><br><span class="line">0      0                            *:3306                          *:*        users:((&quot;mysqld&quot;,1718,10))</span><br></pre></td></tr></table></figure>
+
+<p> <strong>显示所有UDP Sockets</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ss -u -a</span><br><span class="line">State       Recv-Q Send-Q                                     Local Address:Port                                         Peer Address:Port</span><br><span class="line">UNCONN      0      0                                                      *:syslog                                                  *:*</span><br><span class="line">UNCONN      0      0                                         112.124.15.130:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                            10.160.7.81:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                              127.0.0.1:ntp                                                     *:*</span><br><span class="line">UNCONN      0      0                                                      *:ntp                                                     *:*</span><br></pre></td></tr></table></figure>
+
+<h4 id="出所有端口为-22（ssh）的连接"><a href="#出所有端口为-22（ssh）的连接" class="headerlink" title="出所有端口为 22（ssh）的连接"></a>出所有端口为 22（ssh）的连接</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ss state all sport = :ssh</span><br><span class="line"></span><br><span class="line">Netid State      Recv-Q Send-Q     Local Address:Port                      Peer Address:Port</span><br><span class="line">tcp   LISTEN     0      128                    *:ssh                                  *:*</span><br><span class="line">tcp   ESTAB      0      0          192.168.0.136:ssh                      192.168.0.102:46540</span><br><span class="line">tcp   LISTEN     0      128                   :::ssh                                 :::*</span><br></pre></td></tr></table></figure>
+
+
+<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -890,474 +1342,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/sort/" class="post-title-link" itemprop="url">【Linux 命令】sort</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:42:00 11:42:00" itemprop="dateModified" datetime="2020-09-25T11:42:00+08:00">2020-09-25 11:42:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.8k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>对文本文件中所有行进行排序。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sort [OPTION]... [FILE]...</span><br><span class="line">sort [OPTION]... --files0-from=F</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>将所有输入文件的内容排序后并输出。</li>
-<li>当没有文件或文件为<code>-</code>时，读取标准输入。</li>
-</ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>排序选项：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-b, --ignore-leading-blanks    忽略开头的空白。</span><br><span class="line">-d, --dictionary-order         仅考虑空白、字母、数字。</span><br><span class="line">-f, --ignore-case              将小写字母作为大写字母考虑。</span><br><span class="line">-g, --general-numeric-sort     根据数字排序。</span><br><span class="line">-i, --ignore-nonprinting       排除不可打印字符。</span><br><span class="line">-M, --month-sort               按照非月份、一月、十二月的顺序排序。</span><br><span class="line">-h, --human-numeric-sort       根据存储容量排序(注意使用大写字母，例如：2K 1G)。</span><br><span class="line">-n, --numeric-sort             根据数字排序。</span><br><span class="line">-R, --random-sort              随机排序，但分组相同的行。</span><br><span class="line">--random-source=FILE           从FILE中获取随机长度的字节。</span><br><span class="line">-r, --reverse                  将结果倒序排列。</span><br><span class="line">--sort=WORD                    根据WORD排序，其中: general-numeric 等价于 -g，human-numeric 等价于 -h，month 等价于 -M，numeric 等价于 -n，random 等价于 -R，version 等价于 -V。</span><br><span class="line">-V, --version-sort             文本中(版本)数字的自然排序。</span><br></pre></td></tr></table></figure>
-
-<p>其他选项：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">--batch-size=NMERGE                    一次合并最多NMERGE个输入；超过部分使用临时文件。</span><br><span class="line">-c, --check, --check=diagnose-first    检查输入是否已排序，该操作不会执行排序。</span><br><span class="line">-C, --check=quiet, --check=silent      类似于 -c 选项，但不输出第一个未排序的行。</span><br><span class="line">--compress-program=PROG                使用PROG压缩临时文件；使用PROG -d解压缩。</span><br><span class="line">--debug                                注释用于排序的行，发送可疑用法的警报到stderr。</span><br><span class="line">--files0-from=F                        从文件F中读取以NUL结尾的所有文件名称；如果F是 - ，那么从标准输入中读取名字。</span><br><span class="line">-k, --key=KEYDEF                       通过一个key排序；KEYDEF给出位置和类型。</span><br><span class="line">-m, --merge                            合并已排序文件，之后不再排序。</span><br><span class="line">-o, --output=FILE                      将结果写入FILE而不是标准输出。</span><br><span class="line">-s, --stable                           通过禁用最后的比较来稳定排序。</span><br><span class="line">-S, --buffer-size=SIZE                 使用SIZE作为内存缓存大小。</span><br><span class="line">-t, --field-separator=SEP              使用SEP作为列的分隔符。</span><br><span class="line">-T, --temporary-directory=DIR          使用DIR作为临时目录，而不是 $TMPDIR 或 /tmp；多次使用该选项指定多个临时目录。</span><br><span class="line">--parallel=N                           将并发运行的排序数更改为N。</span><br><span class="line">-u, --unique                           同时使用-c，严格检查排序；不同时使用-c，输出排序后去重的结果。</span><br><span class="line">-z, --zero-terminated                  设置行终止符为NUL（空），而不是换行符。</span><br><span class="line">--help                                 显示帮助信息并退出。</span><br><span class="line">--version                              显示版本信息并退出。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">KEYDEF的格式为：F[.C][OPTS][,F[.C][OPTS]] ，表示开始到结束的位置。</span><br><span class="line">F表示列的编号</span><br><span class="line">C表示</span><br><span class="line">OPTS为[bdfgiMhnRrV]中的一到多个字符，用于覆盖当前排序选项。</span><br><span class="line">使用--debug选项可诊断出错误的用法。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SIZE 可以有以下的乘法后缀:</span><br><span class="line"><span class="meta">%</span><span class="bash"> 内存的1%；</span></span><br><span class="line">b 1；</span><br><span class="line">K 1024（默认）；</span><br><span class="line">剩余的 M, G, T, P, E, Z, Y 可以类推出来。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>FILE（可选）：要处理的文件，可以为任意数量。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回0表示成功，返回非0值表示失败。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>sort将文件/文本的每一行作为一个单位相互比较，比较原则是从首字符向后依次按ASCII码值进行比较，最后将他们按升序输出。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root@[mail text]# cat sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">[root@mail text]# sort sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">bbb:20:2.2</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br></pre></td></tr></table></figure>
-
-<p>忽略相同行使用<code>-u</code>选项或者<code>uniq</code>：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@mail text]# cat sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">[root@mail text]# sort -u sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">bbb:20:2.2</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">[root@mail text]# uniq sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br></pre></td></tr></table></figure>
-
-<p><code>sort</code>的<code>-n、-r、-k、-t</code>选项的使用：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@mail text]# cat sort.txt</span><br><span class="line">AAA:BB:CC</span><br><span class="line">aaa:30:1.6</span><br><span class="line">ccc:50:3.3</span><br><span class="line">ddd:20:4.2</span><br><span class="line">bbb:10:2.5</span><br><span class="line">eee:40:5.4</span><br><span class="line">eee:60:5.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将BB列按照数字从小到大顺序排列：</span></span><br><span class="line">[root@mail text]# sort -nk 2 -t: sort.txt</span><br><span class="line">AAA:BB:CC</span><br><span class="line">bbb:10:2.5</span><br><span class="line">ddd:20:4.2</span><br><span class="line">aaa:30:1.6</span><br><span class="line">eee:40:5.4</span><br><span class="line">ccc:50:3.3</span><br><span class="line">eee:60:5.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将CC列数字从大到小顺序排列：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -n是按照数字大小排序，-r是以相反顺序，-k是指定需要排序的栏位，-t指定栏位分隔符为冒号</span></span><br><span class="line">[root@mail text]# sort -nrk 3 -t: sort.txt</span><br><span class="line">eee:40:5.4</span><br><span class="line">eee:60:5.1</span><br><span class="line">ddd:20:4.2</span><br><span class="line">ccc:50:3.3</span><br><span class="line">bbb:10:2.5</span><br><span class="line">aaa:30:1.6</span><br><span class="line">AAA:BB:CC</span><br></pre></td></tr></table></figure>
-
-<p>关于<code>-k</code>选项的解读和例子：</p>
-<p>-k选项深度解读：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FStart.CStart Modifier,FEnd.CEnd Modifier</span><br><span class="line">-------Start--------,-------End--------</span><br><span class="line"> FStart.CStart 选项  ,  FEnd.CEnd 选项</span><br></pre></td></tr></table></figure>
-
-<p>这个语法格式可以被其中的逗号<code>,</code>分为两大部分，<strong>Start</strong> 部分和 <strong>End</strong> 部分。<br>Start部分由三部分组成，其中的Modifier部分就是我们之前说过的选项部分；<br>我们重点说说<code>Start</code>部分的<code>FStart</code>和<code>C.Start</code>；<code>C.Start</code>是可以省略的，省略的话就表示从本域的开头部分开始。<code>FStart.CStart</code>，其中<code>FStart</code>就是表示使用的域，而<code>CStart</code>则表示在<code>FStart</code>域中从第几个字符开始算排序首字符。<br>同理，在End部分中，你可以设定<code>FEnd.CEnd</code>，如果你省略<code>.CEnd</code>或将它设定为0，则表示结尾到本域的最后一个字符。</p>
-<p>例子：从公司英文名称的第二个字母开始排序：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sort -t <span class="string">&#x27; &#x27;</span> -k 1.2 facebook.txt</span></span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
-
-<p>解读：使用了<code>-k 1.2</code>，表示对第一个域的第二个字符开始到本域的最后一个字符为止的字符串进行排序。你会发现baidu因为第二个字母是a而名列榜首。sohu和google第二个字符都是o，但sohu的h在google的o前面，所以两者分别排在第二和第三。guge只能屈居第四了。</p>
-<p>例子：只针对公司英文名称的第二个字母进行排序，如果相同的按照员工工资进行降序排序：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sort -t <span class="string">&#x27; &#x27;</span> -k 1.2,1.2 -nrk 3,3 facebook.txt</span></span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
-
-<p>解读：由于只对第二个字母进行排序，所以我们使用了<code>-k 1.2,1.2</code>的表示方式，表示我们只对第二个字母进行排序（如果你问我使用<code>-k 1.2</code>怎么不行？当然不行，因为你省略了End部分，这就意味着你将对从第二个字母起到本域最后一个字符为止的字符串进行排序）。<br>对员工工资进行排序，我们也使用了<code>-k 3,3</code>，这是最准确的表述，表示我们只对本域进行排序，因为如果你省略了后面的3，就变成了我们对第3个域开始到最后一个域位置的内容进行排序了。</p>
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li><p><span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMTI1NTc4Mi93aGF0cy10aGUtZGlmZmVyZW5jZS1iZXR3ZWVuLWdlbmVyYWwtbnVtZXJpYy1zb3J0LWFuZC1udW1lcmljLXNvcnQtb3B0aW9ucw==">关于-g和-n选项的区别：stackoverflow<i class="fa fa-external-link-alt"></i></span></p>
-</li>
-<li><p>关于这个复杂命令的学习，建议您阅读info文档及参考博客、问答网站等。</p>
-</li>
-<li><p>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 shuf</code>，<code>info coreutils &#39;shuf invocation&#39;</code>。</p>
-</li>
-</ol>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/smbpasswd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/smbpasswd/" class="post-title-link" itemprop="url">【Linux 命令】smbpasswd</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:41:30 11:41:30" itemprop="dateModified" datetime="2020-09-25T11:41:30+08:00">2020-09-25 11:41:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>233</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>samba用户和密码管理工具</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>smbpasswd命令</strong> 属于samba套件，能够实现添加或删除samba用户和为用户修改密码。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbpasswd(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a：向smbpasswd文件中添加用户；</span><br><span class="line">-c：指定samba的配置文件；</span><br><span class="line">-x：从smbpasswd文件中删除用户；</span><br><span class="line">-d：在smbpasswd文件中禁用指定的用户；</span><br><span class="line">-e：在smbpasswd文件中激活指定的用户；</span><br><span class="line">-n：将指定的用户的密码置空。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>用户名：指定要修改SMB密码的用户。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/smbclient/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/smbclient/" class="post-title-link" itemprop="url">【Linux 命令】smbclient</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:41:00 11:41:00" itemprop="dateModified" datetime="2020-09-25T11:41:00+08:00">2020-09-25 11:41:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>交互方式访问samba服务器</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>smbclient命令</strong> 属于samba套件，它提供一种命令行使用交互式方式访问samba服务器的共享资源。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-B&lt;ip地址&gt;：传送广播数据包时所用的IP地址；</span><br><span class="line">-d&lt;排错层级&gt;：指定记录文件所记载事件的详细程度；</span><br><span class="line">-E：将信息送到标准错误输出设备；</span><br><span class="line">-h：显示帮助；</span><br><span class="line">-i&lt;范围&gt;：设置NetBIOS名称范围；</span><br><span class="line">-I&lt;IP地址&gt;：指定服务器的IP地址；</span><br><span class="line">-l&lt;记录文件&gt;：指定记录文件的名称；</span><br><span class="line">-L：显示服务器端所分享出来的所有资源；</span><br><span class="line">-M&lt;NetBIOS名称&gt;：可利用WinPopup协议，将信息送给选项中所指定的主机；</span><br><span class="line">-n&lt;NetBIOS名称&gt;：指定用户端所要使用的NetBIOS名称；</span><br><span class="line">-N：不用询问密码；</span><br><span class="line">-O&lt;连接槽选项&gt;：设置用户端TCP连接槽的选项；</span><br><span class="line">-p&lt;TCP连接端口&gt;：指定服务器端TCP连接端口编号；</span><br><span class="line">-R&lt;名称解析顺序&gt;：设置NetBIOS名称解析的顺序；</span><br><span class="line">-s&lt;目录&gt;：指定smb.conf所在的目录；</span><br><span class="line">-t&lt;服务器字码&gt;：设置用何种字符码来解析服务器端的文件名称；</span><br><span class="line">-T&lt;tar选项&gt;：备份服务器端分享的全部文件，并打包成tar格式的文件；</span><br><span class="line">-U&lt;用户名称&gt;：指定用户名称；</span><br><span class="line">-w&lt;工作群组&gt;：指定工作群组名称。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>smb服务器：指定要连接的smb服务器。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p> <strong>列出某个IP地址所提供的共享文件夹</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L 198.168.0.1 -U username%password</span><br></pre></td></tr></table></figure>
-
-<p> <strong>像ftp客户端一样使用smbclient</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient //192.168.0.1/tmp  -U username%password</span><br></pre></td></tr></table></figure>
-
-<p>执行smbclient命令成功后，进入smbclient环境，出现提示符：<code>smb:/&gt;</code></p>
-<p>这里有许多命令和ftp命令相似，如cd 、lcd、get、megt、put、mput等。通过这些命令，我们可以访问远程主机的共享资源。</p>
-<p> <strong>直接一次性使用smbclient命令</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -c &quot;ls&quot;  //192.168.0.1/tmp  -U username%password</span><br></pre></td></tr></table></figure>
-
-<p>和</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smbclient //192.168.0.1/tmp  -U username%password</span><br><span class="line">smb:/&gt;ls</span><br></pre></td></tr></table></figure>
-
-<p>功能一样的。</p>
-<p> <strong>创建一个共享文件夹</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -c &quot;mkdir share1&quot; //192.168.0.1/tmp -U username%password</span><br></pre></td></tr></table></figure>
-
-<p>如果用户共享<code>//192.168.0.1/tmp</code>的方式是只读的，会提示<code>NT_STATUS_ACCESS_DENIED making remote directory /share1</code></p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/slocate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/slocate/" class="post-title-link" itemprop="url">【Linux 命令】slocate</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:40:30 11:40:30" itemprop="dateModified" datetime="2020-09-25T11:40:30+08:00">2020-09-25 11:40:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>585</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>命令查找文件或目录</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>slocate命令</strong> 是一个命令查找文件或目录。slocate本身具有一个数据库，里面存放了系统中文件与目录的相关信息。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slocate [-u][--help][--version][-d &lt;目录&gt;][查找的文件]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-d&lt;目录&gt;或--database=&lt;目录&gt; 　指定数据库所在的目录。</span><br><span class="line">-u 　更新slocate数据库。</span><br><span class="line">--help 　显示帮助。</span><br><span class="line">--version 　显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用指令”slocate”显示文件名中含有关键字”fdisk”的文件路径信息，输入如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk关键字的文件的路径信息</span></span> </span><br></pre></td></tr></table></figure>
-
-<p>执行以上命令后，指令执行的输出信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> slocate fdisk <span class="comment">#显示文件名中含有fdisk 关键字的文件的路径信息</span></span>  </span><br><span class="line">/root/cfdisk        #搜索到的文件路径列表  </span><br><span class="line">/root/fdisk  </span><br><span class="line">/root/sfdisk  </span><br><span class="line">/usr/include/grub/ieee1275/ofdisk.h  </span><br><span class="line">/usr/share/doc/util-Linux/README.cfdisk  </span><br><span class="line">/usr/share/doc/util-Linux/README.fdisk.gz  </span><br><span class="line">/usr/share/doc/util-Linux/examples/sfdisk.examples.gz  </span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/23/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><a class="extend next" rel="next" href="/page/25/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1390,7 +1374,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">19:52</span>
+    <span title="站点阅读时长">20:10</span>
   </span>
 </div>
 <div class="busuanzi-count">
