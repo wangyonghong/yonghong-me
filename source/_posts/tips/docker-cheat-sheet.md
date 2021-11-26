@@ -3,8 +3,9 @@ title: Docker Cheat Sheet
 tags:
 - Docker
 - 技巧
-categories:
 - 速查
+categories:
+- 技巧
 date: 2021-11-25 22:24:00
 updated: 2021-11-25 22:24:00
 ---
