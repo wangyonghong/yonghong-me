@@ -9,6 +9,7 @@ tags:
 - bzip2recover
 title: 【Linux 命令】bzip2recover
 updated: '2020-09-25 08:23:00'
+indexing: false
 ---
 
 恢复被破坏的.bz2压缩包中的文件

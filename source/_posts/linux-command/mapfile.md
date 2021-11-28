@@ -9,6 +9,7 @@ tags:
 - mapfile
 title: 【Linux 命令】mapfile
 updated: '2020-09-25 10:26:30'
+indexing: false
 ---
 
 从标准输入读取行并赋值到数组。

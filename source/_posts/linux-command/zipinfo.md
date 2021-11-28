@@ -9,6 +9,7 @@ tags:
 - zipinfo
 title: 【Linux 命令】zipinfo
 updated: '2020-09-25 12:44:30'
+indexing: false
 ---
 
 用来列出压缩文件信息

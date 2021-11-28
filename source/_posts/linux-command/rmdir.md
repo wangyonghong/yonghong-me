@@ -9,6 +9,7 @@ tags:
 - rmdir
 title: 【Linux 命令】rmdir
 updated: '2020-09-25 11:21:00'
+indexing: false
 ---
 
 用来删除空目录

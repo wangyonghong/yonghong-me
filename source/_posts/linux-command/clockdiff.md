@@ -9,6 +9,7 @@ tags:
 - clockdiff
 title: 【Linux 命令】clockdiff
 updated: '2020-09-25 08:34:00'
+indexing: false
 ---
 
 检测两台linux主机的时间差

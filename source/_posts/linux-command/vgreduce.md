@@ -9,6 +9,7 @@ tags:
 - vgreduce
 title: 【Linux 命令】vgreduce
 updated: '2020-09-25 12:27:00'
+indexing: false
 ---
 
 从卷组中删除物理卷

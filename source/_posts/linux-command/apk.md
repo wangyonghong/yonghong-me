@@ -9,6 +9,7 @@ tags:
 - apk
 title: 【Linux 命令】apk
 updated: '2020-09-25 08:03:00'
+indexing: false
 ---
 
 Alpine Linux 下的包管理工具

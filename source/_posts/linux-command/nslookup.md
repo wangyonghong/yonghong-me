@@ -9,6 +9,7 @@ tags:
 - nslookup
 title: 【Linux 命令】nslookup
 updated: '2020-09-25 10:47:30'
+indexing: false
 ---
 
 查询域名DNS信息的工具

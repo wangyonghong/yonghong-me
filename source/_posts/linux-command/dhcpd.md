@@ -9,6 +9,7 @@ tags:
 - dhcpd
 title: 【Linux 命令】dhcpd
 updated: '2020-09-25 08:46:30'
+indexing: false
 ---
 
 运行DHCP服务器

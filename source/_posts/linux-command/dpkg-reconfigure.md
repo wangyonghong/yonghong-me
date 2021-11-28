@@ -9,6 +9,7 @@ tags:
 - dpkg-reconfigure
 title: 【Linux 命令】dpkg-reconfigure
 updated: '2020-09-25 08:56:30'
+indexing: false
 ---
 
 Debian Linux中重新配制一个已经安装的软件包

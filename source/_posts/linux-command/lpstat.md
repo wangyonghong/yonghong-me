@@ -9,6 +9,7 @@ tags:
 - lpstat
 title: 【Linux 命令】lpstat
 updated: '2020-09-25 10:14:30'
+indexing: false
 ---
 
 显示CUPS中打印机的状态信息

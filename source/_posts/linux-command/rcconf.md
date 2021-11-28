@@ -9,6 +9,7 @@ tags:
 - rcconf
 title: 【Linux 命令】rcconf
 updated: '2020-09-25 11:12:00'
+indexing: false
 ---
 
 Debian Linux下的运行等级服务配置工具

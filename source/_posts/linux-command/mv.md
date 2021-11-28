@@ -9,6 +9,7 @@ tags:
 - mv
 title: 【Linux 命令】mv
 updated: '2020-09-25 10:35:30'
+indexing: false
 ---
 
 用来对文件或目录重新命名

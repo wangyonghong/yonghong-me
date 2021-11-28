@@ -9,6 +9,7 @@ tags:
 - logname
 title: 【Linux 命令】logname
 updated: '2020-09-25 10:08:00'
+indexing: false
 ---
 
 打印当前终端登录用户的名称。

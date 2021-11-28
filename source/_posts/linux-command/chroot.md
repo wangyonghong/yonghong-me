@@ -9,6 +9,7 @@ tags:
 - chroot
 title: 【Linux 命令】chroot
 updated: '2020-09-25 08:31:30'
+indexing: false
 ---
 
 把根目录换成指定的目的目录

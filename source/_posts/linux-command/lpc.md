@@ -9,6 +9,7 @@ tags:
 - lpc
 title: 【Linux 命令】lpc
 updated: '2020-09-25 10:12:30'
+indexing: false
 ---
 
 命令行方式打印机控制程序

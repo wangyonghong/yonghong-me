@@ -9,6 +9,7 @@ tags:
 - e2fsck
 title: 【Linux 命令】e2fsck
 updated: '2020-09-25 09:01:00'
+indexing: false
 ---
 
 用于检查第二扩展文件系统的完整性

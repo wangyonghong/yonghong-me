@@ -9,6 +9,7 @@ tags:
 - type
 title: 【Linux 命令】type
 updated: '2020-09-25 12:11:30'
+indexing: false
 ---
 
 显示指定命令的类型。

@@ -9,6 +9,7 @@ tags:
 - modprobe
 title: 【Linux 命令】modprobe
 updated: '2020-09-25 10:33:00'
+indexing: false
 ---
 
 自动处理可载入模块

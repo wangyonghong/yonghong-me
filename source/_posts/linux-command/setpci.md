@@ -9,6 +9,7 @@ tags:
 - setpci
 title: 【Linux 命令】setpci
 updated: '2020-09-25 11:33:30'
+indexing: false
 ---
 
 查询和配置PCI设备的使用工具

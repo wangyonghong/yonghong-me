@@ -9,6 +9,7 @@ tags:
 - dig
 title: 【Linux 命令】dig
 updated: '2020-09-25 08:49:00'
+indexing: false
 ---
 
 域名查询工具

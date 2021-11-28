@@ -9,6 +9,7 @@ tags:
 - lvextend
 title: 【Linux 命令】lvextend
 updated: '2020-09-25 10:21:00'
+indexing: false
 ---
 
 扩展逻辑卷空间

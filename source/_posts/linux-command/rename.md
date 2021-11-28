@@ -9,6 +9,7 @@ tags:
 - rename
 title: 【Linux 命令】rename
 updated: '2020-09-25 11:15:30'
+indexing: false
 ---
 
 用字符串替换的方式批量改变文件名

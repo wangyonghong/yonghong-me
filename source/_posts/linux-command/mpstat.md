@@ -9,6 +9,7 @@ tags:
 - mpstat
 title: 【Linux 命令】mpstat
 updated: '2020-09-25 10:34:30'
+indexing: false
 ---
 
 显示各个可用CPU的状态

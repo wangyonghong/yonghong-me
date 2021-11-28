@@ -9,6 +9,7 @@ tags:
 - tree
 title: 【Linux 命令】tree
 updated: '2020-09-25 12:10:00'
+indexing: false
 ---
 
 树状图列出目录的内容

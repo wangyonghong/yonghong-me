@@ -9,6 +9,7 @@ tags:
 - depmod
 title: 【Linux 命令】depmod
 updated: '2020-09-25 08:45:00'
+indexing: false
 ---
 
 分析可载入模块的相依性

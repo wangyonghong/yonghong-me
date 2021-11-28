@@ -9,6 +9,7 @@ tags:
 - bunzip2
 title: 【Linux 命令】bunzip2
 updated: '2020-09-25 08:19:30'
+indexing: false
 ---
 
 创一个bz2文件压缩包

@@ -9,6 +9,7 @@ tags:
 - nmcli
 title: 【Linux 命令】nmcli
 updated: '2020-09-25 10:45:30'
+indexing: false
 ---
 
 地址配置工具

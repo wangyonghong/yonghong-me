@@ -9,6 +9,7 @@ tags:
 - nologin
 title: 【Linux 命令】nologin
 updated: '2020-09-25 10:46:30'
+indexing: false
 ---
 
 拒绝用户登录系统

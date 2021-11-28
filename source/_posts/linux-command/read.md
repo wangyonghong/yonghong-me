@@ -9,6 +9,7 @@ tags:
 - read
 title: 【Linux 命令】read
 updated: '2020-09-25 11:13:00'
+indexing: false
 ---
 
 从键盘读取变量值

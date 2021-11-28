@@ -9,6 +9,7 @@ tags:
 - as
 title: 【Linux 命令】as
 updated: '2020-09-25 08:10:00'
+indexing: false
 ---
 
 汇编语言编译器

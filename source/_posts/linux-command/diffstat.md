@@ -9,6 +9,7 @@ tags:
 - diffstat
 title: 【Linux 命令】diffstat
 updated: '2020-09-25 08:48:30'
+indexing: false
 ---
 
 显示diff命令输出信息的柱状图

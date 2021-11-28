@@ -9,6 +9,7 @@ tags:
 - nfsstat
 title: 【Linux 命令】nfsstat
 updated: '2020-09-25 10:42:00'
+indexing: false
 ---
 
 列出NFS客户端和服务器的工作状态

@@ -9,6 +9,7 @@ tags:
 - mktemp
 title: 【Linux 命令】mktemp
 updated: '2020-09-25 10:32:30'
+indexing: false
 ---
 
 创建临时文件供shell脚本使用

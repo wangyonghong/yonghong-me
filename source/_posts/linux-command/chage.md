@@ -9,6 +9,7 @@ tags:
 - chage
 title: 【Linux 命令】chage
 updated: '2020-09-25 08:27:00'
+indexing: false
 ---
 
 修改帐号和密码的有效期限

@@ -9,6 +9,7 @@ tags:
 - gzexe
 title: 【Linux 命令】gzexe
 updated: '2020-09-25 09:31:30'
+indexing: false
 ---
 
 用来压缩可执行文件

@@ -9,6 +9,7 @@ tags:
 - showmount
 title: 【Linux 命令】showmount
 updated: '2020-09-25 11:37:30'
+indexing: false
 ---
 
 显示NFS服务器加载的信息

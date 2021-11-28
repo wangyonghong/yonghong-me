@@ -9,6 +9,7 @@ tags:
 - ifstat
 title: 【Linux 命令】ifstat
 updated: '2020-09-25 09:42:00'
+indexing: false
 ---
 
 统计网络接口流量状态

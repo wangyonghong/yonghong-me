@@ -9,6 +9,7 @@ tags:
 - dmesg
 title: 【Linux 命令】dmesg
 updated: '2020-09-25 08:51:30'
+indexing: false
 ---
 
 显示Linux系统启动信息

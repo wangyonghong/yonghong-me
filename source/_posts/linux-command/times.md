@@ -9,6 +9,7 @@ tags:
 - times
 title: 【Linux 命令】times
 updated: '2020-09-25 12:05:00'
+indexing: false
 ---
 
 显示进程累计时间。

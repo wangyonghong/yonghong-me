@@ -9,6 +9,7 @@ tags:
 - pvs
 title: 【Linux 命令】pvs
 updated: '2020-09-25 11:07:00'
+indexing: false
 ---
 
 输出物理卷信息报表

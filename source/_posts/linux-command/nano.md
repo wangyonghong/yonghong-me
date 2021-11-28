@@ -9,6 +9,7 @@ tags:
 - nano
 title: 【Linux 命令】nano
 updated: '2020-09-25 10:39:00'
+indexing: false
 ---
 
 字符终端文本编辑器

@@ -9,6 +9,7 @@ tags:
 - protoize
 title: 【Linux 命令】protoize
 updated: '2020-09-25 11:01:00'
+indexing: false
 ---
 
 GNU-C代码转换为ANSI-C代码

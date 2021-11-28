@@ -9,6 +9,7 @@ tags:
 - bzcat
 title: 【Linux 命令】bzcat
 updated: '2020-09-25 08:20:30'
+indexing: false
 ---
 
 解压缩指定的.bz2文件

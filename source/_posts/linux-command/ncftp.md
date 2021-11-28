@@ -9,6 +9,7 @@ tags:
 - ncftp
 title: 【Linux 命令】ncftp
 updated: '2020-09-25 10:40:00'
+indexing: false
 ---
 
 是增强的的FTP工具

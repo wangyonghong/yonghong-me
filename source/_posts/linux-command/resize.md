@@ -9,6 +9,7 @@ tags:
 - resize
 title: 【Linux 命令】resize
 updated: '2020-09-25 11:17:00'
+indexing: false
 ---
 
 命令设置终端机视窗的大小

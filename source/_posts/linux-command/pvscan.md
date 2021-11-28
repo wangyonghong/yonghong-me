@@ -9,6 +9,7 @@ tags:
 - pvscan
 title: 【Linux 命令】pvscan
 updated: '2020-09-25 11:07:30'
+indexing: false
 ---
 
 扫描系统中所有硬盘的物理卷列表

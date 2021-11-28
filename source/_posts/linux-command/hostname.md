@@ -9,6 +9,7 @@ tags:
 - hostname
 title: 【Linux 命令】hostname
 updated: '2020-09-25 09:36:30'
+indexing: false
 ---
 
 显示和设置系统的主机名

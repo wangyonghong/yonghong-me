@@ -9,6 +9,7 @@ tags:
 - kernelversion
 title: 【Linux 命令】kernelversion
 updated: '2020-09-25 09:57:00'
+indexing: false
 ---
 
 打印当前内核的主版本号

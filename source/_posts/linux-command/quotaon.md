@@ -9,6 +9,7 @@ tags:
 - quotaon
 title: 【Linux 命令】quotaon
 updated: '2020-09-25 11:11:30'
+indexing: false
 ---
 
 激活Linux内核中指定文件系统的磁盘配额功能

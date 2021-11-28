@@ -9,6 +9,7 @@ tags:
 - losetup
 title: 【Linux 命令】losetup
 updated: '2020-09-25 10:11:00'
+indexing: false
 ---
 
 设定与控制循环（loop）设备

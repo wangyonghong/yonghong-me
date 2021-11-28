@@ -9,6 +9,7 @@ tags:
 - swapon
 title: 【Linux 命令】swapon
 updated: '2020-09-25 11:55:00'
+indexing: false
 ---
 
 激活Linux系统中交换空间

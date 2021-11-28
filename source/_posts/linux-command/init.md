@@ -9,6 +9,7 @@ tags:
 - init
 title: 【Linux 命令】init
 updated: '2020-09-25 09:44:30'
+indexing: false
 ---
 
 init进程是所有Linux进程的父进程

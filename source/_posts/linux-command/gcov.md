@@ -9,6 +9,7 @@ tags:
 - gcov
 title: 【Linux 命令】gcov
 updated: '2020-09-25 09:22:30'
+indexing: false
 ---
 
 测试程序的代码覆盖率的工具

@@ -9,6 +9,7 @@ tags:
 - zip
 title: 【Linux 命令】zip
 updated: '2020-09-25 12:44:00'
+indexing: false
 ---
 
 可以用来解压缩文件

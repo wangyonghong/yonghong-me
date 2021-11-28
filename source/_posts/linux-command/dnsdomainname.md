@@ -9,6 +9,7 @@ tags:
 - dnsdomainname
 title: 【Linux 命令】dnsdomainname
 updated: '2020-09-25 08:53:00'
+indexing: false
 ---
 
 定义DNS系统中FQDN名称的域名

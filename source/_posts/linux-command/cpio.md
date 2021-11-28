@@ -9,6 +9,7 @@ tags:
 - cpio
 title: 【Linux 命令】cpio
 updated: '2020-09-25 08:39:30'
+indexing: false
 ---
 
 用来建立、还原备份档的工具程序

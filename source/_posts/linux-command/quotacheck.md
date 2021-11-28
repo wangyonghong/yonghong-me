@@ -9,6 +9,7 @@ tags:
 - quotacheck
 title: 【Linux 命令】quotacheck
 updated: '2020-09-25 11:10:30'
+indexing: false
 ---
 
 检查磁盘的使用空间与限制

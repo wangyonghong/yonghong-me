@@ -9,6 +9,7 @@ tags:
 - less
 title: 【Linux 命令】less
 updated: '2020-09-25 10:02:00'
+indexing: false
 ---
 
 分屏上下翻页浏览文件内容

@@ -9,6 +9,7 @@ tags:
 - mkswap
 title: 【Linux 命令】mkswap
 updated: '2020-09-25 10:32:00'
+indexing: false
 ---
 
 建立和设置SWAP交换分区

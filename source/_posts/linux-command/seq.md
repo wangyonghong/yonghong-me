@@ -9,6 +9,7 @@ tags:
 - seq
 title: 【Linux 命令】seq
 updated: '2020-09-25 11:31:00'
+indexing: false
 ---
 
 以指定增量从首数开始打印数字到尾数

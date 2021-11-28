@@ -9,6 +9,7 @@ tags:
 - expand
 title: 【Linux 命令】expand
 updated: '2020-09-25 09:09:00'
+indexing: false
 ---
 
 将文件的制表符转换为空白字符

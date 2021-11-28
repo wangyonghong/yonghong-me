@@ -9,6 +9,7 @@ tags:
 - cal
 title: 【Linux 命令】cal
 updated: '2020-09-25 08:24:30'
+indexing: false
 ---
 
 显示当前日历或指定日期的日历

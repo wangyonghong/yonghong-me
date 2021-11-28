@@ -9,6 +9,7 @@ tags:
 - pstree
 title: 【Linux 命令】pstree
 updated: '2020-09-25 11:03:00'
+indexing: false
 ---
 
 以树状图的方式展现进程之间的派生关系

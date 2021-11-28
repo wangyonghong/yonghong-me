@@ -9,6 +9,7 @@ tags:
 - dstat
 title: 【Linux 命令】dstat
 updated: '2020-09-25 08:59:30'
+indexing: false
 ---
 
 通用的系统资源统计工具

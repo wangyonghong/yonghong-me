@@ -9,6 +9,7 @@ tags:
 - chgrp
 title: 【Linux 命令】chgrp
 updated: '2020-09-25 08:29:00'
+indexing: false
 ---
 
 用来变更文件或目录的所属群组

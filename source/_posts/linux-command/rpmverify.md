@@ -9,6 +9,7 @@ tags:
 - rpmverify
 title: 【Linux 命令】rpmverify
 updated: '2020-09-25 11:25:30'
+indexing: false
 ---
 
 验证已安装的RPM软件包的正确性

@@ -9,6 +9,7 @@ tags:
 - look
 title: 【Linux 命令】look
 updated: '2020-09-25 10:10:30'
+indexing: false
 ---
 
 显示文件中以指定字符串开头的任意行

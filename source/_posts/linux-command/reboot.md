@@ -9,6 +9,7 @@ tags:
 - reboot
 title: 【Linux 命令】reboot
 updated: '2020-09-25 11:14:30'
+indexing: false
 ---
 
 重新启动正在运行的Linux操作系统

@@ -9,6 +9,7 @@ tags:
 - whatis
 title: 【Linux 命令】whatis
 updated: '2020-09-25 12:33:30'
+indexing: false
 ---
 
 查询一个命令执行什么功能

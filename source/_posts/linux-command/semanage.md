@@ -9,6 +9,7 @@ tags:
 - semanage
 title: 【Linux 命令】semanage
 updated: '2020-09-25 11:30:00'
+indexing: false
 ---
 
 默认目录的安全上下文查询与修改

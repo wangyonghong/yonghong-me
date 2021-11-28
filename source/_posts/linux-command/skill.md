@@ -9,6 +9,7 @@ tags:
 - skill
 title: 【Linux 命令】skill
 updated: '2020-09-25 11:39:00'
+indexing: false
 ---
 
 向选定的进程发送信号冻结进程

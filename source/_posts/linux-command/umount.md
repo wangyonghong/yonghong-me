@@ -9,6 +9,7 @@ tags:
 - umount
 title: 【Linux 命令】umount
 updated: '2020-09-25 12:13:00'
+indexing: false
 ---
 
 用于卸载已经加载的文件系统

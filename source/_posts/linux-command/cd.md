@@ -9,6 +9,7 @@ tags:
 - cd
 title: 【Linux 命令】cd
 updated: '2020-09-25 08:26:00'
+indexing: false
 ---
 
 切换用户当前工作目录。

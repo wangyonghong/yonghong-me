@@ -9,6 +9,7 @@ tags:
 - newusers
 title: 【Linux 命令】newusers
 updated: '2020-09-25 10:41:30'
+indexing: false
 ---
 
 用于批处理的方式一次创建多个命令

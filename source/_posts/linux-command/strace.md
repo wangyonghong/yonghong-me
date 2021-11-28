@@ -9,6 +9,7 @@ tags:
 - strace
 title: 【Linux 命令】strace
 updated: '2020-09-25 11:50:30'
+indexing: false
 ---
 
 跟踪系统调用和信号

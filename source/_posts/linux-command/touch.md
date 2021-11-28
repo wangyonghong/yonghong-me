@@ -9,6 +9,7 @@ tags:
 - touch
 title: 【Linux 命令】touch
 updated: '2020-09-25 12:07:00'
+indexing: false
 ---
 
 创建新的空文件

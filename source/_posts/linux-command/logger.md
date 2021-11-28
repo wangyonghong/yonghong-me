@@ -9,6 +9,7 @@ tags:
 - logger
 title: 【Linux 命令】logger
 updated: '2020-09-25 10:07:00'
+indexing: false
 ---
 
 在系统日志中记录相应条目

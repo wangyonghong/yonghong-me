@@ -9,6 +9,7 @@ tags:
 - grub
 title: 【Linux 命令】grub
 updated: '2020-09-25 09:30:30'
+indexing: false
 ---
 
 多重引导程序grub的命令行shell工具

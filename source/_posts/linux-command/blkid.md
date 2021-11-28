@@ -9,6 +9,7 @@ tags:
 - blkid
 title: 【Linux 命令】blkid
 updated: '2020-09-25 08:17:00'
+indexing: false
 ---
 
 查看块设备的文件系统类型、LABEL、UUID等信息

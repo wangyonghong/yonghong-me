@@ -9,6 +9,7 @@ tags:
 - uuto
 title: 【Linux 命令】uuto
 updated: '2020-09-25 12:23:30'
+indexing: false
 ---
 
 将文件传送到远端的UUCP主机

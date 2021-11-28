@@ -9,6 +9,7 @@ tags:
 - lvscan
 title: 【Linux 命令】lvscan
 updated: '2020-09-25 10:23:00'
+indexing: false
 ---
 
 扫描逻辑卷

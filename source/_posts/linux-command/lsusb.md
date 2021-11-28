@@ -9,6 +9,7 @@ tags:
 - lsusb
 title: 【Linux 命令】lsusb
 updated: '2020-09-25 10:19:00'
+indexing: false
 ---
 
 显示本机的USB设备列表信息

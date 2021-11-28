@@ -9,6 +9,7 @@ tags:
 - uptime
 title: 【Linux 命令】uptime
 updated: '2020-09-25 12:19:30'
+indexing: false
 ---
 
 查看Linux系统负载信息

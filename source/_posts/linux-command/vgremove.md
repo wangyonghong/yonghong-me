@@ -9,6 +9,7 @@ tags:
 - vgremove
 title: 【Linux 命令】vgremove
 updated: '2020-09-25 12:27:30'
+indexing: false
 ---
 
 用于用户删除LVM卷组

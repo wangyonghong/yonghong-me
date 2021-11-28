@@ -9,6 +9,7 @@ tags:
 - volname
 title: 【Linux 命令】volname
 updated: '2020-09-25 12:30:00'
+indexing: false
 ---
 
 显示指定的ISO-9660格式的设备的卷名称

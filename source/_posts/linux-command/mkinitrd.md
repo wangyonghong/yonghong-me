@@ -9,6 +9,7 @@ tags:
 - mkinitrd
 title: 【Linux 命令】mkinitrd
 updated: '2020-09-25 10:30:30'
+indexing: false
 ---
 
 建立要载入ramdisk的映像文件

@@ -9,6 +9,7 @@ tags:
 - perl
 title: 【Linux 命令】perl
 updated: '2020-09-25 10:53:30'
+indexing: false
 ---
 
 perl语言解释器

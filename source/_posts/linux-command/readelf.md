@@ -9,6 +9,7 @@ tags:
 - readelf
 title: 【Linux 命令】readelf
 updated: '2020-09-25 11:13:30'
+indexing: false
 ---
 
 用于显示elf格式文件的信息

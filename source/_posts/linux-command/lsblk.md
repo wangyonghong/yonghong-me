@@ -9,6 +9,7 @@ tags:
 - lsblk
 title: 【Linux 命令】lsblk
 updated: '2020-09-25 10:16:30'
+indexing: false
 ---
 
 列出块设备信息

@@ -9,6 +9,7 @@ tags:
 - sysctl
 title: 【Linux 命令】sysctl
 updated: '2020-09-25 11:56:00'
+indexing: false
 ---
 
 时动态地修改内核的运行参数

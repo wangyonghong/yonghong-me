@@ -9,6 +9,7 @@ tags:
 - kexec
 title: 【Linux 命令】kexec
 updated: '2020-09-25 09:57:30'
+indexing: false
 ---
 
 从当前正在运行的内核引导到一个新内核

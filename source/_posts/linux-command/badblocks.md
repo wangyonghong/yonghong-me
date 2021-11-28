@@ -9,6 +9,7 @@ tags:
 - badblocks
 title: 【Linux 命令】badblocks
 updated: '2020-09-25 08:13:30'
+indexing: false
 ---
 
 查找磁盘中损坏的区块

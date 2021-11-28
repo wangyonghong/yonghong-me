@@ -9,6 +9,7 @@ tags:
 - exec
 title: 【Linux 命令】exec
 updated: '2020-09-25 09:08:00'
+indexing: false
 ---
 
 调用并执行指定的命令

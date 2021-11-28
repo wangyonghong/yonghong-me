@@ -9,6 +9,7 @@ tags:
 - return
 title: 【Linux 命令】return
 updated: '2020-09-25 11:18:30'
+indexing: false
 ---
 
 从函数中退出并返回数值。

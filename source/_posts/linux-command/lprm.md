@@ -9,6 +9,7 @@ tags:
 - lprm
 title: 【Linux 命令】lprm
 updated: '2020-09-25 10:14:00'
+indexing: false
 ---
 
 删除打印队列中的打印任务

@@ -9,6 +9,7 @@ tags:
 - vi
 title: 【Linux 命令】vi
 updated: '2020-09-25 12:29:00'
+indexing: false
 ---
 
 功能强大的纯文本编辑器

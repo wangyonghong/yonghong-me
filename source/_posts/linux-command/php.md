@@ -9,6 +9,7 @@ tags:
 - php
 title: 【Linux 命令】php
 updated: '2020-09-25 10:55:00'
+indexing: false
 ---
 
 PHP语言的命令行接口

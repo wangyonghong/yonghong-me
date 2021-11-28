@@ -9,6 +9,7 @@ tags:
 - nohup
 title: 【Linux 命令】nohup
 updated: '2020-09-25 10:46:00'
+indexing: false
 ---
 
 将程序以忽略挂起信号的方式运行起来

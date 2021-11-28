@@ -9,6 +9,7 @@ tags:
 - supervisord
 title: 【Linux 命令】supervisord
 updated: '2020-09-25 11:53:30'
+indexing: false
 ---
 
 配置后台服务/常驻进程的进程管家工具

@@ -9,6 +9,7 @@ tags:
 - xset
 title: 【Linux 命令】xset
 updated: '2020-09-25 12:40:30'
+indexing: false
 ---
 
 设置X-Window系统中的用户爱好的实用工具

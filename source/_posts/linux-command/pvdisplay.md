@@ -9,6 +9,7 @@ tags:
 - pvdisplay
 title: 【Linux 命令】pvdisplay
 updated: '2020-09-25 11:06:00'
+indexing: false
 ---
 
 显示物理卷的属性

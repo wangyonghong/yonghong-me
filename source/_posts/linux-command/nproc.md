@@ -9,6 +9,7 @@ tags:
 - nproc
 title: 【Linux 命令】nproc
 updated: '2020-09-25 10:47:00'
+indexing: false
 ---
 
 打印可用的处理器单元数量。

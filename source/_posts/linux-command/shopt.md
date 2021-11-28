@@ -9,6 +9,7 @@ tags:
 - shopt
 title: 【Linux 命令】shopt
 updated: '2020-09-25 11:37:00'
+indexing: false
 ---
 
 显示和设置shell操作选项

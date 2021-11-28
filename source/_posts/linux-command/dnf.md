@@ -9,6 +9,7 @@ tags:
 - dnf
 title: 【Linux 命令】dnf
 updated: '2020-09-25 08:52:30'
+indexing: false
 ---
 
 新一代的RPM软件包管理器

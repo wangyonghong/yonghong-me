@@ -9,6 +9,7 @@ tags:
 - wget
 title: 【Linux 命令】wget
 updated: '2020-09-25 12:33:00'
+indexing: false
 ---
 
 Linux系统下载文件工具

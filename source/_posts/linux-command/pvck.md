@@ -9,6 +9,7 @@ tags:
 - pvck
 title: 【Linux 命令】pvck
 updated: '2020-09-25 11:05:00'
+indexing: false
 ---
 
 检测物理卷的LVM元数据的一致性

@@ -9,6 +9,7 @@ tags:
 - basename
 title: 【Linux 命令】basename
 updated: '2020-09-25 08:14:30'
+indexing: false
 ---
 
 打印目录或者文件的基本名称

@@ -9,6 +9,7 @@ tags:
 - mysql
 title: 【Linux 命令】mysql
 updated: '2020-09-25 10:36:00'
+indexing: false
 ---
 
 MySQL服务器客户端工具

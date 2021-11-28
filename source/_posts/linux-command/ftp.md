@@ -9,6 +9,7 @@ tags:
 - ftp
 title: 【Linux 命令】ftp
 updated: '2020-09-25 09:19:00'
+indexing: false
 ---
 
 用来设置文件系统相关功能

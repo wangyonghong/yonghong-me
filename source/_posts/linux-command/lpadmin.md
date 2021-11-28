@@ -9,6 +9,7 @@ tags:
 - lpadmin
 title: 【Linux 命令】lpadmin
 updated: '2020-09-25 10:12:00'
+indexing: false
 ---
 
 配置CUPS套件中的打印机和类

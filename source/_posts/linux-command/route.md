@@ -9,6 +9,7 @@ tags:
 - route
 title: 【Linux 命令】route
 updated: '2020-09-25 11:22:00'
+indexing: false
 ---
 
 显示并设置Linux中静态路由表

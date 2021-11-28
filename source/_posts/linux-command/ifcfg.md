@@ -9,6 +9,7 @@ tags:
 - ifcfg
 title: 【Linux 命令】ifcfg
 updated: '2020-09-25 09:40:30'
+indexing: false
 ---
 
 置Linux中的网络接口参数

@@ -9,6 +9,7 @@ tags:
 - ipcs
 title: 【Linux 命令】ipcs
 updated: '2020-09-25 09:50:30'
+indexing: false
 ---
 
 分析消息队列共享内存和信号量 

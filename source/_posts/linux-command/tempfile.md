@@ -9,6 +9,7 @@ tags:
 - tempfile
 title: 【Linux 命令】tempfile
 updated: '2020-09-25 12:03:00'
+indexing: false
 ---
 
 shell中给临时文件命名

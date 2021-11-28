@@ -9,6 +9,7 @@ tags:
 - partprobe
 title: 【Linux 命令】partprobe
 updated: '2020-09-25 10:51:00'
+indexing: false
 ---
 
 不重启的情况下重读分区

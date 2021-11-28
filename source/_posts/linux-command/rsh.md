@@ -9,6 +9,7 @@ tags:
 - rsh
 title: 【Linux 命令】rsh
 updated: '2020-09-25 11:26:00'
+indexing: false
 ---
 
 连接远程主机并执行命令

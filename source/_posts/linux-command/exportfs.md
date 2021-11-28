@@ -9,6 +9,7 @@ tags:
 - exportfs
 title: 【Linux 命令】exportfs
 updated: '2020-09-25 09:10:00'
+indexing: false
 ---
 
 管理NFS共享文件系统列表

@@ -9,6 +9,7 @@ tags:
 - file
 title: 【Linux 命令】file
 updated: '2020-09-25 09:13:30'
+indexing: false
 ---
 
 用来探测给定文件的类型

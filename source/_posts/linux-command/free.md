@@ -9,6 +9,7 @@ tags:
 - free
 title: 【Linux 命令】free
 updated: '2020-09-25 09:18:00'
+indexing: false
 ---
 
 显示内存的使用情况

@@ -9,6 +9,7 @@ tags:
 - startx
 title: 【Linux 命令】startx
 updated: '2020-09-25 11:49:30'
+indexing: false
 ---
 
 用来启动X Window

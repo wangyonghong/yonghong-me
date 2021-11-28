@@ -9,6 +9,7 @@ tags:
 - pssh
 title: 【Linux 命令】pssh
 updated: '2020-09-25 11:02:00'
+indexing: false
 ---
 
 批量管理执行

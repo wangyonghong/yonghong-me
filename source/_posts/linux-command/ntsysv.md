@@ -9,6 +9,7 @@ tags:
 - ntsysv
 title: 【Linux 命令】ntsysv
 updated: '2020-09-25 10:48:30'
+indexing: false
 ---
 
 集中管理系统的各种服务

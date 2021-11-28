@@ -9,6 +9,7 @@ tags:
 - dpkg-divert
 title: 【Linux 命令】dpkg-divert
 updated: '2020-09-25 08:55:00'
+indexing: false
 ---
 
 Debian Linux中创建并管理一个转向列表

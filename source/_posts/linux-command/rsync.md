@@ -9,6 +9,7 @@ tags:
 - rsync
 title: 【Linux 命令】rsync
 updated: '2020-09-25 11:26:30'
+indexing: false
 ---
 
 远程数据同步工具

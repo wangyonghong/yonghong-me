@@ -9,6 +9,7 @@ tags:
 - grpck
 title: 【Linux 命令】grpck
 updated: '2020-09-25 09:29:00'
+indexing: false
 ---
 
 用于验证组文件的完整性

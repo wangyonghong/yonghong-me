@@ -9,6 +9,7 @@ tags:
 - time
 title: 【Linux 命令】time
 updated: '2020-09-25 12:04:30'
+indexing: false
 ---
 
 统计给定命令所花费的总时间

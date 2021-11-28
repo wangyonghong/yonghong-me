@@ -9,6 +9,7 @@ tags:
 - crontab
 title: 【Linux 命令】crontab
 updated: '2020-09-25 08:40:00'
+indexing: false
 ---
 
 提交和管理用户的需要周期性执行的任务

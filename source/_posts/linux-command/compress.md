@@ -9,6 +9,7 @@ tags:
 - compress
 title: 【Linux 命令】compress
 updated: '2020-09-25 08:37:00'
+indexing: false
 ---
 
 使用Lempress-Ziv编码压缩数据文件

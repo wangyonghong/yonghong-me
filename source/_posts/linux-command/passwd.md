@@ -9,6 +9,7 @@ tags:
 - passwd
 title: 【Linux 命令】passwd
 updated: '2020-09-25 10:51:30'
+indexing: false
 ---
 
 用于让用户可以更改自己的密码

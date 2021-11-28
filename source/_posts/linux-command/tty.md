@@ -9,6 +9,7 @@ tags:
 - tty
 title: 【Linux 命令】tty
 updated: '2020-09-25 12:11:00'
+indexing: false
 ---
 
 显示连接到当前标准输入的终端设备文件名

@@ -9,6 +9,7 @@ tags:
 - findfs
 title: 【Linux 命令】findfs
 updated: '2020-09-25 09:14:30'
+indexing: false
 ---
 
 标签或UUID查找文件系统

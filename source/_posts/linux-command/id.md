@@ -9,6 +9,7 @@ tags:
 - id
 title: 【Linux 命令】id
 updated: '2020-09-25 09:40:00'
+indexing: false
 ---
 
 打印真实以及有效的用户和所在组的信息

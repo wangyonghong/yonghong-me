@@ -9,6 +9,7 @@ tags:
 - fgrep
 title: 【Linux 命令】fgrep
 updated: '2020-09-25 09:13:00'
+indexing: false
 ---
 
 为文件搜索文字字符串

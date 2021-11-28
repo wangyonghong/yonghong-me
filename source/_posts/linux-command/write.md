@@ -9,6 +9,7 @@ tags:
 - write
 title: 【Linux 命令】write
 updated: '2020-09-25 12:36:00'
+indexing: false
 ---
 
 向指定登录用户终端上发送信息

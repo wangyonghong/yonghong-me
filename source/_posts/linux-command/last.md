@@ -9,6 +9,7 @@ tags:
 - last
 title: 【Linux 命令】last
 updated: '2020-09-25 09:59:00'
+indexing: false
 ---
 
 列出目前与过去登入系统的用户相关信息

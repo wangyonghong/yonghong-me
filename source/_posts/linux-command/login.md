@@ -9,6 +9,7 @@ tags:
 - login
 title: 【Linux 命令】login
 updated: '2020-09-25 10:07:30'
+indexing: false
 ---
 
 登录系统或切换用户身份

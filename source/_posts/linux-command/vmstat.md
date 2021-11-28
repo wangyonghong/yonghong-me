@@ -9,6 +9,7 @@ tags:
 - vmstat
 title: 【Linux 命令】vmstat
 updated: '2020-09-25 12:29:30'
+indexing: false
 ---
 
 显示虚拟内存状态

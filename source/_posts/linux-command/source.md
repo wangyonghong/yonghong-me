@@ -9,6 +9,7 @@ tags:
 - source
 title: 【Linux 命令】source
 updated: '2020-09-25 11:42:30'
+indexing: false
 ---
 
 在当前Shell环境中从指定文件读取和执行命令。

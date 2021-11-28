@@ -9,6 +9,7 @@ tags:
 - which
 title: 【Linux 命令】which
 updated: '2020-09-25 12:34:30'
+indexing: false
 ---
 
 查找并显示给定命令的绝对路径

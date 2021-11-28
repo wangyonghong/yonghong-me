@@ -9,6 +9,7 @@ tags:
 - lftpget
 title: 【Linux 命令】lftpget
 updated: '2020-09-25 10:03:30'
+indexing: false
 ---
 
 调用lftp指令下载指定的文件

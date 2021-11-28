@@ -9,6 +9,7 @@ tags:
 - nc
 title: 【Linux 命令】nc
 updated: '2020-09-25 10:39:30'
+indexing: false
 ---
 
 用于设置路由器，是网络工具中的瑞士军刀

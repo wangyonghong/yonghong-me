@@ -9,6 +9,7 @@ tags:
 - bzmore
 title: 【Linux 命令】bzmore
 updated: '2020-09-25 08:24:00'
+indexing: false
 ---
 
 查看bzip2压缩过的文本文件的内容

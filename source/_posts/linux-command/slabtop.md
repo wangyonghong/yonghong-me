@@ -9,6 +9,7 @@ tags:
 - slabtop
 title: 【Linux 命令】slabtop
 updated: '2020-09-25 11:39:30'
+indexing: false
 ---
 
 实时显示内核slab内存缓存信息

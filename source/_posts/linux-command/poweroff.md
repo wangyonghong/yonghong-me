@@ -9,6 +9,7 @@ tags:
 - poweroff
 title: 【Linux 命令】poweroff
 updated: '2020-09-25 10:59:00'
+indexing: false
 ---
 
 关闭Linux系统，关闭记录会被写入到/var/log/wtmp日志文件中

@@ -9,6 +9,7 @@ tags:
 - systool
 title: 【Linux 命令】systool
 updated: '2020-09-25 11:57:30'
+indexing: false
 ---
 
 显示基于总线、类和拓扑显示系统中设备的信息

@@ -9,6 +9,7 @@ tags:
 - restorecon
 title: 【Linux 命令】restorecon
 updated: '2020-09-25 11:18:00'
+indexing: false
 ---
 
 恢复文件的安全上下文

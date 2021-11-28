@@ -9,6 +9,7 @@ tags:
 - shift
 title: 【Linux 命令】shift
 updated: '2020-09-25 11:36:30'
+indexing: false
 ---
 
 移动位置参数。

@@ -9,6 +9,7 @@ tags:
 - fsck
 title: 【Linux 命令】fsck
 updated: '2020-09-25 09:18:30'
+indexing: false
 ---
 
 检查并且试图修复文件系统中的错误

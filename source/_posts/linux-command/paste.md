@@ -9,6 +9,7 @@ tags:
 - paste
 title: 【Linux 命令】paste
 updated: '2020-09-25 10:52:00'
+indexing: false
 ---
 
 将多个文件按列队列合并

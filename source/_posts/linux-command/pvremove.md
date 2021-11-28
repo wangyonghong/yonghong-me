@@ -9,6 +9,7 @@ tags:
 - pvremove
 title: 【Linux 命令】pvremove
 updated: '2020-09-25 11:06:30'
+indexing: false
 ---
 
 删除一个存在的物理卷

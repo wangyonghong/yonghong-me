@@ -9,6 +9,7 @@ tags:
 - ldd
 title: 【Linux 命令】ldd
 updated: '2020-09-25 10:01:30'
+indexing: false
 ---
 
 打印程序或者库文件所依赖的共享库列表

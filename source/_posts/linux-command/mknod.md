@@ -9,6 +9,7 @@ tags:
 - mknod
 title: 【Linux 命令】mknod
 updated: '2020-09-25 10:31:30'
+indexing: false
 ---
 
 创建字符设备文件和块设备文件

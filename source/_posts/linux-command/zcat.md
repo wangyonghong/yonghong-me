@@ -9,6 +9,7 @@ tags:
 - zcat
 title: 【Linux 命令】zcat
 updated: '2020-09-25 12:43:00'
+indexing: false
 ---
 
 显示压缩包中文件的内容

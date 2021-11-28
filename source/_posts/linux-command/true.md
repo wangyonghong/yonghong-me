@@ -9,6 +9,7 @@ tags:
 - 'true'
 title: 【Linux 命令】true
 updated: '2020-09-25 12:10:30'
+indexing: false
 ---
 
 返回状态为成功。

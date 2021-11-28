@@ -9,6 +9,7 @@ tags:
 - syslog
 title: 【Linux 命令】syslog
 updated: '2020-09-25 11:56:30'
+indexing: false
 ---
 
 系统默认的日志守护进程

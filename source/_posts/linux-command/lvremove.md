@@ -9,6 +9,7 @@ tags:
 - lvremove
 title: 【Linux 命令】lvremove
 updated: '2020-09-25 10:22:00'
+indexing: false
 ---
 
 删除指定LVM逻辑卷

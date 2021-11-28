@@ -9,6 +9,7 @@ tags:
 - info
 title: 【Linux 命令】info
 updated: '2020-09-25 09:44:00'
+indexing: false
 ---
 
 Linux下info格式的帮助指令

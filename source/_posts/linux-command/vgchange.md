@@ -9,6 +9,7 @@ tags:
 - vgchange
 title: 【Linux 命令】vgchange
 updated: '2020-09-25 12:24:30'
+indexing: false
 ---
 
 修改卷组属性

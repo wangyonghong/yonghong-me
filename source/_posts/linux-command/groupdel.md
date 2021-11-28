@@ -9,6 +9,7 @@ tags:
 - groupdel
 title: 【Linux 命令】groupdel
 updated: '2020-09-25 09:27:30'
+indexing: false
 ---
 
 用于删除指定的工作组

@@ -9,6 +9,7 @@ tags:
 - builtin
 title: 【Linux 命令】builtin
 updated: '2020-09-25 08:19:00'
+indexing: false
 ---
 
 执行bash内建命令。

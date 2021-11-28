@@ -9,6 +9,7 @@ tags:
 - who
 title: 【Linux 命令】who
 updated: '2020-09-25 12:35:00'
+indexing: false
 ---
 
 显示当前所有登陆用户的信息。

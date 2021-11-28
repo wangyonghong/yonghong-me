@@ -9,6 +9,7 @@ tags:
 - ifdown
 title: 【Linux 命令】ifdown
 updated: '2020-09-25 09:41:30'
+indexing: false
 ---
 
 禁用指定的网络接口

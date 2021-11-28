@@ -9,6 +9,7 @@ tags:
 - nisdomainname
 title: 【Linux 命令】nisdomainname
 updated: '2020-09-25 10:43:30'
+indexing: false
 ---
 
 显示主机NIS的域名

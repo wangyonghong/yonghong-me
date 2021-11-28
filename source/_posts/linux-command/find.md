@@ -9,6 +9,7 @@ tags:
 - find
 title: 【Linux 命令】find
 updated: '2020-09-25 09:14:00'
+indexing: false
 ---
 
 在指定目录下查找文件

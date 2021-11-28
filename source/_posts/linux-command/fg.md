@@ -9,6 +9,7 @@ tags:
 - fg
 title: 【Linux 命令】fg
 updated: '2020-09-25 09:12:30'
+indexing: false
 ---
 
 将后台作业移动到前台终端运行

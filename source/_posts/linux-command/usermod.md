@@ -9,6 +9,7 @@ tags:
 - usermod
 title: 【Linux 命令】usermod
 updated: '2020-09-25 12:21:00'
+indexing: false
 ---
 
 用于修改用户的基本信息

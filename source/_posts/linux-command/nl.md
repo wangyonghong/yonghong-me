@@ -9,6 +9,7 @@ tags:
 - nl
 title: 【Linux 命令】nl
 updated: '2020-09-25 10:44:00'
+indexing: false
 ---
 
 为每一个文件添加行号。

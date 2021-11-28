@@ -9,6 +9,7 @@ tags:
 - batch
 title: 【Linux 命令】batch
 updated: '2020-09-25 08:15:00'
+indexing: false
 ---
 
 在系统不繁忙的时候执行定时任务

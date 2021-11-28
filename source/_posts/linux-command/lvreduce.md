@@ -9,6 +9,7 @@ tags:
 - lvreduce
 title: 【Linux 命令】lvreduce
 updated: '2020-09-25 10:21:30'
+indexing: false
 ---
 
 收缩逻辑卷空间

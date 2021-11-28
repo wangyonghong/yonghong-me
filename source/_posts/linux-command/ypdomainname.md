@@ -9,6 +9,7 @@ tags:
 - ypdomainname
 title: 【Linux 命令】ypdomainname
 updated: '2020-09-25 12:42:00'
+indexing: false
 ---
 
 显示主机的NIS的域名

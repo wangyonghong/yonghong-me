@@ -9,6 +9,7 @@ tags:
 - kill
 title: 【Linux 命令】kill
 updated: '2020-09-25 09:58:00'
+indexing: false
 ---
 
 发送信号到进程。

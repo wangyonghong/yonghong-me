@@ -9,6 +9,7 @@ tags:
 - sftp
 title: 【Linux 命令】sftp
 updated: '2020-09-25 11:35:30'
+indexing: false
 ---
 
 交互式的文件传输程序

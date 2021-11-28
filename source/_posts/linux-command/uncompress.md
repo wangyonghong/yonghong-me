@@ -9,6 +9,7 @@ tags:
 - uncompress
 title: 【Linux 命令】uncompress
 updated: '2020-09-25 12:15:00'
+indexing: false
 ---
 
 用来解压.Z文件

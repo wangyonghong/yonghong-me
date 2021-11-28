@@ -9,6 +9,7 @@ tags:
 - groups
 title: 【Linux 命令】groups
 updated: '2020-09-25 09:28:30'
+indexing: false
 ---
 
 打印指定用户所在组的名称。

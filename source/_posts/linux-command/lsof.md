@@ -9,6 +9,7 @@ tags:
 - lsof
 title: 【Linux 命令】lsof
 updated: '2020-09-25 10:18:00'
+indexing: false
 ---
 
 显示Linux系统当前已打开的所有文件列表 `lsof -p pid`

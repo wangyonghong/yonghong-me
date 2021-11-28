@@ -9,6 +9,7 @@ tags:
 - ip6tables
 title: 【Linux 命令】ip6tables
 updated: '2020-09-25 09:49:00'
+indexing: false
 ---
 
 linux中防火墙软件

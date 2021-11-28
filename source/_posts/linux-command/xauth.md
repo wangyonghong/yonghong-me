@@ -9,6 +9,7 @@ tags:
 - xauth
 title: 【Linux 命令】xauth
 updated: '2020-09-25 12:37:00'
+indexing: false
 ---
 
 显示和编辑被用于连接X服务器的认证信息

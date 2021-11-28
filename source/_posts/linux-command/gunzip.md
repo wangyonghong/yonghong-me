@@ -9,6 +9,7 @@ tags:
 - gunzip
 title: 【Linux 命令】gunzip
 updated: '2020-09-25 09:31:00'
+indexing: false
 ---
 
 用来解压缩文件

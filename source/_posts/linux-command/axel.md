@@ -9,6 +9,7 @@ tags:
 - axel
 title: 【Linux 命令】axel
 updated: '2020-09-25 08:13:00'
+indexing: false
 ---
 
 多线程下载工具

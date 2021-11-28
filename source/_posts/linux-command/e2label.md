@@ -9,6 +9,7 @@ tags:
 - e2label
 title: 【Linux 命令】e2label
 updated: '2020-09-25 09:01:30'
+indexing: false
 ---
 
 设置第二扩展文件系统的卷标

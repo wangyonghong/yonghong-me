@@ -9,6 +9,7 @@ tags:
 - tload
 title: 【Linux 命令】tload
 updated: '2020-09-25 12:05:30'
+indexing: false
 ---
 
 显示系统负载状况

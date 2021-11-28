@@ -9,6 +9,7 @@ tags:
 - smbpasswd
 title: 【Linux 命令】smbpasswd
 updated: '2020-09-25 11:41:30'
+indexing: false
 ---
 
 samba用户和密码管理工具

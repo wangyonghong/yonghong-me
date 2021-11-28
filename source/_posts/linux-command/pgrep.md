@@ -9,6 +9,7 @@ tags:
 - pgrep
 title: 【Linux 命令】pgrep
 updated: '2020-09-25 10:54:30'
+indexing: false
 ---
 
 根据用户给出的信息在当前运行进程中查找并列出符合条件的进程ID（PID）

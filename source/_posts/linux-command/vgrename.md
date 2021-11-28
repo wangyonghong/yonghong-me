@@ -9,6 +9,7 @@ tags:
 - vgrename
 title: 【Linux 命令】vgrename
 updated: '2020-09-25 12:28:00'
+indexing: false
 ---
 
 使用vgrename命令可以重命名卷组的名称

@@ -9,6 +9,7 @@ tags:
 - hdparm
 title: 【Linux 命令】hdparm
 updated: '2020-09-25 09:33:00'
+indexing: false
 ---
 
 显示与设定硬盘的参数

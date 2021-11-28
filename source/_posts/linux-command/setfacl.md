@@ -9,6 +9,7 @@ tags:
 - setfacl
 title: 【Linux 命令】setfacl
 updated: '2020-09-25 11:33:00'
+indexing: false
 ---
 
 设置文件访问控制列表

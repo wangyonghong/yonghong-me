@@ -9,6 +9,7 @@ tags:
 - lastlog
 title: 【Linux 命令】lastlog
 updated: '2020-09-25 10:00:00'
+indexing: false
 ---
 
 显示系统中所有用户最近一次登录信息

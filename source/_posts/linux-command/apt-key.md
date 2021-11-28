@@ -9,6 +9,7 @@ tags:
 - apt-key
 title: 【Linux 命令】apt-key
 updated: '2020-09-25 08:04:30'
+indexing: false
 ---
 
 管理Debian Linux系统中的软件包密钥

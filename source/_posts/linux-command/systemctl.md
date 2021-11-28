@@ -9,6 +9,7 @@ tags:
 - systemctl
 title: 【Linux 命令】systemctl
 updated: '2020-09-25 11:57:00'
+indexing: false
 ---
 
 系统服务管理器指令

@@ -9,6 +9,7 @@ tags:
 - disown
 title: 【Linux 命令】disown
 updated: '2020-09-25 08:51:00'
+indexing: false
 ---
 
 从当前的shell中移除作业。

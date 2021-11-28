@@ -9,6 +9,7 @@ tags:
 - fdisk
 title: 【Linux 命令】fdisk
 updated: '2020-09-25 09:12:00'
+indexing: false
 ---
 
 查看磁盘使用情况和磁盘分区

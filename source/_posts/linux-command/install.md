@@ -9,6 +9,7 @@ tags:
 - install
 title: 【Linux 命令】install
 updated: '2020-09-25 09:46:00'
+indexing: false
 ---
 
 安装或升级软件或备份数据

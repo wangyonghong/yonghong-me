@@ -9,6 +9,7 @@ tags:
 - dirs
 title: 【Linux 命令】dirs
 updated: '2020-09-25 08:50:30'
+indexing: false
 ---
 
 显示目录堆栈。

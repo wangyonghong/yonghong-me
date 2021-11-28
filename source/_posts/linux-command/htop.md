@@ -9,6 +9,7 @@ tags:
 - htop
 title: 【Linux 命令】htop
 updated: '2020-09-25 09:38:00'
+indexing: false
 ---
 
 [非内部命令]一个互动的进程查看器，可以动态观察系统进程状况

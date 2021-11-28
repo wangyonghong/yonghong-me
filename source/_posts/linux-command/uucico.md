@@ -9,6 +9,7 @@ tags:
 - uucico
 title: 【Linux 命令】uucico
 updated: '2020-09-25 12:22:30'
+indexing: false
 ---
 
 UUCP文件传输服务程序

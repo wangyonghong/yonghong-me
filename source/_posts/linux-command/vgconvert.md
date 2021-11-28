@@ -9,6 +9,7 @@ tags:
 - vgconvert
 title: 【Linux 命令】vgconvert
 updated: '2020-09-25 12:25:00'
+indexing: false
 ---
 
 转换卷组元数据格式

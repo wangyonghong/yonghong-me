@@ -9,6 +9,7 @@ tags:
 - rev
 title: 【Linux 命令】rev
 updated: '2020-09-25 11:19:00'
+indexing: false
 ---
 
 将文件内容以字符为单位反序输出

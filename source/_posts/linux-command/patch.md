@@ -9,6 +9,7 @@ tags:
 - patch
 title: 【Linux 命令】patch
 updated: '2020-09-25 10:52:30'
+indexing: false
 ---
 
 为开放源代码软件安装补丁程序

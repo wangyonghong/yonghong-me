@@ -9,6 +9,7 @@ tags:
 - ssh-add
 title: 【Linux 命令】ssh-add
 updated: '2020-09-25 11:46:00'
+indexing: false
 ---
 
 把专用密钥添加到ssh-agent的高速缓存中

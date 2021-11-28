@@ -9,6 +9,7 @@ tags:
 - lvresize
 title: 【Linux 命令】lvresize
 updated: '2020-09-25 10:22:30'
+indexing: false
 ---
 
 调整逻辑卷空间大小

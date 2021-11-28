@@ -9,6 +9,7 @@ tags:
 - rcp
 title: 【Linux 命令】rcp
 updated: '2020-09-25 11:12:30'
+indexing: false
 ---
 
 使在两台Linux主机之间的文件复制操作更简单

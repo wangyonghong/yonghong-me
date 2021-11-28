@@ -9,6 +9,7 @@ tags:
 - 'yes'
 title: 【Linux 命令】yes
 updated: '2020-09-25 12:41:30'
+indexing: false
 ---
 
 重复打印指定字符串

@@ -9,6 +9,7 @@ tags:
 - apt-sortpkgs
 title: 【Linux 命令】apt-sortpkgs
 updated: '2020-09-25 08:05:00'
+indexing: false
 ---
 
 Debian Linux下对软件包索引文件进行排序的工具

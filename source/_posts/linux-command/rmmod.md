@@ -9,6 +9,7 @@ tags:
 - rmmod
 title: 【Linux 命令】rmmod
 updated: '2020-09-25 11:21:30'
+indexing: false
 ---
 
 从运行的内核中移除指定的内核模块

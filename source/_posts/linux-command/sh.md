@@ -9,6 +9,7 @@ tags:
 - sh
 title: 【Linux 命令】sh
 updated: '2020-09-25 11:36:00'
+indexing: false
 ---
 
 shell命令解释器

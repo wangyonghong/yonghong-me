@@ -9,6 +9,7 @@ tags:
 - users
 title: 【Linux 命令】users
 updated: '2020-09-25 12:22:00'
+indexing: false
 ---
 
 打印当前主机所有登陆用户的名称。

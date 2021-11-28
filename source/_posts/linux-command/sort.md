@@ -9,6 +9,7 @@ tags:
 - sort
 title: 【Linux 命令】sort
 updated: '2020-09-25 11:42:00'
+indexing: false
 ---
 
 对文本文件中所有行进行排序。

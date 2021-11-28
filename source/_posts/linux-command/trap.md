@@ -9,6 +9,7 @@ tags:
 - trap
 title: 【Linux 命令】trap
 updated: '2020-09-25 12:09:30'
+indexing: false
 ---
 
 捕捉信号和其他事件并执行命令。

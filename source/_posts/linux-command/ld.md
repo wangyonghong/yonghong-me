@@ -9,6 +9,7 @@ tags:
 - ld
 title: 【Linux 命令】ld
 updated: '2020-09-25 10:00:30'
+indexing: false
 ---
 
 将目标文件连接为可执行程序

@@ -9,6 +9,7 @@ tags:
 - zfore
 title: 【Linux 命令】zfore
 updated: '2020-09-25 12:43:30'
+indexing: false
 ---
 
 强制为gzip格式的压缩文件添加.gz后缀

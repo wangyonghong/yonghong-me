@@ -9,6 +9,7 @@ tags:
 - declare
 title: 【Linux 命令】declare
 updated: '2020-09-25 08:44:30'
+indexing: false
 ---
 
 声明变量，设置或显示变量的值和属性。

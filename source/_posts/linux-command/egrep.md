@@ -9,6 +9,7 @@ tags:
 - egrep
 title: 【Linux 命令】egrep
 updated: '2020-09-25 09:03:30'
+indexing: false
 ---
 
 在文件内查找指定的字符串

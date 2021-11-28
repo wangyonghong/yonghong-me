@@ -9,6 +9,7 @@ tags:
 - quotaoff
 title: 【Linux 命令】quotaoff
 updated: '2020-09-25 11:11:00'
+indexing: false
 ---
 
 关闭Linux内核中指定文件系统的磁盘配额功能

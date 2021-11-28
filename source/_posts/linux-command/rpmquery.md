@@ -9,6 +9,7 @@ tags:
 - rpmquery
 title: 【Linux 命令】rpmquery
 updated: '2020-09-25 11:24:30'
+indexing: false
 ---
 
 从RPM数据库中查询软件包信息

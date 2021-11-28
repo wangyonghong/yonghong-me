@@ -9,6 +9,7 @@ tags:
 - sudo
 title: 【Linux 命令】sudo
 updated: '2020-09-25 11:52:30'
+indexing: false
 ---
 
 以其他身份来执行命令

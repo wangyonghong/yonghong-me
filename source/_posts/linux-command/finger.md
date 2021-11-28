@@ -9,6 +9,7 @@ tags:
 - finger
 title: 【Linux 命令】finger
 updated: '2020-09-25 09:15:00'
+indexing: false
 ---
 
 用于查找并显示用户信息

@@ -9,6 +9,7 @@ tags:
 - bg
 title: 【Linux 命令】bg
 updated: '2020-09-25 08:16:00'
+indexing: false
 ---
 
 将前台终端作业移动到后台运行

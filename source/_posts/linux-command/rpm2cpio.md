@@ -9,6 +9,7 @@ tags:
 - rpm2cpio
 title: 【Linux 命令】rpm2cpio
 updated: '2020-09-25 11:23:00'
+indexing: false
 ---
 
 将RPM软件包转换为cpio格式的文件

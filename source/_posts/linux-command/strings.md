@@ -9,6 +9,7 @@ tags:
 - strings
 title: 【Linux 命令】strings
 updated: '2020-09-25 11:51:00'
+indexing: false
 ---
 
 在对象文件或二进制文件中查找可打印的字符串

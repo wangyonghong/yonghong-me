@@ -9,6 +9,7 @@ tags:
 - ssh-copy-id
 title: 【Linux 命令】ssh-copy-id
 updated: '2020-09-25 11:47:00'
+indexing: false
 ---
 
 把本地的ssh公钥文件安装到远程主机对应的账户下

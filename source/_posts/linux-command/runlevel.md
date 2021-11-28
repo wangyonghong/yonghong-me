@@ -9,6 +9,7 @@ tags:
 - runlevel
 title: 【Linux 命令】runlevel
 updated: '2020-09-25 11:27:00'
+indexing: false
 ---
 
 打印当前Linux系统的运行等级

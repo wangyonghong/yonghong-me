@@ -9,6 +9,7 @@ tags:
 - pico
 title: 【Linux 命令】pico
 updated: '2020-09-25 10:55:30'
+indexing: false
 ---
 
 功能强大全屏幕的文本编辑器

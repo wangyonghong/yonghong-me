@@ -9,6 +9,7 @@ tags:
 - ip6tables-save
 title: 【Linux 命令】ip6tables-save
 updated: '2020-09-25 09:48:30'
+indexing: false
 ---
 
 保存ip6tables表配置

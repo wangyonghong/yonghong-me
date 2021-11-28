@@ -9,6 +9,7 @@ tags:
 - rpmdb
 title: 【Linux 命令】rpmdb
 updated: '2020-09-25 11:24:00'
+indexing: false
 ---
 
 初始化和重建RPM数据库

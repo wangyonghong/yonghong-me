@@ -9,6 +9,7 @@ tags:
 - insmod
 title: 【Linux 命令】insmod
 updated: '2020-09-25 09:45:30'
+indexing: false
 ---
 
 将给定的模块加载到内核中

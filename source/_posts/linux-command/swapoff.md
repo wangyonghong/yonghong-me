@@ -9,6 +9,7 @@ tags:
 - swapoff
 title: 【Linux 命令】swapoff
 updated: '2020-09-25 11:54:30'
+indexing: false
 ---
 
 关闭指定的交换空间

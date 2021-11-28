@@ -9,6 +9,7 @@ tags:
 - talk
 title: 【Linux 命令】talk
 updated: '2020-09-25 11:59:30'
+indexing: false
 ---
 
 让用户和其他用户聊天

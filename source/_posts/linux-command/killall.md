@@ -9,6 +9,7 @@ tags:
 - killall
 title: 【Linux 命令】killall
 updated: '2020-09-25 09:58:30'
+indexing: false
 ---
 
 使用进程的名称来杀死一组进程

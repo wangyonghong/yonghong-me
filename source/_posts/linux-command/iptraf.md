@@ -9,6 +9,7 @@ tags:
 - iptraf
 title: 【Linux 命令】iptraf
 updated: '2020-09-25 09:53:00'
+indexing: false
 ---
 
 实时地监视网卡流量

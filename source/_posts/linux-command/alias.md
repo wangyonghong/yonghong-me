@@ -9,6 +9,7 @@ tags:
 - alias
 title: 【Linux 命令】alias
 updated: '2020-09-25 08:02:00'
+indexing: false
 ---
 
 定义或显示别名。

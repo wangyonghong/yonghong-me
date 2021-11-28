@@ -9,6 +9,7 @@ tags:
 - sync
 title: 【Linux 命令】sync
 updated: '2020-09-25 11:55:30'
+indexing: false
 ---
 
 用于强制被改变的内容立刻写入磁盘

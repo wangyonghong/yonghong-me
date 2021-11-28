@@ -9,6 +9,7 @@ tags:
 - service
 title: 【Linux 命令】service
 updated: '2020-09-25 11:31:30'
+indexing: false
 ---
 
 控制系统服务的实用工具

@@ -9,6 +9,7 @@ tags:
 - uupick
 title: 【Linux 命令】uupick
 updated: '2020-09-25 12:23:00'
+indexing: false
 ---
 
 命令处理传送进来的文件

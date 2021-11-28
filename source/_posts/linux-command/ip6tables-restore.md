@@ -9,6 +9,7 @@ tags:
 - ip6tables-restore
 title: 【Linux 命令】ip6tables-restore
 updated: '2020-09-25 09:48:00'
+indexing: false
 ---
 
 还原ip6tables表

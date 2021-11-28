@@ -9,6 +9,7 @@ tags:
 - uniq
 title: 【Linux 命令】uniq
 updated: '2020-09-25 12:16:00'
+indexing: false
 ---
 
 显示或忽略重复的行。

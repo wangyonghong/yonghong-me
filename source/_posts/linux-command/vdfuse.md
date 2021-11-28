@@ -9,6 +9,7 @@ tags:
 - vdfuse
 title: 【Linux 命令】vdfuse
 updated: '2020-09-25 12:24:00'
+indexing: false
 ---
 
 VirtualBox软件挂载VDI分区文件工具

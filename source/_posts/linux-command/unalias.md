@@ -9,6 +9,7 @@ tags:
 - unalias
 title: 【Linux 命令】unalias
 updated: '2020-09-25 12:13:30'
+indexing: false
 ---
 
 删除由alias设置的别名

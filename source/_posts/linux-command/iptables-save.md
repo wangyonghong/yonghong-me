@@ -9,6 +9,7 @@ tags:
 - iptables-save
 title: 【Linux 命令】iptables-save
 updated: '2020-09-25 09:52:00'
+indexing: false
 ---
 
 备份iptables的表配置

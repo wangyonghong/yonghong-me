@@ -9,6 +9,7 @@ tags:
 - tracepath
 title: 【Linux 命令】tracepath
 updated: '2020-09-25 12:08:30'
+indexing: false
 ---
 
 追踪目的主机经过的路由信息

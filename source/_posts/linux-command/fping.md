@@ -9,6 +9,7 @@ tags:
 - fping
 title: 【Linux 命令】fping
 updated: '2020-09-25 09:17:30'
+indexing: false
 ---
 
 fping检测主机是否存在

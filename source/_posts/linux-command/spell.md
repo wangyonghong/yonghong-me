@@ -9,6 +9,7 @@ tags:
 - spell
 title: 【Linux 命令】spell
 updated: '2020-09-25 11:43:30'
+indexing: false
 ---
 
 对文件进行拼写检查

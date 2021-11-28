@@ -9,6 +9,7 @@ tags:
 - hwclock
 title: 【Linux 命令】hwclock
 updated: '2020-09-25 09:39:00'
+indexing: false
 ---
 
 显示与设定硬件时钟

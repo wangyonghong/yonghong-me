@@ -9,6 +9,7 @@ tags:
 - ar
 title: 【Linux 命令】ar
 updated: '2020-09-25 08:06:00'
+indexing: false
 ---
 
 建立或修改备存文件，或是从备存文件中抽取文件

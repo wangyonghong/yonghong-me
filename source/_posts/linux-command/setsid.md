@@ -9,6 +9,7 @@ tags:
 - setsid
 title: 【Linux 命令】setsid
 updated: '2020-09-25 11:34:30'
+indexing: false
 ---
 
 在新的会话中运行程序

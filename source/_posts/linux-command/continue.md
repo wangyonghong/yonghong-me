@@ -9,6 +9,7 @@ tags:
 - continue
 title: 【Linux 命令】continue
 updated: '2020-09-25 08:38:00'
+indexing: false
 ---
 
 结束本次循环，继续执行下一个for，while或until循环。

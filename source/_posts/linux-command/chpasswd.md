@@ -9,6 +9,7 @@ tags:
 - chpasswd
 title: 【Linux 命令】chpasswd
 updated: '2020-09-25 08:31:00'
+indexing: false
 ---
 
 批量更新用户口令的工具

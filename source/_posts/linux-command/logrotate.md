@@ -9,6 +9,7 @@ tags:
 - logrotate
 title: 【Linux 命令】logrotate
 updated: '2020-09-25 10:09:00'
+indexing: false
 ---
 
 系统日志进行轮转、压缩和删除

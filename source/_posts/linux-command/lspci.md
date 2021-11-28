@@ -9,6 +9,7 @@ tags:
 - lspci
 title: 【Linux 命令】lspci
 updated: '2020-09-25 10:18:30'
+indexing: false
 ---
 
 显示当前主机的所有PCI总线信息

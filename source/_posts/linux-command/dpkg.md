@@ -9,6 +9,7 @@ tags:
 - dpkg
 title: 【Linux 命令】dpkg
 updated: '2020-09-25 08:58:30'
+indexing: false
 ---
 
 Debian Linux系统上安装、创建和管理软件包

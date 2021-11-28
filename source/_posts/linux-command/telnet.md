@@ -9,6 +9,7 @@ tags:
 - telnet
 title: 【Linux 命令】telnet
 updated: '2020-09-25 12:02:30'
+indexing: false
 ---
 
 登录远程主机和管理(测试ip端口是否连通)

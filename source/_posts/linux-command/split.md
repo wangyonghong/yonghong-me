@@ -9,6 +9,7 @@ tags:
 - split
 title: 【Linux 命令】split
 updated: '2020-09-25 11:44:00'
+indexing: false
 ---
 
 分割任意大小的文件

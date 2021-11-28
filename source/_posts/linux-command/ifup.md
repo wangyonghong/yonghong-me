@@ -9,6 +9,7 @@ tags:
 - ifup
 title: 【Linux 命令】ifup
 updated: '2020-09-25 09:43:00'
+indexing: false
 ---
 
 激活指定的网络接口

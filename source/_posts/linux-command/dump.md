@@ -9,6 +9,7 @@ tags:
 - dump
 title: 【Linux 命令】dump
 updated: '2020-09-25 09:00:30'
+indexing: false
 ---
 
 用于备份ext2或者ext3文件系统

@@ -9,6 +9,7 @@ tags:
 - iotop
 title: 【Linux 命令】iotop
 updated: '2020-09-25 09:47:00'
+indexing: false
 ---
 
 用来监视磁盘I/O使用状况的工具

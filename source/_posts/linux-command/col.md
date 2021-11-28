@@ -9,6 +9,7 @@ tags:
 - col
 title: 【Linux 命令】col
 updated: '2020-09-25 08:35:00'
+indexing: false
 ---
 
 过滤控制字符

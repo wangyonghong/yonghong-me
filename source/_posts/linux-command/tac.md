@@ -9,6 +9,7 @@ tags:
 - tac
 title: 【Linux 命令】tac
 updated: '2020-09-25 11:58:00'
+indexing: false
 ---
 
 连接多个文件并以行为单位反向打印到标准输出。

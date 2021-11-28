@@ -9,6 +9,7 @@ tags:
 - sendmail
 title: 【Linux 命令】sendmail
 updated: '2020-09-25 11:30:30'
+indexing: false
 ---
 
 著名电子邮件服务器

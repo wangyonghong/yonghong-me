@@ -9,6 +9,7 @@ tags:
 - pkill
 title: 【Linux 命令】pkill
 updated: '2020-09-25 10:57:30'
+indexing: false
 ---
 
 可以按照进程名杀死进程

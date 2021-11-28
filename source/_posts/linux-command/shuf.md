@@ -9,6 +9,7 @@ tags:
 - shuf
 title: 【Linux 命令】shuf
 updated: '2020-09-25 11:38:00'
+indexing: false
 ---
 
 产生随机的排列。

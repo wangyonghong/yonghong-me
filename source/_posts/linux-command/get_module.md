@@ -9,6 +9,7 @@ tags:
 - get_module
 title: 【Linux 命令】get_module
 updated: '2020-09-25 09:23:30'
+indexing: false
 ---
 
 获取Linux内核模块的详细信息

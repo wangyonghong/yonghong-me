@@ -9,6 +9,7 @@ tags:
 - dmidecode
 title: 【Linux 命令】dmidecode
 updated: '2020-09-25 08:52:00'
+indexing: false
 ---
 
 在Linux系统下获取有关硬件方面的信息

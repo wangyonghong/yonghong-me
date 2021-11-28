@@ -9,6 +9,7 @@ tags:
 - rlogin
 title: 【Linux 命令】rlogin
 updated: '2020-09-25 11:20:00'
+indexing: false
 ---
 
 从当前终端登录到远程Linux主机

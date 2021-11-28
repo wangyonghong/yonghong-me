@@ -9,6 +9,7 @@ tags:
 - w
 title: 【Linux 命令】w
 updated: '2020-09-25 12:30:30'
+indexing: false
 ---
 
 显示目前登入系统的用户信息

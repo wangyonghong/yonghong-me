@@ -9,6 +9,7 @@ tags:
 - restore
 title: 【Linux 命令】restore
 updated: '2020-09-25 11:17:30'
+indexing: false
 ---
 
 所进行的操作和dump指令相反

@@ -9,6 +9,7 @@ tags:
 - yum
 title: 【Linux 命令】yum
 updated: '2020-09-25 12:42:30'
+indexing: false
 ---
 
 基于RPM的软件包管理器

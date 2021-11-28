@@ -9,6 +9,7 @@ tags:
 - parted
 title: 【Linux 命令】parted
 updated: '2020-09-25 10:50:30'
+indexing: false
 ---
 
 磁盘分区和分区大小调整工具

@@ -9,6 +9,7 @@ tags:
 - more
 title: 【Linux 命令】more
 updated: '2020-09-25 10:33:30'
+indexing: false
 ---
 
 显示文件内容，每次显示一屏

@@ -9,6 +9,7 @@ tags:
 - cat
 title: 【Linux 命令】cat
 updated: '2020-09-25 08:25:30'
+indexing: false
 ---
 
 连接多个文件并打印到标准输出。

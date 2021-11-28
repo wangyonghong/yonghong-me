@@ -9,6 +9,7 @@ tags:
 - zipsplit
 title: 【Linux 命令】zipsplit
 updated: '2020-09-25 12:45:00'
+indexing: false
 ---
 
 将较大的zip压缩包分割成各个较小的压缩包

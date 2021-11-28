@@ -9,6 +9,7 @@ tags:
 - userdel
 title: 【Linux 命令】userdel
 updated: '2020-09-25 12:20:30'
+indexing: false
 ---
 
 用于删除给定的用户以及与用户相关的文件

@@ -9,6 +9,7 @@ tags:
 - sleep
 title: 【Linux 命令】sleep
 updated: '2020-09-25 11:40:00'
+indexing: false
 ---
 
 将目前动作延迟一段时间

@@ -9,6 +9,7 @@ tags:
 - iptables-restore
 title: 【Linux 命令】iptables-restore
 updated: '2020-09-25 09:51:30'
+indexing: false
 ---
 
 还原iptables表的配置

@@ -9,6 +9,7 @@ tags:
 - lscpu
 title: 【Linux 命令】lscpu
 updated: '2020-09-25 10:17:00'
+indexing: false
 ---
 
 显示有关CPU架构的信息

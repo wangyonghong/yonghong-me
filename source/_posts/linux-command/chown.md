@@ -9,6 +9,7 @@ tags:
 - chown
 title: 【Linux 命令】chown
 updated: '2020-09-25 08:30:30'
+indexing: false
 ---
 
 用来变更文件或目录的拥有者或所属群组

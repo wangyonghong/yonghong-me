@@ -9,6 +9,7 @@ tags:
 - quota
 title: 【Linux 命令】quota
 updated: '2020-09-25 11:10:00'
+indexing: false
 ---
 
 显示磁盘已使用的空间与限制

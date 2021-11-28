@@ -9,6 +9,7 @@ tags:
 - echo
 title: 【Linux 命令】echo
 updated: '2020-09-25 09:02:00'
+indexing: false
 ---
 
 输出指定的字符串或者变量

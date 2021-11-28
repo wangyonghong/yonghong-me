@@ -9,6 +9,7 @@ tags:
 - expr
 title: 【Linux 命令】expr
 updated: '2020-09-25 09:10:30'
+indexing: false
 ---
 
 一款表达式计算工具

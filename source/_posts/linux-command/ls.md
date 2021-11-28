@@ -9,6 +9,7 @@ tags:
 - ls
 title: 【Linux 命令】ls
 updated: '2020-09-25 10:15:00'
+indexing: false
 ---
 
 显示目录内容列表

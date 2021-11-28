@@ -9,6 +9,7 @@ tags:
 - mysqladmin
 title: 【Linux 命令】mysqladmin
 updated: '2020-09-25 10:36:30'
+indexing: false
 ---
 
 MySQL服务器管理客户端

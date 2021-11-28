@@ -9,6 +9,7 @@ tags:
 - chkconfig
 title: 【Linux 命令】chkconfig
 updated: '2020-09-25 08:29:30'
+indexing: false
 ---
 
 检查或设置系统的各种服务

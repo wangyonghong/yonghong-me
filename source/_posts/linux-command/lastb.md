@@ -9,6 +9,7 @@ tags:
 - lastb
 title: 【Linux 命令】lastb
 updated: '2020-09-25 09:59:30'
+indexing: false
 ---
 
 列出登入系统失败的用户相关信息

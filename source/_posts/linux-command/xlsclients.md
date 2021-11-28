@@ -9,6 +9,7 @@ tags:
 - xlsclients
 title: 【Linux 命令】xlsclients
 updated: '2020-09-25 12:39:30'
+indexing: false
 ---
 
 列出显示器中的客户端应用程序

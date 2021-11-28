@@ -9,6 +9,7 @@ tags:
 - cmp
 title: 【Linux 命令】cmp
 updated: '2020-09-25 08:34:30'
+indexing: false
 ---
 
 比较两个文件是否有差异

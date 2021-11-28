@@ -9,6 +9,7 @@ tags:
 - printf
 title: 【Linux 命令】printf
 updated: '2020-09-25 11:00:30'
+indexing: false
 ---
 
 格式化并输出结果。

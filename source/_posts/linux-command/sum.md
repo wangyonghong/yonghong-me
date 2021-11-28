@@ -9,6 +9,7 @@ tags:
 - sum
 title: 【Linux 命令】sum
 updated: '2020-09-25 11:53:00'
+indexing: false
 ---
 
 计算文件的校验码和显示块数

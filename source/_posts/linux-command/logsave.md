@@ -9,6 +9,7 @@ tags:
 - logsave
 title: 【Linux 命令】logsave
 updated: '2020-09-25 10:09:30'
+indexing: false
 ---
 
 将命令的输出信息保存到指定的日志文件

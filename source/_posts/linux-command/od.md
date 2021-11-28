@@ -9,6 +9,7 @@ tags:
 - od
 title: 【Linux 命令】od
 updated: '2020-09-25 10:49:30'
+indexing: false
 ---
 
 输出文件的八进制、十六进制等格式编码的字节

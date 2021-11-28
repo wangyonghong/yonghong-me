@@ -9,6 +9,7 @@ tags:
 - groupadd
 title: 【Linux 命令】groupadd
 updated: '2020-09-25 09:27:00'
+indexing: false
 ---
 
 用于创建一个新的工作组

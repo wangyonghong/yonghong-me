@@ -9,6 +9,7 @@ tags:
 - chcon
 title: 【Linux 命令】chcon
 updated: '2020-09-25 08:28:00'
+indexing: false
 ---
 
 修改对象（文件）的安全上下文

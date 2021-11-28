@@ -9,6 +9,7 @@ tags:
 - xclip
 title: 【Linux 命令】xclip
 updated: '2020-09-25 12:37:30'
+indexing: false
 ---
 
 管理 X 粘贴板

@@ -9,6 +9,7 @@ tags:
 - updatedb
 title: 【Linux 命令】updatedb
 updated: '2020-09-25 12:19:00'
+indexing: false
 ---
 
 创建或更新slocate命令所必需的数据库文件

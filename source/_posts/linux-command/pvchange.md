@@ -9,6 +9,7 @@ tags:
 - pvchange
 title: 【Linux 命令】pvchange
 updated: '2020-09-25 11:04:30'
+indexing: false
 ---
 
 修改物理卷属性

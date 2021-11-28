@@ -9,6 +9,7 @@ tags:
 - mkdir
 title: 【Linux 命令】mkdir
 updated: '2020-09-25 10:29:00'
+indexing: false
 ---
 
 用来创建目录

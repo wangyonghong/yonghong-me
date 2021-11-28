@@ -9,6 +9,7 @@ tags:
 - iostat
 title: 【Linux 命令】iostat
 updated: '2020-09-25 09:46:30'
+indexing: false
 ---
 
 监视系统输入输出设备和CPU的使用情况

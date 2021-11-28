@@ -9,6 +9,7 @@ tags:
 - tail
 title: 【Linux 命令】tail
 updated: '2020-09-25 11:58:30'
+indexing: false
 ---
 
 在屏幕上显示指定文件的末尾若干行

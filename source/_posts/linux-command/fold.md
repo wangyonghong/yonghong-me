@@ -9,6 +9,7 @@ tags:
 - fold
 title: 【Linux 命令】fold
 updated: '2020-09-25 09:17:00'
+indexing: false
 ---
 
 控制文件内容输出时所占用的屏幕宽度

@@ -9,6 +9,7 @@ tags:
 - bzdiff
 title: 【Linux 命令】bzdiff
 updated: '2020-09-25 08:21:30'
+indexing: false
 ---
 
 直接比较两个.bz2压缩包中文件的不同

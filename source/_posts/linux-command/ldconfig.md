@@ -9,6 +9,7 @@ tags:
 - ldconfig
 title: 【Linux 命令】ldconfig
 updated: '2020-09-25 10:01:00'
+indexing: false
 ---
 
 动态链接库管理命令

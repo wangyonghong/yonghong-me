@@ -9,6 +9,7 @@ tags:
 - watch
 title: 【Linux 命令】watch
 updated: '2020-09-25 12:32:00'
+indexing: false
 ---
 
 可以将命令的输出结果输出到标准输出设备，多用于周期性执行命令/定时执行命令

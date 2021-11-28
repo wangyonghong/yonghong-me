@@ -9,6 +9,7 @@ tags:
 - mkbootdisk
 title: 【Linux 命令】mkbootdisk
 updated: '2020-09-25 10:28:30'
+indexing: false
 ---
 
 可建立目前系统的启动盘

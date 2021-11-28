@@ -9,6 +9,7 @@ tags:
 - inotifywait
 title: 【Linux 命令】inotifywait
 updated: '2020-09-25 09:45:00'
+indexing: false
 ---
 
 异步文件系统监控机制

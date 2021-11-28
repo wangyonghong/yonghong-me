@@ -9,6 +9,7 @@ tags:
 - sesearch
 title: 【Linux 命令】sesearch
 updated: '2020-09-25 11:32:00'
+indexing: false
 ---
 
 查询SELinux策略的规则详情

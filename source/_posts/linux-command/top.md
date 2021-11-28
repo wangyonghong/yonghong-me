@@ -9,6 +9,7 @@ tags:
 - top
 title: 【Linux 命令】top
 updated: '2020-09-25 12:06:30'
+indexing: false
 ---
 
 显示或管理执行中的程序

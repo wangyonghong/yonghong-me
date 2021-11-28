@@ -9,6 +9,7 @@ tags:
 - enable
 title: 【Linux 命令】enable
 updated: '2020-09-25 09:06:00'
+indexing: false
 ---
 
 启动或禁用shell内建命令

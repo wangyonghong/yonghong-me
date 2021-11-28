@@ -9,6 +9,7 @@ tags:
 - vgdisplay
 title: 【Linux 命令】vgdisplay
 updated: '2020-09-25 12:26:00'
+indexing: false
 ---
 
 显示LVM卷组的信息

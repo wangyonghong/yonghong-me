@@ -9,6 +9,7 @@ tags:
 - test
 title: 【Linux 命令】test
 updated: '2020-09-25 12:03:30'
+indexing: false
 ---
 
 执行条件表达式。

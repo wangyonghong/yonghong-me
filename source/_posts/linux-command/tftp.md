@@ -9,6 +9,7 @@ tags:
 - tftp
 title: 【Linux 命令】tftp
 updated: '2020-09-25 12:04:00'
+indexing: false
 ---
 
 在本机和tftp服务器之间使用TFTP协议传输文件

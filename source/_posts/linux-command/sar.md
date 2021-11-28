@@ -9,6 +9,7 @@ tags:
 - sar
 title: 【Linux 命令】sar
 updated: '2020-09-25 11:27:30'
+indexing: false
 ---
 
 系统运行状态统计工具

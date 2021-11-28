@@ -9,6 +9,7 @@ tags:
 - ppp-off
 title: 【Linux 命令】ppp-off
 updated: '2020-09-25 10:59:30'
+indexing: false
 ---
 
 关闭ppp连线

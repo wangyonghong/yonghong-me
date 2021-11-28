@@ -9,6 +9,7 @@ tags:
 - rpm
 title: 【Linux 命令】rpm
 updated: '2020-09-25 11:22:30'
+indexing: false
 ---
 
 RPM软件包的管理工具

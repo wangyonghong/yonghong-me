@@ -9,6 +9,7 @@ tags:
 - readonly
 title: 【Linux 命令】readonly
 updated: '2020-09-25 11:14:00'
+indexing: false
 ---
 
 标记shell变量或函数为只读

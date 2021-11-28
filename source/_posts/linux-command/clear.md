@@ -9,6 +9,7 @@ tags:
 - clear
 title: 【Linux 命令】clear
 updated: '2020-09-25 08:33:00'
+indexing: false
 ---
 
 清除当前屏幕终端上的任何信息

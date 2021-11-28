@@ -9,6 +9,7 @@ tags:
 - ex
 title: 【Linux 命令】ex
 updated: '2020-09-25 09:07:30'
+indexing: false
 ---
 
 启动vim编辑器的ex编辑模式

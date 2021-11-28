@@ -9,6 +9,7 @@ tags:
 - exit
 title: 【Linux 命令】exit
 updated: '2020-09-25 09:08:30'
+indexing: false
 ---
 
 退出当前的shell。

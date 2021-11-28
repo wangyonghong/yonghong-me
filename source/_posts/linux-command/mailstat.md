@@ -9,6 +9,7 @@ tags:
 - mailstat
 title: 【Linux 命令】mailstat
 updated: '2020-09-25 10:25:00'
+indexing: false
 ---
 
 显示到达的邮件状态

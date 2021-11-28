@@ -9,6 +9,7 @@ tags:
 - whoami
 title: 【Linux 命令】whoami
 updated: '2020-09-25 12:35:30'
+indexing: false
 ---
 
 打印当前有效的用户ID对应的名称

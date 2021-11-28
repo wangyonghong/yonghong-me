@@ -9,6 +9,7 @@ tags:
 - local
 title: 【Linux 命令】local
 updated: '2020-09-25 10:06:00'
+indexing: false
 ---
 
 在函数内定义局部变量。

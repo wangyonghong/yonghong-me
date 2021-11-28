@@ -9,6 +9,7 @@ tags:
 - export
 title: 【Linux 命令】export
 updated: '2020-09-25 09:09:30'
+indexing: false
 ---
 
 为shell变量或函数设置导出属性。

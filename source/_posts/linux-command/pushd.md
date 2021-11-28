@@ -9,6 +9,7 @@ tags:
 - pushd
 title: 【Linux 命令】pushd
 updated: '2020-09-25 11:03:30'
+indexing: false
 ---
 
 将目录添加到目录堆栈顶部。

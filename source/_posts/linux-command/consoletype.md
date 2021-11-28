@@ -9,6 +9,7 @@ tags:
 - consoletype
 title: 【Linux 命令】consoletype
 updated: '2020-09-25 08:37:30'
+indexing: false
 ---
 
 输出已连接的终端类型

@@ -9,6 +9,7 @@ tags:
 - tr
 title: 【Linux 命令】tr
 updated: '2020-09-25 12:08:00'
+indexing: false
 ---
 
 将字符进行替换压缩和删除

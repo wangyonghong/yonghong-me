@@ -9,6 +9,7 @@ tags:
 - ipcrm
 title: 【Linux 命令】ipcrm
 updated: '2020-09-25 09:50:00'
+indexing: false
 ---
 
 删除消息队列、信号集、或者共享内存标识

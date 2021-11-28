@@ -9,6 +9,7 @@ tags:
 - stat
 title: 【Linux 命令】stat
 updated: '2020-09-25 11:50:00'
+indexing: false
 ---
 
 用于显示文件的状态信息

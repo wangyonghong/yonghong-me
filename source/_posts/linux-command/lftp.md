@@ -9,6 +9,7 @@ tags:
 - lftp
 title: 【Linux 命令】lftp
 updated: '2020-09-25 10:03:00'
+indexing: false
 ---
 
 优秀的文件客户端程序

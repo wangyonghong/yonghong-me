@@ -9,6 +9,7 @@ tags:
 - comm
 title: 【Linux 命令】comm
 updated: '2020-09-25 08:36:00'
+indexing: false
 ---
 
 按行比较两个已排序的文件。

@@ -9,6 +9,7 @@ tags:
 - host
 title: 【Linux 命令】host
 updated: '2020-09-25 09:35:30'
+indexing: false
 ---
 
 常用的分析域名查询工具

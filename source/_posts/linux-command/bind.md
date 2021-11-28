@@ -9,6 +9,7 @@ tags:
 - bind
 title: 【Linux 命令】bind
 updated: '2020-09-25 08:16:30'
+indexing: false
 ---
 
 显示或设置键盘按键与其相关的功能

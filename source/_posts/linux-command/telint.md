@@ -9,6 +9,7 @@ tags:
 - telint
 title: 【Linux 命令】telint
 updated: '2020-09-25 12:02:00'
+indexing: false
 ---
 
 切换当前正在运行系统的运行等级

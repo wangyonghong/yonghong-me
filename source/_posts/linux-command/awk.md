@@ -9,6 +9,7 @@ tags:
 - awk
 title: 【Linux 命令】awk
 updated: '2020-09-25 08:12:30'
+indexing: false
 ---
 
 文本和数据进行处理的编程语言

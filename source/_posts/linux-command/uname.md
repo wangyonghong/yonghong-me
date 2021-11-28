@@ -9,6 +9,7 @@ tags:
 - uname
 title: 【Linux 命令】uname
 updated: '2020-09-25 12:14:00'
+indexing: false
 ---
 
 打印系统信息。

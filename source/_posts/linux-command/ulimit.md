@@ -9,6 +9,7 @@ tags:
 - ulimit
 title: 【Linux 命令】ulimit
 updated: '2020-09-25 12:12:00'
+indexing: false
 ---
 
 控制shell程序的资源

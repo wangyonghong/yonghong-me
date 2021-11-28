@@ -9,6 +9,7 @@ tags:
 - ss
 title: 【Linux 命令】ss
 updated: '2020-09-25 11:45:30'
+indexing: false
 ---
 
 比 netstat 好用的socket统计信息，iproute2 包附带的另一个工具，允许你查询 socket 的有关统计信息

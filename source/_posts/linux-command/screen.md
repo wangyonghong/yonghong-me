@@ -9,6 +9,7 @@ tags:
 - screen
 title: 【Linux 命令】screen
 updated: '2020-09-25 11:28:30'
+indexing: false
 ---
 
 用于命令行终端切换

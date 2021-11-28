@@ -9,6 +9,7 @@ tags:
 - lsmod
 title: 【Linux 命令】lsmod
 updated: '2020-09-25 10:17:30'
+indexing: false
 ---
 
 显示已载入系统的模块

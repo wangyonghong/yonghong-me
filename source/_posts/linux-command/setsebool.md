@@ -9,6 +9,7 @@ tags:
 - setsebool
 title: 【Linux 命令】setsebool
 updated: '2020-09-25 11:34:00'
+indexing: false
 ---
 
 修改SElinux策略内各项规则的布尔值

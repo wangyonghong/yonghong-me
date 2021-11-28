@@ -9,6 +9,7 @@ tags:
 - lsattr
 title: 【Linux 命令】lsattr
 updated: '2020-09-25 10:15:30'
+indexing: false
 ---
 
 查看文件的第二扩展文件系统属性

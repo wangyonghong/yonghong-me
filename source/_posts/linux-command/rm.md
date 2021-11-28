@@ -9,6 +9,7 @@ tags:
 - rm
 title: 【Linux 命令】rm
 updated: '2020-09-25 11:20:30'
+indexing: false
 ---
 
 用于删除给定的文件和目录

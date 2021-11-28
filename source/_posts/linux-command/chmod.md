@@ -9,6 +9,7 @@ tags:
 - chmod
 title: 【Linux 命令】chmod
 updated: '2020-09-25 08:30:00'
+indexing: false
 ---
 
 用来变更文件或目录的权限

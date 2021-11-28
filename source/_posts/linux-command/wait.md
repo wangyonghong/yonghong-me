@@ -9,6 +9,7 @@ tags:
 - wait
 title: 【Linux 命令】wait
 updated: '2020-09-25 12:31:00'
+indexing: false
 ---
 
 等待进程执行完后返回

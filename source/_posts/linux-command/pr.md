@@ -9,6 +9,7 @@ tags:
 - pr
 title: 【Linux 命令】pr
 updated: '2020-09-25 11:00:00'
+indexing: false
 ---
 
 将文本文件转换成适合打印的格式

@@ -9,6 +9,7 @@ tags:
 - tailf
 title: 【Linux 命令】tailf
 updated: '2020-09-25 11:59:00'
+indexing: false
 ---
 
 在屏幕上显示指定文件的末尾若干行内容，通常用于日志文件的跟踪输出

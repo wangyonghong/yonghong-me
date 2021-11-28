@@ -9,6 +9,7 @@ tags:
 - xlsatoms
 title: 【Linux 命令】xlsatoms
 updated: '2020-09-25 12:39:00'
+indexing: false
 ---
 
 列出X服务器内部所有定义的原子成分

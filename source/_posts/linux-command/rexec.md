@@ -9,6 +9,7 @@ tags:
 - rexec
 title: 【Linux 命令】rexec
 updated: '2020-09-25 11:19:30'
+indexing: false
 ---
 
 运程执行Linux系统下命令 

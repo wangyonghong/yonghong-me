@@ -9,6 +9,7 @@ tags:
 - umask
 title: 【Linux 命令】umask
 updated: '2020-09-25 12:12:30'
+indexing: false
 ---
 
 显示或设置创建文件的权限掩码。

@@ -9,6 +9,7 @@ tags:
 - mkisofs
 title: 【Linux 命令】mkisofs
 updated: '2020-09-25 10:31:00'
+indexing: false
 ---
 
 建立ISO 9660映像文件

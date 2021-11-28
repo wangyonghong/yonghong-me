@@ -9,6 +9,7 @@ tags:
 - pwck
 title: 【Linux 命令】pwck
 updated: '2020-09-25 11:08:00'
+indexing: false
 ---
 
 用来验证系统认证文件内容和格式的完整性

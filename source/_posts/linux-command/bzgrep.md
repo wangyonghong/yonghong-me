@@ -9,6 +9,7 @@ tags:
 - bzgrep
 title: 【Linux 命令】bzgrep
 updated: '2020-09-25 08:22:00'
+indexing: false
 ---
 
 使用正则表达式搜索.bz2压缩包中文件

@@ -9,6 +9,7 @@ tags:
 - unlink
 title: 【Linux 命令】unlink
 updated: '2020-09-25 12:16:30'
+indexing: false
 ---
 
 系统调用函数unlink去删除指定的文件

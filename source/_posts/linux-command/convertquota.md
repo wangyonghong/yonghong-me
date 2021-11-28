@@ -9,6 +9,7 @@ tags:
 - convertquota
 title: 【Linux 命令】convertquota
 updated: '2020-09-25 08:38:30'
+indexing: false
 ---
 
 把老的配额文件转换为新的格式

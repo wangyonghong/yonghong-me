@@ -9,6 +9,7 @@ tags:
 - history
 title: 【Linux 命令】history
 updated: '2020-09-25 09:35:00'
+indexing: false
 ---
 
 显示或操作历史列表。

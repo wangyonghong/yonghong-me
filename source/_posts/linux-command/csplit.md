@@ -9,6 +9,7 @@ tags:
 - csplit
 title: 【Linux 命令】csplit
 updated: '2020-09-25 08:40:30'
+indexing: false
 ---
 
 将一个大文件分割成小的碎片文件

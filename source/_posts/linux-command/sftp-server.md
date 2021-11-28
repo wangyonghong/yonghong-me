@@ -9,6 +9,7 @@ tags:
 - sftp-server
 title: 【Linux 命令】sftp-server
 updated: '2020-09-25 11:35:00'
+indexing: false
 ---
 
 sftp协议的服务器端程序

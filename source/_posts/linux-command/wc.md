@@ -9,6 +9,7 @@ tags:
 - wc
 title: 【Linux 命令】wc
 updated: '2020-09-25 12:32:30'
+indexing: false
 ---
 
 统计文件的字节数、字数、行数

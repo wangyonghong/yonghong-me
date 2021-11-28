@@ -9,6 +9,7 @@ tags:
 - popd
 title: 【Linux 命令】popd
 updated: '2020-09-25 10:58:30'
+indexing: false
 ---
 
 从目录堆栈中删除目录。

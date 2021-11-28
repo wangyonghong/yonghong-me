@@ -9,6 +9,7 @@ tags:
 - cdrecord
 title: 【Linux 命令】cdrecord
 updated: '2020-09-25 08:26:30'
+indexing: false
 ---
 
 Linux系统下光盘刻录功能命令

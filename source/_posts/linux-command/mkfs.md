@@ -9,6 +9,7 @@ tags:
 - mkfs
 title: 【Linux 命令】mkfs
 updated: '2020-09-25 10:30:00'
+indexing: false
 ---
 
 用于在设备上创建Linux文件系统

@@ -9,6 +9,7 @@ tags:
 - lvcreate
 title: 【Linux 命令】lvcreate
 updated: '2020-09-25 10:20:00'
+indexing: false
 ---
 
 用于创建LVM的逻辑卷

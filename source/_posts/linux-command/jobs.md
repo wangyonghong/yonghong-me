@@ -9,6 +9,7 @@ tags:
 - jobs
 title: 【Linux 命令】jobs
 updated: '2020-09-25 09:55:00'
+indexing: false
 ---
 
 显示作业的状态。

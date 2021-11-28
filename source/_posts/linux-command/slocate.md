@@ -9,6 +9,7 @@ tags:
 - slocate
 title: 【Linux 命令】slocate
 updated: '2020-09-25 11:40:30'
+indexing: false
 ---
 
 命令查找文件或目录

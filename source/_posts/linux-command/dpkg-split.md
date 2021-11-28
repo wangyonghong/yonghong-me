@@ -9,6 +9,7 @@ tags:
 - dpkg-split
 title: 【Linux 命令】dpkg-split
 updated: '2020-09-25 08:57:00'
+indexing: false
 ---
 
 Debian Linux中将大软件包分割成小包

@@ -9,6 +9,7 @@ tags:
 - aptitude
 title: 【Linux 命令】aptitude
 updated: '2020-09-25 08:05:30'
+indexing: false
 ---
 
 Debian Linux系统中软件包管理工具

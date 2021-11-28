@@ -9,6 +9,7 @@ tags:
 - xinit
 title: 【Linux 命令】xinit
 updated: '2020-09-25 12:38:30'
+indexing: false
 ---
 
 是Linux下X-Window系统的初始化程序

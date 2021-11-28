@@ -9,6 +9,7 @@ tags:
 - locate
 title: 【Linux 命令】locate
 updated: '2020-09-25 10:06:30'
+indexing: false
 ---
 
 比 find 好用的文件查找工具

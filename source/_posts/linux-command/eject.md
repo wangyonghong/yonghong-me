@@ -9,6 +9,7 @@ tags:
 - eject
 title: 【Linux 命令】eject
 updated: '2020-09-25 09:04:00'
+indexing: false
 ---
 
 用来退出抽取式设备

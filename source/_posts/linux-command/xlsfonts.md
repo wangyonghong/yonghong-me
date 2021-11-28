@@ -9,6 +9,7 @@ tags:
 - xlsfonts
 title: 【Linux 命令】xlsfonts
 updated: '2020-09-25 12:40:00'
+indexing: false
 ---
 
 列出X Server使用的字体

@@ -9,6 +9,7 @@ tags:
 - lsb_release
 title: 【Linux 命令】lsb_release
 updated: '2020-09-25 10:16:00'
+indexing: false
 ---
 
 显示发行版本信息

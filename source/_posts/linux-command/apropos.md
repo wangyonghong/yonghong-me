@@ -9,6 +9,7 @@ tags:
 - apropos
 title: 【Linux 命令】apropos
 updated: '2020-09-25 08:03:30'
+indexing: false
 ---
 
 在 whatis 数据库中查找字符串

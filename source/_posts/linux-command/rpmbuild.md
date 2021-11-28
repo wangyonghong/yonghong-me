@@ -9,6 +9,7 @@ tags:
 - rpmbuild
 title: 【Linux 命令】rpmbuild
 updated: '2020-09-25 11:23:30'
+indexing: false
 ---
 
 创建RPM的二进制软件包和源码软件包

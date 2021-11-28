@@ -9,6 +9,7 @@ tags:
 - pathchk
 title: 【Linux 命令】pathchk
 updated: '2020-09-25 10:53:00'
+indexing: false
 ---
 
 检查文件中不可移植的部分

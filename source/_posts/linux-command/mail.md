@@ -9,6 +9,7 @@ tags:
 - mail
 title: 【Linux 命令】mail
 updated: '2020-09-25 10:24:00'
+indexing: false
 ---
 
 命令行下发送和接收电子邮件

@@ -9,6 +9,7 @@ tags:
 - lnstat
 title: 【Linux 命令】lnstat
 updated: '2020-09-25 10:05:30'
+indexing: false
 ---
 
 显示Linux系统的网路状态

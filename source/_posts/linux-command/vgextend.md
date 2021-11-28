@@ -9,6 +9,7 @@ tags:
 - vgextend
 title: 【Linux 命令】vgextend
 updated: '2020-09-25 12:26:30'
+indexing: false
 ---
 
 向卷组中添加物理卷

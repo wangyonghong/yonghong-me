@@ -9,6 +9,7 @@ tags:
 - head
 title: 【Linux 命令】head
 updated: '2020-09-25 09:33:30'
+indexing: false
 ---
 
 显示文件的开头部分。

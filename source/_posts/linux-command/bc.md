@@ -9,6 +9,7 @@ tags:
 - bc
 title: 【Linux 命令】bc
 updated: '2020-09-25 08:15:30'
+indexing: false
 ---
 
 算术操作精密运算工具

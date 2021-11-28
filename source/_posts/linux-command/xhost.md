@@ -9,6 +9,7 @@ tags:
 - xhost
 title: 【Linux 命令】xhost
 updated: '2020-09-25 12:38:00'
+indexing: false
 ---
 
 制哪些X客户端能够在X服务器上显示

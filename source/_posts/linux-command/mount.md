@@ -9,6 +9,7 @@ tags:
 - mount
 title: 【Linux 命令】mount
 updated: '2020-09-25 10:34:00'
+indexing: false
 ---
 
 用于挂载Linux系统外的文件

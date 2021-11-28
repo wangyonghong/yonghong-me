@@ -9,6 +9,7 @@ tags:
 - ispell
 title: 【Linux 命令】ispell
 updated: '2020-09-25 09:54:00'
+indexing: false
 ---
 
 检查文件中出现的拼写错误

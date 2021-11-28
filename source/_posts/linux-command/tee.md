@@ -9,6 +9,7 @@ tags:
 - tee
 title: 【Linux 命令】tee
 updated: '2020-09-25 12:01:30'
+indexing: false
 ---
 
 从标准输入读取数据并重定向到标准输出和文件。

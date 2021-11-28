@@ -9,6 +9,7 @@ tags:
 - lpq
 title: 【Linux 命令】lpq
 updated: '2020-09-25 10:13:00'
+indexing: false
 ---
 
 显示打印队列中的打印任务的状态信息

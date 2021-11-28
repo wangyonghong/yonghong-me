@@ -21,6 +21,7 @@ tags:
 - Linux
 date: 2020-09-28 08:00:00
 updated: 2020-09-28 10:07:00
+indexing: false
 ---
 
 Ubuntu，是一款基于 Debian Linux 的以桌面应用为主的操作系统，内容涵盖文字处理、电子邮件、软件开发工具和 Web 服务等，可供用户免费下载、使用和分享。

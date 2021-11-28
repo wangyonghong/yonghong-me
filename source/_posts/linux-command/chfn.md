@@ -9,6 +9,7 @@ tags:
 - chfn
 title: 【Linux 命令】chfn
 updated: '2020-09-25 08:28:30'
+indexing: false
 ---
 
 用来改变finger命令显示的信息

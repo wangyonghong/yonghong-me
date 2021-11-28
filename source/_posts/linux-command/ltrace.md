@@ -9,6 +9,7 @@ tags:
 - ltrace
 title: 【Linux 命令】ltrace
 updated: '2020-09-25 10:19:30'
+indexing: false
 ---
 
 用来跟踪进程调用库函数的情况

@@ -9,6 +9,7 @@ tags:
 - pidof
 title: 【Linux 命令】pidof
 updated: '2020-09-25 10:56:00'
+indexing: false
 ---
 
 查找指定名称的进程的进程号ID号

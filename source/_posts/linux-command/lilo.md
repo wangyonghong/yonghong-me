@@ -9,6 +9,7 @@ tags:
 - lilo
 title: 【Linux 命令】lilo
 updated: '2020-09-25 10:04:30'
+indexing: false
 ---
 
 安装核心载入开机管理程序

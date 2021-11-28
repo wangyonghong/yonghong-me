@@ -9,6 +9,7 @@ tags:
 - su
 title: 【Linux 命令】su
 updated: '2020-09-25 11:52:00'
+indexing: false
 ---
 
 用于切换当前用户身份到其他用户身份

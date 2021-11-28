@@ -9,6 +9,7 @@ tags:
 - gzip
 title: 【Linux 命令】gzip
 updated: '2020-09-25 09:32:00'
+indexing: false
 ---
 
 用来压缩文件

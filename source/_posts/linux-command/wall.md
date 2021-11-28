@@ -9,6 +9,7 @@ tags:
 - wall
 title: 【Linux 命令】wall
 updated: '2020-09-25 12:31:30'
+indexing: false
 ---
 
 向系统当前所有打开的终端上输出信息

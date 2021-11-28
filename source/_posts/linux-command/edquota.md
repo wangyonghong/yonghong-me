@@ -9,6 +9,7 @@ tags:
 - edquota
 title: 【Linux 命令】edquota
 updated: '2020-09-25 09:03:00'
+indexing: false
 ---
 
 用于编辑指定用户或工作组磁盘配额

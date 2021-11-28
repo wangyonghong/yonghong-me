@@ -9,6 +9,7 @@ tags:
 - ethtool
 title: 【Linux 命令】ethtool
 updated: '2020-09-25 09:07:00'
+indexing: false
 ---
 
 显示或修改以太网卡的配置信息

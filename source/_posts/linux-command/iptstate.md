@@ -9,6 +9,7 @@ tags:
 - iptstate
 title: 【Linux 命令】iptstate
 updated: '2020-09-25 09:53:30'
+indexing: false
 ---
 
 显示iptables的工作状态

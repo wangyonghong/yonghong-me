@@ -9,6 +9,7 @@ tags:
 - jed
 title: 【Linux 命令】jed
 updated: '2020-09-25 09:54:30'
+indexing: false
 ---
 
 主要用于编辑代码的编辑器

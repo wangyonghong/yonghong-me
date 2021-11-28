@@ -9,6 +9,7 @@ tags:
 - shutdown
 title: 【Linux 命令】shutdown
 updated: '2020-09-25 11:38:30'
+indexing: false
 ---
 
 用来执行系统关机的命令

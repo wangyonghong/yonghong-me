@@ -9,6 +9,7 @@ tags:
 - mysqlshow
 title: 【Linux 命令】mysqlshow
 updated: '2020-09-25 10:38:00'
+indexing: false
 ---
 
 显示MySQL中数据库相关信息

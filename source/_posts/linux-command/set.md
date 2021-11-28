@@ -9,6 +9,7 @@ tags:
 - set
 title: 【Linux 命令】set
 updated: '2020-09-25 11:32:30'
+indexing: false
 ---
 
 显示或设置shell特性及shell变量

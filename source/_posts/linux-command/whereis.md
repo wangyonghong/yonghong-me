@@ -9,6 +9,7 @@ tags:
 - whereis
 title: 【Linux 命令】whereis
 updated: '2020-09-25 12:34:00'
+indexing: false
 ---
 
 查找二进制程序、代码等相关文件路径

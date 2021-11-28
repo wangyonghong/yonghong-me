@@ -19,6 +19,7 @@ tags:
 - Linux
 date: 2020-09-28 08:00:00
 updated: 2020-09-28 08:04:00
+indexing: false
 ---
 
 Alpine Linux是一个由社区开发的Linux操作系统，该操作系统以安全为理念，面向x86路由器、防火墙、虚拟专用网、IP电话盒及服务器而设计。

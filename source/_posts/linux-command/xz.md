@@ -9,6 +9,7 @@ tags:
 - xz
 title: 【Linux 命令】xz
 updated: '2020-09-25 12:41:00'
+indexing: false
 ---
 
 POSIX 平台开发具有高压缩率的工具

@@ -9,6 +9,7 @@ tags:
 - lp
 title: 【Linux 命令】lp
 updated: '2020-09-25 10:11:30'
+indexing: false
 ---
 
 打印文件或修改排队的打印任务

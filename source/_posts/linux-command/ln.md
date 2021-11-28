@@ -9,6 +9,7 @@ tags:
 - ln
 title: 【Linux 命令】ln
 updated: '2020-09-25 10:05:00'
+indexing: false
 ---
 
 用来为文件创建链接

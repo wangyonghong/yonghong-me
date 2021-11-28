@@ -9,6 +9,7 @@ tags:
 - stty
 title: 【Linux 命令】stty
 updated: '2020-09-25 11:51:30'
+indexing: false
 ---
 
 修改终端命令行的相关设置

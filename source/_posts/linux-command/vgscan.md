@@ -9,6 +9,7 @@ tags:
 - vgscan
 title: 【Linux 命令】vgscan
 updated: '2020-09-25 12:28:30'
+indexing: false
 ---
 
 扫描并显示系统中的卷组

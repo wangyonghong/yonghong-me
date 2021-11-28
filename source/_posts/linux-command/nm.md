@@ -9,6 +9,7 @@ tags:
 - nm
 title: 【Linux 命令】nm
 updated: '2020-09-25 10:44:30'
+indexing: false
 ---
 
 显示二进制目标文件的符号表

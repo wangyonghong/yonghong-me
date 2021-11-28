@@ -9,6 +9,7 @@ tags:
 - repquota
 title: 【Linux 命令】repquota
 updated: '2020-09-25 11:16:30'
+indexing: false
 ---
 
 报表的格式输出磁盘空间限制的状态

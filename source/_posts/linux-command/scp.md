@@ -9,6 +9,7 @@ tags:
 - scp
 title: 【Linux 命令】scp
 updated: '2020-09-25 11:28:00'
+indexing: false
 ---
 
 加密的方式在本地主机和远程主机之间复制文件

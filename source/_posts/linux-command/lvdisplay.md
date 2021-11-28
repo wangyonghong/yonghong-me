@@ -9,6 +9,7 @@ tags:
 - lvdisplay
 title: 【Linux 命令】lvdisplay
 updated: '2020-09-25 10:20:30'
+indexing: false
 ---
 
 显示逻辑卷属性

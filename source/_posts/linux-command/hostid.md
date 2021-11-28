@@ -9,6 +9,7 @@ tags:
 - hostid
 title: 【Linux 命令】hostid
 updated: '2020-09-25 09:36:00'
+indexing: false
 ---
 
 显示当前主机的十六进制数字标识。

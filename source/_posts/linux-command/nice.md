@@ -9,6 +9,7 @@ tags:
 - nice
 title: 【Linux 命令】nice
 updated: '2020-09-25 10:43:00'
+indexing: false
 ---
 
 改变程序执行的优先权等级

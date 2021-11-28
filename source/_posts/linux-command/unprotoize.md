@@ -9,6 +9,7 @@ tags:
 - unprotoize
 title: 【Linux 命令】unprotoize
 updated: '2020-09-25 12:17:00'
+indexing: false
 ---
 
 删除C语言源代码文件中的函数原型

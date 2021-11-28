@@ -9,6 +9,7 @@ tags:
 - grep
 title: 【Linux 命令】grep
 updated: '2020-09-25 09:26:30'
+indexing: false
 ---
 
 强大的文本搜索工具

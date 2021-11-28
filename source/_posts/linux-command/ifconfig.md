@@ -9,6 +9,7 @@ tags:
 - ifconfig
 title: 【Linux 命令】ifconfig
 updated: '2020-09-25 09:41:00'
+indexing: false
 ---
 
 配置和显示Linux系统网卡的网络参数

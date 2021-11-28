@@ -9,6 +9,7 @@ tags:
 - mesg
 title: 【Linux 命令】mesg
 updated: '2020-09-25 10:27:30'
+indexing: false
 ---
 
 设置当前终端的写权限

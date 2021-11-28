@@ -19,6 +19,7 @@ tags:
 - Linux
 date: 2020-09-28 08:00:00
 updated: 2020-09-28 08:44:00
+indexing: false
 ---
 
 CentOS Linux 是一个由社群支持的发行版本，它是由 Red Hat 或 CentOS git 公开的 Red Hat 企业级 Linux（RHEL）源代码所衍生出来的。因此，CentOS Linux 以兼容 RHEL 的功能为目标。CentOS 计划对组件的修改主要是去除上游提供者的商标及美工图。CentOS Linux 是免费的及可自由派发的。每个 CentOS 版本均获维护直至相等的 RHEL 版本支持被中止。新的 CentOS 版本会随著新版 RHEL 的出现而被重建 —— 次要版本约 6-12 个月发行一次，主要版本数年才发行一次。重建所需的时间由次要版本的数星期到主要版本的数月不等。这样做能创建一个安全、低维护、稳定、高预测性、高重复性的 Linux 环境。

@@ -9,6 +9,7 @@ tags:
 - env
 title: 【Linux 命令】env
 updated: '2020-09-25 09:06:30'
+indexing: false
 ---
 
 显示系统中已存在的环境变量

@@ -9,6 +9,7 @@ tags:
 - du
 title: 【Linux 命令】du
 updated: '2020-09-25 09:00:00'
+indexing: false
 ---
 
 显示每个文件和目录的磁盘使用空间

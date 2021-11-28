@@ -9,6 +9,7 @@ tags:
 - seinfo
 title: 【Linux 命令】seinfo
 updated: '2020-09-25 11:29:30'
+indexing: false
 ---
 
 查询SELinux的策略提供多少相关规则

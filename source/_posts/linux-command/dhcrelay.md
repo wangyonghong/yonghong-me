@@ -9,6 +9,7 @@ tags:
 - dhcrelay
 title: 【Linux 命令】dhcrelay
 updated: '2020-09-25 08:47:00'
+indexing: false
 ---
 
 使用dhcrelay命令可以提供中继DHCP和BOOTP请求

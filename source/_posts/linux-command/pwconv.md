@@ -9,6 +9,7 @@ tags:
 - pwconv
 title: 【Linux 命令】pwconv
 updated: '2020-09-25 11:08:30'
+indexing: false
 ---
 
 用来开启用户的投影密码

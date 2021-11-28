@@ -9,6 +9,7 @@ tags:
 - cancel
 title: 【Linux 命令】cancel
 updated: '2020-09-25 08:25:00'
+indexing: false
 ---
 
 取消已存在的打印任务

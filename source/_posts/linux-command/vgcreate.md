@@ -9,6 +9,7 @@ tags:
 - vgcreate
 title: 【Linux 命令】vgcreate
 updated: '2020-09-25 12:25:30'
+indexing: false
 ---
 
 用于创建LVM卷组
