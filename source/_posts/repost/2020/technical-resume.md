@@ -1,6 +1,5 @@
 ---
 title: 如何写一份有效的技术简历？
-permalink: /technical-resume/
 tags:
 - 简历
 - 技术简历
@@ -8,7 +7,7 @@ tags:
 - 写作规范
 - 格式规范
 categories:
-- 文案风格
+- 转载
 date: 2020-10-01 09:00:00
 updated: 2020-10-01 09:00:00
 ---

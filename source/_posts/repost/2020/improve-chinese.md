@@ -1,6 +1,5 @@
 ---
 title: 余光中：怎样改进英式中文？- 论中文的常态与变态
-permalink: /improve-chinese/
 tags:
 - 英式中文
 - 文案风格
@@ -8,7 +7,7 @@ tags:
 - 格式规范
 - 余光中
 categories:
-- 文案风格
+- 转载
 date: 2020-10-01 08:00:00
 updated: 2020-10-01 08:00:00
 ---

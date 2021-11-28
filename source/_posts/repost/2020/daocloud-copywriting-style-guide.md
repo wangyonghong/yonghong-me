@@ -1,13 +1,12 @@
 ---
 title: DaoCloud 写作规范和格式规范
-permalink: /daocloud-copywriting-style-guide/
 tags:
 - DaoCloud
 - 文案风格
 - 写作规范
 - 格式规范
 categories:
-- 文案风格
+- 转载
 date: 2020-09-30 21:00:00
 updated: 2020-09-30 21:00:00
 ---

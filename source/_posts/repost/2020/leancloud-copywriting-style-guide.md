@@ -1,6 +1,5 @@
 ---
 title: LeanCloud 文案风格指南
-permalink: /leancloud-copywriting-style-guide/
 tags:
 - LeanCloud
 - 文案风格
