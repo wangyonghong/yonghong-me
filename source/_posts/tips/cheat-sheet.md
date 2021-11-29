@@ -82,6 +82,11 @@ updated: 2021-11-24 22:24:00
     ```bash
     git clone --filter=blob:none --no-checkout
     ```
+- git 彻底删除 .gitignore 中文件
+    ```bash
+    git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch file.txt' --prune-empty --tag-name-filter cat -- --all
+    git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch file_dir' --prune-empty --tag-name-filter cat -- --all
+    ```
 
 ## Android 版本号
 
