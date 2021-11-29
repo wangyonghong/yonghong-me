@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <meta name="google-site-verification" content="OnjTLbjHCNhb2DmVFSKHIiIT7K6UOcNW4INMAr5XVrg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
+<meta name="description" content="原文链接：Spring事务的传播特性  Spring 事务一个被讹传很广说法是：一个事务方法不应该调用另一个事务方法，否则将产生两个事务。结果造成开发人员在设计事务方法时束手束脚，生怕一不小心就踩到地雷。 其实这种是不认识 Spring 事务传播机制而造成的误解，Spring 对事务控制的支持统一在 TransactionDefinition 接口中描述，该接口有以下几个重要的接口方法：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring事务的传播特性">
+<meta property="og:url" content="http://yonghong.tech/repost/2020/spring-transaction/index.html">
+<meta property="og:site_name" content="Honng">
+<meta property="og:description" content="原文链接：Spring事务的传播特性  Spring 事务一个被讹传很广说法是：一个事务方法不应该调用另一个事务方法，否则将产生两个事务。结果造成开发人员在设计事务方法时束手束脚，生怕一不小心就踩到地雷。 其实这种是不认识 Spring 事务传播机制而造成的误解，Spring 对事务控制的支持统一在 TransactionDefinition 接口中描述，该接口有以下几个重要的接口方法：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230001-dfRHHu.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230003-679LqZ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-2018123001-vUXmD7.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-2018123002-68a3Ks.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230004-QunABz.png">
+<meta property="og:image" content="https://github.com/love-somnus/interview/wiki/2018123001.png">
+<meta property="og:image" content="https://github.com/love-somnus/interview/wiki/2018123002.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230005-q9rkPU.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230006-X277O5.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230007-PgZlzQ.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230008-wZZUsp.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230009-SZYqIs.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230010-XCj0iS.png">
+<meta property="og:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230011-Sv6pY9.png">
+<meta property="article:published_time" content="2020-06-10T14:24:00.000Z">
+<meta property="article:modified_time" content="2020-06-10T14:24:00.000Z">
+<meta property="article:author" content="Honng">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230001-dfRHHu.png">
+
+
+<link rel="canonical" href="http://yonghong.tech/repost/2020/spring-transaction/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yonghong.tech/repost/2020/spring-transaction/","path":"repost/2020/spring-transaction/","title":"Spring事务的传播特性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spring事务的传播特性 | Honng</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Honng" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Honng</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungary. Stay Foolish.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Honng"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Honng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangyonghong"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnlvbmdob25nd2FuZ0AxNjMuY29t" title="E-Mail → mailto:yonghongwang@163.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXR0ZXIuaW0vd2FuZ3lvbmdob25n" title="Gitter → https:&#x2F;&#x2F;gitter.im&#x2F;wangyonghong"><i class="fab fa-gitter fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZQ==" title="yonghong-me" aria-label="yonghong-me"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/repost/2020/spring-transaction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring事务的传播特性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-10 22:24:00 22:24:00" itemprop="dateCreated datePublished" datetime="2020-06-10T22:24:00+08:00">2020-06-10 22:24:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AC%E8%BD%BD/" itemprop="url" rel="index"><span itemprop="name">转载</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+<div class="post-meta">
+<span id="jinrishici-sentence">正在加载今日诗词....</span>
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8" defer></script>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>原文链接：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xvdmUtc29tbnVzL1NwcmluZy93aWtpL1NwcmluZyVFNCVCQSU4QiVFNSU4QSVBMSVFNyU5QSU4NCVFNCVCQyVBMCVFNiU5MiVBRCVFNyU4OSVCOSVFNiU4MCVBNw==">Spring事务的传播特性<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>Spring 事务一个被讹传很广说法是：一个事务方法不应该调用另一个事务方法，否则将产生两个事务。结果造成开发人员在设计事务方法时束手束脚，生怕一不小心就踩到地雷。</p>
+<p>其实这种是不认识 Spring 事务传播机制而造成的误解，Spring 对事务控制的支持统一在 <code>TransactionDefinition</code> 接口中描述，该接口有以下几个重要的接口方法：</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230001-dfRHHu.png" alt="img"></p>
+<span id="more"></span>
+
+<p>很明显，除了事务的传播行为外，事务的其它特性 Spring 是借助底层资源的功能来完成的，Spring 无非只充当个代理的角色。但是事务的传播行为却是 Spring 凭借自身的框架提供的功能，是 Spring 提供给开发者最珍贵的礼物，讹传的说法玷污了 Spring 事务框架最美丽的光环。</p>
+<p>所谓事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。Spring 支持 7 种事务传播行为（Transaction Propagation Behavior）：</p>
+<table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PROPAGATION_REQUIRED</strong></td>
+<td>如果没有，就开启一个事务；如果有，就加入当前事务（方法B看到自己已经运行在 方法A的事务内部，就不再起新的事务，直接加入方法A）</td>
+</tr>
+<tr>
+<td><strong>RROPAGATION_REQUIRES_NEW</strong></td>
+<td>如果没有，就开启一个事务；如果有，就将当前事务挂起。（方法A所在的事务就会挂起，方法B会起一个新的事务，等待方法B的事务完成以后，方法A才继续执行）</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_NESTED</strong></td>
+<td>如果没有，就开启一个事务；如果有，就在当前事务中嵌套其他事务</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_SUPPORTS</strong></td>
+<td>如果没有，就以非事务方式执行；如果有，就加入当前事务（方法B看到自己已经运行在 方法A的事务内部，就不再起新的事务，直接加入方法A）</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_NOT_SUPPORTED</strong></td>
+<td>如果没有，就以非事务方式执行；如果有，就将当前事务挂起，（方法A所在的事务就会挂起，而方法B以非事务的状态运行完，再继续方法A的事务）</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_NEVER</strong></td>
+<td>如果没有，就以非事务方式执行；如果有，就抛出异常。</td>
+</tr>
+<tr>
+<td><strong>PROPAGATION_MANDATORY</strong></td>
+<td>如果没有，就抛出异常；如果有，就使用当前事务</td>
+</tr>
+</tbody></table>
+<hr>
+<p>其中<strong>前4种</strong>是开发中用到概率比较大的，建议熟记；<strong>后面3种</strong>不常用，了解就行。</p>
+<p>我们经常会提到，方法A传播到方法B，那到底是A调用B，还是B调用A，这个问题我一开始学Spring的时候犯浑过，搞反了，导致久久理解不了。其实只要仔细斟酌字面意思就不会像我那样犯傻了。</p>
+<p>A传播到B，显而易见进入A方法执行半途中，再次进入B方法，这才叫做传播到方法B中。</p>
+<p>还有一点初学者不要搞错的是，这里的方法A和方法B理论上不应该在一个Service中，而是在不同的Service中，这里面有个坑我们会在后面介绍。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230003-679LqZ.png" alt="img"></p>
+<p>我们的例子使用的是<code>@Transactional</code>注解，默认使用REQUIRED传播行为。</p>
+<p>假设事务从方法 A 传播到方法 B。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-2018123001-vUXmD7.png" alt="img"></p>
+<p>我们现在面对方法B，其中B会抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService01 logService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService01</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A和方法B都不会保存数据成功 </span></span><br></pre></td></tr></table></figure>
+
+<p>我们现在面对方法B，其中A会抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService02 logService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService02</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A和方法B都不会保存数据成功 </span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-2018123002-68a3Ks.png" alt="img"></p>
+<p>我们现在面对方法B，其中B会抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService03</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService03 logService;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService03</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A中的数据保存成功，方法B中的数据保存失败</span></span><br></pre></td></tr></table></figure>
+
+<p>我们现在面对方法B，其中A会抛出异常。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService04</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService04 logService;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService04</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A中的数据保存成功，方法B中的数据保存成功</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如果没有，就开启一个事务</strong>(方法B运行的时候发现自己没有在事务中，它就会为自己分配一个事务)；<strong>如果有，就加入当前事务</strong>。（方法B看到自己已经运行在 方法A的事务内部，就不再起新的事务，直接加入方法A）。这就是 **<code>PROPAGATION_REQUIRED</code>**，它也是 Spring 提供的默认事务传播行为，适合绝大多数情况。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230004-QunABz.png" alt="img"></p>
+<p>假设事务从方法 A 传播到方法 B。</p>
+<p><img src="https://github.com/love-somnus/interview/wiki/2018123001.png" alt="img"></p>
+<p><strong>我们现在面对方法B，其中B会抛出异常。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService11</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService11 logService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService11</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional(propagation=Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A中的数据保存失败，方法B中的数据保存失败</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService11_</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService11_ logService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional(noRollbackFor=ArithmeticException.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService11_</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional(propagation=Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A中的数据保存成功，方法B中的数据保存失败</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>我们现在面对方法B，其中A会抛出异常</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService12</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogService12 logService;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        userDao.insert(<span class="keyword">new</span> User(<span class="string">&quot;admin&quot;</span>,<span class="string">&quot;123456&quot;</span>));</span><br><span class="line">        logService.B();</span><br><span class="line">        System.out.println(<span class="number">1</span>/<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogService12</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogDao logDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional(propagation=Propagation.REQUIRES_NEW)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">B</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        logDao.insert(<span class="keyword">new</span> Log(<span class="string">&quot;abcdefghijklmn&quot;</span>,<span class="string">&quot;192.168.1.1&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 方法A中的数据保存失败，方法B中的数据保存成功</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/love-somnus/interview/wiki/2018123002.png" alt="img"></p>
+<p>例子可以参考<strong>PROPAGATION_REQUIRED</strong>，它们都是如果A没有事务，B就为自己分配一个事务。</p>
+<p><strong>如果没有，就开启一个事务</strong>(方法B运行的时候发现自己没有在事务中，它就会为自己分配一个事务)；<strong>如果有，就将当前事务挂起</strong>。（方法A所在的事务就会挂起，方法B会起一个新的事务，等待方法B的事务完成以后，方法A才继续执行）。这就是 <code>RROPAGATION_REQUIRES_NEW</code>，意思就是创建了一个新事务，它和原来的事务没有任何关系了。</p>
+<p><code>RROPAGATION_REQUIRES_NEW</code>与 <strong><code>PROPAGATION_REQUIRED</code></strong> 的事务区别在于事务的回滚程度了。因为 方法B是新起一个事务，那么就是存在两个不同的事务。</p>
+<ol>
+<li>如果方法B已经提交，那么 方法A失败回滚，方法B是不会回滚的。</li>
+<li>如果方法B失败回滚，如果它抛出的异常被方法A捕获，方法A的事务仍然可能提交（主要看方法B抛出的异常是不是方法A会回滚的异常）</li>
+</ol>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230005-q9rkPU.png" alt="img"></p>
+<p><strong>如果没有，就开启一个事务(方法B运行的时候发现自己没有在事务中，它就会为自己分配一个事务)；如果有，就在当前事务中嵌套其他事务。</strong>这就是PROPAGATION_NESTED，也就是传说中的“嵌套事务”了，所嵌套的子事务与主事务之间是有关联的（当主事务提交或回滚，子事务也会提交或回滚）。方法A所在的事务就会挂起，方法B会起一个新的子事务并设置savepoint，等待方法B的事务完成以后，方法A才继续执行。因为方法B是外部事务的子事务，那么</p>
+<ol>
+<li>如果方法B已经提交，那么方法A失败回滚，方法B也将回滚。（REQUIRES_NEW中此种情况方法B是不会回滚的，因为方法B是独立事务，提交就是提交了）</li>
+<li>如果方法B失败回滚，如果它抛出的异常被方法A捕获，方法A的事务仍然可能提交（主要看方法B抛出的异常是不是方法A会回滚的异常）</li>
+</ol>
+<p>理解<strong>NESTED</strong>的关键是<strong>savepoint</strong>。他与<strong>REQUIRES_NEW</strong>的区别是： <strong>REQUIRES_NEW</strong>完全是一个新的事务,它与外部事务相互独立； 而 <strong>NESTED</strong> 则是外部事务的子事务, 如果外部事务commit, 嵌套事务也会被<strong>commit</strong>, 这个规则同样适用于<strong>roll back</strong></p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230006-X277O5.png" alt="img"></p>
+<p><strong>如果没有，就以非事务方式执行</strong>（如果发现方法A没有开启事务，则方法B也不开启事务）；<strong>如果有，就加入当前事务。</strong>（方法B看到自己已经运行在方法A的事务内部，就不再起新的事务，直接加入方法A）。这就是 <strong>PROPAGATION_SUPPORTS</strong>，这种方式非常随意，没有就没有，有就有，有点无所谓的态度，反正我是支持你的。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230007-PgZlzQ.png" alt="img"></p>
+<p><strong>如果没有，就以非事务方式执行</strong>（如果发现方法A没有开启事务，则方法B也不开启事务）；<strong>如果有，就将当前事务挂起</strong>。（方法A的事务挂起，而方法B非事务的状态运行完，再继续方法A的事务。）这就是 <strong>PROPAGATION_NOT_SUPPORTED</strong>，这种方式非常强硬，没有就没有，有我也不支持你，把你挂起来，不鸟你。</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230008-wZZUsp.png" alt="img"></p>
+<p><strong>如果没有，就以非事务方式执行</strong>（如果发现方法A没有开启事务，则方法B也不开启事务）；<strong>如果有，就抛出异常</strong>（如果发现方法A有开启事务，则方法B直接抛出异常）。这就是 <strong>PROPAGATION_NEVER</strong>，这种方式更猛，没有就没有，有了反而报错，确实够牛的，它说：我从不支持事务！</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230009-SZYqIs.png" alt="img"></p>
+<p>如果没有，就抛出异常；如果有，就使用当前事务。这就是 **<code>PROPAGATION_MANDATORY</code>**，这种方式可以说是牛逼中的牛逼了，没有事务直接就报错，确实够狠的，它说：我必须要有事务！</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230010-XCj0iS.png" alt="img"></p>
+<p>需要注意的是 <strong><code>PROPAGATION_NESTED</code>**，不要被它的名字所欺骗，Nested（嵌套），所以凡是在类似方法 A 调用方法 B 的时候，在方法 B 上使用了这种事务传播行为，如果您真的那样做了，那您就错了。因为您错误地以为 **<code>PROPAGATION_NESTED</code></strong> 就是为方法嵌套调用而准备的，其实默认的 <strong><code>PROPAGATION_REQUIRED</code></strong> 就可以帮助您，做您想要做的事情了。</p>
+<p>Spring 给我们带来了事务传播行为，这确实是一个非常强大而又实用的功能。除此以外，也提供了一些小的附加功能，比如：</p>
+<ol>
+<li><strong>事务超时（Transaction Timeout）</strong>：为了解决事务时间太长，消耗太多的资源，所以故意给事务设置一个最大时常，如果超过了，就回滚事务。</li>
+<li><strong>只读事务（Readonly Transaction）</strong>：为了忽略那些不需要事务的方法，比如读取数据，这样可以有效地提高一些性能。 最后，推荐大家使用 Spring 的注解式事务配置，而放弃 XML 式事务配置。因为注解实在是太优雅了，当然这一切都取决于您自身的情况了。</li>
+</ol>
+<p>在 Spring 配置文件中使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...  </span><br><span class="line">&lt;tx:annotation-driven&#x2F;&gt;  </span><br><span class="line">... </span><br></pre></td></tr></table></figure>
+
+<p>在需要事务的方法上使用：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="built_in">void</span> <span class="function"><span class="title">xxx</span>(<span class="params"></span>)</span> &#123;  </span><br><span class="line">    ...  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>可在 <code>@Transactional</code> 注解中设置：事务隔离级别、事务传播行为、事务超时时间、是否只读事务。 简直是太完美了，太优雅了！</p>
+<p>Spring默认情况下会对运行期例外(RunTimeException)，即uncheck异常，进行事务回滚。 如果遇到checked异常就不回滚。</p>
+<p>如何改变默认规则：</p>
+<ul>
+<li>让checked例外也回滚：在整个方法前加上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(<span class="params">rollbackFor=Exception.<span class="keyword">class</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>让unchecked例外不回滚：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional(<span class="params">notRollbackFor=RunTimeException.<span class="keyword">class</span></span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，有必要对本文的内容做一个总结，免费赠送一张高清无码思维导图：</p>
+<p><img src="https://up-img.yonghong.tech/pic/2020/06/10-11-19-20181230011-Sv6pY9.png" alt="img"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Honng 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="Honng 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Honng
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://yonghong.tech/repost/2020/spring-transaction/" title="Spring事务的传播特性">http://yonghong.tech/repost/2020/spring-transaction/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/recommend/2020/004/" rel="prev" title="每周推荐-2020-06-07">
+                  <i class="fa fa-chevron-left"></i> 每周推荐-2020-06-07
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/repost/2020/inf-bom-mybatis/" rel="next" title="MyBatis版本升级引发的线上告警回顾及原理分析">
+                  MyBatis版本升级引发的线上告警回顾及原理分析 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      <div class="tabs tabs-comment">
+        <ul class="nav-tabs">
+            <li class="tab"><a href="#comment-disqus">disqus</a></li>
+            <li class="tab"><a href="#comment-gitalk">gitalk</a></li>
+            <li class="tab"><a href="#comment-livere">livere</a></li>
+            <li class="tab"><a href="#comment-utterances">utterances</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane disqus" id="comment-disqus">
+              
+  <div class="comments" id="disqus_thread">
+    <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+  </div>
+  
+            </div>
+            <div class="tab-pane gitalk" id="comment-gitalk">
+              <div class="comments gitalk-container"></div>
+            </div>
+            <div class="tab-pane livere" id="comment-livere">
+              <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC81MTYxMi8yODA5Mw=="></div>
+            </div>
+            <div class="tab-pane utterances" id="comment-utterances">
+              <div class="comments utterances-container"></div>
+            </div>
+        </div>
+      </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yonghong</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1.4m</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">21:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><div>
+由 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & <a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT.Gemini</a> & <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" style="border: none;"><img src="/images/upyun.png" alt="又拍云" width="80px" style="display: inline; vertical-align: middle;"/></a>强力驱动
+</div>
+<div id="beian">
+  <a href="https://beian.miit.gov.cn" rel="noopener external nofollow noreferrer" target="_blank" class="exturl" title="">京 ICP 备 18012168 号</a>
+</div>
+<script>
+  var domain = document.domain;
+  if (domain == 'localhost') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号';
+  }
+  if (domain == '0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'www.0xl2oot.cn') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-1';
+  }
+  if (domain == 'yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+  if (domain == 'www.yonghong.tech') {
+    document.getElementById('beian').getElementsByTagName('a')[0].innerText = '京ICP备 18012168号-5';
+  }
+</script>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js" integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/next-boot.min.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/search/local-search.min.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.min.js","integrity":"sha256-blHXaX2RMvNwEOnrYOl/6/RKqNi97Ig3o6Ae3bhXPvM="}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/tags/mermaid.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/fancybox.min.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/math/mathjax.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.2.0/dist/quicklink.umd.js" integrity="sha256-4kQf9z5ntdQrzsBC3YSHnEz02Z9C1UeW/E9OgnvlzSY=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://yonghong.tech/repost/2020/spring-transaction/"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/quicklink.min.js"></script>
+<script class="next-config" data-name="disqus" type="application/json">{"enable":true,"shortname":"yonghong-tech","count":false,"i18n":{"disqus":"disqus"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/disqus.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"wangyonghong","repo":"gitalk","client_id":"0e42a09d2799751b9ba7","client_secret":"3e04e5109cf9e3cc34d68deb668842c9c5139846","admin_user":"wangyonghong","distraction_free_mode":true,"proxy":"https://codeyq.com/gitalk-proxy/login/oauth/access_token","language":null,"js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"},"path_md5":"12e34ab05ec0d792ae428774202e4ed0"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/livere.min.js"></script>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"wangyonghong/gitalk","issue_term":"pathname","theme":"github-light"}</script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/third-party/comments/utterances.min.js"></script>
+<script src="//unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+const { range } = rxjs;
+const { map, filter, debounceTime } = rxjs.operators;
+
+const shiftPress$ = rxjs.fromEvent(document, 'keydown')
+  .pipe(
+    filter(({ key }) => key === 'Shift')
+  )
+  
+
+const shiftDoublePress$ = shiftPress$.pipe(debounceTime(600))
+
+shiftDoublePress$.subscribe(count => {
+  console.log('双击shift，激活搜索框')
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  })
+  const searchDiv = document.getElementsByClassName('popup-trigger')[0];
+  searchDiv.dispatchEvent(event)
+})
+</script>
+
+</body>
+</html>
