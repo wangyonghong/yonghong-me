@@ -9,7 +9,6 @@ tags:
 - clock
 title: 【Linux 命令】clock
 updated: '2020-09-25 08:33:30'
-indexing: false
 ---
 
 用于调整 RTC 时间
@@ -57,4 +56,4 @@ clock -utc #显示UTC时间
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

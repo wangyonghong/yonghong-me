@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iptables
 title: 【Linux 命令】iptables
-updated: '2020-09-25 09:52:30'
-indexing: false
+updated: '2020-09-25 09:53:00'
 ---
 
 Linux上常用的防火墙软件
@@ -165,6 +164,7 @@ iptables还支持自己定义链。但是自己定义的链，必须是跟某种
 - **DNAT** ：目标地址转换。
 - **MASQUERADE** ：IP伪装（NAT），用于ADSL。
 - **LOG** ：日志记录。
+- **SEMARK** : 添加SEMARK标记以供网域内强制访问控制（MAC）
 
 ```shell
                              ┏╍╍╍╍╍╍╍╍╍╍╍╍╍╍╍┓
@@ -401,6 +401,12 @@ iptables -I INPUT -j DROP -p tcp -s 0.0.0.0/0 -m string --algo kmp --string "cmd
 iptables -A INPUT -p tcp --syn -m limit --limit 5/second -j ACCEPT
 ```
 
+#### 添加SECMARK记录
+```shell
+iptables -t mangle -A INPUT -p tcp --src 192.168.1.2 --dport 443 -j SECMARK --selctx system_u:object_r:myauth_packet_t
+# 向从 192.168.1.2:443 以TCP方式发出到本机的包添加MAC安全上下文 system_u:object_r:myauth_packet_t
+```
+
 ## 更多实例
 > 用iptables搭建一套强大的安全防护盾 http://www.imooc.com/learn/389
 
@@ -523,4 +529,4 @@ iptables -I INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 100 -j 
 iptables -I INPUT -m limit --limit 3/hour --limit-burst 10 -j ACCEPT # limit模块; --limit-burst 默认为5
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -9,7 +9,6 @@ tags:
 - bc
 title: 【Linux 命令】bc
 updated: '2020-09-25 08:15:30'
-indexing: false
 ---
 
 算术操作精密运算工具
@@ -87,4 +86,3 @@ echo "sqrt(100)" | bc
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

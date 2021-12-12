@@ -9,7 +9,6 @@ tags:
 - blockdev
 title: 【Linux 命令】blockdev
 updated: '2020-09-25 08:17:30'
-indexing: false
 ---
 
 从命令行调用区块设备控制程序
@@ -63,4 +62,3 @@ blockdev --setrw /dev/hda4
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ulimit
 title: 【Linux 命令】ulimit
-updated: '2020-09-25 12:12:00'
-indexing: false
+updated: '2020-09-25 12:14:00'
 ---
 
 控制shell程序的资源
@@ -74,4 +73,4 @@ file locks                      (-x) unlimited   #所能锁住的文件的最大
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

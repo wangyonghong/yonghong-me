@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lp
 title: 【Linux 命令】lp
-updated: '2020-09-25 10:11:30'
-indexing: false
+updated: '2020-09-25 10:12:30'
 ---
 
 打印文件或修改排队的打印任务
@@ -82,4 +81,3 @@ lp -s myfile
 *   >0：没有输出设备可用，或者出现一个错误。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

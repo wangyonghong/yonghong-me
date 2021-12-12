@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sum
 title: 【Linux 命令】sum
-updated: '2020-09-25 11:53:00'
-indexing: false
+updated: '2020-09-25 11:55:00'
 ---
 
 计算文件的校验码和显示块数
@@ -45,4 +44,3 @@ sum(选项)(参数)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

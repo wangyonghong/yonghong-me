@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iptables-save
 title: 【Linux 命令】iptables-save
-updated: '2020-09-25 09:52:00'
-indexing: false
+updated: '2020-09-25 09:52:30'
 ---
 
 备份iptables的表配置
@@ -51,4 +50,3 @@ COMMIT
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

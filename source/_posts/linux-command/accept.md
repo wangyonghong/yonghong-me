@@ -9,7 +9,6 @@ tags:
 - accept
 title: 【Linux 命令】accept
 updated: '2020-09-25 08:01:00'
-indexing: false
 ---
 
 指示打印系统接受发往指定目标打印机的打印任务
@@ -37,4 +36,3 @@ accept(选项)(参数)
 目标：指定目标打印机。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

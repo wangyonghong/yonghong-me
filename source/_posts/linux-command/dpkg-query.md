@@ -9,7 +9,6 @@ tags:
 - dpkg-query
 title: 【Linux 命令】dpkg-query
 updated: '2020-09-25 08:56:00'
-indexing: false
 ---
 
 Debian Linux中软件包的查询工具
@@ -79,4 +78,3 @@ dpkg-query -W -f='${Status} ${Version}\n' apache-perl
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

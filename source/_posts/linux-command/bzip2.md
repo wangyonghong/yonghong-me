@@ -9,7 +9,6 @@ tags:
 - bzip2
 title: 【Linux 命令】bzip2
 updated: '2020-09-25 08:22:30'
-indexing: false
 ---
 
 将文件压缩成bz2格式
@@ -194,4 +193,4 @@ bzip2 -- -myfilename
 这里主要是为了防止文件名中`-`产生以为是选项的歧义。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

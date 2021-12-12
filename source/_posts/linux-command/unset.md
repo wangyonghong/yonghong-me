@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unset
 title: 【Linux 命令】unset
-updated: '2020-09-25 12:18:00'
-indexing: false
+updated: '2020-09-25 12:20:00'
 ---
 
 删除指定的shell变量或函数。
@@ -107,4 +106,4 @@ declare -p a
 1. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

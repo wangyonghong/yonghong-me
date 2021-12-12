@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pwck
 title: 【Linux 命令】pwck
-updated: '2020-09-25 11:08:00'
-indexing: false
+updated: '2020-09-25 11:09:00'
 ---
 
 用来验证系统认证文件内容和格式的完整性
@@ -61,4 +60,3 @@ pwck：无改变
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

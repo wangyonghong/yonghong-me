@@ -9,7 +9,6 @@ tags:
 - dhcrelay
 title: 【Linux 命令】dhcrelay
 updated: '2020-09-25 08:47:00'
-indexing: false
 ---
 
 使用dhcrelay命令可以提供中继DHCP和BOOTP请求
@@ -53,4 +52,4 @@ Sending on  LPF/eth0/00:0c:27:fc:25:ec
 Sending on  Socket/fallback
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

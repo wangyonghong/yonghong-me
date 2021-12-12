@@ -9,7 +9,6 @@ tags:
 - df
 title: 【Linux 命令】df
 updated: '2020-09-25 08:45:30'
-indexing: false
 ---
 
 显示磁盘的相关信息
@@ -103,4 +102,4 @@ df public
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

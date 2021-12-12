@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pstack
 title: 【Linux 命令】pstack
-updated: '2020-09-25 11:02:30'
-indexing: false
+updated: '2020-09-25 11:03:30'
 ---
 
 显示每个进程的栈跟踪
@@ -109,4 +108,3 @@ Thread 1 (Thread 182894129792 (LWP 4551)):
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

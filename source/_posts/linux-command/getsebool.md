@@ -9,7 +9,6 @@ tags:
 - getsebool
 title: 【Linux 命令】getsebool
 updated: '2020-09-25 09:24:30'
-indexing: false
 ---
 
 查询SElinux策略内各项规则的布尔值
@@ -51,4 +50,3 @@ setsebool -P httpd_enable_homedirs=0    # 0是关闭  1是开启
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

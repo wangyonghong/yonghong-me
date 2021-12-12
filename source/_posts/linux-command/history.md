@@ -9,7 +9,6 @@ tags:
 - history
 title: 【Linux 命令】history
 updated: '2020-09-25 09:35:00'
-indexing: false
 ---
 
 显示或操作历史列表。
@@ -95,4 +94,4 @@ filename：可选，表示历史文件；默认调用顺序为`filename`、环�
 5. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

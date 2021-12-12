@@ -9,7 +9,6 @@ tags:
 - gpm
 title: 【Linux 命令】gpm
 updated: '2020-09-25 09:26:00'
-indexing: false
 ---
 
 提供文字模式下的滑鼠事件处理
@@ -35,4 +34,3 @@ gpm(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

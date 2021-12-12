@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - join
 title: 【Linux 命令】join
-updated: '2020-09-25 09:56:00'
-indexing: false
+updated: '2020-09-25 09:56:30'
 ---
 
 两个文件中指定栏位内容相同的行连接起来
@@ -43,4 +42,3 @@ join(选项)(参数)
 *   文件2：要进行合并操作的第2个文件参数。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

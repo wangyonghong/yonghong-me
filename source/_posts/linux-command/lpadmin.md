@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lpadmin
 title: 【Linux 命令】lpadmin
-updated: '2020-09-25 10:12:00'
-indexing: false
+updated: '2020-09-25 10:13:00'
 ---
 
 配置CUPS套件中的打印机和类
@@ -46,4 +45,3 @@ lpadmin(选项)(参数)
 打印机：指定要配置的打印机的名称。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

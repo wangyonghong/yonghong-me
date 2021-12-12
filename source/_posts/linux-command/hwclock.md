@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - hwclock
 title: 【Linux 命令】hwclock
-updated: '2020-09-25 09:39:00'
-indexing: false
+updated: '2020-09-25 09:39:30'
 ---
 
 显示与设定硬件时钟
@@ -73,4 +72,3 @@ ARC=false
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

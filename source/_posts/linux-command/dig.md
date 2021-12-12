@@ -9,7 +9,6 @@ tags:
 - dig
 title: 【Linux 命令】dig
 updated: '2020-09-25 08:49:00'
-indexing: false
 ---
 
 域名查询工具
@@ -74,4 +73,3 @@ jsdig.com.            8       IN      NS      f1g1ns1.dnspod.net.
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

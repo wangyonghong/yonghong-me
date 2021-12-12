@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unprotoize
 title: 【Linux 命令】unprotoize
-updated: '2020-09-25 12:17:00'
-indexing: false
+updated: '2020-09-25 12:19:00'
 ---
 
 删除C语言源代码文件中的函数原型
@@ -36,4 +35,3 @@ unprotoize(选项)(参数)
 文件：需要转换代码的C语言源文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

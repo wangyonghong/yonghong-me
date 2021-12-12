@@ -9,7 +9,6 @@ tags:
 - cut
 title: 【Linux 命令】cut
 updated: '2020-09-25 08:43:00'
-indexing: false
 ---
 
 连接文件并打印到标准输出设备上

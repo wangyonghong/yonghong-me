@@ -9,7 +9,6 @@ tags:
 - cu
 title: 【Linux 命令】cu
 updated: '2020-09-25 08:41:00'
-indexing: false
 ---
 
 用于连接另一个系统主机
@@ -59,4 +58,4 @@ cu -s 38400 9=12015551234
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

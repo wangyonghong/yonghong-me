@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - syslog
 title: 【Linux 命令】syslog
-updated: '2020-09-25 11:56:30'
-indexing: false
+updated: '2020-09-25 11:58:30'
 ---
 
 系统默认的日志守护进程
@@ -47,4 +46,3 @@ Jan  5 10:37:14 localhost TAG: this is a test log line
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

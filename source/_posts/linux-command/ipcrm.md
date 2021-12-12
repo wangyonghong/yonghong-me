@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ipcrm
 title: 【Linux 命令】ipcrm
-updated: '2020-09-25 09:50:00'
-indexing: false
+updated: '2020-09-25 09:50:30'
 ---
 
 删除消息队列、信号集、或者共享内存标识
@@ -46,4 +45,3 @@ ipcrm -m 18602
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

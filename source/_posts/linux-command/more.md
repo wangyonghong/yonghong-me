@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - more
 title: 【Linux 命令】more
-updated: '2020-09-25 10:33:30'
-indexing: false
+updated: '2020-09-25 10:34:30'
 ---
 
 显示文件内容，每次显示一屏
@@ -63,4 +62,4 @@ more -c -10 file
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

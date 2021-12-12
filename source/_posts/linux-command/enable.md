@@ -9,7 +9,6 @@ tags:
 - enable
 title: 【Linux 命令】enable
 updated: '2020-09-25 09:06:00'
-indexing: false
 ---
 
 启动或禁用shell内建命令
@@ -118,4 +117,4 @@ A：可以；不能。
 
 2. 该命令是bash内建命令，相关的帮助信息请查看 `help` 命令。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

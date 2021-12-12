@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tmux
 title: 【Linux 命令】tmux
-updated: '2020-09-25 12:06:00'
-indexing: false
+updated: '2020-09-25 12:08:00'
 ---
 
 Tmux是一个优秀的终端复用软件，类似GNU Screen，但来自于OpenBSD，采用BSD授权

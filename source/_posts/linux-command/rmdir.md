@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rmdir
 title: 【Linux 命令】rmdir
-updated: '2020-09-25 11:21:00'
-indexing: false
+updated: '2020-09-25 11:22:00'
 ---
 
 用来删除空目录
@@ -63,4 +62,4 @@ rmdir -p a/b/c
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

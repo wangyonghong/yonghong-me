@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - protoize
 title: 【Linux 命令】protoize
-updated: '2020-09-25 11:01:00'
-indexing: false
+updated: '2020-09-25 11:02:00'
 ---
 
 GNU-C代码转换为ANSI-C代码
@@ -36,4 +35,3 @@ protoize(选项)(参数)
 文件：需要转换代码的C语言源文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

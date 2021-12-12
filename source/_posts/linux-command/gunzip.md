@@ -9,7 +9,6 @@ tags:
 - gunzip
 title: 【Linux 命令】gunzip
 updated: '2020-09-25 09:31:00'
-indexing: false
 ---
 
 用来解压缩文件
@@ -75,4 +74,3 @@ compressed        uncompressed ratio uncompressed_name
 通过上面的示例可以知道`gzip –d`等价于`gunzip`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

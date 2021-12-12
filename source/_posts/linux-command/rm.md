@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rm
 title: 【Linux 命令】rm
-updated: '2020-09-25 11:20:30'
-indexing: false
+updated: '2020-09-25 11:21:30'
 ---
 
 用于删除给定的文件和目录
@@ -59,9 +58,21 @@ Remove example ?y（删除文件example)
 
 应注意，这样做是非常危险的!
 
+**rm 命令删除当前目录下的 package-lock.json 文件**
+
+```shell
+find .  -name "package-lock.json" -exec rm -rf {} \;
+```
+
+**rm 命令删除当前目录下的 node_modules 目录**
+
+```shell
+find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+```
+
 **rm 命令删除文件**
 
-```shellbash
+```shell
 # rm 文件1 文件2 ...
 rm testfile.txt
 ```
@@ -117,4 +128,4 @@ rm -I file1 file2 file3
 rm -v [文件/目录]
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

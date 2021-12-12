@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ntsysv
 title: 【Linux 命令】ntsysv
-updated: '2020-09-25 10:48:30'
-indexing: false
+updated: '2020-09-25 10:49:30'
 ---
 
 集中管理系统的各种服务
@@ -42,4 +41,4 @@ ntsysv(选项)
 使用空格键选择或者取消选项！
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

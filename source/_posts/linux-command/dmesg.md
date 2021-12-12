@@ -9,7 +9,6 @@ tags:
 - dmesg
 title: 【Linux 命令】dmesg
 updated: '2020-09-25 08:51:30'
-indexing: false
 ---
 
 显示Linux系统启动信息
@@ -61,4 +60,4 @@ dmesg | grep sda
 [    2.448503] sd 0:0:0:0: [sda] Attached SCSI disk
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mke2fs
 title: 【Linux 命令】mke2fs
-updated: '2020-09-25 10:29:30'
-indexing: false
+updated: '2020-09-25 10:30:30'
 ---
 
 创建磁盘分区上的“etc2/etc3”文件系统
@@ -59,4 +58,3 @@ mke2fs -q /dev/hda1
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unarj
 title: 【Linux 命令】unarj
-updated: '2020-09-25 12:14:30'
-indexing: false
+updated: '2020-09-25 12:16:30'
 ---
 
 解压缩由arj命令创建的压缩包
@@ -38,4 +37,3 @@ x：解压缩时保留原有的路径。
 .arj压缩包：指定要解压缩的.arj压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

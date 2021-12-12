@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ntpdate
 title: 【Linux 命令】ntpdate
-updated: '2020-09-25 10:48:00'
-indexing: false
+updated: '2020-09-25 10:49:00'
 ---
 
 使用网络计时协议（NTP）设置日期和时间
@@ -83,4 +82,3 @@ ntpdate [ -b] [ -d] [ -s] [ -u] [ -aKeyid] [ -eAuthenticationDelay] [ -kKeyFile]
 </table>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

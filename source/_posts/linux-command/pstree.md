@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pstree
 title: 【Linux 命令】pstree
-updated: '2020-09-25 11:03:00'
-indexing: false
+updated: '2020-09-25 11:04:00'
 ---
 
 以树状图的方式展现进程之间的派生关系
@@ -50,7 +49,7 @@ pstree -p
 
 显示所有进程的所有详细信息，遇到相同的进程名可以压缩显示。
 
-```shellbash
+```shell
 pstree  -a
 ```
 
@@ -66,4 +65,4 @@ pstree -p | grep ssh
 从上方的输出中，你可以看到 sshd 进程与分支的树形图。sshd 的主进程是 sshd（1221），另两个分支分别为 sshd（2768） 和 sshd（2807）。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

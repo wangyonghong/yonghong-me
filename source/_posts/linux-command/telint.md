@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - telint
 title: 【Linux 命令】telint
-updated: '2020-09-25 12:02:00'
-indexing: false
+updated: '2020-09-25 12:04:00'
 ---
 
 切换当前正在运行系统的运行等级
@@ -35,4 +34,3 @@ telint(选项)(参数)
 运行等级：指定要切换的运行等级。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

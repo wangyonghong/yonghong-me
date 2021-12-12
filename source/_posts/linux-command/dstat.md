@@ -9,7 +9,6 @@ tags:
 - dstat
 title: 【Linux 命令】dstat
 updated: '2020-09-25 08:59:30'
-indexing: false
 ---
 
 通用的系统资源统计工具
@@ -141,4 +140,3 @@ internal:
 dstat命令的基本用法就说到这里，更多用法有待摸索，如果您需要补充内容请给我们发邮件，谢谢！
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

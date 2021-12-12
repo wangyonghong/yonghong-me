@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - id
 title: 【Linux 命令】id
-updated: '2020-09-25 09:40:00'
-indexing: false
+updated: '2020-09-25 09:40:30'
 ---
 
 打印真实以及有效的用户和所在组的信息
@@ -103,4 +102,4 @@ uid=500(www) gid=500(www) groups=500(www)
 
 2. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 id`，`info coreutils 'id invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

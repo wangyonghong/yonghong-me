@@ -9,7 +9,6 @@ tags:
 - bzmore
 title: 【Linux 命令】bzmore
 updated: '2020-09-25 08:24:00'
-indexing: false
 ---
 
 查看bzip2压缩过的文本文件的内容
@@ -29,4 +28,3 @@ bzmore(参数)
 文件：指定要分屏显示的.bz2压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

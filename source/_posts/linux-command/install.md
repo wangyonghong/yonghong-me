@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - install
 title: 【Linux 命令】install
-updated: '2020-09-25 09:46:00'
-indexing: false
+updated: '2020-09-25 09:46:30'
 ---
 
 安装或升级软件或备份数据
@@ -89,4 +88,3 @@ install a/* d
 其中d是目录。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

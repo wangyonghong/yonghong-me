@@ -9,7 +9,6 @@ tags:
 - eject
 title: 【Linux 命令】eject
 updated: '2020-09-25 09:04:00'
-indexing: false
 ---
 
 用来退出抽取式设备
@@ -49,4 +48,3 @@ eject(选项)(参数)
 设备名：指定弹出的设备名称。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nm
 title: 【Linux 命令】nm
-updated: '2020-09-25 10:44:30'
-indexing: false
+updated: '2020-09-25 10:45:30'
 ---
 
 显示二进制目标文件的符号表
@@ -38,4 +37,3 @@ nm(选项)(参数)
 目标文件：二进制目标文件，通常是库文件和可执行文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

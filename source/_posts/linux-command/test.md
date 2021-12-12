@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - test
 title: 【Linux 命令】test
-updated: '2020-09-25 12:03:30'
-indexing: false
+updated: '2020-09-25 12:05:30'
 ---
 
 执行条件表达式。
@@ -109,4 +108,4 @@ arg1 OP arg2      算术表达式测试； OP是 -eq，-ne，-lt，-le，-gt，-
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sh
 title: 【Linux 命令】sh
-updated: '2020-09-25 11:36:00'
-indexing: false
+updated: '2020-09-25 11:38:00'
 ---
 
 shell命令解释器
@@ -70,4 +69,3 @@ bash [options] [file]
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

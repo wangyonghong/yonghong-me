@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - usernetctl
 title: 【Linux 命令】usernetctl
-updated: '2020-09-25 12:21:30'
-indexing: false
+updated: '2020-09-25 12:23:30'
 ---
 
 被允许时操作指定的网络接口
@@ -32,4 +31,3 @@ usernetctl(参数)
 *   report：报告网络接口状态。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

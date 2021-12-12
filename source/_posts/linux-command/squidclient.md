@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - squidclient
 title: 【Linux 命令】squidclient
-updated: '2020-09-25 11:45:00'
-indexing: false
+updated: '2020-09-25 11:47:00'
 ---
 
 squid服务器的客户端管理工具
@@ -42,4 +41,3 @@ squidclient(选项)(参数)
 URL：指定操作缓存中的URL。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ltrace
 title: 【Linux 命令】ltrace
-updated: '2020-09-25 10:19:30'
-indexing: false
+updated: '2020-09-25 10:20:30'
 ---
 
 用来跟踪进程调用库函数的情况
@@ -96,4 +95,3 @@ SYS_mmap2(0x424000, 4096, 3, 2066, 3) = 0x424000
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

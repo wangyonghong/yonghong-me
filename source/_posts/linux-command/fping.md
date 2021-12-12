@@ -9,7 +9,6 @@ tags:
 - fping
 title: 【Linux 命令】fping
 updated: '2020-09-25 09:17:30'
-indexing: false
 ---
 
 fping检测主机是否存在
@@ -86,5 +85,5 @@ ping某一段ip：
 192.168.0.130
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
 

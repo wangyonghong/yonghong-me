@@ -9,7 +9,6 @@ tags:
 - ar
 title: 【Linux 命令】ar
 updated: '2020-09-25 08:06:00'
-indexing: false
 ---
 
 建立或修改备存文件，或是从备存文件中抽取文件
@@ -168,4 +167,4 @@ d.c
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

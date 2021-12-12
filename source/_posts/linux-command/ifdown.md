@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ifdown
 title: 【Linux 命令】ifdown
-updated: '2020-09-25 09:41:30'
-indexing: false
+updated: '2020-09-25 09:42:00'
 ---
 
 禁用指定的网络接口
@@ -35,4 +34,3 @@ ifdown eth0  #禁用eth0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lprm
 title: 【Linux 命令】lprm
-updated: '2020-09-25 10:14:00'
-indexing: false
+updated: '2020-09-25 10:15:00'
 ---
 
 删除打印队列中的打印任务
@@ -51,4 +50,3 @@ lprm 101
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

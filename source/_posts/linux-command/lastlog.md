@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lastlog
 title: 【Linux 命令】lastlog
-updated: '2020-09-25 10:00:00'
-indexing: false
+updated: '2020-09-25 10:01:00'
 ---
 
 显示系统中所有用户最近一次登录信息
@@ -67,4 +66,3 @@ mysql                                       **Never logged in**
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

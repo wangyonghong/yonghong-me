@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - who
 title: 【Linux 命令】who
-updated: '2020-09-25 12:35:00'
-indexing: false
+updated: '2020-09-25 12:37:00'
 ---
 
 显示当前所有登陆用户的信息。
@@ -84,4 +83,4 @@ root     + pts/1        2013-12-20 10:37 (180.111.155.40)
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 who`，`info coreutils 'who invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

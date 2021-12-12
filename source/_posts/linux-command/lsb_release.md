@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lsb_release
 title: 【Linux 命令】lsb_release
-updated: '2020-09-25 10:16:00'
-indexing: false
+updated: '2020-09-25 10:17:00'
 ---
 
 显示发行版本信息
@@ -41,4 +40,3 @@ redhat和fedora系统中，还支持一个参数：
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - passwd
 title: 【Linux 命令】passwd
-updated: '2020-09-25 10:51:30'
-indexing: false
+updated: '2020-09-25 10:52:30'
 ---
 
 用于让用户可以更改自己的密码
@@ -136,4 +135,3 @@ Empty password.                          # 空密码，也就是没有密码；
 注意：当我们清除一个用户的密码时，登录时就无需密码，这一点要加以注意。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

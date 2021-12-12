@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ssh-agent
 title: 【Linux 命令】ssh-agent
-updated: '2020-09-25 11:46:30'
-indexing: false
+updated: '2020-09-25 11:48:30'
 ---
 
 ssh密钥管理器
@@ -49,4 +48,3 @@ ssh-agent
 运行ssh-agent，它会打印出来它使用的环境和变量。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

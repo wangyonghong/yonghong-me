@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lnstat
 title: 【Linux 命令】lnstat
-updated: '2020-09-25 10:05:30'
-indexing: false
+updated: '2020-09-25 10:06:30'
 ---
 
 显示Linux系统的网路状态
@@ -38,4 +37,3 @@ lnstat(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

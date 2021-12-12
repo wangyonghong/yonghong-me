@@ -9,7 +9,6 @@ tags:
 - dpkg-preconfigure
 title: 【Linux 命令】dpkg-preconfigure
 updated: '2020-09-25 08:55:30'
-indexing: false
 ---
 
 Debian Linux中软件包安装之前询问问题
@@ -45,4 +44,3 @@ dpkg-preconfigure /var/cache/apt/archives/mysql-server-5.5*.deb
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

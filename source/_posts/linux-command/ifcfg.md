@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ifcfg
 title: 【Linux 命令】ifcfg
-updated: '2020-09-25 09:40:30'
-indexing: false
+updated: '2020-09-25 09:41:00'
 ---
 
 置Linux中的网络接口参数
@@ -34,4 +33,3 @@ Stop：停用指定的网络接口的IP地址。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

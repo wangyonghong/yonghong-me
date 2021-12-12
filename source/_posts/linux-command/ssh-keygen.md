@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ssh-keygen
 title: 【Linux 命令】ssh-keygen
-updated: '2020-09-25 11:47:30'
-indexing: false
+updated: '2020-09-25 11:49:30'
 ---
 
 为ssh生成、管理和转换认证密钥
@@ -40,4 +39,3 @@ ssh-keygen(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

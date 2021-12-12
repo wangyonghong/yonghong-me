@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ip6tables-restore
 title: 【Linux 命令】ip6tables-restore
-updated: '2020-09-25 09:48:00'
-indexing: false
+updated: '2020-09-25 09:48:30'
 ---
 
 还原ip6tables表
@@ -32,4 +31,3 @@ ip6tables-restore(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

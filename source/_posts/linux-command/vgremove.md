@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgremove
 title: 【Linux 命令】vgremove
-updated: '2020-09-25 12:27:30'
-indexing: false
+updated: '2020-09-25 12:29:30'
 ---
 
 用于用户删除LVM卷组
@@ -44,4 +43,3 @@ Volume group "vg1000" successfully removed
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

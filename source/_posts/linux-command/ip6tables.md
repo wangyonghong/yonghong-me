@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ip6tables
 title: 【Linux 命令】ip6tables
-updated: '2020-09-25 09:49:00'
-indexing: false
+updated: '2020-09-25 09:49:30'
 ---
 
 linux中防火墙软件
@@ -214,4 +213,3 @@ IPv4 通常默认即可保护内部局域网私有 IP 上的主机。但是 IPv6
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

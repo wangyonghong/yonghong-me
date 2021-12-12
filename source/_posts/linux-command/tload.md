@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tload
 title: 【Linux 命令】tload
-updated: '2020-09-25 12:05:30'
-indexing: false
+updated: '2020-09-25 12:07:30'
 ---
 
 显示系统负载状况
@@ -49,4 +48,3 @@ tload -d 1
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - perl
 title: 【Linux 命令】perl
-updated: '2020-09-25 10:53:30'
-indexing: false
+updated: '2020-09-25 10:54:30'
 ---
 
 perl语言解释器
@@ -38,4 +37,3 @@ perl(选项)(参数)
 文件：要运行的perl脚本程序。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

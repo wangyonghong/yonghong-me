@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iptstate
 title: 【Linux 命令】iptstate
-updated: '2020-09-25 09:53:30'
-indexing: false
+updated: '2020-09-25 09:54:00'
 ---
 
 显示iptables的工作状态
@@ -39,4 +38,3 @@ iptstate(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

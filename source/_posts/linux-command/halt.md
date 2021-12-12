@@ -9,7 +9,6 @@ tags:
 - halt
 title: 【Linux 命令】halt
 updated: '2020-09-25 09:32:30'
-indexing: false
 ---
 
 关闭正在运行的Linux操作系统
@@ -43,4 +42,3 @@ halt -d     # 关闭系统，但不留下纪录。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

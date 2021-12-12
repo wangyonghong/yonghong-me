@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - patch
 title: 【Linux 命令】patch
-updated: '2020-09-25 10:52:30'
-indexing: false
+updated: '2020-09-25 10:53:30'
 ---
 
 为开放源代码软件安装补丁程序
@@ -67,4 +66,3 @@ patch(选项)(参数)
 * 补丁文件：指定补丁文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

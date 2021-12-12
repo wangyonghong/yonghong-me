@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - swapon
 title: 【Linux 命令】swapon
-updated: '2020-09-25 11:55:00'
-indexing: false
+updated: '2020-09-25 11:57:00'
 ---
 
 激活Linux系统中交换空间
@@ -50,4 +49,3 @@ Filename                                type            Size    Used    Priority
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

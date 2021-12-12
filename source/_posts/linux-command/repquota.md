@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - repquota
 title: 【Linux 命令】repquota
-updated: '2020-09-25 11:16:30'
-indexing: false
+updated: '2020-09-25 11:17:30'
 ---
 
 报表的格式输出磁盘空间限制的状态
@@ -46,4 +45,3 @@ repquota -a
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

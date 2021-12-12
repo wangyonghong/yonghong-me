@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - suspend
 title: 【Linux 命令】suspend
-updated: '2020-09-25 11:54:00'
-indexing: false
+updated: '2020-09-25 11:56:00'
 ---
 
 挂起shell的执行。
@@ -59,4 +58,4 @@ kill -s SIGCONT PID
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

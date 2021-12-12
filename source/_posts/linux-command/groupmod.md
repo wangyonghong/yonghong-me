@@ -9,7 +9,6 @@ tags:
 - groupmod
 title: 【Linux 命令】groupmod
 updated: '2020-09-25 09:28:00'
-indexing: false
 ---
 
 更改群组识别码或名称
@@ -37,4 +36,3 @@ groupmod(选项)(参数)
 组名：指定要修改的工作的组名。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

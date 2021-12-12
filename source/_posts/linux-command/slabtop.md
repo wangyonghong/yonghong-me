@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - slabtop
 title: 【Linux 命令】slabtop
-updated: '2020-09-25 11:39:30'
-indexing: false
+updated: '2020-09-25 11:41:30'
 ---
 
 实时显示内核slab内存缓存信息
@@ -102,4 +101,3 @@ slabtop
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

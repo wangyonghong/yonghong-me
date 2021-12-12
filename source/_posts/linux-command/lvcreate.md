@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvcreate
 title: 【Linux 命令】lvcreate
-updated: '2020-09-25 10:20:00'
-indexing: false
+updated: '2020-09-25 10:21:00'
 ---
 
 用于创建LVM的逻辑卷
@@ -52,4 +51,3 @@ Logical volume "lvol0" created
 说明：创建成功后，新的逻辑卷"lvol0"，将通过设备文件`/dev/vg1000/lvol0`进行访问。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

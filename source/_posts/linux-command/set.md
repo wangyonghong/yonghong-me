@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - set
 title: 【Linux 命令】set
-updated: '2020-09-25 11:32:30'
-indexing: false
+updated: '2020-09-25 11:34:30'
 ---
 
 显示或设置shell特性及shell变量
@@ -74,4 +73,3 @@ env | grep mylove             #显示环境变量值
 此时，该命令执行后，将输出查询到的环境变量值。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

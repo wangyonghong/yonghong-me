@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - umount
 title: 【Linux 命令】umount
-updated: '2020-09-25 12:13:00'
-indexing: false
+updated: '2020-09-25 12:15:00'
 ---
 
 用于卸载已经加载的文件系统
@@ -88,4 +87,3 @@ eject /dev/cdrom      卸载并弹出CD
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

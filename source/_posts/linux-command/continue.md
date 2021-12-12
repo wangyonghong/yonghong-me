@@ -9,7 +9,6 @@ tags:
 - continue
 title: 【Linux 命令】continue
 updated: '2020-09-25 08:38:00'
-indexing: false
 ---
 
 结束本次循环，继续执行下一个for，while或until循环。
@@ -78,4 +77,4 @@ done
 1. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

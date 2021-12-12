@@ -9,7 +9,6 @@ tags:
 - chmod
 title: 【Linux 命令】chmod
 updated: '2020-09-25 08:30:00'
-indexing: false
 ---
 
 用来变更文件或目录的权限
@@ -109,4 +108,4 @@ chmod --reference=./1.log  ./test.log
 
 3. 使用`-R`选项一定要保留当前用户的执行和读取权限，否则会报错！
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - man
 title: 【Linux 命令】man
-updated: '2020-09-25 10:26:00'
-indexing: false
+updated: '2020-09-25 10:27:00'
 ---
 
 查看Linux中的指令帮助
@@ -71,4 +70,4 @@ man 3 sleep
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

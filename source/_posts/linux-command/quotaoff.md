@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - quotaoff
 title: 【Linux 命令】quotaoff
-updated: '2020-09-25 11:11:00'
-indexing: false
+updated: '2020-09-25 11:12:00'
 ---
 
 关闭Linux内核中指定文件系统的磁盘配额功能
@@ -38,4 +37,3 @@ quotaoff(选项)(参数)
 文件系统：指定要关闭磁盘配额功能的文件系统。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

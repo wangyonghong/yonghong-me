@@ -9,7 +9,6 @@ tags:
 - firewall-cmd
 title: 【Linux 命令】firewall-cmd
 updated: '2020-09-25 09:15:30'
-indexing: false
 ---
 
 Linux上新用的防火墙软件，跟iptables差不多的工具

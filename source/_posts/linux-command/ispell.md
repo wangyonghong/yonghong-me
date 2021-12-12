@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ispell
 title: 【Linux 命令】ispell
-updated: '2020-09-25 09:54:00'
-indexing: false
+updated: '2020-09-25 09:54:30'
 ---
 
 检查文件中出现的拼写错误
@@ -29,4 +28,3 @@ ispell(参数)
 文件：指定要进行拼写检查的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - wc
 title: 【Linux 命令】wc
-updated: '2020-09-25 12:32:30'
-indexing: false
+updated: '2020-09-25 12:34:30'
 ---
 
 统计文件的字节数、字数、行数
@@ -76,4 +75,20 @@ expr $(ls -l | wc -l) - 1
 8
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+统计当前目录下的所有文件行数及总计行数
+
+```shell
+[root@centos7 ~]# wc -l *
+      21 LICENSE
+     270 README.md
+wc: example: read: Is a directory
+     785 lerna-debug.log
+      25 lerna.json
+wc: node_modules: read: Is a directory
+   23603 package-lock.json
+      79 package.json
+       3 renovate.json
+   24786 total
+```
+
+

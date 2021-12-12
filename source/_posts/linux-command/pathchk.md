@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pathchk
 title: 【Linux 命令】pathchk
-updated: '2020-09-25 10:53:00'
-indexing: false
+updated: '2020-09-25 10:54:00'
 ---
 
 检查文件中不可移植的部分
@@ -40,4 +39,3 @@ pathchk(选项)(参数)
 *   后缀：可选参数，指定要去除的文件后缀字符串。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mapfile
 title: 【Linux 命令】mapfile
-updated: '2020-09-25 10:26:30'
-indexing: false
+updated: '2020-09-25 10:27:30'
 ---
 
 从标准输入读取行并赋值到数组。
@@ -92,4 +91,4 @@ done
 1. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 2. bash内建命令readarray是mapfile的同义词。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -9,7 +9,6 @@ tags:
 - axel
 title: 【Linux 命令】axel
 updated: '2020-09-25 08:13:00'
-indexing: false
 ---
 
 多线程下载工具
@@ -78,4 +77,3 @@ axel -n 10 -o /tmp/ http://www.jsdig.com/lnmp.tar.gz
 如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

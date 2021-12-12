@@ -9,7 +9,6 @@ tags:
 - comm
 title: 【Linux 命令】comm
 updated: '2020-09-25 08:36:00'
-indexing: false
 ---
 
 按行比较两个已排序的文件。
@@ -159,4 +158,4 @@ jjj
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 comm`，`info coreutils 'comm invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

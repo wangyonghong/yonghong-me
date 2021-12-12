@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unzip
 title: 【Linux 命令】unzip
-updated: '2020-09-25 12:18:30'
-indexing: false
+updated: '2020-09-25 12:20:30'
 ---
 
 用于解压缩由zip命令压缩的压缩包
@@ -89,4 +88,4 @@ unzip test.zip "*.jpg"
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

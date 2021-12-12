@@ -9,7 +9,6 @@ tags:
 - dpkg-statoverride
 title: 【Linux 命令】dpkg-statoverride
 updated: '2020-09-25 08:57:30'
-indexing: false
 ---
 
 Debian Linux中覆盖文件的所有权和模式
@@ -54,4 +53,3 @@ sudo dpkg-statoverride --remove /usr/bin/wall
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

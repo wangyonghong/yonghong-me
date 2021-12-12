@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - inotifywait
 title: 【Linux 命令】inotifywait
-updated: '2020-09-25 09:45:00'
-indexing: false
+updated: '2020-09-25 09:45:30'
 ---
 
 异步文件系统监控机制
@@ -130,4 +129,3 @@ open | **打开** ，对文件进行打开操作。
 close | **关闭** ，对文件进行关闭操作。
 delete | **删除** ，文件被删除。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

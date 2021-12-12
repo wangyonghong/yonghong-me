@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - volname
 title: 【Linux 命令】volname
-updated: '2020-09-25 12:30:00'
-indexing: false
+updated: '2020-09-25 12:32:00'
 ---
 
 显示指定的ISO-9660格式的设备的卷名称
@@ -29,4 +28,3 @@ volname(参数)
 设备文件名：指定要显示卷名称的设备。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

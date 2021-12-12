@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - useradd
 title: 【Linux 命令】useradd
-updated: '2020-09-25 12:20:00'
-indexing: false
+updated: '2020-09-25 12:22:00'
 ---
 
 创建的新的系统用户
@@ -65,4 +64,3 @@ useradd caojh -u 544
 需要说明的是，设定ID值时尽量要大于500，以免冲突。因为Linux安装后会建立一些特殊用户，一般0到499之间的值留给bin、mail这样的系统账号。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xlsatoms
 title: 【Linux 命令】xlsatoms
-updated: '2020-09-25 12:39:00'
-indexing: false
+updated: '2020-09-25 12:41:00'
 ---
 
 列出X服务器内部所有定义的原子成分
@@ -32,4 +31,3 @@ xlsatoms(选项)
 * -range<列表范围>：设置成分清单的列表范围。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

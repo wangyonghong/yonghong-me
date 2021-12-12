@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nfsstat
 title: 【Linux 命令】nfsstat
-updated: '2020-09-25 10:42:00'
-indexing: false
+updated: '2020-09-25 10:43:00'
 ---
 
 列出NFS客户端和服务器的工作状态
@@ -64,4 +63,3 @@ nfsstat –s
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

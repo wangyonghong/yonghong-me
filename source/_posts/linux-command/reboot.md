@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - reboot
 title: 【Linux 命令】reboot
-updated: '2020-09-25 11:14:30'
-indexing: false
+updated: '2020-09-25 11:15:30'
 ---
 
 重新启动正在运行的Linux操作系统
@@ -42,4 +41,3 @@ reboot -w     //做个重开机的模拟（只有纪录并不会真的重开机�
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

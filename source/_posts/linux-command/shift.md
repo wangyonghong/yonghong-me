@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - shift
 title: 【Linux 命令】shift
-updated: '2020-09-25 11:36:30'
-indexing: false
+updated: '2020-09-25 11:38:30'
 ---
 
 移动位置参数。
@@ -63,4 +62,4 @@ e r t
 1. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - swapoff
 title: 【Linux 命令】swapoff
-updated: '2020-09-25 11:54:30'
-indexing: false
+updated: '2020-09-25 11:56:30'
 ---
 
 关闭指定的交换空间
@@ -43,4 +42,3 @@ swapoff /dev/sda2
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - objdump
 title: 【Linux 命令】objdump
-updated: '2020-09-25 10:49:00'
-indexing: false
+updated: '2020-09-25 10:50:00'
 ---
 
 显示二进制文件信息
@@ -495,4 +494,3 @@ Idx Name          Size      VMA       LMA       File off  Algn
 这里，更多的内容参见`man objdump`中的这个选项。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

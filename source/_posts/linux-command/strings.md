@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - strings
 title: 【Linux 命令】strings
-updated: '2020-09-25 11:51:00'
-indexing: false
+updated: '2020-09-25 11:53:00'
 ---
 
 在对象文件或二进制文件中查找可打印的字符串
@@ -59,4 +58,3 @@ strings /bin/ls | grep -i libc
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

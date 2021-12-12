@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tcpreplay
 title: 【Linux 命令】tcpreplay
-updated: '2020-09-25 12:01:00'
-indexing: false
+updated: '2020-09-25 12:03:00'
 ---
 
 将PCAP包重新发送，用于性能或者功能测试
@@ -109,4 +108,3 @@ c、使用 tcpreplay 重放报文。 
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

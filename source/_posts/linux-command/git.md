@@ -9,7 +9,6 @@ tags:
 - git
 title: 【Linux 命令】git
 updated: '2020-09-25 09:25:00'
-indexing: false
 ---
 
 是目前世界上最先进的分布式版本控制系统
@@ -1103,4 +1102,4 @@ git config --global core.quotepath false
 - [沉浸式学 Git](http://www.kancloud.cn/kancloud/igit/46710)
 - [Git进阶用法，主要是rebase高级用法](http://way.oschina.io/2016/12/15/notes/GitAdvance/?utm_source=gank.io&utm_medium=email)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

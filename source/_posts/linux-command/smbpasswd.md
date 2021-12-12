@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - smbpasswd
 title: 【Linux 命令】smbpasswd
-updated: '2020-09-25 11:41:30'
-indexing: false
+updated: '2020-09-25 11:43:30'
 ---
 
 samba用户和密码管理工具
@@ -40,4 +39,3 @@ smbpasswd(选项)(参数)
 用户名：指定要修改SMB密码的用户。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

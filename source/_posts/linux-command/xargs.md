@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xargs
 title: 【Linux 命令】xargs
-updated: '2020-09-25 12:36:30'
-indexing: false
+updated: '2020-09-25 12:38:30'
 ---
 
 给其他命令传递参数的一个过滤器

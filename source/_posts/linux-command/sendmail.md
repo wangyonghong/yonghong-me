@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sendmail
 title: 【Linux 命令】sendmail
-updated: '2020-09-25 11:30:30'
-indexing: false
+updated: '2020-09-25 11:32:30'
 ---
 
 著名电子邮件服务器
@@ -41,4 +40,3 @@ sendmail(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

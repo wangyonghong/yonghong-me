@@ -9,7 +9,6 @@ tags:
 - convertquota
 title: 【Linux 命令】convertquota
 updated: '2020-09-25 08:38:30'
-indexing: false
 ---
 
 把老的配额文件转换为新的格式
@@ -46,4 +45,3 @@ convertquota -u /data     //转换文件系统"/data"上的用户磁盘配额文
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - return
 title: 【Linux 命令】return
-updated: '2020-09-25 11:18:30'
-indexing: false
+updated: '2020-09-25 11:19:30'
 ---
 
 从函数中退出并返回数值。
@@ -53,4 +52,4 @@ echo $?
 1. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

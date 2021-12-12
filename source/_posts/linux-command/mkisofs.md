@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkisofs
 title: 【Linux 命令】mkisofs
-updated: '2020-09-25 10:31:00'
-indexing: false
+updated: '2020-09-25 10:32:00'
 ---
 
 建立ISO 9660映像文件
@@ -109,4 +108,3 @@ mkisofs -R -J -T -v -no-emul-boot -boot-load-size 4 -boot-info-table -V RHEL4ASD
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

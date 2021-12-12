@@ -9,7 +9,6 @@ tags:
 - ack
 title: 【Linux 命令】ack
 updated: '2020-09-25 08:01:30'
-indexing: false
 ---
 
 比grep好用的文本搜索工具

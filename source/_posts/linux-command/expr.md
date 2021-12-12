@@ -9,7 +9,6 @@ tags:
 - expr
 title: 【Linux 命令】expr
 updated: '2020-09-25 09:10:30'
-indexing: false
 ---
 
 一款表达式计算工具
@@ -51,4 +50,3 @@ result=$(expr $no1 + 5)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

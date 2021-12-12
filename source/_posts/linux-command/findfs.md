@@ -9,7 +9,6 @@ tags:
 - findfs
 title: 【Linux 命令】findfs
 updated: '2020-09-25 09:14:30'
-indexing: false
 ---
 
 标签或UUID查找文件系统
@@ -38,4 +37,3 @@ findfs LABEL=/boot
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

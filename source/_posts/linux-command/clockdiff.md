@@ -9,7 +9,6 @@ tags:
 - clockdiff
 title: 【Linux 命令】clockdiff
 updated: '2020-09-25 08:34:00'
-indexing: false
 ---
 
 检测两台linux主机的时间差
@@ -67,4 +66,3 @@ host=gigagate1.Princeton.EDU rtt=307(21)ms/271ms delta=-5ms/-5ms Wed Dec 17 11:5
 上面是测试一个RTT较大的目的主机和本地主机的系统时间差。不过在使用clockdiff的时候，需要一点运气，因为很多路由会忽略ICMP或IP时间戳。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - yum
 title: 【Linux 命令】yum
-updated: '2020-09-25 12:42:30'
-indexing: false
+updated: '2020-09-25 12:44:30'
 ---
 
 基于RPM的软件包管理器
@@ -108,16 +107,16 @@ yum deplist package1               #查看程序package1依赖情况
 **清除缓存**
 
 ```shell
-yum clean packages       #清除缓存目录下的软件包
-yum clean headers        #清除缓存目录下的 headers
-yum clean oldheaders     #清除缓存目录下旧的 headers
+yum clean packages       # 清除缓存目录下的软件包
+yum clean headers        # 清除缓存目录下的 headers
+yum clean oldheaders     # 清除缓存目录下旧的 headers
 ```
 
 **更多实例**
 
 ```shell
 # yum
-/etc/yum.repos.d/       yum 源配置文件
+/etc/yum.repos.d/       # yum 源配置文件
 vi /etc/yum.repos.d/nginx.repo # 举个栗子: nginx yum源
 [nginx]
 name=nginx repo
@@ -137,4 +136,4 @@ yum groupinstall "Chinese Support" # 添加中文语言支持
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

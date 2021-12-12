@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - read
 title: 【Linux 命令】read
-updated: '2020-09-25 11:13:00'
-indexing: false
+updated: '2020-09-25 11:14:00'
 ---
 
 从键盘读取变量值
@@ -188,4 +187,3 @@ Linux c+           #输出变量值
 注意：使用echo命令输出变量值时，必须在变量名前添加符号`$`。否则，echo将直接输出变量名。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

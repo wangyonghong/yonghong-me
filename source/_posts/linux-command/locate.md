@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - locate
 title: 【Linux 命令】locate
-updated: '2020-09-25 10:06:30'
-indexing: false
+updated: '2020-09-25 10:07:30'
 ---
 
 比 find 好用的文件查找工具
@@ -99,4 +98,4 @@ root ~ # locate /etc/m
 /etc/mate-settings-daemon
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

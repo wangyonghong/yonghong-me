@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ncftp
 title: 【Linux 命令】ncftp
-updated: '2020-09-25 10:40:00'
-indexing: false
+updated: '2020-09-25 10:41:00'
 ---
 
 是增强的的FTP工具
@@ -72,4 +71,3 @@ ncftp的基本命令和普通ftp一样，可以输入help获得命令列表。�
 *   lrmdir: 删除本地目录。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkdir
 title: 【Linux 命令】mkdir
-updated: '2020-09-25 10:29:00'
-indexing: false
+updated: '2020-09-25 10:30:00'
 ---
 
 用来创建目录
@@ -56,4 +55,3 @@ mkdir -p-m 750 bin/os_1
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

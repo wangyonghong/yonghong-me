@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - squid
 title: 【Linux 命令】squid
-updated: '2020-09-25 11:44:30'
-indexing: false
+updated: '2020-09-25 11:46:30'
 ---
 
 squid服务器守护进程
@@ -39,4 +38,3 @@ squid(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

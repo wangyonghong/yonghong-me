@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iftop
 title: 【Linux 命令】iftop
-updated: '2020-09-25 09:42:30'
-indexing: false
+updated: '2020-09-25 09:43:00'
 ---
 
 一款实时流量监控工具
@@ -82,4 +81,4 @@ iftop -F 192.168.1.0/24 or 192.168.1.0/255.255.255.0  # 显示某个网段进出
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

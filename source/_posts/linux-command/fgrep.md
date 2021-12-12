@@ -9,7 +9,6 @@ tags:
 - fgrep
 title: 【Linux 命令】fgrep
 updated: '2020-09-25 09:13:00'
-indexing: false
 ---
 
 为文件搜索文字字符串
@@ -95,4 +94,3 @@ fgrep -l strcpy *.c
 搜索当前目录下以 .c 结尾的文件，然后显示包含 strcpy 字符串的文件名。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

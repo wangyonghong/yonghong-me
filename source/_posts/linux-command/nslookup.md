@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nslookup
 title: 【Linux 命令】nslookup
-updated: '2020-09-25 10:47:30'
-indexing: false
+updated: '2020-09-25 10:48:30'
 ---
 
 查询域名DNS信息的工具
@@ -52,4 +51,3 @@ Address: 100.42.212.8
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

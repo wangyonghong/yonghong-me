@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rmmod
 title: 【Linux 命令】rmmod
-updated: '2020-09-25 11:21:30'
-indexing: false
+updated: '2020-09-25 11:22:30'
 ---
 
 从运行的内核中移除指定的内核模块
@@ -50,4 +49,3 @@ raid1                  25153  0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - readelf
 title: 【Linux 命令】readelf
-updated: '2020-09-25 11:13:30'
-indexing: false
+updated: '2020-09-25 11:14:30'
 ---
 
 用于显示elf格式文件的信息
@@ -609,4 +608,3 @@ Key to Flags:
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

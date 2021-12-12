@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - logout
 title: 【Linux 命令】logout
-updated: '2020-09-25 10:08:30'
-indexing: false
+updated: '2020-09-25 10:09:30'
 ---
 
 退出当前登录的Shell
@@ -25,4 +24,3 @@ logout
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

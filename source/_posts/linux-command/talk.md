@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - talk
 title: 【Linux 命令】talk
-updated: '2020-09-25 11:59:30'
-indexing: false
+updated: '2020-09-25 12:01:30'
 ---
 
 让用户和其他用户聊天
@@ -96,4 +95,3 @@ mesg n
 以上是linux中talk命令参数的是使用方法。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

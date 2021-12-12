@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tailf
 title: 【Linux 命令】tailf
-updated: '2020-09-25 11:59:00'
-indexing: false
+updated: '2020-09-25 12:01:00'
 ---
 
 在屏幕上显示指定文件的末尾若干行内容，通常用于日志文件的跟踪输出
@@ -50,4 +49,4 @@ tailf -n 5 log2014.log   # 显示文件最后5行内容
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

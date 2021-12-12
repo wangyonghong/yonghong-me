@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - slocate
 title: 【Linux 命令】slocate
-updated: '2020-09-25 11:40:30'
-indexing: false
+updated: '2020-09-25 11:42:30'
 ---
 
 命令查找文件或目录
@@ -54,4 +53,4 @@ $ slocate fdisk #显示文件名中含有fdisk 关键字的文件的路径信息
 /usr/share/doc/util-Linux/examples/sfdisk.examples.gz  
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -9,7 +9,6 @@ tags:
 - at
 title: 【Linux 命令】at
 updated: '2020-09-25 08:10:30'
-indexing: false
 ---
 
 在指定时间执行一个任务
@@ -92,4 +91,4 @@ date >/root/2013.log
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

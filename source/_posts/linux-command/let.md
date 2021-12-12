@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - let
 title: 【Linux 命令】let
-updated: '2020-09-25 10:02:30'
-indexing: false
+updated: '2020-09-25 10:03:30'
 ---
 
 简单的计算器，执行算术表达式。
@@ -130,4 +129,4 @@ echo ${a}
 
 2. 执行算术计算的命令除了`let`，还有外部命令`expr`、`bc`等。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

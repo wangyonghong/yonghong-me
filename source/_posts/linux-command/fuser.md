@@ -9,7 +9,6 @@ tags:
 - fuser
 title: 【Linux 命令】fuser
 updated: '2020-09-25 09:21:30'
-indexing: false
 ---
 
 使用文件或文件结构识别进程
@@ -81,4 +80,3 @@ fuser -d /usr文件
 `/dev/mem`  也用于系统映像。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

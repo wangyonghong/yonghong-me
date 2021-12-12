@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tar
 title: 【Linux 命令】tar
-updated: '2020-09-25 12:00:00'
-indexing: false
+updated: '2020-09-25 12:02:00'
 ---
 
 将许多文件一起保存至一个单独的磁带或磁盘归档，并能从归档中单独还原所需文件。
@@ -367,7 +366,7 @@ tar -tf all.tar
 ```
 
 ```shell
-tar -cfv archive.tar foo bar  # 从文件foo和bar创建archive.tar。
+tar -cvf archive.tar foo bar  # 从文件foo和bar创建archive.tar。
 tar -tvf archive.tar         # 详细列出archive.tar中的所有文件。
 tar -xf archive.tar          # 从archive.tar提取所有文件。
 ```
@@ -539,4 +538,4 @@ tar -cvf test.tar test --remove-files
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mesg
 title: 【Linux 命令】mesg
-updated: '2020-09-25 10:27:30'
-indexing: false
+updated: '2020-09-25 10:28:30'
 ---
 
 设置当前终端的写权限
@@ -36,4 +35,3 @@ y/n：y表示运行向当前终端写信息，n表示禁止向当前终端写信
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

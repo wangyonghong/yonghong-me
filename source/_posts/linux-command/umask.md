@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - umask
 title: 【Linux 命令】umask
-updated: '2020-09-25 12:12:30'
-indexing: false
+updated: '2020-09-25 12:14:30'
 ---
 
 显示或设置创建文件的权限掩码。
@@ -109,4 +108,4 @@ stat newdir
 
 3. **请谨慎使用该命令**，特别是不要取消当前用户的读取权限，那样会导致你在终端使用`TAB`键补全时报错。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

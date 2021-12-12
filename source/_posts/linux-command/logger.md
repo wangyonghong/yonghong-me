@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - logger
 title: 【Linux 命令】logger
-updated: '2020-09-25 10:07:00'
-indexing: false
+updated: '2020-09-25 10:08:00'
 ---
 
 在系统日志中记录相应条目
@@ -50,4 +49,4 @@ logger -p syslog.info "backup.sh is starting"
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

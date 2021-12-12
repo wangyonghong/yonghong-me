@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pigz
 title: 【Linux 命令】pigz
-updated: '2020-09-25 10:56:30'
-indexing: false
+updated: '2020-09-25 10:57:30'
 ---
 
 可以用来解压缩文件，gzip的并行实现升级版

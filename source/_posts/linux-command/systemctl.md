@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - systemctl
 title: 【Linux 命令】systemctl
-updated: '2020-09-25 11:57:00'
-indexing: false
+updated: '2020-09-25 11:59:00'
 ---
 
 系统服务管理器指令
@@ -61,4 +60,4 @@ sudo systemctl disable firewalld.service
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

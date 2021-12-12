@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - stty
 title: 【Linux 命令】stty
-updated: '2020-09-25 11:51:30'
-indexing: false
+updated: '2020-09-25 11:53:30'
 ---
 
 修改终端命令行的相关设置
@@ -105,4 +104,3 @@ read -t 10 varname
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

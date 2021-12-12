@@ -9,7 +9,6 @@ tags:
 - fg
 title: 【Linux 命令】fg
 updated: '2020-09-25 09:12:30'
-indexing: false
 ---
 
 将后台作业移动到前台终端运行
@@ -56,4 +55,4 @@ sleep 60
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

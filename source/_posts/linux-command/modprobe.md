@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - modprobe
 title: 【Linux 命令】modprobe
-updated: '2020-09-25 10:33:00'
-indexing: false
+updated: '2020-09-25 10:34:00'
 ---
 
 自动处理可载入模块
@@ -87,4 +86,4 @@ modprobe -r 模块名
 这里，移除已加载的模块，和rmmod功能相同。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

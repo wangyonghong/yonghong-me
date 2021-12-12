@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpm2cpio
 title: 【Linux 命令】rpm2cpio
-updated: '2020-09-25 11:23:00'
-indexing: false
+updated: '2020-09-25 11:24:00'
 ---
 
 将RPM软件包转换为cpio格式的文件
@@ -35,4 +34,3 @@ rpm2cpio ../libstdc++-4.3.0-8.i386.rpm | cpio -idv
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

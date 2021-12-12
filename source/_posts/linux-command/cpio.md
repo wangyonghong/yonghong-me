@@ -9,7 +9,6 @@ tags:
 - cpio
 title: 【Linux 命令】cpio
 updated: '2020-09-25 08:39:30'
-indexing: false
 ---
 
 用来建立、还原备份档的工具程序
@@ -104,4 +103,3 @@ cpio –icduv < /opt/etc.cpio
 通过上面的示例，可以看出，cpio无法直接读取文件，它需要每个文件或者目录的完整路径名才能识别读取，而find命令的输出刚好做到了这点，因此，cpio命令一般和find命令配合使用。其实，上面的示例我们已经看到了它们的组合用法。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

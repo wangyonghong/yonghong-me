@@ -9,7 +9,6 @@ tags:
 - badblocks
 title: 【Linux 命令】badblocks
 updated: '2020-09-25 08:13:30'
-indexing: false
 ---
 
 查找磁盘中损坏的区块
@@ -93,4 +92,3 @@ mkfs.ext3 -c /dev/hda1
 这个操作已经很清楚地告知我们可以采用`mkfs.ext3 -c`选项用`read-only`方式检查硬盘。这个命令会在格式化硬盘时检查硬盘，并标出错误的硬盘“block”。用这个方法格式化硬盘，需要有相当大的耐心，因为命令运行后，会一个个用读的方式检查硬盘。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

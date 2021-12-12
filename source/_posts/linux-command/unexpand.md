@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unexpand
 title: 【Linux 命令】unexpand
-updated: '2020-09-25 12:15:30'
-indexing: false
+updated: '2020-09-25 12:17:30'
 ---
 
 将文件的空白字符转换为制表符
@@ -37,4 +36,3 @@ unexpand(选项)(参数)
 文件：指定要转换空白为TAB的文件列表。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - losetup
 title: 【Linux 命令】losetup
-updated: '2020-09-25 10:11:00'
-indexing: false
+updated: '2020-09-25 10:12:00'
 ---
 
 设定与控制循环（loop）设备
@@ -78,4 +77,3 @@ losetup -d /dev/loop1
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pvdisplay
 title: 【Linux 命令】pvdisplay
-updated: '2020-09-25 11:06:00'
-indexing: false
+updated: '2020-09-25 11:07:00'
 ---
 
 显示物理卷的属性
@@ -54,4 +53,3 @@ PV UUID         FOXiS2-Ghaj-Z0Mf- cdVZ-pfpk- dP9p-ifIZXN
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - ed
 title: 【Linux 命令】ed
 updated: '2020-09-25 09:02:30'
-indexing: false
 ---
 
 单行纯文本编辑器
@@ -49,4 +48,3 @@ q # 退出ed编辑器。
 文件：待编辑的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

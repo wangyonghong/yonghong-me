@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvdisplay
 title: 【Linux 命令】lvdisplay
-updated: '2020-09-25 10:20:30'
-indexing: false
+updated: '2020-09-25 10:21:30'
 ---
 
 显示逻辑卷属性
@@ -46,4 +45,3 @@ lvdisplay(参数)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

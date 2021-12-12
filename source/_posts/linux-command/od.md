@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - od
 title: 【Linux 命令】od
-updated: '2020-09-25 10:49:30'
-indexing: false
+updated: '2020-09-25 10:50:30'
 ---
 
 输出文件的八进制、十六进制等格式编码的字节
@@ -159,4 +158,3 @@ abcdef g
 说明：每行输出3个字节，并使用八进制单字节进行解释
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

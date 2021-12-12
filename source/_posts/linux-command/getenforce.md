@@ -9,7 +9,6 @@ tags:
 - getenforce
 title: 【Linux 命令】getenforce
 updated: '2020-09-25 09:24:00'
-indexing: false
 ---
 
 显示当前SELinux的应用模式，是强制、执行还是停用
@@ -33,4 +32,4 @@ getenforce
 Enforcing
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

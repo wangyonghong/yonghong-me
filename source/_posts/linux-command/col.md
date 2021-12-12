@@ -9,7 +9,6 @@ tags:
 - col
 title: 【Linux 命令】col
 updated: '2020-09-25 08:35:00'
-indexing: false
 ---
 
 过滤控制字符
@@ -34,4 +33,3 @@ col(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - declare
 title: 【Linux 命令】declare
 updated: '2020-09-25 08:44:30'
-indexing: false
 ---
 
 声明变量，设置或显示变量的值和属性。
@@ -221,4 +220,4 @@ declare -F func_a func_b
 3. 只读属性的相关介绍请查看'readonly'命令。
 4. 引用属性的相关介绍请查看'unset'命令的例子部分。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

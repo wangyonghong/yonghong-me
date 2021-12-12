@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvremove
 title: 【Linux 命令】lvremove
-updated: '2020-09-25 10:22:00'
-indexing: false
+updated: '2020-09-25 10:23:00'
 ---
 
 删除指定LVM逻辑卷
@@ -51,4 +50,3 @@ volume "lvol0"? [y/n]: y    #确认删除
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

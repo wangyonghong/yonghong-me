@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - logwatch
 title: 【Linux 命令】logwatch
-updated: '2020-09-25 10:10:00'
-indexing: false
+updated: '2020-09-25 10:11:00'
 ---
 
 可定制和可插入式的日志监视系统
@@ -79,4 +78,3 @@ logwatch --service sshd --detail High                       只看sshd的日志�
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

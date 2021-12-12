@@ -9,7 +9,6 @@ tags:
 - ftpshut
 title: 【Linux 命令】ftpshut
 updated: '2020-09-25 09:20:00'
-indexing: false
 ---
 
 在指定的时间关闭FTP服务器
@@ -32,4 +31,3 @@ ftpshut [-d<分钟>][-l<分钟>][关闭时间]["警告信息"]
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

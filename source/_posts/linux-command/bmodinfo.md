@@ -9,7 +9,6 @@ tags:
 - bmodinfo
 title: 【Linux 命令】bmodinfo
 updated: '2020-09-25 08:18:00'
-indexing: false
 ---
 
 显示给定模块的详细信息
@@ -58,4 +57,3 @@ depends:    scsi_mod
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

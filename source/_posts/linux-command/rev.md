@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rev
 title: 【Linux 命令】rev
-updated: '2020-09-25 11:19:00'
-indexing: false
+updated: '2020-09-25 11:20:00'
 ---
 
 将文件内容以字符为单位反序输出
@@ -63,4 +62,3 @@ TIMMOC
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

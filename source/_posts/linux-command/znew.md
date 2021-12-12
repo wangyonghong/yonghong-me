@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - znew
 title: 【Linux 命令】znew
-updated: '2020-09-25 12:45:30'
-indexing: false
+updated: '2020-09-25 12:47:30'
 ---
 
 将.Z压缩包重新转化为gzip命令压缩的.gz压缩包
@@ -40,4 +39,3 @@ znew(选项)(参数)
 文件：指定compress指令压缩生成的“.Z”压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

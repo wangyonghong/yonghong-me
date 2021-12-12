@@ -9,7 +9,6 @@ tags:
 - fsck
 title: 【Linux 命令】fsck
 updated: '2020-09-25 09:18:30'
-indexing: false
 ---
 
 检查并且试图修复文件系统中的错误
@@ -64,4 +63,3 @@ fsck
 结束后同样使用reboot命令重启系统这样就好了！
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

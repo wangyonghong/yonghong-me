@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pkill
 title: 【Linux 命令】pkill
-updated: '2020-09-25 10:57:30'
-indexing: false
+updated: '2020-09-25 10:58:30'
 ---
 
 可以按照进程名杀死进程
@@ -50,4 +49,3 @@ pkill gaim
 也就是说：kill对应的是PID，pkill对应的是command。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - bzcmp
 title: 【Linux 命令】bzcmp
 updated: '2020-09-25 08:21:00'
-indexing: false
 ---
 
 比较两个压缩包中的文件
@@ -30,4 +29,3 @@ bzcmp(参数)
 * 文件2：指定要比较的第二个.bz2压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

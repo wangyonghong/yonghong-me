@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nmap
 title: 【Linux 命令】nmap
-updated: '2020-09-25 10:45:00'
-indexing: false
+updated: '2020-09-25 10:46:00'
 ---
 
 网络探测和安全审核
@@ -81,4 +80,4 @@ Nmap finished: 1 IP address (1 host up) scanned in 45.870 seconds
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

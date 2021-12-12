@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpmverify
 title: 【Linux 命令】rpmverify
-updated: '2020-09-25 11:25:30'
-indexing: false
+updated: '2020-09-25 11:26:30'
 ---
 
 验证已安装的RPM软件包的正确性
@@ -33,4 +32,3 @@ rpmverify(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

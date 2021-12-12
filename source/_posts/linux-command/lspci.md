@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lspci
 title: 【Linux 命令】lspci
-updated: '2020-09-25 10:18:30'
-indexing: false
+updated: '2020-09-25 10:19:30'
 ---
 
 显示当前主机的所有PCI总线信息
@@ -88,4 +87,3 @@ lspci(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

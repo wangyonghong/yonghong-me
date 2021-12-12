@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nproc
 title: 【Linux 命令】nproc
-updated: '2020-09-25 10:47:00'
-indexing: false
+updated: '2020-09-25 10:48:00'
 ---
 
 打印可用的处理器单元数量。
@@ -44,4 +43,4 @@ nproc [OPTION]...
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 nproc`，`info coreutils 'nproc invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

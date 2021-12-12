@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rcp
 title: 【Linux 命令】rcp
-updated: '2020-09-25 11:12:30'
-indexing: false
+updated: '2020-09-25 11:13:30'
 ---
 
 使在两台Linux主机之间的文件复制操作更简单
@@ -133,4 +132,4 @@ rcp –r webserver1:/home/root/work .Enter
 `.`表示当前目录。将在此目录下创建 work 目录。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

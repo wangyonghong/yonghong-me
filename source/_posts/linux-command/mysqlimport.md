@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mysqlimport
 title: 【Linux 命令】mysqlimport
-updated: '2020-09-25 10:37:30'
-indexing: false
+updated: '2020-09-25 10:38:30'
 ---
 
 为MySQL服务器用命令行方式导入数据
@@ -40,4 +39,3 @@ mysqlimport(选项)(参数)
 *   文本文件：包含特定格式文本文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

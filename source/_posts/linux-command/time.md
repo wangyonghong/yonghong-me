@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - time
 title: 【Linux 命令】time
-updated: '2020-09-25 12:04:30'
-indexing: false
+updated: '2020-09-25 12:06:30'
 ---
 
 统计给定命令所花费的总时间
@@ -85,4 +84,3 @@ shell内建也有一个time命令，当运行time时候是调用的系统内建�
 `%w` | 进程主动进行上下文切换的次数，例如等待I/O操作完成。
 `%c` | 进程被迫进行上下文切换的次数（由于时间片到期）。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

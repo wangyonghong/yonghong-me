@@ -9,7 +9,6 @@ tags:
 - fc
 title: 【Linux 命令】fc
 updated: '2020-09-25 09:11:30'
-indexing: false
 ---
 
 显示历史列表中的命令或修改指定的历史命令并执行。
@@ -88,4 +87,4 @@ fc -s ~=/
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

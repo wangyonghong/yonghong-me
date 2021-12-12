@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pvck
 title: 【Linux 命令】pvck
-updated: '2020-09-25 11:05:00'
-indexing: false
+updated: '2020-09-25 11:06:00'
 ---
 
 检测物理卷的LVM元数据的一致性
@@ -50,4 +49,3 @@ size=70656, offset2=0 size2=0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - echo
 title: 【Linux 命令】echo
 updated: '2020-09-25 09:02:00'
-indexing: false
 ---
 
 输出指定的字符串或者变量
@@ -81,4 +80,4 @@ echo -e "\033[37;31;5mMySQL Server Stop...\033[39;49;0m"
 红色数字处还有其他数字参数：0 关闭所有属性、1 设置高亮度（加粗）、4 下划线、5 闪烁、7 反显、8 消隐
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

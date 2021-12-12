@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sar
 title: 【Linux 命令】sar
-updated: '2020-09-25 11:27:30'
-indexing: false
+updated: '2020-09-25 11:28:30'
 ---
 
 系统运行状态统计工具
@@ -77,4 +76,3 @@ sar -o temp 60 10
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

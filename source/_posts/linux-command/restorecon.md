@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - restorecon
 title: 【Linux 命令】restorecon
-updated: '2020-09-25 11:18:00'
-indexing: false
+updated: '2020-09-25 11:19:00'
 ---
 
 恢复文件的安全上下文
@@ -85,4 +84,3 @@ type=AVC msg=audit(1378974214.610:465): avc:  denied  { open } for  pid=2359 com
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

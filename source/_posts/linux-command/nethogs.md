@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nethogs
 title: 【Linux 命令】nethogs
-updated: '2020-09-25 10:40:30'
-indexing: false
+updated: '2020-09-25 10:41:30'
 ---
 
 终端下的网络流量监控工具
@@ -148,4 +147,4 @@ $ sudo nethogs eth0 eth1
 关于NetHogs命令行工具的完整参数列表，可以参考NetHogs的手册，使用方法是在终端里输入`man nethogs`或者`sudo man nethogs`，更多信息请参考NetHogs项目主页。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

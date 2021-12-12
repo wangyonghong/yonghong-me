@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpmsign
 title: 【Linux 命令】rpmsign
-updated: '2020-09-25 11:25:00'
-indexing: false
+updated: '2020-09-25 11:26:00'
 ---
 
 使用RPM软件包的签名管理工具
@@ -37,4 +36,3 @@ rpmsign(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

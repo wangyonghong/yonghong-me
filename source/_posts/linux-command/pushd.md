@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pushd
 title: 【Linux 命令】pushd
-updated: '2020-09-25 11:03:30'
-indexing: false
+updated: '2020-09-25 11:04:30'
 ---
 
 将目录添加到目录堆栈顶部。
@@ -85,4 +84,4 @@ dir（可选）：要推送的目录。
 
 - [popd、pushd命令'-n'选项的行为](https://superuser.com/questions/784450/popd-and-pushd-behavior-with-n-option)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

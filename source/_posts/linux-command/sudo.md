@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sudo
 title: 【Linux 命令】sudo
-updated: '2020-09-25 11:52:30'
-indexing: false
+updated: '2020-09-25 11:54:30'
 ---
 
 以其他身份来执行命令
@@ -204,4 +203,4 @@ PWD=/home/foobar ; USER=root ; COMMAND=/bin/cat /etc/shadow
 sudo 有自己的方式来保护安全。以root的身份执行`sudo-V`，查看一下sudo的设置。因为考虑到安全问题，一部分环境变量并没有传递给sudo后面的命令，或者被检查后再传递的，比如：PATH，HOME，SHELL等。当然，你也可以通过sudoers来配置这些环境变量。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

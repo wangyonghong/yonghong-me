@@ -9,7 +9,6 @@ tags:
 - help
 title: 【Linux 命令】help
 updated: '2020-09-25 09:34:00'
-indexing: false
 ---
 
 该命令是bash内建命令，用于显示bash内建命令的帮助信息。
@@ -78,4 +77,4 @@ shopt: shopt [-pqsu] [-o long-option] optname [optname...]
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

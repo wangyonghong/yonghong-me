@@ -9,7 +9,6 @@ tags:
 - dircolors
 title: 【Linux 命令】dircolors
 updated: '2020-09-25 08:49:30'
-indexing: false
 ---
 
 置ls命令在显示目录或文件时所用的色彩
@@ -153,4 +152,3 @@ exec 01;32
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

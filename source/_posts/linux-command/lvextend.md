@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvextend
 title: 【Linux 命令】lvextend
-updated: '2020-09-25 10:21:00'
-indexing: false
+updated: '2020-09-25 10:22:00'
 ---
 
 扩展逻辑卷空间
@@ -51,4 +50,3 @@ Logical volume lvol0 successfully resized
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

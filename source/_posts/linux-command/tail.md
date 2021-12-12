@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tail
 title: 【Linux 命令】tail
-updated: '2020-09-25 11:58:30'
-indexing: false
+updated: '2020-09-25 12:00:30'
 ---
 
 在屏幕上显示指定文件的末尾若干行
@@ -71,4 +70,4 @@ tail -F mail.log # 等同于--follow=name --retry，根据文件名进行追踪�
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - last
 title: 【Linux 命令】last
-updated: '2020-09-25 09:59:00'
-indexing: false
+updated: '2020-09-25 10:00:00'
 ---
 
 列出目前与过去登入系统的用户相关信息
@@ -59,4 +58,3 @@ root     pts/0        221.6.45.34      Mon Dec  9 09:38 - 11:41  (02:02)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

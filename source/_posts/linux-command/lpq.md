@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lpq
 title: 【Linux 命令】lpq
-updated: '2020-09-25 10:13:00'
-indexing: false
+updated: '2020-09-25 10:14:00'
 ---
 
 显示打印队列中的打印任务的状态信息
@@ -37,4 +36,3 @@ lpq(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - ftpwho
 title: 【Linux 命令】ftpwho
 updated: '2020-09-25 09:21:00'
-indexing: false
 ---
 
 显示当前每个ftp会话信息
@@ -32,4 +31,3 @@ ftpwho(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

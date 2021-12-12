@@ -9,7 +9,6 @@ tags:
 - arj
 title: 【Linux 命令】arj
 updated: '2020-09-25 08:07:00'
-indexing: false
 ---
 
 用于创建和管理.arj压缩包
@@ -30,4 +29,3 @@ arj(参数)
 *  压缩包名称：指定要操作的arj压缩包名称。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

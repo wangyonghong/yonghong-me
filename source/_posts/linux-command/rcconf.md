@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rcconf
 title: 【Linux 命令】rcconf
-updated: '2020-09-25 11:12:00'
-indexing: false
+updated: '2020-09-25 11:13:00'
 ---
 
 Debian Linux下的运行等级服务配置工具
@@ -33,4 +32,3 @@ rcconf(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

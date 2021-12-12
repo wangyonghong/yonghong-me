@@ -9,7 +9,6 @@ tags:
 - hostid
 title: 【Linux 命令】hostid
 updated: '2020-09-25 09:36:00'
-indexing: false
 ---
 
 显示当前主机的十六进制数字标识。
@@ -44,4 +43,4 @@ hostid [OPTION]...
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 hostid`，`info coreutils 'hostid invocation'`。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

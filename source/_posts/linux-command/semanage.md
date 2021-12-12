@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - semanage
 title: 【Linux 命令】semanage
-updated: '2020-09-25 11:30:00'
-indexing: false
+updated: '2020-09-25 11:32:00'
 ---
 
 默认目录的安全上下文查询与修改
@@ -93,4 +92,3 @@ drwxr-xr-x  root root system_u:object_r:public_content_t /srv/samba/  #有默认
 semanage命令的功能很多，这里主要用到的仅有fcontext这个选项的用法而已。如上所示，你可以使用semanage来查询所有的目录默认值，也能够使用它来增加默认值的设置！
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

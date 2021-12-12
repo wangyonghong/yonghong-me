@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - reject
 title: 【Linux 命令】reject
-updated: '2020-09-25 11:15:00'
-indexing: false
+updated: '2020-09-25 11:16:00'
 ---
 
 指示打印系统拒绝发往指定目标打印机的打印任务
@@ -38,4 +37,3 @@ reject(选项)(参数)
 目标：指定目标打印机。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

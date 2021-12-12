@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iptables-restore
 title: 【Linux 命令】iptables-restore
-updated: '2020-09-25 09:51:30'
-indexing: false
+updated: '2020-09-25 09:52:00'
 ---
 
 还原iptables表的配置
@@ -21,7 +20,7 @@ indexing: false
 ###  语法
 
 ```shell
-iptables-restor(选项)
+iptables-restore(选项)
 ```
 
 ###  选项
@@ -34,10 +33,10 @@ iptables-restor(选项)
 ###  实例
 
 ```shell
-iptables-restor < iptables.bak
+iptables-restore < iptables.bak
 ```
 
 iptables.bak是iptables-save命令所备份的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

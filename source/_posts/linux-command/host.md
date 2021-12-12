@@ -9,7 +9,6 @@ tags:
 - host
 title: 【Linux 命令】host
 updated: '2020-09-25 09:35:30'
-indexing: false
 ---
 
 常用的分析域名查询工具
@@ -65,4 +64,3 @@ Received 54 bytes from 202.96.104.15#53 in 0 ms
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

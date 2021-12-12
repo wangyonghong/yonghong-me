@@ -9,7 +9,6 @@ tags:
 - gpasswd
 title: 【Linux 命令】gpasswd
 updated: '2020-09-25 09:25:30'
-indexing: false
 ---
 
 Linux下工作组文件的管理工具
@@ -71,4 +70,3 @@ gpasswd -a user_name group_name
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

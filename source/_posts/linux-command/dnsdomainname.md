@@ -9,7 +9,6 @@ tags:
 - dnsdomainname
 title: 【Linux 命令】dnsdomainname
 updated: '2020-09-25 08:53:00'
-indexing: false
 ---
 
 定义DNS系统中FQDN名称的域名
@@ -41,4 +40,3 @@ Result: h_addr_list=`10.160.7.81'
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

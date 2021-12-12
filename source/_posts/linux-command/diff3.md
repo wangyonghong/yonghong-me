@@ -9,7 +9,6 @@ tags:
 - diff3
 title: 【Linux 命令】diff3
 updated: '2020-09-25 08:48:00'
-indexing: false
 ---
 
 比较3个文件不同的地方
@@ -43,4 +42,3 @@ diff3(选项)(参数)
 * 文件3：指定要比较的第3个文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

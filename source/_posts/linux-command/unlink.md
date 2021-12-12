@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unlink
 title: 【Linux 命令】unlink
-updated: '2020-09-25 12:16:30'
-indexing: false
+updated: '2020-09-25 12:18:30'
 ---
 
 系统调用函数unlink去删除指定的文件
@@ -36,4 +35,3 @@ unlink(选项)(参数)
 文件：指定要删除的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

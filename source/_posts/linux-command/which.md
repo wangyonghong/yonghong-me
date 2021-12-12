@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - which
 title: 【Linux 命令】which
-updated: '2020-09-25 12:34:30'
-indexing: false
+updated: '2020-09-25 12:36:30'
 ---
 
 查找并显示给定命令的绝对路径
@@ -59,4 +58,4 @@ cd: shell built-in command
 ```
 cd 这个常用的命令竟然找不到啊！为什么呢？这是因为 cd 是bash 内建的命令！ 但是 which 默认是找 PATH 内所规范的目录，所以当然一定找不到的！
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

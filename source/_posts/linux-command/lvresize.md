@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvresize
 title: 【Linux 命令】lvresize
-updated: '2020-09-25 10:22:30'
-indexing: false
+updated: '2020-09-25 10:23:30'
 ---
 
 调整逻辑卷空间大小
@@ -51,4 +50,3 @@ Logical volume lvol0 successfully resized
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - chcon
 title: 【Linux 命令】chcon
 updated: '2020-09-25 08:28:00'
-indexing: false
 ---
 
 修改对象（文件）的安全上下文
@@ -83,4 +82,3 @@ chcon -t public_content_t /directories
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

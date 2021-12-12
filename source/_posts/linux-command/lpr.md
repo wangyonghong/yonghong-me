@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lpr
 title: 【Linux 命令】lpr
-updated: '2020-09-25 10:13:30'
-indexing: false
+updated: '2020-09-25 10:14:30'
 ---
 
 将文件发送给指定打印机进行打印
@@ -51,4 +50,3 @@ lpr -P lp man1 man2
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - emacs
 title: 【Linux 命令】emacs
 updated: '2020-09-25 09:05:30'
-indexing: false
 ---
 
 功能强大的全屏文本编辑器
@@ -169,4 +168,3 @@ C-x C-q : 修改buffer的只读属性
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
