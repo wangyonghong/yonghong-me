@@ -31,7 +31,7 @@
 <meta property="og:description" content="可以用来解压缩文件 补充说明zip命令 可以用来解压缩文件，或者对文件进行打包操作。zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具有“.zip”扩展名的压缩文件。 语法1zip(选项)(参数)  选项12345678910111213141516171819202122232425262728293031323334-A：调整可执行的自动解压缩文件；-b&lt;工作目录&gt;：指定暂时">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-25T04:44:00.000Z">
+<meta property="article:modified_time" content="2020-09-25T04:46:00.000Z">
 <meta property="article:author" content="Honng">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Linux Command">
@@ -96,9 +96,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">792</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">908</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -171,18 +171,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-count">792</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-count">908</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -271,7 +271,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 12:44:00 12:44:00" itemprop="dateModified" datetime="2020-09-25T12:44:00+08:00">2020-09-25 12:44:00</time>
+        <time title="修改时间：2020-09-25 12:46:00 12:46:00" itemprop="dateModified" datetime="2020-09-25T12:46:00+08:00">2020-09-25 12:46:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,14 +301,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.3k</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -338,8 +338,23 @@
 <p>比如现在我的html目录下，我操作的zip压缩命令是：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -q -r html.zip *</span><br></pre></td></tr></table></figure>
 
+<p>压缩 <code>example/basic/</code> 目录内容到 <code>basic.zip</code> 压缩包中 <code>-x</code> 指定排除目录，注意没有双引号将不起作用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -r basic.zip example/basic/ -x &quot;example/basic/node_modules/*&quot; -x &quot;example/basic/build/*&quot; -x &quot;example/basic/coverage/*&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面压缩解压出来，内容存放在 <code>example/basic/</code>， 如果想存放到根目录，进入目录进行压缩，目前没有找到一个合适的参数来解决此问题。</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd example/basic/ <span class="variable">&amp;&amp;</span> zip -r basic.zip . -<span class="meta">x</span> <span class="string">&quot;node_modules/*&quot;</span> -<span class="meta">x</span> <span class="string">&quot;build/*&quot;</span> -<span class="meta">x</span> <span class="string">&quot;coverage/*&quot;</span></span><br></pre></td></tr></table></figure>
+
 <p>压缩效率选择:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zip -9 # 1-9 faster-&gt;better</span><br></pre></td></tr></table></figure>
+
+<p>创建 <code>public_html</code> 目录下忽略所有文件和文件夹，排除包括文本 <code>backup</code> 的所有文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> zip -r public_html.zip public_html -x *backup*</span></span><br></pre></td></tr></table></figure>
+
+<p><code>httpdocs</code> 目录忽略 <code>.svn</code> 文件或 <code>git</code> 的文件和目录下创建所有文件的归档。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> zip -r httpdocs.zip httpdocs --exclude *.svn* --exclude *.git*</span></span><br></pre></td></tr></table></figure>
+
+<p><code>httpdocs</code> 目录忽略的所有文件，并与 <code>.log</code> 结尾的目录下创建所有文件的归档。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> zip -r httpdocs.zip httpdocs --exclude <span class="string">&quot;*.log&quot;</span></span></span><br></pre></td></tr></table></figure>
 
 <h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>CentOS7中命令找不到</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Bash: Unzip: Command Not Found</span><br></pre></td></tr></table></figure>
@@ -347,7 +362,7 @@
 <p>解决方法</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y unzip zip</span><br></pre></td></tr></table></figure>
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
 
     </div>
 
@@ -492,7 +507,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:17</span>
+    <span title="站点阅读时长">21:35</span>
   </span>
 </div>
 <div class="busuanzi-count">

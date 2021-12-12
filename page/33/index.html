@@ -88,9 +88,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">792</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">908</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-count">792</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-count">908</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -230,6 +230,355 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/pv/" class="post-title-link" itemprop="url">【Linux 命令】pv</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:05:00 11:05:00" itemprop="dateModified" datetime="2020-09-25T11:05:00+08:00">2020-09-25 11:05:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示当前在命令行执行的命令的进度信息，管道查看器</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pv命令</strong>  Pipe Viewer 的简称，由Andrew Wood 开发。意思是通过管道显示数据处理进度的信息。这些信息包括已经耗费的时间，完成的百分比(通过进度条显示)，当前的速度，全部传输的数据，以及估计剩余的时间。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Debian 系的操作系统，如 Ubuntu</span></span><br><span class="line">sudo apt-get install pv</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> RedHat系的则这样：</span></span><br><span class="line">yum install pv</span><br></pre></td></tr></table></figure>
+
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pv(选项)(参数)</span><br><span class="line">pv [OPTION] [FILE]...</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">-p, --progress           显示进度条</span><br><span class="line">-t, --timer              显示已用时间</span><br><span class="line">-e, --eta                显示预计到达时间 (完成)</span><br><span class="line">-I, --fineta             显示绝对估计到达时间</span><br><span class="line">                         (完成)</span><br><span class="line">-r, --rate               显示数据传输速率计数器</span><br><span class="line">-a, --average-rate       显示数据传输平均速率计数器</span><br><span class="line">-b, --bytes              显示传输的字节数</span><br><span class="line">-T, --buffer-percent     显示正在使用的传输缓冲区百分比</span><br><span class="line">-A, --last-written NUM   显示上次写入的字节数</span><br><span class="line">-F, --format FORMAT      将输出格式设置为FORMAT</span><br><span class="line">-n, --numeric            输出百分比</span><br><span class="line">-q, --quiet              不输出任何信息</span><br><span class="line"></span><br><span class="line">-W, --wait               在传输第一个字节之前不显示任何内容</span><br><span class="line">-D, --delay-start SEC    在SEC秒过去之前不显示任何内容</span><br><span class="line">-s, --size SIZE          将估算的数据大小设置为SIZE字节</span><br><span class="line">-l, --line-mode          计算行数而不是字节数 </span><br><span class="line">-0, --null               行以零结尾</span><br><span class="line">-i, --interval SEC       每SEC秒更新一次</span><br><span class="line">-w, --width WIDTH        假设终端的宽度为WIDTH个字符 </span><br><span class="line">-H, --height HEIGHT      假设终端高度为HEIGHT行</span><br><span class="line">-N, --name NAME          在可视信息前面加上名称</span><br><span class="line">-f, --force              将标准错误输出到终端</span><br><span class="line">-c, --cursor             使用光标定位转义序列</span><br><span class="line"></span><br><span class="line">-L, --rate-limit RATE    将传输限制为每秒RATE字节</span><br><span class="line">-B, --buffer-size BYTES  使用BYTES的缓冲区大小</span><br><span class="line">-C, --no-splice          从不使用splice()，始终使用读/写</span><br><span class="line">-E, --skip-errors        跳过输入中的读取错误</span><br><span class="line">-S, --stop-at-size       传输--size字节后停止</span><br><span class="line">-R, --remote PID         更新过程PID的设置</span><br><span class="line"></span><br><span class="line">-P, --pidfile FILE       将进程ID保存在FILE中 </span><br><span class="line"></span><br><span class="line">-d, --watchfd PID[:FD]   监视进程PID,打开的文件FD</span><br><span class="line"></span><br><span class="line">-h, --help               显示帮助</span><br><span class="line">-V, --version            显示版本信息</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>我们（在 linux 上使用命令行的用户）的大多数使用场景都会用到的命令是从一个 USB 驱动器拷贝电影文件到你的电脑。如果你使用 cp 来完成上面的任务，你会什么情况都不清楚，直到整个复制过程结束或者出错。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 复制文件会有进度</span></span><br><span class="line">linux [master●] % pv ~/Downloads/CentOS-7-x86_64-Minimal-1511.iso &gt; ~/Desktop/CentOS-7-x86_64-Minimal-1511.iso</span><br><span class="line"><span class="meta">#</span><span class="bash"> 下面输入信息</span></span><br><span class="line">552MiB 0:00:02 [ 212MiB/s] [==================&gt;           ] 91% ETA 0:00:00</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -L 可以让你修改 pv 命令的传输速率。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 -L 选项来限制传输速率为2MB/s。</span></span><br><span class="line">pv -L 2m /media/himanshu/1AC2-A8E3/fNf.mkv &gt; ./Desktop/fnf.mkv </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 字符一个个匀速在命令行中显示出来</span></span><br><span class="line">echo &quot;Tecmint[dot]com is a community of Linux Nerds and Geeks&quot; | pv -qL 10</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 压缩文件展示进度信息</span></span><br><span class="line">pv /media/himanshu/1AC2-A8E3/fnf.mkv | gzip &gt; ./Desktop/fnf.log.gz </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 用 dd 命令将 iso 写入磁盘，pv来实现进度条的显示</span></span><br><span class="line">sudo pv -cN source &lt; /Users/kacperwang/Downloads/CentOS-7-x86_64-Everything-1511.iso | sudo dd of=/dev/disk2 bs=4m</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 显示下面进度</span></span></span><br><span class="line">source:  5.2GiB 5:11:41 [ 503KiB/s] [=====================&gt;       ] 71% ETA 2:01:56</span><br></pre></td></tr></table></figure>
+
+<p>在linux上, 如果执行的一些命令或者一些脚本需要花费很长时间, 但又不能拿出更多的精力反复盯着有没有执行结束, 这时候可以用pv监听PID, 任务完成后通过网络通知到微信或者钉钉, 这样就可以腾出来精力做其他的事, 是不是很棒</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pv -d $(ps -ef | grep -v grep | grep <span class="string">&quot;&lt;脚本或命令的关键字&gt;&quot;</span> | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>) &amp;&amp; &lt;这里执行发通知脚本或者命令,脚本或命令需要提前调试好&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>选项”-d, –watchfd PID[:FD]”, 是在1.6.6版本中才有的参数,如果使用需要<code>pv</code>升级到大于等于1.6.6的版本</li>
+<li>CentOS7的Yum仓库里<code>pv</code>最新的是1.4.6版本,1.6.6版本是发布在CentOS8里面的,如果需要,可以将CentOS8里的pv下载到本地电脑上或者本地的Yum私服里, 这个是<span class="exturl" data-url="aHR0cDovL3d3dy5ycG1maW5kLm5ldC9saW51eC9ycG0yaHRtbC9zZWFyY2gucGhwP3F1ZXJ5PXB2JnN1Ym1pdD1TZWFyY2grLi4uJnN5c3RlbT1FUEVMJmFyY2g9">下载地址<i class="fa fa-external-link-alt"></i></span>, 可以根据自己不同的架构下载, 1.6.6的安装: <code>rpm -ivh pv-1.6.6-7.el8.x86_64.rpm -U</code></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pushd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/pushd/" class="post-title-link" itemprop="url">【Linux 命令】pushd</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:04:30 11:04:30" itemprop="dateModified" datetime="2020-09-25T11:04:30+08:00">2020-09-25 11:04:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>757</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>将目录添加到目录堆栈顶部。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushd [-n] [+N | -N | dir]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li><p>将目录添加到目录堆栈顶部，切换当前工作目录到该目录。</p>
+</li>
+<li><p>旋转目录堆栈，使堆栈的新顶部成为当前工作目录。</p>
+</li>
+<li><p>没有参数时，交换目录堆栈的前两个目录。</p>
+</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n    抑制添加目录引起的当前工作目录变化。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>+N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，左起的第N个目录将作为堆栈顶部，在它前面的会移动到底部。（从0开始计数）</p>
+<p>-N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，右起的第N个目录将作为堆栈顶部，在它前面的会移动到底部。（从0开始计数）</p>
+<p>dir（可选）：要推送的目录。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非提供了非法选项或执行出现错误。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加目录到堆栈，改变了当前工作目录。</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd ~/Desktop</span><br><span class="line">~/Desktop ~</span><br><span class="line">[user2@pc Desktop]$ </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加目录到堆栈，当前工作目录不变。</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Pictures</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 调整顺序。</span></span><br><span class="line">[user2@pc ~]$ pushd +1</span><br><span class="line">~/Pictures ~/Desktop ~</span><br><span class="line">[user2@pc ~]$ pushd -1</span><br><span class="line">~/Desktop ~ ~/Pictures</span><br><span class="line">[user2@pc ~]$ pushd</span><br><span class="line">~ ~/Desktop ~/Pictures</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li><code>bash</code>的目录堆栈命令包括<code>dirs popd pushd</code>。</li>
+<li>当前目录始终是目录堆栈的顶部。</li>
+<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
+</ol>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdXBlcnVzZXIuY29tL3F1ZXN0aW9ucy83ODQ0NTAvcG9wZC1hbmQtcHVzaGQtYmVoYXZpb3Itd2l0aC1uLW9wdGlvbg==">popd、pushd命令’-n’选项的行为<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pstree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/pstree/" class="post-title-link" itemprop="url">【Linux 命令】pstree</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:04:00 11:04:00" itemprop="dateModified" datetime="2020-09-25T11:04:00+08:00">2020-09-25 11:04:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>566</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>以树状图的方式展现进程之间的派生关系</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pstree命令</strong> 以树状图的方式展现进程之间的派生关系，显示效果比较直观。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-a：显示每个程序的完整指令，包含路径，参数或是常驻服务的标示；</span><br><span class="line">-c：不使用精简标示法；</span><br><span class="line">-G：使用VT100终端机的列绘图字符；</span><br><span class="line">-h：列出树状图时，特别标明现在执行的程序；</span><br><span class="line">-H&lt;程序识别码&gt;：此参数的效果和指定&quot;-h&quot;参数类似，但特别标明指定的程序；</span><br><span class="line">-l：采用长列格式显示树状图；</span><br><span class="line">-n：用程序识别码排序。预设是以程序名称来排序；</span><br><span class="line">-p：显示程序识别码；</span><br><span class="line">-u：显示用户名称；</span><br><span class="line">-U：使用UTF-8列绘图字符；</span><br><span class="line">-V：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>显示当前所有进程的进程号和进程id</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree -p</span><br></pre></td></tr></table></figure>
+
+<p>显示所有进程的所有详细信息，遇到相同的进程名可以压缩显示。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pstree  -a</span><br></pre></td></tr></table></figure>
+
+<p>获取 SSH 会话的 PID</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pstree -p | grep ssh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  |-sshd(1221)-+-sshd(2768)---bash(2770)-+-grep(2810)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  |            `-sshd(2807)---sshd(2808)</span></span><br></pre></td></tr></table></figure>
+
+<p>从上方的输出中，你可以看到 sshd 进程与分支的树形图。sshd 的主进程是 sshd（1221），另两个分支分别为 sshd（2768） 和 sshd（2807）。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pstack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -261,7 +610,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:02:30 11:02:30" itemprop="dateModified" datetime="2020-09-25T11:02:30+08:00">2020-09-25 11:02:30</time>
+        <time title="修改时间：2020-09-25 11:03:30 11:03:30" itemprop="dateModified" datetime="2020-09-25T11:03:30+08:00">2020-09-25 11:03:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -312,7 +661,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">pstack 4551</span><br><span class="line">Thread 7 (Thread 1084229984 (LWP 4552)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302afc63dc <span class="keyword">in</span> epoll_wait () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x00000000006f0730 <span class="keyword">in</span> ub::EPollEx::poll ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x00000000006f172a <span class="keyword">in</span> ub::NetReactor::callback ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x00000000006fbbbb <span class="keyword">in</span> ub::UBTask::CALLBACK ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 6 (Thread 1094719840 (LWP 4553)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302afc63dc <span class="keyword">in</span> epoll_wait () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x00000000006f0730 <span class="keyword">in</span> ub::EPollEx::poll ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x00000000006f172a <span class="keyword">in</span> ub::NetReactor::callback ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x00000000006fbbbb <span class="keyword">in</span> ub::UBTask::CALLBACK ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 5 (Thread 1105209696 (LWP 4554)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302b80baa5 <span class="keyword">in</span> __nanosleep_nocancel ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x000000000079e758 <span class="keyword">in</span> comcm::ms_sleep ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x00000000006c8581 <span class="keyword">in</span> ub::UbClientManager::healthyCheck ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x00000000006c8471 <span class="keyword">in</span> ub::UbClientManager::start_healthy_check ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 4 (Thread 1115699552 (LWP 4555)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302b80baa5 <span class="keyword">in</span> __nanosleep_nocancel ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x0000000000482b0e <span class="keyword">in</span> armor::armor_check_thread ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 3 (Thread 1126189408 (LWP 4556)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302af8f1a5 <span class="keyword">in</span> __nanosleep_nocancel () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x000000302af8f010 <span class="keyword">in</span> sleep () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x000000000044c972 <span class="keyword">in</span> Business_config_manager::run ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x0000000000457b83 <span class="keyword">in</span> Thread::run_thread ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 2 (Thread 1136679264 (LWP 4557)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302af8f1a5 <span class="keyword">in</span> __nanosleep_nocancel () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x000000302af8f010 <span class="keyword">in</span> sleep () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x00000000004524bb <span class="keyword">in</span> Process_thread::sleep_period ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x0000000000452641 <span class="keyword">in</span> Process_thread::run ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">4  0x0000000000457b83 <span class="keyword">in</span> Thread::run_thread ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">5  0x000000302b80610a <span class="keyword">in</span> start_thread () from /lib64/tls/libpthread.so.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">6  0x000000302afc6003 <span class="keyword">in</span> <span class="built_in">clone</span> () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">7  0x0000000000000000 <span class="keyword">in</span> ?? ()</span></span><br><span class="line">Thread 1 (Thread 182894129792 (LWP 4551)):</span><br><span class="line"><span class="meta">#</span><span class="bash">0  0x000000302af8f1a5 <span class="keyword">in</span> __nanosleep_nocancel () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">1  0x000000302af8f010 <span class="keyword">in</span> sleep () from /lib64/tls/libc.so.6</span></span><br><span class="line"><span class="meta">#</span><span class="bash">2  0x0000000000420d79 <span class="keyword">in</span> Ad_preprocess::run ()</span></span><br><span class="line"><span class="meta">#</span><span class="bash">3  0x0000000000450ad0 <span class="keyword">in</span> main ()</span></span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -369,7 +718,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:02:00 11:02:00" itemprop="dateModified" datetime="2020-09-25T11:02:00+08:00">2020-09-25 11:02:00</time>
+        <time title="修改时间：2020-09-25 11:03:00 11:03:00" itemprop="dateModified" datetime="2020-09-25T11:03:00+08:00">2020-09-25 11:03:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -430,7 +779,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ll /tmp/pssh/</span></span><br><span class="line">总用量 12</span><br><span class="line">-rw-r--r--. 1 root root 70 12月  1 11:19 Feb.mars.he</span><br><span class="line">-rw-r--r--. 1 root root 70 12月  1 11:19 Jan.mars.he</span><br><span class="line">-rw-r--r--. 1 root root 69 12月  1 11:19 Mar.mars.he</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> cat /tmp/pssh/*</span></span><br><span class="line">11:19:55 up 4 days, 16:31,  2 users,  load average: 0.02, 0.03, 0.00</span><br><span class="line">11:19:56 up 3 days, 23:30,  0 users,  load average: 0.01, 0.00, 0.00</span><br><span class="line">11:19:56 up 4 days, 16:30,  1 user,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
 
 <p>上面介绍的是pssh命令很少的一部分，大家可以将其用到适合自己的场景，发挥它的最大功效。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -487,7 +836,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:01:30 11:01:30" itemprop="dateModified" datetime="2020-09-25T11:01:30+08:00">2020-09-25 11:01:30</time>
+        <time title="修改时间：2020-09-25 11:02:30 11:02:30" itemprop="dateModified" datetime="2020-09-25T11:02:30+08:00">2020-09-25 11:02:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -585,7 +934,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux &gt; ps001.txt</span><br></pre></td></tr></table></figure>
 
 <p>输出指定的字段</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
     </div>
@@ -643,7 +991,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:01:00 11:01:00" itemprop="dateModified" datetime="2020-09-25T11:01:00+08:00">2020-09-25 11:01:00</time>
+        <time title="修改时间：2020-09-25 11:02:00 11:02:00" itemprop="dateModified" datetime="2020-09-25T11:02:00+08:00">2020-09-25 11:02:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -687,7 +1035,7 @@
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-d：设置需要转换代码的目录；</span><br><span class="line">-x：转换代码时排除的文件。</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换代码的C语言源文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -744,7 +1092,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:00:30 11:00:30" itemprop="dateModified" datetime="2020-09-25T11:00:30+08:00">2020-09-25 11:00:30</time>
+        <time title="修改时间：2020-09-25 11:01:30 11:01:30" itemprop="dateModified" datetime="2020-09-25T11:01:30+08:00">2020-09-25 11:01:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -834,7 +1182,6 @@
 </ul>
 </li>
 </ol>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
     </div>
@@ -892,7 +1239,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:00:00 11:00:00" itemprop="dateModified" datetime="2020-09-25T11:00:00+08:00">2020-09-25 11:00:00</time>
+        <time title="修改时间：2020-09-25 11:01:00 11:01:00" itemprop="dateModified" datetime="2020-09-25T11:01:00+08:00">2020-09-25 11:01:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -936,7 +1283,7 @@
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-h&lt;标题&gt;：为页指定标题；</span><br><span class="line">-l&lt;行数&gt;：指定每页的行数。</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：需要转换格式的文件。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -993,7 +1340,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 10:59:30 10:59:30" itemprop="dateModified" datetime="2020-09-25T10:59:30+08:00">2020-09-25 10:59:30</time>
+        <time title="修改时间：2020-09-25 11:00:30 11:00:30" itemprop="dateModified" datetime="2020-09-25T11:00:30+08:00">2020-09-25 11:00:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1035,336 +1382,7 @@
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ppp-off</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/poweroff/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/poweroff/" class="post-title-link" itemprop="url">【Linux 命令】poweroff</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 10:59:00 10:59:00" itemprop="dateModified" datetime="2020-09-25T10:59:00+08:00">2020-09-25 10:59:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>220</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>关闭Linux系统，关闭记录会被写入到/var/log/wtmp日志文件中</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>grename命令</strong> 可以重命名卷组的名称。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poweroff [选项]</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-n 关闭之前不同步</span><br><span class="line">-p 当被称为halt时关闭电源</span><br><span class="line">-v 增加输出，包括消息</span><br><span class="line">-q 降低输出错误唯一的消息</span><br><span class="line">-w 并不实际关闭系统，只是写入/var/log/wtmp文件中</span><br><span class="line">-f 强制关机，不调用shutdown</span><br></pre></td></tr></table></figure>
-
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>关闭Linux系统。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# poweroff</span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/popd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/popd/" class="post-title-link" itemprop="url">【Linux 命令】popd</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 10:58:30 10:58:30" itemprop="dateModified" datetime="2020-09-25T10:58:30+08:00">2020-09-25 10:58:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>793</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>从目录堆栈中删除目录。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">popd [-n] [+N | -N]</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li><p>从目录堆栈中删除目录，如果是顶部目录被删除，那么当前工作目录会切换到新的顶部目录。</p>
-</li>
-<li><p>没有参数时，删除目录堆栈顶部。</p>
-</li>
-</ul>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-n    抑制删除目录引起的当前工作目录变化。</span><br></pre></td></tr></table></figure>
-
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>+N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，左起的第N个目录将被删除。（从0开始计数）</p>
-<p>-N（可选）：不带参数执行<code>dirs</code>命令显示的列表中，右起的第N个目录将被删除。（从0开始计数）</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回成功除非提供了非法选项或执行出现错误。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加目录到堆栈，当前工作目录不变。</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Pictures</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line">[user2@pc ~]$ pushd -n ~/bin</span><br><span class="line">~ ~/bin ~/Pictures ~/Desktop</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从目录堆栈中删除目录，删除顶部目录时会改变当前工作目录：</span></span><br><span class="line">[user2@pc ~]$ popd -2</span><br><span class="line">~ ~/Pictures ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd +1</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd</span><br><span class="line">~/Desktop</span><br><span class="line">[user2@pc Desktop]$</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 从目录堆栈中删除目录，删除顶部目录时不会改变当前工作目录：</span></span><br><span class="line">[user2@pc ~]$ dirs</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ pushd -n ~/Desktop</span><br><span class="line">~ ~/Desktop</span><br><span class="line">[user2@pc ~]$ popd -n</span><br><span class="line">~</span><br><span class="line">[user2@pc ~]$ </span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li><code>bash</code>的目录堆栈命令包括<code>dirs popd pushd</code>。</li>
-<li>当前目录始终是目录堆栈的顶部。</li>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-</ol>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9zdXBlcnVzZXIuY29tL3F1ZXN0aW9ucy83ODQ0NTAvcG9wZC1hbmQtcHVzaGQtYmVoYXZpb3Itd2l0aC1uLW9wdGlvbg==">popd、pushd命令’-n’选项的行为<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/pmap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/pmap/" class="post-title-link" itemprop="url">【Linux 命令】pmap</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 10:58:00 10:58:00" itemprop="dateModified" datetime="2020-09-25T10:58:00+08:00">2020-09-25 10:58:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>3.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>报告进程的内存映射关系</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>pmap命令</strong> 用于报告进程的内存映射关系，是Linux调试及运维一个很好的工具。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pmap(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-x：显示扩展格式；</span><br><span class="line">-d：显示设备格式；</span><br><span class="line">-q：不显示头尾行；</span><br><span class="line">-V：显示指定版本。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>进程号：指定需要显示内存映射关系的进程号，可以是多个进程号。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">pidof nginx</span><br><span class="line">13312 5371</span><br><span class="line"></span><br><span class="line">pmap -x 5371</span><br><span class="line">5371:   nginx: worker process                </span><br><span class="line">Address           Kbytes     RSS   Dirty Mode   Mapping</span><br><span class="line">0000000000400000     564     344       0 r-x--  nginx</span><br><span class="line">000000000068c000      68      68      60 rw---  nginx</span><br><span class="line">000000000069d000      56      12      12 rw---    [ anon ]</span><br><span class="line">000000000a0c8000    1812    1684    1684 rw---    [ anon ]</span><br><span class="line">0000003ac0a00000     112      40       0 r-x--  ld-2.5.so</span><br><span class="line">0000003ac0c1c000       4       4       4 r----  ld-2.5.so</span><br><span class="line">0000003ac0c1d000       4       4       4 rw---  ld-2.5.so</span><br><span class="line">0000003ac0e00000    1340     284       0 r-x--  libc-2.5.so</span><br><span class="line">0000003ac0f4f000    2044       0       0 -----  libc-2.5.so</span><br><span class="line">0000003ac114e000      16      16       8 r----  libc-2.5.so</span><br><span class="line">0000003ac1152000       4       4       4 rw---  libc-2.5.so</span><br><span class="line">0000003ac1153000      20      20      20 rw---    [ anon ]</span><br><span class="line">0000003ac1200000       8       4       0 r-x--  libdl-2.5.so</span><br><span class="line">0000003ac1202000    2048       0       0 -----  libdl-2.5.so</span><br><span class="line">0000003ac1402000       4       4       4 r----  libdl-2.5.so</span><br><span class="line">0000003ac1403000       4       4       4 rw---  libdl-2.5.so</span><br><span class="line">0000003ac1600000      84       0       0 r-x--  libselinux.so.1</span><br><span class="line">0000003ac1615000    2048       0       0 -----  libselinux.so.1</span><br><span class="line">0000003ac1815000       8       8       8 rw---  libselinux.so.1</span><br><span class="line">0000003ac1817000       4       4       4 rw---    [ anon ]</span><br><span class="line">0000003ac1a00000     236       0       0 r-x--  libsepol.so.1</span><br><span class="line">0000003ac1a3b000    2048       0       0 -----  libsepol.so.1</span><br><span class="line">0000003ac1c3b000       4       4       4 rw---  libsepol.so.1</span><br><span class="line">0000003ac1c3c000      40       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac1e00000      88      44       0 r-x--  libpthread-2.5.so</span><br><span class="line">0000003ac1e16000    2048       0       0 -----  libpthread-2.5.so</span><br><span class="line">0000003ac2016000       4       4       4 r----  libpthread-2.5.so</span><br><span class="line">0000003ac2017000       4       4       4 rw---  libpthread-2.5.so</span><br><span class="line">0000003ac2018000      16       4       4 rw---    [ anon ]</span><br><span class="line">0000003ac2600000      80      52       0 r-x--  libz.so.1.2.3</span><br><span class="line">0000003ac2614000    2044       0       0 -----  libz.so.1.2.3</span><br><span class="line">0000003ac2813000       4       4       4 rw---  libz.so.1.2.3</span><br><span class="line">0000003ac2a00000      36       4       0 r-x--  libcrypt-2.5.so</span><br><span class="line">0000003ac2a09000    2044       0       0 -----  libcrypt-2.5.so</span><br><span class="line">0000003ac2c08000       4       4       4 r----  libcrypt-2.5.so</span><br><span class="line">0000003ac2c09000       4       4       4 rw---  libcrypt-2.5.so</span><br><span class="line">0000003ac2c0a000     184       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac3600000       8       0       0 r-x--  libkeyutils-1.2.so</span><br><span class="line">0000003ac3602000    2044       0       0 -----  libkeyutils-1.2.so</span><br><span class="line">0000003ac3801000       4       4       4 rw---  libkeyutils-1.2.so</span><br><span class="line">0000003ac3a00000      68       0       0 r-x--  libresolv-2.5.so</span><br><span class="line">0000003ac3a11000    2048       0       0 -----  libresolv-2.5.so</span><br><span class="line">0000003ac3c11000       4       4       4 r----  libresolv-2.5.so</span><br><span class="line">0000003ac3c12000       4       4       4 rw---  libresolv-2.5.so</span><br><span class="line">0000003ac3c13000       8       0       0 rw---    [ anon ]</span><br><span class="line">0000003ac3e00000       8       0       0 r-x--  libcom_err.so.2.1</span><br><span class="line">0000003ac3e02000    2044       0       0 -----  libcom_err.so.2.1</span><br><span class="line">0000003ac4001000       4       4       4 rw---  libcom_err.so.2.1</span><br><span class="line">0000003ac4200000    1204       8       0 r-x--  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac432d000    2044       0       0 -----  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac452c000     132      88      12 rw---  libcrypto.so.0.9.8e</span><br><span class="line">0000003ac454d000      16      12      12 rw---    [ anon ]</span><br><span class="line">0000003ac4600000     176       0       0 r-x--  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac462c000    2048       0       0 -----  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac482c000       8       8       8 rw---  libgssapi_krb5.so.2.2</span><br><span class="line">0000003ac4a00000     144       0       0 r-x--  libk5crypto.so.3.1</span><br><span class="line">0000003ac4a24000    2044       0       0 -----  libk5crypto.so.3.1</span><br><span class="line">0000003ac4c23000       8       8       8 rw---  libk5crypto.so.3.1</span><br><span class="line">0000003ac4e00000      32       0       0 r-x--  libkrb5support.so.0.1</span><br><span class="line">0000003ac4e08000    2044       0       0 -----  libkrb5support.so.0.1</span><br><span class="line">0000003ac5007000       4       4       4 rw---  libkrb5support.so.0.1</span><br><span class="line">0000003ac5200000     580       0       0 r-x--  libkrb5.so.3.3</span><br><span class="line">0000003ac5291000    2048       0       0 -----  libkrb5.so.3.3</span><br><span class="line">0000003ac5491000      16      16      12 rw---  libkrb5.so.3.3</span><br><span class="line">0000003ac5a00000     288       4       0 r-x--  libssl.so.0.9.8e</span><br><span class="line">0000003ac5a48000    2048       0       0 -----  libssl.so.0.9.8e</span><br><span class="line">0000003ac5c48000      24      16      12 rw---  libssl.so.0.9.8e</span><br><span class="line">00002b5751808000       8       8       8 rw---    [ anon ]</span><br><span class="line">00002b5751810000     108      36       0 r-x--  libpcre.so.1.2.0</span><br><span class="line">00002b575182b000    2044       0       0 -----  libpcre.so.1.2.0</span><br><span class="line">00002b5751a2a000       4       4       4 rw---  libpcre.so.1.2.0</span><br><span class="line">00002b5751a2b000      28      28      28 rw---    [ anon ]</span><br><span class="line">00002b5751a32000      40      20       0 r-x--  libnss_files-2.5.so</span><br><span class="line">00002b5751a3c000    2044       0       0 -----  libnss_files-2.5.so</span><br><span class="line">00002b5751c3b000       4       4       4 r----  libnss_files-2.5.so</span><br><span class="line">00002b5751c3c000       4       4       4 rw---  libnss_files-2.5.so</span><br><span class="line">00002b5751c3d000       4       4       4 rw-s-  zero (deleted)</span><br><span class="line">00002b5751c3e000   20012   20000   20000 rw---    [ anon ]</span><br><span class="line">00007fffbf2ce000      84      20      20 rw---    [ stack ]</span><br><span class="line">00007fffbf35e000      12       0       0 r-x--    [ anon ]</span><br><span class="line">ffffffffff600000    8192       0       0 -----    [ anon ]</span><br><span class="line">----------------  ------  ------  ------</span><br><span class="line">total kB           72880   22940   22000</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
       
     </div>
 
@@ -1383,7 +1401,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/32/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/34/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1414,7 +1432,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:17</span>
+    <span title="站点阅读时长">21:35</span>
   </span>
 </div>
 <div class="busuanzi-count">

@@ -23,15 +23,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yonghong.tech","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.8.1","exturl":true,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":360},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":true,"nav":null,"activeClass":"disqus"},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.8.1/source/js/config.min.js"></script>
-<meta name="description" content="用字符串替换的方式批量改变文件名 补充说明rename命令 用字符串替换的方式批量改变文件名。 语法1rename(参数)  参数123原字符串：将文件名需要替换的字符串；目标字符串：将文件名中含有的原字符替换成目标字符串；文件：指定要改变文件名的文件列表。  实例将main1.c重命名为main.c 1rename main1.c main.c main1.c   rename支持通配符  12">
+<meta name="description" content="用字符串替换的方式批量改变文件名 补充说明rename命令存在两个版本用法上有所区别  12345678910111213C语言版本, 支持通配符[常用通配符说明]?    表示一个任意字符*    表示一个或一串任意字符Perl版本, 支持正则表达式[常用正则表达式符号说明]^    匹配输入的开始位置$    匹配输入的结尾.    匹配除换行符外的任意字符+    匹配前一个字符一次或多次">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Linux 命令】rename">
 <meta property="og:url" content="http://yonghong.tech/linux-command/rename/index.html">
 <meta property="og:site_name" content="Honng">
-<meta property="og:description" content="用字符串替换的方式批量改变文件名 补充说明rename命令 用字符串替换的方式批量改变文件名。 语法1rename(参数)  参数123原字符串：将文件名需要替换的字符串；目标字符串：将文件名中含有的原字符替换成目标字符串；文件：指定要改变文件名的文件列表。  实例将main1.c重命名为main.c 1rename main1.c main.c main1.c   rename支持通配符  12">
+<meta property="og:description" content="用字符串替换的方式批量改变文件名 补充说明rename命令存在两个版本用法上有所区别  12345678910111213C语言版本, 支持通配符[常用通配符说明]?    表示一个任意字符*    表示一个或一串任意字符Perl版本, 支持正则表达式[常用正则表达式符号说明]^    匹配输入的开始位置$    匹配输入的结尾.    匹配除换行符外的任意字符+    匹配前一个字符一次或多次">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-25T00:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-25T03:15:30.000Z">
+<meta property="article:modified_time" content="2020-09-25T03:16:30.000Z">
 <meta property="article:author" content="Honng">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Linux Command">
@@ -96,9 +96,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">792</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">908</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -156,7 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.3.</span> <span class="nav-text">实例</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.3.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perl%E7%89%88%E6%9C%AC"><span class="nav-number">1.3.1.</span> <span class="nav-text">Perl版本</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#C%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">C语言版本</span></a></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -171,18 +171,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-count">792</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-count">908</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -271,7 +271,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:15:30 11:15:30" itemprop="dateModified" datetime="2020-09-25T11:15:30+08:00">2020-09-25 11:15:30</time>
+        <time title="修改时间：2020-09-25 11:16:30 11:16:30" itemprop="dateModified" datetime="2020-09-25T11:16:30+08:00">2020-09-25 11:16:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,14 +301,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>840</span>
+      <span>2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -320,37 +320,40 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>用字符串替换的方式批量改变文件名</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>rename命令</strong> 用字符串替换的方式批量改变文件名。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename(参数)</span><br></pre></td></tr></table></figure>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>rename命令存在两个版本用法上有所区别 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">C语言版本, 支持通配符</span><br><span class="line">[常用通配符说明]</span><br><span class="line">?    表示一个任意字符</span><br><span class="line">*    表示一个或一串任意字符</span><br><span class="line"></span><br><span class="line">Perl版本, 支持正则表达式</span><br><span class="line">[常用正则表达式符号说明]</span><br><span class="line">^    匹配输入的开始位置</span><br><span class="line">$    匹配输入的结尾</span><br><span class="line">.    匹配除换行符外的任意字符</span><br><span class="line">+    匹配前一个字符一次或多次 例如，<span class="string">&quot;zo+&quot;</span>可以匹配<span class="string">&quot;zoo&quot;</span>,但不匹配<span class="string">&quot;z&quot;</span></span><br><span class="line">[a-z]    表示某个范围内的字符，例如，<span class="string">&quot;[a-z]&quot;</span>匹配<span class="string">&quot;a&quot;</span>与<span class="string">&quot;z&quot;</span>之间的任何一个小写字母字符。</span><br><span class="line">[^m-z]    否定的字符区间。与不在指定区间内的字符匹配。</span><br></pre></td></tr></table></figure>
 
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原字符串：将文件名需要替换的字符串；</span><br><span class="line">目标字符串：将文件名中含有的原字符替换成目标字符串；</span><br><span class="line">文件：指定要改变文件名的文件列表。</span><br></pre></td></tr></table></figure>
+<p>区分方法: <code>rename --version</code></p>
+<p>如果返回结果中包含 <strong>util-linux</strong> , 说明是C语言版本, 反之是Perl版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Perl版本 | Ubuntu(18),Mint(20)默认的是Perl版本</span></span><br><span class="line">$ rename --version</span><br><span class="line">/usr/bin/rename using File::Rename version 1.10</span><br><span class="line"></span><br><span class="line"><span class="comment"># C语言版本 | Centos(7)默认的是C语言版本</span></span><br><span class="line">$ rename --version</span><br><span class="line">rename，来自 util-linux 2.23.2</span><br></pre></td></tr></table></figure>
 
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>将main1.c重命名为main.c</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename main1.c main.c main1.c</span><br></pre></td></tr></table></figure>
 
-<p> <strong>rename支持通配符</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">?  可替代单个字符</span><br><span class="line">*  可替代多个字符</span><br><span class="line">[charset]  可替代charset集中的任意单个字符</span><br></pre></td></tr></table></figure>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Perl版本</span></span><br><span class="line">rename [ -h|-m|-V ] [ -v ] [ -0 ] [ -n ] [ -f ] [ -d ] [ -e|-E perlexpr]*|perlexpr [ files ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># C语言版本</span></span><br><span class="line">rename [选项] 表达式 替换的字符 文件...</span><br></pre></td></tr></table></figure>
 
-<p>文件夹中有这些文件foo1, …, foo9, foo10, …, foo278</p>
-<p>如果使用<code>rename foo foo0 foo?</code>，会把foo1到foo9的文件重命名为foo01到foo09，重命名的文件只是有4个字符长度名称的文件，文件名中的foo被替换为foo0。</p>
-<p>如果使用<code>rename foo foo0 foo??</code>，foo01到foo99的所有文件都被重命名为foo001到foo099，只重命名5个字符长度名称的文件，文件名中的foo被替换为foo0。</p>
-<p>如果使用<code>rename foo foo0 foo*</code>，foo001到foo278的所有文件都被重命名为foo0001到foo0278，所有以foo开头的文件都被重命名。</p>
-<p>如果使用<code>rename foo0 foo foo0[2]*</code>，从foo0200到foo0278的所有文件都被重命名为foo200到foo278，文件名中的foo0被替换为foo。</p>
-<p> <strong>rename支持正则表达式</strong> </p>
-<p>字母的替换</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename &quot;s/AA/aa/&quot; *  # 把文件名中的AA替换成aa</span><br></pre></td></tr></table></figure>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Perl版本</span></span><br><span class="line">-v, --verbose</span><br><span class="line">        详细：成功重命名的文件的打印名称。</span><br><span class="line"></span><br><span class="line">-0, --null</span><br><span class="line">        从STDIN读取时，请使用\0作为记录分隔符</span><br><span class="line"></span><br><span class="line">-n, --nono</span><br><span class="line">        不执行任何操作：打印要重命名的文件名，但不重命名。</span><br><span class="line"></span><br><span class="line">-f, --force</span><br><span class="line">        覆盖：允许覆盖现有文件</span><br><span class="line"></span><br><span class="line">--path, --fullpath</span><br><span class="line">        重命名完整路径：包括任何目录组件。默认</span><br><span class="line"></span><br><span class="line">-d, --filename, --nopath, --nofullpath</span><br><span class="line">        不重命名目录：仅重命名路径的文件名部分</span><br><span class="line"></span><br><span class="line">-h, --<span class="built_in">help</span></span><br><span class="line">        帮助：打印提要和选项。</span><br><span class="line"></span><br><span class="line">-m, --man</span><br><span class="line">        手册: 打印手册页.</span><br><span class="line"></span><br><span class="line">-V, --version</span><br><span class="line">        版本: 显示版本号.</span><br><span class="line"></span><br><span class="line">-e      表达: 作用于文件名的代码.</span><br><span class="line"></span><br><span class="line">        可以重复来构建代码（比如“perl-e”）。如果没有-e，则第一个参数用作代码。</span><br><span class="line"></span><br><span class="line">-E      语句：对文件名执行操作的代码，如-e，但终止于 <span class="string">&#x27;;&#x27;</span>.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># C语言版本</span></span><br><span class="line">-v, --verbose</span><br><span class="line">        提供视觉反馈，其中重命名了哪些文件（如果有的话）</span><br><span class="line"></span><br><span class="line">-V, --version</span><br><span class="line">        显示版本信息并退出。</span><br><span class="line"></span><br><span class="line">-s, --symlink</span><br><span class="line">        在符号链接目标上执行重命名</span><br><span class="line"></span><br><span class="line">-h, --<span class="built_in">help</span></span><br><span class="line">        显示帮助文本并退出</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><hr>
+<h4 id="Perl版本"><a href="#Perl版本" class="headerlink" title="Perl版本"></a>Perl版本</h4><p>将1.txt 2.txt重命名为1.log 2.log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rename -v <span class="string">&quot;s/txt/log/g&quot;</span> 1.txt 2.txt</span><br><span class="line">1.txt renamed as 1.log</span><br><span class="line">2.txt renamed as 2.log</span><br></pre></td></tr></table></figure>
 
 <p>修改文件的后缀</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename &quot;s//.html//.php/&quot; *     # 把.html 后缀的改成 .php后缀</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="string">&quot;s//.html//.php/&quot;</span> *     <span class="comment"># 把.html 后缀的改成 .php后缀</span></span><br></pre></td></tr></table></figure>
 
 <p>批量添加文件后缀</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename &quot;s/$//.txt/&quot; *  # 把所有的文件名都以txt结尾</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="string">&quot;s/$//.txt/&quot;</span> *  <span class="comment"># 把所有的文件名都以txt结尾</span></span><br></pre></td></tr></table></figure>
 
 <p>批量删除文件名</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename &quot;s//.txt//&quot; *   # 把所有以.txt结尾的文件名的.txt删掉</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="string">&quot;s//.txt//&quot;</span> *   <span class="comment"># 把所有以.txt结尾的文件名的.txt删掉</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="C语言版本"><a href="#C语言版本" class="headerlink" title="C语言版本"></a>C语言版本</h5><p>将1.txt 2.txt重命名为1.log 2.log</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rename -v txt <span class="built_in">log</span> 1.txt 2.txt</span><br><span class="line">`1.txt<span class="string">&#x27; -&gt; `1.log&#x27;</span></span><br><span class="line">`2.txt<span class="string">&#x27; -&gt; `2.log&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>文件夹中有这些文件foo1, …, foo9, foo10, …, foo278</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把foo1到foo9的文件重命名为foo01到foo09，重命名的文件只是有4个字符长度名称的文件，文件名中的foo被替换为foo0。</span></span><br><span class="line">rename foo foo0 foo?</span><br><span class="line"></span><br><span class="line"><span class="comment"># foo01到foo99的所有文件都被重命名为foo001到foo099，只重命名5个字符长度名称的文件，文件名中的foo被替换为foo0。</span></span><br><span class="line">rename foo foo0 foo??</span><br><span class="line"></span><br><span class="line"><span class="comment"># foo001到foo278的所有文件都被重命名为foo0001到foo0278，所有以foo开头的文件都被重命名。</span></span><br><span class="line">rename foo foo0 foo*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从foo0200到foo0278的所有文件都被重命名为foo200到foo278，文件名中的foo0被替换为foo。</span></span><br><span class="line">rename foo0 foo foo0[2]*</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
     </div>
 
     
@@ -494,7 +497,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:17</span>
+    <span title="站点阅读时长">21:35</span>
   </span>
 </div>
 <div class="busuanzi-count">

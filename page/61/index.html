@@ -88,9 +88,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">792</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">908</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-count">792</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-count">908</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,696 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/depmod/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/depmod/" class="post-title-link" itemprop="url">【Linux 命令】depmod</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:45:00 08:45:00" itemprop="dateModified" datetime="2020-09-25T08:45:00+08:00">2020-09-25 08:45:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>分析可载入模块的相依性</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>depmod命令</strong> 可产生模块依赖的映射文件，在构建嵌入式系统时，需要由这个命令来生成相应的文件，由modprobe使用。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">depmod(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-a或--all：分析所有可用的模块；</span><br><span class="line">-d或debug：执行排错模式；</span><br><span class="line">-e：输出无法参照的符号；</span><br><span class="line">-i：不检查符号表的版本；</span><br><span class="line">-m&lt;文件&gt;或system-map&lt;文件&gt;：使用指定的符号表文件；</span><br><span class="line">-s或--system-log：在系统记录中记录错误；</span><br><span class="line">-v或--verbose：执行时显示详细的信息；</span><br><span class="line">-V或--version：显示版本信息；</span><br><span class="line">--help：显示帮助。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">depmod -b /home/windsome/EMMA3PF-KernelSource-20080626/install_pos -e -F ./boot/System.map -v 2.6.18_pro500-bcm91250-mips2_fp_be -A -a</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  <code>/home/windsome/EMMA3PF-KernelSource-20080626/install_pos</code>是我<code>make mod_install</code>后，所有模块的存放路径。</li>
+<li>  <code>./boot/System.map</code>是<code>make linux</code>后生成，我拷贝到此目录的。</li>
+<li>  <code>2.6.18_pro500-bcm91250-mips2_fp_be</code>是我build的linux的版本。</li>
+</ul>
+<p>编译linux过程及执行depmod的例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">genkernel.sh (at linux-2.6.18_pro500)</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">######</span></span></span><br><span class="line">export INSTALL_ROOT_EMMA3PF=&quot;/home/windsome/EMMA3PF-KernelSource-20080626/install_pos&quot;</span><br><span class="line">export INSTALL_MOD_EMMA3PF=&quot;/home/windsome/EMMA3PF-KernelSource-20080626/install_pos&quot;</span><br><span class="line">rm /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/lib -rf</span><br><span class="line">rm /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/boot/* -rf</span><br><span class="line">cd &lt;linux_src_dir&gt;</span><br><span class="line">make</span><br><span class="line">make modules_install</span><br><span class="line">cp vmlinux System.map /home/windsome/EMMA3PF-KernelSource-20080626/install_pos/boot/ -p</span><br><span class="line">cd /home/windsome/EMMA3PF-KernelSource-20080626/install_pos</span><br><span class="line">depmod -b /home/windsome/EMMA3PF-KernelSource-20080626/install_pos -e -F ./boot/System.map -v 2.6.18_pro500-bcm91250-mips2_fp_be -A -a</span><br></pre></td></tr></table></figure>
+
+<p>其他用法：</p>
+<p>在linux桌面系统中，当你编译了新的驱动，为了能够用<code>modprobe ***</code>加载模块, 你需要先将模块拷贝到<code>/lib/modules /2.6.31-20-generic</code>目录下，然后运行<code>sudo depmod -a</code>将模块信息写入modules.dep、modules.dep.bin、modules.alias.bin、modules.alias和modules.pcimap文件中。</p>
+<p>如，我编译了一个新的wifi驱动r8192se_pci.ko，将其拷贝到<code>/lib/modules/2.6.31-20-generic/wireless</code>下，然后到<code>/lib/modules/2.6.31-20-generic</code>运行<code>depmod -a</code>，之后可以在任意目录运行modprobe r8192se_pci。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/declare/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/declare/" class="post-title-link" itemprop="url">【Linux 命令】declare</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:44:30 08:44:30" itemprop="dateModified" datetime="2020-09-25T08:44:30+08:00">2020-09-25 08:44:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>声明变量，设置或显示变量的值和属性。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declare [-aAfFgilnrtux] [-p] [name[=value] ...]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>显示包含指定属性的全部变量和值</li>
+<li>显示包含指定属性的一到多个变量和值</li>
+<li>显示一到多个变量的属性和值</li>
+<li>显示所有变量的属性和值并显示函数的定义</li>
+<li>显示所有变量的属性和值</li>
+<li>显示所有全局变量的属性和值</li>
+<li>显示全部函数名和函数定义</li>
+<li>只显示全部函数名</li>
+<li>显示一到多个函数名和函数定义</li>
+<li>只显示一到多个函数名</li>
+<li>声明全局变量（可选：赋值）</li>
+<li>声明变量（可选：赋值、属性）</li>
+<li>增加、删除变量的属性（可选：赋值）</li>
+</ul>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-f 将操作或显示限制为函数名及函数定义。</span><br><span class="line">-F 只显示函数名（调试时附加行号和源文件）。</span><br><span class="line">-g 在shell函数中使用时创建全局变量；其他情况下忽略。</span><br><span class="line">-p 显示每个名称的属性和值。</span><br><span class="line"></span><br><span class="line">*设置属性的选项:</span><br><span class="line">-a 创建数组（如果支持）。</span><br><span class="line">-A 创建关联数组（如果支持）。</span><br><span class="line">-i 增加整型属性。</span><br><span class="line">+i 删除整型属性。</span><br><span class="line">-l 增加小写属性，变量的值将转换为小写。</span><br><span class="line">+l 删除小写属性。</span><br><span class="line">-n 增加引用属性（如果该选项存在）。</span><br><span class="line">+n 删除引用属性（如果该选项存在）。</span><br><span class="line">-r 增加只读属性。</span><br><span class="line">-t 增加追踪属性。</span><br><span class="line">+t 删除追踪属性。</span><br><span class="line">-u 增加大写属性，变量的值将转换为大写。</span><br><span class="line">+u 删除大写属性。</span><br><span class="line">-x 增加导出属性。</span><br><span class="line">+x 删除导出属性。</span><br></pre></td></tr></table></figure>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name（可选）：变量名或函数名。</span><br><span class="line">value（可选）：变量的值。</span><br></pre></td></tr></table></figure>
+
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>declare 返回true除非你提供了非法选项或赋值错误。具体导致异常的情况请查看<strong>讨论</strong>章节的<strong>关于异常情况</strong>。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 声明变量，当然也欢迎您在这个网站（感谢本项目发起人 @jaywcjlove）查询linux命令。</span></span><br><span class="line">declare reference_website=&#x27;https://wangchujiang.com/linux-command/&#x27;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有包含整型属性的变量和值。</span></span><br><span class="line">declare -i</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义变量b并赋值为3，具有整型属性。</span></span><br><span class="line">declare -i b=5</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示属性，返回 <span class="built_in">declare</span> -i b=<span class="string">&quot;5&quot;</span>。</span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除整型属性。</span></span><br><span class="line">declare +i b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示属性，返回 <span class="built_in">declare</span> -- b=<span class="string">&quot;5&quot;</span>。</span></span><br><span class="line">declare -p b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 根据变量属性强制转换值的英文大小写。</span></span><br><span class="line">declare -u uc_var=&#x27;abc&#x27;</span><br><span class="line">declare -l lc_var=&#x27;ABC&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示<span class="string">&#x27;ABC abc&#x27;</span>;</span></span><br><span class="line">echo &quot;$&#123;uc_var&#125; $&#123;lc_var&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 定义函数内的全局变量</span></span><br><span class="line">function test()&#123;</span><br><span class="line">  declare -g a=3</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 或者</span></span><br><span class="line">  local -g b=3</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 或者</span></span><br><span class="line">  c=3</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 让我们查看它们的属性。</span></span><br><span class="line">  declare -p a b c</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行函数。</span></span><br><span class="line">test</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回结果。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">declare</span> -- a=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">declare</span> -- b=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">declare</span> -- c=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义函数外的全局变量</span></span><br><span class="line">declare a=3</span><br><span class="line">b=3</span><br><span class="line">declare –p a b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回结果如下。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">declare</span> -- a=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">declare</span> -- b=<span class="string">&quot;3&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义局部变量</span></span><br><span class="line">function test2()&#123;</span><br><span class="line">  local -i a=3</span><br><span class="line">  declare -i b=3</span><br><span class="line">&#125;</span><br><span class="line">test2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有该变量（已经被销毁了）</span></span><br><span class="line">echo &quot;$&#123;a&#125; $&#123;b&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 因此，我们日常脚本中最常见的类似于<span class="string">&#x27;a=3&#x27;</span>实际上是声明并赋值了一个全局变量。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在接下来的 **讨论** 环节会延伸讨论全局和局部变量问题。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意，不能使用 `+a` 或 `+A` 取消数组，也不能使用 `+r` 取消只读属性。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义只读数组，设置属性的同时定义赋值。</span></span><br><span class="line">declare -ar season=(&#x27;Spring&#x27; &#x27;Summer&#x27; &#x27;Autumn&#x27; &#x27;Winter&#x27;)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者这样。</span></span><br><span class="line">season=(&#x27;Spring&#x27; &#x27;Summer&#x27; &#x27;Autumn&#x27; &#x27;Winter&#x27;)</span><br><span class="line">declare -ar season</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有数组。</span></span><br><span class="line">declare -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义关联数组。</span></span><br><span class="line"></span><br><span class="line">declare -A fruits=([&#x27;apple&#x27;]=&#x27;red&#x27; [&#x27;banana&#x27;]=&#x27;yellow&#x27;)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有关联数组。</span></span><br><span class="line">declare -A</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示所有变量的属性和值并显示函数的定义，输出很长。</span></span><br><span class="line">declare</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有变量的属性和值。</span></span><br><span class="line">declare -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有全局变量的属性和值。</span></span><br><span class="line">declare -g</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示全部函数名和函数定义。</span></span><br><span class="line">declare -f</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只显示全部函数名。</span></span><br><span class="line">declare -F</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义两个函数。</span></span><br><span class="line">function func_a()&#123; echo $(date +&quot;%F %T&quot;); &#125;</span><br><span class="line">function func_b()&#123; cd /; ls -lh --sort=time; &#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示一到多个函数名和函数定义。</span></span><br><span class="line">declare -f func_a func_b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只显示一到多个函数名，验证某个名称是否已经定义为函数时有用。</span></span><br><span class="line">declare -F func_a func_b</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最好不要让函数名和变量名相同。</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ol>
+<li><p>全局和局部变量</p>
+<p>正如上面<strong>例子</strong>指出的情况，我们在日常编写程序的时候需要了解这些概念，在这里<br>做个简要地介绍，当然你也可以很方便的搜索到相关内容。</p>
+<ul>
+<li>全局变量：在整个脚本执行期间，只要没有被删除就<strong>一直存在</strong>。</li>
+<li>局部变量：在函数内定义，函数执行后就被删除。</li>
+</ul>
+<p>建议函数内使用<code>local</code>命令，函数外使用<code>declare</code>命令。</p>
+<blockquote>
+<p><em>不要在脚本中定义过多的全局变量，那样可能会被其他函数调用造成意料之外的后果，并且也不方便检查出来。</em></p>
+<p><em>更不用说缺乏必要的注释了 —— ZhuangZhu-74</em></p>
+</blockquote>
+<p>相关资料：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvb2dsZS9zdHlsZWd1aWRl">google提供的编码规范<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly91bml4LnN0YWNrZXhjaGFuZ2UuY29tL3F1ZXN0aW9ucy8zODE3NjEvd2hhdC1kby1kZWNsYXJlLW5hbWUtYW5kLWRlY2xhcmUtZy1kbw==">全局变量的讨论<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li><p>关于<code>declare</code> <code>typeset</code> <code>export</code> <code>local</code> <code>readonly</code>命令</p>
+<p>为什么<code>declare</code>能做到的事，还需要定义其他这些命令呢？</p>
+<p>因为这样语句含义会更加明确，例如：</p>
+<ul>
+<li>设置导出属性的变量时，<code>export var</code>和<code>declare -x var</code>。</li>
+<li>在函数内声明变量时，使用<code>local</code>。</li>
+<li>声明只读变量，使用<code>readonly</code>。</li>
+</ul>
+<p><code>typeset</code>和<code>declare</code>命令一样。</p>
+</li>
+<li><p>关于异常情况</p>
+<p>有多种原因导致<code>declare</code>失败，关于这些情况可以参考<span class="exturl" data-url="aHR0cHM6Ly93d3cuZ251Lm9yZy9zb2Z0d2FyZS9iYXNoL21hbnVhbC9iYXNoLmh0bWwjaW5kZXgtZGVjbGFyZQ==">bash在线文档declare部分(最新版)<i class="fa fa-external-link-alt"></i></span>，或执行 <code>info bash</code><br>查看<code>declare</code>部分最后一大串<code>an attempt is</code>开头的句子。</p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3></li>
+<li><p>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</p>
+</li>
+<li><p>导出属性的相关介绍请查看’export’命令。</p>
+</li>
+<li><p>只读属性的相关介绍请查看’readonly’命令。</p>
+</li>
+<li><p>引用属性的相关介绍请查看’unset’命令的例子部分。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/dd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/dd/" class="post-title-link" itemprop="url">【Linux 命令】dd</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:44:00 08:44:00" itemprop="dateModified" datetime="2020-09-25T08:44:00+08:00">2020-09-25 08:44:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>复制文件并对原文件的内容进行转换和格式化处理</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>dd命令</strong> 用于复制文件并对原文件的内容进行转换和格式化处理。dd命令功能很强大的，对于一些比较底层的问题，使用dd命令往往可以得到出人意料的效果。用的比较多的还是用dd来备份裸设备。但是不推荐，如果需要备份oracle裸设备，可以使用rman备份，或使用第三方软件备份，使用dd的话，管理起来不太方便。</p>
+<p>建议在有需要的时候使用dd 对物理磁盘操作，如果是文件系统的话还是使用tar backup cpio等其他命令更加方便。另外，使用dd对磁盘操作时，最好使用块设备文件。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd(选项)</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">bs=&lt;字节数&gt;：将ibs（输入）与obs（输出）设成指定的字节数；</span><br><span class="line">cbs=&lt;字节数&gt;：转换时，每次只转换指定的字节数；</span><br><span class="line">conv=&lt;关键字&gt;：指定文件转换的方式；</span><br><span class="line">count=&lt;区块数&gt;：仅读取指定的区块数；</span><br><span class="line">ibs=&lt;字节数&gt;：每次读取的字节数；</span><br><span class="line">obs=&lt;字节数&gt;：每次输出的字节数；</span><br><span class="line">of=&lt;文件&gt;：输出到文件；</span><br><span class="line">seek=&lt;区块数&gt;：一开始输出时，跳过指定的区块数；</span><br><span class="line">skip=&lt;区块数&gt;：一开始读取时，跳过指定的区块数；</span><br><span class="line">--help：帮助；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# dd if=/dev/zero of=sun.txt bs=1M count=1</span><br><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</span><br><span class="line"></span><br><span class="line">[root@localhost text]# du -sh sun.txt </span><br><span class="line">1.1M    sun.txt</span><br></pre></td></tr></table></figure>
+
+<p>该命令创建了一个1M大小的文件sun.txt，其中参数解释：</p>
+<ul>
+<li><strong>if</strong>  代表输入文件。如果不指定if，默认就会从stdin中读取输入。</li>
+<li><strong>of</strong>  代表输出文件。如果不指定of，默认就会将stdout作为默认输出。</li>
+<li><strong>bs</strong>  代表字节为单位的块大小。</li>
+<li><strong>count</strong>  代表被复制的块数。</li>
+<li><strong>/dev/zero</strong>  是一个字符设备，会不断返回0值字节（\0）。</li>
+</ul>
+<p>块大小可以使用的计量单位表</p>
+<table>
+<thead>
+<tr>
+<th>单元大小</th>
+<th>代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节（1B）</td>
+<td>c</td>
+</tr>
+<tr>
+<td>字节（2B）</td>
+<td>w</td>
+</tr>
+<tr>
+<td>块（512B）</td>
+<td>b</td>
+</tr>
+<tr>
+<td>千字节（1024B）</td>
+<td>k</td>
+</tr>
+<tr>
+<td>兆字节（1024KB）</td>
+<td>M</td>
+</tr>
+<tr>
+<td>吉字节（1024MB）</td>
+<td>G</td>
+</tr>
+</tbody></table>
+<p>以上命令可以看出dd命令来测试内存操作速度：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1048576 bytes (1.0 MB) copied, 0.006107 seconds, 172 MB/s</span><br></pre></td></tr></table></figure>
+
+<p><strong>生成随机字符串</strong></p>
+<p>我们甚至可以使用 /dev/urandom 设备配合 dd 命令 来获取随机字符串。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# dd if=/dev/urandom bs=1 count=15|base64 -w 0</span><br><span class="line">15+0 records in</span><br><span class="line">15+0 records out</span><br><span class="line">15 bytes (15 B) copied, 0.000111993 s, 134 kB/s</span><br><span class="line">wFRAnlkXeBXmWs1MyGEs</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/date/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/date/" class="post-title-link" itemprop="url">【Linux 命令】date</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:43:30 08:43:30" itemprop="dateModified" datetime="2020-09-25T08:43:30+08:00">2020-09-25 08:43:30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>显示或设置系统时间与日期</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">date [OPTION]... [+FORMAT]</span><br><span class="line">date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
+<li>转换时间到选定的格式，默认为当前。</li>
+<li>设置系统时间。</li>
+</ul>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>format：输出的时间格式。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">format可用的转义序列如下：</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">%      百分号</span></span><br><span class="line"><span class="meta">%</span><span class="bash">a      当地缩写的工作日名称（例如，Sun）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">A      当地完整的工作日名称（例如，Sunday）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">b      当地缩写的月份名称（例如，Jan）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">B      当地完整的月份名称（例如，January）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">c      当地的日期和时间（例如，Thu Mar  3 23:05:25 2005）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">C      世纪，和%Y类似，但是省略后两位（例如，20）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">d      一月中的一天（例如，01）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">D      日期，等价于%m/%d/%y</span></span><br><span class="line"><span class="meta">%</span><span class="bash">e      一月中的一天，格式使用空格填充，等价于%_d</span></span><br><span class="line"><span class="meta">%</span><span class="bash">F      完整的日期；等价于%+4Y-%m-%d</span></span><br><span class="line"><span class="meta">%</span><span class="bash">g      ISO标准计数周的年份的最后两位数字</span></span><br><span class="line"><span class="meta">%</span><span class="bash">G      ISO标准计数周的年份，通常只对%V有用</span></span><br><span class="line"><span class="meta">%</span><span class="bash">h      等价于%b</span></span><br><span class="line"><span class="meta">%</span><span class="bash">H      小时，范围（00..23）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">I      小时，范围（00..23）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">j      一年中的一天，范围（001..366）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">k      小时，使用空格填充，范围（0..23），等价于%_H</span></span><br><span class="line"><span class="meta">%</span><span class="bash">l      小时，使用空格填充，范围（1..12），等价于%_I</span></span><br><span class="line"><span class="meta">%</span><span class="bash">m      月，范围（01..12）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">M      分钟，范围（00..59）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">n      换行符</span></span><br><span class="line"><span class="meta">%</span><span class="bash">N      纳秒，范围（000000000..000000000）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">p      用于表示当地的AM或PM，如果未知则为空白</span></span><br><span class="line"><span class="meta">%</span><span class="bash">P      类似于%p，但用小写表示</span></span><br><span class="line"><span class="meta">%</span><span class="bash">q      季度，范围（1..4）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">r      当地以12小时表示的时钟时间（例如，11:11:04 PM）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">R      24小时每分钟；等价于%H:%M</span></span><br><span class="line"><span class="meta">%</span><span class="bash">s      自协调世界时1970年01月01日00时00分以来的秒数</span></span><br><span class="line"><span class="meta">%</span><span class="bash">S      秒数，范围（00..60）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">t      水平制表符</span></span><br><span class="line"><span class="meta">%</span><span class="bash">T      时间；等价于%H:%M:%S</span></span><br><span class="line"><span class="meta">%</span><span class="bash">u      一周中的一天（1..7），1代表星期一</span></span><br><span class="line"><span class="meta">%</span><span class="bash">U      一年中的第几周，周日作为一周的起始（00..53）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">V      ISO标准计数周，该方法将周一作为一周的起始（01..53）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">w      一周中的一天（0..6），0代表星期天</span></span><br><span class="line"><span class="meta">%</span><span class="bash">W      一年中的第几周，周一作为一周的起始（00..53）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">x      当地的日期表示（例如，12/31/99）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">X      当地的时间表示（例如，23:13:48）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">y      年份后两位数字，范围（00..99）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">Y      年份</span></span><br><span class="line"><span class="meta">%</span><span class="bash">z      +hhmm格式的数值化时区格式（例如，-0400）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">:z     +hh:mm格式的数值化时区格式（例如，-04:00）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">::z    +hh:mm:ss格式的数值化时区格式（例如，-04:00:00）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">:::z   数值化时区格式，相比上一个格式增加<span class="string">&#x27;:&#x27;</span>以显示必要的精度（例如，-04，+05:30）</span></span><br><span class="line"><span class="meta">%</span><span class="bash">Z      时区缩写（如EDT）</span></span><br><span class="line"></span><br><span class="line">默认情况下，日期用零填充数字字段；以下可选的符号可以跟在&#x27;%&#x27;后面:</span><br><span class="line"></span><br><span class="line">-      (连字符) 不要填充相应的字段。</span><br><span class="line">_      (下划线) 使用空格填充相应的字段。</span><br><span class="line">0      (数字0) 使用数字0填充相应的字段。</span><br><span class="line">+      用数字0填充，未来年份大于4位数字则在前面加上&#x27;+&#x27;号。</span><br><span class="line">^      允许的情况下使用大写。</span><br><span class="line"><span class="meta">#</span><span class="bash">      允许的情况下将默认的大写转换为小写，默认的小写转换为大写。</span></span><br><span class="line"></span><br><span class="line">在任何标志之后都有一个可选的字段宽度，如小数；然后是一个可选的修饰符，在可用的情况下，使用E来使用当地语言环境的替代表示，</span><br><span class="line">使用O来使用当地语言环境的替代数字符号。</span><br></pre></td></tr></table></figure>
+
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">长选项与短选项等价</span><br><span class="line"></span><br><span class="line">-d, --date=STRING          解析字符串并按照指定格式输出，字符串不能是&#x27;now&#x27;。</span><br><span class="line">--debug                    注释已解析的日期，并将有疑问的用法发送到标准错误。</span><br><span class="line">-f, --file=DATEFILE        类似于--date; 一次从DATEFILE处理一行。</span><br><span class="line">-I[FMT], --iso-8601[=FMT]  按照ISO 8601格式输出，FMT可以为&#x27;date&#x27;(默认)，&#x27;hours&#x27;，&#x27;minutes&#x27;，&#x27;seconds&#x27;，&#x27;ns&#x27;。</span><br><span class="line">                           例如：2006-08-14T02:34:56-06:00</span><br><span class="line">-R, --rfc-email            按照RFC 5322格式输出，例如: Mon, 14 Aug 2006 02:34:56 -0600</span><br><span class="line">--rfc-3339=FMT             按照RFC 3339格式输出，FMT可以为&#x27;date&#x27;, &#x27;seconds&#x27;,&#x27;ns&#x27;中的一个，</span><br><span class="line">                           例如：2006-08-14 02:34:56-06:00</span><br><span class="line">-r, --reference=FILE       显示文件的上次修改时间。</span><br><span class="line">-s, --set=STRING           根据字符串设置系统时间。</span><br><span class="line">-u, --utc, --universal     显示或设置世界协调时(UTC)。</span><br><span class="line">--help                     显示帮助信息并退出。</span><br><span class="line">--version                  显示版本信息并退出。</span><br></pre></td></tr></table></figure>
+
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回状态为成功除非给出了非法选项或非法参数。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 格式化输出：</span></span><br><span class="line">date +&quot;%Y-%m-%d&quot;</span><br><span class="line">2009-12-07</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出昨天日期：</span></span><br><span class="line">date -d &quot;1 day ago&quot; +&quot;%Y-%m-%d&quot;</span><br><span class="line">2012-11-19</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2秒后输出：</span></span><br><span class="line">date -d &quot;2 second&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;</span><br><span class="line">2012-11-20 14:21.31</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 传说中的 1234567890 秒：</span></span><br><span class="line">date -d &quot;1970-01-01 1234567890 seconds&quot; +&quot;%Y-%m-%d %H:%M:%S&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">date -d@1234567890 +&quot;%F %T&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">2009-02-13 23:02:30</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 时间格式转换：</span></span><br><span class="line">date -d &quot;2009-12-12&quot; +&quot;%Y/%m/%d %H:%M.%S&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">2009/12/12 00:00.00</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> apache格式转换：</span></span><br><span class="line">date -d &quot;Dec 5, 2009 12:00:37 AM&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">2009-12-05 00:00.37</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 格式转换后时间游走：</span></span><br><span class="line">date -d &quot;Dec 5, 2009 12:00:37 AM 2 year ago&quot; +&quot;%Y-%m-%d %H:%M.%S&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">2007-12-05 00:00.37</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 时间加减操作：</span></span><br><span class="line">date +%Y%m%d                   # 显示年月日</span><br><span class="line">date -d &quot;+1 day&quot; +%Y%m%d       # 显示前一天的日期</span><br><span class="line">date -d &quot;-1 day&quot; +%Y%m%d       # 显示后一天的日期</span><br><span class="line">date -d &quot;-1 month&quot; +%Y%m%d     # 显示上一月的日期</span><br><span class="line">date -d &quot;+1 month&quot; +%Y%m%d     # 显示下一月的日期</span><br><span class="line">date -d &quot;-1 year&quot; +%Y%m%d      # 显示前一年的日期</span><br><span class="line">date -d &quot;+1 year&quot; +%Y%m%d      # 显示下一年的日期</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设定时间：</span></span><br><span class="line">date -s                         # 设置当前时间，只有root权限才能设置，其他只能查看</span><br><span class="line">date -s 20120523                # 设置成20120523，这样会把具体时间设置成00:00:00</span><br><span class="line">date -s 01:01:01                # 设置具体时间，不会对日期做更改</span><br><span class="line">date -s &quot;01:01:01 2012-05-23&quot;   # 这样可以设置全部时间</span><br><span class="line">date -s &quot;01:01:01 20120523&quot;     # 这样可以设置全部时间</span><br><span class="line">date -s &quot;2012-05-23 01:01:01&quot;   # 这样可以设置全部时间</span><br><span class="line">date -s &quot;20120523 01:01:01&quot;     # 这样可以设置全部时间</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 有时需要检查一组命令花费的时间：</span></span><br><span class="line">start=$(date +%s)</span><br><span class="line">nmap wangchujiang.com &amp;&gt; /dev/null</span><br><span class="line">end=$(date +%s)</span><br><span class="line">difference=$(( end - start ))</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示执行时间</span></span><br><span class="line">echo $difference seconds.</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 当你考虑输出带有时间的字符串时，例如（Current time: 2019/05/19）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通常使用的方法：</span></span><br><span class="line">echo &quot;Current time: $(date +&quot;%Y/%m/%d&quot;)&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 另一种方法：</span></span><br><span class="line">suffix=&#x27;Current time:&#x27;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意如果换成单引号就不能替换变量了。</span></span><br><span class="line">date +&quot;$&#123;suffix&#125; %Y/%m/%d&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
+<li>该命令是<code>GNU coreutils</code>包中的命令，相关的帮助信息请查看<code>man -s 1 date</code>或<code>info coreutils &#39;date invocation&#39;</code>。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/cut/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/cut/" class="post-title-link" itemprop="url">【Linux 命令】cut</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 08:43:00 08:43:00" itemprop="dateModified" datetime="2020-09-25T08:43:00+08:00">2020-09-25 08:43:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>连接文件并打印到标准输出设备上</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cut 命令</strong> 用来显示行中的指定部分，删除文件中指定字段。cut 经常用来显示文件的内容，类似于 type 命令。</p>
+<p>说明：该命令有两项功能，其一是用来显示文件的内容，它依次读取由参数 file 所指 明的文件，将它们的内容输出到标准输出上；其二是连接两个或多个文件，如<code>cut fl f2 &gt; f3</code>将把文件 fl 和 f2 的内容合并起来，然后通过输出重定向符“&gt;”的作用，将它们放入文件 f3 中。</p>
+<p>当文件较大时，文本在屏幕上迅速闪过（滚屏），用户往往看不清所显示的内容。因此，一般用 more 等命令分屏显示。为了控制滚屏，可以按 Ctrl+S 键，停止滚屏；按 Ctrl+Q 键可以恢复滚屏。按 Ctrl+C（中断）键可以终止该命令的执行，并且返回 Shell 提示符状态。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut（选项）（参数）</span><br></pre></td></tr></table></figure>
+
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-b：仅显示行中指定直接范围的内容；</span><br><span class="line">-c：仅显示行中指定范围的字符；</span><br><span class="line">-d：指定字段的分隔符，默认的字段分隔符为“TAB”；</span><br><span class="line">-f：显示指定字段的内容；</span><br><span class="line">-n：与“-b”选项连用，不分割多字节字符；</span><br><span class="line">--complement：补足被选择的字节、字符或字段；</span><br><span class="line">--out-delimiter= 字段分隔符：指定输出内容是的字段分割符；</span><br><span class="line">--help：显示指令的帮助信息；</span><br><span class="line">--version：显示指令的版本信息。</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件：指定要进行内容过滤的文件。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>例如有一个学生报表信息，包含 No、Name、Mark、Percent：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cat test.txt</span><br><span class="line">No Name Mark Percent</span><br><span class="line">01 tom 69 91</span><br><span class="line">02 jack 71 87</span><br><span class="line">03 alex 68 98</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>使用  <strong>-f</strong>  选项提取指定字段（这里的 f 参数可以简单记忆为 <code>--fields</code>的缩写）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -f 1 test.txt</span><br><span class="line">No</span><br><span class="line">01</span><br><span class="line">02</span><br><span class="line">03</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -f2,3 test.txt</span><br><span class="line">Name Mark</span><br><span class="line">tom 69</span><br><span class="line">jack 71</span><br><span class="line">alex 68</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> <strong>–complement</strong>  选项提取指定字段之外的列（打印除了第二列之外的列）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -f2 --complement test.txt</span><br><span class="line">No Mark Percent</span><br><span class="line">01 69 91</span><br><span class="line">02 71 87</span><br><span class="line">03 68 98</span><br></pre></td></tr></table></figure>
+
+<p>使用  <strong>-d</strong>  选项指定字段分隔符：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cat test2.txt</span><br><span class="line">No;Name;Mark;Percent</span><br><span class="line">01;tom;69;91</span><br><span class="line">02;jack;71;87</span><br><span class="line">03;alex;68;98</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -f2 -d&quot;;&quot; test2.txt</span><br><span class="line">Name</span><br><span class="line">tom</span><br><span class="line">jack</span><br><span class="line">alex</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="指定字段的字符或者字节范围"><a href="#指定字段的字符或者字节范围" class="headerlink" title="指定字段的字符或者字节范围"></a>指定字段的字符或者字节范围</h3><p>cut 命令可以将一串字符作为列来显示，字符字段的记法：</p>
+<ul>
+<li><strong>N-</strong> ：从第 N 个字节、字符、字段到结尾；</li>
+<li><strong>N-M</strong> ：从第 N 个字节、字符、字段到第 M 个（包括 M 在内）字节、字符、字段；</li>
+<li><strong>-M</strong> ：从第 1 个字节、字符、字段到第 M 个（包括 M 在内）字节、字符、字段。</li>
+</ul>
+<p>上面是记法，结合下面选项将摸个范围的字节、字符指定为字段：</p>
+<ul>
+<li><strong>-b</strong>  表示字节；</li>
+<li><strong>-c</strong>  表示字符；</li>
+<li><strong>-f</strong>  表示定义字段。</li>
+</ul>
+<p><strong>示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cat test.txt</span><br><span class="line">abcdefghijklmnopqrstuvwxyz</span><br><span class="line">abcdefghijklmnopqrstuvwxyz</span><br><span class="line">abcdefghijklmnopqrstuvwxyz</span><br><span class="line">abcdefghijklmnopqrstuvwxyz</span><br><span class="line">abcdefghijklmnopqrstuvwxyz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>打印第 1 个到第 3 个字符：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -c1-3 test.txt</span><br><span class="line">abc</span><br><span class="line">abc</span><br><span class="line">abc</span><br><span class="line">abc</span><br><span class="line">abc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>打印前 2 个字符：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -c-2 test.txt</span><br><span class="line">ab</span><br><span class="line">ab</span><br><span class="line">ab</span><br><span class="line">ab</span><br><span class="line">ab</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>打印从第 5 个字符开始到结尾：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost text]# cut -c5- test.txt</span><br><span class="line">efghijklmnopqrstuvwxyz</span><br><span class="line">efghijklmnopqrstuvwxyz</span><br><span class="line">efghijklmnopqrstuvwxyz</span><br><span class="line">efghijklmnopqrstuvwxyz</span><br><span class="line">efghijklmnopqrstuvwxyz</span><br></pre></td></tr></table></figure>
+
+<!-- Linux 命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -557,7 +1247,7 @@
 <h3 id="要求返回是压缩的状态"><a href="#要求返回是压缩的状态" class="headerlink" title="要求返回是压缩的状态"></a>要求返回是压缩的状态</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">▶ curl --compressed -o- -L https://yarnpkg.com/install.sh | bash</span><br><span class="line"><span class="meta">  %</span><span class="bash"> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span></span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100    54  100    54    0     0     42      0  0:00:01  0:00:01 --:--:--    42</span><br><span class="line">100  2341  100  2341    0     0   1202      0  0:00:01  0:00:01 --:--:--  9289</span><br><span class="line">Installing Yarn!</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Downloading tarball...</span></span><br><span class="line"></span><br><span class="line">[1/2]: https://yarnpkg.com/latest.tar.gz --&gt; /var/folders/j7/3xly5sk567s65ny5dnr__3b80000gn/T/yarn.tar.gz.XXXXXXXXXX.9hJsBsrA</span><br><span class="line"><span class="meta">  %</span><span class="bash"> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span></span><br><span class="line">                                 Dload  Upload   Total   Spent    Left  Speed</span><br><span class="line">100    57  100    57    0     0     72      0 --:--:-- --:--:-- --:--:--    72</span><br><span class="line">100    93  100    93    0     0     63      0  0:00:01  0:00:01 --:--:--    63</span><br><span class="line">100   643  100   643    0     0    248      0  0:00:02  0:00:02 --:--:--   707</span><br><span class="line">100 1215k  100 1215k    0     0   153k      0  0:00:07  0:00:07 --:--:--  305k</span><br><span class="line"></span><br><span class="line">[2/2]: https://yarnpkg.com/latest.tar.gz.asc --&gt; /var/folders/j7/3xly5sk567s65ny5dnr__3b80000gn/T/yarn.tar.gz.XXXXXXXXXX.9hJsBsrA.asc</span><br><span class="line">100    61  100    61    0     0    356      0 --:--:-- --:--:-- --:--:--   356</span><br><span class="line">100    97  100    97    0     0    325      0 --:--:-- --:--:-- --:--:--   325</span><br><span class="line">100   647  100   647    0     0   1283      0 --:--:-- --:--:-- --:--:--  1283</span><br><span class="line">100   832  100   832    0     0   1107      0 --:--:-- --:--:-- --:--:--  812k</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
 
       
     </div>
@@ -659,7 +1349,7 @@
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-E：当连接到服务器时强制使用加密；</span><br><span class="line">-U：指定连接服务器时使用的用户名；</span><br><span class="line">-u：指定打印任务所属的用户；</span><br><span class="line">-h：指定连接的服务器名和端口号；</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标：指定目标打印机。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -760,7 +1450,7 @@
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-E：当连接到服务器时强制使用加密；</span><br><span class="line">-U：指定连接服务器时使用的用户名；</span><br><span class="line">-u：指定打印任务所属的用户；</span><br><span class="line">-c：取消指定打印机的所有打印任务；</span><br><span class="line">-h：指定连接的服务器名和端口号；</span><br><span class="line">-r：停止打印机的原因。</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>目标：指定目标打印机。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -865,7 +1555,7 @@
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
 
       
     </div>
@@ -980,663 +1670,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/[正则表达式]/   #匹配文本样式，比如/SERVER/，从第一行到包含SERVER的匹配行。</span><br><span class="line">&#123;*&#125;     #表示根据匹配重复执行分割，直到文件尾停止，使用&#123;整数&#125;的形式指定分割执行的次数。</span><br><span class="line">-s      #静默模式，不打印其他信息。</span><br><span class="line">-n      #指定分割后的文件名后缀的数字个数。比如01、02、03等。</span><br><span class="line">-f      #指定分割后的文件名前缀。</span><br><span class="line">-b      #指定后缀格式。比如%02d.log，类似于C语言中的printf参数格式。</span><br><span class="line">rm server00.log    #是删除第一个文件，因为分割后的的第一个文件没有内容，匹配的单词就位于文件的第一行中。</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/crontab/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/crontab/" class="post-title-link" itemprop="url">【Linux 命令】crontab</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:40:00 08:40:00" itemprop="dateModified" datetime="2020-09-25T08:40:00+08:00">2020-09-25 08:40:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>提交和管理用户的需要周期性执行的任务</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>crontab命令</strong> 被用来提交和管理用户的需要周期性执行的任务，与windows下的计划任务类似，当安装完成操作系统后，默认会安装此服务工具，并且会自动启动crond进程，crond进程每分钟会定期检查是否有要执行的任务，如果有要执行的任务，则自动执行该任务。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-e：编辑该用户的计时器设置；</span><br><span class="line">-l：列出该用户的计时器设置；</span><br><span class="line">-r：删除该用户的计时器设置；</span><br><span class="line">-u&lt;用户名称&gt;：指定要设定计时器的用户名称。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>crontab文件：指定包含待执行任务的crontab文件。</p>
-<h3 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h3><p>Linux下的任务调度分为两类： <strong>系统任务调度</strong> 和 <strong>用户任务调度</strong> 。</p>
-<p> <strong>系统任务调度：</strong> 系统周期性所要执行的工作，比如写缓存数据到硬盘、日志清理等。在<code>/etc</code>目录下有一个crontab文件，这个就是系统任务调度的配置文件。</p>
-<p><code>/etc/crontab</code>文件包括下面几行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SHELL=/bin/bash</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=&quot;&quot;HOME=/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> run-parts</span></span><br><span class="line">51 * * * * root run-parts /etc/cron.hourly</span><br><span class="line">24 7 * * * root run-parts /etc/cron.daily</span><br><span class="line">22 4 * * 0 root run-parts /etc/cron.weekly</span><br><span class="line">42 4 1 * * root run-parts /etc/cron.monthly</span><br></pre></td></tr></table></figure>
-
-<p>前四行是用来配置crond任务运行的环境变量，第一行SHELL变量指定了系统要使用哪个shell，这里是bash，第二行PATH变量指定了系统执行命令的路径，第三行MAILTO变量指定了crond的任务执行信息将通过电子邮件发送给root用户，如果MAILTO变量的值为空，则表示不发送任务执行信息给用户，第四行的HOME变量指定了在执行命令或者脚本时使用的主目录。</p>
-<p> <strong>用户任务调度：</strong> 用户定期要执行的工作，比如用户数据备份、定时邮件提醒等。用户可以使用 crontab 工具来定制自己的计划任务。所有用户定义的crontab文件都被保存在<code>/var/spool/cron</code>目录中。其文件名与用户名一致，使用者权限文件如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/cron.deny     该文件中所列用户不允许使用crontab命令</span><br><span class="line">/etc/cron.allow    该文件中所列用户允许使用crontab命令</span><br><span class="line">/var/spool/cron/   所有用户crontab文件存放的目录,以用户名命名</span><br></pre></td></tr></table></figure>
-
-<p>crontab文件的含义：用户所建立的crontab文件中，每一行都代表一项任务，每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minute   hour   day   month   week   command     顺序：分 时 日 月 周</span><br></pre></td></tr></table></figure>
-
-<p>其中：</p>
-<ul>
-<li>  minute： 表示分钟，可以是从0到59之间的任何整数。</li>
-<li>  hour：表示小时，可以是从0到23之间的任何整数。</li>
-<li>  day：表示日期，可以是从1到31之间的任何整数。</li>
-<li>  month：表示月份，可以是从1到12之间的任何整数。</li>
-<li>  week：表示星期几，可以是从0到7之间的任何整数，这里的0或7代表星期日。</li>
-<li>  command：要执行的命令，可以是系统命令，也可以是自己编写的脚本文件。</li>
-</ul>
-<p>在以上各个字段中，还可以使用以下特殊字符：</p>
-<ul>
-<li>  星号（*）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作。</li>
-<li>  逗号（,）：可以用逗号隔开的值指定一个列表范围，例如，“1,2,5,7,8,9”</li>
-<li>  中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”</li>
-<li>  正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次。</li>
-</ul>
-<p><strong>crond服务</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/sbin/service crond start    # 启动服务</span><br><span class="line">/sbin/service crond stop     # 关闭服务</span><br><span class="line">/sbin/service crond restart  # 重启服务</span><br><span class="line">/sbin/service crond reload   # 重新载入配置</span><br></pre></td></tr></table></figure>
-
-<p>查看crontab服务状态：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service crond status</span><br></pre></td></tr></table></figure>
-
-<p>手动启动crontab服务：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service crond start</span><br></pre></td></tr></table></figure>
-
-<p>查看crontab服务是否已设置为开机启动，执行命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntsysv</span><br></pre></td></tr></table></figure>
-
-<p>加入开机自动启动：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig –level 35 crond on</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>每1分钟执行一次command</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * command</span><br></pre></td></tr></table></figure>
-
-<p>每小时的第3和第15分钟执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 * * * * command</span><br></pre></td></tr></table></figure>
-
-<p>在上午8点到11点的第3和第15分钟执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * * command</span><br></pre></td></tr></table></figure>
-
-<p>每隔两天的上午8点到11点的第3和第15分钟执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 */2 * * command</span><br></pre></td></tr></table></figure>
-
-<p>每个星期一的上午8点到11点的第3和第15分钟执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3,15 8-11 * * 1 command</span><br></pre></td></tr></table></figure>
-
-<p>每晚的21:30重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">30 21 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每月1、10、22日的4 : 45重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">45 4 1,10,22 * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每周六、周日的1:10重启smb</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 1 * * 6,0 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每天18 : 00至23 : 00之间每隔30分钟重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,30 18-23 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每星期六的晚上11:00 pm重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 6 /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每一小时重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* */1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>晚上11点到早上7点之间，每隔一小时重启smb</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* 23-7/1 * * * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每月的4号与每周一到周三的11点重启smb </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 11 4 * mon-wed /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>一月一号的4点重启smb</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 4 1 jan * /etc/init.d/smb restart</span><br></pre></td></tr></table></figure>
-
-<p>每小时执行<code>/etc/cron.hourly</code>目录内的脚本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">01 * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/cpio/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/cpio/" class="post-title-link" itemprop="url">【Linux 命令】cpio</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:39:30 08:39:30" itemprop="dateModified" datetime="2020-09-25T08:39:30+08:00">2020-09-25 08:39:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>用来建立、还原备份档的工具程序</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cpio命令</strong> 主要是用来建立或者还原备份档的工具程序，cpio命令可以复制文件到归档包中，或者从归档包中复制文件。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpio(选项)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">-0或--null：接受新增列控制字符，通常配合find指令的“-print0”参数使用；</span><br><span class="line">-a或--rest-access-time：重新设置文件的存取时间；</span><br><span class="line">-A或--append：附加到已存在的备份文档中，且这个备份文档必须存放在磁盘上，而不能放置于磁带机里；</span><br><span class="line">-b或--awap：此参数的效果和同时指定“-ss”参数相同；</span><br><span class="line">-B：将输入/输出的区块大小改成5210Bytes；</span><br><span class="line">-c：使用旧ASCII备份格式；</span><br><span class="line">-C&lt;区块大小&gt;或--io-size=&lt;区块大小&gt;：设置输入/输出的区块大小，单位是Byte；</span><br><span class="line">-d或--make-directories：如有需要cpio会自行建立目录；</span><br><span class="line">-E&lt;范本文件&gt;或--pattern-file=&lt;范本文件&gt;：指定范本文件，其内含有一个或多个范本样式，让cpio解开符合范本条件的文件，格式为每列一个范本样式；</span><br><span class="line">-f或--nonmatching：让cpio解开所有不符合范本条件的文件；</span><br><span class="line">-F&lt;备份档&gt;或--file=&lt;备份档&gt;：指定备份档的名称，用来取代标准输入或输出，也能借此通过网络使用另一台主机的保存设备存取备份档；</span><br><span class="line">-H&lt;备份格式&gt;：指定备份时欲使用的文件格式；</span><br><span class="line">-i或--extract：执行copy-in模式，还原备份档；</span><br><span class="line">-l&lt;备份档&gt;：指定备份档的名称，用来取代标准输入，也能借此通过网络使用另一台主机的保存设备读取备份档；</span><br><span class="line">-k：此参数将忽略不予处理，仅负责解决cpio不同版本间的兼容性问题；</span><br><span class="line">-l或--link：以硬连接的方式取代复制文件，可在copy-pass模式下运用；</span><br><span class="line">-L或--dereference：不建立符号连接，直接复制该连接所指向的原始文件；</span><br><span class="line">-m或preserve-modification-time：不去更改文件的更改时间；</span><br><span class="line">-M&lt;回传信息&gt;或--message=&lt;回传信息&gt;：设置更换保存媒体的信息；</span><br><span class="line">-n或--numeric-uid-gid：使用“-tv”参数列出备份档的内容时，若再加上参数“-n”，则会以用户识别和群组识别码替代拥有者和群组名称列出文件清单；</span><br><span class="line">-o或--create：执行copy-out模式，建立备份档；</span><br><span class="line">-O&lt;备份档&gt;：指定备份档的名称，用来取代标准输出，也能借此通过网络使用另一台主机的保存设备存放备份档；</span><br><span class="line">-p或--pass-through：执行copy-pass模式，略过备份步骤，直接将文件复制到目的目录；</span><br><span class="line">-r或--rename：当有文件名称需要更改时，采用互动模式；</span><br><span class="line">-R&lt;拥有者&gt;&lt;:/.&gt;&lt;所属群组&gt;或----owner&lt;拥有者&gt;&lt;:/.&gt;&lt;所属群组&gt;   在copy-in模式还原备份档，或copy-pass模式复制文件时，可指定这些备份，复制的文件的拥有者与所属群组；</span><br><span class="line">-s或--swap-bytes：交换每队字节的内容；</span><br><span class="line">-S或--swap-halfwords：交换每半个字节的内容；</span><br><span class="line">-t或--list：将输入的内容呈现出来；</span><br><span class="line">-u或--unconditional：置换所有文件，不论日期时间的新旧与否，皆不予询问而直接覆盖；</span><br><span class="line">-v或--verbose：详细显示指令的执行过程；</span><br><span class="line">-V或--dot：执行指令时。在每个文件的执行程序前面加上“.”号；</span><br><span class="line">--block-size=&lt;区块大小&gt;：设置输入/输出的区块大小，假如设置数值为5，则区块大小为2500，若设置成10，则区块大小为5120，以此类推；</span><br><span class="line">--force-local：强制将备份档存放在本地主机；</span><br><span class="line">--help：在线帮助；</span><br><span class="line">--no-absolute-filenames：使用相对路径建立文件名称；</span><br><span class="line">--no-preserve-owner：不保留文件的拥有者，谁解开了备份档，那些文件就归谁所有；</span><br><span class="line">-only-verify-crc：当备份档采用CRC备份格式时，可使用这项参数检查备份档内的每个文件是否正确无误；</span><br><span class="line">--quiet：不显示复制了多少区块；</span><br><span class="line">--sparse：倘若一个文件内含有大量的连续0字节，则将此文件存在稀疏文件；</span><br><span class="line">--version：显示版本信息。</span><br></pre></td></tr></table></figure>
-
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p><strong>将<code>/etc</code>下的所有普通文件都备份到<code>/opt/etc.cpio</code>，使用以下命令：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc –type f | cpio –ocvB &gt;/opt/etc.cpio</span><br></pre></td></tr></table></figure>
-
-<p><strong>将系统上所有资料备份到磁带机内，使用以下命令：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -print | cpio -covB &gt; /dev/st0</span><br></pre></td></tr></table></figure>
-
-<p>这里的<code>/dev/st0</code>是磁带的设备名，代表SCSI磁带机。</p>
-<p><strong>查看上例磁带机上备份的文件，使用以下命令：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpio  -icdvt &lt; /dev/st0 &gt; /tmp/st_content</span><br></pre></td></tr></table></figure>
-
-<p>有时可能因为备份的文件过多，一个屏幕无法显示完毕，此时我们利用下面命令，让磁带机的文件信息输出到文件。</p>
-<p><strong>将示例1中的备份包还原到相应的位置，如果有相同文件进行覆盖，使用以下命令：</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpio –icduv &lt; /opt/etc.cpio</span><br></pre></td></tr></table></figure>
-
-<p>注意，cpio恢复的路径，如果cpio在打包备份的时候用的是绝对路径，那么在恢复的时候会自动恢复到这些绝对路径下，本例就会将备份文件全部还原到/etc路径下对应的目录中。同理，如果在打包备份用的是相对路径，还原时也将恢复到相对路径下。</p>
-<p>通过上面的示例，可以看出，cpio无法直接读取文件，它需要每个文件或者目录的完整路径名才能识别读取，而find命令的输出刚好做到了这点，因此，cpio命令一般和find命令配合使用。其实，上面的示例我们已经看到了它们的组合用法。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/cp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/cp/" class="post-title-link" itemprop="url">【Linux 命令】cp</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:39:00 08:39:00" itemprop="dateModified" datetime="2020-09-25T08:39:00+08:00">2020-09-25 08:39:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>将源文件或目录复制到目标文件或目录中</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>cp命令</strong> 用来将一个或多个源文件或者目录复制到指定的目的文件或目录。它可以将单个源文件复制成一个指定文件名的具体的文件或一个已经存在的目录下。cp命令还支持同时复制多个文件，当一次复制多个文件时，目标文件参数必须是一个已经存在的目录，否则将出现错误。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同；</span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录；</span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在；</span><br><span class="line">-i：覆盖既有文件之前先询问用户；</span><br><span class="line">-l：对源文件建立硬连接，而非复制文件；</span><br><span class="line">-p：保留源文件或目录的属性；</span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理；</span><br><span class="line">-s：对源文件建立符号连接，而非复制文件；</span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件；</span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀；</span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份；</span><br><span class="line">-v：详细显示命令执行的操作。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>  源文件：制定源文件列表。默认情况下，cp命令不能复制目录，如果要复制目录，则必须使用<code>-R</code>选项；</li>
-<li>  目标文件：指定目标文件。当“源文件”为多个文件时，要求“目标文件”为指定的目录。</li>
-</ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>下面的第一行中是 cp 命令和具体的参数（-r 是“递归”， -u 是“更新”，-v 是“详细”）。接下来的三行显示被复制文件的信息，最后一行显示命令行提示符。这样，只拷贝新的文件到我的存储设备上，我就使用 cp 的“更新”和“详细”选项。</p>
-<p>通常来说，参数 <code>-r</code> 也可用更详细的风格 <code>--recursive</code>。但是以简短的方式，也可以这么连用 <code>-ruv</code>。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r -u -v /usr/men/tmp ~/men/tmp</span><br></pre></td></tr></table></figure>
-
-<p>版本备份 <code>--backup=numbered</code> 参数意思为“我要做个备份，而且是带编号的连续备份”。所以一个备份就是 1 号，第二个就是 2 号，等等。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp --force --backup=numbered test1.py test1.py</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ls</span></span><br><span class="line">test1.py test1.py.~1~ test1.py.~2~</span><br></pre></td></tr></table></figure>
-
-<p>如果把一个文件复制到一个目标文件中，而目标文件已经存在，那么，该目标文件的内容将被破坏。此命令中所有参数既可以是绝对路径名，也可以是相对路径名。通常会用到点<code>.</code>或点点<code>..</code>的形式。例如，下面的命令将指定文件复制到当前目录下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ../mary/homework/assign .</span><br></pre></td></tr></table></figure>
-
-<p>所有目标文件指定的目录必须是己经存在的，cp命令不能创建目录。如果没有文件复制的权限，则系统会显示出错信息。</p>
-<p>将文件file复制到目录<code>/usr/men/tmp</code>下，并改名为file1</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp file /usr/men/tmp/file1</span><br></pre></td></tr></table></figure>
-
-<p>将目录<code>/usr/men</code>下的所有文件及其子目录复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -r /usr/men /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>交互式地将目录<code>/usr/men</code>中的以m打头的所有.c文件复制到目录<code>/usr/zh</code>中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -i /usr/men m*.c /usr/zh</span><br></pre></td></tr></table></figure>
-
-<p>我们在Linux下使用cp命令复制文件时候，有时候会需要覆盖一些同名文件，覆盖文件的时候都会有提示：需要不停的按Y来确定执行覆盖。文件数量不多还好，但是要是几百个估计按Y都要吐血了，于是折腾来半天总结了一个方法：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cp aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 复制目录aaa下所有到/bbb目录下，这时如果/bbb目录下有和aaa同名的文件，需要按Y来确认并且会略过aaa目录下的子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这次依然需要按Y来确认操作，但是没有忽略子目录。</span></span><br><span class="line"></span><br><span class="line">cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 依然需要按Y来确认操作，并且把aaa目录以及子目录和文件属性也传递到了/bbb。</span></span><br><span class="line"></span><br><span class="line">\cp -r -a aaa/* /bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 成功，没有提示按Y、传递了目录属性、没有略过目录。</span></span><br></pre></td></tr></table></figure>
-
-<p>递归强制复制目录到指定目录中覆盖已存在文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -rfb ./* ../backup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将当前目录下所有文件，复制到当前目录的兄弟目录 backup 文件夹中</span></span><br></pre></td></tr></table></figure>
-
-<p>拷贝目录下的隐藏文件如 <code>.babelrc</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp -r aaa/.* ./bbb</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将 aaa 目录下的，所有`.`开头的文件，复制到 bbb 目录中。</span></span><br><span class="line"></span><br><span class="line">cp -a aaa ./bbb/ </span><br><span class="line"><span class="meta">#</span><span class="bash"> 记住后面目录最好的<span class="string">&#x27;/&#x27;</span> 带上 `-a` 参数</span></span><br></pre></td></tr></table></figure>
-
-<p>复制到当前目录</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp aaa.conf ./</span><br><span class="line"><span class="comment"># 将 aaa.conf 复制到当前目录</span></span><br></pre></td></tr></table></figure>
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/convertquota/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/convertquota/" class="post-title-link" itemprop="url">【Linux 命令】convertquota</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:38:30 08:38:30" itemprop="dateModified" datetime="2020-09-25T08:38:30+08:00">2020-09-25 08:38:30</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>357</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>把老的配额文件转换为新的格式</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>convertquota命令</strong> 用于将老的磁盘额数据文件（“quota.user”和“quota.group”）转换为新格式的文件（“quota.user”和“quota.group”）。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convertquota(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-u：仅转换用户磁盘配额数据文件；</span><br><span class="line">-g：仅转换组磁盘配额数据文件；</span><br><span class="line">-f：将老的磁盘配额文件转换为新的格式；</span><br><span class="line">-e：将新的文件格式从大字节序换为小字节序。</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>文件系统：指定要转换磁盘配额数据文件格式的文件系统（硬盘分区）。</p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>使用convertquota指令转换指定文件系统<code>/data</code>的磁盘配额数据文件。在命令行中输入下面的命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convertquota -u /data     //转换文件系统&quot;/data&quot;上的用户磁盘配额文件</span><br></pre></td></tr></table></figure>
-
-
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/continue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/continue/" class="post-title-link" itemprop="url">【Linux 命令】continue</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 08:38:00 08:38:00" itemprop="dateModified" datetime="2020-09-25T08:38:00+08:00">2020-09-25 08:38:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>595</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>结束本次循环，继续执行下一个for，while或until循环。</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">continue [n]</span><br></pre></td></tr></table></figure>
-
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><ul>
-<li>结束本次循环，继续执行下一个for，while或until循环；可指定从第几层循环继续执行。</li>
-</ul>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>n（可选）：大于等于1的整数，用于指定从第几层循环继续执行。</p>
-<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>返回状态为成功除非n小于1。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">continue</span>的可选参数n缺省值为1。</span></span><br><span class="line">for((i=3;i&gt;0;i--)); do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 跳到内层<span class="keyword">for</span>循环继续执行。</span></span><br><span class="line">  for((j=3;j&gt;0;j--)); do</span><br><span class="line">    if((j==2)); then</span><br><span class="line">      # 换成continue 1时结果一样</span><br><span class="line">      continue</span><br><span class="line">    fi</span><br><span class="line">  printf &quot;%s %s\n&quot; $&#123;i&#125; $&#123;j&#125;</span><br><span class="line">  done</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">3 3</span><br><span class="line">3 1</span><br><span class="line">2 3</span><br><span class="line">2 1</span><br><span class="line">1 3</span><br><span class="line">1 1</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 当n为2时：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 跳到外层<span class="keyword">for</span>循环继续执行。</span></span><br><span class="line">for((i=3;i&gt;0;i--)); do</span><br><span class="line">  for((j=3;j&gt;0;j--)); do</span><br><span class="line">    if((j==2)); then</span><br><span class="line">      continue 2</span><br><span class="line">    fi</span><br><span class="line">  printf &quot;%s %s\n&quot; $&#123;i&#125; $&#123;j&#125;</span><br><span class="line">  done</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出结果</span></span><br><span class="line">3 3</span><br><span class="line">2 3</span><br><span class="line">1 3</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ol>
-<li>该命令是bash内建命令，相关的帮助信息请查看<code>help</code>命令。</li>
-</ol>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
 
       
     </div>
@@ -1656,7 +1689,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/60/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/62/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/60/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/62/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1687,7 +1720,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:17</span>
+    <span title="站点阅读时长">21:35</span>
   </span>
 </div>
 <div class="busuanzi-count">

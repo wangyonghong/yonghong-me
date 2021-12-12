@@ -88,9 +88,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">787</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">59</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">792</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">908</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">61</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -162,18 +162,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">787</span>
+          <span class="site-state-item-count">792</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">903</span>
+        <span class="site-state-item-count">908</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -230,6 +230,203 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/setfacl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/linux-command/setfacl/" class="post-title-link" itemprop="url">【Linux 命令】setfacl</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-25 11:35:00 11:35:00" itemprop="dateModified" datetime="2020-09-25T11:35:00+08:00">2020-09-25 11:35:00</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>设置文件访问控制列表</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>setfacl命令</strong> 是用来在命令行里设置ACL（访问控制列表）。在命令行里，一系列的命令跟随以一系列的文件名。</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-b,--remove-all：删除所有扩展的acl规则，基本的acl规则(所有者，群组，其他）将被保留。</span><br><span class="line">-k,--remove-default：删除缺省的acl规则。如果没有缺省规则，将不提示。</span><br><span class="line">-n，--no-mask：不要重新计算有效权限。setfacl默认会重新计算ACL mask，除非mask被明确的制定。</span><br><span class="line">--mask：重新计算有效权限，即使ACL mask被明确指定。</span><br><span class="line">-d，--default：设定默认的acl规则。</span><br><span class="line">--restore=file：从文件恢复备份的acl规则（这些文件可由getfacl -R产生）。通过这种机制可以恢复整个目录树的acl规则。此参数不能和除--test以外的任何参数一同执行。</span><br><span class="line">--test：测试模式，不会改变任何文件的acl规则，操作后的acl规格将被列出。</span><br><span class="line">-R，--recursive：递归的对所有文件及目录进行操作。</span><br><span class="line">-L，--logical：跟踪符号链接，默认情况下只跟踪符号链接文件，跳过符号链接目录。</span><br><span class="line">-P，--physical：跳过所有符号链接，包括符号链接文件。</span><br><span class="line">--version：输出setfacl的版本号并退出。</span><br><span class="line">--help：输出帮助信息。</span><br><span class="line">--：标识命令行参数结束，其后的所有参数都将被认为是文件名</span><br><span class="line">-：如果文件名是-，则setfacl将从标准输入读取文件名。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>  选项<code>-m</code>和<code>-x</code>后边跟以acl规则。多条acl规则以逗号(,)隔开。选项<code>-M</code>和<code>-X</code>用来从文件或标准输入读取acl规则。</li>
+<li>  选项<code>--set</code>和<code>--set-file</code>用来设置文件或目录的acl规则，先前的设定将被覆盖。</li>
+<li>  选项<code>-m(--modify)</code>和<code>-M(--modify-file)</code>选项修改文件或目录的acl规则。</li>
+<li>  选项<code>-x(--remove)</code>和<code>-X(--remove-file)</code>选项删除acl规则。</li>
+</ul>
+<p>当使用-M，-X选项从文件中读取规则时，setfacl接受getfacl命令输出的格式。每行至少一条规则，以#开始的行将被视为注释。</p>
+<p>当在不支持ACLs的文件系统上使用setfacl命令时，setfacl将修改文件权限位。如果acl规则并不完全匹配文件权限位，setfacl将会修改文件权限位使其尽可能的反应acl规则，并会向standard error发送错误消息，以大于0的状态返回。</p>
+<p> <strong>权限</strong> </p>
+<p>文件的所有者以及有<code>CAP_FOWNER</code>的用户进程可以设置一个文件的acl。（在目前的linux系统上，root用户是唯一有<code>CAP_FOWNER</code>能力的用户）</p>
+<p> <strong>ACL规则</strong> </p>
+<p>setfacl命令可以识别以下的规则格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[d[efault]:] [u[ser]:]uid [:perms]  指定用户的权限，文件所有者的权限（如果uid没有指定）。</span><br><span class="line">[d[efault]:] g[roup]:gid [:perms]   指定群组的权限，文件所有群组的权限（如果gid未指定）</span><br><span class="line">[d[efault]:] m[ask][:] [:perms]     有效权限掩码</span><br><span class="line">[d[efault]:] o[ther] [:perms]       其他的权限</span><br></pre></td></tr></table></figure>
+
+<p>恰当的acl规则被用在修改和设定的操作中，对于uid和gid，可以指定一个数字，也可指定一个名字。perms域是一个代表各种权限的字母的组合：读<code>-r</code>写<code>-w</code>执行<code>-x</code>，执行只适合目录和一些可执行的文件。pers域也可设置为八进制格式。</p>
+<p> <strong>自动创建的规则</strong> </p>
+<p>最初的，文件目录仅包含3个基本的acl规则。为了使规则能正常执行，需要满足以下规则。</p>
+<ul>
+<li><p>  3个基本规则不能被删除。</p>
+</li>
+<li><p>  任何一条包含指定的用户名或群组名的规则必须包含有效的权限组合。</p>
+</li>
+<li><p>  任何一条包含缺省规则的规则在使用时，缺省规则必须存在。</p>
+</li>
+<li><p>*ACL的名词定义** </p>
+</li>
+</ul>
+<p>先来看看在ACL里面每一个名词的定义，这些名词我大多从man page上摘下来虽然有些枯燥,但是对于理解下面的内容还是很有帮助的。</p>
+<p>ACL是由一系列的Access Entry所组成的，每一条Access Entry定义了特定的类别可以对文件拥有的操作权限。Access Entry有三个组成部分：Entry tag type, qualifier (optional), permission。</p>
+<p>我们先来看一下最重要的Entry tag type，它有以下几个类型：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ACL_USER_OBJ：相当于Linux里file_owner的permission</span><br><span class="line">ACL_USER：定义了额外的用户可以对此文件拥有的permission</span><br><span class="line">ACL_GROUP_OBJ：相当于Linux里group的permission</span><br><span class="line">ACL_GROUP：定义了额外的组可以对此文件拥有的permission</span><br><span class="line">ACL_MASK：定义了ACL_USER, ACL_GROUP_OBJ和ACL_GROUP的最大权限 (这个我下面还会专门讨论)</span><br><span class="line">ACL_OTHER：相当于Linux里other的permission</span><br></pre></td></tr></table></figure>
+
+<p>让我们来据个例子说明一下，下面我们就用getfacl命令来查看一个定义好了的ACL文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# getfacl ./test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> file: test.txt</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> owner: root</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> group: admin</span></span><br><span class="line">user::rw-</span><br><span class="line">user:john:rw-</span><br><span class="line">group::rw-</span><br><span class="line">group:dev:r--</span><br><span class="line">mask::rw- other::r--</span><br></pre></td></tr></table></figure>
+
+<p>前面三个以#开头的定义了文件名，file owner和group。这些信息没有太大的作用，接下来我们可以用<code>--omit-header</code>来省略掉。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user::rw-       定义了ACL_USER_OBJ, 说明file owner拥有read and write permission</span><br><span class="line">user:john:rw-   定义了ACL_USER,这样用户john就拥有了对文件的读写权限,实现了我们一开始要达到的目的</span><br><span class="line">group::rw-      定义了ACL_GROUP_OBJ,说明文件的group拥有read and write permission</span><br><span class="line">group:dev:r--   定义了ACL_GROUP,使得dev组拥有了对文件的read permission</span><br><span class="line">mask::rw-       定义了ACL_MASK的权限为read and write</span><br><span class="line">other::r--      定义了ACL_OTHER的权限为read</span><br></pre></td></tr></table></figure>
+
+<p>从这里我们就可以看出ACL提供了我们可以定义特定用户和用户组的功能，那么接下来我们就来看一下如何设置一个文件的ACL：</p>
+<p> <strong>如何设置ACL文件</strong> </p>
+<p>首先我们还是要讲一下设置ACL文件的格式，从上面的例子中我们可以看到每一个Access Entry都是由三个被：号分隔开的字段所组成，第一个就是Entry tag type。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user   对应了ACL_USER_OBJ和ACL_USER</span><br><span class="line">group  对应了ACL_GROUP_OBJ和ACL_GROUP</span><br><span class="line">mask   对应了ACL_MASK</span><br><span class="line">other  对应了ACL_OTHER</span><br></pre></td></tr></table></figure>
+
+<p>第二个字段称之为qualifier，也就是上面例子中的john和dev组，它定义了特定用户和拥护组对于文件的权限。这里我们也可以发现只有user和group才有qualifier，其他的都为空。第三个字段就是我们熟悉的permission了。它和Linux的permission一样定义，这里就不多讲了。</p>
+<p>下面我们就来看一下怎么设置test.txt这个文件的ACL让它来达到我们上面的要求。</p>
+<p>一开始文件没有ACL的额外属性：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -l</span><br><span class="line">-rw-rw-r-- 1 root admin 0 Jul 3 22:06 test.txt</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./test.txt</span><br><span class="line">user::rw- group::rw- other::r--</span><br></pre></td></tr></table></figure>
+
+<p>我们先让用户john拥有对test.txt文件的读写权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# setfacl -m user:john:rw- ./test.txt</span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./test.txt</span><br><span class="line">user::rw-</span><br><span class="line">user:john:rw-</span><br><span class="line">group::rw-</span><br><span class="line">mask::rw-</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+<p>这时我们就可以看到john用户在ACL里面已经拥有了对文件的读写权。这个时候如果我们查看一下linux的permission我们还会发现一个不一样的地方。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -l ./test.txt</span><br><span class="line">-rw-rw-r--+ 1 root admin 0 Jul 3 22:06 ./test.txt</span><br></pre></td></tr></table></figure>
+
+<p>在文件permission的最后多了一个+号，当任何一个文件拥有了ACL_USER或者ACL_GROUP的值以后我们就可以称它为ACL文件，这个+号就是用来提示我们的。我们还可以发现当一个文件拥有了<code>ACL_USER</code>或者<code>ACL_GROUP</code>的值时<code>ACL_MASK</code>同时也会被定义。</p>
+<p>接下来我们来设置dev组拥有read permission：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# setfacl -m group:dev:r-- ./test.txt</span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./test.txt</span><br><span class="line">user::rw-</span><br><span class="line">user:john:rw-</span><br><span class="line">group::rw-</span><br><span class="line">group:dev:r--</span><br><span class="line">mask::rw-</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+<p>到这里就完成了我们上面讲到的要求，是不是很简单呢。</p>
+<p> <strong>ACL_MASK和Effective permission</strong> </p>
+<p>这里需要重点讲一下<code>ACL_MASK</code>，因为这是掌握ACL的另一个关键，在Linux file permission里面大家都知道比如对于<code>rw-rw-r--</code>来说, 当中的那个<code>rw-</code>是指文件组的permission. 但是在ACL里面这种情况只是在<code>ACL_MASK</code>不存在的情况下成立。如果文件有ACL_MASK值，那么当中那个<code>rw-</code>代表的就是mask值而不再是group permission了。</p>
+<p>让我们来看下面这个例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -l</span><br><span class="line">-rwxrw-r-- 1 root admin 0 Jul 3 23:10 test.sh</span><br></pre></td></tr></table></figure>
+
+<p>这里说明test.sh文件只有file owner: root拥有read, write, execute/search permission。admin组只有read and write permission，现在我们想让用户john也对test.sh具有和root一样的permission。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# setfacl -m user:john:rwx ./test.sh</span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./test.sh</span><br><span class="line">user::rwx user:john:rwx</span><br><span class="line">group::rw-</span><br><span class="line">mask::rwx</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+<p>这里我们看到john已经拥有了rwx的permission，mask值也被设定为rwx，那是因为它规定了<code>ACL_USER</code>，<code>ACL_GROUP</code>和<code>ACL_GROUP_OBJ</code>的最大值，现在我们再来看test.sh的Linux permission，它已经变成了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -l</span><br><span class="line">-rwxrwxr--+ 1 root admin 0 Jul 3 23:10 test.sh</span><br></pre></td></tr></table></figure>
+
+<p>那么如果现在admin组的用户想要执行test.sh的程序会发生什么情况呢？它会被permission deny。原因在于实际上admin组的用户只有read and write permission，这里当中显示的rwx是<code>ACL_MASK</code>的值而不是group的permission。</p>
+<p>所以从这里我们就可以知道，如果一个文件后面有+标记，我们都需要用getfacl来确认它的permission，以免发生混淆。</p>
+<p>下面我们再来继续看一个例子，假如现在我们设置test.sh的mask为read only，那么admin组的用户还会有write permission吗？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# setfacl -m mask::r-- ./test.sh</span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./test.sh</span><br><span class="line">user::rwx</span><br><span class="line">user:john:rwx   #effective:r--</span><br><span class="line">group::rw-      #effective:r--</span><br><span class="line">mask::r--</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+<p>这时候我们可以看到ACL_USER和ACL_GROUP_OBJ旁边多了个#effective:r–，这是什么意思呢？让我们再来回顾一下<code>ACL_MASK</code>的定义。它规定了<code>ACL_USER</code>，<code>ACL_GROUP_OBJ</code>和<code>ACL_GROUP</code>的最大权限。那么在我们这个例子中他们的最大权限也就是read only。虽然我们这里给<code>ACL_USER</code>和<code>ACL_GROUP_OBJ</code>设置了其他权限，但是他们真正有效果的只有read权限。</p>
+<p>这时我们再来查看test.sh的Linux file permission时它的group permission也会显示其mask的值(i.e. r–)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ls -l</span><br><span class="line">-rwxr--r--+ 1 root admin 0 Jul 3 23:10 test.sh</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Default ACL</strong> </p>
+<p>上面我们所有讲的都是Access ACL，也就是对文件而言。下面我简单讲一下Default ACL。Default ACL是指对于一个目录进行Default ACL设置，并且在此目录下建立的文件都将继承此目录的ACL。</p>
+<p>同样我们来做一个试验说明，比如现在root用户建立了一个dir目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# mkdir dir</span><br></pre></td></tr></table></figure>
+
+<p>他希望所有在此目录下建立的文件都可以被john用户所访问，那么我们就应该对dir目录设置Default ACL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# setfacl -d -m user:john:rw ./dir</span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./dir</span><br><span class="line">user::rwx</span><br><span class="line">group::rwx</span><br><span class="line">other::r-x</span><br><span class="line">default:user::rwx</span><br><span class="line">default:user:john:rwx</span><br><span class="line">default:group::rwx</span><br><span class="line">default:mask::rwx</span><br><span class="line">default: other::r-x</span><br></pre></td></tr></table></figure>
+
+<p>这里我们可以看到ACL定义了default选项，john用户拥有了default的read, write, excute/search permission。所有没有定义的default都将从file permission里copy过来，现在root用户在dir下建立一个test.txt文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# touch ./dir/test.txt</span><br><span class="line">[root@localhost ~]# ls -l ./dir/test.txt</span><br><span class="line">-rw-rw-r--+ 1 root root 0 Jul 3 23:46 ./dir/test.txt</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# getfacl --omit-header ./dir/test.txt</span><br><span class="line">user::rw-</span><br><span class="line">user:john:rw-</span><br><span class="line">group::rwx #effective:rw-</span><br><span class="line">mask::rw-</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+<p>这里我们看到在dir下建立的文件john用户自动就有了read and write permission，</p>
+<p> <strong>ACL相关命令</strong> </p>
+<p>前面的例子中我们都注意到了getfacl命令是用来读取文件的ACL，setfacl是用来设定文件的Acess ACL。这里还有一个chacl是用来改变文件和目录的Access ACL and Default ACL，它的具体参数大家可以去看man page。我只想提及一下<code>chacl -B</code>。它可以彻底删除文件或者目录的ACL属性(包括Default ACL)，比如你即使用了<code>setfacl -x</code>删除了所有文件的ACL属性，那个+号还是会出现在文件的末尾，所以正确的删除方法应该是用<code>chacl -B</code>用cp来复制文件的时候我们现在可以加上<code>-p</code>选项。这样在拷贝文件的时候也将拷贝文件的ACL属性，对于不能拷贝的ACL属性将给出警告。</p>
+<p>mv命令将会默认地移动文件的ACL属性，同样如果操作不允许的情况下会给出警告。</p>
+<p> <strong>需要注意的几点</strong> </p>
+<p>如果你的文件系统不支持ACL的话，你也许需要重新mount你的file system：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o remount, acl [mount point]</span><br></pre></td></tr></table></figure>
+
+<p>如果用chmod命令改变Linux file permission的时候相应的ACL值也会改变，反之改变ACL的值，相应的file permission也会改变。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/set/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -261,7 +458,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:32:30 11:32:30" itemprop="dateModified" datetime="2020-09-25T11:32:30+08:00">2020-09-25 11:32:30</time>
+        <time title="修改时间：2020-09-25 11:34:30 11:34:30" itemprop="dateModified" datetime="2020-09-25T11:34:30+08:00">2020-09-25 11:34:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -315,7 +512,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env | grep mylove             #显示环境变量值</span><br></pre></td></tr></table></figure>
 
 <p>此时，该命令执行后，将输出查询到的环境变量值。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -372,7 +569,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:32:00 11:32:00" itemprop="dateModified" datetime="2020-09-25T11:32:00+08:00">2020-09-25 11:32:00</time>
+        <time title="修改时间：2020-09-25 11:34:00 11:34:00" itemprop="dateModified" datetime="2020-09-25T11:34:00+08:00">2020-09-25 11:34:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -425,7 +622,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sesearch -b httpd_enable_homedirs -a</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -482,7 +679,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:31:30 11:31:30" itemprop="dateModified" datetime="2020-09-25T11:31:30+08:00">2020-09-25 11:31:30</time>
+        <time title="修改时间：2020-09-25 11:33:30 11:33:30" itemprop="dateModified" datetime="2020-09-25T11:33:30+08:00">2020-09-25 11:33:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -536,7 +733,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">service mysqld status</span><br><span class="line">mysqld (pid 1638) 正在运行...</span><br><span class="line"></span><br><span class="line">service mysqld restart</span><br><span class="line">停止 MySQL：                                               [  确定  ]</span><br><span class="line">启动 MySQL：                                               [  确定  ]</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -593,7 +790,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:31:00 11:31:00" itemprop="dateModified" datetime="2020-09-25T11:31:00+08:00">2020-09-25 11:31:00</time>
+        <time title="修改时间：2020-09-25 11:33:00 11:33:00" itemprop="dateModified" datetime="2020-09-25T11:33:00+08:00">2020-09-25 11:33:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -657,7 +854,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq -s&quot;`echo -e &quot;\n&quot;`&quot; 9 11</span><br><span class="line">19293949596979899910911</span><br></pre></td></tr></table></figure>
 
 <p>得到的是个错误结果，不过一般也没有这个必要，它默认的就是回车作为分隔符。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -714,7 +911,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:30:30 11:30:30" itemprop="dateModified" datetime="2020-09-25T11:30:30+08:00">2020-09-25 11:30:30</time>
+        <time title="修改时间：2020-09-25 11:32:30 11:32:30" itemprop="dateModified" datetime="2020-09-25T11:32:30+08:00">2020-09-25 11:32:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -758,7 +955,7 @@
 <h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-bd：以守护进程方式运行指令；</span><br><span class="line">-bD：以前台运行方式运行；</span><br><span class="line">-bi：初始化别名数据库；</span><br><span class="line">-bm：以常规发送电子邮件；</span><br><span class="line">-bp：显示邮件的发送队列；</span><br><span class="line">-C：指定配置文件；</span><br><span class="line">-D：将调试的输出信息保存到日志文件，而不显示在标准输出设备上；</span><br><span class="line">-F：指定邮件发送者全名；</span><br><span class="line">-n：禁止使用邮件别名功能；</span><br><span class="line">-f：指定发件人的名字；</span><br><span class="line">-q：设置处理邮件队列中邮件的时间间隔。</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -815,7 +1012,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:30:00 11:30:00" itemprop="dateModified" datetime="2020-09-25T11:30:00+08:00">2020-09-25 11:30:00</time>
+        <time title="修改时间：2020-09-25 11:32:00 11:32:00" itemprop="dateModified" datetime="2020-09-25T11:32:00+08:00">2020-09-25 11:32:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -876,7 +1073,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">restorecon -Rv /srv/samba* #尝试恢复默认值</span><br><span class="line">ll -Zd /srv/samba</span><br><span class="line">drwxr-xr-x  root root system_u:object_r:public_content_t /srv/samba/  #有默认值，以后用restorecon命令来修改比较简单！</span><br></pre></td></tr></table></figure>
 
 <p>semanage命令的功能很多，这里主要用到的仅有fcontext这个选项的用法而已。如上所示，你可以使用semanage来查询所有的目录默认值，也能够使用它来增加默认值的设置！</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -933,7 +1130,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:29:30 11:29:30" itemprop="dateModified" datetime="2020-09-25T11:29:30+08:00">2020-09-25 11:29:30</time>
+        <time title="修改时间：2020-09-25 11:31:30 11:31:30" itemprop="dateModified" datetime="2020-09-25T11:31:30+08:00">2020-09-25 11:31:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -980,7 +1177,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seinfo -b | grep httpd</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
       
     </div>
 
@@ -1037,7 +1234,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:29:00 11:29:00" itemprop="dateModified" datetime="2020-09-25T11:29:00+08:00">2020-09-25 11:29:00</time>
+        <time title="修改时间：2020-09-25 11:31:00 11:31:00" itemprop="dateModified" datetime="2020-09-25T11:31:00+08:00">2020-09-25 11:31:00</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1086,7 +1283,7 @@
 
 <h3 id="sed替换标记"><a href="#sed替换标记" class="headerlink" title="sed替换标记"></a>sed替换标记</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">g # 表示行内全面替换。  </span><br><span class="line">p # 表示打印行。  </span><br><span class="line">w # 表示把行写入一个文件。  </span><br><span class="line">x # 表示互换模板块中的文本和缓冲区中的文本。  </span><br><span class="line">y # 表示把一个字符翻译为另外的字符（但是不用于正则表达式）</span><br><span class="line">\1 # 子串匹配标记</span><br><span class="line">&amp; # 已匹配字符串标记</span><br></pre></td></tr></table></figure>
 
-<h3 id="sed元字符集"><a href="#sed元字符集" class="headerlink" title="sed元字符集"></a>sed元字符集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">^ # 匹配行开始，如：/^sed/匹配所有以sed开头的行。</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</span></span></span><br><span class="line">. # 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</span><br><span class="line">* # 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</span><br><span class="line">[] # 匹配一个指定范围内的字符，如/[ss]ed/匹配sed和Sed。  </span><br><span class="line">[^] # 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</span><br><span class="line">\(..\) # 匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。</span><br><span class="line">&amp; # 保存搜索字符用来替换其他字符，如s/love/ **&amp;** /，love这成 **love** 。</span><br><span class="line">\&lt; # 匹配单词的开始，如:/\&lt;love/匹配包含以love开头的单词的行。</span><br><span class="line">\&gt; # 匹配单词的结束，如/love\&gt;/匹配包含以love结尾的单词的行。</span><br><span class="line">x\&#123;m\&#125; # 重复字符x，m次，如：/0\&#123;5\&#125;/匹配包含5个0的行。</span><br><span class="line">x\&#123;m,\&#125; # 重复字符x，至少m次，如：/0\&#123;5,\&#125;/匹配至少有5个0的行。</span><br><span class="line">x\&#123;m,n\&#125; # 重复字符x，至少m次，不多于n次，如：/0\&#123;5,10\&#125;/匹配5~10个0的行。  </span><br></pre></td></tr></table></figure>
+<h3 id="sed元字符集"><a href="#sed元字符集" class="headerlink" title="sed元字符集"></a>sed元字符集</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">^ # 匹配行开始，如：/^sed/匹配所有以sed开头的行。</span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="comment"># 匹配行结束，如：/sed$/匹配所有以sed结尾的行。</span></span></span><br><span class="line">. # 匹配一个非换行符的任意字符，如：/s.d/匹配s后接一个任意字符，最后是d。</span><br><span class="line">* # 匹配0个或多个字符，如：/*sed/匹配所有模板是一个或多个空格后紧跟sed的行。</span><br><span class="line">[] # 匹配一个指定范围内的字符，如/[sS]ed/匹配sed和Sed。  </span><br><span class="line">[^] # 匹配一个不在指定范围内的字符，如：/[^A-RT-Z]ed/匹配不包含A-R和T-Z的一个字母开头，紧跟ed的行。</span><br><span class="line">\(..\) # 匹配子串，保存匹配的字符，如s/\(love\)able/\1rs，loveable被替换成lovers。</span><br><span class="line">&amp; # 保存搜索字符用来替换其他字符，如s/love/ **&amp;** /，love这成 **love** 。</span><br><span class="line">\&lt; # 匹配单词的开始，如:/\&lt;love/匹配包含以love开头的单词的行。</span><br><span class="line">\&gt; # 匹配单词的结束，如/love\&gt;/匹配包含以love结尾的单词的行。</span><br><span class="line">x\&#123;m\&#125; # 重复字符x，m次，如：/0\&#123;5\&#125;/匹配包含5个0的行。</span><br><span class="line">x\&#123;m,\&#125; # 重复字符x，至少m次，如：/0\&#123;5,\&#125;/匹配至少有5个0的行。</span><br><span class="line">x\&#123;m,n\&#125; # 重复字符x，至少m次，不多于n次，如：/0\&#123;5,10\&#125;/匹配5~10个0的行。  </span><br></pre></td></tr></table></figure>
 
 <h2 id="sed用法实例"><a href="#sed用法实例" class="headerlink" title="sed用法实例"></a>sed用法实例</h2><h3 id="替换操作：s命令"><a href="#替换操作：s命令" class="headerlink" title="替换操作：s命令"></a>替换操作：s命令</h3><p>替换文本中的字符串：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/book/books/&#x27; file</span><br></pre></td></tr></table></figure>
@@ -1205,7 +1402,7 @@
 <h3 id="打印匹配字符串的下一行"><a href="#打印匹配字符串的下一行" class="headerlink" title="打印匹配字符串的下一行"></a>打印匹配字符串的下一行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -A 1 SCC URFILE</span><br><span class="line">sed -n &#x27;/SCC/&#123;n;p&#125;&#x27; URFILE</span><br><span class="line">awk &#x27;/SCC/&#123;getline; print&#125;&#x27; URFILE</span><br></pre></td></tr></table></figure>
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+
 
       
     </div>
@@ -1232,7 +1429,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/screen/">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/scriptreplay/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -1245,7 +1442,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/screen/" class="post-title-link" itemprop="url">【Linux 命令】screen</a>
+          <a href="/linux-command/scriptreplay/" class="post-title-link" itemprop="url">【Linux 命令】scriptreplay</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1263,7 +1460,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:28:30 11:28:30" itemprop="dateModified" datetime="2020-09-25T11:28:30+08:00">2020-09-25 11:28:30</time>
+        <time title="修改时间：2020-09-25 11:30:30 11:30:30" itemprop="dateModified" datetime="2020-09-25T11:30:30+08:00">2020-09-25 11:30:30</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1282,14 +1479,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
+      <span>2.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1300,207 +1497,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>用于命令行终端切换</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>Screen</strong> 是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。</p>
-<p> <strong>会话恢复</strong> </p>
-<p>只要Screen本身没有终止，在其内部运行的会话都可以恢复。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</p>
-<p> <strong>多窗口</strong> </p>
-<p>在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。Screen实现了基本的文本操作，如复制粘贴等；还提供了类似滚动条的功能，可以查看窗口状况的历史记录。窗口还可以被分区和命名，还可以监视后台窗口的活动。 会话共享 Screen可以让一个或多个用户从不同终端多次登录一个会话，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。</p>
-<p>GNU’s Screen 官方站点：<span class="exturl" data-url="aHR0cDovL3d3dy5nbnUub3JnL3NvZnR3YXJlL3NjcmVlbi8=">http://www.gnu.org/software/screen/<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> screen -AmRvx -[ls -wipe][-d &lt;作业名称&gt;][-h &lt;行数&gt;][-r &lt;作业名称&gt;][-s ][-S &lt;作业名称&gt;]</span></span><br></pre></td></tr></table></figure>
+          <p>重新播放终端会话的所有操作</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>scriptreplay</strong> 用于在终端中，根据 <code>script</code> 命令记录的终端数据文件和时间日志文件，重现当时用户的所有操作和命令的输出信息。简而言之，重现播放当时终端会话发生的一切信息，而不是重新运行一遍命令。例如，用户当时在输入某条命令时，字符的键入和删除也都会被重现。非常适合用于教程演示场合。而且，在机器 A 上面使用 <code>script</code> 命令记录终端操作，可以在机器 B 上面使用 <code>scriptreplay</code> 命令重新播放。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scriptreplay [options] [-t] timingfile [typescript [divisor]]</span><br></pre></td></tr></table></figure>
 
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-A 　将所有的视窗都调整为目前终端机的大小。</span><br><span class="line">-d &lt;作业名称&gt; 　将指定的screen作业离线。</span><br><span class="line">-h &lt;行数&gt; 　指定视窗的缓冲区行数。</span><br><span class="line">-m 　即使目前已在作业中的screen作业，仍强制建立新的screen作业。</span><br><span class="line">-r &lt;作业名称&gt; 　恢复离线的screen作业。</span><br><span class="line">-R 　先试图恢复离线的作业。若找不到离线的作业，即建立新的screen作业。</span><br><span class="line">-s 　指定建立新视窗时，所要执行的shell。</span><br><span class="line">-S &lt;作业名称&gt; 　指定screen作业的名称。</span><br><span class="line">-v 　显示版本信息。</span><br><span class="line">-x 　恢复之前离线的screen作业。</span><br><span class="line">-ls或--list 　显示目前所有的screen作业。</span><br><span class="line">-wipe 　检查目前所有的screen作业，并删除已经无法使用的screen作业。</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用screen参数"><a href="#常用screen参数" class="headerlink" title="常用screen参数"></a>常用screen参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -S yourname -&gt; 新建一个叫yourname的session</span><br><span class="line">screen -ls -&gt; 列出当前所有的session</span><br><span class="line">screen -r yourname -&gt; 回到yourname这个session</span><br><span class="line">screen -d yourname -&gt; 远程detach某个session</span><br><span class="line">screen -d -r yourname -&gt; 结束当前session并回到yourname这个session</span><br></pre></td></tr></table></figure>
-
-<p>在每个screen session 下，所有命令都以 ctrl+a(C-a) 开始。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">C-a ? -&gt; 显示所有键绑定信息</span><br><span class="line">C-a c -&gt; 创建一个新的运行shell的窗口并切换到该窗口</span><br><span class="line">C-a n -&gt; Next，切换到下一个 window </span><br><span class="line">C-a p -&gt; Previous，切换到前一个 window </span><br><span class="line">C-a 0..9 -&gt; 切换到第 0..9 个 window</span><br><span class="line">Ctrl+a [Space] -&gt; 由视窗0循序切换到视窗9</span><br><span class="line">C-a C-a -&gt; 在两个最近使用的 window 间切换 </span><br><span class="line">C-a x -&gt; 锁住当前的 window，需用用户密码解锁</span><br><span class="line">C-a d -&gt; detach，暂时离开当前session，将目前的 screen session (可能含有多个 windows) 丢到后台执行，并会回到还没进 screen 时的状态，此时在 screen session 里，每个 window 内运行的 process (无论是前台/后台)都在继续执行，即使 logout 也不影响。 </span><br><span class="line">C-a z -&gt; 把当前session放到后台执行，用 shell 的 fg 命令则可回去。</span><br><span class="line">C-a w -&gt; 显示所有窗口列表</span><br><span class="line">C-a t -&gt; time，显示当前时间，和系统的 load </span><br><span class="line">C-a k -&gt; kill window，强行关闭当前的 window</span><br><span class="line">C-a  -&gt; 进入 copy mode，在 copy mode 下可以回滚、搜索、复制就像用使用 [vi 一样</span><br><span class="line">    C-b Backward，PageUp </span><br><span class="line">    C-f Forward，PageDown </span><br><span class="line">    H(大写) High，将光标移至左上角 </span><br><span class="line">    L Low，将光标移至左下角 </span><br><span class="line">    0 移到行首 </span><br><span class="line">    $ 行末 </span><br><span class="line">    w forward one word，以字为单位往前移 </span><br><span class="line">    b backward one word，以字为单位往后移 </span><br><span class="line">    Space 第一次按为标记区起点，第二次按为终点 </span><br><span class="line">    Esc 结束 copy mode </span><br><span class="line">C-a ] -&gt; paste，把刚刚在 copy mode 选定的内容贴上</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-screen"><a href="#使用-screen" class="headerlink" title="使用 screen"></a>使用 screen</h3><p> <strong>安装screen</strong> </p>
-<p>流行的Linux发行版（例如Red Hat Enterprise Linux）通常会自带screen实用程序，如果没有的话，可以从GNU screen的官方网站下载。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# yum install screen</span><br><span class="line">[root@TS-DEV ~]# rpm -qa|grep screen</span><br><span class="line">screen-4.0.3-4.el5</span><br><span class="line">[root@TS-DEV ~]#</span><br></pre></td></tr></table></figure>
-
-<p> <strong>创建一个新的窗口</strong> </p>
-<p>安装完成后，直接敲命令screen就可以启动它。但是这样启动的screen会话没有名字，实践上推荐为每个screen会话取一个名字，方便分辨：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -S david </span><br></pre></td></tr></table></figure>
-
-<p>screen启动后，会创建第一个窗口，也就是窗口No. 0，并在其中打开一个系统默认的shell，一般都会是bash。所以你敲入命令screen之后，会立刻又返回到命令提示符，仿佛什么也没有发生似的，其实你已经进入Screen的世界了。当然，也可以在screen命令之后加入你喜欢的参数，使之直接打开你指定的程序，例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen vi david.txt</span><br></pre></td></tr></table></figure>
-
-<p>screen创建一个执行vi david.txt的单窗口会话，退出vi 将退出该窗口/会话。</p>
-<p> <strong>查看窗口和窗口名称</strong> </p>
-<p>打开多个窗口后，可以使用快捷键C-a w列出当前所有窗口。如果使用文本终端，这个列表会列在屏幕左下角，如果使用X环境下的终端模拟器，这个列表会列在标题栏里。窗口列表的样子一般是这样：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">0$</span><span class="bash"> bash  1-$ bash  2*$ bash</span>  </span><br></pre></td></tr></table></figure>
-
-<p>这个例子中我开启了三个窗口，其中*号表示当前位于窗口2，-号表示上一次切换窗口时位于窗口1。</p>
-<p>Screen默认会为窗口命名为编号和窗口中运行程序名的组合，上面的例子中窗口都是默认名字。练习了上面查看窗口的方法，你可能就希望各个窗口可以有不同的名字以方便区分了。可以使用快捷键C-a A来为当前窗口重命名，按下快捷键后，Screen会允许你为当前窗口输入新的名字，回车确认。</p>
-<p> <strong>会话分离与恢复</strong> </p>
-<p>你可以不中断screen窗口中程序的运行而暂时断开（detach）screen会话，并在随后时间重新连接（attach）该会话，重新控制各窗口中运行的程序。例如，我们打开一个screen窗口编辑/tmp/david.txt文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen vi /tmp/david.txt</span><br></pre></td></tr></table></figure>
-
-<p>之后我们想暂时退出做点别的事情，比如出去散散步，那么在screen窗口键入C-a d，Screen会给出detached提示：</p>
-<p>暂时中断会话</p>
-<p>半个小时之后回来了，找到该screen会话：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -ls</span><br></pre></td></tr></table></figure>
-
-<p>重新连接会话：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -r 12865</span><br></pre></td></tr></table></figure>
-
-<p>一切都在。</p>
-<p>当然，如果你在另一台机器上没有分离一个Screen会话，就无从恢复会话了。这时可以使用下面命令强制将这个会话从它所在的终端分离，转移到新的终端上来：</p>
-<p> <strong>清除dead 会话</strong> </p>
-<p>如果由于某种原因其中一个会话死掉了（例如人为杀掉该会话），这时screen -list会显示该会话为dead状态。使用screen -wipe命令清除该会话：</p>
-<p> <strong>关闭或杀死窗口</strong> </p>
-<p>正常情况下，当你退出一个窗口中最后一个程序（通常是bash）后，这个窗口就关闭了。另一个关闭窗口的方法是使用C-a k，这个快捷键杀死当前的窗口，同时也将杀死这个窗口中正在运行的进程。</p>
-<p>如果一个Screen会话中最后一个窗口被关闭了，那么整个Screen会话也就退出了，screen进程会被终止。</p>
-<p>除了依次退出/杀死当前Screen会话中所有窗口这种方法之外，还可以使用快捷键C-a :，然后输入quit命令退出Screen会话。需要注意的是，这样退出会杀死所有窗口并退出其中运行的所有程序。其实C-a :这个快捷键允许用户直接输入的命令有很多，包括分屏可以输入split等，这也是实现Screen功能的一个途径，不过个人认为还是快捷键比较方便些。</p>
-<h3 id="screen-高级应用"><a href="#screen-高级应用" class="headerlink" title="screen 高级应用"></a>screen 高级应用</h3><p> <strong>会话共享</strong> </p>
-<p>还有一种比较好玩的会话恢复，可以实现会话共享。假设你在和朋友在不同地点以相同用户登录一台机器，然后你创建一个screen会话，你朋友可以在他的终端上命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -x</span><br></pre></td></tr></table></figure>
-
-<p>这个命令会将你朋友的终端Attach到你的Screen会话上，并且你的终端不会被Detach。这样你就可以和朋友共享同一个会话了，如果你们当前又处于同一个窗口，那就相当于坐在同一个显示器前面，你的操作会同步演示给你朋友，你朋友的操作也会同步演示给你。当然，如果你们切换到这个会话的不同窗口中去，那还是可以分别进行不同的操作的。</p>
-<p> <strong>会话锁定与解锁</strong> </p>
-<p>Screen允许使用快捷键C-a s锁定会话。锁定以后，再进行任何输入屏幕都不会再有反应了。但是要注意虽然屏幕上看不到反应，但你的输入都会被Screen中的进程接收到。快捷键C-a q可以解锁一个会话。</p>
-<p>也可以使用C-a x锁定会话，不同的是这样锁定之后，会话会被Screen所属用户的密码保护，需要输入密码才能继续访问这个会话。</p>
-<p> <strong>发送命令到screen会话</strong> </p>
-<p>在Screen会话之外，可以通过screen命令操作一个Screen会话，这也为使用Screen作为脚本程序增加了便利。关于Screen在脚本中的应用超出了入门的范围，这里只看一个例子，体会一下在会话之外对Screen的操作：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@TS-DEV ~]# screen -S sandy -X screen ping www.baidu.com</span><br></pre></td></tr></table></figure>
-
-<p>这个命令在一个叫做sandy的screen会话中创建一个新窗口，并在其中运行ping命令。</p>
-<p> <strong>屏幕分割</strong> </p>
-<p>现在显示器那么大，将一个屏幕分割成不同区域显示不同的Screen窗口显然是个很酷的事情。可以使用快捷键C-a S将显示器水平分割，Screen 4.00.03版本以后，也支持垂直分屏，快捷键是C-a |。分屏以后，可以使用C-a <tab>在各个区块间切换，每一区块上都可以创建窗口并在其中运行进程。</p>
-<p>可以用C-a X快捷键关闭当前焦点所在的屏幕区块，也可以用C-a Q关闭除当前区块之外其他的所有区块。关闭的区块中的窗口并不会关闭，还可以通过窗口切换找到它。</p>
-<p> <strong>C/P模式和操作</strong> </p>
-<p>screen的另一个很强大的功能就是可以在不同窗口之间进行复制粘贴了。使用快捷键C-a <Esc>或者C-a [可以进入copy/paste模式，这个模式下可以像在vi中一样移动光标，并可以使用空格键设置标记。其实在这个模式下有很多类似vi的操作，譬如使用/进行搜索，使用y快速标记一行，使用w快速标记一个单词等。关于C/P模式下的高级操作，其文档的这一部分有比较详细的说明。</p>
-<p>一般情况下，可以移动光标到指定位置，按下空格设置一个开头标记，然后移动光标到结尾位置，按下空格设置第二个标记，同时会将两个标记之间的部分储存在copy/paste buffer中，并退出copy/paste模式。在正常模式下，可以使用快捷键C-a ]将储存在buffer中的内容粘贴到当前窗口。</p>
-<p> <strong>更多screen功能</strong> </p>
-<p>同大多数UNIX程序一样，GNU Screen提供了丰富强大的定制功能。你可以在Screen的默认两级配置文件/etc/screenrc和$HOME/.screenrc中指定更多，例如设定screen选项，定制绑定键，设定screen会话自启动窗口，启用多用户模式，定制用户访问权限控制等等。如果你愿意的话，也可以自己指定screen配置文件。</p>
-<p>以多用户功能为例，screen默认是以单用户模式运行的，你需要在配置文件中指定multiuser on 来打开多用户模式，通过acl*（acladd,acldel,aclchg…）命令，你可以灵活配置其他用户访问你的screen会话。更多配置文件内容请参考screen的man页。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/linux-command/scp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/linux-command/scp/" class="post-title-link" itemprop="url">【Linux 命令】scp</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-09-25 08:00:00 08:00:00" itemprop="dateCreated datePublished" datetime="2020-09-25T08:00:00+08:00">2020-09-25 08:00:00</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-09-25 11:28:00 11:28:00" itemprop="dateModified" datetime="2020-09-25T11:28:00+08:00">2020-09-25 11:28:00</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux-%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">Linux 命令</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>加密的方式在本地主机和远程主机之间复制文件</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>scp命令</strong> 用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。可能会稍微影响一下速度。当你服务器硬盘变为只读read only system时，用scp可以帮你把文件移出来。另外，scp还非常不占资源，不会提高多少系统负荷，在这一点上，rsync就远远不及它了。虽然 rsync比scp会快一点，但当小文件众多的情况下，rsync会导致硬盘I/O非常高，而scp基本不影响系统正常使用。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp(选项)(参数)</span><br></pre></td></tr></table></figure>
-
-<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-1：使用ssh协议版本1；</span><br><span class="line">-2：使用ssh协议版本2；</span><br><span class="line">-4：使用ipv4；</span><br><span class="line">-6：使用ipv6；</span><br><span class="line">-B：以批处理模式运行；</span><br><span class="line">-C：使用压缩；</span><br><span class="line">-F：指定ssh配置文件；</span><br><span class="line">-i：identity_file 从指定文件中读取传输时使用的密钥文件（例如亚马逊云pem），此参数直接传递给ssh；</span><br><span class="line">-l：指定宽带限制；</span><br><span class="line">-o：指定使用的ssh选项；</span><br><span class="line">-P：指定远程主机的端口号；</span><br><span class="line">-p：保留文件的最后修改时间，最后访问时间和权限模式；</span><br><span class="line">-q：不显示复制进度；</span><br><span class="line">-r：以递归方式复制。</span><br></pre></td></tr></table></figure>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-t, --timing file         # 记录时间日志的文件名称</span><br><span class="line">-s, --typescript file     # 记录终端数据信息的日志文件名称</span><br><span class="line">-d, --divisor number      # 表示倍速播放，把时间日志文件记录的时间间隔都除以 number</span><br><span class="line">                          # -d 2 表示播放速度是原始输入单条命令的速度的两倍，-d 0.1 表示播放单条命令的速度减慢 10 倍</span><br><span class="line">-m, --maxdelay number     # 表示命令之间的最大延迟时间（单位是秒）</span><br><span class="line">                          # -m 2 表示 command.log 中存放的两条命令之间的间隔时间如果大于两秒，则按两秒执行播放</span><br><span class="line">-V, --version             # 显示版本信息并退出</span><br><span class="line">-h, --help                # 显示帮助文本并退出</span><br></pre></td></tr></table></figure>
 
 <h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><ul>
-<li>源文件：指定要复制的源文件。</li>
-<li>目标文件：目标文件。格式为<code>user@host：filename</code>（文件名为目标文件的名称）。</li>
+<li>时间日志文件：存储时间日志信息的文件名称</li>
+<li>终端数据文件：存储终端数据信息的文件名称</li>
 </ul>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>从远程复制到本地的scp命令与上面的命令雷同，只要将从本地复制到远程的命令后面2个参数互换顺序就行了。</p>
-<p> <strong>从远处复制文件到本地目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp root@10.10.10.10:/opt/soft/nginx-0.5.38.tar.gz /opt/soft/</span><br></pre></td></tr></table></figure>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重新播放终端内容，默认第一个参数是时间日志，第二个参数是终端数据文件</span></span><br><span class="line">scriptreplay time.file command.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新播放终端内容，播放快进速度为 1 ，命令之间最大延时为 2 秒</span></span><br><span class="line">scriptreplay -d 1 -m 2 -t time.file -s command.log</span><br></pre></td></tr></table></figure>
 
-<p>从10.10.10.10机器上的<code>/opt/soft/</code>的目录中下载nginx-0.5.38.tar.gz 文件到本地<code>/opt/soft/</code>目录中。</p>
-<p><strong>从亚马逊云复制OpenVPN到本地目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -i amazon.pem ubuntu@10.10.10.10:/usr/local/openvpn_as/etc/exe/openvpn-connect-2.1.3.110.dmg openvpn-connect-2.1.3.110.dmg</span><br></pre></td></tr></table></figure>
-<p>从10.10.10.10机器上下载openvpn安装文件到本地当前目录来。</p>
-<p> <strong>从远处复制到本地</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r root@10.10.10.10:/opt/soft/mongodb /opt/soft/</span><br></pre></td></tr></table></figure>
+<p> <strong>记录终端内容到文件</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">zfb@localhost:~$ script -t 2&gt;time.file -a -f command.log</span><br><span class="line">Script started, file is command.log</span><br><span class="line">zfb@localhost:~$ echo &quot;hello, world&quot;</span><br><span class="line">hello, world</span><br><span class="line">zfb@localhost:~$ echo $(date &quot;+%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">2020-12-23 20:48:46</span><br><span class="line">zfb@localhost:~$ echo &quot;Bye&quot;</span><br><span class="line">Bye</span><br><span class="line">zfb@localhost:~$ ls -al</span><br><span class="line">total 20</span><br><span class="line">drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 .</span><br><span class="line">drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..</span><br><span class="line">-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt</span><br><span class="line">-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt</span><br><span class="line">-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log</span><br><span class="line">-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file</span><br><span class="line">zfb@localhost:~$ exit</span><br><span class="line">Script done, file is command.log</span><br><span class="line">zfb@localhost:~$</span><br></pre></td></tr></table></figure>
 
-<p>从10.10.10.10机器上的<code>/opt/soft/</code>中下载mongodb目录到本地的<code>/opt/soft/</code>目录来。</p>
-<p> <strong>上传本地文件到远程机器指定目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp /opt/soft/nginx-0.5.38.tar.gz root@10.10.10.10:/opt/soft/scptest</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定端口 2222</span></span><br><span class="line">scp -rp -P 2222 /opt/soft/nginx-0.5.38.tar.gz root@10.10.10.10:/opt/soft/scptest</span><br></pre></td></tr></table></figure>
+<p> <strong>重新播放终端内容</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">zfb@localhost:~$ scriptreplay -d 1 -m 2 -t time.file -s command.log</span><br><span class="line">zfb@localhost:~$ echo &quot;hello, world&quot;</span><br><span class="line">hello, world</span><br><span class="line">zfb@localhost:~$ echo $(date &quot;+%Y-%m-%d %H:%M:%S&quot;)</span><br><span class="line">2020-12-23 20:48:46</span><br><span class="line">zfb@localhost:~$ echo &quot;Bye&quot;</span><br><span class="line">Bye</span><br><span class="line">zfb@localhost:~$ ls -al</span><br><span class="line">total 20</span><br><span class="line">drwxr-xr-x  2 zfb zfb 4096 Dec 23 20:48 .</span><br><span class="line">drwxr-xr-x 37 zfb zfb 4096 Dec 23 20:49 ..</span><br><span class="line">-rw-r--r--  1 zfb zfb    0 Dec 23 19:03 a.txt</span><br><span class="line">-rw-r--r--  1 zfb zfb   12 Dec 23 19:04 b.txt</span><br><span class="line">-rw-r--r--  1 zfb zfb 2744 Dec 23 20:49 command.log</span><br><span class="line">-rw-r--r--  1 zfb zfb  790 Dec 23 20:49 time.file</span><br><span class="line">zfb@localhost:~$ exit</span><br><span class="line"></span><br><span class="line">zfb@localhost:~$</span><br></pre></td></tr></table></figure>
 
-<p>复制本地<code>/opt/soft/</code>目录下的文件nginx-0.5.38.tar.gz到远程机器10.10.10.10的<code>opt/soft/scptest</code>目录。</p>
-<p> <strong>上传本地目录到远程机器指定目录</strong> </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r /opt/soft/mongodb root@10.10.10.10:/opt/soft/scptest</span><br></pre></td></tr></table></figure>
-
-<p>上传本地目录<code>/opt/soft/mongodb</code>到远程机器10.10.10.10上<code>/opt/soft/scptest</code>的目录中去。</p>
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+<p>其中，只有命令<code>scriptreplay -d 1 -m 2 -t time.file -s command.log</code>是用户输入，其他均为自动呈现（且视觉效果与真实用户的操作一致）。通过查看上面输出的时间<code>2020-12-23 20:48:46</code>，可以证明，这是重新播放当时的记录，而非重新执行一遍命令。也就是说，可以把<code>time.file</code>和<code>command.log</code>文件移动到任意一台支持<code>scriptreplay</code>命令的机器上，都可以动态重现命令输入与终端回显。</p>
 
       
     </div>
@@ -1520,7 +1535,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/26/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><span class="page-number current">27</span><a class="page-number" href="/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/28/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1551,7 +1566,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:17</span>
+    <span title="站点阅读时长">21:35</span>
   </span>
 </div>
 <div class="busuanzi-count">
