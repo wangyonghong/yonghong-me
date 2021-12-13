@@ -9,7 +9,6 @@ tags:
 - fdisk
 title: 【Linux 命令】fdisk
 updated: '2020-09-25 09:12:00'
-indexing: false
 ---
 
 查看磁盘使用情况和磁盘分区
@@ -329,4 +328,4 @@ proc                    /proc                   proc    defaults        0 0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -9,7 +9,6 @@ tags:
 - base64
 title: 【Linux 命令】base64
 updated: '2020-09-25 08:14:00'
-indexing: false
 ---
 
 base64 编码/解码文件或标准输入输出
@@ -61,4 +60,3 @@ printf Zm9v|base64 -d
 base64 -d file
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

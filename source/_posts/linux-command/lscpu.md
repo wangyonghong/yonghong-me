@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lscpu
 title: 【Linux 命令】lscpu
-updated: '2020-09-25 10:17:00'
-indexing: false
+updated: '2020-09-25 10:18:00'
 ---
 
 显示有关CPU架构的信息
@@ -83,4 +82,4 @@ L3 cache:              8192K
 NUMA node0 CPU(s):     0-3
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

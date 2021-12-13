@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ifup
 title: 【Linux 命令】ifup
-updated: '2020-09-25 09:43:00'
-indexing: false
+updated: '2020-09-25 09:43:30'
 ---
 
 激活指定的网络接口
@@ -35,4 +34,3 @@ ifup eth0   #激活eth0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

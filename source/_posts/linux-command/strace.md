@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - strace
 title: 【Linux 命令】strace
-updated: '2020-09-25 11:50:30'
-indexing: false
+updated: '2020-09-25 11:52:30'
 ---
 
 跟踪系统调用和信号
@@ -374,4 +373,3 @@ lrwx------    1 oracle   dba            64 Dec 30 10:55 25 -> /db/databases/orcl
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

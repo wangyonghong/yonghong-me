@@ -9,7 +9,6 @@ tags:
 - chpasswd
 title: 【Linux 命令】chpasswd
 updated: '2020-09-25 08:31:00'
-indexing: false
 ---
 
 批量更新用户口令的工具
@@ -43,4 +42,3 @@ chpasswd < user.txt
 以上是运用chpasswd命令来批量修改密码。是linux系统管理中的捷径。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

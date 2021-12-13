@@ -9,7 +9,6 @@ tags:
 - clear
 title: 【Linux 命令】clear
 updated: '2020-09-25 08:33:00'
-indexing: false
 ---
 
 清除当前屏幕终端上的任何信息
@@ -29,4 +28,3 @@ clear
 直接输入clear命令当前终端上的任何信息就可被清除。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

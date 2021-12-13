@@ -9,7 +9,6 @@ tags:
 - bg
 title: 【Linux 命令】bg
 updated: '2020-09-25 08:16:00'
-indexing: false
 ---
 
 将前台终端作业移动到后台运行
@@ -56,4 +55,4 @@ bg %1
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nisdomainname
 title: 【Linux 命令】nisdomainname
-updated: '2020-09-25 10:43:30'
-indexing: false
+updated: '2020-09-25 10:44:30'
 ---
 
 显示主机NIS的域名
@@ -31,4 +30,3 @@ nisdomainname(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

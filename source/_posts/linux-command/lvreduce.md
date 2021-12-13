@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvreduce
 title: 【Linux 命令】lvreduce
-updated: '2020-09-25 10:21:30'
-indexing: false
+updated: '2020-09-25 10:22:30'
 ---
 
 收缩逻辑卷空间
@@ -53,4 +52,3 @@ Do you really want to reduce lvol0? [y/n]: y  #确认操作
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

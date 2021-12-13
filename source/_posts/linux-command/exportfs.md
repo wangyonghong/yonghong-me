@@ -9,7 +9,6 @@ tags:
 - exportfs
 title: 【Linux 命令】exportfs
 updated: '2020-09-25 09:10:00'
-indexing: false
 ---
 
 管理NFS共享文件系统列表
@@ -31,4 +30,3 @@ exportfs 命令用来管理当前NFS共享的文件系统列表。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

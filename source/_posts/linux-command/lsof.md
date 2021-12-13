@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lsof
 title: 【Linux 命令】lsof
-updated: '2020-09-25 10:18:00'
-indexing: false
+updated: '2020-09-25 10:19:00'
 ---
 
 显示Linux系统当前已打开的所有文件列表 `lsof -p pid`
@@ -23,7 +22,7 @@ indexing: false
 ### 语法
 
 ```shell
-lsof(选项)
+lsof (选项)
 ```
 
 ### 选项
@@ -36,11 +35,11 @@ lsof(选项)
 +d<目录>：列出目录下被打开的文件；
 +D<目录>：递归列出目录下被打开的文件；
 -n<目录>：列出使用NFS的文件；
--i<条件>：列出符合条件的进程。（4、6、协议、:端口、 @ip ）
+-i<条件>：列出符合条件的进程（协议、:端口、 @ip ）
 -p<进程号>：列出指定进程号所打开的文件；
 -u：列出UID号进程详情；
 -h：显示帮助信息；
--v：显示版本信息。
+-v：显示版本信息
 ```
 
 ### 实例
@@ -157,4 +156,4 @@ lsof -i:9981 -P -t -sTCP:LISTEN
 lsof $filename
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

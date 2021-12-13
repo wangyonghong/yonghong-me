@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgdisplay
 title: 【Linux 命令】vgdisplay
-updated: '2020-09-25 12:26:00'
-indexing: false
+updated: '2020-09-25 12:28:00'
 ---
 
 显示LVM卷组的信息
@@ -54,4 +53,3 @@ vgdisplay(选项)(参数)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - cupsdisable
 title: 【Linux 命令】cupsdisable
 updated: '2020-09-25 08:41:30'
-indexing: false
 ---
 
 停止指定的打印机
@@ -40,4 +39,3 @@ cupsdisable(选项)(参数)
 目标：指定目标打印机。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

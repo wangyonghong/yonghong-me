@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - write
 title: 【Linux 命令】write
-updated: '2020-09-25 12:36:00'
-indexing: false
+updated: '2020-09-25 12:38:00'
 ---
 
 向指定登录用户终端上发送信息
@@ -52,4 +51,3 @@ write Rollaend pts/2
 若对方设定`mesg n`，则此时信息将无法传给对方。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

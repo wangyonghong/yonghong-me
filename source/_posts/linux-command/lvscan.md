@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lvscan
 title: 【Linux 命令】lvscan
-updated: '2020-09-25 10:23:00'
-indexing: false
+updated: '2020-09-25 10:24:00'
 ---
 
 扫描逻辑卷
@@ -45,4 +44,3 @@ ACTIVE          '/dev/vg1000/lvol0' [200.00 MB] inherit
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

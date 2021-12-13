@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pvremove
 title: 【Linux 命令】pvremove
-updated: '2020-09-25 11:06:30'
-indexing: false
+updated: '2020-09-25 11:07:30'
 ---
 
 删除一个存在的物理卷
@@ -46,4 +45,3 @@ Labels on physical volume "/dev/sdb2" successfully wiped
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

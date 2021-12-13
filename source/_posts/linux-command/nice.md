@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nice
 title: 【Linux 命令】nice
-updated: '2020-09-25 10:43:00'
-indexing: false
+updated: '2020-09-25 10:44:00'
 ---
 
 改变程序执行的优先权等级
@@ -49,4 +48,3 @@ nice --19 tar zcf pack.tar.gz documents
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

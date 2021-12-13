@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgextend
 title: 【Linux 命令】vgextend
-updated: '2020-09-25 12:26:30'
-indexing: false
+updated: '2020-09-25 12:28:30'
 ---
 
 向卷组中添加物理卷
@@ -51,4 +50,3 @@ Volume group "vg2000" successfully extended
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nologin
 title: 【Linux 命令】nologin
-updated: '2020-09-25 10:46:30'
-indexing: false
+updated: '2020-09-25 10:47:30'
 ---
 
 拒绝用户登录系统
@@ -67,4 +66,3 @@ touch /etc/nologin
 除root以外的用户不能登录了。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

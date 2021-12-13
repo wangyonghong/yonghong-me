@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - resize
 title: 【Linux 命令】resize
-updated: '2020-09-25 11:17:00'
-indexing: false
+updated: '2020-09-25 11:18:00'
 ---
 
 命令设置终端机视窗的大小
@@ -61,4 +60,4 @@ export COLUMNS LINES;
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

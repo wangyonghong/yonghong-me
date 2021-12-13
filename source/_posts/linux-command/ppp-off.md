@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ppp-off
 title: 【Linux 命令】ppp-off
-updated: '2020-09-25 10:59:30'
-indexing: false
+updated: '2020-09-25 11:00:30'
 ---
 
 关闭ppp连线
@@ -25,4 +24,3 @@ ppp-off
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

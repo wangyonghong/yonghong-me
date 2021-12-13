@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - startx
 title: 【Linux 命令】startx
-updated: '2020-09-25 11:49:30'
-indexing: false
+updated: '2020-09-25 11:51:30'
 ---
 
 用来启动X Window
@@ -99,4 +98,3 @@ $HOME/.uwmrc uwm 配置文件。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

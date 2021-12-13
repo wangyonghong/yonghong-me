@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ping
 title: 【Linux 命令】ping
-updated: '2020-09-25 10:57:00'
-indexing: false
+updated: '2020-09-25 10:58:00'
 ---
 
 测试主机之间网络的连通性
@@ -64,4 +63,3 @@ rtt min/avg/max/mdev = 174.068/176.916/178.182/1.683 ms
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

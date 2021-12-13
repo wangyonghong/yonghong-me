@@ -9,7 +9,6 @@ tags:
 - dpkg-trigger
 title: 【Linux 命令】dpkg-trigger
 updated: '2020-09-25 08:58:00'
-indexing: false
 ---
 
 Debian Linux下的软件包触发器
@@ -39,4 +38,3 @@ dpkg-trigger(选项)(参数)
 触发器名：指定触发器名称。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - type
 title: 【Linux 命令】type
-updated: '2020-09-25 12:11:30'
-indexing: false
+updated: '2020-09-25 12:13:30'
 ---
 
 显示指定命令的类型。
@@ -130,4 +129,4 @@ file
 2. 命令优先级问题请查看`builtin`命令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

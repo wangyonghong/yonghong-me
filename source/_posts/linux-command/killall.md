@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - killall
 title: 【Linux 命令】killall
-updated: '2020-09-25 09:58:30'
-indexing: false
+updated: '2020-09-25 09:59:30'
 ---
 
 使用进程的名称来杀死一组进程
@@ -51,4 +50,3 @@ killall vi
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

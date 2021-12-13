@@ -9,7 +9,6 @@ tags:
 - date
 title: 【Linux 命令】date
 updated: '2020-09-25 08:43:30'
-indexing: false
 ---
 
 显示或设置系统时间与日期
@@ -193,4 +192,4 @@ date +"${suffix} %Y/%m/%d"
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 date`或`info coreutils 'date invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

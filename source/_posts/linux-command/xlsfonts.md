@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xlsfonts
 title: 【Linux 命令】xlsfonts
-updated: '2020-09-25 12:40:00'
-indexing: false
+updated: '2020-09-25 12:42:00'
 ---
 
 列出X Server使用的字体
@@ -38,4 +37,3 @@ xlsfonts(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

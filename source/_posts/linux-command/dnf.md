@@ -9,7 +9,6 @@ tags:
 - dnf
 title: 【Linux 命令】dnf
 updated: '2020-09-25 08:52:30'
-indexing: false
 ---
 
 新一代的RPM软件包管理器
@@ -288,4 +287,3 @@ DNF 包管理器作为 YUM 包管理器的升级替代品，它能自动完成�
 4.  当你在 DNF 中排除了某个软件库，那么该操作将会影响到你之后所有的操作，不像在 YUM 下那样，你的排除操作只会咋升级和安装软件时才起作用。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

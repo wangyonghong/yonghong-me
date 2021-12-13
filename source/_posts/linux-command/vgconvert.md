@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgconvert
 title: 【Linux 命令】vgconvert
-updated: '2020-09-25 12:25:00'
-indexing: false
+updated: '2020-09-25 12:27:00'
 ---
 
 转换卷组元数据格式
@@ -59,4 +58,3 @@ Volume group vg1000 successfully converted
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

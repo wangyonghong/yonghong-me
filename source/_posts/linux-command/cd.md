@@ -9,7 +9,6 @@ tags:
 - cd
 title: 【Linux 命令】cd
 updated: '2020-09-25 08:26:00'
-indexing: false
 ---
 
 切换用户当前工作目录。
@@ -99,4 +98,4 @@ shopt -u cdable_vars
 
 2. 建议您在编写脚本的过程中如有必要使用`cd`命令时，请增加必要的注释以用于提醒阅读者当前工作目录，以免出现诸如`找不到文件`这类问题的发生。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

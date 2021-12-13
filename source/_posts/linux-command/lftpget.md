@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lftpget
 title: 【Linux 命令】lftpget
-updated: '2020-09-25 10:03:30'
-indexing: false
+updated: '2020-09-25 10:04:30'
 ---
 
 调用lftp指令下载指定的文件
@@ -37,4 +36,3 @@ lftpget(选项)(参数)
 文件：指定要下载的文件，文件必须是合法的URL路径。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

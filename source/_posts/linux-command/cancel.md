@@ -9,7 +9,6 @@ tags:
 - cancel
 title: 【Linux 命令】cancel
 updated: '2020-09-25 08:25:00'
-indexing: false
 ---
 
 取消已存在的打印任务
@@ -39,4 +38,3 @@ cancel(选项)(参数)
 打印任务号：指定要取消的打印任务编号。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

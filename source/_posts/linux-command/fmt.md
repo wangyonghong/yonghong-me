@@ -9,7 +9,6 @@ tags:
 - fmt
 title: 【Linux 命令】fmt
 updated: '2020-09-25 09:16:30'
-indexing: false
 ---
 
 读取文件后优化处理并输出
@@ -40,4 +39,3 @@ fmt(选项)(参数)
 指定要优化格式的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

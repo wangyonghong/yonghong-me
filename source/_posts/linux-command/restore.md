@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - restore
 title: 【Linux 命令】restore
-updated: '2020-09-25 11:17:30'
-indexing: false
+updated: '2020-09-25 11:18:30'
 ---
 
 所进行的操作和dump指令相反
@@ -63,4 +62,3 @@ restore ft /dev/hda3
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

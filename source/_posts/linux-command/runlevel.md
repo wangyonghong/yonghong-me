@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - runlevel
 title: 【Linux 命令】runlevel
-updated: '2020-09-25 11:27:00'
-indexing: false
+updated: '2020-09-25 11:28:00'
 ---
 
 打印当前Linux系统的运行等级
@@ -48,4 +47,3 @@ S s Single user mode
 linux的运行模式比起windows的启动模式的优势在于：你可以在系统空闲时使用init命令切换你现在使用的runlevel，另外，当你关闭或者启动linux系统时你已经不知不觉中切换你的runlevel，系统关机进程需要调用runlevel(0或6)来关闭所有正在运行中的进程。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

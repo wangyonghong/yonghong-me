@@ -9,7 +9,6 @@ tags:
 - command
 title: 【Linux 命令】command
 updated: '2020-09-25 08:36:30'
-indexing: false
 ---
 
 调用并执行指定的命令
@@ -43,4 +42,3 @@ Linux
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

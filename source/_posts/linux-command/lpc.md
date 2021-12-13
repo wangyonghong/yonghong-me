@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lpc
 title: 【Linux 命令】lpc
-updated: '2020-09-25 10:12:30'
-indexing: false
+updated: '2020-09-25 10:13:30'
 ---
 
 命令行方式打印机控制程序
@@ -36,4 +35,3 @@ lpc> exit
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pr
 title: 【Linux 命令】pr
-updated: '2020-09-25 11:00:00'
-indexing: false
+updated: '2020-09-25 11:01:00'
 ---
 
 将文本文件转换成适合打印的格式
@@ -36,4 +35,3 @@ pr(选项)(参数)
 文件：需要转换格式的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

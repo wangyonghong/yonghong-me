@@ -9,7 +9,6 @@ tags:
 - dirs
 title: 【Linux 命令】dirs
 updated: '2020-09-25 08:50:30'
-indexing: false
 ---
 
 显示目录堆栈。
@@ -86,4 +85,4 @@ dirs [-clpv] [+N] [-N]
 2. 当前目录始终是目录堆栈的顶部。
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

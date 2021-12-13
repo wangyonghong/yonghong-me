@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - printf
 title: 【Linux 命令】printf
-updated: '2020-09-25 11:00:30'
-indexing: false
+updated: '2020-09-25 11:01:30'
 ---
 
 格式化并输出结果。
@@ -197,4 +196,4 @@ value1
    - [POSIX printf格式说明符](https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html)
    的`Description`段落。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

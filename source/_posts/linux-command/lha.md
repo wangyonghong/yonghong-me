@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lha
 title: 【Linux 命令】lha
-updated: '2020-09-25 10:04:00'
-indexing: false
+updated: '2020-09-25 10:05:00'
 ---
 
 压缩或解压缩lzh格式文件
@@ -54,4 +53,3 @@ lha -xiw=agis abc          #解压文件abc，到当前目录
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

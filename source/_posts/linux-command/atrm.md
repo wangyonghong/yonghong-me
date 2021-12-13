@@ -9,7 +9,6 @@ tags:
 - atrm
 title: 【Linux 命令】atrm
 updated: '2020-09-25 08:12:00'
-indexing: false
 ---
 
 删除待执行任务队列中的指定任务
@@ -47,4 +46,3 @@ atrm 2     # 删除任务2
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

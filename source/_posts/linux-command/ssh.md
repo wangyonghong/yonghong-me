@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ssh
 title: 【Linux 命令】ssh
-updated: '2020-09-25 11:48:30'
-indexing: false
+updated: '2020-09-25 11:50:30'
 ---
 
 openssh套件中的客户端连接工具
@@ -175,4 +174,4 @@ iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEP
 service iptables save
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sort
 title: 【Linux 命令】sort
-updated: '2020-09-25 11:42:00'
-indexing: false
+updated: '2020-09-25 11:44:00'
 ---
 
 对文本文件中所有行进行排序。
@@ -222,4 +221,4 @@ guge 50 3000
 
 3. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 shuf`，`info coreutils 'shuf invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

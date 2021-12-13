@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pmap
 title: 【Linux 命令】pmap
-updated: '2020-09-25 10:58:00'
-indexing: false
+updated: '2020-09-25 10:59:00'
 ---
 
 报告进程的内存映射关系
@@ -132,4 +131,3 @@ total kB           72880   22940   22000
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - uncompress
 title: 【Linux 命令】uncompress
-updated: '2020-09-25 12:15:00'
-indexing: false
+updated: '2020-09-25 12:17:00'
 ---
 
 用来解压.Z文件
@@ -51,4 +50,3 @@ uncompress FileName.Z
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

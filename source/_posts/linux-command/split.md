@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - split
 title: 【Linux 命令】split
-updated: '2020-09-25 11:44:00'
-indexing: false
+updated: '2020-09-25 11:46:00'
 ---
 
 分割任意大小的文件
@@ -70,4 +69,4 @@ split -l 10 date.file
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

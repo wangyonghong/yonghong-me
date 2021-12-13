@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - info
 title: 【Linux 命令】info
-updated: '2020-09-25 09:44:00'
-indexing: false
+updated: '2020-09-25 09:44:30'
 ---
 
 Linux下info格式的帮助指令
@@ -90,4 +89,3 @@ info info
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

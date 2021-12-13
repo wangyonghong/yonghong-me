@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkinitrd
 title: 【Linux 命令】mkinitrd
-updated: '2020-09-25 10:30:30'
-indexing: false
+updated: '2020-09-25 10:31:30'
 ---
 
 建立要载入ramdisk的映像文件
@@ -71,4 +70,3 @@ myinitrd.img: ASCII cpio archive (SVR4 with no CRC)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

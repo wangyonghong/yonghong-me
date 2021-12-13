@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lsusb
 title: 【Linux 命令】lsusb
-updated: '2020-09-25 10:19:00'
-indexing: false
+updated: '2020-09-25 10:20:00'
 ---
 
 显示本机的USB设备列表信息
@@ -83,4 +82,3 @@ Bus 002 Device 001: ID 0000:0000**
 * 一个是usb鼠标  -- 006
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

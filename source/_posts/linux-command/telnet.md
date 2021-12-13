@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - telnet
 title: 【Linux 命令】telnet
-updated: '2020-09-25 12:02:30'
-indexing: false
+updated: '2020-09-25 12:04:30'
 ---
 
 登录远程主机和管理(测试ip端口是否连通)
@@ -145,4 +144,4 @@ telnet 23/udp
 service xinetd restart
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

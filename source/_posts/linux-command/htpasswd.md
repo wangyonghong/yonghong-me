@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - htpasswd
 title: 【Linux 命令】htpasswd
-updated: '2020-09-25 09:38:30'
-indexing: false
+updated: '2020-09-25 09:39:00'
 ---
 
 apache服务器创建密码认证文件
@@ -82,4 +81,3 @@ htpasswd -b .passwd Jack 123456
 即先使用htpasswd删除命令删除指定用户，再利用htpasswd添加用户命令创建用户即可实现修改密码的功能。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - scp
 title: 【Linux 命令】scp
-updated: '2020-09-25 11:28:00'
-indexing: false
+updated: '2020-09-25 11:29:00'
 ---
 
 加密的方式在本地主机和远程主机之间复制文件
@@ -52,7 +51,7 @@ scp(选项)(参数)
 
 从远程复制到本地的scp命令与上面的命令雷同，只要将从本地复制到远程的命令后面2个参数互换顺序就行了。
 
- **从远处复制文件到本地目录** 
+ **从远程机器复制文件到本地目录** 
 
 ```shell
 scp root@10.10.10.10:/opt/soft/nginx-0.5.38.tar.gz /opt/soft/
@@ -67,7 +66,7 @@ scp -i amazon.pem ubuntu@10.10.10.10:/usr/local/openvpn_as/etc/exe/openvpn-conne
 ```
 从10.10.10.10机器上下载openvpn安装文件到本地当前目录来。
 
- **从远处复制到本地** 
+ **从远程机器复制到本地** 
 
 ```shell
 scp -r root@10.10.10.10:/opt/soft/mongodb /opt/soft/
@@ -94,4 +93,4 @@ scp -r /opt/soft/mongodb root@10.10.10.10:/opt/soft/scptest
 上传本地目录`/opt/soft/mongodb`到远程机器10.10.10.10上`/opt/soft/scptest`的目录中去。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

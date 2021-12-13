@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pvcreate
 title: 【Linux 命令】pvcreate
-updated: '2020-09-25 11:05:30'
-indexing: false
+updated: '2020-09-25 11:06:30'
 ---
 
 将物理硬盘分区初始化为物理卷
@@ -121,4 +120,3 @@ Physical volume "/dev/sdb1" changed
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mailq
 title: 【Linux 命令】mailq
-updated: '2020-09-25 10:24:30'
-indexing: false
+updated: '2020-09-25 10:25:30'
 ---
 
 显示待发送的邮件队列
@@ -39,4 +38,3 @@ mailq(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

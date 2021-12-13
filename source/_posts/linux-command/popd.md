@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - popd
 title: 【Linux 命令】popd
-updated: '2020-09-25 10:58:30'
-indexing: false
+updated: '2020-09-25 10:59:30'
 ---
 
 从目录堆栈中删除目录。
@@ -87,4 +86,4 @@ popd [-n] [+N | -N]
 
 - [popd、pushd命令'-n'选项的行为](https://superuser.com/questions/784450/popd-and-pushd-behavior-with-n-option)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

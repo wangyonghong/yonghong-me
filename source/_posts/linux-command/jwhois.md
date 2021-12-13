@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - jwhois
 title: 【Linux 命令】jwhois
-updated: '2020-09-25 09:56:30'
-indexing: false
+updated: '2020-09-25 09:57:30'
 ---
 
 whois 客户端服务
@@ -70,4 +69,3 @@ Registrar WHOIS Server: whois.west263.com
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpmdb
 title: 【Linux 命令】rpmdb
-updated: '2020-09-25 11:24:00'
-indexing: false
+updated: '2020-09-25 11:25:00'
 ---
 
 初始化和重建RPM数据库
@@ -32,4 +31,3 @@ rpmdb(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

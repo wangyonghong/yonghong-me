@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - zipinfo
 title: 【Linux 命令】zipinfo
-updated: '2020-09-25 12:44:30'
-indexing: false
+updated: '2020-09-25 12:46:30'
 ---
 
 用来列出压缩文件信息
@@ -46,4 +45,3 @@ zipinfo(选项)(参数)
 文件：指定zip格式的压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

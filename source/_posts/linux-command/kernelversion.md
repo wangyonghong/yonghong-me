@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - kernelversion
 title: 【Linux 命令】kernelversion
-updated: '2020-09-25 09:57:00'
-indexing: false
+updated: '2020-09-25 09:58:00'
 ---
 
 打印当前内核的主版本号
@@ -25,4 +24,3 @@ kernelversion
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - atq
 title: 【Linux 命令】atq
 updated: '2020-09-25 08:11:30'
-indexing: false
 ---
 
 列出当前用户的at任务列表
@@ -44,4 +43,4 @@ atq
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

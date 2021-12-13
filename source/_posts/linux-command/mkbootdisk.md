@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkbootdisk
 title: 【Linux 命令】mkbootdisk
-updated: '2020-09-25 10:28:30'
-indexing: false
+updated: '2020-09-25 10:29:30'
 ---
 
 可建立目前系统的启动盘
@@ -51,4 +50,3 @@ mkbootdisk --device /dev/fd0 2.2.18
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

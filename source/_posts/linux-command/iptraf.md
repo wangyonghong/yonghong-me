@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iptraf
 title: 【Linux 命令】iptraf
-updated: '2020-09-25 09:53:00'
-indexing: false
+updated: '2020-09-25 09:53:30'
 ---
 
 实时地监视网卡流量
@@ -40,4 +39,3 @@ iptraf(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - fishshell
 title: 【Linux 命令】fishshell
 updated: '2020-09-25 09:16:00'
-indexing: false
 ---
 
 比 bash 更好用的 shell

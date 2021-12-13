@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - speedtest-cli
 title: 【Linux 命令】speedtest-cli
-updated: '2020-09-25 11:43:00'
-indexing: false
+updated: '2020-09-25 11:45:00'
 ---
 
 命令行下测试服务器外网速度
@@ -130,4 +129,3 @@ Share results: http://www.speedtest.net/result/3240988007.png
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

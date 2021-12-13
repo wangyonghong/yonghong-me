@@ -9,7 +9,6 @@ tags:
 - grub
 title: 【Linux 命令】grub
 updated: '2020-09-25 09:30:30'
-indexing: false
 ---
 
 多重引导程序grub的命令行shell工具
@@ -80,4 +79,3 @@ boot
 这里的关键问题是如何确定系统的几个分区：`/boot` `/` `/sbin`
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

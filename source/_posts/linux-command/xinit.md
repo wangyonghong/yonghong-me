@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xinit
 title: 【Linux 命令】xinit
-updated: '2020-09-25 12:38:30'
-indexing: false
+updated: '2020-09-25 12:40:30'
 ---
 
 是Linux下X-Window系统的初始化程序
@@ -31,4 +30,3 @@ xinit(参数)
 * 服务器端选项：服务器端选项指令及选项。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

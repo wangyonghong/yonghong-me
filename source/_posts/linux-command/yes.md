@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - 'yes'
 title: 【Linux 命令】yes
-updated: '2020-09-25 12:41:30'
-indexing: false
+updated: '2020-09-25 12:43:30'
 ---
 
 重复打印指定字符串
@@ -45,4 +44,3 @@ testline
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

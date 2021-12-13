@@ -9,7 +9,6 @@ tags:
 - dpkg
 title: 【Linux 命令】dpkg
 updated: '2020-09-25 08:58:30'
-indexing: false
 ---
 
 Debian Linux系统上安装、创建和管理软件包
@@ -57,4 +56,3 @@ dpkg --configure package   # 配置包
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

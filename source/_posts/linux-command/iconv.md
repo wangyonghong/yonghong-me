@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iconv
 title: 【Linux 命令】iconv
-updated: '2020-09-25 09:39:30'
-indexing: false
+updated: '2020-09-25 09:40:00'
 ---
 
 转换文件的编码方式
@@ -54,4 +53,3 @@ iconv file1 -f EUC-JP-MS -t UTF-8 -o file2
 这里，没`-o`那么会输出到标准输出。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

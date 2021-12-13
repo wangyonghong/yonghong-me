@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - kill
 title: 【Linux 命令】kill
-updated: '2020-09-25 09:58:00'
-indexing: false
+updated: '2020-09-25 09:59:00'
 ---
 
 发送信号到进程。
@@ -198,4 +197,4 @@ name：使用此名称调用的所有进程将接收信号。
 #### 参考链接
 [发送信号到进程](https://bash.cyberciti.biz/guide/Sending_signal_to_Processes)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

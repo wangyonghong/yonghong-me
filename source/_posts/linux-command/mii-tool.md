@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mii-tool
 title: 【Linux 命令】mii-tool
-updated: '2020-09-25 10:28:00'
-indexing: false
+updated: '2020-09-25 10:29:00'
 ---
 
 配置网络设备协商方式的工具
@@ -81,4 +80,3 @@ eth0: 100 Mbit, full duplex, link ok
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

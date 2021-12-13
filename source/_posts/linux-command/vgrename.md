@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgrename
 title: 【Linux 命令】vgrename
-updated: '2020-09-25 12:28:00'
-indexing: false
+updated: '2020-09-25 12:30:00'
 ---
 
 使用vgrename命令可以重命名卷组的名称
@@ -47,4 +46,4 @@ vgrename [选项] [旧卷组路径|旧卷组名称|旧卷组UUID] [新卷组路�
   Volume group "vg1" successfully renamed to "vg2"
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

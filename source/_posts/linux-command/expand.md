@@ -9,7 +9,6 @@ tags:
 - expand
 title: 【Linux 命令】expand
 updated: '2020-09-25 09:09:00'
-indexing: false
 ---
 
 将文件的制表符转换为空白字符
@@ -35,4 +34,3 @@ expand(选项)(参数)
 文件：指定要转换制表符为空白的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vdfuse
 title: 【Linux 命令】vdfuse
-updated: '2020-09-25 12:24:00'
-indexing: false
+updated: '2020-09-25 12:26:00'
 ---
 
 VirtualBox软件挂载VDI分区文件工具
@@ -67,4 +66,3 @@ mount /path/to/mountpoint/Partition1 /path/to/someother/mountpoint
 文件系统就挂载到`/path/to/someother/mountpoint`了。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

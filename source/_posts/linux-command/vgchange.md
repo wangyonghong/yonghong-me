@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgchange
 title: 【Linux 命令】vgchange
-updated: '2020-09-25 12:24:30'
-indexing: false
+updated: '2020-09-25 12:26:30'
 ---
 
 修改卷组属性
@@ -49,4 +48,3 @@ vgchange(选项)(参数)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

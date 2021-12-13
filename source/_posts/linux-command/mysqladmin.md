@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mysqladmin
 title: 【Linux 命令】mysqladmin
-updated: '2020-09-25 10:36:30'
-indexing: false
+updated: '2020-09-25 10:37:30'
 ---
 
 MySQL服务器管理客户端
@@ -60,4 +59,3 @@ version：得到服务器的版本信息。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

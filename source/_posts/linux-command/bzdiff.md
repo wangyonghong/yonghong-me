@@ -9,7 +9,6 @@ tags:
 - bzdiff
 title: 【Linux 命令】bzdiff
 updated: '2020-09-25 08:21:30'
-indexing: false
 ---
 
 直接比较两个.bz2压缩包中文件的不同
@@ -30,4 +29,3 @@ bzdiff(参数)
 *   文件2：指定要比较的第二个.bz2压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

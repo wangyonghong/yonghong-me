@@ -9,7 +9,6 @@ tags:
 - chkconfig
 title: 【Linux 命令】chkconfig
 updated: '2020-09-25 08:29:30'
-indexing: false
 ---
 
 检查或设置系统的各种服务
@@ -87,4 +86,4 @@ chkconfig –level redis 2345 on # 把redis在运行级别为2、3、4、5的情
 3.  `chkconfig --level 35 mysqld on`修改服务的默认启动等级。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

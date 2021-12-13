@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - shutdown
 title: 【Linux 命令】shutdown
-updated: '2020-09-25 11:38:30'
-indexing: false
+updated: '2020-09-25 11:40:30'
 ---
 
 用来执行系统关机的命令
@@ -57,4 +56,3 @@ shutdown +5 "System will shutdown after 5 minutes"
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

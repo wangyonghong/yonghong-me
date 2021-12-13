@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - shopt
 title: 【Linux 命令】shopt
-updated: '2020-09-25 11:37:00'
-indexing: false
+updated: '2020-09-25 11:39:00'
 ---
 
 显示和设置shell操作选项
@@ -68,4 +67,3 @@ cdspell on                #开启cdspell选项
 用户可以通过实际执行cd命令检查该选项是否被成功开启。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

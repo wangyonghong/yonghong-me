@@ -9,7 +9,6 @@ tags:
 - diff
 title: 【Linux 命令】diff
 updated: '2020-09-25 08:47:30'
-indexing: false
 ---
 
 比较给定的两个文件的不同
@@ -89,4 +88,3 @@ n1,n2 c n3,n4
 注意：以上说明指定了两个文件中不同处的行号及其相应的操作。在输出形式中，每一行后面将跟随受到影响的若干行。其中，以<开始的行属于文件1，以>开始的行属于文件2。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

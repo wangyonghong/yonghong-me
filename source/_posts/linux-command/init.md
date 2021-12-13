@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - init
 title: 【Linux 命令】init
-updated: '2020-09-25 09:44:30'
-indexing: false
+updated: '2020-09-25 09:45:00'
 ---
 
 init进程是所有Linux进程的父进程
@@ -58,4 +57,3 @@ init(选项)(参数)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

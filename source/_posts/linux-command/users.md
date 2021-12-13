@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - users
 title: 【Linux 命令】users
-updated: '2020-09-25 12:22:00'
-indexing: false
+updated: '2020-09-25 12:24:00'
 ---
 
 打印当前主机所有登陆用户的名称。
@@ -50,4 +49,4 @@ root root
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 users`，`info coreutils 'users invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ip6tables-save
 title: 【Linux 命令】ip6tables-save
-updated: '2020-09-25 09:48:30'
-indexing: false
+updated: '2020-09-25 09:49:00'
 ---
 
 保存ip6tables表配置
@@ -32,4 +31,3 @@ ip6tables-save(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

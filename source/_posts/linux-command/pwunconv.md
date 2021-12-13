@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pwunconv
 title: 【Linux 命令】pwunconv
-updated: '2020-09-25 11:09:30'
-indexing: false
+updated: '2020-09-25 11:10:30'
 ---
 
 用来关闭用户的投影密码
@@ -36,4 +35,3 @@ ls: cannot access /etc/shadow: No such file or directory
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

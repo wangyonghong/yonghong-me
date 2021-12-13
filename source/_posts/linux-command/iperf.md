@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iperf
 title: 【Linux 命令】iperf
-updated: '2020-09-25 09:51:00'
-indexing: false
+updated: '2020-09-25 09:51:30'
 ---
 
 网络性能测试工具
@@ -261,4 +260,3 @@ iperf -c 192.168.1.1  -d -t 60
 进行上下行带宽测试。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

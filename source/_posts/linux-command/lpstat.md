@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lpstat
 title: 【Linux 命令】lpstat
-updated: '2020-09-25 10:14:30'
-indexing: false
+updated: '2020-09-25 10:15:30'
 ---
 
 显示CUPS中打印机的状态信息
@@ -41,4 +40,3 @@ lpstat(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

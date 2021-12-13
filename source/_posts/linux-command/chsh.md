@@ -9,7 +9,6 @@ tags:
 - chsh
 title: 【Linux 命令】chsh
 updated: '2020-09-25 08:32:00'
-indexing: false
 ---
 
 用来更换登录系统时使用的shell
@@ -101,4 +100,3 @@ Shell changed.
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - cksum
 title: 【Linux 命令】cksum
 updated: '2020-09-25 08:32:30'
-indexing: false
 ---
 
 检查文件的CRC是否正确
@@ -58,4 +57,3 @@ cksum testfile1            #对指定文件进行CRC校验
 注意：如果文件中有任何字符被修改，都将改变计算后CRC校验码的值。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

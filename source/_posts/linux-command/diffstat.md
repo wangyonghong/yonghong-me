@@ -9,7 +9,6 @@ tags:
 - diffstat
 title: 【Linux 命令】diffstat
 updated: '2020-09-25 08:48:30'
-indexing: false
 ---
 
 显示diff命令输出信息的柱状图
@@ -76,4 +75,3 @@ testfile | 2 +-             #统计信息输出显示
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

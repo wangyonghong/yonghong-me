@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - logsave
 title: 【Linux 命令】logsave
-updated: '2020-09-25 10:09:30'
-indexing: false
+updated: '2020-09-25 10:10:30'
 ---
 
 将命令的输出信息保存到指定的日志文件
@@ -36,4 +35,3 @@ logsave(选项)(参数)
 *   指令：需要执行的指令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

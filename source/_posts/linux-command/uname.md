@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - uname
 title: 【Linux 命令】uname
-updated: '2020-09-25 12:14:00'
-indexing: false
+updated: '2020-09-25 12:16:00'
 ---
 
 打印系统信息。
@@ -92,4 +91,4 @@ GNU/Linux
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 uname`，`info coreutils 'uname invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

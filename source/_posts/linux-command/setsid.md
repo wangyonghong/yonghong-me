@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - setsid
 title: 【Linux 命令】setsid
-updated: '2020-09-25 11:34:30'
-indexing: false
+updated: '2020-09-25 11:36:30'
 ---
 
 在新的会话中运行程序
@@ -45,4 +44,4 @@ root 31102 29217 0 07:29 pts/4 00:00:00 grep www.ibm.com
 [root@root ~]#
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

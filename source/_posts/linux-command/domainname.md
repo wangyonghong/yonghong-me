@@ -9,7 +9,6 @@ tags:
 - domainname
 title: 【Linux 命令】domainname
 updated: '2020-09-25 08:53:30'
-indexing: false
 ---
 
 显示和设置系统的NIS域名
@@ -50,4 +49,3 @@ www.jsdig.com
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

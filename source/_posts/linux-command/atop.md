@@ -9,7 +9,6 @@ tags:
 - atop
 title: 【Linux 命令】atop
 updated: '2020-09-25 08:11:00'
-indexing: false
 ---
 
 监控Linux系统资源与进程的工具
@@ -108,4 +107,3 @@ swin、swout字段：换入和换出内存页数
 
 - [官方手册](http://www.atoptool.nl/download/man_atop-1.pdf)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

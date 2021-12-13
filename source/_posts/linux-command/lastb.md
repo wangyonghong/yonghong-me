@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lastb
 title: 【Linux 命令】lastb
-updated: '2020-09-25 09:59:30'
-indexing: false
+updated: '2020-09-25 10:00:30'
 ---
 
 列出登入系统失败的用户相关信息
@@ -72,4 +71,3 @@ admin    ssh:notty    129.171.193.99   Mon Dec 16 16:52 - 16:52  (00:00)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

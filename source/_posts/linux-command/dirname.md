@@ -9,7 +9,6 @@ tags:
 - dirname
 title: 【Linux 命令】dirname
 updated: '2020-09-25 08:50:00'
-indexing: false
 ---
 
 去除文件名中的非目录部分
@@ -48,4 +47,4 @@ dirname a/b
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

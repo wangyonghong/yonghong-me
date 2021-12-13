@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mtools
 title: 【Linux 命令】mtools
-updated: '2020-09-25 10:35:00'
-indexing: false
+updated: '2020-09-25 10:36:00'
 ---
 
 显示mtools支持的指令
@@ -55,4 +54,3 @@ mwrite, mzip
 如上所示，其显示的所有命令均为mtools工具所支持的。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

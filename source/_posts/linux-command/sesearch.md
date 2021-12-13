@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sesearch
 title: 【Linux 命令】sesearch
-updated: '2020-09-25 11:32:00'
-indexing: false
+updated: '2020-09-25 11:34:00'
 ---
 
 查询SELinux策略的规则详情
@@ -53,4 +52,3 @@ sesearch -b httpd_enable_homedirs -a
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

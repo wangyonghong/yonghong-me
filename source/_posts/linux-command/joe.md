@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - joe
 title: 【Linux 命令】joe
-updated: '2020-09-25 09:55:30'
-indexing: false
+updated: '2020-09-25 09:56:00'
 ---
 
 强大的纯文本编辑器
@@ -56,4 +55,3 @@ joe(选项)(参数)
 文件：指定要编辑的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

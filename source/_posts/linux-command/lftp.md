@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lftp
 title: 【Linux 命令】lftp
-updated: '2020-09-25 10:03:00'
-indexing: false
+updated: '2020-09-25 10:04:00'
 ---
 
 优秀的文件客户端程序
@@ -127,4 +126,3 @@ set pget:default-n 5
 这样，就不用每次进入都要打命令了。其他的set可以自己tab然后help来看。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

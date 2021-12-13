@@ -9,7 +9,6 @@ tags:
 - ftptop
 title: 【Linux 命令】ftptop
 updated: '2020-09-25 09:20:30'
-indexing: false
 ---
 
 proftpd服务器的连接状态
@@ -33,4 +32,3 @@ ftptop(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

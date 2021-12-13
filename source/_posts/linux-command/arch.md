@@ -9,7 +9,6 @@ tags:
 - arch
 title: 【Linux 命令】arch
 updated: '2020-09-25 08:06:30'
-indexing: false
 ---
 
 显示当前主机的硬件架构类型
@@ -44,4 +43,4 @@ x86_64
 
 2. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 arch`，`info coreutils 'arch invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

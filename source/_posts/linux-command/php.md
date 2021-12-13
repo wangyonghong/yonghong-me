@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - php
 title: 【Linux 命令】php
-updated: '2020-09-25 10:55:00'
-indexing: false
+updated: '2020-09-25 10:56:00'
 ---
 
 PHP语言的命令行接口
@@ -36,4 +35,3 @@ php(选项)(参数)
 文件：要执行的php脚本。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

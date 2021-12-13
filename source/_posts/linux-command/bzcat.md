@@ -9,7 +9,6 @@ tags:
 - bzcat
 title: 【Linux 命令】bzcat
 updated: '2020-09-25 08:20:30'
-indexing: false
 ---
 
 解压缩指定的.bz2文件
@@ -47,4 +46,3 @@ bzcat man.config.bz2
 此时屏幕上会显示 man.config.bz2 解压缩之后的文件内容。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

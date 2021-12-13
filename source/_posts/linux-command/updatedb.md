@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - updatedb
 title: 【Linux 命令】updatedb
-updated: '2020-09-25 12:19:00'
-indexing: false
+updated: '2020-09-25 12:21:00'
 ---
 
 创建或更新slocate命令所必需的数据库文件
@@ -43,4 +42,3 @@ updatedb -U /usr/local/  更新指定命令的slocate数据库
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - exit
 title: 【Linux 命令】exit
 updated: '2020-09-25 09:08:30'
-indexing: false
 ---
 
 退出当前的shell。
@@ -85,4 +84,4 @@ fi
 
 1.	该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

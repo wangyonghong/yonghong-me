@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - top
 title: 【Linux 命令】top
-updated: '2020-09-25 12:06:30'
-indexing: false
+updated: '2020-09-25 12:08:30'
 ---
 
 显示或管理执行中的程序
@@ -100,4 +99,3 @@ Swap:  5144568k total,       56k used,  5144512k free,  2013180k cached
 *  2013180k cached[缓冲的交换区总量],
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

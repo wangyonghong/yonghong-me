@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgcreate
 title: 【Linux 命令】vgcreate
-updated: '2020-09-25 12:25:30'
-indexing: false
+updated: '2020-09-25 12:27:30'
 ---
 
 用于创建LVM卷组
@@ -52,4 +51,3 @@ Volume group "vg1000" successfully created
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

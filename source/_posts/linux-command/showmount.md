@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - showmount
 title: 【Linux 命令】showmount
-updated: '2020-09-25 11:37:30'
-indexing: false
+updated: '2020-09-25 11:39:30'
 ---
 
 显示NFS服务器加载的信息
@@ -36,4 +35,3 @@ showmount(选项)(参数)
 NFS服务器：指定NFS服务器的ip地址或者主机名。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

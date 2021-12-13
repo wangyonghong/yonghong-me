@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - setpci
 title: 【Linux 命令】setpci
-updated: '2020-09-25 11:33:30'
-indexing: false
+updated: '2020-09-25 11:35:30'
 ---
 
 查询和配置PCI设备的使用工具
@@ -78,4 +77,3 @@ sudo setpci -s 00:02.0 F4.B=CC
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

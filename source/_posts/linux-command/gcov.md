@@ -9,7 +9,6 @@ tags:
 - gcov
 title: 【Linux 命令】gcov
 updated: '2020-09-25 09:22:30'
-indexing: false
 ---
 
 测试程序的代码覆盖率的工具
@@ -38,4 +37,3 @@ gcov(选项)(参数)
 V语言文件：C语言源代码文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - bunzip2
 title: 【Linux 命令】bunzip2
 updated: '2020-09-25 08:19:30'
-indexing: false
 ---
 
 创一个bz2文件压缩包
@@ -49,4 +48,3 @@ bzip2 -9vk /opt/etc.zip /opt/var.zip /opt/backup.zip
 压缩完毕后，在`/opt`下就会生成相应的etc.zip.bz2、var.zip.bz2和backup.zip.bz2文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nl
 title: 【Linux 命令】nl
-updated: '2020-09-25 10:44:00'
-indexing: false
+updated: '2020-09-25 10:45:00'
 ---
 
 为每一个文件添加行号。
@@ -164,4 +163,4 @@ ZhuangZhu-74
 
 1. 该命令是`GNU coreutils`包中的命令，相关的帮助信息请查看`man -s 1 nl`，`info coreutils 'nl invocation'`。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

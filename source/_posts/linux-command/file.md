@@ -9,7 +9,6 @@ tags:
 - file
 title: 【Linux 命令】file
 updated: '2020-09-25 09:13:30'
-indexing: false
 ---
 
 用来探测给定文件的类型
@@ -78,4 +77,3 @@ lrwxrwxrwx 1 root root 10 08-13 00:11 /var/mail -> spool/mail
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

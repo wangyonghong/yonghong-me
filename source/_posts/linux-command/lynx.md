@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lynx
 title: 【Linux 命令】lynx
-updated: '2020-09-25 10:23:30'
-indexing: false
+updated: '2020-09-25 10:24:30'
 ---
 
 纯文本模式的网页浏览器
@@ -124,4 +123,3 @@ Ctrl+k：调用 Cookie Jar 页。
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - zipsplit
 title: 【Linux 命令】zipsplit
-updated: '2020-09-25 12:45:00'
-indexing: false
+updated: '2020-09-25 12:47:00'
 ---
 
 将较大的zip压缩包分割成各个较小的压缩包
@@ -37,4 +36,3 @@ zipsplit(选项)(参数)
 文件：指定要分割的zip压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rlogin
 title: 【Linux 命令】rlogin
-updated: '2020-09-25 11:20:00'
-indexing: false
+updated: '2020-09-25 11:21:00'
 ---
 
 从当前终端登录到远程Linux主机
@@ -39,4 +38,3 @@ rlogin(选项)(参数)
 远程主机：指定要登录的远程主机（ip地址或者域名）。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

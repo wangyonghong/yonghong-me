@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - wall
 title: 【Linux 命令】wall
-updated: '2020-09-25 12:31:30'
-indexing: false
+updated: '2020-09-25 12:33:30'
 ---
 
 向系统当前所有打开的终端上输出信息
@@ -39,4 +38,3 @@ this is a test line
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

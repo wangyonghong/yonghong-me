@@ -9,7 +9,6 @@ tags:
 - colrm
 title: 【Linux 命令】colrm
 updated: '2020-09-25 08:35:30'
-indexing: false
 ---
 
 删除文件中的指定列
@@ -30,4 +29,3 @@ colrm(参数)
 *   结尾列号：指定要删除的结尾列。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

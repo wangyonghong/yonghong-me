@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - partprobe
 title: 【Linux 命令】partprobe
-updated: '2020-09-25 10:51:00'
-indexing: false
+updated: '2020-09-25 10:52:00'
 ---
 
 不重启的情况下重读分区
@@ -165,4 +164,3 @@ tmpfs                  2023936         0   2023936   0% /dev/shm
 使用partprobe可以不用重启系统即可配合fdisk工具创建新的分区。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

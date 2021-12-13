@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - uupick
 title: 【Linux 命令】uupick
-updated: '2020-09-25 12:23:00'
-indexing: false
+updated: '2020-09-25 12:25:00'
 ---
 
 命令处理传送进来的文件
@@ -44,4 +43,3 @@ uupick-s localhost
 该命令通常没有输出。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

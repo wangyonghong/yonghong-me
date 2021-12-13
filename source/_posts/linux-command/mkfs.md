@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkfs
 title: 【Linux 命令】mkfs
-updated: '2020-09-25 10:30:00'
-indexing: false
+updated: '2020-09-25 10:31:00'
 ---
 
 用于在设备上创建Linux文件系统
@@ -51,4 +50,3 @@ mkfs -t ext2 /dev/sda7     //将sda7分区格式化为ext2格式
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iotop
 title: 【Linux 命令】iotop
-updated: '2020-09-25 09:47:00'
-indexing: false
+updated: '2020-09-25 09:47:30'
 ---
 
 用来监视磁盘I/O使用状况的工具
@@ -91,4 +90,3 @@ Total DISK read:       0.00 B/s | Total DISK write:       0.00 B/s
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

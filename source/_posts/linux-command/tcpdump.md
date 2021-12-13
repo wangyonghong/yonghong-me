@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tcpdump
 title: 【Linux 命令】tcpdump
-updated: '2020-09-25 12:00:30'
-indexing: false
+updated: '2020-09-25 12:02:30'
 ---
 
 一款sniffer工具，是Linux上的抓包工具，嗅探器
@@ -173,4 +172,4 @@ sudo tcpdump -i any port 80 -A
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

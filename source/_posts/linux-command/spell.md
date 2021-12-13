@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - spell
 title: 【Linux 命令】spell
-updated: '2020-09-25 11:43:30'
-indexing: false
+updated: '2020-09-25 11:45:30'
 ---
 
 对文件进行拼写检查
@@ -29,4 +28,3 @@ spell(参数)
 文件：指定需要进行拼写检查的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

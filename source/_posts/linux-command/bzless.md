@@ -9,7 +9,6 @@ tags:
 - bzless
 title: 【Linux 命令】bzless
 updated: '2020-09-25 08:23:30'
-indexing: false
 ---
 
 增强.bz2压缩包查看器
@@ -29,4 +28,3 @@ bzless(参数)
 文件：指定要分屏显示的.bz2压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

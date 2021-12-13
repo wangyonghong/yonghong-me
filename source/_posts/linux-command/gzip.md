@@ -9,7 +9,6 @@ tags:
 - gzip
 title: 【Linux 命令】gzip
 updated: '2020-09-25 09:32:00'
-indexing: false
 ---
 
 用来压缩文件
@@ -47,6 +46,7 @@ gzip(选项)(参数)
 --best：此参数的效果和指定“-9”参数相同；
 --fast：此参数的效果和指定“-1”参数相同。
 -num 用指定的数字num调整压缩的速度，-1或--fast表示最快压缩方法（低压缩比），-9或--best表示最慢压缩方法（高压缩比）。系统缺省值为6。
+-c或--stdout或--to-stdout：保留原始文件，生成标准输出流（结合重定向使用）。
 ```
 
 ### 参数
@@ -93,5 +93,12 @@ gzip -rv test6
 gzip -dr test6
 ```
 
+保留原始文件，把压缩/解压流重定向到新文件
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+```shell
+gzip -c aa > aa.gz
+gzip -dc bb.gz > bb
+```
+
+
+

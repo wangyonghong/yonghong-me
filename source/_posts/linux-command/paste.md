@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - paste
 title: 【Linux 命令】paste
-updated: '2020-09-25 10:52:00'
-indexing: false
+updated: '2020-09-25 10:53:00'
 ---
 
 将多个文件按列队列合并
@@ -36,4 +35,3 @@ paste(选项)(参数)
 文件列表：指定需要合并的文件列表。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

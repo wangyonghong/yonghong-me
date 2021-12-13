@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lilo
 title: 【Linux 命令】lilo
-updated: '2020-09-25 10:04:30'
-indexing: false
+updated: '2020-09-25 10:05:30'
 ---
 
 安装核心载入开机管理程序
@@ -145,4 +144,3 @@ LILO 被成功加载后，将看到 LILO 提示符。还是使用前面的示例
 关于第一次尝试 LILO 的最后一点建议是：我发现使用软盘引导磁盘比使用硬盘实现 LILO 配置更为安全。为此，必须在 lilo.conf 文件中使用`boot=/dev/fd0`替换`boot=/dev/hda`。那样，如果弄乱了lilo.conf文件 中的任何配置，都可以取出引导磁盘并像先前一样引导到 Linux。当使用软盘进行引导一切正常以后，可以将lilo.conf修改回`boot=/dev/hda`，然后最后一次运行`/sbin/lilo`来上传修改。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

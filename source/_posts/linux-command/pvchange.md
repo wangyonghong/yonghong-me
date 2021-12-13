@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pvchange
 title: 【Linux 命令】pvchange
-updated: '2020-09-25 11:04:30'
-indexing: false
+updated: '2020-09-25 11:05:30'
 ---
 
 修改物理卷属性
@@ -51,4 +50,3 @@ Physical volume "/dev/sdb1" changed
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

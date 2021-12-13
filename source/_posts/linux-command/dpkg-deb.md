@@ -9,7 +9,6 @@ tags:
 - dpkg-deb
 title: 【Linux 命令】dpkg-deb
 updated: '2020-09-25 08:54:30'
-indexing: false
 ---
 
 Debian Linux下的软件包管理工具
@@ -69,4 +68,3 @@ dpkg-deb -c demo.deb
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

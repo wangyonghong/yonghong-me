@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - whereis
 title: 【Linux 命令】whereis
-updated: '2020-09-25 12:34:00'
-indexing: false
+updated: '2020-09-25 12:36:00'
 ---
 
 查找二进制程序、代码等相关文件路径
@@ -75,4 +74,3 @@ svn:
 说明：`whereis -m svn`查出说明文档路径，`whereis -s svn`找source源文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

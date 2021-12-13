@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - htop
 title: 【Linux 命令】htop
-updated: '2020-09-25 09:38:00'
-indexing: false
+updated: '2020-09-25 09:38:30'
 ---
 
 [非内部命令]一个互动的进程查看器，可以动态观察系统进程状况
@@ -137,4 +136,3 @@ F7表示减小nice值(增大优先级)，F8增大nice值(减小优先级)，选�
 **F10:退出htop**
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

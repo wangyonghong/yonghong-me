@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgscan
 title: 【Linux 命令】vgscan
-updated: '2020-09-25 12:28:30'
-indexing: false
+updated: '2020-09-25 12:30:30'
 ---
 
 扫描并显示系统中的卷组
@@ -49,4 +48,3 @@ Found volume group "vg1000" using metadata type lvm2
 说明：本例中，vgscan指令找到了两个LVM2卷组"vg1000"和"vg2000"。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

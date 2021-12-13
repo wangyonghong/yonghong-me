@@ -9,7 +9,6 @@ tags:
 - elm
 title: 【Linux 命令】elm
 updated: '2020-09-25 09:05:00'
-indexing: false
 ---
 
 纯文本邮件客户端程序
@@ -37,4 +36,3 @@ elm(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

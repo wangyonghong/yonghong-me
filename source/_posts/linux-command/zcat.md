@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - zcat
 title: 【Linux 命令】zcat
-updated: '2020-09-25 12:43:00'
-indexing: false
+updated: '2020-09-25 12:45:00'
 ---
 
 显示压缩包中文件的内容
@@ -45,4 +44,3 @@ zcat(选项)(参数)
 文件：指定要显示其中文件内容的压缩包。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

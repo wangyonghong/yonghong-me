@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mysql
 title: 【Linux 命令】mysql
-updated: '2020-09-25 10:36:00'
-indexing: false
+updated: '2020-09-25 10:37:00'
 ---
 
 MySQL服务器客户端工具
@@ -38,4 +37,3 @@ mysql(选项)(参数)
 数据库：指定连接服务器后自动打开的数据库。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

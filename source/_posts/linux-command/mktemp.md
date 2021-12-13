@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mktemp
 title: 【Linux 命令】mktemp
-updated: '2020-09-25 10:32:30'
-indexing: false
+updated: '2020-09-25 10:33:30'
 ---
 
 创建临时文件供shell脚本使用
@@ -37,4 +36,3 @@ mktemp(选项)(参数)
 文件：指定创建的临时文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - whatis
 title: 【Linux 命令】whatis
-updated: '2020-09-25 12:33:30'
-indexing: false
+updated: '2020-09-25 12:35:30'
 ---
 
 查询一个命令执行什么功能
@@ -53,4 +52,3 @@ man.config [man]     (5)  - configuration data for man
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

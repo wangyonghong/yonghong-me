@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpm
 title: 【Linux 命令】rpm
-updated: '2020-09-25 11:22:30'
-indexing: false
+updated: '2020-09-25 11:23:30'
 ---
 
 RPM软件包的管理工具
@@ -250,4 +249,3 @@ rpm2cpio | cpio -idv
 /usr/share/man/ manual
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -9,7 +9,6 @@ tags:
 - cp
 title: 【Linux 命令】cp
 updated: '2020-09-25 08:39:00'
-indexing: false
 ---
 
 将源文件或目录复制到目标文件或目录中
@@ -125,9 +124,8 @@ cp -a aaa ./bbb/
 
 复制到当前目录
 
-```sh
+```shell
 cp aaa.conf ./
 # 将 aaa.conf 复制到当前目录
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

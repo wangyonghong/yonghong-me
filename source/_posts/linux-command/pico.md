@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pico
 title: 【Linux 命令】pico
-updated: '2020-09-25 10:55:30'
-indexing: false
+updated: '2020-09-25 10:56:30'
 ---
 
 功能强大全屏幕的文本编辑器
@@ -69,4 +68,3 @@ pico(选项)(参数)
 文件：指定要编辑的文件。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

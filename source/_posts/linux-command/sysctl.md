@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sysctl
 title: 【Linux 命令】sysctl
-updated: '2020-09-25 11:56:00'
-indexing: false
+updated: '2020-09-25 11:58:00'
 ---
 
 时动态地修改内核的运行参数
@@ -197,4 +196,3 @@ net.ipv4.icmp_echo_ignore_all = 1
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

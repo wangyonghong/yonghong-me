@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xz
 title: 【Linux 命令】xz
-updated: '2020-09-25 12:41:00'
-indexing: false
+updated: '2020-09-25 12:43:00'
 ---
 
 POSIX 平台开发具有高压缩率的工具

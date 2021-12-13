@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - quota
 title: 【Linux 命令】quota
-updated: '2020-09-25 11:10:00'
-indexing: false
+updated: '2020-09-25 11:11:00'
 ---
 
 显示磁盘已使用的空间与限制
@@ -159,4 +158,3 @@ Disk quotas for group qgroup (gid 502):
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

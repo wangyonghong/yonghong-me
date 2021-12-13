@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - vgreduce
 title: 【Linux 命令】vgreduce
-updated: '2020-09-25 12:27:00'
-indexing: false
+updated: '2020-09-25 12:29:00'
 ---
 
 从卷组中删除物理卷
@@ -51,4 +50,3 @@ Removed "/dev/sdb2" from volume group "vg2000"
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mount
 title: 【Linux 命令】mount
-updated: '2020-09-25 10:34:00'
-indexing: false
+updated: '2020-09-25 10:35:00'
 ---
 
 用于挂载Linux系统外的文件
@@ -80,4 +79,4 @@ mount [-fnrsvw] [-t vfstype] [-o options] device dir
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

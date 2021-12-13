@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ypdomainname
 title: 【Linux 命令】ypdomainname
-updated: '2020-09-25 12:42:00'
-indexing: false
+updated: '2020-09-25 12:44:00'
 ---
 
 显示主机的NIS的域名
@@ -31,4 +30,3 @@ ypdomainname(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

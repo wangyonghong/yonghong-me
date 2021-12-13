@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pwconv
 title: 【Linux 命令】pwconv
-updated: '2020-09-25 11:08:30'
-indexing: false
+updated: '2020-09-25 11:09:30'
 ---
 
 用来开启用户的投影密码
@@ -39,4 +38,3 @@ test:$6$nYOEWamm$bz07nlv/.RgJufb3FAqJJeULfwybzgxmrWqbk7O4vI0KsT6N.ujrh6dDIUcAJdf
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

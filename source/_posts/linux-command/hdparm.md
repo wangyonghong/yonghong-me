@@ -9,7 +9,6 @@ tags:
 - hdparm
 title: 【Linux 命令】hdparm
 updated: '2020-09-25 09:33:00'
-indexing: false
 ---
 
 显示与设定硬盘的参数
@@ -123,4 +122,3 @@ hdparm -m    #参数值为整数值如8 /dev/sda
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

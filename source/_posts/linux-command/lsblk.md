@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - lsblk
 title: 【Linux 命令】lsblk
-updated: '2020-09-25 10:16:30'
-indexing: false
+updated: '2020-09-25 10:17:30'
 ---
 
 列出块设备信息
@@ -107,4 +106,3 @@ lsblk -s
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

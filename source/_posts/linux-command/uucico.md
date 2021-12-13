@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - uucico
 title: 【Linux 命令】uucico
-updated: '2020-09-25 12:22:30'
-indexing: false
+updated: '2020-09-25 12:24:30'
 ---
 
 UUCP文件传输服务程序
@@ -58,4 +57,3 @@ uucico-r1
 提示：该命令一般没有输出。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

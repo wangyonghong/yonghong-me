@@ -9,7 +9,6 @@ tags:
 - bye
 title: 【Linux 命令】bye
 updated: '2020-09-25 08:20:00'
-indexing: false
 ---
 
 命令用于中断FTP连线并结束程序

@@ -19,9 +19,9 @@ updated: 2021-11-23 22:24:00
 | 搬书匠 计算机类图书 | http://www.banshujiang.cn |
 | Java知识分享网 计算机类图书 | http://www.java1234.com |
 | 码农之家 计算机类图书 | https://www.xz577.com |
-| 布客新知 计算机类图书 | Github：https://github.com/ixinzhi http://it-ebooks.flygon.net |
+| 布客新知 计算机类图书 | https://github.com/ixinzhi|
 | free-programming-books Free Ebook Foundation的免费计算机类图书 | https://github.com/EbookFoundation/free-programming-books |
-| 免费编程中文书籍索引 | https://github.com/justjavac/free-programming-books-zh\_CN |
+| 免费编程中文书籍索引 | https://github.com/justjavac/free-programming-books-zh_CN |
 | 编程随想的电子书清单 | https://github.com/programthink/books |
 | SaltTiger 最新出版的技术类英文原版书 | https://salttiger.com |
 | IT图书 计算机类图书 | https://itboook.com |

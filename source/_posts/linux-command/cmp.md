@@ -9,7 +9,6 @@ tags:
 - cmp
 title: 【Linux 命令】cmp
 updated: '2020-09-25 08:34:30'
-indexing: false
 ---
 
 比较两个文件是否有差异
@@ -71,4 +70,3 @@ testfile testfile1           #有差异：第8字节，第2行
 注意：在比较结果中，只能够显示第一比较结果。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

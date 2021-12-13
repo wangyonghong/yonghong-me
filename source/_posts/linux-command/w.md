@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - w
 title: 【Linux 命令】w
-updated: '2020-09-25 12:30:30'
-indexing: false
+updated: '2020-09-25 12:32:30'
 ---
 
 显示目前登入系统的用户信息
@@ -52,4 +51,4 @@ root     pts/0    222.94.97.122    20:39    1.00s  0.00s  0.00s w
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - source
 title: 【Linux 命令】source
-updated: '2020-09-25 11:42:30'
-indexing: false
+updated: '2020-09-25 11:44:30'
 ---
 
 在当前Shell环境中从指定文件读取和执行命令。
@@ -62,4 +61,4 @@ A：`sh`的执行是在子shell中，`source`会使得被执行文件的变量�
 
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

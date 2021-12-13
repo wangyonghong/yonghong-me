@@ -9,7 +9,6 @@ tags:
 - ftp
 title: 【Linux 命令】ftp
 updated: '2020-09-25 09:19:00'
-indexing: false
 ---
 
 用来设置文件系统相关功能
@@ -108,4 +107,4 @@ ftp> mput *.txt           # 可以上传多个文件
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

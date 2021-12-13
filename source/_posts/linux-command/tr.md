@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tr
 title: 【Linux 命令】tr
-updated: '2020-09-25 12:08:00'
-indexing: false
+updated: '2020-09-25 12:10:00'
 ---
 
 将字符进行替换压缩和删除
@@ -115,4 +114,3 @@ tr '[:lower:]' '[:upper:]'
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

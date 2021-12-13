@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - rpmquery
 title: 【Linux 命令】rpmquery
-updated: '2020-09-25 11:24:30'
-indexing: false
+updated: '2020-09-25 11:25:30'
 ---
 
 从RPM数据库中查询软件包信息
@@ -44,4 +43,3 @@ httpd-2.2.3-81.el5.centos
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nohup
 title: 【Linux 命令】nohup
-updated: '2020-09-25 10:46:00'
-indexing: false
+updated: '2020-09-25 10:47:00'
 ---
 
 将程序以忽略挂起信号的方式运行起来
@@ -58,4 +57,4 @@ nohup wget site.com/file.zip
 nohup ping -c 10 baidu.com
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

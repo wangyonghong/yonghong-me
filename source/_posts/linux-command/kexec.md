@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - kexec
 title: 【Linux 命令】kexec
-updated: '2020-09-25 09:57:30'
-indexing: false
+updated: '2020-09-25 09:58:30'
 ---
 
 从当前正在运行的内核引导到一个新内核
@@ -37,4 +36,3 @@ kexec(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

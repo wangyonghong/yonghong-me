@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - uuto
 title: 【Linux 命令】uuto
-updated: '2020-09-25 12:23:30'
-indexing: false
+updated: '2020-09-25 12:25:30'
 ---
 
 将文件传送到远端的UUCP主机
@@ -35,4 +34,3 @@ uuto./testfile localhost/tmp # 将文件传送到远程UUCP 主机localhost的tm
 
 该命令通常没有输出。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

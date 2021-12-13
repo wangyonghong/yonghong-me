@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - su
 title: 【Linux 命令】su
-updated: '2020-09-25 11:52:00'
-indexing: false
+updated: '2020-09-25 11:54:00'
 ---
 
 用于切换当前用户身份到其他用户身份
@@ -61,4 +60,3 @@ su -test
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

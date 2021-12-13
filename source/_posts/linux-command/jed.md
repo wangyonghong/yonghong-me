@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - jed
 title: 【Linux 命令】jed
-updated: '2020-09-25 09:54:30'
-indexing: false
+updated: '2020-09-25 09:55:00'
 ---
 
 主要用于编辑代码的编辑器
@@ -78,4 +77,3 @@ unset_setkey ("@\emy", "\ey");
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - stat
 title: 【Linux 命令】stat
-updated: '2020-09-25 11:50:00'
-indexing: false
+updated: '2020-09-25 11:52:00'
 ---
 
 用于显示文件的状态信息
@@ -65,4 +64,3 @@ myfile 0 8 81a4 0 0 fd00 194805815 1 0 0 1292127755 1286628261 1286628261 4096
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

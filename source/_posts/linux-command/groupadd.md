@@ -9,7 +9,6 @@ tags:
 - groupadd
 title: 【Linux 命令】groupadd
 updated: '2020-09-25 09:27:00'
-indexing: false
 ---
 
 用于创建一个新的工作组
@@ -48,4 +47,3 @@ groupadd -g 344 jsdigname
 此时在`/etc/passwd`文件中产生一个组ID（GID）是344的项目。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

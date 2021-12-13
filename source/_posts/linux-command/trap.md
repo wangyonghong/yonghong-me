@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - trap
 title: 【Linux 命令】trap
-updated: '2020-09-25 12:09:30'
-indexing: false
+updated: '2020-09-25 12:11:30'
 ---
 
 捕捉信号和其他事件并执行命令。
@@ -156,4 +155,4 @@ $ trap 1 2
 - [阮一峰： Bash 脚本如何创建临时文件：mktemp 命令和 trap 命令教程](http://www.ruanyifeng.com/blog/2019/12/mktemp.html)
 - [【Bash百宝箱】shell内建命令之trap](https://blog.csdn.net/iEearth/article/details/52612557)
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

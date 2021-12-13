@@ -9,7 +9,6 @@ tags:
 - chattr
 title: 【Linux 命令】chattr
 updated: '2020-09-25 08:27:30'
-indexing: false
 ---
 
 用来改变文件属性
@@ -63,4 +62,3 @@ chattr +a /data1/user_act.log
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

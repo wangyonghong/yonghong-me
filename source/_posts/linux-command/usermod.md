@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - usermod
 title: 【Linux 命令】usermod
-updated: '2020-09-25 12:21:00'
-indexing: false
+updated: '2020-09-25 12:23:00'
 ---
 
 用于修改用户的基本信息
@@ -91,4 +90,4 @@ lutixiaya
 new_home
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

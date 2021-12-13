@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - renice
 title: 【Linux 命令】renice
-updated: '2020-09-25 11:16:00'
-indexing: false
+updated: '2020-09-25 11:17:00'
 ---
 
 修改正在运行的进程的调度优先级
@@ -47,4 +46,3 @@ renice 1 987 -u daemon root -p 32
 注意：每一个行程都有一个唯一的id。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

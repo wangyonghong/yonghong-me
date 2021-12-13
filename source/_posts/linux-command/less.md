@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - less
 title: 【Linux 命令】less
-updated: '2020-09-25 10:02:00'
-indexing: false
+updated: '2020-09-25 10:03:00'
 ---
 
 分屏上下翻页浏览文件内容
@@ -47,4 +46,4 @@ less(选项)(参数)
 sudo less /var/log/shadowsocks.log
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

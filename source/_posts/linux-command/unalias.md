@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - unalias
 title: 【Linux 命令】unalias
-updated: '2020-09-25 12:13:30'
-indexing: false
+updated: '2020-09-25 12:15:30'
 ---
 
 删除由alias设置的别名
@@ -69,4 +68,4 @@ unalias ls grep
 
 3. 该命令是bash内建命令，相关的帮助信息请查看`help`命令。
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tput
 title: 【Linux 命令】tput
-updated: '2020-09-25 12:07:30'
-indexing: false
+updated: '2020-09-25 12:09:30'
 ---
 
 通过terminfo数据库对终端会话进行初始化和操作
@@ -222,4 +221,3 @@ exit 0
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - mkswap
 title: 【Linux 命令】mkswap
-updated: '2020-09-25 10:32:00'
-indexing: false
+updated: '2020-09-25 10:33:00'
 ---
 
 建立和设置SWAP交换分区
@@ -122,4 +121,3 @@ swapoff /dev/sdb2
 从`/etc/fstab`中删除项目，使用fdisk或yast工具删除分区。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

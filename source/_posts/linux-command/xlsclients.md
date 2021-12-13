@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xlsclients
 title: 【Linux 命令】xlsclients
-updated: '2020-09-25 12:39:30'
-indexing: false
+updated: '2020-09-25 12:41:30'
 ---
 
 列出显示器中的客户端应用程序
@@ -34,4 +33,3 @@ xlsclients(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

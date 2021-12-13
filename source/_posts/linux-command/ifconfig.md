@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - ifconfig
 title: 【Linux 命令】ifconfig
-updated: '2020-09-25 09:41:00'
-indexing: false
+updated: '2020-09-25 09:41:30'
 ---
 
 配置和显示Linux系统网卡的网络参数
@@ -136,4 +135,4 @@ ifconfig eth0  #显示eth0的网卡信息
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
+

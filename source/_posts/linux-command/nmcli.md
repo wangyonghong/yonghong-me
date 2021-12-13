@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - nmcli
 title: 【Linux 命令】nmcli
-updated: '2020-09-25 10:45:30'
-indexing: false
+updated: '2020-09-25 10:46:30'
 ---
 
 地址配置工具
@@ -64,4 +63,3 @@ nmcli con add help              # 查看帮助
 
 ```
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

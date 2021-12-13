@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - pidof
 title: 【Linux 命令】pidof
-updated: '2020-09-25 10:56:00'
-indexing: false
+updated: '2020-09-25 10:57:00'
 ---
 
 查找指定名称的进程的进程号ID号
@@ -51,4 +50,3 @@ pidof init
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

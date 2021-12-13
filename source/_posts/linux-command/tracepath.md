@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tracepath
 title: 【Linux 命令】tracepath
-updated: '2020-09-25 12:08:30'
-indexing: false
+updated: '2020-09-25 12:10:30'
 ---
 
 追踪目的主机经过的路由信息
@@ -51,4 +50,3 @@ tracepath www.58.com
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - sshd
 title: 【Linux 命令】sshd
-updated: '2020-09-25 11:49:00'
-indexing: false
+updated: '2020-09-25 11:51:00'
 ---
 
 openssh软件套件中的服务器守护进程
@@ -42,4 +41,3 @@ sshd(选项)
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

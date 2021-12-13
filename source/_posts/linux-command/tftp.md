@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - tftp
 title: 【Linux 命令】tftp
-updated: '2020-09-25 12:04:00'
-indexing: false
+updated: '2020-09-25 12:06:00'
 ---
 
 在本机和tftp服务器之间使用TFTP协议传输文件
@@ -166,4 +165,3 @@ tftp -g -r embedexpert 192.168.1.2
 ```
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

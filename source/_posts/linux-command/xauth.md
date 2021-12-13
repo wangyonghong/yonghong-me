@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - xauth
 title: 【Linux 命令】xauth
-updated: '2020-09-25 12:37:00'
-indexing: false
+updated: '2020-09-25 12:39:00'
 ---
 
 显示和编辑被用于连接X服务器的认证信息
@@ -49,4 +48,3 @@ xauth(选项)(参数)
 *   source：从指定文件读取包含xauth的内容指令。
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->

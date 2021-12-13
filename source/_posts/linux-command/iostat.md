@@ -8,8 +8,7 @@ tags:
 - Linux 命令
 - iostat
 title: 【Linux 命令】iostat
-updated: '2020-09-25 09:46:30'
-indexing: false
+updated: '2020-09-25 09:47:00'
 ---
 
 监视系统输入输出设备和CPU的使用情况
@@ -83,4 +82,3 @@ svctm | I/O需求完成的平均时间
 %util | 被I/O需求消耗的CPU百分比
 
 
-<!-- Linux命令行搜索引擎：https://jaywcjlove.github.io/linux-command/ -->
