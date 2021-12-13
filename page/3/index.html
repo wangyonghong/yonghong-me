@@ -88,8 +88,8 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-bell fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">793</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">910</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">786</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">903</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-list-alt fa-fw"></i>分类<span class="badge">62</span></a></li>
         <li class="menu-item menu-item-开源"><a href="/open-source/" rel="section"><i class="fab fa-github fa-fw"></i>开源</a></li>
       <li class="menu-item menu-item-search">
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">793</span>
+          <span class="site-state-item-count">786</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -173,7 +173,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">910</span>
+        <span class="site-state-item-count">903</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,482 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/06-jvm-gc-algo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-advance/06-jvm-gc-algo/" class="post-title-link" itemprop="url">Java 进阶 06 —— JVM 垃圾回收算法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-18 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-06-18T21:00:00+08:00">2021-06-18 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="为什么会有-GC"><a href="#为什么会有-GC" class="headerlink" title="为什么会有 GC"></a>为什么会有 GC</h1><p>本质上是内存资源的有限性，因此需要大家共享使用，手工申请，手动释放。</p>
+<p>垃圾收集，不是 Java 语言的伴生产物。早在 1960 年，第一门开始使用内存动态分配和垃圾收集技术的 Lisp 语言诞生。</p>
+<p>关于垃圾收集有三个经典问题：</p>
+<ul>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>如何回收？</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-advance/06-jvm-gc-algo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/05-jvm-args-tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-advance/05-jvm-args-tools/" class="post-title-link" itemprop="url">Java 进阶 05 —— JVM 相关工具</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-11 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-06-11T21:00:00+08:00">2021-06-11 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="JVM-命令行工具"><a href="#JVM-命令行工具" class="headerlink" title="JVM 命令行工具"></a>JVM 命令行工具</h2><table>
+<thead>
+<tr>
+<th align="center">工具</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">java</td>
+<td>Java 应用的启动程序</td>
+</tr>
+<tr>
+<td align="center">javac</td>
+<td>JDK 内置的编译工具</td>
+</tr>
+<tr>
+<td align="center">javap</td>
+<td>反编译 class 文件的工具</td>
+</tr>
+<tr>
+<td align="center">javadoc</td>
+<td>根据 Java 代码和标准注释,自动生成相关的API说明文档</td>
+</tr>
+<tr>
+<td align="center">javah</td>
+<td>JNI 开发时, 根据 java 代码生成需要的 .h文件。</td>
+</tr>
+<tr>
+<td align="center">extcheck</td>
+<td>检查某个 jar 文件和运行时扩展 jar 有没有版本冲突，很少使用</td>
+</tr>
+<tr>
+<td align="center">jdb</td>
+<td>Java Debugger ; 可以调试本地和远端程序, 属于 JPDA 中的一个 demo 实现, 供其他调试器参考。开发时很使用</td>
+</tr>
+<tr>
+<td align="center">jdeps</td>
+<td>探测 class 或 jar 包需要的依赖</td>
+</tr>
+<tr>
+<td align="center">jar</td>
+<td>打包工具，可以将文件和目录打包成为 .jar 文件；.jar 文件本质上就是 zip 文件, 只是后缀不同。使用时按顺序对应好选项和参数即可。</td>
+</tr>
+<tr>
+<td align="center">keytool</td>
+<td>安全证书和密钥的管理工具; （支持生成、导入、导出等操作）</td>
+</tr>
+<tr>
+<td align="center">jarsigner</td>
+<td>JAR 文件签名和验证工具</td>
+</tr>
+<tr>
+<td align="center">policytool</td>
+<td>实际上这是一款图形界面工具, 管理本机的 Java 安全策略</td>
+</tr>
+<tr>
+<td align="center">jps/jinfo</td>
+<td>查看 java 进程</td>
+</tr>
+<tr>
+<td align="center"><strong>jstat</strong></td>
+<td>查看 JVM 内部 gc 相关信息</td>
+</tr>
+<tr>
+<td align="center"><strong>jmap</strong></td>
+<td>查看 heap 或类占用空间统计</td>
+</tr>
+<tr>
+<td align="center"><strong>jstack</strong></td>
+<td>查看线程信息</td>
+</tr>
+<tr>
+<td align="center">jcmd</td>
+<td>执行 JVM 相关分析命令（整合命令）</td>
+</tr>
+<tr>
+<td align="center">jrunscript/jjs</td>
+<td>执行 js 命令</td>
+</tr>
+</tbody></table>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-advance/05-jvm-args-tools/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/reading-notes/001/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/reading-notes/001/" class="post-title-link" itemprop="url">读书笔记（一）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-31 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-05-31T21:00:00+08:00">2021-05-31 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="《秒赞》林桂枝"><a href="#《秒赞》林桂枝" class="headerlink" title="《秒赞》林桂枝"></a>《秒赞》林桂枝</h2><p>1.你的样子里，有你走过的路，读过的书，看过的风景。</p>
+<p>2.想当垃圾吃垃圾，想当辣椒吃辣椒，想当什么自己要想好吃什么。</p>
+<ul>
+<li>创建“好东西”文件夹，在里面放好的设计与照片、出色的演讲、有见地的文章、有趣的事物。</li>
+<li>准备一个“好东西”本子，随时记录有趣的对话和文字，补充新词汇，不断丰富自己的储备。</li>
+<li>将自己认为“有感觉”的词汇记下来，接着将这些词汇分给不同的人和不同的事物，想想这些词该给谁，与什么东西结合最有意思。</li>
+<li>读完一本书，写个简短的读书心得；看完一部电影，记录自己的感受。有时间多写，忙的话写几行字也可以。</li>
+<li>你记录的点点滴滴将会成为你个人的宝贵资产，你的缪斯女神，更是让你工作顺利、表现优秀的利器。</li>
+</ul>
+<p>3.人能想象到的一切都是真实的。——毕加索</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/reading-notes/001/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/java-advance/04-jvm-mem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Honng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Honng">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/java-advance/04-jvm-mem/" class="post-title-link" itemprop="url">Java 进阶 04 —— JVM 内存模型：堆和栈是什么？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-16 21:00:00 21:00:00" itemprop="dateCreated datePublished" datetime="2021-05-16T21:00:00+08:00">2021-05-16 21:00:00</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index"><span itemprop="name">Java进阶</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="JVM-运行时数据区概述"><a href="#JVM-运行时数据区概述" class="headerlink" title="JVM 运行时数据区概述"></a>JVM 运行时数据区概述</h2><p>内存是非常重要的系统资源，是硬盘和 CPU 的中间仓库及桥梁，承载着操作系统和应用程序的实时运行。JVM 内存布局规定了 Java 在运行过程中内存申请、分配、管理的策略，保证了 JVM 的高效稳定运行。不同的 JVM 对于内存的划分方式和管理机制存在着部分差异。结合 JVM 虚拟机规范，来讨论一下经典的 JVM 内存布局。</p>
+<p>Java 虚拟机定义了若干种程序运行期间会使用到的运行时数据区，其中有一些会随着虚拟机启动而创建，随着虚拟机退出而销毁。而另外一些则是与线程一一对应的，这些与线对应的数据区域会随着线程开始和结束而创建和销毁。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/java-advance/04-jvm-mem/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -849,408 +1325,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/02/create-folder-in-macos-root/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/02/create-folder-in-macos-root/" class="post-title-link" itemprop="url">如何在macOS根目录创建文件夹</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-02-27 10:24:00 10:24:00" itemprop="dateCreated datePublished" datetime="2021-02-27T10:24:00+08:00">2021-02-27 10:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/macOS/" itemprop="url" rel="index"><span itemprop="name">macOS</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>572</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在短短的两个月里，已经遇到了 2 次这个问题，第 1 次是 macOS@Catalina 版本，第 2 次是升级后的 macOS@Big Sur 版本，在这里记录一下解决办法。</p>
-<h2 id="macOS-Catalina-版本"><a href="#macOS-Catalina-版本" class="headerlink" title="macOS@Catalina 版本"></a>macOS@Catalina 版本</h2><p>重启系统进入恢复模式，关闭 SIP，重启后命令行执行下面这行代码，再创建文件夹就能成功了。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mount -uw /</span><br></pre></td></tr></table></figure>
-
-<h2 id="macOS-Big-Sur-版本"><a href="#macOS-Big-Sur-版本" class="headerlink" title="macOS@Big Sur 版本"></a>macOS@Big Sur 版本</h2><p>重启系统进入恢复模式，关闭 SIP（不确定有没有这个步骤，如果有人尝试可以评论一下），接下来稍稍麻烦一点，修改 /etc/synthetic.conf 文件</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/create-folder-in-macos-root/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/01/jvm-instruction-set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/jvm-instruction-set/" class="post-title-link" itemprop="url">JVM 指令集对照表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-07 10:24:00 10:24:00" itemprop="dateCreated datePublished" datetime="2021-01-07T10:24:00+08:00">2021-01-07 10:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>6.6k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 Java Virtual Machine Specification 中，有对 JVM 指令集的详细描述，可以打开链接查看：</p>
-<ul>
-<li>Java 11：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3NwZWNzL2p2bXMvc2UxMS9odG1sL2p2bXMtNi5odG1s">https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-6.html<i class="fa fa-external-link-alt"></i></span></li>
-<li>Java 8：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vamF2YXNlL3NwZWNzL2p2bXMvc2U4L2h0bWwvanZtcy02Lmh0bWw=">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-6.html<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>也有人整理了一个对照表，记录在下面</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/jvm-instruction-set/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/2021/01/mercurial/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/mercurial/" class="post-title-link" itemprop="url">hg clone 与 Mercurial</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-06 22:24:00 22:24:00" itemprop="dateCreated datePublished" datetime="2021-01-06T22:24:00+08:00">2021-01-06 22:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" itemprop="url" rel="index"><span itemprop="name">版本控制</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>856</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Mercurial是跨平台的分布式版本控制软件，主要由Python语言实现，但也包含用C语言实现的二进制比较工具。Mercurial一开始的主要运行平台是Linux，现在Mercurial已经移植到Windows、Mac OS X和大多数的类Unix系统中。Mercurial主要由命令行程序组成，现在也有了图形用户界面。对Mercurial的所有操作都由用不同的关键字作为参数调用程序“hg”来实现，Hg是参考水银的化学符号而取的名字。</p>
-<p>Mercurial的主要设计目标包括高性能、可扩展性、分散性、完全分布式合作开发、能同时高效地处理纯文本和二进制文件，以及分支和合并功能，以此同时保持系统的简洁性[1]。Mercurial也包括一个集成的Web界面。</p>
-<p>Mercurial的创建者和主要开发人员是Matt Mackal。其源代码采用GNU通用公共许可证第二版为授权，确保了Mercurial是一个自由软件。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/mercurial/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://yonghong.tech/weekly-011/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="Honng">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Honng">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/weekly-011/" class="post-title-link" itemprop="url">技术爱好者周刊 第11期 | 2020年12月14日</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-14 10:24:00 10:24:00" itemprop="dateCreated datePublished" datetime="2020-12-14T10:24:00+08:00">2020-12-14 10:24:00</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%80%E6%9C%AF%E7%88%B1%E5%A5%BD%E8%80%85%E5%91%A8%E5%88%8A/" itemprop="url" rel="index"><span itemprop="name">技术爱好者周刊</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>技术爱好者周刊，每周一发布，欢迎提<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dhbmd5b25naG9uZy95b25naG9uZy1tZS9pc3N1ZXM=">issue<i class="fa fa-external-link-alt"></i></span>贡献内容。</p>
-</blockquote>
-<h2 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly90ZWNoLm1laXR1YW4uY29tLzIwMjAvMTIvMTAvYXBhY2hlLWt5bGluLXByYWN0aWNlLWluLW1laXR1YW4uaHRtbA==">C++服务编译耗时优化原理及实践<i class="fa fa-external-link-alt"></i></span><br>大型C++工程项目，都会面临编译耗时较长的问题。不管是开发调试迭代、准入测试，亦或是持续集成阶段，编译行为无处不在，降低编译时间对提高研发效率来说具有非常重要意义。</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvMnNvTHIxRjBYN3JjOGZaLTJmVEU2QQ==">爱奇艺微服务标准技术架构实践<i class="fa fa-external-link-alt"></i></span><br>为数以亿计的用户提供优质的视频服务的爱奇艺技术产品团队，为了适应业务的快速迭代和创新，并支撑海量的用户请求，很多团队都对各自的业务系统自发地进行了微服务架构的改造。</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvbEhHQzlKZUtiM29rVnV1UXkzekNXZw==">步入超高清视频时代视频编码技术的机遇与挑战——AV1时代要来了<i class="fa fa-external-link-alt"></i></span><br>近些年随着视频行业的迅猛发展，尤其像短视频、点播、直播、VR等领域的爆发，人们对于高清、超高清视频体验的追求越来越强烈，流媒体平台如何在提升观众观看体验，同时降低播放成本，利用技术降低带宽消耗的同时又能最大化的还原视频的画质和质量，成为了重要的课题。</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvTGtDb2FVRTVzbDg4SjkwaVZ3bG45QQ==">一文彻底理解 I/O 多路复用<i class="fa fa-external-link-alt"></i></span><br>这里的关键点在于，我们事先并不知道一个文件描述对应的I/O设备是否是可读的、是否是可写的，在外设的不可读或不可写的状态下进行I/O只会导致进程阻塞被暂停运行。</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9tcC53ZWl4aW4ucXEuY29tL3MvVmlIS2Y5Y0Izbl9JalM0TFVIeXpLUQ==">10 张图告诉你，Kafka 是怎么做到支持百万级 TPS 的？<i class="fa fa-external-link-alt"></i></span><br>谈到大数据传输都会想到 Kafka，Kafka 号称大数据的杀手锏，在业界有很多成熟的应用场景并且被主流公司认可。这款为大数据而生的消息中间件，以其百万级TPS的吞吐量名声大噪，迅速成为大数据领域的宠儿，在数据采集、传输、存储的过程中发挥着举足轻重的作用。在业界已经有很多成熟的消息中间件如：RabbitMQ, RocketMQ, ActiveMQ, ZeroMQ，为什么 Kafka 在众多的敌手中依然能有一席之地，当然靠的是其强悍的吞吐量。下面带领大家来揭秘。</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/weekly-011/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/80/">80</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/79/">79</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
@@ -1281,7 +1357,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">21:46</span>
+    <span title="站点阅读时长">21:37</span>
   </span>
 </div>
 <div class="busuanzi-count">
